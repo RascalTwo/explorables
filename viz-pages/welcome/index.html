@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>explorables — welcome</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Welcome to the explorables">
+<meta name="viz:description" content="A growing collection of interactive, AI-generated educational visualizations.">
+<meta name="viz:tag" content="meta">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  .hero { max-width: 60ch; margin: 8vh auto 0; padding: 0 1.5rem; }
+  .hero p { line-height: 1.6; color: var(--fg-dim, #b9c2cf); }
+  .orbit { display:block; margin: 2.5rem auto; }
+  .orbit circle.node { fill: var(--accent); }
+  .orbit circle.ring { fill: none; stroke: var(--border, #2a3240); stroke-dasharray: 3 5; }
+  .orbit g { transform-origin: 110px 110px; animation: spin 24s linear infinite; }
+  .orbit g:nth-child(4){ animation-duration: 16s; }
+  .orbit g:nth-child(5){ animation-duration: 34s; animation-direction: reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .orbit g{ animation: none; } }
+</style>
+</head>
+<body>
+  <div class="viz-header">
+    <h1>explorables</h1>
+    <div class="sub">interactive, mostly AI-generated educational visualizations</div>
+  </div>
+
+  <svg class="orbit" width="220" height="220" viewBox="0 0 220 220" aria-hidden="true">
+    <circle class="ring" cx="110" cy="110" r="55"/>
+    <circle class="ring" cx="110" cy="110" r="85"/>
+    <g><circle class="node" cx="110" cy="55" r="6"/></g>
+    <g><circle class="node" cx="110" cy="25" r="5"/></g>
+    <g><circle class="node" cx="110" cy="195" r="4"/></g>
+    <circle class="node" cx="110" cy="110" r="9"/>
+  </svg>
+
+  <div class="hero">
+    <p>This is a collection of <strong>explorable explanations</strong> — small interactive
+    web pages that try to make an idea click by letting you poke at it, not just read about it.</p>
+    <p>Most were generated with a custom <code>/viz</code> skill (it lives in this same repo,
+    under <code>skills/viz/</code>), then hand-tuned. Some are serious; plenty are just for fun.</p>
+    <p>Feel free to explore. Open any page, click around, change things.</p>
+  </div>
+</body>
+</html>
