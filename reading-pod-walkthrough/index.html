@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2ggfSBmcm9tICIvX2tpdC92aXouanMiOwovLyAgIDwvc2NyaXB0PgovLyBTZXJ2ZWQgYnkgdGhlIHZpeiBzZXJ2ZXIgYXQgL19raXQvdml6LmpzIGZyb20gdGhlIHNraWxsJ3Mgb3duIGtpdC8gZGlyLCBzbyBpdCdzCi8vIG9uZSBzb3VyY2Ugb2YgdHJ1dGggYWNyb3NzIGV2ZXJ5IHZpei4gUGFpcnMgd2l0aCAvX2tpdC92aXota2l0LmNzcy4KCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU1ZHIGRpYWdyYW1zIOKAlCBnZW9tZXRyeSBmaXJzdC4KLy8KLy8gVGhlIHJlY3VycmluZyByZXdvcmsgaW4gYm94ZXMtYW5kLWFycm93cyBkaWFncmFtcyBjb21lcyBmcm9tIHR5cGluZyBsYWJlbCBhbmQKLy8gYXJyb3cgY29vcmRpbmF0ZXMgYXMgaW5kZXBlbmRlbnQgbGl0ZXJhbHM6IGEgYm94IGdldHMgcmVzaXplZCBvciBtb3ZlZCwgYnV0IHRoZQovLyBhcnJvdyBlbmRwb2ludCBhbmQgdGhlIGxhYmVsIHBvc2l0aW9uIHdlcmUgZ3Vlc3NlZCBhZ2FpbnN0IHRoZSAqb2xkKiBnZW9tZXRyeSwKLy8gc28gdGhlIGFycm93IG5vdyBwb2ludHMgYXQgZW1wdHkgc3BhY2UgKG9yIHRoZSB3cm9uZyBib3gpIGFuZCB0aGUgbGFiZWwgc3BpbGxzCi8vIG91dC4gVGhlIGZpeCBpcyB0byBuZXZlciBoYW5kLXBsYWNlIHRob3NlOiBkZWZpbmUgZWFjaCBub2RlIE9OQ0UgYXMge3gseSx3LGh9Ci8vIGFuZCBjb21wdXRlIGV2ZXJ5dGhpbmcgZWxzZSBmcm9tIGl0LgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCi8vIERlZmF1bHQgYXJyb3doZWFkIHBhbGV0dGUsIGtleWVkIHRvIHRoZSB2aXota2l0IGludGVudCB0b2tlbnMuIFNWRyBtYXJrZXJzIGNhbid0Ci8vIGluaGVyaXQgdGhlIHN0cm9rZSBjb2xvciBvZiB0aGUgbGluZSB0aGF0IHVzZXMgdGhlbSwgc28geW91IGdlbnVpbmVseSBuZWVkIG9uZQovLyBtYXJrZXIgcGVyIGNvbG9yIOKAlCB0aGlzIGVtaXRzIHRoZW0gYWxsIHdpdGggc3RhYmxlIGlkcyBzbyB5b3Ugc3RvcCByZS1kZXJpdmluZwovLyB0aGUgc2FtZSA8bWFya2VyPiBibG9jayBwZXIgZGlhZ3JhbS4gUmVmZXJlbmNlIGFzIG1hcmtlci1lbmQ9InVybCgjYWgtYWNjZW50KSIuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICBhaDogIiM4Yjk0OWUiLCAvLyBtdXRlZCDigJQgdGhlIGRlZmF1bHQgZWRnZQogICJhaC1hY2NlbnQiOiAiIzU4YTZmZiIsCiAgImFoLWdvb2QiOiAiIzNmYjk1MCIsCiAgImFoLXdhcm4iOiAiI2QyOTkyMiIsCiAgImFoLWRhbmdlciI6ICIjZjg1MTQ5IiwKfTsKCi8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgY29uc3QgbWFya2VycyA9IE9iamVjdC5lbnRyaWVzKHBhbGV0dGUpCiAgICAubWFwKAogICAgICAoW2lkLCBmaWxsXSkgPT4KICAgICAgICBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCwKICAgICkKICAgIC5qb2luKCIiKTsKICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQoKLy8gQSBub2RlIGlzIGp1c3Qge3gsIHksIHcsIGh9LiBjZW50ZXIoKSBhbmQgc2lkZSgpIGRlcml2ZSBjb25uZWN0aW9uIHBvaW50cyBmcm9tCi8vIGl0LCBzbyBhbiBlZGdlIHN0YXlzIGF0dGFjaGVkIHRvIHRoZSBib3ggbm8gbWF0dGVyIGhvdyB0aGUgYm94IGNoYW5nZXMuCmV4cG9ydCBjb25zdCBjZW50ZXIgPSAobikgPT4gKHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIC8gMiB9KTsKCmV4cG9ydCBjb25zdCBzaWRlID0gKG4sIHdoZXJlKSA9PgogICh7CiAgICB0b3A6IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55IH0sCiAgICBib3R0b206IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIH0sCiAgICBsZWZ0OiB7IHg6IG4ueCwgeTogbi55ICsgbi5oIC8gMiB9LAogICAgcmlnaHQ6IHsgeDogbi54ICsgbi53LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgfSlbd2hlcmVdOwoKLy8gU3RyYWlnaHQgZWRnZSBiZXR3ZWVuIHR3byBub2RlcywgYXV0by1waWNraW5nIHRoZSBmYWNpbmcgc2lkZXMgYmFzZWQgb24gdGhlaXIKLy8gcmVsYXRpdmUgcG9zaXRpb24uIFJldHVybnMgYW4gU1ZHIHBhdGggImQiIHN0cmluZzsgc2V0IHRoZSBtYXJrZXIgeW91cnNlbGYgdmlhCi8vIHRoZSBlbGVtZW50J3MgbWFya2VyLWVuZCBhdHRyaWJ1dGUuIEZvciA+NSBub2RlcyB3aXRoIGNyb3NzaW5nIGVkZ2VzLCByZWFjaCBmb3IKLy8gYSBsYXlvdXQgZW5naW5lIChkYWdyZSAvIGQzLWRhZyAvIG1lcm1haWQpIGluc3RlYWQgb2YgcGxhY2luZyBub2RlcyBieSBoYW5kIOKAlAovLyB0aGF0J3MgdGhlIHBvaW50IHdoZXJlIG1hbnVhbCBjb29yZGluYXRlcyBzdG9wIGJlaW5nIHdvcnRoIGl0LgpleHBvcnQgZnVuY3Rpb24gY29ubmVjdChhLCBiKSB7CiAgY29uc3QgY2EgPSBjZW50ZXIoYSksCiAgICBjYiA9IGNlbnRlcihiKTsKICBjb25zdCBob3JpeiA9IE1hdGguYWJzKGNiLnggLSBjYS54KSA+IE1hdGguYWJzKGNiLnkgLSBjYS55KTsKICBjb25zdCBwYSA9IGhvcml6CiAgICA/IHNpZGUoYSwgY2IueCA+IGNhLnggPyAicmlnaHQiIDogImxlZnQiKQogICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgY29uc3QgcGIgPSBob3JpegogICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgIDogc2lkZShiLCBjYi55ID4gY2EueSA/ICJ0b3AiIDogImJvdHRvbSIpOwogIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9CgovLyBBIGxhYmVsIHRoYXQgQ0FOTk9UIG92ZXJmbG93IGl0cyBib3guIDxmb3JlaWduT2JqZWN0PiBsZXRzIHRoZSBicm93c2VyIHdyYXAgYW5kCi8vIGVsbGlwc2l6ZSBIVE1MIG5hdGl2ZWx5LCB1bmxpa2UgcmF3IDx0ZXh0PiB3aGljaCB5b3UnZCBoYXZlIHRvIG1lYXN1cmUgYnkgaGFuZAovLyAoYW5kIGhpc3RvcmljYWxseSBndWVzc2VkIHdyb25nKS4gVXNlIHRoaXMgZm9yIGFueSBtdWx0aS13b3JkIGxhYmVsIGluc2lkZSBhCi8vIGZpeGVkLXdpZHRoIGJveC4gU3R5bGUgdmlhIHRoZSAudnN2Zy1sYWJlbCBjbGFzcyBpbiB2aXota2l0LmNzcy4KZXhwb3J0IGZ1bmN0aW9uIGxhYmVsQm94KG5vZGUsIGh0bWwsIGNscyA9ICIiKSB7CiAgcmV0dXJuICgKICAgIGA8Zm9yZWlnbk9iamVjdCB4PSIke25vZGUueH0iIHk9IiR7bm9kZS55fSIgd2lkdGg9IiR7bm9kZS53fSIgaGVpZ2h0PSIke25vZGUuaH0iPmAgKwogICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgYDwvZm9yZWlnbk9iamVjdD5gCiAgKTsKfQoKLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICBjb25zdCBiYWQgPSBbXTsKICBmb3IgKGNvbnN0IHQgb2Ygcm9vdC5xdWVyeVNlbGVjdG9yQWxsKCJ0ZXh0IikpIHsKICAgIGNvbnN0IHJlY3QgPSB0LmNsb3Nlc3QoImciKT8ucXVlcnlTZWxlY3RvcigicmVjdCIpOwogICAgaWYgKCFyZWN0KSBjb250aW51ZTsKICAgIGNvbnN0IHRiID0gdC5nZXRCQm94KCk7CiAgICBjb25zdCByYiA9IHJlY3QuZ2V0QkJveCgpOwogICAgY29uc3Qgc3BpbGxzID0KICAgICAgdGIueCA8IHJiLnggLSAxIHx8CiAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgIGlmIChzcGlsbHMpIHsKICAgICAgdC5zdHlsZS5vdXRsaW5lID0gIjFweCBzb2xpZCAjZjg1MTQ5IjsKICAgICAgYmFkLnB1c2godC50ZXh0Q29udGVudCk7CiAgICB9CiAgfQogIGlmIChiYWQubGVuZ3RoKSB7CiAgICBjb25zb2xlLmVycm9yKCJbdml6QXVkaXRdIHRleHQgb3ZlcmZsb3c6IiwgYmFkKTsKICAgIGNvbnN0IGJhbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgYmFubmVyLnN0eWxlLmNzc1RleHQgPQogICAgICAicG9zaXRpb246Zml4ZWQ7bGVmdDo4cHg7Ym90dG9tOjhweDt6LWluZGV4Ojk5OTk7YmFja2dyb3VuZDojZjg1MTQ5O2NvbG9yOiNmZmY7IiArCiAgICAgICJmb250OjEycHgvMSBzYW5zLXNlcmlmO3BhZGRpbmc6NnB4IDEwcHg7Ym9yZGVyLXJhZGl1czo2cHgiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogIH0KICByZXR1cm4gYmFkOwp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU21hbGwgdXRpbGl0aWVzIHRoYXQgZXZlcnkgdml6IHJlLWRlcml2ZXMuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKZXhwb3J0IGNvbnN0ICQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IHJvb3QucXVlcnlTZWxlY3RvcihzZWwpOwpleHBvcnQgY29uc3QgJCQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IFsuLi5yb290LnF1ZXJ5U2VsZWN0b3JBbGwoc2VsKV07CgovLyBFc2NhcGUgYmVmb3JlIGluamVjdGluZyB0ZXh0IGludG8gaW5uZXJIVE1MLgpleHBvcnQgY29uc3QgZXNjID0gKHMpID0+CiAgU3RyaW5nKHMpLnJlcGxhY2UoCiAgICAvWyY8PiInXS9nLAogICAgKGMpID0+ICh7ICImIjogIiZhbXA7IiwgIjwiOiAiJmx0OyIsICI+IjogIiZndDsiLCAnIic6ICImcXVvdDsiLCAiJyI6ICImIzM5OyIgfSlbY10sCiAgKTsKCi8vIEhvdC1yZWxvYWQgKGFuZCBldmVyeSBzYXZlKSBkb2VzIGEgZnVsbCBwYWdlIHJlZnJlc2gsIHNvIGluLXBhZ2Ugc3RhdGUgaXMgd2lwZWQuCi8vIFBlcnNpc3QgYW55dGhpbmcgeW91IHdhbnQgdG8gc3Vydml2ZSDigJQgb3BlbiBwYW5lbCwgc2VsZWN0ZWQgc3RlcCwgYWN0aXZlIGZpbHRlcnMg4oCUCi8vIHRvIHRoZSBVUkwgaGFzaC4gQm9udXM6IHRoZSBVUkwgYmVjb21lcyBzaGFyZWFibGUvZGVlcC1saW5rYWJsZSBmb3IgZnJlZS4KLy8gUm91bmQtdHJpcHMgYSBwbGFpbiBvYmplY3QuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+CiAgbG9jYXRpb24ucmVwbGFjZSgiIyIgKyBlbmNvZGVVUklDb21wb25lbnQoSlNPTi5zdHJpbmdpZnkob2JqKSkpOwoKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogIHRyeSB7CiAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgfSBjYXRjaCB7CiAgICByZXR1cm4ge307CiAgfQp9Owo="}}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Reading Pod — Newcomer Walkthrough</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="The Reading Pod — Newcomer Walkthrough">
+<meta name="viz:description" content="A scroll-driven first-run journey through The Reading Pod, recreating each real screen and selling every feature from sign-up to community.">
+<meta name="viz:tag" content="Product Tour">
+<meta name="viz:tag" content="Reading Pod">
+<style>
+  :root{
+    /* real app palette, sampled from the live logged-in UI */
+    --paper:#f2f0e9; --surface:#f7f5ef; --card:#ffffff; --line:#e4dfd3;
+    --ink:#34433b;          /* dark green-slate headings */
+    --navy:#2f3160;         /* nav text / dark labels */
+    --muted:#8b8678; --soft:#6f6a5e;
+    --teal:#5d9e86;         /* primary action */
+    --teal-d:#4f8a74;
+    --coral:#e8966c;        /* secondary / progress */
+    --coral-d:#df8455;
+    --indigo:#6164c9;       /* Menu */
+    --navy-btn:#283357;     /* Update Book */
+    --peach:#f0a878;        /* in-progress badge */
+    --maxw:1180px;
+    /* dark, for the public landing only */
+    --d-bg:#1b1b19; --d-card:#232220; --d-line:#39352f; --d-cream:#ece7da; --d-dim:#b6b0a4;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Poppins","Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-weight:800; letter-spacing:-.02em; line-height:1.1; margin:0}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+
+  #rail{position:fixed; top:0; left:0; height:3px; width:0%; background:var(--coral); z-index:60; transition:width .1s linear}
+
+  /* top nav (mirrors the app's own bar) */
+  nav.top{position:sticky; top:0; z-index:50; background:var(--surface); border-bottom:1px solid var(--line); box-shadow:0 6px 20px -16px rgba(0,0,0,.35)}
+  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; height:62px}
+  .brand{display:flex; align-items:center; gap:8px; font-weight:700; font-size:15px; color:var(--navy)}
+  .navsteps{display:flex; gap:3px; font-size:12.5px}
+  .navsteps a{padding:6px 11px; border-radius:8px; text-decoration:none; color:var(--navy); transition:.15s; opacity:.7}
+  .navsteps a:hover{background:#eceadf; opacity:1}
+  .navsteps a.on{opacity:1; color:var(--coral-d); box-shadow:inset 0 -2px 0 var(--coral)}
+  @media(max-width:880px){.navsteps{display:none}}
+
+  /* hero */
+  header.hero{padding:96px 0 64px; text-align:center; position:relative; overflow:hidden}
+  header.hero::before{content:""; position:absolute; inset:0; background:radial-gradient(60% 70% at 50% 0%, rgba(232,150,108,.16), transparent 70%); pointer-events:none}
+  .eyebrow{color:var(--coral-d); font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase}
+  header.hero h1{font-size:clamp(38px,7vw,78px); margin:16px auto 0; max-width:15ch; color:var(--ink)}
+  header.hero p.lede{max-width:62ch; margin:22px auto 0; color:var(--soft); font-size:19px}
+  .pills{display:flex; gap:9px; justify-content:center; flex-wrap:wrap; margin-top:30px}
+  .pill{border:1px solid var(--line); background:var(--card); color:var(--soft); font-size:13px; padding:7px 14px; border-radius:999px}
+  .pill b{color:var(--ink)}
+  .scrollcue{margin-top:42px; color:var(--muted); font-size:13px; letter-spacing:.1em; text-transform:uppercase; animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(7px);opacity:1}}
+
+  /* journey stop */
+  .stop{padding:72px 0; border-top:1px solid var(--line); position:relative}
+  .stoprow{display:grid; grid-template-columns:0.92fr 1.08fr; gap:52px; align-items:center}
+  .stop.flip .copy{order:2}
+  @media(max-width:920px){.stoprow{grid-template-columns:1fr; gap:30px} .stop.flip .copy{order:0}}
+
+  .step-no{display:inline-flex; align-items:center; gap:11px; color:var(--coral-d); font-weight:700; font-size:12.5px; letter-spacing:.13em; text-transform:uppercase; margin-bottom:14px}
+  .step-no .n{display:grid; place-items:center; width:30px; height:30px; border-radius:50%; border:1.5px solid var(--coral); color:var(--coral-d); font-size:13px}
+  .copy h2{font-size:clamp(26px,3.3vw,38px); color:var(--ink)}
+  .copy .who{color:var(--teal-d); font-size:14px; font-weight:600; margin:10px 0 0}
+  .copy p{color:var(--soft); font-size:16.5px; margin:15px 0 0}
+  .copy ul{margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
+  .copy li{display:flex; gap:11px; align-items:flex-start; font-size:15px; color:var(--ink)}
+  .copy li::before{content:"›"; color:var(--coral-d); font-weight:800}
+  .soon{display:inline-block; margin-bottom:13px; background:rgba(232,150,108,.14); color:var(--coral-d); border:1px solid rgba(232,150,108,.45); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 11px; border-radius:999px}
+
+  /* browser frame */
+  .mock{background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 34px 60px -34px rgba(40,35,25,.5)}
+  .mockbar{display:flex; align-items:center; gap:7px; padding:11px 14px; background:#efece3; border-bottom:1px solid var(--line)}
+  .mockbar .b{width:11px; height:11px; border-radius:50%}
+  .mockbar .b1{background:#e2705f}.mockbar .b2{background:#e7b64f}.mockbar .b3{background:#76b07f}
+  .mockbar .url{margin-left:9px; flex:1; background:#fff; border:1px solid var(--line); border-radius:6px; font-size:11.5px; color:var(--muted); padding:4px 10px; font-family:ui-monospace,monospace}
+  .appbar{display:flex; align-items:center; justify-content:space-between; padding:13px 18px; border-bottom:1px solid var(--line)}
+  .appbar .logo{display:flex; gap:6px; align-items:center; font-weight:700; font-size:12.5px; color:var(--navy)}
+  .appbar .links{display:flex; gap:13px; font-size:11.5px; color:var(--navy); opacity:.85}
+  .appbar .links .a{color:var(--coral-d); box-shadow:inset 0 -2px 0 var(--coral); opacity:1}
+  .appbar .menu{background:var(--indigo); color:#fff; font-size:11px; padding:5px 12px; border-radius:7px; font-weight:600}
+  .mbody{padding:20px}
+
+  /* buttons / chips */
+  .btn{display:inline-block; font-weight:600; font-size:12.5px; padding:8px 15px; border-radius:9px; border:none; color:#fff; white-space:nowrap}
+  .btn.teal{background:var(--teal)} .btn.coral{background:var(--coral); color:#46270f} .btn.navy{background:var(--navy-btn)}
+  .btn.ghost{background:#fff; border:1px solid var(--line); color:var(--navy)}
+  .chip{font-size:12px; padding:7px 14px; border-radius:9px; border:1px solid var(--line); background:#fff; color:var(--navy)}
+  .chip.on{background:var(--teal); color:#fff; border-color:var(--teal)}
+  .search{flex:1; background:#fff; border:1.5px solid #c9c4ea; border-radius:10px; padding:8px 13px; font-size:12.5px; color:var(--muted)}
+
+  /* dashboard */
+  .dash-grid{display:grid; grid-template-columns:1fr auto; gap:18px; align-items:start}
+  .dash-h{font-size:20px; color:var(--ink)}
+  .goalrow{display:flex; align-items:center; gap:9px; font-size:13px; color:var(--soft); margin-top:14px}
+  .goalrow .gi{width:64px; height:30px; border:1px solid var(--line); border-radius:7px; background:#fff}
+  .nowcard{border:1.5px solid var(--ink); border-radius:11px; padding:15px 16px; min-width:236px; background:#fff}
+  .nowcard .lab{font-size:15px; font-weight:800; color:var(--ink); margin-bottom:10px}
+  .nowcard .bt{font-weight:800; font-size:15px}
+  .nowcard .ba{font-size:12.5px; color:var(--soft); margin:2px 0 11px}
+  .pbar{height:8px; border-radius:99px; background:#e9e4d8; overflow:hidden}
+  .pbar > i{display:block; height:100%; background:var(--coral); border-radius:99px}
+  .pmeta{font-size:11.5px; color:var(--soft); margin-top:7px}
+  .sectrow{display:flex; align-items:center; justify-content:space-between; margin:22px 0 10px}
+  .sectrow h3{font-size:16px; color:var(--ink)}
+  .emptybox{border:1.5px solid var(--teal); border-radius:9px; padding:11px 14px; font-size:13px; color:var(--soft); display:inline-block; background:#fff}
+  .booklist{display:flex; gap:10px; flex-wrap:wrap}
+  .mini{background:#fff; border:1px solid var(--line); border-radius:9px; padding:9px 12px; font-size:12px}
+  .mini .t{font-weight:700} .mini .a{color:var(--muted); font-size:11px}
+
+  /* books grid */
+  .toolbar{display:flex; gap:9px; align-items:center; margin-bottom:16px; flex-wrap:wrap}
+  .bookcards{display:grid; grid-template-columns:repeat(3,1fr); gap:13px}
+  @media(max-width:540px){.bookcards{grid-template-columns:1fr 1fr}}
+  .bcard{background:#fff; border:1px solid var(--line); border-radius:11px; padding:15px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .bcard .bt{font-weight:800; font-size:14.5px; color:var(--ink)}
+  .bcard .row{display:flex; justify-content:space-between; align-items:baseline; margin-top:8px}
+  .bcard .ba{font-style:italic; color:var(--soft); font-size:12.5px}
+  .bcard .pg{font-size:12px; color:var(--soft)}
+  .bcard .foot{display:flex; align-items:center; justify-content:space-between; margin-top:16px}
+  .badge{font-size:9.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:4px 9px; border-radius:6px}
+  .badge.ip{background:var(--peach); color:#5a3618}
+  .badge.done{background:#9ec79a; color:#274922}
+  .badge.todo{background:#e7e2d6; color:#6f6a5e}
+
+  /* recs */
+  .reccards{display:grid; grid-template-columns:repeat(3,1fr); gap:13px}
+  @media(max-width:540px){.reccards{grid-template-columns:1fr 1fr}}
+  .rcard{background:#fff; border:1px solid var(--line); border-radius:11px; padding:15px; display:flex; flex-direction:column; min-height:128px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .rcard .bt{font-weight:800; font-size:14px; color:var(--ink)}
+  .rcard .ba{font-style:italic; color:var(--soft); font-size:12.5px; margin-top:6px}
+  .rcard .foot{margin-top:auto; display:flex; justify-content:flex-end; padding-top:14px}
+
+  /* pods */
+  .podhead{display:flex; align-items:center; justify-content:space-between; margin-bottom:6px}
+  .podhead h3{font-size:19px; color:var(--ink)}
+  .podgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px}
+  .pcard{background:#fff; border:1px solid var(--line); border-radius:11px; padding:14px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .pcard .emoji{font-size:21px}
+  .pcard .pn{font-weight:800; font-size:14px; color:var(--ink); margin-top:7px}
+  .pcard .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .ptag{font-size:10px; background:#eef3ef; color:var(--teal-d); border:1px solid #d6e6db; padding:2px 8px; border-radius:999px; font-weight:600}
+  .pcard .pd{font-size:11.5px; color:var(--soft); margin-top:9px}
+  .pcard .pf{display:flex; align-items:center; justify-content:space-between; margin-top:12px}
+  .pcard .mem{font-size:11px; color:var(--muted)}
+  .pending{border:2px dashed #c7c2b4; border-radius:11px; padding:14px 16px; margin-top:14px; color:var(--indigo); font-weight:800; font-size:15px}
+  .pending small{display:block; color:var(--muted); font-weight:400; font-size:11.5px; margin-top:4px}
+
+  /* dark landing mock */
+  .mock.dark{background:var(--d-bg); border-color:var(--d-line); color:var(--d-cream)}
+  .mock.dark .mockbar{background:#141311; border-color:var(--d-line)}
+  .mock.dark .mockbar .url{background:#000; border-color:var(--d-line); color:#7c776c}
+  .mock.dark .appbar{border-color:var(--d-line)}
+  .mock.dark .appbar .logo,.mock.dark .appbar .links{color:var(--d-cream)}
+  .lg{max-width:280px}
+  .lg .t{font-weight:800; font-size:16px; margin-bottom:13px; color:var(--d-cream)}
+  .lg label{display:block; font-size:11px; color:var(--d-dim); margin-bottom:5px}
+  .lg .input{background:#000; border:1px solid var(--d-line); border-radius:7px; padding:9px 11px; font-size:12.5px; color:#7c776c; margin-bottom:12px}
+  .lg .ghost{font-size:11px; color:#7c776c; margin-top:4px}.lg .ghost b{color:var(--d-cream)}
+  .feat3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:16px}
+  .feat{border:1px solid var(--d-line); border-radius:9px; padding:11px}
+  .feat .ic{font-size:15px}.feat .ft{font-size:11px; font-weight:700; color:var(--d-cream); margin-top:6px}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  /* roadmap */
+  .road{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:8px}
+  @media(max-width:760px){.road{grid-template-columns:1fr}}
+  .rc{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .rc .ic{font-size:24px}
+  .rc h4{margin:10px 0 0; font-size:16px; color:var(--ink)}
+  .rc p{margin:7px 0 0; font-size:13.5px; color:var(--soft)}
+  .rc .tag{display:inline-block; margin-top:11px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(97,100,201,.12); color:var(--indigo)}
+
+  /* closing */
+  .closing{padding:90px 0 100px; text-align:center; border-top:1px solid var(--line); position:relative}
+  .closing::before{content:""; position:absolute; inset:0; background:radial-gradient(55% 70% at 50% 100%, rgba(93,158,134,.18), transparent 70%)}
+  .closing h2{font-size:clamp(30px,5vw,50px); position:relative; color:var(--ink)}
+  .closing p{color:var(--soft); font-size:18px; max-width:54ch; margin:18px auto 0; position:relative}
+  .cta{position:relative; margin-top:30px; display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center}
+  .cta a{text-decoration:none; font-weight:700; font-size:15px; padding:13px 26px; border-radius:11px}
+  .cta .primary{background:var(--teal); color:#fff}
+  .cta .secondary{border:1px solid var(--line); color:var(--ink); background:#fff}
+  footer{padding:28px 0 56px; text-align:center; color:var(--muted); font-size:12.5px; border-top:1px solid var(--line)}
+  footer .note{max-width:74ch; margin:0 auto 12px; color:var(--soft); font-size:13px}
+  footer code{background:#eceadf; border:1px solid var(--line); padding:2px 6px; border-radius:4px; font-size:12px}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Reading Pod — Newcomer Walkthrough">
+<meta property="og:description" content="A scroll-driven first-run journey through The Reading Pod, recreating each real screen and selling every feature from sign-up to community.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/reading-pod-walkthrough/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<div id="rail"></div>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand"><span>📚</span> The Reading Pod</div>
+    <div class="navsteps">
+      <a href="#join" class="on">Join</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#library">Library</a>
+      <a href="#recs">Book Recs</a>
+      <a href="#pods">Pods</a>
+      <a href="#roadmap">What's Next</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">A newcomer's first 10 minutes</div>
+    <h1 class="reveal">Welcome to The Reading Pod</h1>
+    <p class="lede reveal">Your reading life — organized, tracked, and social. Follow the exact path a brand-new reader takes: from the sign-up screen, to a dashboard that tracks every page, to finding the people who get your taste.</p>
+    <div class="pills reveal">
+      <span class="pill"><b>Track</b> every page</span>
+      <span class="pill"><b>Organize</b> your library</span>
+      <span class="pill"><b>Capture</b> recs</span>
+      <span class="pill"><b>Join</b> a pod</span>
+    </div>
+    <div class="scrollcue reveal">Scroll to begin ↓</div>
+  </div>
+</header>
+
+<!-- 1 — JOIN -->
+<section class="stop" id="join">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">1</span> The door</div>
+      <h2>You're one screen away</h2>
+      <p class="who">Where every newcomer starts.</p>
+      <p>No setup maze. Land on the home page and the pitch is right there: stop juggling notes, screenshots, and half-remembered titles — keep your whole reading life in one calm, distraction-free space. Email and password, and you're in.</p>
+      <ul>
+        <li>Simple email + password sign-up — that's the whole gate</li>
+        <li>The landing page sells you the features before you commit</li>
+        <li>Five reasons to join, front and center</li>
+      </ul>
+    </div>
+    <div class="mock dark reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span class="a">Home</span><span>About</span></div></div>
+      <div class="mbody">
+        <div class="lg">
+          <div class="t">Log In</div>
+          <label>Email</label><div class="input">you@example.com</div>
+          <label>Password</label><div class="input">••••••••</div>
+          <span class="btn" style="background:#2d2d2a;color:var(--d-cream)">Login</span>
+          <div class="ghost">Don't have an account? <b>Sign Up</b></div>
+        </div>
+        <div class="feat3">
+          <div class="feat"><div class="ic">📖</div><div class="ft">Reading Life, Organized</div></div>
+          <div class="feat"><div class="ic">🔖</div><div class="ft">Never Lose a Rec</div></div>
+          <div class="feat"><div class="ic">⭐</div><div class="ft">Review While Fresh</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 — DASHBOARD -->
+<section class="stop flip" id="dashboard">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">2</span> Your command center</div>
+      <h2>A dashboard that knows where you are</h2>
+      <p class="who">The first thing you see after logging in.</p>
+      <p>"Welcome back" — then everything that matters at a glance. Set a yearly book goal, see exactly what you're <i>Currently Reading</i> with a live page-progress bar, line up your "Books to Read," and watch your "Books Read This Month" stack up.</p>
+      <ul>
+        <li>Set a <b>yearly reading goal</b> and track toward it</li>
+        <li><b>Currently Reading</b> shows real progress — 182 / 476 pages (38%)</li>
+        <li>"Books to Read" and "Read This Month" keep momentum visible</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/dashboard</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span class="a">Home</span><span>About</span><span>Books</span><span>Pods</span><span>Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="dash-grid">
+          <div>
+            <div class="dash-h">Welcome Back, Rascall!</div>
+            <div class="goalrow">This Year's Book Goal: <span class="gi"></span> <span class="btn coral">Set Goal</span></div>
+          </div>
+          <div class="nowcard">
+            <div class="lab">Currently Reading:</div>
+            <div class="bt">Project Hail Mary</div>
+            <div class="ba">by Andy Weir</div>
+            <div class="pbar"><i style="width:38%"></i></div>
+            <div class="pmeta">182 / 476 pages (38%)</div>
+          </div>
+        </div>
+        <div class="sectrow"><h3>Books to Read</h3><span class="btn teal">+ Add</span></div>
+        <div class="booklist">
+          <div class="mini"><div class="t">Babel</div><div class="a">R. F. Kuang</div></div>
+          <div class="mini"><div class="t">The Psychology of Money</div><div class="a">Morgan Housel</div></div>
+        </div>
+        <div class="sectrow"><h3>Books Read This Month</h3></div>
+        <div class="emptybox">No books completed this month yet.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 — LIBRARY -->
+<section class="stop" id="library">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">3</span> Your shelf</div>
+      <h2>Your Reading Life, Organized</h2>
+      <p class="who">The library you actually build.</p>
+      <p>Add a book in seconds — title, author, the page you're on, and total pages. The app turns that into a status (Not&nbsp;Started → In-Progress → Completed) and a progress bar. Filter by status, search your shelf, and hit <b>Update Book</b> as you read.</p>
+      <ul>
+        <li>Add books with <b>page-level progress</b>, not just "reading/read"</li>
+        <li>Filter tabs: All · Not Started · In-Progress · Completed</li>
+        <li>Search any title; update your page as you go</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/books</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span>Home</span><span>About</span><span class="a">Books</span><span>Pods</span><span>Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="toolbar">
+          <span class="chip on">All</span><span class="chip">Not Started</span><span class="chip">In-Progress</span><span class="chip">Completed</span>
+          <span class="search">Search your books…</span>
+          <span class="btn teal">Add New Book</span>
+        </div>
+        <div class="bookcards">
+          <div class="bcard"><div class="bt">Project Hail Mary</div><div class="row"><span class="ba">Andy Weir</span><span class="pg">182 / 476</span></div><div class="foot"><span class="badge ip">In-Progress</span><span class="btn navy">Update Book</span></div></div>
+          <div class="bcard"><div class="bt">Educated</div><div class="row"><span class="ba">Tara Westover</span><span class="pg">334 / 334</span></div><div class="foot"><span class="badge done">Completed</span><span class="btn navy">Update Book</span></div></div>
+          <div class="bcard"><div class="bt">Dune</div><div class="row"><span class="ba">Frank Herbert</span><span class="pg">0 / 688</span></div><div class="foot"><span class="badge todo">Not Started</span><span class="btn navy">Update Book</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 — RECS -->
+<section class="stop flip" id="recs">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">4</span> The capture</div>
+      <h2>Never Lose a Recommendation Again</h2>
+      <p class="who">The habit that makes the app stick.</p>
+      <p>A friend mentions a book, a podcast drops three, you spot one at 1am. Drop the title and author into the shared <b>Latest &amp; Greatest</b> feed and it's saved for good. See what everyone's recommending — and pull any of it straight onto your shelf with one tap of <b>Add to Library</b>.</p>
+      <ul>
+        <li>Capture a rec in two fields: title + author</li>
+        <li>A community feed of what readers are loving right now</li>
+        <li><b>Add to Library</b> turns a rec into a tracked book instantly</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/book-recs</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span>Home</span><span>About</span><span>Books</span><span>Pods</span><span class="a">Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="toolbar">
+          <strong style="font-size:15px;color:var(--ink)">Latest &amp; Greatest</strong>
+          <span class="search">Search by title or author…</span>
+          <span class="btn teal">Add Book Rec</span>
+        </div>
+        <div class="reccards">
+          <div class="rcard"><div class="bt">The Midnight Library</div><div class="ba">Matt Haig</div><div class="foot"><span class="btn coral">Add to Library</span></div></div>
+          <div class="rcard"><div class="bt">Tomorrow, and Tomorrow, and Tomorrow</div><div class="ba">Gabrielle Zevin</div><div class="foot"><span class="btn coral">Add to Library</span></div></div>
+          <div class="rcard"><div class="bt">Sapiens</div><div class="ba">Yuval Noah Harari</div><div class="foot"><span class="btn coral">Add to Library</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 — PODS -->
+<section class="stop" id="pods">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">5</span> Your people</div>
+      <h2>Find Your People with Pods</h2>
+      <p class="who">Where solo reading turns social.</p>
+      <p>Reading doesn't have to be a solo sport. Pods are small communities built around genres and themes. Spin one up with a name, genre tags, and a summary — or search and <b>request to join</b> someone else's. Your pending requests sit right on the page until you're let in.</p>
+      <ul>
+        <li><b>Create a pod</b>: name, genre tags, and a summary</li>
+        <li>Search and <b>request to join</b> pods that match your taste</li>
+        <li>A "Pending Requests" area tracks where you've knocked</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/pods</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span>Home</span><span>About</span><span>Books</span><span class="a">Pods</span><span>Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="toolbar"><span class="btn teal">+ Create Pod</span><span class="search" style="max-width:220px;margin-left:auto;flex:none;width:220px">Search pods…</span></div>
+        <div class="podhead"><h3>Discover pods</h3></div>
+        <div class="podgrid">
+          <div class="pcard"><div class="emoji">🐉</div><div class="pn">Fantasy Realms</div><div class="tags"><span class="ptag">fantasy</span><span class="ptag">epic</span></div><div class="pd">Doorstopper series and dragons welcome.</div><div class="pf"><span class="mem">1,204 members</span><span class="btn ghost">Request</span></div></div>
+          <div class="pcard"><div class="emoji">📈</div><div class="pn">Business &amp; Builders</div><div class="tags"><span class="ptag">business</span><span class="ptag">startups</span></div><div class="pd">Strategy and the books behind it.</div><div class="pf"><span class="mem">847 members</span><span class="btn ghost">Request</span></div></div>
+        </div>
+        <div class="pending">Pending Requests<small>Fantasy Realms — waiting for approval</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 — ROADMAP -->
+<section class="stop" id="roadmap">
+  <div class="wrap">
+    <div class="copy reveal" style="text-align:center;max-width:680px;margin:0 auto 8px">
+      <span class="soon">On the roadmap</span>
+      <h2>The pod is just getting started</h2>
+      <p>The foundation — library, recs, pods — is live today. These are the pieces the experience is building toward, promised right on the landing page.</p>
+    </div>
+    <div class="road reveal">
+      <div class="rc"><div class="ic">💬</div><h4>Talk Books, Not Algorithms</h4><p>Real conversations inside your pod — share takes, debate endings, and discover your next read through actual humans.</p><span class="tag">Coming soon</span></div>
+      <div class="rc"><div class="ic">⭐</div><h4>Review While It's Still Fresh</h4><p>The moment you finish is when your thoughts are sharpest. Drop a quick, meaningful review before "later" becomes never.</p><span class="tag">Coming soon</span></div>
+      <div class="rc"><div class="ic">🎮</div><h4>Turn Reading Into a Game</h4><p>Group reads, leaderboards, and shared goals — a whole new way to stay motivated and actually finish, together.</p><span class="tag">Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>No one reads alone.</h2>
+    <p>That's the whole idea. Track every page, organize your library, never lose a rec, and find the pod that gets your taste — all in one calm, distraction-free space.</p>
+    <div class="cta">
+      <a class="primary" href="https://the-reading-pod.vercel.app" target="_blank" rel="noopener">Open The Reading Pod ↗</a>
+      <a class="secondary" href="#join">Replay the walkthrough</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="note">Built from a real logged-in walkthrough of The Reading Pod on 2026-06-27. Screens above faithfully recreate the live UI (real theme, structure, labels, and flows) with idealized sample data. Live features today: <b>Dashboard, Books, Book Recs, Pods</b>. Reviews, pod chat, gamification, and the Profile page are not yet built — shown here as roadmap.</div>
+  📚 The Reading Pod · newcomer walkthrough
+</footer>
+
+<script>
+  const rail=document.getElementById('rail');
+  const onScroll=()=>{const h=document.documentElement;const sc=h.scrollTop/(h.scrollHeight-h.clientHeight);rail.style.width=(sc*100)+'%';};
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const links=[...document.querySelectorAll('.navsteps a')];
+  const secs=links.map(l=>document.querySelector(l.getAttribute('href')));
+  const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const id='#'+e.target.id;links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')===id));}});},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>s&&spy.observe(s));
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();}).then(save)
+      .catch(function(){ save("<!DOCTYPE html>\n"+document.documentElement.outerHTML); });
+  });
+})();</script>
+</body>
+</html>

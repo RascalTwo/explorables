@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2ggfSBmcm9tICIvX2tpdC92aXouanMiOwovLyAgIDwvc2NyaXB0PgovLyBTZXJ2ZWQgYnkgdGhlIHZpeiBzZXJ2ZXIgYXQgL19raXQvdml6LmpzIGZyb20gdGhlIHNraWxsJ3Mgb3duIGtpdC8gZGlyLCBzbyBpdCdzCi8vIG9uZSBzb3VyY2Ugb2YgdHJ1dGggYWNyb3NzIGV2ZXJ5IHZpei4gUGFpcnMgd2l0aCAvX2tpdC92aXota2l0LmNzcy4KCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU1ZHIGRpYWdyYW1zIOKAlCBnZW9tZXRyeSBmaXJzdC4KLy8KLy8gVGhlIHJlY3VycmluZyByZXdvcmsgaW4gYm94ZXMtYW5kLWFycm93cyBkaWFncmFtcyBjb21lcyBmcm9tIHR5cGluZyBsYWJlbCBhbmQKLy8gYXJyb3cgY29vcmRpbmF0ZXMgYXMgaW5kZXBlbmRlbnQgbGl0ZXJhbHM6IGEgYm94IGdldHMgcmVzaXplZCBvciBtb3ZlZCwgYnV0IHRoZQovLyBhcnJvdyBlbmRwb2ludCBhbmQgdGhlIGxhYmVsIHBvc2l0aW9uIHdlcmUgZ3Vlc3NlZCBhZ2FpbnN0IHRoZSAqb2xkKiBnZW9tZXRyeSwKLy8gc28gdGhlIGFycm93IG5vdyBwb2ludHMgYXQgZW1wdHkgc3BhY2UgKG9yIHRoZSB3cm9uZyBib3gpIGFuZCB0aGUgbGFiZWwgc3BpbGxzCi8vIG91dC4gVGhlIGZpeCBpcyB0byBuZXZlciBoYW5kLXBsYWNlIHRob3NlOiBkZWZpbmUgZWFjaCBub2RlIE9OQ0UgYXMge3gseSx3LGh9Ci8vIGFuZCBjb21wdXRlIGV2ZXJ5dGhpbmcgZWxzZSBmcm9tIGl0LgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCi8vIERlZmF1bHQgYXJyb3doZWFkIHBhbGV0dGUsIGtleWVkIHRvIHRoZSB2aXota2l0IGludGVudCB0b2tlbnMuIFNWRyBtYXJrZXJzIGNhbid0Ci8vIGluaGVyaXQgdGhlIHN0cm9rZSBjb2xvciBvZiB0aGUgbGluZSB0aGF0IHVzZXMgdGhlbSwgc28geW91IGdlbnVpbmVseSBuZWVkIG9uZQovLyBtYXJrZXIgcGVyIGNvbG9yIOKAlCB0aGlzIGVtaXRzIHRoZW0gYWxsIHdpdGggc3RhYmxlIGlkcyBzbyB5b3Ugc3RvcCByZS1kZXJpdmluZwovLyB0aGUgc2FtZSA8bWFya2VyPiBibG9jayBwZXIgZGlhZ3JhbS4gUmVmZXJlbmNlIGFzIG1hcmtlci1lbmQ9InVybCgjYWgtYWNjZW50KSIuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICBhaDogIiM4Yjk0OWUiLCAvLyBtdXRlZCDigJQgdGhlIGRlZmF1bHQgZWRnZQogICJhaC1hY2NlbnQiOiAiIzU4YTZmZiIsCiAgImFoLWdvb2QiOiAiIzNmYjk1MCIsCiAgImFoLXdhcm4iOiAiI2QyOTkyMiIsCiAgImFoLWRhbmdlciI6ICIjZjg1MTQ5IiwKfTsKCi8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgY29uc3QgbWFya2VycyA9IE9iamVjdC5lbnRyaWVzKHBhbGV0dGUpCiAgICAubWFwKAogICAgICAoW2lkLCBmaWxsXSkgPT4KICAgICAgICBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCwKICAgICkKICAgIC5qb2luKCIiKTsKICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQoKLy8gQSBub2RlIGlzIGp1c3Qge3gsIHksIHcsIGh9LiBjZW50ZXIoKSBhbmQgc2lkZSgpIGRlcml2ZSBjb25uZWN0aW9uIHBvaW50cyBmcm9tCi8vIGl0LCBzbyBhbiBlZGdlIHN0YXlzIGF0dGFjaGVkIHRvIHRoZSBib3ggbm8gbWF0dGVyIGhvdyB0aGUgYm94IGNoYW5nZXMuCmV4cG9ydCBjb25zdCBjZW50ZXIgPSAobikgPT4gKHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIC8gMiB9KTsKCmV4cG9ydCBjb25zdCBzaWRlID0gKG4sIHdoZXJlKSA9PgogICh7CiAgICB0b3A6IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55IH0sCiAgICBib3R0b206IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIH0sCiAgICBsZWZ0OiB7IHg6IG4ueCwgeTogbi55ICsgbi5oIC8gMiB9LAogICAgcmlnaHQ6IHsgeDogbi54ICsgbi53LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgfSlbd2hlcmVdOwoKLy8gU3RyYWlnaHQgZWRnZSBiZXR3ZWVuIHR3byBub2RlcywgYXV0by1waWNraW5nIHRoZSBmYWNpbmcgc2lkZXMgYmFzZWQgb24gdGhlaXIKLy8gcmVsYXRpdmUgcG9zaXRpb24uIFJldHVybnMgYW4gU1ZHIHBhdGggImQiIHN0cmluZzsgc2V0IHRoZSBtYXJrZXIgeW91cnNlbGYgdmlhCi8vIHRoZSBlbGVtZW50J3MgbWFya2VyLWVuZCBhdHRyaWJ1dGUuIEZvciA+NSBub2RlcyB3aXRoIGNyb3NzaW5nIGVkZ2VzLCByZWFjaCBmb3IKLy8gYSBsYXlvdXQgZW5naW5lIChkYWdyZSAvIGQzLWRhZyAvIG1lcm1haWQpIGluc3RlYWQgb2YgcGxhY2luZyBub2RlcyBieSBoYW5kIOKAlAovLyB0aGF0J3MgdGhlIHBvaW50IHdoZXJlIG1hbnVhbCBjb29yZGluYXRlcyBzdG9wIGJlaW5nIHdvcnRoIGl0LgpleHBvcnQgZnVuY3Rpb24gY29ubmVjdChhLCBiKSB7CiAgY29uc3QgY2EgPSBjZW50ZXIoYSksCiAgICBjYiA9IGNlbnRlcihiKTsKICBjb25zdCBob3JpeiA9IE1hdGguYWJzKGNiLnggLSBjYS54KSA+IE1hdGguYWJzKGNiLnkgLSBjYS55KTsKICBjb25zdCBwYSA9IGhvcml6CiAgICA/IHNpZGUoYSwgY2IueCA+IGNhLnggPyAicmlnaHQiIDogImxlZnQiKQogICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgY29uc3QgcGIgPSBob3JpegogICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgIDogc2lkZShiLCBjYi55ID4gY2EueSA/ICJ0b3AiIDogImJvdHRvbSIpOwogIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9CgovLyBBIGxhYmVsIHRoYXQgQ0FOTk9UIG92ZXJmbG93IGl0cyBib3guIDxmb3JlaWduT2JqZWN0PiBsZXRzIHRoZSBicm93c2VyIHdyYXAgYW5kCi8vIGVsbGlwc2l6ZSBIVE1MIG5hdGl2ZWx5LCB1bmxpa2UgcmF3IDx0ZXh0PiB3aGljaCB5b3UnZCBoYXZlIHRvIG1lYXN1cmUgYnkgaGFuZAovLyAoYW5kIGhpc3RvcmljYWxseSBndWVzc2VkIHdyb25nKS4gVXNlIHRoaXMgZm9yIGFueSBtdWx0aS13b3JkIGxhYmVsIGluc2lkZSBhCi8vIGZpeGVkLXdpZHRoIGJveC4gU3R5bGUgdmlhIHRoZSAudnN2Zy1sYWJlbCBjbGFzcyBpbiB2aXota2l0LmNzcy4KZXhwb3J0IGZ1bmN0aW9uIGxhYmVsQm94KG5vZGUsIGh0bWwsIGNscyA9ICIiKSB7CiAgcmV0dXJuICgKICAgIGA8Zm9yZWlnbk9iamVjdCB4PSIke25vZGUueH0iIHk9IiR7bm9kZS55fSIgd2lkdGg9IiR7bm9kZS53fSIgaGVpZ2h0PSIke25vZGUuaH0iPmAgKwogICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgYDwvZm9yZWlnbk9iamVjdD5gCiAgKTsKfQoKLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICBjb25zdCBiYWQgPSBbXTsKICBmb3IgKGNvbnN0IHQgb2Ygcm9vdC5xdWVyeVNlbGVjdG9yQWxsKCJ0ZXh0IikpIHsKICAgIGNvbnN0IHJlY3QgPSB0LmNsb3Nlc3QoImciKT8ucXVlcnlTZWxlY3RvcigicmVjdCIpOwogICAgaWYgKCFyZWN0KSBjb250aW51ZTsKICAgIGNvbnN0IHRiID0gdC5nZXRCQm94KCk7CiAgICBjb25zdCByYiA9IHJlY3QuZ2V0QkJveCgpOwogICAgY29uc3Qgc3BpbGxzID0KICAgICAgdGIueCA8IHJiLnggLSAxIHx8CiAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgIGlmIChzcGlsbHMpIHsKICAgICAgdC5zdHlsZS5vdXRsaW5lID0gIjFweCBzb2xpZCAjZjg1MTQ5IjsKICAgICAgYmFkLnB1c2godC50ZXh0Q29udGVudCk7CiAgICB9CiAgfQogIGlmIChiYWQubGVuZ3RoKSB7CiAgICBjb25zb2xlLmVycm9yKCJbdml6QXVkaXRdIHRleHQgb3ZlcmZsb3c6IiwgYmFkKTsKICAgIGNvbnN0IGJhbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgYmFubmVyLnN0eWxlLmNzc1RleHQgPQogICAgICAicG9zaXRpb246Zml4ZWQ7bGVmdDo4cHg7Ym90dG9tOjhweDt6LWluZGV4Ojk5OTk7YmFja2dyb3VuZDojZjg1MTQ5O2NvbG9yOiNmZmY7IiArCiAgICAgICJmb250OjEycHgvMSBzYW5zLXNlcmlmO3BhZGRpbmc6NnB4IDEwcHg7Ym9yZGVyLXJhZGl1czo2cHgiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogIH0KICByZXR1cm4gYmFkOwp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU21hbGwgdXRpbGl0aWVzIHRoYXQgZXZlcnkgdml6IHJlLWRlcml2ZXMuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKZXhwb3J0IGNvbnN0ICQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IHJvb3QucXVlcnlTZWxlY3RvcihzZWwpOwpleHBvcnQgY29uc3QgJCQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IFsuLi5yb290LnF1ZXJ5U2VsZWN0b3JBbGwoc2VsKV07CgovLyBFc2NhcGUgYmVmb3JlIGluamVjdGluZyB0ZXh0IGludG8gaW5uZXJIVE1MLgpleHBvcnQgY29uc3QgZXNjID0gKHMpID0+CiAgU3RyaW5nKHMpLnJlcGxhY2UoCiAgICAvWyY8PiInXS9nLAogICAgKGMpID0+ICh7ICImIjogIiZhbXA7IiwgIjwiOiAiJmx0OyIsICI+IjogIiZndDsiLCAnIic6ICImcXVvdDsiLCAiJyI6ICImIzM5OyIgfSlbY10sCiAgKTsKCi8vIEhvdC1yZWxvYWQgKGFuZCBldmVyeSBzYXZlKSBkb2VzIGEgZnVsbCBwYWdlIHJlZnJlc2gsIHNvIGluLXBhZ2Ugc3RhdGUgaXMgd2lwZWQuCi8vIFBlcnNpc3QgYW55dGhpbmcgeW91IHdhbnQgdG8gc3Vydml2ZSDigJQgb3BlbiBwYW5lbCwgc2VsZWN0ZWQgc3RlcCwgYWN0aXZlIGZpbHRlcnMg4oCUCi8vIHRvIHRoZSBVUkwgaGFzaC4gQm9udXM6IHRoZSBVUkwgYmVjb21lcyBzaGFyZWFibGUvZGVlcC1saW5rYWJsZSBmb3IgZnJlZS4KLy8gUm91bmQtdHJpcHMgYSBwbGFpbiBvYmplY3QuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+CiAgbG9jYXRpb24ucmVwbGFjZSgiIyIgKyBlbmNvZGVVUklDb21wb25lbnQoSlNPTi5zdHJpbmdpZnkob2JqKSkpOwoKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogIHRyeSB7CiAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgfSBjYXRjaCB7CiAgICByZXR1cm4ge307CiAgfQp9Owo="}}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>⚠️ Jane Driscoll (Paradise) — Spoilers Inside</title>
+<!-- Public + listed, but the LISTING must stay spoiler-free (mirrors the paradise-s2 sibling):
+     title/description/tag below carry only a warning, no plot. -->
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="⚠️ Jane Driscoll (Paradise) — Spoilers Inside">
+<meta name="viz:description" content="Heavy spoilers for Paradise (Seasons 1–2 and the finale). A character & story-journey explainer for Jane Driscoll — don't open unless you're caught up.">
+<meta name="viz:tag" content="⚠️ S2 Spoilers">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors. The
+   house style is dark-only on purpose — it's the look these vizzes converge on. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text */
+  --text: #e6edf3;
+  --muted: #8b949e;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — distinct hues for diagram categories / series.
+     Use these when you need N visually separable colors, not meaning. */
+  --c1: #58a6ff; /* blue */
+  --c2: #3fb950; /* green */
+  --c3: #d29922; /* amber */
+  --c4: #bc8cff; /* purple */
+  --c5: #4ec9b0; /* teal */
+  --c6: #f85149; /* red */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+.swatch.line {
+  width: 16px;
+  height: 0;
+  border-radius: 0;
+  border-top: 2px solid var(--accent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+</style>
+<style>
+  body { margin: 0; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px 120px; }
+
+  /* ---- reading-progress bar ---- */
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--danger), var(--c4)); z-index: 50; }
+
+  /* ---- sticky section nav ---- */
+  nav.toc { position: sticky; top: 0; z-index: 40; display: flex; gap: 4px; flex-wrap: wrap;
+    background: rgba(13,17,23,.82); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border); padding: 10px 0; margin-bottom: 8px; }
+  nav.toc a { color: var(--muted); text-decoration: none; font-size: 12.5px;
+    padding: 5px 11px; border-radius: 999px; border: 1px solid transparent; }
+  nav.toc a:hover { color: var(--text); }
+  nav.toc a.active { color: var(--text); border-color: var(--border); background: var(--panel-2); }
+
+  /* ---- hero ---- */
+  .hero { padding: 56px 0 30px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+  .hero .kicker { color: var(--danger); letter-spacing: .22em; text-transform: uppercase;
+    font-size: 12px; font-weight: 700; }
+  .hero h1 { font-size: clamp(38px, 7vw, 76px); line-height: .98; margin: 10px 0 6px; letter-spacing: -.02em; }
+  .hero h1 .last { color: var(--muted); }
+  .hero .tag { font-size: clamp(17px, 2.4vw, 23px); color: var(--text); max-width: 700px;
+    font-style: italic; border-left: 3px solid var(--danger); padding-left: 16px; margin: 18px 0 26px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .fact { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 9px 14px; }
+  .fact .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .fact .v { font-size: 15px; font-weight: 600; margin-top: 2px; }
+  .fact .v.unknown { color: var(--danger); }
+
+  .spoiler { display: inline-block; margin-top: 22px; font-size: 12.5px; color: var(--warn);
+    border: 1px dashed var(--warn); border-radius: 8px; padding: 5px 11px; }
+
+  section { padding-top: 46px; }
+  section > h2 { font-size: 26px; margin: 0 0 4px; letter-spacing: -.01em; }
+  section > .lede { color: var(--muted); max-width: 760px; margin: 0 0 26px; line-height: 1.55; }
+
+  /* ---- timeline ---- */
+  .timeline { position: relative; margin: 10px 0; }
+  .timeline::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+    background: var(--border); transform: translateX(-50%); }
+  .act-band { text-align: center; margin: 30px 0 18px; position: relative; }
+  .act-band span { background: var(--bg); padding: 4px 16px; border: 1px solid var(--border);
+    border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .beat { position: relative; width: 50%; padding: 12px 34px; box-sizing: border-box; }
+  .beat.left { left: 0; text-align: right; }
+  .beat.right { left: 50%; text-align: left; }
+  .beat .dot { position: absolute; top: 22px; width: 15px; height: 15px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent); z-index: 2; }
+  .beat.left .dot { right: -8px; }
+  .beat.right .dot { left: -8px; }
+  .beat .card2 { display: inline-block; text-align: left; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; max-width: 380px;
+    transition: border-color .15s, transform .15s; }
+  .beat .card2:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .beat .meta-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+  .beat .badge { font-family: var(--mono); font-size: 10px; letter-spacing: .02em;
+    padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; }
+  .beat .b-ep { color: var(--accent); border-color: rgba(88,166,255,.4); }
+  .beat .b-when { color: var(--warn); border-color: rgba(210,153,34,.4); }
+  .beat h3 { margin: 4px 0 6px; font-size: 16px; }
+  .beat p { margin: 0; font-size: 13.5px; color: var(--text); line-height: 1.5; }
+  .beat details { margin-top: 9px; }
+  .beat summary { cursor: pointer; font-size: 12px; color: var(--accent); list-style: none; }
+  .beat summary::-webkit-details-marker { display: none; }
+  .beat summary::before { content: "▸ "; }
+  .beat details[open] summary::before { content: "▾ "; }
+  .beat .note { margin-top: 8px; font-size: 12.5px; color: var(--muted); line-height: 1.5;
+    border-left: 2px solid var(--border); padding-left: 10px; }
+  .beat .quote { font-style: italic; color: var(--text); }
+
+  /* ---- generic panels / grids ---- */
+  .grid { display: grid; gap: 16px; }
+  .cols-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .pcard { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .pcard h3 { margin: 0 0 8px; font-size: 16px; }
+  .pcard p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+  .pcard .em { color: var(--text); }
+
+  figure.diagram { margin: 0; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 14px; padding: 10px; overflow-x: auto; }
+  figure.diagram figcaption { color: var(--muted); font-size: 12.5px; padding: 6px 10px 4px; }
+  svg { display: block; width: 100%; height: auto; }
+  .vsvg-label { font-size: 12px; line-height: 1.25; color: var(--text); }
+  .vsvg-label .role { color: var(--muted); font-size: 10.5px; display: block; margin-top: 1px; }
+
+  blockquote.big { font-size: clamp(20px, 3.4vw, 30px); line-height: 1.3; font-weight: 600;
+    letter-spacing: -.01em; margin: 0; max-width: 860px; }
+  blockquote.big .cite { display: block; font-size: 14px; font-weight: 400; color: var(--muted); margin-top: 14px; }
+  blockquote.big .hl { color: var(--danger); }
+
+  .openq { border-color: var(--danger); }
+  .openq h3 { color: var(--danger); }
+  footer { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 12px; line-height: 1.7; }
+  footer a { color: var(--muted); }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="⚠️ Jane Driscoll (Paradise) — Spoilers Inside">
+<meta property="og:description" content="Heavy spoilers for Paradise (Seasons 1–2 and the finale). A character &amp; story-journey explainer for Jane Driscoll — don't open unless you're caught up.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/jane-driscoll-paradise/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<div id="progress"></div>
+<div class="wrap">
+
+  <nav class="toc" id="toc">
+    <a href="#top">Top</a>
+    <a href="#wired">How she's wired</a>
+    <a href="#journey">The journey</a>
+    <a href="#wii">The Wii</a>
+    <a href="#orbit">Who she orbits</a>
+    <a href="#alex">Who is ALEX?</a>
+    <a href="#themes">Themes</a>
+    <a href="#open">Is Jane dead?</a>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="kicker">Paradise · Hulu · created by Dan Fogelman</div>
+    <h1>Jane <span class="last">Driscoll</span></h1>
+    <div class="tag">"I'm a killer. It's what I've always been — a weapon. People I respect aim me, and I execute for them."</div>
+    <div class="facts">
+      <div class="fact"><div class="k">Played by</div><div class="v">Nicole Brydon Bloom</div></div>
+      <div class="fact"><div class="k">Born</div><div class="v">June 6, 1997 · 12:01 a.m.</div></div>
+      <div class="fact"><div class="k">Cover role</div><div class="v">Secret Service agent</div></div>
+      <div class="fact"><div class="k">Real role</div><div class="v">Sinatra's in-house assassin</div></div>
+      <div class="fact"><div class="k">Status</div><div class="v unknown">UNKNOWN</div></div>
+    </div>
+    <span class="spoiler">⚠ Full spoilers — Season 1, Season 2, and the S2 finale cliffhanger.</span>
+  </header>
+
+  <section id="wired">
+    <h2>How she's wired</h2>
+    <p class="lede">Jane isn't evil-for-its-own-sake — she's a child who was never wanted, looping forever
+      through the same engine. She has no internal compass, so she borrows one: she finds a mother-figure
+      to earn, lets them point her at a target, and kills to be kept. Then the hunger resets.</p>
+
+    <figure class="diagram">
+      <svg id="loop" viewBox="0 0 800 250" role="img" aria-label="The aimed-weapon loop"></svg>
+      <figcaption>The aimed-weapon loop — every kill is really an attempt to replace the absent mother.</figcaption>
+    </figure>
+
+    <div class="grid cols-3" style="margin-top:16px">
+      <div class="pcard">
+        <h3>"Climby"</h3>
+        <p>A lonely, abused kid invents an imaginary friend who <span class="em">gives her permission to be
+          violent</span> — the externalized voice of every impulse she's not supposed to act on. He's why she
+          once locked her mother and the boyfriend in a sauna.</p>
+      </div>
+      <div class="pcard">
+        <h3>The voices, weaponized</h3>
+        <p>At the CIA's farm, mentor Stacy Thomas teaches her <span class="em">meditation to quiet the voices
+          in her head</span>. Jane repurposes it into hyperfocus — the same technique meant to contain her
+          instead sharpens her into a precise assassin.</p>
+      </div>
+      <div class="pcard">
+        <h3>Childlike &amp; all-seeing</h3>
+        <p>She loves the Wii and pretty dresses, reads as harmless and a little off — while
+          <span class="em">studying every face in the room</span> and noticing more than the smartest people
+          present. The actor keeps it deliberately ambiguous: genuine psychopath, or playing a part?</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <h2>The journey</h2>
+    <p class="lede">Her arc runs from a prophecy before she's born, through Season 1 as Sinatra's quiet cleanup
+      crew, to a Season 2 origin episode that finally explains her — and ends with her own predator/prey
+      reversal. Each card is tagged with the <span style="color:var(--accent)">episode</span> it's shown in and,
+      where the show actually fixes it, the <span style="color:var(--warn)">in-universe date</span>. Click
+      <em>▸ more</em> for the subtext.</p>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <section id="wii">
+    <h2>The Wii question</h2>
+    <p class="lede">A trained assassin who'd murder you over a children's console. It surfaces twice — and the
+      show keeps it pointedly double-edged: is it a punchline, or a mask?</p>
+    <div class="grid cols-2">
+      <div class="pcard">
+        <h3>S1E3 — the alibi</h3>
+        <p>The night the President dies, the residence cameras are off. Jane and Billy's cover: they shut them
+          off <span class="em">to play Wii Tennis</span>. That blackout is exactly what made the assassination
+          cover-up possible — so the Wii arrives as her tell.</p>
+      </div>
+      <div class="pcard">
+        <h3>S1E8 — the trigger</h3>
+        <p>She covets the dead President's game collection. Sinatra orders her to kill Presley; Jane's
+          counter-ask is <span class="em">the Wii</span>. Refused and called insane, she shoots
+          <span class="em">Sinatra</span> instead — and had stashed Presley safe all along.</p>
+      </div>
+    </div>
+    <div class="pcard" style="margin-top:16px; border-color: var(--c4)">
+      <h3>So what does it mean? — deliberately both</h3>
+      <p style="color:var(--text)"><span class="em"><b>The joke:</b></span> she frames a murder as pettiness over
+        a toy, performing how detached she is from normal human stakes. <span class="em"><b>The mask:</b></span>
+        it may be a tell that she's colder and smarter than she lets the room believe. Creator Dan Fogelman
+        leaves it open on purpose — and the S2 origin episode lays the floor under it: abuse, neglect, no
+        childhood. A kids' console becomes <span class="em">arrested development standing in for the childhood
+        she was robbed of</span>.</p>
+    </div>
+    <blockquote class="big" style="margin-top:26px">
+      “She didn't necessarily shoot Sinatra because she wanted to play the Wii… But she <span class="hl">does
+      love that damn video game</span>, and it remains to be seen if Jane is playing three-dimensional chess
+      while everybody else is playing checkers — or she's just batsh*t crazy.”
+      <span class="cite">— Dan Fogelman (creator), to Deadline</span>
+    </blockquote>
+  </section>
+
+  <section id="orbit">
+    <h2>Who she orbits</h2>
+    <p class="lede">Two amber lines are the only ones that matter to Jane — the mother-figures whose approval she's
+      chasing. Everything else is something she did <em>to</em> someone on their behalf.</p>
+    <figure class="diagram">
+      <svg id="orbitsvg" viewBox="0 0 980 660" role="img" aria-label="Jane's relationships"></svg>
+      <div class="legend" style="padding:6px 12px 10px">
+        <span class="legend-item"><span class="swatch line" style="border-top-color:var(--warn)"></span>Mother-figure / handler</span>
+        <span class="legend-item"><span class="swatch line" style="border-top-color:var(--c4)"></span>Inner voice</span>
+        <span class="legend-item"><span class="swatch line" style="border-top-color:var(--danger)"></span>Killed / targeted</span>
+        <span class="legend-item"><span class="swatch line" style="border-top-color:var(--c5)"></span>Took captive</span>
+        <span class="legend-item"><span class="swatch line" style="border-top-color:var(--accent)"></span>Deceived / adversary</span>
+      </div>
+    </figure>
+  </section>
+
+  <section id="alex">
+    <h2>Who — or what — is ALEX?</h2>
+    <p class="lede">The sender of Jane's birth prophecy isn't a person. ALEX is a
+      <span style="color:var(--c4)">predictive AI</span> — and the channel through which a 1997 stranger was
+      told a killer was coming.</p>
+    <figure class="diagram">
+      <svg id="alexflow" viewBox="0 0 960 150" role="img" aria-label="How the 1997 ALEX message reached Jane"></svg>
+      <figcaption>How the warning reached her — and the paradox: ALEX seemingly didn't exist yet in 1997.</figcaption>
+    </figure>
+    <div class="grid cols-2" style="margin-top:16px">
+      <div class="pcard"><h3>What ALEX is</h3><p>A predictive computer built by tech figure <span class="em">Henry
+        Miller</span> (company: Vestige Quantum) and named after his dying wife, Alex. Sinatra wanted the tech;
+        the deal turned bloody. ALEX is now <span class="em">Sinatra's secret project buried in the bunker</span>
+        — the finale shows her descending to greet a glowing machine that appears able to see the future.</p></div>
+      <div class="pcard"><h3>The paradox</h3><p>ALEX seemingly didn't exist in 1997 — yet a message from
+        "Alex&nbsp;Q" reached a store computer that year. The show flags this as an open, possibly
+        <span class="em">time-bending</span> mystery, not an answered one.</p></div>
+      <div class="pcard openq"><h3>Did it cause her, or warn of her?</h3><p>The message offered a chance to
+        <span class="em">stop</span> the killer. The show never confirms what Don actually told Charlotte, or
+        whether it helped or harmed. The eerie "the warning <em>made</em> her" reading is
+        <span class="em">fan/critic theory, not canon</span> — her making is pinned on the abusive mother,
+        Climby, and CIA conditioning.</p></div>
+      <div class="pcard openq"><h3>The unspent clause</h3><p>"She can be stopped <span class="em">when it
+        matters</span>." As of the finale that moment hasn't come — which, with her body gone, reads as a
+        Season&nbsp;3 promissory note.</p></div>
+    </div>
+  </section>
+
+  <section id="themes">
+    <h2>What she's about</h2>
+    <div class="grid cols-2">
+      <div class="pcard"><h3>Manufactured loyalty</h3><p>No moral compass of her own — she needs someone she
+        respects to "aim" her. Loyalty isn't felt, it's <span class="em">issued</span> by whoever fills the
+        mother-shaped hole.</p></div>
+      <div class="pcard"><h3>Mother-hunger</h3><p>Every attachment — Stacy, then Sinatra — is an attempt to
+        replace the abusive mother who raised her alone. She'll do anything for the approval she never got.</p></div>
+      <div class="pcard"><h3>Nature vs. nurture</h3><p>A prophecy says a killer was <span class="em">born</span>
+        on a fixed date and hour. The same episode shows abuse and neglect <span class="em">making</span> one.
+        The show refuses to settle which.</p></div>
+      <div class="pcard"><h3>The weapon untethered</h3><p>Contained by the CIA, then by Sinatra. With the leash
+        cut and her body vanished, the arc points from <span class="em">controlled tool</span> toward
+        <span class="em">autonomous threat</span>.</p></div>
+    </div>
+
+    <blockquote class="big" style="margin-top:34px">
+      “People I respect <span class="hl">aim me</span>, and I execute for them. To serve my purpose, I need
+      someone like you. You're no good to me <span class="hl">if you're dead</span>.”
+      <span class="cite">— Jane, explaining to Sinatra why she keeps her alive (S2E6, "Jane")</span>
+    </blockquote>
+  </section>
+
+  <section id="open">
+    <h2>So… is Jane dead?</h2>
+    <p class="lede">Dr. Gabriela Torabi turned the hunt around — ambushed Jane and stabbed her twice in the back.
+      Jane bled out in the shower and looked gone. Then the finale quietly undercut it.</p>
+    <div class="grid cols-3">
+      <div class="pcard openq"><h3>The vanished body</h3><p>In the finale's final minutes, a cut to Torabi's
+        shower shows <span class="em">Jane's body is gone</span> — only splatter, no drag trail. It wasn't there
+        when the bunker imploded. Someone moved her. The shot only makes sense if she lived.</p></div>
+      <div class="pcard openq"><h3>The writer hedges</h3><p>Episode writer John Hoberg: <span class="em">"She
+        looked really dead to me."</span> No Terminator resurrections — a knife went in, she lay there a long
+        time. Realistically dead… but pointedly not <em>shown</em> dead.</p></div>
+      <div class="pcard openq"><h3>The prophecy hook</h3><p>The 1997 message said the killer
+        <span class="em">"can be stopped when it matters."</span> If that moment hasn't come, the story may
+        <em>need</em> her alive — a severed weapon with nothing to lose, primed to be Season 3's antagonist.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>On dating these beats:</strong> the show fixes hard calendar dates only in Jane's 1997 flashback
+    (revealed in S2E6 "Jane"). The bunker "present" sits <em>~3 years after the cataclysm ("the Day")</em> with
+    no on-screen year given, and Seasons 1–2 are one continuous present-day timeline — so present-day cards are
+    badged by episode order, not dated intervals. The "2029/2032" figures floating around online are fan
+    synthesis, not canon.
+    <br><br>
+    Sources: <a href="https://paradise.fandom.com/wiki/Jane_Driscoll">Paradise Wiki</a>,
+    <a href="https://www.tvinsider.com/1255561/paradise-season-3-jane-dead-alive-ending-explained/">TV Insider</a> (finale, writer quotes, ALEX explainer),
+    <a href="https://www.hollywoodreporter.com/tv/tv-features/paradise-nicole-brydon-bloom-jane-season-2-interview-1236511992/">The Hollywood Reporter</a> &
+    <a href="https://deadline.com/2026/03/nicole-brydon-bloom-paradise-season-2-interview-jane-1236752886/">Deadline</a> (Nicole Brydon Bloom; the Fogelman "Wii" quote),
+    Parade (S2E6 recap), and <a href="https://blackgirlnerds.com/where-is-jane-the-mystery-of-agent-driscoll-and-why-paradise-isnt-done-with-her-yet/">Black Girl Nerds</a> (Season 3 theory).
+    Season 3 survival, who moved the body, and the prophecy payoff are unconfirmed setups, not facts.
+  </footer>
+
+</div>
+
+<script type="module">
+import { arrowMarkers, connect, side, labelBox, $, $$ } from "/_kit/viz.js";
+
+/* ============ THE JOURNEY ============ */
+const ACTS = [
+  { band: "Origin · before the series", color: "var(--c4)", beats: [
+    { ep: "Revealed · S2E6 \"Jane\"", when: "May 29 – Jun 6, 1997", t: "The prophecy", p: "A stranger receives a message from a mystery sender, \"Alex Q,\" on a store computer: a killer will be born June 6 at 12:01 a.m. — and \"she can be stopped when it matters.\" He tries to warn Jane's mother on the hospital steps.",
+      note: "This message — and the sender \"Alex\" — is the thread Season 2 pulls on. ALEX turns out to be a predictive AI tied to Sinatra; how it sent a 1997 message is left as an open (possibly time-bending) mystery." },
+    { ep: "Revealed · S2E6 \"Jane\"", when: "Childhood · year unstated", t: "Climby & the sauna", p: "Raised alone by a detached, abusive mother. To cope, she invents Climby — an imaginary friend who eggs her on. On his encouragement she locks her mother and the boyfriend in a sauna.",
+      note: "First glimpse of the engine: loneliness in, permission-to-harm out. Climby is the violence she isn't allowed to own yet." },
+    { ep: "Revealed · S2E6 \"Jane\"", when: "Adulthood · year unstated", t: "Stacy Thomas, the first mother", p: "She enlists and trains at the CIA's secret facility, The Farm. Mentor Stacy Thomas teaches her meditation to quiet the voices — Jane turns it into assassin's hyperfocus. Desperate for Stacy's approval, she brutally retaliates against the man promoted over her.",
+      note: "The template for every relationship after: find a woman to idolize, earn her with violence. Sinatra is just the sequel to Stacy." },
+  ]},
+  { band: "Season 1 · the quiet cleanup crew", color: "var(--accent)", beats: [
+    { ep: "S1E1 · \"Wildcat is Down\"", when: "≈3 yrs after \"the Day\"", t: "The night the President dies", p: "President Cal Bradford is assassinated. Jane is working the control systems; her lover Billy is on guard — and the cameras are down. Xavier calls the residence lockdown.",
+      note: "She's hidden in plain sight from the pilot — a colleague, not yet a suspect. (No calendar year is ever given for the bunker present.)" },
+    { ep: "S1E3", when: "days later", t: "The Wii Tennis alibi", p: "As investigator Garcia closes in on the camera blackout, Jane and Billy's cover for the dark night is almost absurdly innocent: they say they shut the cameras off to play Wii Tennis.",
+      note: "The camera blackout is what enabled the assassination cover-up — and the Wii is introduced as her tell, a childish fixation bolted onto a killer." },
+    { ep: "S1E4 · \"Agent Billy Pace\"", when: "days later", t: "She kills Billy", p: "On Sinatra's order (Billy was a threat to her), Jane poisons Billy's beer and stages a drug overdose — murdering her own lover on command.",
+      note: "Clean demonstration of \"aimed\": the target is someone she's close to, and it doesn't matter." },
+    { ep: "S1E5", when: "same stretch", t: "Grieving the body she staged", p: "Jane and Xavier \"discover\" Billy's corpse. Jane performs the devastated girlfriend flawlessly — only she and Sinatra know she did it.",
+      note: "She can manufacture grief on demand. The performance is as effortless as the kill." },
+    { ep: "S1E6 · \"You Asked for Miracles\"", when: "days later", t: "She takes Presley", p: "Tasked with finding the off-grid Xavier, Jane retrieves her gun from a heart-shaped pillow and abducts his daughter Presley — under the gentle cover of \"not wanting to be alone.\"",
+      note: "The heart-pillow holster says it all: the loneliness leaks through even mid-operation. The captive is also company." },
+    { ep: "S1E8 · \"The Man Who Kept the Secrets\"", when: "S1 climax", t: "She shoots Sinatra", p: "Denied her petty prize — the late president's Wii / video-game collection — Jane finds Xavier holding Sinatra at gunpoint and shoots Sinatra herself, leaning in: she should've just let me have the Wii. (Presley was safe all along.)",
+      note: "Approval is conditional and volatile — cross her on something small and the loyalty inverts in a heartbeat. Fogelman: the Wii is \"the butt of the joke,\" but she does love that damn game." },
+  ]},
+  { band: "Season 2 · the origin, and the reversal", color: "var(--c5)", beats: [
+    { ep: "S2E6 · \"Jane\"", when: "continuous with S1", t: "Her standalone episode", p: "The backstory above is finally told. In the present, with President Baines secretly dead by Jane's hand and Sinatra back in control, Jane explains why she kept Sinatra alive — \"a weapon… people I respect aim me\" — and warns Dr. Torabi: \"If you come for her, you come through me.\"",
+      note: "The thesis statement of the character, delivered to the only person who's started to see her clearly." },
+    { ep: "S2E7 · \"The Final Countdown\"", when: "S2 climax", t: "The predator becomes prey", p: "Jane breaks into Dr. Gabriela Torabi's home to kill her. Torabi senses it, ambushes her from behind, and stabs her twice in the back. Jane collapses, bleeding out in the shower.",
+      note: "For once the room out-watches the watcher. The hunter ends the season on the floor." },
+  ]},
+  { band: "Cliffhanger", color: "var(--danger)", beats: [
+    { ep: "S2 finale", when: "moments later", t: "The empty shower", p: "Minutes from the end, a cut reveals Jane's body is gone — no drag trail, just splatter. She isn't there when the bunker implodes. Dead, or removed by someone? The series leaves it wide open.",
+      note: "See \"Is Jane dead?\" below — the writer says she looked dead; the staging says she didn't stay put." },
+  ]},
+];
+
+const tl = $("#timeline");
+let html = "", i = 0;
+for (const act of ACTS) {
+  html += `<div class="act-band"><span style="color:${act.color}">${act.band}</span></div>`;
+  for (const b of act.beats) {
+    const sideCls = i % 2 ? "right" : "left";
+    html += `<div class="beat ${sideCls}">
+      <div class="dot" style="border-color:${act.color}"></div>
+      <div class="card2">
+        <div class="meta-row">
+          <span class="badge b-ep">${b.ep}</span>
+          <span class="badge b-when">${b.when}</span>
+        </div>
+        <h3>${b.t}</h3>
+        <p>${b.p}</p>
+        <details><summary>more</summary><div class="note">${b.note}</div></details>
+      </div>
+    </div>`;
+    i++;
+  }
+}
+tl.innerHTML = html;
+
+/* ============ THE AIMED-WEAPON LOOP ============ */
+(() => {
+  const svg = $("#loop");
+  const nodes = [
+    { x: 18,  y: 70, w: 168, h: 96, c: "var(--c4)",     t: "<b>Abandonment wound</b>", r: "raised by an abusive mother; no compass of her own" },
+    { x: 222, y: 70, w: 168, h: 96, c: "var(--warn)",   t: "<b>Latches onto a mother</b>", r: "Stacy, then Sinatra — someone to idolize and earn" },
+    { x: 426, y: 70, w: 168, h: 96, c: "var(--accent)", t: "<b>Gets aimed</b>", r: "the handler points her at a target" },
+    { x: 630, y: 70, w: 168, h: 96, c: "var(--danger)", t: "<b>Executes</b>", r: "kills without remorse — then needs to be wanted again" },
+  ];
+  let s = arrowMarkers();
+  for (let k = 0; k < nodes.length - 1; k++) {
+    s += `<path d="${connect(nodes[k], nodes[k+1])}" fill="none" stroke="var(--border)" stroke-width="2" marker-end="url(#ah)"/>`;
+  }
+  const a = nodes[3], b = nodes[0];
+  s += `<path d="M ${a.x + a.w/2} ${a.y + a.h} C ${a.x + a.w/2} 235, ${b.x + b.w/2} 235, ${b.x + b.w/2} ${b.y + b.h}"
+          fill="none" stroke="var(--danger)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah-danger)"/>`;
+  s += `<text x="408" y="230" text-anchor="middle" fill="var(--danger)" font-size="12" font-style="italic">craves the next approval — and the loop resets</text>`;
+  for (const n of nodes) {
+    s += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="11" fill="var(--panel)" stroke="${n.c}" stroke-width="2"/>`;
+    s += labelBox({ x: n.x, y: n.y, w: n.w, h: n.h },
+      `<div style="padding:10px 12px"><div>${n.t}</div><div class="role">${n.r}</div></div>`);
+  }
+  svg.innerHTML = s;
+})();
+
+/* ============ WHO SHE ORBITS ============ */
+(() => {
+  const svg = $("#orbitsvg");
+  const jane = { x: 410, y: 300, w: 160, h: 64 };
+  const C = { handler: "var(--warn)", inner: "var(--c4)", killed: "var(--danger)", captive: "var(--c5)", foe: "var(--accent)" };
+  const sat = [
+    { x: 405, y: 18,  w: 170, h: 54, cat: "inner",   t: "Climby", r: "the inner voice that grants permission" },
+    { x: 70,  y: 80,  w: 180, h: 56, cat: "handler", t: "Stacy Thomas", r: "first mother-figure · CIA mentor" },
+    { x: 730, y: 80,  w: 180, h: 60, cat: "handler", t: "Sinatra", r: "current handler — yet Jane shot her too" },
+    { x: 770, y: 300, w: 180, h: 56, cat: "foe",     t: "Xavier Collins", r: "colleague she deceives & crosses" },
+    { x: 40,  y: 300, w: 180, h: 56, cat: "captive", t: "Presley", r: "Xavier's daughter — abducted" },
+    { x: 90,  y: 540, w: 180, h: 56, cat: "killed",  t: "Billy Pace", r: "her lover — killed on order" },
+    { x: 400, y: 580, w: 180, h: 56, cat: "killed",  t: "President Baines", r: "secretly killed by Jane" },
+    { x: 720, y: 540, w: 190, h: 60, cat: "killed",  t: "Dr. Gabriela Torabi", r: "her last target — who stabbed her instead" },
+  ];
+  let s = arrowMarkers();
+  const markerFor = { handler: "url(#ah-warn)", inner: "url(#ah)", killed: "url(#ah-danger)", captive: "url(#ah)", foe: "url(#ah-accent)" };
+  for (const n of sat) {
+    const dashed = n.cat === "killed" && n.t.startsWith("Dr.");
+    s += `<path d="${connect(jane, n)}" fill="none" stroke="${C[n.cat]}" stroke-width="2"
+            ${dashed ? 'stroke-dasharray="5 4"' : ""} marker-end="${markerFor[n.cat]}"/>`;
+  }
+  for (const n of sat) {
+    s += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="10" fill="var(--panel)" stroke="${C[n.cat]}" stroke-width="1.5"/>`;
+    s += labelBox(n, `<div style="padding:7px 11px"><div><b>${n.t}</b></div><div class="role">${n.r}</div></div>`);
+  }
+  s += `<rect x="${jane.x}" y="${jane.y}" width="${jane.w}" height="${jane.h}" rx="12" fill="var(--panel-2)" stroke="var(--text)" stroke-width="2"/>`;
+  s += labelBox(jane, `<div style="padding:9px 12px;text-align:center"><div style="font-size:17px"><b>JANE</b></div><div class="role">the weapon</div></div>`);
+  svg.innerHTML = s;
+})();
+
+/* ============ ALEX MESSAGE FLOW ============ */
+(() => {
+  const svg = $("#alexflow");
+  const fn = [
+    { x: 6,   y: 40, w: 172, h: 70, c: "var(--c4)",     t: "ALEX", r: "predictive AI · Sinatra's secret" },
+    { x: 202, y: 40, w: 172, h: 70, c: "var(--accent)", t: "\"Alex Q\" message", r: "on a 1997 store computer" },
+    { x: 398, y: 40, w: 160, h: 70, c: "var(--muted)",  t: "Don", r: "the store clerk who got it" },
+    { x: 582, y: 40, w: 170, h: 70, c: "var(--muted)",  t: "Charlotte", r: "Jane's mother, at the hospital" },
+    { x: 776, y: 40, w: 178, h: 70, c: "var(--danger)", t: "Jane", r: "born Jun 6, 1997 · 12:01 a.m." },
+  ];
+  let s = arrowMarkers();
+  for (let k = 0; k < fn.length - 1; k++) {
+    const dashed = k === 0; // the eerie/time-bending hop from a future AI into 1997
+    s += `<path d="${connect(fn[k], fn[k+1])}" fill="none" stroke="${dashed ? 'var(--c4)' : 'var(--border)'}"
+            stroke-width="2" ${dashed ? 'stroke-dasharray="5 4"' : ""} marker-end="${dashed ? 'url(#ah-accent)' : 'url(#ah)'}"/>`;
+  }
+  for (const n of fn) {
+    s += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="11" fill="var(--panel)" stroke="${n.c}" stroke-width="1.8"/>`;
+    s += labelBox(n, `<div style="padding:9px 12px"><div><b>${n.t}</b></div><div class="role">${n.r}</div></div>`);
+  }
+  svg.innerHTML = s;
+})();
+
+/* ============ nav active-state + progress bar ============ */
+const prog = $("#progress");
+const links = $$("nav.toc a");
+const sections = links.map(a => document.getElementById(a.getAttribute("href").slice(1))).filter(Boolean);
+function onScroll() {
+  const h = document.documentElement;
+  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+  let active = sections[0];
+  for (const sec of sections) { if (sec.getBoundingClientRect().top <= 120) active = sec; }
+  links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + active.id));
+}
+document.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();}).then(save)
+      .catch(function(){ save("<!DOCTYPE html>\n"+document.documentElement.outerHTML); });
+  });
+})();</script>
+</body>
+</html>

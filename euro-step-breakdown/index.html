@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2ggfSBmcm9tICIvX2tpdC92aXouanMiOwovLyAgIDwvc2NyaXB0PgovLyBTZXJ2ZWQgYnkgdGhlIHZpeiBzZXJ2ZXIgYXQgL19raXQvdml6LmpzIGZyb20gdGhlIHNraWxsJ3Mgb3duIGtpdC8gZGlyLCBzbyBpdCdzCi8vIG9uZSBzb3VyY2Ugb2YgdHJ1dGggYWNyb3NzIGV2ZXJ5IHZpei4gUGFpcnMgd2l0aCAvX2tpdC92aXota2l0LmNzcy4KCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU1ZHIGRpYWdyYW1zIOKAlCBnZW9tZXRyeSBmaXJzdC4KLy8KLy8gVGhlIHJlY3VycmluZyByZXdvcmsgaW4gYm94ZXMtYW5kLWFycm93cyBkaWFncmFtcyBjb21lcyBmcm9tIHR5cGluZyBsYWJlbCBhbmQKLy8gYXJyb3cgY29vcmRpbmF0ZXMgYXMgaW5kZXBlbmRlbnQgbGl0ZXJhbHM6IGEgYm94IGdldHMgcmVzaXplZCBvciBtb3ZlZCwgYnV0IHRoZQovLyBhcnJvdyBlbmRwb2ludCBhbmQgdGhlIGxhYmVsIHBvc2l0aW9uIHdlcmUgZ3Vlc3NlZCBhZ2FpbnN0IHRoZSAqb2xkKiBnZW9tZXRyeSwKLy8gc28gdGhlIGFycm93IG5vdyBwb2ludHMgYXQgZW1wdHkgc3BhY2UgKG9yIHRoZSB3cm9uZyBib3gpIGFuZCB0aGUgbGFiZWwgc3BpbGxzCi8vIG91dC4gVGhlIGZpeCBpcyB0byBuZXZlciBoYW5kLXBsYWNlIHRob3NlOiBkZWZpbmUgZWFjaCBub2RlIE9OQ0UgYXMge3gseSx3LGh9Ci8vIGFuZCBjb21wdXRlIGV2ZXJ5dGhpbmcgZWxzZSBmcm9tIGl0LgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCi8vIERlZmF1bHQgYXJyb3doZWFkIHBhbGV0dGUsIGtleWVkIHRvIHRoZSB2aXota2l0IGludGVudCB0b2tlbnMuIFNWRyBtYXJrZXJzIGNhbid0Ci8vIGluaGVyaXQgdGhlIHN0cm9rZSBjb2xvciBvZiB0aGUgbGluZSB0aGF0IHVzZXMgdGhlbSwgc28geW91IGdlbnVpbmVseSBuZWVkIG9uZQovLyBtYXJrZXIgcGVyIGNvbG9yIOKAlCB0aGlzIGVtaXRzIHRoZW0gYWxsIHdpdGggc3RhYmxlIGlkcyBzbyB5b3Ugc3RvcCByZS1kZXJpdmluZwovLyB0aGUgc2FtZSA8bWFya2VyPiBibG9jayBwZXIgZGlhZ3JhbS4gUmVmZXJlbmNlIGFzIG1hcmtlci1lbmQ9InVybCgjYWgtYWNjZW50KSIuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICBhaDogIiM4Yjk0OWUiLCAvLyBtdXRlZCDigJQgdGhlIGRlZmF1bHQgZWRnZQogICJhaC1hY2NlbnQiOiAiIzU4YTZmZiIsCiAgImFoLWdvb2QiOiAiIzNmYjk1MCIsCiAgImFoLXdhcm4iOiAiI2QyOTkyMiIsCiAgImFoLWRhbmdlciI6ICIjZjg1MTQ5IiwKfTsKCi8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgY29uc3QgbWFya2VycyA9IE9iamVjdC5lbnRyaWVzKHBhbGV0dGUpCiAgICAubWFwKAogICAgICAoW2lkLCBmaWxsXSkgPT4KICAgICAgICBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCwKICAgICkKICAgIC5qb2luKCIiKTsKICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQoKLy8gQSBub2RlIGlzIGp1c3Qge3gsIHksIHcsIGh9LiBjZW50ZXIoKSBhbmQgc2lkZSgpIGRlcml2ZSBjb25uZWN0aW9uIHBvaW50cyBmcm9tCi8vIGl0LCBzbyBhbiBlZGdlIHN0YXlzIGF0dGFjaGVkIHRvIHRoZSBib3ggbm8gbWF0dGVyIGhvdyB0aGUgYm94IGNoYW5nZXMuCmV4cG9ydCBjb25zdCBjZW50ZXIgPSAobikgPT4gKHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIC8gMiB9KTsKCmV4cG9ydCBjb25zdCBzaWRlID0gKG4sIHdoZXJlKSA9PgogICh7CiAgICB0b3A6IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55IH0sCiAgICBib3R0b206IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIH0sCiAgICBsZWZ0OiB7IHg6IG4ueCwgeTogbi55ICsgbi5oIC8gMiB9LAogICAgcmlnaHQ6IHsgeDogbi54ICsgbi53LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgfSlbd2hlcmVdOwoKLy8gU3RyYWlnaHQgZWRnZSBiZXR3ZWVuIHR3byBub2RlcywgYXV0by1waWNraW5nIHRoZSBmYWNpbmcgc2lkZXMgYmFzZWQgb24gdGhlaXIKLy8gcmVsYXRpdmUgcG9zaXRpb24uIFJldHVybnMgYW4gU1ZHIHBhdGggImQiIHN0cmluZzsgc2V0IHRoZSBtYXJrZXIgeW91cnNlbGYgdmlhCi8vIHRoZSBlbGVtZW50J3MgbWFya2VyLWVuZCBhdHRyaWJ1dGUuIEZvciA+NSBub2RlcyB3aXRoIGNyb3NzaW5nIGVkZ2VzLCByZWFjaCBmb3IKLy8gYSBsYXlvdXQgZW5naW5lIChkYWdyZSAvIGQzLWRhZyAvIG1lcm1haWQpIGluc3RlYWQgb2YgcGxhY2luZyBub2RlcyBieSBoYW5kIOKAlAovLyB0aGF0J3MgdGhlIHBvaW50IHdoZXJlIG1hbnVhbCBjb29yZGluYXRlcyBzdG9wIGJlaW5nIHdvcnRoIGl0LgpleHBvcnQgZnVuY3Rpb24gY29ubmVjdChhLCBiKSB7CiAgY29uc3QgY2EgPSBjZW50ZXIoYSksCiAgICBjYiA9IGNlbnRlcihiKTsKICBjb25zdCBob3JpeiA9IE1hdGguYWJzKGNiLnggLSBjYS54KSA+IE1hdGguYWJzKGNiLnkgLSBjYS55KTsKICBjb25zdCBwYSA9IGhvcml6CiAgICA/IHNpZGUoYSwgY2IueCA+IGNhLnggPyAicmlnaHQiIDogImxlZnQiKQogICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgY29uc3QgcGIgPSBob3JpegogICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgIDogc2lkZShiLCBjYi55ID4gY2EueSA/ICJ0b3AiIDogImJvdHRvbSIpOwogIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9CgovLyBBIGxhYmVsIHRoYXQgQ0FOTk9UIG92ZXJmbG93IGl0cyBib3guIDxmb3JlaWduT2JqZWN0PiBsZXRzIHRoZSBicm93c2VyIHdyYXAgYW5kCi8vIGVsbGlwc2l6ZSBIVE1MIG5hdGl2ZWx5LCB1bmxpa2UgcmF3IDx0ZXh0PiB3aGljaCB5b3UnZCBoYXZlIHRvIG1lYXN1cmUgYnkgaGFuZAovLyAoYW5kIGhpc3RvcmljYWxseSBndWVzc2VkIHdyb25nKS4gVXNlIHRoaXMgZm9yIGFueSBtdWx0aS13b3JkIGxhYmVsIGluc2lkZSBhCi8vIGZpeGVkLXdpZHRoIGJveC4gU3R5bGUgdmlhIHRoZSAudnN2Zy1sYWJlbCBjbGFzcyBpbiB2aXota2l0LmNzcy4KZXhwb3J0IGZ1bmN0aW9uIGxhYmVsQm94KG5vZGUsIGh0bWwsIGNscyA9ICIiKSB7CiAgcmV0dXJuICgKICAgIGA8Zm9yZWlnbk9iamVjdCB4PSIke25vZGUueH0iIHk9IiR7bm9kZS55fSIgd2lkdGg9IiR7bm9kZS53fSIgaGVpZ2h0PSIke25vZGUuaH0iPmAgKwogICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgYDwvZm9yZWlnbk9iamVjdD5gCiAgKTsKfQoKLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICBjb25zdCBiYWQgPSBbXTsKICBmb3IgKGNvbnN0IHQgb2Ygcm9vdC5xdWVyeVNlbGVjdG9yQWxsKCJ0ZXh0IikpIHsKICAgIGNvbnN0IHJlY3QgPSB0LmNsb3Nlc3QoImciKT8ucXVlcnlTZWxlY3RvcigicmVjdCIpOwogICAgaWYgKCFyZWN0KSBjb250aW51ZTsKICAgIGNvbnN0IHRiID0gdC5nZXRCQm94KCk7CiAgICBjb25zdCByYiA9IHJlY3QuZ2V0QkJveCgpOwogICAgY29uc3Qgc3BpbGxzID0KICAgICAgdGIueCA8IHJiLnggLSAxIHx8CiAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgIGlmIChzcGlsbHMpIHsKICAgICAgdC5zdHlsZS5vdXRsaW5lID0gIjFweCBzb2xpZCAjZjg1MTQ5IjsKICAgICAgYmFkLnB1c2godC50ZXh0Q29udGVudCk7CiAgICB9CiAgfQogIGlmIChiYWQubGVuZ3RoKSB7CiAgICBjb25zb2xlLmVycm9yKCJbdml6QXVkaXRdIHRleHQgb3ZlcmZsb3c6IiwgYmFkKTsKICAgIGNvbnN0IGJhbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgYmFubmVyLnN0eWxlLmNzc1RleHQgPQogICAgICAicG9zaXRpb246Zml4ZWQ7bGVmdDo4cHg7Ym90dG9tOjhweDt6LWluZGV4Ojk5OTk7YmFja2dyb3VuZDojZjg1MTQ5O2NvbG9yOiNmZmY7IiArCiAgICAgICJmb250OjEycHgvMSBzYW5zLXNlcmlmO3BhZGRpbmc6NnB4IDEwcHg7Ym9yZGVyLXJhZGl1czo2cHgiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogIH0KICByZXR1cm4gYmFkOwp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU21hbGwgdXRpbGl0aWVzIHRoYXQgZXZlcnkgdml6IHJlLWRlcml2ZXMuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKZXhwb3J0IGNvbnN0ICQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IHJvb3QucXVlcnlTZWxlY3RvcihzZWwpOwpleHBvcnQgY29uc3QgJCQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IFsuLi5yb290LnF1ZXJ5U2VsZWN0b3JBbGwoc2VsKV07CgovLyBFc2NhcGUgYmVmb3JlIGluamVjdGluZyB0ZXh0IGludG8gaW5uZXJIVE1MLgpleHBvcnQgY29uc3QgZXNjID0gKHMpID0+CiAgU3RyaW5nKHMpLnJlcGxhY2UoCiAgICAvWyY8PiInXS9nLAogICAgKGMpID0+ICh7ICImIjogIiZhbXA7IiwgIjwiOiAiJmx0OyIsICI+IjogIiZndDsiLCAnIic6ICImcXVvdDsiLCAiJyI6ICImIzM5OyIgfSlbY10sCiAgKTsKCi8vIEhvdC1yZWxvYWQgKGFuZCBldmVyeSBzYXZlKSBkb2VzIGEgZnVsbCBwYWdlIHJlZnJlc2gsIHNvIGluLXBhZ2Ugc3RhdGUgaXMgd2lwZWQuCi8vIFBlcnNpc3QgYW55dGhpbmcgeW91IHdhbnQgdG8gc3Vydml2ZSDigJQgb3BlbiBwYW5lbCwgc2VsZWN0ZWQgc3RlcCwgYWN0aXZlIGZpbHRlcnMg4oCUCi8vIHRvIHRoZSBVUkwgaGFzaC4gQm9udXM6IHRoZSBVUkwgYmVjb21lcyBzaGFyZWFibGUvZGVlcC1saW5rYWJsZSBmb3IgZnJlZS4KLy8gUm91bmQtdHJpcHMgYSBwbGFpbiBvYmplY3QuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+CiAgbG9jYXRpb24ucmVwbGFjZSgiIyIgKyBlbmNvZGVVUklDb21wb25lbnQoSlNPTi5zdHJpbmdpZnkob2JqKSkpOwoKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogIHRyeSB7CiAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgfSBjYXRjaCB7CiAgICByZXR1cm4ge307CiAgfQp9Owo="}}</script>
+  <meta name="viz:tag" content="Basketball">
+  <meta name="viz:tag" content="Explainer">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="The Euro Step">
+<meta name="viz:description" content="Basketball's slickest finishing move, broken down five ways: the path, the physics of why it works, rookie-vs-pro, a 3D view, and the footwork. Interactive, for newcomers.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors. The
+   house style is dark-only on purpose — it's the look these vizzes converge on. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text */
+  --text: #e6edf3;
+  --muted: #8b949e;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — distinct hues for diagram categories / series.
+     Use these when you need N visually separable colors, not meaning. */
+  --c1: #58a6ff; /* blue */
+  --c2: #3fb950; /* green */
+  --c3: #d29922; /* amber */
+  --c4: #bc8cff; /* purple */
+  --c5: #4ec9b0; /* teal */
+  --c6: #f85149; /* red */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+.swatch.line {
+  width: 16px;
+  height: 0;
+  border-radius: 0;
+  border-top: 2px solid var(--accent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+</style>
+<script type="importmap">{ "imports": { "three": "https://esm.sh/three@0.160.0", "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/" } }</script>
+<style>
+  body { margin: 0; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 24px; }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 22px; border-bottom: 1px solid var(--line, #2c3647); }
+  .tabs button { font: inherit; cursor: pointer; background: transparent; color: var(--ink-dim, #9fb0c3);
+    border: none; border-bottom: 2px solid transparent; padding: 10px 14px 12px; margin-bottom: -1px; font-size: 14px; }
+  .tabs button:hover { color: var(--ink, #e7ecf3); }
+  .tabs button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .two { display: grid; grid-template-columns: minmax(340px, 540px) 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  svg.court { width: 100%; height: auto; display: block; border-radius: 14px; touch-action: none; background:#15110a; }
+  .controls { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .controls button { font: inherit; cursor: pointer; background: var(--panel-2, #1b2230); color: var(--ink, #e7ecf3);
+    border: 1px solid var(--line, #2c3647); border-radius: 9px; padding: 8px 14px; }
+  .controls button:hover { border-color: var(--accent); }
+  .controls button.primary { background: var(--accent); color: #06121f; border-color: var(--accent); font-weight: 600; }
+  input[type=range] { flex: 1; min-width: 120px; accent-color: var(--accent); }
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step { padding: 13px 15px; border: 1px solid var(--line, #2c3647); border-radius: 12px; background: var(--panel, #141a24);
+    cursor: pointer; transition: border-color .15s, background .15s; }
+  .step:hover { border-color: var(--accent); }
+  .step.active { border-color: var(--accent); background: #16202e; box-shadow: 0 0 0 1px var(--accent) inset; }
+  .step h3 { margin: 0 0 4px; font-size: 14.5px; display: flex; align-items: center; gap: 9px; }
+  .step .num { display: inline-grid; place-items: center; width: 21px; height: 21px; border-radius: 50%;
+    background: var(--accent); color: #06121f; font-size: 12px; font-weight: 700; flex: none; }
+  .step p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-dim, #9fb0c3); }
+  .legend { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 11px; font-size: 12.5px; color: var(--ink-dim, #9fb0c3); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .prose { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .prose b { color: var(--ink, #e7ecf3); }
+  .prose h3 { color: var(--ink, #e7ecf3); margin: 16px 0 6px; font-size: 15px; }
+  .verdict { margin-top: 14px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line, #2c3647); background: var(--panel, #141a24); }
+  .verdict .big { font-size: 19px; font-weight: 700; }
+  .verdict.open { border-color: #36c98f; box-shadow: 0 0 0 1px #36c98f inset; } .verdict.open .big { color: #36c98f; }
+  .verdict.contested { border-color: #e2493f; box-shadow: 0 0 0 1px #e2493f inset; } .verdict.contested .big { color: #e2493f; }
+  .verdict p { margin: 6px 0 0; font-size: 13px; color: var(--ink-dim, #9fb0c3); line-height: 1.5; }
+  .hint { font-size: 13px; color: var(--ink-dim, #9fb0c3); margin-top: 12px; }
+  .tldr { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .tldr b { color: var(--ink, #e7ecf3); }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Euro Step">
+<meta property="og:description" content="Basketball's slickest finishing move, broken down five ways: the path, the physics of why it works, rookie-vs-pro, a 3D view, and the footwork. Interactive, for newcomers.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/euro-step-breakdown/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<div class="page">
+  <div class="viz-header" style="padding:0;">
+    <h1 style="margin:0;">The Euro Step</h1>
+    <div class="sub">Basketball's slickest finishing move — dodging a defender at the rim, legally. Five ways to see it.</div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="move" class="active">1 · The Move</button>
+    <button data-tab="why">2 · Why It Works</button>
+    <button data-tab="vs">3 · Rookie vs Pro</button>
+    <button data-tab="d3">4 · 3D View</button>
+    <button data-tab="feet">5 · The Footwork</button>
+  </nav>
+
+  <!-- ============ TAB 1: THE MOVE ============ -->
+  <section id="tab-move" class="tab active">
+    <div class="two">
+      <div>
+        <svg class="court move-court" viewBox="0 0 500 490" aria-label="Top-down half court animation">
+          <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+          <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+          <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>
+          <g class="prints"></g>
+          <path class="trail" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.55"/>
+          <g class="def"><circle r="13" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">D</text></g>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+        </svg>
+        <div class="controls">
+          <button class="play primary">▶ Play</button>
+          <button class="restart">↺ Restart</button>
+          <input class="scrub" type="range" min="0" max="1000" value="0">
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#36c98f"></i> Ball-handler</span>
+          <span><i class="dot" style="background:#e2493f"></i> Defender</span>
+          <span><i class="dot" style="background:#ff9b3c"></i> Ball</span>
+        </div>
+      </div>
+      <div>
+        <p class="tldr"><b>The idea:</b> instead of jumping <i>straight</i> at the rim into a waiting defender, you take your two
+        allowed steps in <b>two different directions</b> — one way to make the defender commit, then the other way to slip past
+        for the layup. Hit ▶ and watch the green dot.</p>
+        <p class="tldr" style="margin:10px 0 16px;"><b>Why it's legal:</b> once you stop dribbling (the “gather”), the rules give
+        you <b>two steps</b>. The Euro Step just uses those two steps to zig-zag instead of going straight.</p>
+        <div class="steps move-steps"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: WHY IT WORKS ============ -->
+  <section id="tab-why" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court why-court" viewBox="0 0 500 490" aria-label="Interactive half court">
+          <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+          <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+          <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>
+          <defs>
+            <marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e2493f"/></marker>
+            <marker id="mf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9fb0c3"/></marker>
+          </defs>
+          <circle class="reach" fill="#e2493f" fill-opacity="0.13" stroke="#e2493f" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <line class="fakeArrow" stroke="#9fb0c3" stroke-width="2.5" stroke-dasharray="4 4" marker-end="url(#mf)"/>
+          <line class="momArrow" stroke="#e2493f" stroke-width="3" marker-end="url(#mv)"/>
+          <g class="finish"><circle r="13" fill="none" stroke-width="3"/><text y="5" text-anchor="middle" font-size="15">⛹</text></g>
+          <path class="wpath" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <g class="def" style="cursor:grab"><circle r="22" fill="transparent"/><circle r="13" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" style="pointer-events:none">D</text></g>
+        </svg>
+        <div class="controls">
+          <button class="wplay primary">▶ Run the move</button>
+          <button class="wreset">↺ Reset defender</button>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#e2493f"></i> Defender (drag me)</span>
+          <span><i class="dot" style="background:#36c98f"></i> Ball-handler</span>
+          <span style="color:#e2493f">◌ reachable zone</span>
+          <span style="color:#e2493f">→ momentum</span>
+        </div>
+      </div>
+      <div>
+        <div class="verdict"><div class="big">—</div><p class="vtext"></p></div>
+        <p class="hint">Drag <b style="color:#e2493f">D</b> anywhere, then hit <b>Run the move</b>. The dashed red circle is everywhere
+        the defender can still reach in the ~0.4&nbsp;s a layup takes. Finish lands <b>outside</b> it → bucket.</p>
+        <div class="prose">
+          <h3>The trick isn't speed — it's commitment</h3>
+          <p>A defender must honor your <b>first</b> step, so they lean to cut it off. The instant they do, their body has
+          <b>momentum</b> that way (red arrow). Humans can't reverse momentum instantly — for a few tenths of a second they're
+          <i>carried</i> the way they committed.</p>
+          <h3>The second step attacks the space they vacated</h3>
+          <p>Your second step goes the <b>opposite</b> way. The reachable circle <b>shifts toward the fake</b> — that shift is
+          the whole move. Drag D around: it's hardest to beat a defender who sits back and <i>doesn't</i> commit, which is
+          exactly why a good Euro Step <b>sells</b> the fake to force the lean.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: ROOKIE vs PRO ============ -->
+  <section id="tab-vs" class="tab">
+    <p class="tldr" style="margin-bottom:16px;">Same defender. Same starting spot. <b>Left:</b> the rookie drives straight and runs
+    into the wall (an offensive foul — a “charge”). <b>Right:</b> the Euro Step goes <i>around</i> the wall. Press once, watch both.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div class="vs-pane" data-kind="rookie">
+        <div style="font-size:14px; font-weight:600; color:#e2493f; margin-bottom:8px;">❌ Straight drive</div>
+        <svg class="vs-court" viewBox="0 0 280 300">
+          <rect x="6" y="6" width="268" height="288" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="95" y="6" width="90" height="150" fill="#3a2b14" stroke="#6b5836" stroke-width="1.5"/>
+          <circle cx="140" cy="156" r="42" fill="none" stroke="#6b5836" stroke-width="1.5"/>
+          <line x1="118" y1="26" x2="162" y2="26" stroke="#cbb78a" stroke-width="3"/>
+          <circle cx="140" cy="38" r="8" fill="none" stroke="#ff7a3c" stroke-width="2.5"/>
+          <path class="vtrail" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <g class="vdef"><circle r="12" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">D</text></g>
+          <g class="voff"><circle r="12" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">O</text><circle class="vball" r="5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.2"/></g>
+          <text class="vstamp" x="140" y="230" text-anchor="middle" font-size="20" font-weight="800" opacity="0"></text>
+        </svg>
+      </div>
+      <div class="vs-pane" data-kind="pro">
+        <div style="font-size:14px; font-weight:600; color:#36c98f; margin-bottom:8px;">✓ Euro Step</div>
+        <svg class="vs-court" viewBox="0 0 280 300">
+          <rect x="6" y="6" width="268" height="288" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="95" y="6" width="90" height="150" fill="#3a2b14" stroke="#6b5836" stroke-width="1.5"/>
+          <circle cx="140" cy="156" r="42" fill="none" stroke="#6b5836" stroke-width="1.5"/>
+          <line x1="118" y1="26" x2="162" y2="26" stroke="#cbb78a" stroke-width="3"/>
+          <circle cx="140" cy="38" r="8" fill="none" stroke="#ff7a3c" stroke-width="2.5"/>
+          <path class="vtrail" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <g class="vdef"><circle r="12" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">D</text></g>
+          <g class="voff"><circle r="12" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">O</text><circle class="vball" r="5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.2"/></g>
+          <text class="vstamp" x="140" y="92" text-anchor="middle" font-size="20" font-weight="800" opacity="0"></text>
+        </svg>
+      </div>
+    </div>
+    <div class="controls"><button class="vsplay primary">▶ Run both</button></div>
+  </section>
+
+  <!-- ============ TAB 4: 3D VIEW ============ -->
+  <section id="tab-d3" class="tab">
+    <div class="two">
+      <div>
+        <div class="d3-canvas" style="width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden; background:#0c0a06;"></div>
+        <div class="controls">
+          <button class="d3play primary">▶ Play</button>
+          <input class="d3scrub" type="range" min="0" max="1000" value="0">
+          <label style="font-size:12.5px;color:var(--ink-dim,#9fb0c3);display:inline-flex;gap:5px;align-items:center;"><input class="d3rot" type="checkbox" checked> spin</label>
+        </div>
+        <div class="legend"><span>🖱 drag to orbit · scroll to zoom</span></div>
+      </div>
+      <div>
+        <div class="verdict" style="border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;">
+          <div class="big" style="color:var(--accent);font-size:16px;" id="d3phaseTitle">The drive</div>
+          <p class="d3phase" style="margin-top:6px;">Press ▶ and orbit around the move.</p>
+        </div>
+        <div class="prose">
+          <h3>The same move, in 3D</h3>
+          <p>Now you can see what the top-down view flattens: the <b>lean</b>. On step 1 the body tilts toward the fake to sell it;
+          on step 2 it whips the other way while the <b>ball swings across the body</b>, shielded from the defender.</p>
+          <p>The two long, low strides — far wider than a normal running step — are what cover the ground sideways. That's the
+          Euro Step's signature look: not faster, just <i>wider</i> and in two directions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 5: THE FOOTWORK ============ -->
+  <section id="tab-feet" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court feet-court" viewBox="0 0 300 430" aria-label="Footwork rhythm">
+          <rect x="6" y="6" width="288" height="418" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <!-- direction-to-rim arrow -->
+          <line x1="150" y1="60" x2="150" y2="26" stroke="#6b5836" stroke-width="2" marker-end="url(#mf)"/>
+          <text x="150" y="80" text-anchor="middle" font-size="11" fill="#7d8aa0">↑ toward the rim</text>
+          <!-- gather feet -->
+          <g class="fp" data-id="gather"><ellipse cx="128" cy="350" rx="13" ry="20" fill="#5b6b82"/><ellipse cx="172" cy="350" rx="13" ry="20" fill="#5b6b82"/><text x="150" y="392" text-anchor="middle" font-size="12" fill="#9fb0c3">gather (0)</text></g>
+          <!-- step 1 -->
+          <g class="fp" data-id="s1"><ellipse cx="225" cy="265" rx="14" ry="21" fill="#36c98f"/><text x="225" y="270" text-anchor="middle" font-size="16" font-weight="800" fill="#06231a">1</text></g>
+          <!-- step 2 -->
+          <g class="fp" data-id="s2"><ellipse cx="80" cy="180" rx="14" ry="21" fill="#36c98f"/><text x="80" y="185" text-anchor="middle" font-size="16" font-weight="800" fill="#06231a">2</text></g>
+          <!-- illegal 3rd -->
+          <g class="fp" data-id="s3"><ellipse cx="165" cy="120" rx="14" ry="21" fill="#e2493f"/><text x="165" y="126" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">3</text></g>
+          <!-- connecting path -->
+          <path class="feet-path" d="M150 350 L225 265 L80 180" fill="none" stroke="#36c98f" stroke-width="2" stroke-dasharray="4 4" opacity="0"/>
+        </svg>
+      </div>
+      <div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
+          <div class="feet-count" style="font-size:40px; font-weight:800; color:var(--accent); line-height:1;">0</div>
+          <div style="color:var(--ink-dim,#9fb0c3); font-size:14px;">/ 2 steps used <span style="opacity:.7">(after the gather)</span></div>
+        </div>
+        <div class="feet-banner verdict" style="margin-top:8px;"><div class="big" style="font-size:16px;">Press a button below</div><p class="feet-msg">The gather is “step zero” — picking up your dribble. Then you get exactly two steps.</p></div>
+        <div class="controls">
+          <button class="feet-legal primary">▶ Legal Euro Step</button>
+          <button class="feet-travel">⚠ Take a 3rd step</button>
+        </div>
+        <div class="prose">
+          <h3>Why two steps, in two directions</h3>
+          <p>The whole move lives inside one rule: the moment you stop dribbling — the <b>gather</b> — you may take <b>two steps</b>
+          before you shoot or pass. Most layups spend those two steps going <i>straight</i>. The Euro Step spends them going
+          <b>two different ways</b>: one to move the defender, one to beat them.</p>
+          <p>Take a <b>third</b> step (or move your pivot foot before the gather) and it's a <b>travel</b> — a turnover. Watch the
+          counter: step 3 is where it turns red. Selling a huge fake while staying inside two steps is the skill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module">
+const RIM = { x: 250, y: 56 };
+const sub=(a,b)=>({x:a.x-b.x,y:a.y-b.y}), add=(a,b)=>({x:a.x+b.x,y:a.y+b.y});
+const mul=(a,k)=>({x:a.x*k,y:a.y*k}), dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const norm=(a)=>{const l=Math.hypot(a.x,a.y)||1;return{x:a.x/l,y:a.y/l};};
+const ease=(p)=>p*p*(3-2*p);
+function along(pts, a){ const segs=pts.length-1; const x=Math.max(0,Math.min(1,a))*segs;
+  const i=Math.min(segs-1,Math.floor(x)); let f=x-i; f=ease(f);
+  return {x:pts[i].x+(pts[i+1].x-pts[i].x)*f, y:pts[i].y+(pts[i+1].y-pts[i].y)*f}; }
+
+/* ---------------- TAB 1: THE MOVE ---------------- */
+function initMove(root){
+  const offKeys=[{t:0,x:150,y:430},{t:.30,x:222,y:250},{t:.55,x:305,y:200},{t:.82,x:188,y:130},{t:1,x:232,y:78}];
+  const defKeys=[{t:0,x:250,y:175},{t:.30,x:235,y:200},{t:.55,x:292,y:198},{t:.82,x:300,y:205},{t:1,x:298,y:210}];
+  const prints=[{t:.30,x:222,y:250,label:"gather"},{t:.55,x:305,y:200,label:"1"},{t:.82,x:188,y:130,label:"2"}];
+  const STEPS=[
+    {t0:0,name:"The drive",body:"The ball-handler attacks the basket off the dribble. The defender slides over to cut him off — straight ahead is a dead end (and a collision)."},
+    {t0:.30,name:"The gather",body:"He picks up his dribble. The instant you stop dribbling, the rules give you two steps to finish. The clock on those two steps starts now."},
+    {t0:.55,name:"Step 1 — sell the fake",body:"First step is a long stride to one side (here, his right). It looks like he's finishing that way, so the defender lunges to block it."},
+    {t0:.82,name:"Step 2 — cross over",body:"He pushes off and takes his second step the OTHER way, swinging the ball across his body — right past the defender who just committed the wrong direction."},
+    {t0:.93,name:"The finish",body:"No one between him and the rim. Easy layup on the far side, away from the stranded defender. Two steps, two directions, bucket."},
+  ];
+  const sample=(keys,t)=>{ t=Math.max(0,Math.min(1,t)); for(let i=0;i<keys.length-1;i++){const a=keys[i],b=keys[i+1];
+    if(t>=a.t&&t<=b.t){const p=b.t===a.t?0:ease((t-a.t)/(b.t-a.t));return{x:a.x+(b.x-a.x)*p,y:a.y+(b.y-a.y)*p};}}
+    const l=keys[keys.length-1];return{x:l.x,y:l.y}; };
+  const $=(s)=>root.querySelector(s);
+  const stepsEl=$(".move-steps");
+  STEPS.forEach((s,i)=>{const d=document.createElement("div");d.className="step";
+    d.innerHTML=`<h3><span class="num">${i+1}</span>${s.name}</h3><p>${s.body}</p>`;
+    d.addEventListener("click",()=>{pause();setT(s.t0+0.001);});stepsEl.appendChild(d);});
+  const off=$(".off"),def=$(".def"),ball=$(".ball"),trail=$(".trail"),printsG=$(".prints"),scrub=$(".scrub"),playBtn=$(".play");
+  let dPath=""; for(let i=0;i<=120;i++){const p=sample(offKeys,i/120);dPath+=(i?" L ":"M ")+p.x.toFixed(1)+" "+p.y.toFixed(1);} trail.setAttribute("d",dPath);
+  function render(t){
+    const o=sample(offKeys,t),d=sample(defKeys,t);
+    off.setAttribute("transform",`translate(${o.x} ${o.y})`); def.setAttribute("transform",`translate(${d.x} ${d.y})`);
+    const ah=sample(offKeys,Math.min(1,t+.04)),dx=ah.x-o.x,dy=ah.y-o.y,len=Math.hypot(dx,dy)||1;
+    ball.setAttribute("cx",dx/len*13); ball.setAttribute("cy",dy/len*13);
+    printsG.innerHTML="";
+    prints.forEach(pr=>{ if(t>=pr.t-.001){const num=pr.label==="1"||pr.label==="2";
+      const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+      g.innerHTML=`<circle cx="${pr.x}" cy="${pr.y}" r="${num?11:9}" fill="none" stroke="${num?'var(--accent)':'#7d8aa0'}" stroke-width="${num?2.5:2}" ${num?'':'stroke-dasharray="3 3"'} opacity="0.9"/><text x="${pr.x}" y="${pr.y+4}" text-anchor="middle" font-size="${num?12:8.5}" font-weight="700" fill="${num?'var(--accent)':'#9fb0c3'}">${num?pr.label:'⊕'}</text>`;
+      printsG.appendChild(g);} });
+    let active=0;STEPS.forEach((s,i)=>{if(t>=s.t0)active=i;});
+    root.querySelectorAll(".step").forEach((el,i)=>el.classList.toggle("active",i===active));
+    scrub.value=Math.round(t*1000);
+  }
+  let playing=false,raf=null,t=0,last=0; const DUR=6500;
+  function tick(ts){if(!last)last=ts;t+=(ts-last)/DUR;last=ts;if(t>=1){t=1;render(t);pause();return;}render(t);raf=requestAnimationFrame(tick);}
+  function play(){if(playing)return;if(t>=1)t=0;playing=true;last=0;playBtn.textContent="❚❚ Pause";raf=requestAnimationFrame(tick);}
+  function pause(){playing=false;if(raf)cancelAnimationFrame(raf);raf=null;playBtn.textContent="▶ Play";}
+  function setT(v){t=Math.max(0,Math.min(1,v));render(t);}
+  playBtn.addEventListener("click",()=>playing?pause():play());
+  $(".restart").addEventListener("click",()=>{pause();setT(0);play();});
+  scrub.addEventListener("input",()=>{pause();setT(scrub.value/1000);});
+  render(0);
+  return { onHide: pause };
+}
+
+/* ---------------- TAB 2: WHY IT WORKS ---------------- */
+function initWhy(root){
+  const svg=root.querySelector(".why-court"); const $=(s)=>root.querySelector(s);
+  let D={x:250,y:195}; const O_START={x:175,y:442}, REACH_R=52, LUNGE=34;
+  function plan(){
+    const spaceSide=D.x<=RIM.x?1:-1, fakeSide=-spaceSide;
+    const gather={x:D.x,y:Math.min(D.y+52,300)};
+    const fake={x:gather.x+fakeSide*72,y:D.y+6};
+    const finish={x:RIM.x+spaceSide*46,y:92};
+    const toFake=norm(sub(fake,D)); const lungeEnd=add(D,mul(toFake,LUNGE));
+    const open=dist(finish,lungeEnd)>REACH_R; const margin=Math.round(dist(finish,lungeEnd)-REACH_R);
+    return {spaceSide,fakeSide,gather,fake,finish,toFake,lungeEnd,open,margin};
+  }
+  const els={reach:$(".reach"),mom:$(".momArrow"),fake:$(".fakeArrow"),finish:$(".finish"),finishC:$(".finish circle"),path:$(".wpath"),off:$(".off"),ball:$(".ball"),def:$(".def")};
+  const setLine=(el,a,b)=>{el.setAttribute("x1",a.x);el.setAttribute("y1",a.y);el.setAttribute("x2",b.x);el.setAttribute("y2",b.y);};
+  function verdict(p){ const v=$(".verdict"),big=v.querySelector(".big"),t=$(".vtext");
+    v.className="verdict "+(p.open?"open":"contested");
+    if(p.open){big.textContent=`🏀 OPEN LAYUP  (+${p.margin}px clear)`;t.textContent="The defender's momentum carried them toward the fake. By the time they could change direction, the finish on the other side is already up. This is the Euro Step working.";}
+    else{big.textContent=`🛡 CONTESTED  (${p.margin}px short)`;t.textContent="From here the defender can still recover to the finish — they're sitting back, not over-committing. Sell the fake harder, or pick a different finish. Drag D off-center to open the move up.";} }
+  function render(a=0){
+    const p=plan(); els.def.setAttribute("transform",`translate(${D.x} ${D.y})`);
+    const committed=a>=0.45; const lungeNow=committed?p.lungeEnd:D;
+    els.reach.setAttribute("cx",lungeNow.x);els.reach.setAttribute("cy",lungeNow.y);els.reach.setAttribute("r",REACH_R);
+    els.reach.style.opacity=a>=0.3?1:0.35;
+    setLine(els.mom,D,lungeNow);els.mom.style.opacity=committed?1:0.25;
+    setLine(els.fake,p.gather,p.fake);els.fake.style.opacity=(a>=0.3&&a<0.75)?1:0.25;
+    els.finish.setAttribute("transform",`translate(${p.finish.x} ${p.finish.y})`);
+    els.finishC.setAttribute("stroke",p.open?"#36c98f":"#e2493f");els.finish.style.opacity=a>=0.5?1:0.3;
+    els.path.setAttribute("d",`M ${O_START.x} ${O_START.y} L ${p.gather.x} ${p.gather.y} L ${p.fake.x} ${p.fake.y} L ${p.finish.x} ${p.finish.y}`);
+    const o=along([O_START,p.gather,p.fake,p.finish],a); els.off.setAttribute("transform",`translate(${o.x} ${o.y})`);
+    const o2=along([O_START,p.gather,p.fake,p.finish],Math.min(1,a+.05)); const d=norm(sub(o2,o));els.ball.setAttribute("cx",d.x*13);els.ball.setAttribute("cy",d.y*13);
+    if(committed){const tt=Math.min(1,(a-.45)/.3);const dp=add(D,mul(p.toFake,LUNGE*tt));els.def.setAttribute("transform",`translate(${dp.x} ${dp.y})`);}
+    verdict(p);
+  }
+  let dragging=false; const pt=svg.createSVGPoint();
+  const toSvg=(e)=>{pt.x=e.clientX;pt.y=e.clientY;const m=svg.getScreenCTM().inverse();const p=pt.matrixTransform(m);return{x:p.x,y:p.y};};
+  els.def.addEventListener("pointerdown",(e)=>{dragging=true;els.def.setPointerCapture(e.pointerId);els.def.style.cursor="grabbing";});
+  svg.addEventListener("pointermove",(e)=>{if(!dragging)return;const p=toSvg(e);D.x=Math.max(120,Math.min(380,p.x));D.y=Math.max(80,Math.min(300,p.y));render(0);});
+  window.addEventListener("pointerup",()=>{if(dragging){dragging=false;els.def.style.cursor="grab";}});
+  let raf=null,a=0,last=0; const DUR=4200; const playBtn=$(".wplay");
+  function tick(ts){if(!last)last=ts;a+=(ts-last)/DUR;last=ts;if(a>=1){a=1;render(1);raf=null;playBtn.textContent="▶ Run the move";return;}render(a);raf=requestAnimationFrame(tick);}
+  playBtn.addEventListener("click",()=>{if(raf){cancelAnimationFrame(raf);raf=null;playBtn.textContent="▶ Run the move";render(1);return;}a=0;last=0;playBtn.textContent="❚❚ Stop";raf=requestAnimationFrame(tick);});
+  $(".wreset").addEventListener("click",()=>{D={x:250,y:195};if(raf){cancelAnimationFrame(raf);raf=null;}playBtn.textContent="▶ Run the move";render(0);});
+  render(0);
+  return { onHide: ()=>{ if(raf){cancelAnimationFrame(raf);raf=null;playBtn.textContent="▶ Run the move";} } };
+}
+
+/* ---------------- TAB 3: ROOKIE vs PRO ---------------- */
+function initVS(root){
+  const cfg={
+    rookie:{ o:[[0,140,288],[.5,140,202],[.72,140,176],[1,140,176]], d:[[0,140,150],[1,140,150]],
+             stampAt:.72, stamp:"CHARGE!", color:"#e2493f", ballPop:true },
+    pro:{ o:[[0,140,288],[.45,140,205],[.65,196,170],[.85,92,128],[1,160,66]],
+          d:[[0,140,150],[.45,140,152],[.65,182,168],[1,188,170]],
+          stampAt:.9, stamp:"BUCKET 🏀", color:"#36c98f" },
+  };
+  const sampleKf=(kf,a)=>{ for(let i=0;i<kf.length-1;i++){const A=kf[i],B=kf[i+1];
+    if(a>=A[0]&&a<=B[0]){const p=B[0]===A[0]?0:ease((a-A[0])/(B[0]-A[0]));return{x:A[1]+(B[1]-A[1])*p,y:A[2]+(B[2]-A[2])*p};}}
+    const L=kf[kf.length-1];return{x:L[1],y:L[2]}; };
+  const panes=[...root.querySelectorAll(".vs-pane")].map(pane=>{
+    const c=cfg[pane.dataset.kind];
+    const off=pane.querySelector(".voff"),def=pane.querySelector(".vdef"),ball=pane.querySelector(".vball"),
+      trail=pane.querySelector(".vtrail"),stamp=pane.querySelector(".vstamp");
+    trail.setAttribute("stroke",c.color); let d="";c.o.forEach((p,i)=>{d+=(i?" L ":"M ")+p[1]+" "+p[2];});trail.setAttribute("d",d);
+    return {c,off,def,ball,trail,stamp};
+  });
+  function render(a){
+    panes.forEach(P=>{
+      const o=sampleKf(P.c.o,a),d=sampleKf(P.c.d,a);
+      P.off.setAttribute("transform",`translate(${o.x} ${o.y})`); P.def.setAttribute("transform",`translate(${d.x} ${d.y})`);
+      if(P.c.ballPop && a>=P.c.stampAt){const t=(a-P.c.stampAt)/(1-P.c.stampAt);P.ball.setAttribute("cx",42*t);P.ball.setAttribute("cy",-34*t);}
+      else {const o2=sampleKf(P.c.o,Math.min(1,a+.05));const dx=o2.x-o.x,dy=o2.y-o.y,len=Math.hypot(dx,dy)||1;P.ball.setAttribute("cx",dx/len*11);P.ball.setAttribute("cy",dy/len*11);}
+      P.stamp.style.opacity=a>=P.c.stampAt?1:0; P.stamp.setAttribute("fill",P.c.color); P.stamp.textContent=P.c.stamp;
+    });
+  }
+  let raf=null,a=0,last=0; const DUR=3600; const btn=root.querySelector(".vsplay");
+  function tick(ts){if(!last)last=ts;a+=(ts-last)/DUR;last=ts;if(a>=1){a=1;render(1);raf=null;btn.textContent="↺ Run both again";return;}render(a);raf=requestAnimationFrame(tick);}
+  btn.addEventListener("click",()=>{if(raf){cancelAnimationFrame(raf);raf=null;btn.textContent="▶ Run both";return;}a=0;last=0;btn.textContent="❚❚ Stop";raf=requestAnimationFrame(tick);});
+  render(0);
+  return {onHide:()=>{if(raf){cancelAnimationFrame(raf);raf=null;btn.textContent="▶ Run both";}}};
+}
+
+/* ---------------- TAB 4: 3D VIEW ---------------- */
+function initD3(root){
+  const host = root.querySelector(".d3-canvas");
+  const playBtn = root.querySelector(".d3play"), scrub = root.querySelector(".d3scrub"),
+        rotChk = root.querySelector(".d3rot"), phaseEl = root.querySelector(".d3phase"),
+        titleEl = root.querySelector("#d3phaseTitle");
+  let THREE, scene, cam, renderer, controls, raf=null, built=false, a=0, last=0, playing=false;
+  const DUR = 6000;
+  const figs = {};
+
+  // move keyframes in 3D ground coords (x lateral, z toward basket at z=-22)
+  const rootKf=[[0,-5,14],[.38,-1,0.5],[.5,-1,-0.5],[.66,2.2,-4],[.86,-2.2,-10],[1,0.4,-15.5]];
+  const sample3=(kf,t)=>{ for(let i=0;i<kf.length-1;i++){const A=kf[i],B=kf[i+1];
+    if(t>=A[0]&&t<=B[0]){const p=B[0]===A[0]?0:ease((t-A[0])/(B[0]-A[0]));return[A[1]+(B[1]-A[1])*p,A[2]+(B[2]-A[2])*p];}}
+    const L=kf[kf.length-1];return[L[1],L[2]]; };
+  const PHASES=[[0,"The drive","Attacking downhill, ball on a live dribble."],
+    [.38,"The gather","Picks up the ball — the two-step clock starts."],
+    [.5,"Step 1 — the fake","A long, low stride to one side. Watch the lean sell it."],
+    [.7,"Step 2 — the cross","Whips the other way; the ball swings across the body."],
+    [.9,"The finish","Up at the rim, far side, defender stranded."]];
+
+  function makeFigure(color, scale=1){
+    const g=new THREE.Group();
+    const mat=new THREE.MeshStandardMaterial({color, roughness:.55, metalness:.05});
+    const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.7*scale,1.5*scale,6,12),mat);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.55*scale,18,18),mat);
+    g.add(torso,head);
+    const limb=(r,l)=>{const m=new THREE.Mesh(new THREE.CapsuleGeometry(r,l,4,8),mat);m.geometry.translate(0,-l/2,0);g.add(m);return m;};
+    const legL=limb(.22*scale,1.6*scale),legR=limb(.22*scale,1.6*scale),
+          armL=limb(.18*scale,1.4*scale),armR=limb(.18*scale,1.4*scale);
+    scene.add(g);
+    return {g,torso,head,legL,legR,armL,armR,scale};
+  }
+  // orient a top-anchored capsule (its top at `from`) to point toward `to`
+  const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+  function aimLimb(mesh, from, to){
+    const dir=new THREE.Vector3().subVectors(to,from); const len=dir.length()||.001;
+    mesh.position.copy(from);
+    mesh.quaternion.setFromUnitVectors(V(0,-1,0), dir.clone().normalize());
+    mesh.scale.y = len / (mesh.geometry.parameters.length || 1);
+  }
+
+  function build(){
+    scene=new THREE.Scene(); scene.background=new THREE.Color(0x0c0a06);
+    const w=host.clientWidth||520, h=host.clientHeight||520;
+    cam=new THREE.PerspectiveCamera(42, w/h, .1, 200); cam.position.set(16,15,20);
+    renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setSize(w,h); renderer.setPixelRatio(Math.min(2,devicePixelRatio));
+    host.appendChild(renderer.domElement);
+    scene.add(new THREE.AmbientLight(0xffffff,.55));
+    const dl=new THREE.DirectionalLight(0xfff0d8,1.1); dl.position.set(10,20,8); scene.add(dl);
+    // floor + paint + rim
+    const floor=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({color:0x241a0e,roughness:.95}));
+    floor.rotation.x=-Math.PI/2; floor.position.z=-6; scene.add(floor);
+    const paint=new THREE.Mesh(new THREE.PlaneGeometry(11,22),new THREE.MeshStandardMaterial({color:0x3a2b14,roughness:.95}));
+    paint.rotation.x=-Math.PI/2; paint.position.set(0,.02,-11); scene.add(paint);
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,9),new THREE.MeshStandardMaterial({color:0x888}));
+    pole.position.set(0,4.5,-23.5); scene.add(pole);
+    const board=new THREE.Mesh(new THREE.BoxGeometry(6,3.5,.2),new THREE.MeshStandardMaterial({color:0xcbb78a}));
+    board.position.set(0,8,-22.7); scene.add(board);
+    const rim=new THREE.Mesh(new THREE.TorusGeometry(1.4,.13,12,28),new THREE.MeshStandardMaterial({color:0xff7a3c,roughness:.4}));
+    rim.rotation.x=Math.PI/2; rim.position.set(0,6.6,-21); scene.add(rim);
+    // ball
+    figs.ball=new THREE.Mesh(new THREE.SphereGeometry(.5,18,18),new THREE.MeshStandardMaterial({color:0xff9b3c,roughness:.5}));
+    scene.add(figs.ball);
+    figs.off=makeFigure(0x36c98f); figs.def=makeFigure(0xe2493f,.98);
+    controls=new OrbitControls(cam,renderer.domElement); controls.target.set(0,2,-9);
+    controls.enableDamping=true; controls.minDistance=10; controls.maxDistance=60; controls.maxPolarAngle=Math.PI/2.05;
+    controls.update();
+    window.addEventListener("resize",onResize);
+  }
+  function onResize(){ if(!renderer) return; const w=host.clientWidth||520,h=host.clientHeight||520; cam.aspect=w/h; cam.updateProjectionMatrix(); renderer.setSize(w,h); }
+
+  function poseFigure(f, pos, lean, footL, footR, handBall){
+    const [x,z]=pos; const y=f._y||0;
+    f.g.position.set(x,0,z);
+    // torso leans (rotate group about Z for lateral lean, X for forward)
+    f.g.rotation.set(lean.fwd, 0, lean.side);
+    f.torso.position.set(0,2.3+y,0); f.head.position.set(0,3.7+y,0);
+    // hips/shoulders in group-local space
+    const hipL=V(-.45,1.5+y,0), hipR=V(.45,1.5+y,0), shL=V(-.6,3.0+y,0), shR=V(.6,3.0+y,0);
+    // feet given in WORLD-ish offset relative to root; convert to local by subtracting root x/z
+    aimLimb(f.legL, hipL, V(footL[0]-x,0,footL[1]-z));
+    aimLimb(f.legR, hipR, V(footR[0]-x,0,footR[1]-z));
+    // arms: ball-side arm reaches to the ball, other relaxed
+    aimLimb(f.armR, shR, handBall ? V(handBall[0]-x,handBall[1],handBall[2]-z) : V(.9,1.6+y,.2));
+    aimLimb(f.armL, shL, V(-.9,1.6+y,.2));
+  }
+
+  function render(t){
+    const [x,z]=sample3(rootKf,t);
+    // lean: toward fake (right,+side) during step1, toward left during step2
+    let side=0, fwd=.12;
+    if(t>.5&&t<.72) side=-.28;            // lean right (visual +x ⇒ negative Z-rot)
+    else if(t>=.72&&t<.9) side=.30;       // lean left
+    // jump at finish
+    figs.off._y = t>.9 ? (t-.9)/.1*1.6 : 0;
+    // feet: plant wide on each step, else tuck near root
+    const footStepR=[2.6,-4], footStepL=[-2.6,-10];
+    const footR = (t>.5&&t<.74)? footStepR : [x+0.5, z+0.3];
+    const footL = (t>=.7)? footStepL : [x-0.5, z+0.3];
+    // ball: held right (step1) → swung left (step2) → raised at finish
+    let ball;
+    if(t<.5) ball=[x+0.6,2.4,z+0.4];
+    else if(t<.72) ball=[x+1.0,2.2,z+0.2];      // cocked to fake side
+    else if(t<.9) ball=[x-1.0,2.3,z-0.2];       // swung across
+    else ball=[0.2,5.2+(t-.9)/.1*0.8,-18.5];    // up to rim
+    figs.ball.position.set(ball[0],ball[1],ball[2]);
+    poseFigure(figs.off,[x,z],{side,fwd}, footL, footR, ball);
+    // defender lunges to the fake then stuck
+    const dRoot = t<.5? [0,-7] : t<.78? [2.2+(t-.5)/.28*1.2, -7.5] : [3.4,-7.6];
+    poseFigure(figs.def, dRoot, {side: t>.5&&t<.78? -.25:0, fwd:.1}, [dRoot[0]-.5,dRoot[1]+.4],[dRoot[0]+.5,dRoot[1]+.4], null);
+    // phase text
+    let ph=PHASES[0]; PHASES.forEach(p=>{if(t>=p[0])ph=p;});
+    titleEl.textContent=ph[1]; phaseEl.textContent=ph[2];
+    scrub.value=Math.round(t*1000);
+  }
+
+  function loop(ts){ if(!last)last=ts; if(playing){ a+=(ts-last)/DUR; if(a>=1){a=1;playing=false;playBtn.textContent="↺ Play again";} render(a);} last=ts;
+    controls.autoRotate=rotChk.checked; controls.autoRotateSpeed=.8;
+    controls.update(); renderer.render(scene,cam); raf=requestAnimationFrame(loop); }
+
+  async function onShow(){
+    if(!built){ THREE=await import("three"); ({OrbitControls}=await import("three/addons/controls/OrbitControls.js"));
+      build(); render(0); built=true; }
+    onResize();
+    if(!raf){ last=0; raf=requestAnimationFrame(loop); }
+  }
+  function onHide(){ if(raf){cancelAnimationFrame(raf);raf=null;} }
+
+  let OrbitControls;
+  playBtn.addEventListener("click",()=>{ if(playing){playing=false;playBtn.textContent="▶ Play";} else {if(a>=1)a=0;playing=true;last=0;playBtn.textContent="❚❚ Pause";} });
+  scrub.addEventListener("input",()=>{ playing=false; playBtn.textContent="▶ Play"; a=scrub.value/1000; if(built)render(a); });
+  return { onShow, onHide };
+}
+
+/* ---------------- TAB 5: THE FOOTWORK ---------------- */
+function initFeet(root){
+  const $=(s)=>root.querySelector(s);
+  const fps={}; root.querySelectorAll(".fp").forEach(g=>fps[g.dataset.id]=g);
+  const path=$(".feet-path"), countEl=$(".feet-count"), banner=$(".feet-banner"),
+        bannerBig=banner.querySelector(".big"), msg=$(".feet-msg");
+  let timers=[];
+  const clear=()=>{ timers.forEach(clearTimeout); timers=[]; };
+  function reset(){ clear(); Object.values(fps).forEach(g=>g.style.opacity=0); path.style.opacity=0;
+    countEl.textContent="0"; countEl.style.color="var(--accent)"; banner.className="feet-banner verdict";
+    bannerBig.textContent="Press a button below"; bannerBig.style.color=""; msg.textContent="The gather is “step zero” — picking up your dribble. Then you get exactly two steps."; }
+  const show=(id)=>{ fps[id].style.opacity=1; fps[id].animate([{opacity:.3},{opacity:1}],{duration:220}); };
+  function legal(){
+    reset();
+    timers.push(setTimeout(()=>{ show("gather"); msg.textContent="Gather — dribble picked up. The two-step count starts now."; },150));
+    timers.push(setTimeout(()=>{ show("s1"); countEl.textContent="1"; path.style.opacity=.7;
+      bannerBig.textContent="Step 1 ✓"; bannerBig.style.color="var(--accent)"; msg.textContent="First step — a long stride one way to move the defender."; },1000));
+    timers.push(setTimeout(()=>{ show("s2"); countEl.textContent="2";
+      bannerBig.textContent="Step 2 ✓"; msg.textContent="Second step — the other way, into the open space. Shoot now."; },1900));
+    timers.push(setTimeout(()=>{ banner.className="feet-banner verdict open"; bannerBig.textContent="🏀 LEGAL — bucket";
+      msg.textContent="Two steps, two directions, ball released. Textbook Euro Step."; },2700));
+  }
+  function travel(){
+    legal();
+    timers.push(setTimeout(()=>{ show("s3"); countEl.textContent="3"; countEl.style.color="#e2493f";
+      banner.className="feet-banner verdict contested"; bannerBig.textContent="🚫 TRAVEL — turnover";
+      bannerBig.style.color="#e2493f"; msg.textContent="That third step is a traveling violation — you only get two after the gather. Ball goes the other way.";
+      countEl.animate([{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:300}); },2700));
+  }
+  $(".feet-legal").addEventListener("click",legal);
+  $(".feet-travel").addEventListener("click",travel);
+  reset();
+  return { onHide: reset };
+}
+
+/* ---------------- TABS ---------------- */
+const inits = {
+  move: initMove(document.getElementById("tab-move")),
+  why:  initWhy(document.getElementById("tab-why")),
+  vs:   initVS(document.getElementById("tab-vs")),
+  d3:   initD3(document.getElementById("tab-d3")),
+  feet: initFeet(document.getElementById("tab-feet")),
+};
+document.getElementById("tabs").addEventListener("click",(e)=>{
+  const b=e.target.closest("button[data-tab]"); if(!b) return;
+  const id=b.dataset.tab;
+  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("active",x===b));
+  document.querySelectorAll(".tab").forEach(s=>s.classList.toggle("active",s.id==="tab-"+id));
+  Object.entries(inits).forEach(([k,api])=>{ if(k!==id && api && api.onHide) api.onHide(); });
+  const cur=inits[id]; if(cur && cur.onShow) cur.onShow();
+});
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();}).then(save)
+      .catch(function(){ save("<!DOCTYPE html>\n"+document.documentElement.outerHTML); });
+  });
+})();</script>
+</body>
+</html>

@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2ggfSBmcm9tICIvX2tpdC92aXouanMiOwovLyAgIDwvc2NyaXB0PgovLyBTZXJ2ZWQgYnkgdGhlIHZpeiBzZXJ2ZXIgYXQgL19raXQvdml6LmpzIGZyb20gdGhlIHNraWxsJ3Mgb3duIGtpdC8gZGlyLCBzbyBpdCdzCi8vIG9uZSBzb3VyY2Ugb2YgdHJ1dGggYWNyb3NzIGV2ZXJ5IHZpei4gUGFpcnMgd2l0aCAvX2tpdC92aXota2l0LmNzcy4KCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU1ZHIGRpYWdyYW1zIOKAlCBnZW9tZXRyeSBmaXJzdC4KLy8KLy8gVGhlIHJlY3VycmluZyByZXdvcmsgaW4gYm94ZXMtYW5kLWFycm93cyBkaWFncmFtcyBjb21lcyBmcm9tIHR5cGluZyBsYWJlbCBhbmQKLy8gYXJyb3cgY29vcmRpbmF0ZXMgYXMgaW5kZXBlbmRlbnQgbGl0ZXJhbHM6IGEgYm94IGdldHMgcmVzaXplZCBvciBtb3ZlZCwgYnV0IHRoZQovLyBhcnJvdyBlbmRwb2ludCBhbmQgdGhlIGxhYmVsIHBvc2l0aW9uIHdlcmUgZ3Vlc3NlZCBhZ2FpbnN0IHRoZSAqb2xkKiBnZW9tZXRyeSwKLy8gc28gdGhlIGFycm93IG5vdyBwb2ludHMgYXQgZW1wdHkgc3BhY2UgKG9yIHRoZSB3cm9uZyBib3gpIGFuZCB0aGUgbGFiZWwgc3BpbGxzCi8vIG91dC4gVGhlIGZpeCBpcyB0byBuZXZlciBoYW5kLXBsYWNlIHRob3NlOiBkZWZpbmUgZWFjaCBub2RlIE9OQ0UgYXMge3gseSx3LGh9Ci8vIGFuZCBjb21wdXRlIGV2ZXJ5dGhpbmcgZWxzZSBmcm9tIGl0LgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCi8vIERlZmF1bHQgYXJyb3doZWFkIHBhbGV0dGUsIGtleWVkIHRvIHRoZSB2aXota2l0IGludGVudCB0b2tlbnMuIFNWRyBtYXJrZXJzIGNhbid0Ci8vIGluaGVyaXQgdGhlIHN0cm9rZSBjb2xvciBvZiB0aGUgbGluZSB0aGF0IHVzZXMgdGhlbSwgc28geW91IGdlbnVpbmVseSBuZWVkIG9uZQovLyBtYXJrZXIgcGVyIGNvbG9yIOKAlCB0aGlzIGVtaXRzIHRoZW0gYWxsIHdpdGggc3RhYmxlIGlkcyBzbyB5b3Ugc3RvcCByZS1kZXJpdmluZwovLyB0aGUgc2FtZSA8bWFya2VyPiBibG9jayBwZXIgZGlhZ3JhbS4gUmVmZXJlbmNlIGFzIG1hcmtlci1lbmQ9InVybCgjYWgtYWNjZW50KSIuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICBhaDogIiM4Yjk0OWUiLCAvLyBtdXRlZCDigJQgdGhlIGRlZmF1bHQgZWRnZQogICJhaC1hY2NlbnQiOiAiIzU4YTZmZiIsCiAgImFoLWdvb2QiOiAiIzNmYjk1MCIsCiAgImFoLXdhcm4iOiAiI2QyOTkyMiIsCiAgImFoLWRhbmdlciI6ICIjZjg1MTQ5IiwKfTsKCi8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgY29uc3QgbWFya2VycyA9IE9iamVjdC5lbnRyaWVzKHBhbGV0dGUpCiAgICAubWFwKAogICAgICAoW2lkLCBmaWxsXSkgPT4KICAgICAgICBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCwKICAgICkKICAgIC5qb2luKCIiKTsKICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQoKLy8gQSBub2RlIGlzIGp1c3Qge3gsIHksIHcsIGh9LiBjZW50ZXIoKSBhbmQgc2lkZSgpIGRlcml2ZSBjb25uZWN0aW9uIHBvaW50cyBmcm9tCi8vIGl0LCBzbyBhbiBlZGdlIHN0YXlzIGF0dGFjaGVkIHRvIHRoZSBib3ggbm8gbWF0dGVyIGhvdyB0aGUgYm94IGNoYW5nZXMuCmV4cG9ydCBjb25zdCBjZW50ZXIgPSAobikgPT4gKHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIC8gMiB9KTsKCmV4cG9ydCBjb25zdCBzaWRlID0gKG4sIHdoZXJlKSA9PgogICh7CiAgICB0b3A6IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55IH0sCiAgICBib3R0b206IHsgeDogbi54ICsgbi53IC8gMiwgeTogbi55ICsgbi5oIH0sCiAgICBsZWZ0OiB7IHg6IG4ueCwgeTogbi55ICsgbi5oIC8gMiB9LAogICAgcmlnaHQ6IHsgeDogbi54ICsgbi53LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgfSlbd2hlcmVdOwoKLy8gU3RyYWlnaHQgZWRnZSBiZXR3ZWVuIHR3byBub2RlcywgYXV0by1waWNraW5nIHRoZSBmYWNpbmcgc2lkZXMgYmFzZWQgb24gdGhlaXIKLy8gcmVsYXRpdmUgcG9zaXRpb24uIFJldHVybnMgYW4gU1ZHIHBhdGggImQiIHN0cmluZzsgc2V0IHRoZSBtYXJrZXIgeW91cnNlbGYgdmlhCi8vIHRoZSBlbGVtZW50J3MgbWFya2VyLWVuZCBhdHRyaWJ1dGUuIEZvciA+NSBub2RlcyB3aXRoIGNyb3NzaW5nIGVkZ2VzLCByZWFjaCBmb3IKLy8gYSBsYXlvdXQgZW5naW5lIChkYWdyZSAvIGQzLWRhZyAvIG1lcm1haWQpIGluc3RlYWQgb2YgcGxhY2luZyBub2RlcyBieSBoYW5kIOKAlAovLyB0aGF0J3MgdGhlIHBvaW50IHdoZXJlIG1hbnVhbCBjb29yZGluYXRlcyBzdG9wIGJlaW5nIHdvcnRoIGl0LgpleHBvcnQgZnVuY3Rpb24gY29ubmVjdChhLCBiKSB7CiAgY29uc3QgY2EgPSBjZW50ZXIoYSksCiAgICBjYiA9IGNlbnRlcihiKTsKICBjb25zdCBob3JpeiA9IE1hdGguYWJzKGNiLnggLSBjYS54KSA+IE1hdGguYWJzKGNiLnkgLSBjYS55KTsKICBjb25zdCBwYSA9IGhvcml6CiAgICA/IHNpZGUoYSwgY2IueCA+IGNhLnggPyAicmlnaHQiIDogImxlZnQiKQogICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgY29uc3QgcGIgPSBob3JpegogICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgIDogc2lkZShiLCBjYi55ID4gY2EueSA/ICJ0b3AiIDogImJvdHRvbSIpOwogIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9CgovLyBBIGxhYmVsIHRoYXQgQ0FOTk9UIG92ZXJmbG93IGl0cyBib3guIDxmb3JlaWduT2JqZWN0PiBsZXRzIHRoZSBicm93c2VyIHdyYXAgYW5kCi8vIGVsbGlwc2l6ZSBIVE1MIG5hdGl2ZWx5LCB1bmxpa2UgcmF3IDx0ZXh0PiB3aGljaCB5b3UnZCBoYXZlIHRvIG1lYXN1cmUgYnkgaGFuZAovLyAoYW5kIGhpc3RvcmljYWxseSBndWVzc2VkIHdyb25nKS4gVXNlIHRoaXMgZm9yIGFueSBtdWx0aS13b3JkIGxhYmVsIGluc2lkZSBhCi8vIGZpeGVkLXdpZHRoIGJveC4gU3R5bGUgdmlhIHRoZSAudnN2Zy1sYWJlbCBjbGFzcyBpbiB2aXota2l0LmNzcy4KZXhwb3J0IGZ1bmN0aW9uIGxhYmVsQm94KG5vZGUsIGh0bWwsIGNscyA9ICIiKSB7CiAgcmV0dXJuICgKICAgIGA8Zm9yZWlnbk9iamVjdCB4PSIke25vZGUueH0iIHk9IiR7bm9kZS55fSIgd2lkdGg9IiR7bm9kZS53fSIgaGVpZ2h0PSIke25vZGUuaH0iPmAgKwogICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgYDwvZm9yZWlnbk9iamVjdD5gCiAgKTsKfQoKLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICBjb25zdCBiYWQgPSBbXTsKICBmb3IgKGNvbnN0IHQgb2Ygcm9vdC5xdWVyeVNlbGVjdG9yQWxsKCJ0ZXh0IikpIHsKICAgIGNvbnN0IHJlY3QgPSB0LmNsb3Nlc3QoImciKT8ucXVlcnlTZWxlY3RvcigicmVjdCIpOwogICAgaWYgKCFyZWN0KSBjb250aW51ZTsKICAgIGNvbnN0IHRiID0gdC5nZXRCQm94KCk7CiAgICBjb25zdCByYiA9IHJlY3QuZ2V0QkJveCgpOwogICAgY29uc3Qgc3BpbGxzID0KICAgICAgdGIueCA8IHJiLnggLSAxIHx8CiAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgIGlmIChzcGlsbHMpIHsKICAgICAgdC5zdHlsZS5vdXRsaW5lID0gIjFweCBzb2xpZCAjZjg1MTQ5IjsKICAgICAgYmFkLnB1c2godC50ZXh0Q29udGVudCk7CiAgICB9CiAgfQogIGlmIChiYWQubGVuZ3RoKSB7CiAgICBjb25zb2xlLmVycm9yKCJbdml6QXVkaXRdIHRleHQgb3ZlcmZsb3c6IiwgYmFkKTsKICAgIGNvbnN0IGJhbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgYmFubmVyLnN0eWxlLmNzc1RleHQgPQogICAgICAicG9zaXRpb246Zml4ZWQ7bGVmdDo4cHg7Ym90dG9tOjhweDt6LWluZGV4Ojk5OTk7YmFja2dyb3VuZDojZjg1MTQ5O2NvbG9yOiNmZmY7IiArCiAgICAgICJmb250OjEycHgvMSBzYW5zLXNlcmlmO3BhZGRpbmc6NnB4IDEwcHg7Ym9yZGVyLXJhZGl1czo2cHgiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogIH0KICByZXR1cm4gYmFkOwp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gU21hbGwgdXRpbGl0aWVzIHRoYXQgZXZlcnkgdml6IHJlLWRlcml2ZXMuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKZXhwb3J0IGNvbnN0ICQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IHJvb3QucXVlcnlTZWxlY3RvcihzZWwpOwpleHBvcnQgY29uc3QgJCQgPSAoc2VsLCByb290ID0gZG9jdW1lbnQpID0+IFsuLi5yb290LnF1ZXJ5U2VsZWN0b3JBbGwoc2VsKV07CgovLyBFc2NhcGUgYmVmb3JlIGluamVjdGluZyB0ZXh0IGludG8gaW5uZXJIVE1MLgpleHBvcnQgY29uc3QgZXNjID0gKHMpID0+CiAgU3RyaW5nKHMpLnJlcGxhY2UoCiAgICAvWyY8PiInXS9nLAogICAgKGMpID0+ICh7ICImIjogIiZhbXA7IiwgIjwiOiAiJmx0OyIsICI+IjogIiZndDsiLCAnIic6ICImcXVvdDsiLCAiJyI6ICImIzM5OyIgfSlbY10sCiAgKTsKCi8vIEhvdC1yZWxvYWQgKGFuZCBldmVyeSBzYXZlKSBkb2VzIGEgZnVsbCBwYWdlIHJlZnJlc2gsIHNvIGluLXBhZ2Ugc3RhdGUgaXMgd2lwZWQuCi8vIFBlcnNpc3QgYW55dGhpbmcgeW91IHdhbnQgdG8gc3Vydml2ZSDigJQgb3BlbiBwYW5lbCwgc2VsZWN0ZWQgc3RlcCwgYWN0aXZlIGZpbHRlcnMg4oCUCi8vIHRvIHRoZSBVUkwgaGFzaC4gQm9udXM6IHRoZSBVUkwgYmVjb21lcyBzaGFyZWFibGUvZGVlcC1saW5rYWJsZSBmb3IgZnJlZS4KLy8gUm91bmQtdHJpcHMgYSBwbGFpbiBvYmplY3QuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+CiAgbG9jYXRpb24ucmVwbGFjZSgiIyIgKyBlbmNvZGVVUklDb21wb25lbnQoSlNPTi5zdHJpbmdpZnkob2JqKSkpOwoKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogIHRyeSB7CiAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgfSBjYXRjaCB7CiAgICByZXR1cm4ge307CiAgfQp9Owo="}}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>freeCodeCamp Daily Challenges — visual walkthroughs</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="freeCodeCamp Daily Challenges — visual walkthroughs">
+<meta name="viz:description" content="Interactive, step-through explainers for 9 freeCodeCamp daily coding challenges — the problem, the visual intuition, and an idiomatic TypeScript solution for each.">
+<meta name="viz:tag" content="freeCodeCamp">
+<meta name="viz:tag" content="algorithms">
+<meta name="viz:tag" content="explainer">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors. The
+   house style is dark-only on purpose — it's the look these vizzes converge on. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text */
+  --text: #e6edf3;
+  --muted: #8b949e;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — distinct hues for diagram categories / series.
+     Use these when you need N visually separable colors, not meaning. */
+  --c1: #58a6ff; /* blue */
+  --c2: #3fb950; /* green */
+  --c3: #d29922; /* amber */
+  --c4: #bc8cff; /* purple */
+  --c5: #4ec9b0; /* teal */
+  --c6: #f85149; /* red */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+.swatch.line {
+  width: 16px;
+  height: 0;
+  border-radius: 0;
+  border-top: 2px solid var(--accent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+</style>
+<style>
+  body { padding-bottom: 64px; }
+  .viz-header { max-width: 1480px; margin: 0 auto; }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 0 16px; }
+
+  /* Tab bar */
+  .tabs {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 6px; flex-wrap: wrap;
+    padding: 12px 16px; margin: 0 auto; max-width: 1480px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    font: 600 12.5px var(--sans); color: var(--muted);
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 12px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  }
+  .tab:hover { color: var(--text); border-color: var(--accent); }
+  .tab.active { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+  .tab .n { opacity: .6; font-variant-numeric: tabular-nums; }
+  .tab.active .n { opacity: .8; }
+
+  section.problem { display: none; padding: 24px 0 8px; }
+  section.problem.active { display: block; }
+
+  h2.ptitle { margin: 0 0 2px; font-size: 22px; letter-spacing: -.02em; }
+  .eyebrow { color: var(--accent); font: 700 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+  .statement { color: var(--text); margin: 12px 0 18px; max-width: 760px; }
+  .statement code, code.inl { background: var(--panel-2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px; font: 12.5px var(--mono); color: var(--text); }
+  .statement .rule { color: var(--muted); }
+
+  .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 880px) { .layout { grid-template-columns: 1.35fr 1fr; align-items: start; } }
+
+  .demo { min-height: 60px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; align-items: center; }
+  .chip {
+    font: 600 12px var(--mono); color: var(--text);
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 7px; padding: 5px 9px; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip.on { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .chip.bad.on { background: var(--danger); border-color: var(--danger); }
+  .chip.good.on { background: var(--good); border-color: var(--good); }
+  input[type=text], input[type=number] {
+    font: 13px var(--mono); color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 7px; padding: 6px 9px; min-width: 0;
+  }
+  input[type=range] { accent-color: var(--accent); }
+  .ctl-label { color: var(--muted); font-size: 12px; }
+
+  aside .approach { margin: 0 0 12px; }
+  aside h3 { margin: 0 0 6px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+  aside .approach p { margin: 0 0 8px; color: var(--text); }
+  pre.code {
+    margin: 0; background: #0a0e14; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px; overflow: auto; font: 12px/1.55 var(--mono); color: #c9d1d9;
+    max-height: 460px;
+  }
+  pre.code .kw { color: #ff7b72; } pre.code .ty { color: #79c0ff; }
+  pre.code .st { color: #a5d6ff; } pre.code .cm { color: #8b949e; font-style: italic; }
+  pre.code .fn { color: #d2a8ff; } pre.code .nu { color: #79c0ff; }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; font: 700 13px var(--sans); padding: 5px 11px; border-radius: 8px; }
+  .badge.ok { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); border: 1px solid var(--good); }
+  .badge.no { background: color-mix(in srgb, var(--danger) 18%, transparent); color: var(--danger); border: 1px solid var(--danger); }
+  .mono { font-family: var(--mono); }
+  .muted { color: var(--muted); }
+  .big { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tag { font: 600 11px var(--mono); padding: 2px 7px; border-radius: 5px; border: 1px solid var(--border); }
+
+  /* schema rows */
+  .srow { display: flex; align-items: baseline; gap: 8px; padding: 3px 0; font: 12.5px var(--mono); border-bottom: 1px dashed color-mix(in srgb, var(--border) 60%, transparent); }
+  .srow .mark { width: 16px; flex: none; text-align: center; }
+  .srow .k { color: var(--accent); }
+  .srow .exp { color: var(--muted); }
+  .srow.bad { background: color-mix(in srgb, var(--danger) 9%, transparent); }
+  .srow.bad .got { color: var(--danger); font-weight: 700; }
+  .srow.head .got { color: var(--muted); }
+
+  /* digit boxes (luhn) */
+  .digits { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dbox { width: 46px; border: 1px solid var(--border); border-radius: 8px; padding: 6px 0; text-align: center; background: var(--panel-2); }
+  .dbox .d { font: 700 18px var(--mono); }
+  .dbox .x { font: 11px var(--mono); color: var(--muted); height: 14px; }
+  .dbox.dbl { border-color: var(--accent); }
+  .dbox.dbl .d { color: var(--accent); }
+  .dbox.dbl .x { color: var(--accent); }
+
+  /* cards (poker) */
+  .hand { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pcard { width: 52px; height: 72px; border-radius: 8px; background: #f4f6fb; color: #11151c; border: 1px solid #c9d1d9;
+           display: flex; flex-direction: column; align-items: center; justify-content: center; font: 700 20px var(--sans); }
+  .pcard.red { color: #c1121f; }
+  .pcard .s { font-size: 20px; line-height: 1; }
+  .ladder { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+  .rung { display: flex; justify-content: space-between; padding: 4px 9px; border-radius: 6px; font: 12.5px var(--mono); color: var(--muted); border: 1px solid transparent; }
+  .rung.on { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--text); border-color: var(--accent); font-weight: 700; }
+  .rung .v { opacity: .55; }
+
+  /* chips/units (blood, dna, sort) */
+  .units { display: flex; flex-wrap: wrap; gap: 5px; }
+  .unit { font: 700 12px var(--mono); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); }
+  .unit.used { opacity: .25; text-decoration: line-through; }
+  .bt-O { color: var(--c1); border-color: color-mix(in srgb, var(--c1) 60%, var(--border)); }
+  .bt-A { color: var(--c2); border-color: color-mix(in srgb, var(--c2) 60%, var(--border)); }
+  .bt-B { color: var(--c3); border-color: color-mix(in srgb, var(--c3) 60%, var(--border)); }
+  .bt-AB { color: var(--c4); border-color: color-mix(in srgb, var(--c4) 60%, var(--border)); }
+  .pt { padding: 4px 8px; border-radius: 6px; font: 700 12px var(--mono); border: 1px solid var(--border); }
+  .pt.served { background: color-mix(in srgb, var(--good) 18%, transparent); border-color: var(--good); }
+  .pt.unserved { background: color-mix(in srgb, var(--danger) 16%, transparent); border-color: var(--danger); opacity: .8; }
+
+  .strand { font: 700 15px var(--mono); letter-spacing: 3px; display: flex; flex-wrap: wrap; }
+  .base { width: 1ch; } .base.mut { color: var(--danger); background: color-mix(in srgb, var(--danger) 22%, transparent); border-radius: 3px; }
+  .idxrow { font: 11px var(--mono); color: var(--muted); letter-spacing: 3px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .num { font: 700 14px var(--mono); padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border); background: var(--panel-2); }
+  .num.wrong { border-color: var(--danger); color: var(--danger); }
+  .num.right { border-color: var(--good); color: var(--good); }
+
+  .note { font-size: 12.5px; color: var(--muted); border-left: 2px solid var(--accent); padding: 2px 0 2px 10px; margin: 12px 0 0; }
+  .result-line { margin: 14px 0 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  table.cmp { border-collapse: collapse; font: 12px var(--mono); }
+  table.cmp td, table.cmp th { border: 1px solid var(--border); padding: 4px 9px; text-align: center; }
+  table.cmp th { color: var(--muted); font-weight: 600; }
+  svg { max-width: 100%; height: auto; display: block; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="freeCodeCamp Daily Challenges — visual walkthroughs">
+<meta property="og:description" content="Interactive, step-through explainers for 9 freeCodeCamp daily coding challenges — the problem, the visual intuition, and an idiomatic TypeScript solution for each.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/fcc-daily-challenges/">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="viz-header">
+    <h1>freeCodeCamp Daily Challenges — visual walkthroughs</h1>
+    <div class="sub">Nine challenges from the last month, each as an interactive walkthrough: the problem, the visual intuition, the gotcha, and an idiomatic TypeScript solution. Pick a tab. Click the test cases.</div>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+  <main class="wrap" id="main"></main>
+
+<!-- ── TypeScript solutions (raw text → rendered into <pre>, no escaping needed) ── -->
+<script type="text/plain" data-code="schema">
+// A schema is a tiny tagged union; validate() walks value + schema together.
+type Schema =
+  | { kind: "string" }
+  | { kind: "number" }
+  | { kind: "boolean" }
+  | { kind: "enum"; values: string[] }
+  | { kind: "array"; of: Schema }
+  | { kind: "object"; fields: Record<string, Schema>; optional?: string[] };
+
+function validate(value: unknown, schema: Schema): boolean {
+  switch (schema.kind) {
+    case "string":  return typeof value === "string";
+    case "number":  return typeof value === "number";
+    case "boolean": return typeof value === "boolean";
+    case "enum":    return typeof value === "string" && schema.values.includes(value);
+    case "array":   return Array.isArray(value) && value.every(v => validate(v, schema.of));
+    case "object": {
+      if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
+      const obj = value as Record<string, unknown>;
+      return Object.entries(schema.fields).every(([key, sub]) => {
+        if (!(key in obj)) return schema.optional?.includes(key) ?? false; // missing → ok iff optional
+        return validate(obj[key], sub);                                    // recurse
+      });
+      // extra keys are simply never inspected → always allowed
+    }
+  }
+}
+</script>
+
+<script type="text/plain" data-code="itinerary">
+// Don't enumerate — count. The itinerary is a fixed skeleton with 3 gaps:
+//   breakfast · [gap A] · lunch · [gap B] · dinner · [gap C]
+// Rules: A >= 1, B >= 1, C in {0, 1}.  Distribute the n distinct stops.
+//
+//   #compositions of n into (a>=1, b>=1, c in {0,1})  =  (n-1) + (n-2) = 2n - 3
+//   each composition then ORDERS all n distinct stops               =  n!
+function getItineraryCount(stops: string[]): number {
+  const n = stops.length;
+  const factorial = (k: number): number => (k <= 1 ? 1 : k * factorial(k - 1));
+  return (2 * n - 3) * factorial(n);
+}
+</script>
+
+<script type="text/plain" data-code="parens">
+// "Number of valid combinations" = the nth Catalan number.
+// Build strings left-to-right, pruning the moment a string can't be completed:
+//   - add '(' only while open < n
+//   - add ')' only while close < open   (never let ')' overtake '(')
+// Every leaf reached is valid by construction — so just count leaves.
+function getCombinations(n: number): number {
+  let count = 0;
+  const build = (open: number, close: number): void => {
+    if (open === n && close === n) { count++; return; } // complete & balanced
+    if (open < n)     build(open + 1, close);           // place '('
+    if (close < open) build(open, close + 1);           // place ')'
+  };
+  build(0, 0);
+  return count;
+}
+</script>
+
+<script type="text/plain" data-code="prime">
+// Trial division by the SMALLEST factor. Divide it out completely, move on.
+// Once d*d > n, whatever remains (> 1) is itself prime.
+function primeFactorization(n: number): number[] {
+  const factors: number[] = [];
+  for (let d = 2; d * d <= n; d++) {
+    while (n % d === 0) { factors.push(d); n /= d; }
+  }
+  if (n > 1) factors.push(n); // the last prime left standing
+  return factors;
+}
+</script>
+
+<script type="text/plain" data-code="luhn">
+// Luhn: walk right-to-left, double every SECOND digit, cast nines down by 9,
+// sum everything, check divisibility by 10.
+function isValidCard(number: string): boolean {
+  const sum = [...number]
+    .map(Number)
+    .reverse()
+    .reduce((acc, d, i) => {
+      if (i % 2 === 1) { d *= 2; if (d > 9) d -= 9; } // every 2nd from the right
+      return acc + d;
+    }, 0);
+  return sum % 10 === 0;
+}
+</script>
+
+<script type="text/plain" data-code="besthand">
+// Reduce 5 cards to two facts: the shape of the rank groups, and flush/straight.
+const RANKS = "23456789TJQKA";
+function getBestHand(cards: string[]): string {
+  const values = cards.map(c => RANKS.indexOf(c[0])).sort((a, b) => a - b);
+  const suits  = cards.map(c => c[1]);
+
+  const groups = [...new Set(values)]                  // e.g. [3,2] = full house,
+    .map(v => values.filter(x => x === v).length)      //      [4]   = four of a kind
+    .sort((a, b) => b - a);
+
+  const flush    = suits.every(s => s === suits[0]);
+  const distinct = new Set(values).size === 5;
+  const straight = distinct && (
+    values[4] - values[0] === 4 ||                      // ordinary run
+    values.join() === "0,1,2,3,12"                      // A-2-3-4-5 (ace low)
+  );
+
+  if (straight && flush)             return values[0] === 8 ? "Royal Flush" : "Straight Flush";
+  if (groups[0] === 4)               return "Four of a Kind";
+  if (groups[0] === 3 && groups[1] === 2) return "Full House";
+  if (flush)                         return "Flush";
+  if (straight)                      return "Straight";
+  if (groups[0] === 3)               return "Three of a Kind";
+  if (groups[0] === 2 && groups[1] === 2) return "Two Pair";
+  if (groups[0] === 2)               return "Pair";
+  return "High Card";
+}
+</script>
+
+<script type="text/plain" data-code="blood">
+// Maximize matches under scarcity. O is the universal donor, so it's precious —
+// serve the most-constrained patients first, and let each take its OWN type
+// before falling back to O.
+function triageBlood(bank: string[], patients: string[]): string {
+  const stock: Record<string, number> = { O: 0, A: 0, B: 0, AB: 0 };
+  for (const t of bank) stock[t]++;
+
+  const donorsFor: Record<string, string[]> = {
+    O:  ["O"],                 // hardest to satisfy → goes first
+    A:  ["A", "O"],
+    B:  ["B", "O"],
+    AB: ["AB", "A", "B", "O"], // easiest → spends leftovers last
+  };
+
+  let served = 0;
+  for (const type of ["O", "A", "B", "AB"]) {
+    for (const _ of patients.filter(p => p === type)) {
+      const donor = donorsFor[type].find(d => stock[d] > 0);
+      if (donor) { stock[donor]--; served++; }
+    }
+  }
+  return `${served} of ${patients.length} patients served`;
+}
+</script>
+
+<script type="text/plain" data-code="dna">
+// Position-by-position comparison; collect the indexes that differ.
+function detectMutations(strand1: string, strand2: string): number[] {
+  const mutations: number[] = [];
+  for (let i = 0; i < strand1.length; i++) {
+    if (strand1[i] !== strand2[i]) mutations.push(i);
+  }
+  return mutations;
+}
+</script>
+
+<script type="text/plain" data-code="sort">
+// The whole challenge is one gotcha: Array.prototype.sort() is LEXICOGRAPHIC
+// by default, so [12, 2].sort() → [12, 2]. Pass a numeric comparator.
+function sortNumbers(str: string): number[] {
+  return str.split(",").map(Number).sort((a, b) => a - b);
+}
+</script>
+
+<script type="module">
+import { $, $$, esc, saveHash, loadHash } from "/_kit/viz.js";
+
+const codeFor = key => ($(`script[data-code="${key}"]`)?.textContent ?? "").replace(/^\n/, "").replace(/\s+$/, "");
+
+// tiny TS-ish syntax highlighter — a single scan (regex passes corrupt their own injected markup)
+function hl(src) {
+  const KW = new Set("type function const let return if else for of in case switch new typeof true false void unknown number string boolean never Record Array".split(" "));
+  let out = "", i = 0;
+  while (i < src.length) {
+    const c = src[i];
+    if (c === "/" && src[i + 1] === "/") { let j = src.indexOf("\n", i); if (j < 0) j = src.length; out += `<span class="cm">${esc(src.slice(i, j))}</span>`; i = j; continue; }
+    if (c === '"' || c === "'" || c === "`") { let j = i + 1; while (j < src.length && src[j] !== c) { if (src[j] === "\\") j++; j++; } j++; out += `<span class="st">${esc(src.slice(i, j))}</span>`; i = j; continue; }
+    if (/[A-Za-z_$]/.test(c)) { let j = i; while (j < src.length && /[A-Za-z0-9_$]/.test(src[j])) j++; const w = src.slice(i, j); out += KW.has(w) ? `<span class="kw">${w}</span>` : esc(w); i = j; continue; }
+    if (/[0-9]/.test(c)) { let j = i; while (j < src.length && /[0-9.]/.test(src[j])) j++; out += `<span class="nu">${src.slice(i, j)}</span>`; i = j; continue; }
+    out += esc(c); i++;
+  }
+  return out;
+}
+
+// shared element helper
+function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+
+/* ───────────────────────────── 1. SCHEMA VALIDATOR ───────────────────────────── */
+function mountSchema(host) {
+  const ROLES = ["user", "creator", "moderator", "staff", "admin"];
+  const S = {
+    str: { kind: "string" }, num: { kind: "number" }, bool: { kind: "boolean" },
+    role: { kind: "enum", name: "Roles", values: ROLES },
+  };
+  const base = {
+    1: { username: S.str },
+    2: { username: S.str, posts: S.num, verified: S.bool },
+    3: { username: S.str, posts: S.num, verified: S.bool, role: S.role },
+    4: { username: S.str, posts: S.num, verified: S.bool, role: S.role, supporter: S.bool },
+    5: { username: S.str, posts: S.num, verified: S.bool, role: S.role, supporter: S.bool, badges: { kind: "array", of: S.str } },
+  };
+  const profile = { kind: "object", name: "UserProfile", fields: base[5], optional: ["supporter"] };
+  const schemaFor = p => p <= 5
+    ? { kind: "object", fields: base[p], optional: p >= 4 ? ["supporter"] : [] }
+    : { kind: "object", fields: { users: { kind: "array", of: profile } }, optional: [] };
+
+  const tests = {
+    1: [["{ username: \"bob\" }", { username: "bob" }], ["{ username: 7 }", { username: 7 }], ["{ posts: 25 }", { posts: 25 }]],
+    2: [["valid", { username: "alice", posts: 10, verified: false }], ["posts is a string", { username: "frank", posts: "21", verified: true }], ["posts missing", { username: "bill", verified: true }]],
+    3: [["role: staff", { username: "henry", posts: 0, verified: true, role: "staff" }], ["role: guest", { username: "david", posts: 0, verified: false, role: "guest" }], ["role missing", { username: "wendy", posts: 10, verified: true }]],
+    4: [["supporter omitted", { username: "rudolph", posts: 15, verified: true, role: "creator" }], ["supporter: \"true\"", { username: "julia", posts: 50, verified: true, role: "admin", supporter: "true" }]],
+    5: [["badges ok", { username: "zara", posts: 0, verified: false, role: "user", supporter: false, badges: [] }], ["badge is a number", { username: "nicole", posts: 65, verified: true, role: "admin", supporter: false, badges: ["first-post", 18] }]],
+    6: [["array of profiles", { users: [{ username: "ron", posts: 14, verified: true, role: "creator", badges: ["early-adopter"] }] }], ["empty users", { users: [] }], ["users is an object", { users: { username: "anne", posts: 0, verified: false, role: "user", badges: [] } }], ["one bad badge deep inside", { users: [{ username: "tony", posts: 10, verified: true, role: "creator", supporter: true, badges: ["liked", 6] }] }]],
+  };
+
+  const typeName = s => s.kind === "array" ? typeName(s.of) + "[]" : s.kind === "enum" ? (s.name || "enum") : s.kind === "object" ? (s.name || "object") : s.kind;
+  const fmt = v => v === undefined ? "(absent)" : Array.isArray(v) ? "[" + v.map(fmt).join(", ") + "]" : typeof v === "string" ? `"${v}"` : typeof v === "object" && v !== null ? "{…}" : String(v);
+
+  function trace(value, schema, label, depth, rows) {
+    if (schema.kind === "object") {
+      if (typeof value !== "object" || value === null || Array.isArray(value)) { rows.push({ depth, label, exp: typeName(schema), got: fmt(value), ok: false }); return false; }
+      rows.push({ depth, label, exp: typeName(schema), got: "{…}", ok: true, head: true });
+      let ok = true;
+      for (const [k, sub] of Object.entries(schema.fields)) {
+        const optional = schema.optional?.includes(k);
+        if (!(k in value)) {
+          if (optional) rows.push({ depth: depth + 1, label: k + "?", exp: typeName(sub), got: "(absent)", ok: true });
+          else { rows.push({ depth: depth + 1, label: k, exp: typeName(sub), got: "(missing)", ok: false }); ok = false; }
+          continue;
+        }
+        ok = trace(value[k], sub, optional ? k + "?" : k, depth + 1, rows) && ok;
+      }
+      return ok;
+    }
+    if (schema.kind === "array") {
+      if (!Array.isArray(value)) { rows.push({ depth, label, exp: typeName(schema), got: fmt(value), ok: false }); return false; }
+      rows.push({ depth, label, exp: typeName(schema), got: `[${value.length}]`, ok: true, head: true });
+      let ok = true;
+      value.forEach((elv, i) => { ok = trace(elv, schema.of, `${label.replace(/\?$/, "")}[${i}]`, depth + 1, rows) && ok; });
+      return ok;
+    }
+    let ok = schema.kind === "string" ? typeof value === "string"
+      : schema.kind === "number" ? typeof value === "number"
+      : schema.kind === "boolean" ? typeof value === "boolean"
+      : typeof value === "string" && schema.values.includes(value);
+    rows.push({ depth, label, exp: typeName(schema), got: fmt(value), ok });
+    return ok;
+  }
+
+  let part = 1, idx = 0;
+  const partBar = el("div", "controls");
+  const caseBar = el("div", "controls");
+  const out = el("div");
+  host.append(el("div", "ctl-label", "Schema grows across the 6-part series:"), partBar, caseBar, out);
+
+  function renderCases() {
+    caseBar.innerHTML = "";
+    tests[part].forEach((tc, i) => {
+      const c = el("button", "chip" + (i === idx ? " on" : ""), esc(tc[0]));
+      c.onclick = () => { idx = i; renderCases(); render(); };
+      caseBar.append(c);
+    });
+  }
+  function render() {
+    const schema = schemaFor(part), value = tests[part][idx][1];
+    const rows = []; const ok = trace(value, schema, "(root)", 0, rows);
+    out.innerHTML = "";
+    out.append(el("div", "result-line", `<span class="badge ${ok ? "ok" : "no"}">${ok ? "✓ isValidSchema → true" : "✗ isValidSchema → false"}</span>`));
+    const box = el("div", "panel");
+    rows.forEach(r => {
+      const row = el("div", "srow" + (r.ok ? "" : " bad") + (r.head ? " head" : ""));
+      row.style.paddingLeft = (r.depth * 16) + "px";
+      row.innerHTML = `<span class="mark">${r.head ? "" : r.ok ? "✓" : "✗"}</span><span class="k">${esc(r.label)}</span><span class="exp">: ${esc(r.exp)}</span><span class="got" style="margin-left:auto">${esc(r.got)}</span>`;
+      box.append(row);
+    });
+    out.append(box);
+  }
+  [1, 2, 3, 4, 5, 6].forEach(p => {
+    const b = el("button", "chip" + (p === part ? " on" : ""), "Part " + p);
+    b.onclick = () => { part = p; idx = 0; [...partBar.children].forEach((c, i) => c.classList.toggle("on", i === p - 1)); renderCases(); render(); };
+    partBar.append(b);
+  });
+  renderCases(); render();
+}
+
+/* ───────────────────────────── 2. ITINERARY ARRANGEMENTS ───────────────────────────── */
+function mountItinerary(host) {
+  const fact = k => k <= 1 ? 1 : k * fact(k - 1);
+  const ctl = el("div", "controls");
+  const rng = el("input"); rng.type = "range"; rng.min = 2; rng.max = 7; rng.value = 3; rng.style.width = "180px";
+  const lab = el("span", "ctl-label");
+  ctl.append(el("span", "ctl-label", "optional stops n ="), rng, lab);
+  const out = el("div");
+  host.append(ctl, out);
+
+  function render() {
+    const n = +rng.value;
+    lab.textContent = ` ${n}`;
+    // skeleton
+    const skeleton = el("div", "panel");
+    skeleton.style.cssText = "display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:600 13px var(--mono)";
+    const slot = (txt, cls) => `<span class="tag" style="border-color:${cls}">${txt}</span>`;
+    skeleton.innerHTML =
+      slot("breakfast", "var(--good)") + "→" +
+      slot("gap A · ≥1", "var(--accent)") + "→" +
+      slot("lunch", "var(--good)") + "→" +
+      slot("gap B · ≥1", "var(--accent)") + "→" +
+      slot("dinner", "var(--good)") + "→" +
+      slot("gap C · 0–1", "var(--warn)");
+    // compositions
+    const comps = [];
+    for (let c = 0; c <= 1; c++) for (let a = 1; a <= n; a++) { const b = n - a - c; if (b >= 1) comps.push([a, b, c]); }
+    const grid = el("div", "panel");
+    grid.innerHTML = `<div class="muted" style="margin-bottom:6px">${comps.length} valid placements <span class="mono">(a,b,c)</span> — i.e. 2n−3 = ${2 * n - 3}:</div>`;
+    const wrap = el("div", "units");
+    comps.forEach(([a, b, c]) => wrap.append(el("span", "unit", `${a},${b},${c}`)));
+    grid.append(wrap);
+
+    out.innerHTML = "";
+    out.append(skeleton, grid);
+    out.append(el("div", "result-line",
+      `<span class="big">${((2 * n - 3) * fact(n)).toLocaleString()}</span>` +
+      `<span class="muted mono">= (2·${n} − 3) × ${n}!  =  ${2 * n - 3} × ${fact(n).toLocaleString()}</span>`));
+    out.append(el("div", "note", "Each placement fixes only the <em>counts</em> in each gap. The n distinct stops are then arranged across those slots in n! ways — so the answer is the placement count times n!."));
+  }
+  rng.oninput = render; render();
+}
+
+/* ───────────────────────────── 3. PARENTHESES COMBINATIONS ───────────────────────────── */
+function mountParens(host) {
+  const ctl = el("div", "controls");
+  [1, 2, 3, 4].forEach(n => { const b = el("button", "chip" + (n === 3 ? " on" : ""), "n = " + n); b.dataset.n = n; ctl.append(b); });
+  const svgBox = el("div"); const out = el("div");
+  host.append(ctl, out, svgBox);
+
+  const catalan = n => { let c = 1; for (let i = 0; i < n; i++) c = c * 2 * (2 * i + 1) / (i + 2); return Math.round(c); };
+
+  function build(n) {
+    // build tree of states; nodes get id; record pruned stubs
+    let id = 0; const nodes = []; const edges = [];
+    function rec(open, close, str, depth) {
+      const me = { id: id++, str: str || "ε", open, close, depth, leaf: open === n && close === n };
+      nodes.push(me);
+      if (me.leaf) return me;
+      if (open < n) { const ch = rec(open + 1, close, str + "(", depth + 1); edges.push({ from: me.id, to: ch.id, ch: "(" }); }
+      else edges.push({ from: me.id, pruned: "(", ch: "(" });
+      if (close < open) { const ch = rec(open, close + 1, str + ")", depth + 1); edges.push({ from: me.id, to: ch.id, ch: ")" }); }
+      else if (close < n) edges.push({ from: me.id, pruned: ")", ch: ")" });
+      return me;
+    }
+    rec(0, 0, "", 0);
+    return { nodes, edges };
+  }
+
+  function render(n) {
+    const { nodes, edges } = build(n);
+    // layout: x by leaf order (in-order), y by depth
+    const byId = Object.fromEntries(nodes.map(nd => [nd.id, nd]));
+    let leafX = 0; const W = 150;
+    const place = nd => {
+      const kids = edges.filter(e => e.from === nd.id && e.to != null).map(e => byId[e.to]);
+      if (!kids.length) { nd.x = leafX++; return nd.x; }
+      const xs = kids.map(place); nd.x = (Math.min(...xs) + Math.max(...xs)) / 2; return nd.x;
+    };
+    place(nodes[0]);
+    const maxDepth = Math.max(...nodes.map(n => n.depth));
+    const dx = 92, dy = 64, padX = 30, padY = 26;
+    const width = (leafX) * dx + padX * 2;
+    const height = (maxDepth + 1) * dy + padY * 2;
+    const px = nd => padX + nd.x * dx + dx / 2;
+    const py = nd => padY + nd.depth * dy;
+
+    let s = `<svg viewBox="0 0 ${width} ${height}" width="${width}">`;
+    edges.forEach(e => {
+      if (e.to == null) return;
+      const a = byId[e.from], b = byId[e.to];
+      const col = e.ch === "(" ? "var(--accent)" : "var(--c5)";
+      s += `<line x1="${px(a)}" y1="${py(a) + 9}" x2="${px(b)}" y2="${py(b) - 9}" stroke="${col}" stroke-width="1.5" opacity=".55"/>`;
+    });
+    edges.forEach(e => { // pruned stubs
+      if (e.to != null) return;
+      const a = byId[e.from]; const dir = e.pruned === "(" ? -22 : 22;
+      s += `<line x1="${px(a)}" y1="${py(a) + 9}" x2="${px(a) + dir}" y2="${py(a) + 30}" stroke="var(--danger)" stroke-width="1.2" stroke-dasharray="3 3" opacity=".5"/>`;
+      s += `<text x="${px(a) + dir}" y="${py(a) + 42}" fill="var(--danger)" font-size="10" text-anchor="middle" opacity=".7">✗${e.pruned}</text>`;
+    });
+    nodes.forEach(nd => {
+      const fill = nd.leaf ? "var(--good)" : "var(--panel-2)";
+      const stroke = nd.leaf ? "var(--good)" : "var(--border)";
+      const tcol = nd.leaf ? "var(--bg)" : "var(--text)";
+      const w = Math.max(26, nd.str.length * 9 + 12);
+      s += `<g><rect x="${px(nd) - w / 2}" y="${py(nd) - 10}" width="${w}" height="20" rx="6" fill="${fill}" stroke="${stroke}"/>` +
+           `<text x="${px(nd)}" y="${py(nd) + 4}" fill="${tcol}" font-family="var(--mono)" font-size="11" font-weight="700" text-anchor="middle">${esc(nd.str)}</text></g>`;
+    });
+    s += `</svg>`;
+
+    const leaves = nodes.filter(n => n.leaf).length;
+    out.innerHTML = "";
+    out.append(el("div", "result-line",
+      `<span class="big">${leaves}</span><span class="muted">valid combinations (green leaves)</span>` +
+      `<span class="badge ok" style="margin-left:6px">= Catalan(${n}) = ${catalan(n)}</span>`));
+    out.append(el("div", "note", "Red dashed stubs are moves the rules forbid — adding ')' when none is open, or '(' past n. That pruning is the whole trick: every path that survives reaches a valid string, so the count is just the number of leaves."));
+    svgBox.innerHTML = `<div class="panel" style="overflow:auto">${s}</div>`;
+  }
+
+  ctl.onclick = e => { if (!e.target.dataset.n) return; [...ctl.children].forEach(c => c.classList.toggle("on", c === e.target)); render(+e.target.dataset.n); };
+  render(3);
+}
+
+/* ───────────────────────────── 4. PRIME FACTORIZATION ───────────────────────────── */
+function mountPrime(host) {
+  const ctl = el("div", "controls");
+  const inp = el("input"); inp.type = "number"; inp.value = 360; inp.min = 2; inp.style.width = "120px";
+  const go = el("button", "chip on", "factorize");
+  ctl.append(el("span", "ctl-label", "n ="), inp, go);
+  const presets = el("div", "controls");
+  [20, 17, 999, 360, 510510].forEach(v => { const c = el("button", "chip", String(v)); c.onclick = () => { inp.value = v; render(); }; presets.append(c); });
+  const out = el("div");
+  host.append(ctl, presets, out);
+
+  function render() {
+    let n = Math.max(2, Math.floor(+inp.value || 2)); const orig = n;
+    const steps = []; const factors = [];
+    for (let d = 2; d * d <= n; d++) {
+      while (n % d === 0) { steps.push({ n, d, hit: true, next: n / d }); factors.push(d); n /= d; }
+      if (d * d <= n) steps.push({ n, d: d, hit: false });
+    }
+    if (n > 1) { factors.push(n); steps.push({ n, d: n, hit: true, last: true, next: 1 }); }
+
+    out.innerHTML = "";
+    out.append(el("div", "result-line", `<span class="muted mono">${orig} =</span> ` +
+      factors.map(f => `<span class="num right">${f}</span>`).join('<span class="muted"> · </span>')));
+    // ladder
+    const lad = el("div", "panel"); lad.style.font = "13px var(--mono)";
+    lad.append(el("div", "muted", "Trial division — divide out the smallest prime each time:"));
+    let cur = orig;
+    factors.forEach(f => {
+      const row = el("div"); row.style.cssText = "display:flex;gap:10px;align-items:center;padding:3px 0";
+      row.innerHTML = `<span class="mono">${cur}</span> <span class="muted">÷</span> <span class="num right" style="padding:2px 7px">${f}</span> <span class="muted">=</span> <span class="mono">${cur / f}</span>`;
+      lad.append(row); cur = cur / f;
+    });
+    out.append(lad);
+    out.append(el("div", "note", `Stop dividing once d·d &gt; n: any remainder above 1 must itself be prime. ${orig === 510510 ? "510510 = 2·3·5·7·11·13·17 — the product of the first 7 primes (a “primorial”)." : ""}`));
+  }
+  go.onclick = render; inp.onkeydown = e => { if (e.key === "Enter") render(); };
+  render();
+}
+
+/* ───────────────────────────── 5. CREDIT CARD (LUHN) ───────────────────────────── */
+function mountLuhn(host) {
+  const ctl = el("div", "controls");
+  const inp = el("input"); inp.type = "text"; inp.value = "4532015112830366"; inp.style.width = "240px";
+  ctl.append(el("span", "ctl-label", "card number"), inp);
+  const presets = el("div", "controls");
+  [["4532015112830366", true], ["371449635398431", true], ["4532015112830367", false], ["1234567890123456", false]].forEach(([v, ok]) => {
+    const c = el("button", "chip " + (ok ? "good" : "bad"), v.slice(0, 6) + "…");
+    c.onclick = () => { inp.value = v; render(); }; presets.append(c);
+  });
+  const out = el("div");
+  host.append(ctl, presets, out);
+
+  function render() {
+    const num = inp.value.replace(/\D/g, "");
+    const digits = [...num].map(Number);
+    const N = digits.length;
+    let sum = 0;
+    const boxes = digits.map((d, i) => {
+      const fromRight = N - 1 - i;
+      const doubled = fromRight % 2 === 1;
+      let val = d;
+      if (doubled) { val = d * 2; if (val > 9) val -= 9; }
+      sum += val;
+      return { d, val, doubled };
+    });
+    const ok = num.length > 0 && sum % 10 === 0;
+    out.innerHTML = "";
+    const dRow = el("div", "digits");
+    boxes.forEach(b => {
+      const box = el("div", "dbox" + (b.doubled ? " dbl" : ""));
+      box.innerHTML = `<div class="x">${b.doubled ? "×2" + (b.d * 2 > 9 ? "−9" : "") : ""}</div><div class="d">${b.d}</div><div class="x">${b.doubled ? "→" + b.val : ""}</div>`;
+      dRow.append(box);
+    });
+    out.append(dRow);
+    out.append(el("div", "result-line",
+      `<span class="muted">sum =</span> <span class="num">${sum}</span>` +
+      `<span class="muted mono">${sum} mod 10 = ${sum % 10}</span>` +
+      `<span class="badge ${ok ? "ok" : "no"}">${ok ? "✓ valid" : "✗ invalid"}</span>`));
+    out.append(el("div", "note", "Outlined digits are every second one counting from the right. Double them; if the result is two digits, subtract 9 (same as summing the two digits). The card is valid when the grand total is a multiple of 10."));
+  }
+  inp.oninput = render; render();
+}
+
+/* ───────────────────────────── 6. BEST HAND ───────────────────────────── */
+function mountBestHand(host) {
+  const RANKS = "23456789TJQKA";
+  const SUIT = { h: "♥", d: "♦", c: "♣", s: "♠" }, RED = { h: 1, d: 1 };
+  const HANDS = ["High Card", "Pair", "Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"];
+  const cases = [
+    ["7s", "7h", "7d", "2c", "5h"], ["Ks", "Kh", "Kd", "4s", "4h"], ["2h", "5h", "7h", "9h", "Jh"],
+    ["As", "Ah", "Ad", "Ac", "Kh"], ["Ts", "Th", "9d", "9c", "8h"], ["9c", "8c", "7c", "6c", "5c"],
+    ["As", "Kh", "Jd", "8c", "5h"], ["As", "2h", "3d", "4c", "5h"], ["As", "Ks", "Qs", "Js", "Ts"],
+  ];
+  function evaluate(cards) {
+    const values = cards.map(c => RANKS.indexOf(c[0])).sort((a, b) => a - b);
+    const suits = cards.map(c => c[1]);
+    const groups = [...new Set(values)].map(v => values.filter(x => x === v).length).sort((a, b) => b - a);
+    const flush = suits.every(s => s === suits[0]);
+    const distinct = new Set(values).size === 5;
+    const straight = distinct && (values[4] - values[0] === 4 || values.join() === "0,1,2,3,12");
+    let name = "High Card";
+    if (straight && flush) name = values[0] === 8 ? "Royal Flush" : "Straight Flush";
+    else if (groups[0] === 4) name = "Four of a Kind";
+    else if (groups[0] === 3 && groups[1] === 2) name = "Full House";
+    else if (flush) name = "Flush";
+    else if (straight) name = "Straight";
+    else if (groups[0] === 3) name = "Three of a Kind";
+    else if (groups[0] === 2 && groups[1] === 2) name = "Two Pair";
+    else if (groups[0] === 2) name = "Pair";
+    return { name, groups, flush, straight };
+  }
+  const ctl = el("div", "controls"); const out = el("div");
+  host.append(ctl, out);
+  let idx = 0;
+  cases.forEach((c, i) => { const b = el("button", "chip" + (i === 0 ? " on" : ""), c.join(" ")); b.onclick = () => { idx = i; [...ctl.children].forEach((x, j) => x.classList.toggle("on", j === i)); render(); }; ctl.append(b); });
+
+  function render() {
+    const cards = cases[idx]; const r = evaluate(cards);
+    out.innerHTML = "";
+    const hand = el("div", "hand");
+    cards.forEach(c => { const pc = el("div", "pcard" + (RED[c[1]] ? " red" : "")); pc.innerHTML = `<div>${c[0]}</div><div class="s">${SUIT[c[1]]}</div>`; hand.append(pc); });
+    out.append(hand);
+    out.append(el("div", "result-line",
+      `<span class="tag">groups ${JSON.stringify(r.groups)}</span>` +
+      `<span class="tag" style="border-color:${r.flush ? "var(--good)" : "var(--border)"}">flush ${r.flush ? "✓" : "✗"}</span>` +
+      `<span class="tag" style="border-color:${r.straight ? "var(--good)" : "var(--border)"}">straight ${r.straight ? "✓" : "✗"}</span>`));
+    const lad = el("div", "ladder");
+    HANDS.slice().reverse().forEach(h => { const rung = el("div", "rung" + (h === r.name ? " on" : "")); rung.innerHTML = `<span>${h}</span>${h === r.name ? '<span>◀ best</span>' : ""}`; lad.append(rung); });
+    out.append(lad);
+  }
+  render();
+}
+
+/* ───────────────────────────── 7. BLOOD BANK ───────────────────────────── */
+function mountBlood(host) {
+  const TYPES = ["O", "A", "B", "AB"];
+  const donorsFor = { O: ["O"], A: ["A", "O"], B: ["B", "O"], AB: ["AB", "A", "B", "O"] };
+  const cases = [
+    [["O", "A", "B", "AB"], ["O", "A", "B", "AB"]],
+    [["A", "A", "B", "B", "AB"], ["O", "A", "B", "B", "B"]],
+    [["O", "A", "B", "AB"], ["AB", "AB", "AB", "AB", "AB"]],
+    [["O", "O", "O", "O", "O"], ["O", "A", "B", "AB"]],
+    [["A", "O", "B", "AB", "B", "AB", "O", "A", "A"], ["O", "A", "B", "AB", "A", "B", "A", "A", "B", "A", "B"]],
+  ];
+  const ctl = el("div", "controls"); const out = el("div");
+  host.append(el("div", "ctl-label", "Compatibility: AB←anyone · A←A,O · B←B,O · O←O only"), ctl, out);
+  let idx = 1;
+  cases.forEach((c, i) => { const b = el("button", "chip" + (i === 1 ? " on" : ""), `case ${i + 1}`); b.onclick = () => { idx = i; [...ctl.children].forEach((x, j) => x.classList.toggle("on", j === i)); render(); }; ctl.append(b); });
+
+  function render() {
+    const [bank, patients] = cases[idx];
+    const stock = { O: 0, A: 0, B: 0, AB: 0 }; bank.forEach(t => stock[t]++);
+    const usedUnits = { O: 0, A: 0, B: 0, AB: 0 };
+    let served = 0; const patientResult = [];
+    for (const type of TYPES) for (const _ of patients.filter(p => p === type)) {
+      const donor = donorsFor[type].find(d => stock[d] - usedUnits[d] > 0);
+      if (donor) { usedUnits[donor]++; served++; patientResult.push({ type, donor }); }
+      else patientResult.push({ type, donor: null });
+    }
+    out.innerHTML = "";
+    // inventory
+    const inv = el("div", "panel"); inv.innerHTML = `<div class="muted" style="margin-bottom:6px">Bank inventory (faded = used):</div>`;
+    const iu = el("div", "units");
+    TYPES.forEach(t => { for (let k = 0; k < stock[t]; k++) { const u = el("span", "unit bt-" + t + (k < usedUnits[t] ? " used" : ""), t); iu.append(u); } });
+    inv.append(iu); out.append(inv);
+    // patients
+    const pp = el("div", "panel"); pp.innerHTML = `<div class="muted" style="margin-bottom:6px">Patients (served first by most-constrained type → O, A, B, AB):</div>`;
+    const pu = el("div", "units");
+    patientResult.forEach(r => { const p = el("span", "pt " + (r.donor ? "served" : "unserved"), r.type + (r.donor ? " ←" + r.donor : " ✗")); pu.append(p); });
+    pp.append(pu); out.append(pp);
+    out.append(el("div", "result-line", `<span class="big">${served} of ${patients.length}</span><span class="muted">patients served</span>`));
+    out.append(el("div", "note", "Why order matters: O is the universal donor, so it's the scarcest useful resource. Serve O-patients (who can ONLY take O) first, let A/B patients exhaust their own type before dipping into O, and let AB-patients — who accept anything — mop up the leftovers last."));
+  }
+  render();
+}
+
+/* ───────────────────────────── 8. DNA MUTATIONS ───────────────────────────── */
+function mountDna(host) {
+  const cases = [
+    ["ATCG", "ATGG"],
+    ["ATGCGTACGTTAGC", "ATGCATACGATTGC"],
+    ["GATCTAGCTAGGCTAGCTAG", "GATCTAGCTAGGCTAGCTAG"],
+    ["TCAGATCATGGCTAGCTACGATCAGCTAGCATGCATATCGACTG", "TCAGATCATGGCTAGAGCTGATCAGCTAGCATGCATATCGACTG"],
+    ["ACGTCAGTACGCACATGACCATTGACATA", "AACGTCAGTACGCACATGACCATTGACAT"],
+  ];
+  const ctl = el("div", "controls"); const out = el("div");
+  host.append(ctl, out);
+  let idx = 1;
+  cases.forEach((c, i) => { const b = el("button", "chip" + (i === 1 ? " on" : ""), `case ${i + 1}`); b.onclick = () => { idx = i; [...ctl.children].forEach((x, j) => x.classList.toggle("on", j === i)); render(); }; ctl.append(b); });
+
+  function render() {
+    const [a, b] = cases[idx]; const mut = [];
+    for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) mut.push(i);
+    const strand = s => `<div class="strand">${[...s].map((ch, i) => `<span class="base${mut.includes(i) ? " mut" : ""}">${ch}</span>`).join("")}</div>`;
+    out.innerHTML = "";
+    const box = el("div", "panel"); box.style.overflowX = "auto";
+    box.innerHTML = strand(a) + strand(b);
+    out.append(box);
+    out.append(el("div", "result-line", `<span class="muted">mutations at</span> <span class="num">[${mut.join(", ")}]</span> <span class="muted">(${mut.length})</span>`));
+    if (idx === 4) out.append(el("div", "note", "Gotcha: here strand 2 has an extra base prepended, so a simple positional compare flags almost every index as a mutation. The challenge defines a mutation purely by position — biological alignment (handling insertions/deletions) is a much harder, different problem."));
+    else out.append(el("div", "note", "Equal-length strands compared base-by-base; collect the indexes that differ. O(n), one pass."));
+  }
+  render();
+}
+
+/* ───────────────────────────── 9. NUMBER SORT ───────────────────────────── */
+function mountSort(host) {
+  const ctl = el("div", "controls");
+  const inp = el("input"); inp.type = "text"; inp.value = "0,6,-19,44,-2,7,0"; inp.style.width = "320px";
+  ctl.append(el("span", "ctl-label", "comma-separated"), inp);
+  const presets = el("div", "controls");
+  ["3,1,2", "12,61,49,80,19,50,77,38", "0,6,-19,44,-2,7,0"].forEach(v => { const c = el("button", "chip", v); c.onclick = () => { inp.value = v; render(); }; presets.append(c); });
+  const out = el("div");
+  host.append(ctl, presets, out);
+
+  function render() {
+    const nums = inp.value.split(",").map(s => s.trim()).filter(s => s !== "").map(Number);
+    const wrong = [...nums].sort();                 // default lexicographic
+    const right = [...nums].sort((a, b) => a - b);  // numeric
+    const isWrong = JSON.stringify(wrong) !== JSON.stringify(right);
+    out.innerHTML = "";
+    const g = el("div", "grid2");
+    const col = (title, arr, cls, note) => {
+      const c = el("div", "panel");
+      c.innerHTML = `<h3 style="margin:0 0 8px">${title}</h3>`;
+      const u = el("div", "units"); arr.forEach(x => u.append(el("span", "num " + cls, String(x)))); c.append(u);
+      c.append(el("div", "muted", note)); c.style.fontSize = "12px";
+      return c;
+    };
+    g.append(col(".sort() — default", wrong, isWrong ? "wrong" : "right", '<code class="inl">[...nums].sort()</code> compares as STRINGS'));
+    g.append(col(".sort((a,b)=>a-b) — numeric", right, "right", "the correct comparator"));
+    out.append(g);
+    out.append(el("div", "note", isWrong
+      ? 'See the difference? Default sort coerces to strings, so "12" sorts before "2" and negatives scatter. Always pass a numeric comparator.'
+      : "On this input the two happen to agree — try the multi-digit or negative presets to see the default sort break."));
+  }
+  inp.oninput = render; render();
+}
+
+/* ───────────────────────────── wire up ───────────────────────────── */
+const PROBLEMS = [
+  { id: "schema", title: "Schema Validator", date: "Jun 1–6 · #295–300",
+    statement: `Given an object, decide if it matches a schema. The schema grows over six parts — from <code>{ username: string }</code> to a <code>UserProfile[]</code> with enums, an optional field, and string arrays. <span class="rule">Extra keys are always allowed.</span>`,
+    approach: "One recursive <code class='inl'>validate(value, schema)</code> that dispatches on the schema's kind. Objects recurse over their fields; arrays recurse over their elements; the nested Part 6 case falls out for free. Missing keys pass only when optional; extra keys are never inspected.",
+    mount: mountSchema },
+  { id: "itinerary", title: "Itinerary Arrangements", date: "Jun 10 · #304",
+    statement: `Count valid day-trip itineraries. <code>breakfast/lunch/dinner</code> are fixed; optional stops slot around them with rules: ≥1 stop before lunch, ≥1 between lunch and dinner, at most one after dinner.`,
+    approach: "Don't enumerate — count. The skeleton has three gaps with simple size constraints, giving <code class='inl'>2n−3</code> ways to choose the gap sizes; the n distinct stops then permute in <code class='inl'>n!</code> ways. Answer: <code class='inl'>(2n−3)·n!</code>.",
+    mount: mountItinerary },
+  { id: "parens", title: "Parentheses Combinations", date: "May 31 · #294",
+    statement: `Given <code>n</code>, return the number of valid combinations of <code>n</code> pairs of parentheses. (For n=2: <code>(())</code> and <code>()()</code> → 2.)`,
+    approach: "Build strings left-to-right, pruning illegal moves (never close more than you've opened, never open past n). Every surviving path is valid, so count the leaves. The count is exactly the nth Catalan number.",
+    mount: mountParens },
+  { id: "prime", title: "Prime Factorization", date: "Jun 20 · #314",
+    statement: `Return the prime factors of an integer > 1, in ascending order, with multiplicity. <code>20 → [2,2,5]</code>, <code>17 → [17]</code>.`,
+    approach: "Trial-divide by the smallest factor, dividing it out fully before moving up. Once <code class='inl'>d·d &gt; n</code>, any leftover above 1 is itself prime.",
+    mount: mountPrime },
+  { id: "luhn", title: "Credit Card Validator", date: "Jun 14 · #308",
+    statement: `Validate a card number with the Luhn checksum: from the second-to-last digit, double every other digit (subtracting 9 if over 9), sum all digits, and check divisibility by 10.`,
+    approach: "Reverse, then double the odd-indexed digits (the every-other-from-the-right ones), cast any two-digit result down by 9, sum, and test <code class='inl'>sum % 10 === 0</code>.",
+    mount: mountLuhn },
+  { id: "besthand", title: "Best Hand", date: "May 30 · #293",
+    statement: `Given five cards (rank+suit, e.g. <code>"Th"</code>), return the best poker hand name, from "High Card" up to "Royal Flush". Ace plays high or low in a straight.`,
+    approach: "Reduce the hand to two facts: the sorted group sizes (e.g. <code class='inl'>[3,2]</code> = full house) and the flush/straight flags. Then check from strongest to weakest and return the first match.",
+    mount: mountBestHand },
+  { id: "blood", title: "Blood Bank", date: "Jun 26 · #320",
+    statement: `Given bank inventory and patient requests (blood types, duplicates = quantity), return how many patients can be served. AB receives from anyone; A from A/O; B from B/O; O from O only.`,
+    approach: "A constrained matching problem. O is the universal donor, so it's the scarce resource — serve the most-constrained patients first (O), let A/B spend their own type before O, and let AB mop up leftovers last.",
+    mount: mountBlood },
+  { id: "dna", title: "DNA Mutations", date: "Jun 24 · #318",
+    statement: `Given two equal-length DNA strands, return the indexes where they differ.`,
+    approach: "Single positional pass; collect mismatched indexes. Watch the insertion case — a shifted strand makes naive position-compare flag everything, which is the point of the example.",
+    mount: mountDna },
+  { id: "sort", title: "Number Sort", date: "Jun 15 · #309",
+    statement: `Given a comma-separated string of numbers, return them sorted smallest to largest.`,
+    approach: "The entire challenge is the JavaScript gotcha: <code class='inl'>.sort()</code> sorts lexicographically by default. Parse with <code class='inl'>map(Number)</code> and pass <code class='inl'>(a,b)=&gt;a-b</code>.",
+    mount: mountSort },
+];
+
+const tabsEl = $("#tabs"), mainEl = $("#main");
+let active = loadHash().tab || PROBLEMS[0].id;
+
+PROBLEMS.forEach((p, i) => {
+  const tab = el("button", "tab", `<span class="n">${i + 1}</span>${esc(p.title)}`);
+  tab.dataset.id = p.id;
+  tab.onclick = () => select(p.id);
+  tabsEl.append(tab);
+
+  const sec = el("section", "problem"); sec.dataset.id = p.id;
+  sec.innerHTML =
+    `<div class="eyebrow">${esc(p.date)}</div>` +
+    `<h2 class="ptitle">${esc(p.title)}</h2>` +
+    `<div class="statement">${p.statement}</div>` +
+    `<div class="layout"><div class="demo"></div>` +
+    `<aside><div class="approach"><h3>How to solve it</h3><p>${p.approach}</p></div>` +
+    `<h3>Solution · TypeScript</h3><pre class="code">${hl(codeFor(p.id))}</pre></aside></div>`;
+  mainEl.append(sec);
+  p.mount($(".demo", sec));
+});
+
+function select(id) {
+  active = id;
+  $$(".tab").forEach(t => t.classList.toggle("active", t.dataset.id === id));
+  $$("section.problem").forEach(s => s.classList.toggle("active", s.dataset.id === id));
+  saveHash({ tab: id });
+}
+select(active);
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();}).then(save)
+      .catch(function(){ save("<!DOCTYPE html>\n"+document.documentElement.outerHTML); });
+  });
+})();</script>
+</body>
+</html>
