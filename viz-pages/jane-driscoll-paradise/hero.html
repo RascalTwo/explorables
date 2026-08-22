@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jane Driscoll (Paradise) — OG hero card</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel-2:#21262d; --border:#30363d;
+    --text:#e6edf3; --muted:#8b949e;
+    --accent:#58a6ff; --warn:#d29922; --danger:#f85149;
+    --c4:#bc8cff; --c5:#4ec9b0;
+    --display:"Helvetica Neue",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Menlo","Consolas",monospace;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:#05070a; }
+
+  .og-card{
+    width:1200px; height:630px; overflow:hidden; position:relative;
+    background:
+      radial-gradient(1300px 780px at 74% -22%, rgba(248,81,73,.13), transparent 62%),
+      radial-gradient(1100px 900px at 12% 118%, rgba(188,140,255,.10), transparent 60%),
+      radial-gradient(1500px 950px at 50% -30%, color-mix(in srgb, var(--panel) 60%, transparent), transparent 74%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--display);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* faint scan grid for texture */
+  .og-card::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(1000px 640px at 50% 44%, #000 55%, transparent 100%);
+            mask-image:radial-gradient(1000px 640px at 50% 44%, #000 55%, transparent 100%);
+  }
+  /* vignette */
+  .og-card::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    box-shadow:inset 0 0 220px 24px rgba(0,0,0,.55);
+  }
+
+  /* hairline inner frame */
+  .frame{ position:absolute; inset:22px; border:1px solid rgba(255,255,255,.06); border-radius:4px; pointer-events:none; }
+  .brack{ position:absolute; width:26px; height:26px; border:2px solid var(--danger); opacity:.85; }
+  .brack.tl{ left:30px; top:30px; border-right:0; border-bottom:0; }
+  .brack.tr{ right:30px; top:30px; border-left:0; border-bottom:0; }
+  .brack.bl{ left:30px; bottom:30px; border-right:0; border-top:0; }
+  .brack.br{ right:30px; bottom:30px; border-left:0; border-top:0; }
+
+  .stage{ position:absolute; inset:0; padding:56px 62px; z-index:3; }
+
+  /* ---- top rail ---- */
+  .toprail{ position:absolute; left:62px; right:62px; top:52px; display:flex; align-items:center; justify-content:space-between; }
+  .kicker{ color:var(--danger); font-size:14.5px; font-weight:800; letter-spacing:.30em; text-transform:uppercase; }
+  .kicker .dot{ color:var(--muted); margin:0 .55em; font-weight:400; }
+  .idtag{ font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--muted);
+    border:1px solid var(--border); border-radius:999px; padding:5px 13px; background:rgba(22,27,34,.6); }
+
+  /* ---- left type column ---- */
+  .col-l{ position:absolute; left:62px; top:150px; width:640px; }
+  .name{ font-weight:800; line-height:.9; letter-spacing:-.035em; }
+  .name .jane{ display:block; font-size:118px; color:var(--text); }
+  .name .drisc{ display:block; font-size:118px; color:var(--muted); }
+
+  .tag{ margin-top:30px; padding-left:20px; border-left:3px solid var(--danger);
+    font-style:italic; font-size:23px; line-height:1.42; color:var(--text); max-width:585px; letter-spacing:-.005em; }
+
+  .redact{ display:inline-block; vertical-align:-1px; color:transparent; border-radius:3px;
+    background:repeating-linear-gradient(45deg,#141922 0 5px,#0b0e13 5px 10px);
+    box-shadow:inset 0 0 0 1px rgba(248,81,73,.28), 0 0 0 1px rgba(0,0,0,.4);
+    padding:0 .18em; height:1.02em; }
+
+  .spoiler{ display:inline-flex; align-items:center; gap:9px; margin-top:30px;
+    font-size:14px; font-weight:600; letter-spacing:.05em; color:var(--warn);
+    border:1px dashed var(--warn); border-radius:9px; padding:8px 15px; background:rgba(210,153,34,.06); }
+  .spoiler .warnico{ font-size:16px; }
+
+  /* ---- right reticle ---- */
+  .col-r{ position:absolute; right:40px; top:126px; width:452px; height:452px; }
+  .col-r svg{ display:block; width:100%; height:100%; overflow:visible; }
+  .retlabel{ position:absolute; left:0; right:0; bottom:-2px; text-align:center;
+    font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--danger); opacity:.9; }
+  .retlabel .sub{ display:block; color:var(--muted); letter-spacing:.14em; margin-top:5px; }
+
+  /* ---- bottom journey spine ---- */
+  .spine{ position:absolute; left:62px; right:62px; bottom:56px; }
+  .spine .cap{ font-family:var(--mono); font-size:11.5px; letter-spacing:.20em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .track{ position:relative; height:2px; background:linear-gradient(90deg,var(--border),rgba(48,54,61,.35)); }
+  .node{ position:absolute; top:-6px; transform:translateX(-50%); }
+  .node .pt{ width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--c4); box-shadow:0 0 12px rgba(0,0,0,.6); }
+  .node .lb{ position:absolute; top:20px; left:50%; transform:translateX(-50%); white-space:nowrap;
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--muted); }
+  .node.n1 .pt{ border-color:var(--c4); }   .node.n1 .lb{ color:var(--c4); }
+  .node.n2 .pt{ border-color:var(--accent); } .node.n2 .lb{ color:var(--accent); }
+  .node.n3 .pt{ border-color:var(--c5); }    .node.n3 .lb{ color:var(--c5); }
+  .node.n4 .pt{ border-color:var(--danger); box-shadow:0 0 14px rgba(248,81,73,.5); }
+  .node.n4 .lb .rd{ display:inline-block; color:transparent; border-radius:2px; padding:0 .2em; height:1.05em; vertical-align:-2px;
+    background:repeating-linear-gradient(45deg,#141922 0 4px,#0b0e13 4px 8px); box-shadow:inset 0 0 0 1px rgba(248,81,73,.3); }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+    <span class="brack tl"></span><span class="brack tr"></span>
+    <span class="brack bl"></span><span class="brack br"></span>
+
+    <div class="toprail">
+      <div class="kicker">Paradise<span class="dot">·</span>Hulu<span class="dot">·</span>Dan&nbsp;Fogelman</div>
+      <div class="idtag">CHARACTER&nbsp;·&nbsp;STORY-JOURNEY EXPLAINER</div>
+    </div>
+
+    <div class="col-l">
+      <div class="name"><span class="jane">JANE</span><span class="drisc">DRISCOLL</span></div>
+      <div class="tag">
+        &ldquo;I&rsquo;m a <span class="redact">killer</span>. It&rsquo;s what I&rsquo;ve
+        always been &mdash; a <span class="redact">weapon</span>. People I respect
+        <span class="redact">aim</span> me, and I <span class="redact">execute</span> for them.&rdquo;
+      </div>
+      <div class="spoiler"><span class="warnico">⚠️</span> FULL SPOILERS &mdash; S1, S2 &amp; the finale. Don&rsquo;t open unless you&rsquo;re caught up.</div>
+    </div>
+
+    <div class="col-r">
+      <svg viewBox="0 0 420 420" role="img" aria-label="Crosshair locked on redacted content">
+        <defs>
+          <pattern id="hatch" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="9" height="9" fill="#0b0e13"/>
+            <rect width="4.5" height="9" fill="#141922"/>
+          </pattern>
+          <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(248,81,73,.16)"/>
+            <stop offset="70%" stop-color="rgba(248,81,73,.03)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+
+        <circle cx="210" cy="210" r="200" fill="url(#halo)"/>
+
+        <!-- redacted dossier target under the crosshair -->
+        <g opacity=".96">
+          <rect x="138" y="176" width="150" height="15" rx="3" fill="url(#hatch)" stroke="rgba(248,81,73,.26)"/>
+          <rect x="138" y="199" width="112" height="15" rx="3" fill="url(#hatch)" stroke="rgba(248,81,73,.26)"/>
+          <rect x="138" y="222" width="134" height="15" rx="3" fill="url(#hatch)" stroke="rgba(248,81,73,.26)"/>
+        </g>
+
+        <!-- reticle rings -->
+        <circle cx="210" cy="210" r="182" fill="none" stroke="var(--danger)" stroke-width="1" opacity=".18"/>
+        <circle cx="210" cy="210" r="150" fill="none" stroke="var(--danger)" stroke-width="1.6" opacity=".55"
+                stroke-dasharray="2 7"/>
+        <circle cx="210" cy="210" r="118" fill="none" stroke="var(--text)" stroke-width="1" opacity=".2"/>
+
+        <!-- tick marks -->
+        <g stroke="var(--muted)" stroke-width="2" opacity=".5">
+          <line x1="210" y1="38"  x2="210" y2="58"/>
+          <line x1="210" y1="362" x2="210" y2="382"/>
+          <line x1="38"  y1="210" x2="58"  y2="210"/>
+          <line x1="362" y1="210" x2="382" y2="210"/>
+        </g>
+        <g stroke="var(--muted)" stroke-width="1.4" opacity=".32">
+          <line x1="335" y1="85"  x2="322" y2="98"/>
+          <line x1="85"  y1="85"  x2="98"  y2="98"/>
+          <line x1="335" y1="335" x2="322" y2="322"/>
+          <line x1="85"  y1="335" x2="98"  y2="322"/>
+        </g>
+
+        <!-- crosshair cross, gapped so it frames the redaction -->
+        <g stroke="var(--danger)" stroke-width="2.2" stroke-linecap="round">
+          <line x1="210" y1="70"  x2="210" y2="150"/>
+          <line x1="210" y1="270" x2="210" y2="350"/>
+          <line x1="70"  y1="207" x2="120" y2="207"/>
+          <line x1="300" y1="207" x2="350" y2="207"/>
+        </g>
+        <circle cx="210" cy="207" r="3" fill="var(--danger)"/>
+      </svg>
+      <div class="retlabel">TARGET&nbsp;·&nbsp;CONTENT REDACTED
+        <span class="sub">everything past this point is a spoiler</span>
+      </div>
+    </div>
+
+    <div class="spine">
+      <div class="cap">The full story-journey, arc-by-arc</div>
+      <div class="track">
+        <div class="node n1" style="left:6%"><div class="pt"></div><div class="lb">ORIGIN</div></div>
+        <div class="node n2" style="left:34%"><div class="pt"></div><div class="lb">SEASON 1</div></div>
+        <div class="node n3" style="left:62%"><div class="pt"></div><div class="lb">SEASON 2</div></div>
+        <div class="node n4" style="left:94%"><div class="pt"></div><div class="lb"><span class="rd">THE&nbsp;FINALE</span></div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FROM · S2E1 — Strangers in a Strange Land</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="FROM">
+<meta name="viz:tag" content="TV & Film">
+<meta name="viz:spoiler" content="true">
+<meta name="viz:title" content="FROM S2E1 — Strangers in a Strange Land">
+<meta name="viz:description" content="A cross-cut depth-braid of the premiere: five storylines stacked by how far below the town they happen — Tabitha lost in the tunnels, Boyd climbing out of a dry well, Jim buried in a collapse — with a side-cutaway of the town's strata and a playhead that follows the edit.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root{
+    --matthews:#e8b04b;   /* Matthews family / the basement */
+    --tunnel:#38c2b0;      /* the tunnels — Tabitha & Victor */
+    --pit:#d98a46;         /* the dry well — Boyd */
+    --diner:#4aa3c7;       /* the Diner / the new arrivals */
+    --colony:#9a86ef;      /* Colony House / Jade / the journal */
+    --frame:#7b8494;       /* recap & montage */
+    --creature:#d64560;    /* the sleeping monsters / danger */
+    --bg0:#070a10; --panel:#0d1119; --line:#1d2637;
+  }
+  body{background:var(--bg0);color:#e7ecf5;font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:22px 26px 60px;}
+  h1,h2,h3{margin:0;font-weight:650;letter-spacing:.2px}
+  .wrap{max-width:1280px;margin:0 auto}
+  /* header */
+  .top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+  .ttl{font-size:13px;letter-spacing:3px;color:#8fa3c2;text-transform:uppercase}
+  .ep{font-size:30px;font-weight:700;letter-spacing:.3px;margin-top:2px}
+  .ep em{font-style:italic;color:#cdd8ea;font-weight:500}
+  .meta{font-size:12px;color:#7d8aa3;margin-top:4px;max-width:780px}
+  .sign{border:2px solid #16324a;background:#07131c;border-radius:8px;padding:8px 14px;text-align:center;box-shadow:inset 0 0 24px #000;min-width:162px}
+  .sign .lab{font-size:9px;letter-spacing:2px;color:#4e93b8;text-transform:uppercase}
+  .sign .num{font:700 24px/1.1 "DS-Digital",ui-monospace,monospace;color:#66d8ff;text-shadow:0 0 12px #2aa8d688}
+  .sign .sub{font-size:8.5px;color:#3f6478;letter-spacing:1px;margin-top:3px}
+  /* hero */
+  .hero{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:var(--panel)}
+  #dial{display:block;width:100%;height:214px;border-right:1px solid var(--line)}
+  .readout{padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:11px}
+  .rline{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .beatno{font:700 26px/1 ui-monospace,monospace;color:#fff;letter-spacing:1px}
+  .beatno small{font-size:14px;color:#7d8aa3;font-weight:600}
+  .pill{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;padding:3px 12px;border-radius:20px;border:1px solid var(--line);font-weight:700}
+  .cutto{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6e7c96}
+  .scnttl{font-size:20px;font-weight:650;color:#fff}
+  .scnloc{font-size:12.5px;color:#8ea1c0}
+  .scnloc b{color:#c7d4e8;font-weight:600}
+  .gauge{margin-top:2px}
+  .gauge .glab{display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px;color:#8ea1c0;text-transform:uppercase;margin-bottom:4px}
+  .gtrack{height:9px;border-radius:6px;background:#0a0e1a;border:1px solid var(--line);overflow:hidden;position:relative}
+  .gsurf{position:absolute;top:-3px;bottom:-3px;width:2px;background:#c7d4e8;opacity:.7}
+  .gfill{position:absolute;top:0;bottom:0;border-radius:3px;transition:left .35s,width .35s}
+  .urgent{color:var(--creature);font-weight:700;letter-spacing:1px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:.35}}
+  /* controls */
+  .ctl{display:flex;align-items:center;gap:14px;margin:0 2px 8px;flex-wrap:wrap}
+  .btn{cursor:pointer;border:1px solid var(--line);background:#141a2c;color:#cdd8ea;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3a4a72;background:#18213a}
+  .hint{font-size:11.5px;color:#6e7c96}
+  /* braid */
+  .tlwrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:#060810}
+  #braid{display:block;width:100%;height:395px}
+  .node{cursor:pointer}
+  .node circle{transition:r .12s,stroke-width .12s}
+  .node:hover circle{stroke:#fff}
+  .nsel circle{stroke:#fff;stroke-width:3}
+  .nnum{font:700 10px/1 ui-monospace,monospace;fill:#05070f;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+  .stratlab{font:600 10.5px/1 sans-serif;letter-spacing:.5px;text-anchor:start}
+  .tick{font:10px/1 ui-monospace,monospace;fill:#5c6a86;text-anchor:middle}
+  .phline{stroke:#fff;stroke-width:1.5;stroke-dasharray:3 3;opacity:.85;pointer-events:none}
+  .phgrip{fill:#fff;cursor:ew-resize}
+  /* lower grid */
+  .low{display:grid;grid-template-columns:1fr 372px;gap:16px}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0;overflow:hidden}
+  #cut{display:block;width:100%;height:auto;background:linear-gradient(#0a1020,#070b13)}
+  .pin{cursor:pointer}
+  .pin text{font:600 10px/1 sans-serif;fill:#b9c6dd;pointer-events:none}
+  .pin:hover text{fill:#fff}
+  .psel .pdot{stroke:#fff;stroke-width:3}
+  .detail{padding:16px 18px}
+  .detail h3{font-size:16px;margin-bottom:2px}
+  .dloc{font-size:12px;color:#8ea1c0;margin-bottom:10px}
+  .dsum{font-size:13.5px;color:#d3ddec;margin-bottom:12px}
+  .quote{border-left:3px solid #3a4a72;padding:4px 0 4px 12px;margin:12px 0;font-style:italic;color:#e7ecf5;font-size:14px}
+  .quote .by{display:block;font-style:normal;font-size:11px;color:#8ea1c0;margin-top:4px;letter-spacing:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chip{font-size:11px;padding:2px 9px;border-radius:20px;border:1px solid var(--line);background:#131a2c;color:#cdd8ea}
+  .badge{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:5px;font-weight:700;margin-bottom:8px}
+  /* roster */
+  .roster{padding:14px 16px 18px}
+  .roster h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#8ea1c0;margin:14px 0 8px}
+  .roster h3:first-child{margin-top:0}
+  .fac{display:flex;align-items:center;gap:7px;margin:6px 0;font-size:13px}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .fac .role{color:#8391a8;font-size:11.5px}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;padding:10px 16px;border-top:1px solid var(--line);font-size:11.5px;color:#a9b6cd}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  @media(max-width:1000px){.hero{grid-template-columns:1fr}.low{grid-template-columns:1fr}#dial{border-right:none;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="ttl">FROM · Season 2 · Episode 1 · dir. Jack Bender · wr. John Griffin &amp; Jeff Pinkner</div>
+      <div class="ep">Strangers in a <em>Strange Land</em></div>
+      <div class="meta">The morning after everything broke, the town splits five ways and the episode cross-cuts between them — so this map stacks the storylines by <b>how far below the surface</b> they happen. Step through the edit: watch Boyd climb up out of the well, Tabitha rise out of the tunnels, and Jim sink into a collapse. Click a beat · drag the playhead · read the strata.</div>
+    </div>
+    <div class="sign" data-viz-id="sign" data-label="Depth of the cut">
+      <div class="lab">Depth of the cut</div>
+      <div class="num" id="sign-num">SURFACE</div>
+      <div class="sub" id="sign-sub">— ground level —</div>
+    </div>
+  </div>
+
+  <!-- HERO: depth dial + readout -->
+  <div class="hero">
+    <svg id="dial" viewBox="0 0 300 214" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="readout">
+      <div class="rline">
+        <span class="beatno" id="r-beat">00 <small>/ 28</small></span>
+        <span class="pill" id="r-pill">—</span>
+      </div>
+      <div>
+        <div class="cutto" id="r-cutto">the episode opens on</div>
+        <div class="scnttl" id="r-title">—</div>
+        <div class="scnloc" id="r-loc">—</div>
+      </div>
+      <div class="gauge">
+        <div class="glab"><span>Depth below the surface</span><span id="r-dpct">—</span></div>
+        <div class="gtrack"><div class="gsurf" id="r-surf"></div><div class="gfill" id="r-dfill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctl">
+    <button class="btn" id="prev">‹ Prev cut</button>
+    <button class="btn" id="next">Next cut ›</button>
+    <button class="btn" id="play">▶ Play the edit</button>
+    <span class="hint">Use <b>← →</b> to follow the cross-cutting · height on the braid <b>is</b> depth underground · the dashed line is the edit order.</span>
+  </div>
+
+  <!-- BRAID: story order × depth -->
+  <div class="tlwrap">
+    <svg id="braid" viewBox="0 0 1000 395"></svg>
+  </div>
+
+  <!-- LOWER: town cross-section + detail/roster -->
+  <div class="low">
+    <div class="card">
+      <svg id="cut" viewBox="0 0 560 470"></svg>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--tunnel)"></span>Tunnels · Tabitha &amp; Victor</span>
+        <span><span class="dot" style="background:var(--pit)"></span>The well · Boyd</span>
+        <span><span class="dot" style="background:var(--matthews)"></span>Basement · Jim &amp; the dig</span>
+        <span><span class="dot" style="background:var(--diner)"></span>The Diner · the new arrivals</span>
+        <span><span class="dot" style="background:var(--colony)"></span>Colony House · Jade</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="detail" id="detail"></div>
+      <div class="roster" id="roster"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+import { saveHash, loadHash } from "/_kit/viz.js";
+
+/* ---------------- THREADS ---------------- */
+const THREAD = {
+  frame:    {v:'--frame',    label:'Recap / montage'},
+  tunnel:   {v:'--tunnel',   label:'The tunnels'},
+  pit:      {v:'--pit',      label:'The dry well'},
+  basement: {v:'--matthews', label:'The basement'},
+  diner:    {v:'--diner',    label:'The Diner'},
+  colony:   {v:'--colony',   label:'Colony House'},
+};
+const col = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const tcol = t => col(THREAD[t]?.v || '--diner');
+
+/* ---------------- BEATS (broadcast order; depth = how high/low it happens) ----
+   depth:  +2 Colony (up the hill) · 0 surface · -1 basement · -2.6 well floor · -3 deep tunnels */
+const beats = [
+ {id:0, t:'00:09', thread:'frame', depth:0.2, loc:'town', title:'“Previously, on From…”',
+  sum:"A recap montage stitches the S1 finale back together: the looping road, Donna's warnings, the radio-tower plan, Ethan's “quest,” Victor's journal, and Sara's voices leading Boyd into the tree.",
+  quote:"Your wife shouldn't be digging that hole, Jim.", by:'the voice on the radio',
+  chars:['Boyd','Donna','Jim','Sara'], cut:'the episode opens on'},
+ {id:1, t:'04:02', thread:'frame', depth:0.2, loc:'town', title:'A hard rain — the morning after',
+  sum:"Boyd's dream: he walks a storm-lit, empty town ringing the curfew bell as “A Hard Rain's A-Gonna Fall” plays on the diner jukeboxes — intercut with a figure clawing at darkness and a bus rolling in.",
+  quote:"Motherfuckin' fuck you!", by:'a trapped man', song:'“A Hard Rain’s A-Gonna Fall” — Bob Dylan',
+  chars:['Boyd'], cut:'the episode opens on'},
+ {id:2, t:'07:01', thread:'diner', depth:0.2, loc:'diner', title:'“Stop the bus”', danger:true,
+  sum:"On the incoming bus, passenger Elgin wakes from a nightmare in a panic, begs the driver to turn around, is shoved back into his seat — and vomits over another passenger.",
+  quote:"We have to turn around. We can't be here.", by:'Elgin',
+  chars:['Elgin','Bakta','Randall'], cut:'the episode cuts to'},
+ {id:3, t:'07:37', thread:'frame', depth:0.2, loc:'town', title:'Que Sera, Sera',
+  sum:"A wordless arrival montage carries the bus into town over “Que Sera, Sera (Whatever Will Be, Will Be)” — the future's not ours to see.",
+  quote:"Whatever will be, will be…", by:'the jukebox', song:'“Que Sera, Sera” — Doris Day',
+  chars:[], cut:'the episode cuts to'},
+ {id:4, t:'09:37', thread:'colony', depth:2, loc:'colony', title:'Tower fallout — “a bus at the diner”', danger:true,
+  sum:"Colony House is wrecked from the storm and the radio-tower explosion; they haul gear in from the rain, a bulb bursts in Clara's eye. Julie arrives hunting her dad — then Kenny bursts in with the news.",
+  quote:"There is a bus parked outside the diner!", by:'Kenny',
+  chars:['Donna','Jade','Kristi','Kenny','Julie','Ellis','Clara'], cut:'the episode cuts up to'},
+ {id:5, t:'11:07', thread:'basement', depth:-1, loc:'basement', title:'Jim in the caved-in basement', danger:true,
+  sum:"Jim picks through the collapsed basement where Tabitha had been digging toward the tower's buried wires, calling into the rubble for her. She's gone.",
+  quote:"Tabitha? Are you down there? … Come on, baby. Please.", by:'Jim',
+  chars:['Jim','Tabitha'], cut:'the episode cuts down to'},
+ {id:6, t:'11:44', thread:'tunnel', depth:-3, loc:'tunnels', title:'Victor finds Tabitha', danger:true,
+  sum:"Having fallen through, Tabitha wakes in the labyrinth beneath the town. Victor is there — he came “through the tree,” guided by the boy in white — and pulls her into the dark, warning her to stay silent.",
+  quote:"We're underneath the town. This is where the monsters live. This is where they sleep.", by:'Victor',
+  chars:['Tabitha','Victor'], cut:'the episode cuts far down to'},
+ {id:7, t:'12:56', thread:'colony', depth:2, loc:'colony', title:'“You’re sheriff now”',
+  sum:"Donna orders Colony House locked down and the shotguns readied. With Boyd vanished into the woods, she hands the deputy the town — and the responsibility — before heading for the diner.",
+  quote:"Boyd picked one hell of a time to go on safari. … You're sheriff now.", by:'Donna',
+  chars:['Donna','Kenny','Matthias','Kristi'], cut:'the episode cuts up to'},
+ {id:8, t:'13:41', thread:'diner', depth:0.2, loc:'diner', title:'Sunlight, and a nurse named Mari',
+  sum:"A passenger whoops in the daylight — “rain dance is done.” Marielle, a pediatric nurse, examines a shaken Elgin, who blames a bad dream. Randall, puked-on, harasses him as a freak; Mari sits with him.",
+  quote:"I had a really bad dream.", by:'Elgin',
+  chars:['Marielle','Elgin','Tillie','Randall'], cut:'the episode cuts to'},
+ {id:9, t:'16:02', thread:'diner', depth:0.2, loc:'diner', title:'Julie in the crowd · Jade’s verdict',
+  sum:"Julie searches the newcomers for her father. Jade watches the crowd and writes them off; the bus driver tells everyone to sit tight — he'll “clean up and we'll be on our way.”",
+  quote:"Maybe the magic tower summoned them. … These people are fucked.", by:'Jade',
+  chars:['Julie','Jade','Ellis','Bakta'], cut:'the episode cuts to'},
+ {id:10, t:'16:47', thread:'basement', depth:-1, loc:'basement', title:'Julie finds Jim', danger:true,
+  sum:"Julie climbs down into the wreckage to her father. Tabitha is somewhere under the rubble; Jim steadies his daughter and sends her up for help.",
+  quote:"Now is the time for you to be strong. Your mom needs you. Go and get help.", by:'Jim',
+  chars:['Jim','Julie'], cut:'the episode cuts down to'},
+ {id:11, t:'17:41', thread:'diner', depth:0.2, loc:'diner', title:'Julie rallies · Ellis takes charge',
+  sum:"Julie begs the newcomers for help. Ellis marshals volunteers off the bus; a snarky passenger refuses (“let emergency services handle it”). Ellis heads for the basement.",
+  quote:"I'm a bartender. Crowd control's my thing.", by:'Ellis',
+  chars:['Julie','Ellis','Randall'], cut:'the episode cuts to'},
+ {id:12, t:'18:43', thread:'basement', depth:-1, loc:'basement', title:'The dig begins',
+  sum:"Townsfolk and volunteers reach Jim. Learning Tabitha had been tracing the tower's wires, Jim warns them to move each beam carefully — nothing here is holding itself up.",
+  quote:"Before you lift anything out, make sure it's not holding up something else.", by:'Jim',
+  chars:['Jim','Tom','Donna','Kenny','Ellis','Randall'], cut:'the episode cuts down to'},
+ {id:13, t:'20:53', thread:'tunnel', depth:-3, loc:'tunnels', title:'“We go while they sleep”', danger:true,
+  sum:"Victor forces Tabitha past a threshold and deeper in, insisting there's no turning back — they can only move through, while the creatures still sleep.",
+  quote:"There's no going back. We have to go through… we go while they sleep. You have to be brave.", by:'Victor',
+  chars:['Tabitha','Victor'], cut:'the episode cuts far down to'},
+ {id:14, t:'21:01', thread:'pit', depth:-2.6, loc:'pit', title:'Boyd in the well — “Are you real?”', danger:true,
+  sum:"Boyd is stuck at the bottom of a dry well the tree dropped him into. He jokes bitterly about Sara's promise of safety — then a voice from above starts to bargain: help me, and I'll help you out.",
+  quote:"Are you real? … I can help you if you help me.", by:'the man in the well',
+  chars:['Boyd','the man in the well'], cut:'the episode cuts down to'},
+ {id:15, t:'22:39', thread:'colony', depth:2, loc:'colony', title:'“Did we make it angry?”',
+  sum:"Amid the wreck, Jade and Clara wonder if the tower woke something and light up the last rolling paper. A synth cue swells and a ventriloquist's dummy shrieks — then it's gone.",
+  quote:"The way the lights exploded… it's almost like we made something angry.", by:'Clara',
+  chars:['Jade','Clara'], cut:'the episode cuts up to'},
+ {id:16, t:'23:56', thread:'colony', depth:2, loc:'colony', title:'Ethan, Tian-Chen & “the quest”',
+  sum:"Ethan and Kenny's mother Tian-Chen sweep up broken glass. Ethan reassures her and frames the fear as part of a quest — the closer to the end, the scarier it gets — and settles in for the night.",
+  quote:"Sometimes a quest can be scary. When it gets close to the end, that's when it gets really scary.", by:'Ethan',
+  chars:['Ethan','Tian-Chen'], cut:'the episode cuts up to'},
+ {id:17, t:'24:55', thread:'colony', depth:2, loc:'colony', title:'“Which room is Victor’s?”',
+  sum:"Outside, a bitter Jade vents about the plan crashing down; Ethan says they'll just try again. Then Jade pivots — he needs Ethan to show him Victor's room.",
+  quote:"You're friends with Victor, right? Do you know which room is his?", by:'Jade',
+  chars:['Jade','Ethan'], cut:'the episode cuts up to'},
+ {id:18, t:'26:06', thread:'tunnel', depth:-3, loc:'tunnels', title:'Past the sleeping creatures', danger:true,
+  sum:"Tabitha and Victor creep through a chamber of sleeping monsters and their hoarded junk. Victor panics and bolts; they separate, and Tabitha drags him on when he admits he's lost the way.",
+  quote:"This isn't the way that he told me to go.", by:'Victor',
+  chars:['Tabitha','Victor'], cut:'the episode cuts far down to'},
+ {id:19, t:'29:55', thread:'colony', depth:2, loc:'colony', title:'The journal, the symbol, the Polaroid', danger:true,
+  sum:"Jade lays out his evidence in Victor's room: an old journal covered in the symbol from his visions, two pages stuck together, and a hidden Polaroid — of a man holding the journal, with a young Victor beside his lunchbox. Victor may know what it means.",
+  quote:"You have to figure out if they're good symbols or bad symbols… sometimes they make you do bad things.", by:'Ethan',
+  chars:['Jade','Ethan','Victor'], cut:'the episode cuts up to'},
+ {id:20, t:'31:11', thread:'diner', depth:0.2, loc:'diner', title:'Donna warns the driver', danger:true,
+  sum:"Donna tries to make the skeptical bus driver understand what the dark brings. Bakta brushes her off and moves to leave anyway.",
+  quote:"They will rip you to shreds. These things don't just kill.", by:'Donna',
+  chars:['Donna','Bakta'], cut:'the episode cuts to'},
+ {id:21, t:'31:58', thread:'basement', depth:-1.4, loc:'basement', title:'A chamber below — then the collapse', danger:true,
+  sum:"Jim finds a hollow chamber beneath the basement (Tabitha's way down). Outside, Elgin drops into a seizure. As Jim frees the last beam, the whole house implodes onto him, Tom and Brick.",
+  quote:"You gotta get out of there. — I'm not leaving.", by:'Kenny & Jim',
+  chars:['Jim','Tom','Brick','Kenny','Elgin'], cut:'the episode cuts down to'},
+ {id:22, t:'33:33', thread:'basement', depth:-1.1, loc:'basement', title:'Digging them out',
+  sum:"Ringing ears and panic at the collapse. They find Jim, Tom and Brick alive and pull out a conscious young man — but a second body in a jacket isn't moving.",
+  quote:"The kid with the jacket — he's not moving.", by:'Tom',
+  chars:['Julie','Donna','Kenny','Ellis','Kristi','Jim'], cut:'the episode cuts down to'},
+ {id:23, t:'36:04', thread:'tunnel', depth:-3, loc:'tunnels', title:'Rising water — “They’re waking up”', danger:true,
+  sum:"Tabitha disturbs something in a chamber and water floods in. Victor realizes the creatures are stirring, spots a shaft leading up, and screams at her to climb.",
+  quote:"They're waking up.", by:'Victor',
+  chars:['Tabitha','Victor'], cut:'the episode cuts far down to'},
+ {id:24, t:'37:58', thread:'pit', depth:-1.2, loc:'pit', title:'The climb · a memory of the boat',
+  sum:"Boyd hauls himself up the rope. On the way, a dreamlike father-and-son memory surfaces — a promise to take the boat out before dark — as the creatures vocalize somewhere close.",
+  quote:"It's getting dark. You said we'd take the boat out.", by:'a voice from a memory',
+  chars:['Boyd'], cut:'the episode cuts up to'},
+ {id:25, t:'39:45', thread:'tunnel', depth:-2.4, loc:'tunnels', title:'Racing up and out', danger:true,
+  sum:"The creatures shriek closer as Tabitha and Victor scramble for the shaft — and break out of the ground into the forest, Victor now leading the way.",
+  quote:"Which way, Victor? Which way?", by:'Tabitha',
+  chars:['Tabitha','Victor'], cut:'the episode cuts up to'},
+ {id:26, t:'40:14', thread:'diner', depth:0.2, loc:'diner', title:'Jim’s choice · Donna draws · a gunshot', danger:true,
+  sum:"Below, Jim accepts a safe rescue can't beat sundown and tells them to leave him and Tom. Above, the driver tries to flee; Donna gives her ultimatum and shoots out the tires, Fatima bolts after the ones who run, and Kenny fires a shot to herd everyone into the diner.",
+  quote:"That's why you're gonna leave us here.", by:'Jim',
+  chars:['Donna','Bakta','Fatima','Kenny','Jim'], cut:'the episode cuts to'},
+ {id:27, t:'43:39', thread:'basement', depth:-1, loc:'basement', title:'Julie & Jim say goodbye', danger:true,
+  sum:"Jim tells Julie about the cavern below — if Tabitha reached it, she's alive. As the sun sets, he makes his daughter climb out and leave him buried for the night.",
+  quote:"If your mother made it down there, then she's okay. … I love you. — I love you, too.", by:'Jim & Julie',
+  chars:['Jim','Julie','Kenny'], cut:'the episode cuts down to'},
+ {id:28, t:'45:11', thread:'pit', depth:0.5, loc:'pit', title:'“I need you to kill me”', danger:true,
+  sum:"Boyd finishes the climb and finds his rescuer: a frail, emaciated old man chained to the wall of a locked room. Seeing Boyd's gun, the man makes his request — and the season begins.",
+  quote:"It's good that you have a gun. That'll make it easy. … I need you to kill me.", by:'the man in the well',
+  chars:['Boyd','the man in the well'], cut:'the episode ends on'},
+];
+const N = beats.length;               // 29 beats, ids 0..28
+const lastId = beats[N-1].id;
+
+/* ---------------- STRATA (depth bands for the braid) ---------------- */
+const strata = [
+  {d: 2.0, label:'▲ Colony House — up the hill'},
+  {d: 0.0, label:'— Surface: town, diner, woods —'},
+  {d:-1.0, label:'▼ The basement'},
+  {d:-2.6, label:'▼ The dry well'},
+  {d:-3.0, label:'▼ The tunnels — where they sleep'},
+];
+
+/* ---------------- CROSS-SECTION PLACES (side view) ---------------- */
+const places = {
+  colony:  {x:474, y:96,  label:'Colony House'},
+  diner:   {x:300, y:190, label:'The Diner'},
+  town:    {x:356, y:188, label:'Town square'},
+  basement:{x:202, y:250, label:'Matthews basement'},
+  pit:     {x:96,  y:352, label:'The dry well'},
+  tunnels: {x:214, y:322, label:'The tunnels'},
+};
+
+/* ---------------- ROSTER ---------------- */
+const roster = [
+  ['Matthews family — split top to bottom','matthews',[
+    ['Tabitha','lost deepest, in the tunnels'],['Jim','buried in the basement'],
+    ['Julie','on the surface, leads the dig'],['Ethan','up at Colony House']]],
+  ['Townsfolk','diner',[
+    ['Boyd','down the dry well'],['Kenny','deputy — “sheriff now”'],['Kristi','the town doctor'],
+    ['Ellis','Boyd’s son, rallies help'],['Fatima','Ellis’s partner'],['Tom','buried with Jim'],
+    ['Tian-Chen','Kenny’s mother, with Ethan'],['Sara','led Boyd to the tree — absent']]],
+  ['Colony House','colony',[
+    ['Donna','locks it down, draws the gun'],['Jade','chasing the symbol & journal'],
+    ['Victor','guiding Tabitha below'],['Clara','blinded in one eye']]],
+  ['The bus — strangers','tunnel',[
+    ['Elgin','nightmare, vomit, a seizure'],['Marielle','nurse — Kristi’s fiancée'],
+    ['Randall','abrasive, then digs'],['Bakta','the driver who won’t believe'],
+    ['Tillie','dances in the rain'],['Brick','buried in the collapse']]],
+  ['The dark','creature',[
+    ['The man in the well','“I need you to kill me”'],['The boy in white','Victor’s unseen guide'],
+    ['The sleeping creatures','they wake by nightfall'],['Nathan','Sara’s brother † (the finale)']]],
+];
+
+/* ---------------- GEOMETRY ---------------- */
+const PX0=118, PX1=978;
+const DMAX=2.3, DMIN=-3.25, YTOP=50, YBOT=336;
+const xOf = id => PX0 + (id/lastId)*(PX1-PX0);
+const yOf = d => YTOP + (DMAX-d)/(DMAX-DMIN)*(YBOT-YTOP);
+
+let sel = beats.find(b=>b.id==loadHash().b) || beats[0];
+
+/* ---------------- DEPTH DIAL (hero) ---------------- */
+const dial = document.getElementById('dial');
+function stratumOf(d){
+  if(d>=1)    return {short:'COLONY',  sub:'▲ up the hill'};
+  if(d>=-0.4) return {short:'SURFACE', sub:'— ground level —'};
+  if(d>=-1.9) return {short:'BASEMENT',sub:'▼ below the town'};
+  if(d>=-2.75)return {short:'THE WELL',sub:'▼ deep below'};
+  return {short:'TUNNELS', sub:'▼ deepest — where they sleep'};
+}
+function renderDial(b){
+  const W=300, yTop=22, yBot=196, dTop=2.3, dBot=-3.25;
+  const yD = d => yTop + (dTop-d)/(dTop-dBot)*(yBot-yTop);
+  let s = `<rect x="0" y="0" width="${W}" height="214" fill="#080c14"/>`;
+  // sky slice (above surface)
+  s += `<rect x="0" y="${yD(2.3)}" width="${W}" height="${yD(-0.05)-yD(2.3)}" fill="#0c1526"/>`;
+  // earth slices, darkening down
+  for(let i=0;i<6;i++){
+    const d0=-0.05 - i*0.55, d1=d0-0.55, shade=28-i*4;
+    s += `<rect x="0" y="${yD(d0)}" width="${W}" height="${yD(d1)-yD(d0)+0.6}" fill="rgb(${shade+8},${shade+4},${shade})"/>`;
+  }
+  // surface line
+  s += `<line x1="0" y1="${yD(0)}" x2="${W}" y2="${yD(0)}" stroke="#c7d4e8" stroke-opacity=".5" stroke-width="1.5"/>`;
+  s += `<text x="10" y="${yD(0)-6}" font-size="9" letter-spacing="1.5" fill="#8ea1c0">SURFACE</text>`;
+  [['COLONY',2.0],['BASEMENT',-1.0],['THE WELL',-2.6],['TUNNELS',-3.05]].forEach(([lab,d])=>{
+    s += `<text x="${W-10}" y="${yD(d)+3}" font-size="8" letter-spacing="1" text-anchor="end" fill="#5f6f8c">${lab}</text>`;
+  });
+  const my=yD(b.depth), c=tcol(b.thread);
+  s += `<line x1="150" y1="${yD(0)}" x2="150" y2="${my}" stroke="${c}" stroke-width="2" stroke-opacity=".5"/>`;
+  s += `<circle cx="150" cy="${my}" r="13" fill="${c}" opacity=".22"/>`;
+  if(b.danger) s += `<circle cx="150" cy="${my}" r="17" fill="none" stroke="${col('--creature')}" stroke-opacity=".55"/>`;
+  s += `<circle cx="150" cy="${my}" r="7.5" fill="${c}" stroke="#05070f" stroke-width="1.5"/>`;
+  dial.innerHTML = s;
+}
+
+/* ---------------- READOUT ---------------- */
+function renderReadout(b){
+  document.getElementById('r-beat').innerHTML = `${String(b.id).padStart(2,'0')} <small>/ ${lastId}</small>`;
+  const pill=document.getElementById('r-pill');
+  pill.textContent = THREAD[b.thread].label;
+  pill.style.color = tcol(b.thread); pill.style.borderColor = tcol(b.thread)+'88';
+  pill.style.background = tcol(b.thread)+'1a';
+  document.getElementById('r-cutto').textContent = b.cut;
+  document.getElementById('r-title').textContent = b.title;
+  const p=places[b.loc];
+  document.getElementById('r-loc').innerHTML = `<b>${p?p.label:b.loc}</b> · ${b.t}`;
+  const surfPct=(DMAX-0)/(DMAX-DMIN)*100, yv=(DMAX-b.depth)/(DMAX-DMIN)*100;
+  document.getElementById('r-surf').style.left=surfPct+'%';
+  const dfill=document.getElementById('r-dfill');
+  if(b.depth<0){ dfill.style.left=surfPct+'%'; dfill.style.width=(yv-surfPct)+'%'; dfill.style.background=`linear-gradient(90deg,${tcol(b.thread)},var(--creature))`; }
+  else { dfill.style.left=yv+'%'; dfill.style.width=(surfPct-yv)+'%'; dfill.style.background=tcol(b.thread); }
+  const st=stratumOf(b.depth);
+  document.getElementById('r-dpct').innerHTML = b.danger?`<span class="urgent">${st.short} · turning point</span>`:st.short;
+  document.getElementById('sign-num').textContent = st.short;
+  document.getElementById('sign-sub').textContent = st.sub;
+}
+
+/* ---------------- BRAID ---------------- */
+const braid = document.getElementById('braid');
+function renderBraid(){
+  const ys=yOf(0);
+  let s = `<rect x="${PX0}" y="${ys}" width="${PX1-PX0}" height="${YBOT-ys+8}" fill="#0a0f1a" opacity=".55"/>`;
+  // strata bands + labels
+  strata.forEach((L,i)=>{
+    const y=yOf(L.d), dark=L.d<0;
+    s += `<line x1="${PX0}" y1="${y}" x2="${PX1}" y2="${y}" stroke="${dark?'#20304a':'#2a3a5c'}" stroke-opacity="${dark?0.5:0.35}" ${dark?'':'stroke-dasharray="2 4"'}/>`;
+    s += `<text class="stratlab" x="6" y="${y-4}" fill="${i===1?'#9fb0cd':'#63728f'}">${L.label}</text>`;
+  });
+  // thread ribbons
+  Object.keys(THREAD).forEach(t=>{
+    const pts=beats.filter(b=>b.thread===t).sort((a,b)=>a.id-b.id);
+    if(pts.length>1){
+      const d=pts.map((p,i)=>`${i?'L':'M'}${xOf(p.id).toFixed(1)} ${yOf(p.depth).toFixed(1)}`).join(' ');
+      s += `<path d="${d}" fill="none" stroke="${tcol(t)}" stroke-opacity=".55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }
+  });
+  // edit-order zigzag through every beat
+  const edit=beats.map((b,i)=>`${i?'L':'M'}${xOf(b.id).toFixed(1)} ${yOf(b.depth).toFixed(1)}`).join(' ');
+  s += `<path d="${edit}" fill="none" stroke="#fff" stroke-opacity=".15" stroke-width="1" stroke-dasharray="2 4"/>`;
+  // nodes
+  beats.forEach(b=>{
+    const x=xOf(b.id), y=yOf(b.depth), c=tcol(b.thread);
+    const dz=b.danger?`<circle cx="${x}" cy="${y}" r="14" fill="${col('--creature')}" opacity="0.16"/>`:'';
+    s += `<g class="node ${b.id===sel.id?'nsel':''}" data-id="${b.id}" data-viz-id="beat-${b.id}" data-label="${b.t} ${b.title}">
+      ${dz}<circle cx="${x}" cy="${y}" r="10.5" fill="${c}" stroke="${b.danger?col('--creature'):'#05070f'}" stroke-width="${b.danger?2:1.5}"/>
+      <text class="nnum" x="${x}" y="${y}">${b.id}</text></g>`;
+  });
+  // time ticks
+  for(let m=0;m<=45;m+=5){
+    const x=PX0+(m/45)*(PX1-PX0);
+    s += `<text class="tick" x="${x}" y="${YBOT+26}">${String(m).padStart(2,'0')}:00</text>`;
+  }
+  s += `<text class="tick" x="${(PX0+PX1)/2}" y="${YBOT+44}" fill="#7f8da6" letter-spacing="2">STORY ORDER  →  (the episode's runtime)</text>`;
+  // playhead
+  const px=xOf(sel.id);
+  s += `<g id="ph"><line class="phline" x1="${px}" y1="${YTOP-14}" x2="${px}" y2="${YBOT+8}"/>
+        <path class="phgrip" d="M${px-6} ${YTOP-20} L${px+6} ${YTOP-20} L${px} ${YTOP-10} Z"/></g>`;
+  braid.innerHTML = s;
+  braid.querySelectorAll('.node').forEach(n=>n.addEventListener('click',()=>select(+n.dataset.id)));
+}
+
+/* ---------------- CROSS-SECTION (side cutaway) ---------------- */
+const cut = document.getElementById('cut');
+function renderCut(){
+  const ground="M0 196 L150 198 Q 260 200 320 194 Q 400 186 560 76 L560 470 L0 470 Z";
+  let s = `<defs><linearGradient id="earth" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#2a2130" stop-opacity="0"/>
+      <stop offset=".3" stop-color="#0f0b14" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#05040a"/></linearGradient></defs>`;
+  s += `<rect x="0" y="0" width="560" height="470" fill="#070b13"/>`;
+  s += `<rect x="0" y="0" width="560" height="200" fill="#0b1424"/>`;
+  s += `<path d="${ground}" fill="#141019"/><path d="${ground}" fill="url(#earth)"/>`;
+  s += `<path d="M0 196 L150 198 Q 260 200 320 194 Q 400 186 560 76" fill="none" stroke="#3a4a63" stroke-width="1.5"/>`;
+  // woods on the left
+  for(let i=0;i<5;i++){const x=20+i*26, y=196-((i*13)%9);
+    s += `<path d="M${x} ${y} l-6 0 l6 -18 l6 18 z" fill="#0e1a15"/><path d="M${x} ${y-8} l-5 0 l5 -15 l5 15 z" fill="#12241c"/>`;}
+  // Colony House on the hill
+  s += `<g><rect x="446" y="70" width="56" height="34" fill="#1a1630" stroke="#39335c"/>
+        <path d="M442 70 L474 52 L506 70 Z" fill="#241d3f" stroke="#39335c"/>
+        <rect x="459" y="82" width="8" height="14" fill="#9a86ef" opacity=".5"/><rect x="481" y="82" width="8" height="14" fill="#9a86ef" opacity=".5"/></g>`;
+  // diner + square
+  s += `<rect x="278" y="168" width="46" height="26" fill="#132230" stroke="#2a3f52"/>
+        <rect x="286" y="160" width="30" height="10" fill="#0f1b27"/>
+        <rect x="294" y="176" width="10" height="18" fill="#4aa3c7" opacity=".45"/>`;
+  s += `<rect x="340" y="172" width="26" height="22" fill="#101d29" stroke="#243848"/>`;
+  // the bus
+  s += `<rect x="238" y="176" width="34" height="16" rx="2" fill="#22303e" stroke="#38536a"/>
+        <circle cx="246" cy="193" r="3" fill="#0a0e14"/><circle cx="264" cy="193" r="3" fill="#0a0e14"/>`;
+  // Matthews house + basement void
+  s += `<rect x="184" y="170" width="40" height="26" fill="#1c1614" stroke="#3a2f28"/>
+        <path d="M180 170 L204 156 L228 170 Z" fill="#241a15" stroke="#3a2f28"/>`;
+  s += `<rect x="186" y="204" width="36" height="34" fill="#0b0906" stroke="#3a2f28" stroke-dasharray="3 3"/>`;
+  s += `<text x="204" y="224" text-anchor="middle" font-size="7" fill="#e8b04b" opacity=".7">collapse</text>`;
+  // the dry well shaft
+  s += `<rect x="86" y="192" width="20" height="176" rx="3" fill="#05040a" stroke="#3a2f28"/>`;
+  s += `<ellipse cx="96" cy="192" rx="12" ry="4" fill="#0c0a10" stroke="#3a2f28"/>`;
+  s += `<line x1="96" y1="194" x2="96" y2="352" stroke="#6a5638" stroke-width="1" stroke-dasharray="4 5" opacity=".7"/>`;
+  // tunnels labyrinth beneath the town, linking well ⇄ basement
+  s += `<path d="M96 352 Q 150 336 204 322 Q 250 312 300 320 Q 340 326 360 312" fill="none" stroke="#0c1a18" stroke-width="20" stroke-linecap="round"/>`;
+  s += `<path d="M96 352 Q 150 336 204 322 Q 250 312 300 320 Q 340 326 360 312" fill="none" stroke="${col('--tunnel')}" stroke-opacity=".3" stroke-width="2" stroke-dasharray="3 6"/>`;
+  [[168,330],[252,316],[326,318]].forEach(p=>{
+    s += `<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="${col('--creature')}" opacity=".5"/><circle cx="${p[0]}" cy="${p[1]}" r="8" fill="${col('--creature')}" opacity=".18"/>`;});
+  // pins
+  for(const [k,p] of Object.entries(places)){
+    const active=sel.loc===k;
+    const c = k==='colony'?col('--colony'): k==='pit'?col('--pit'): k==='tunnels'?col('--tunnel'):
+              k==='basement'?col('--matthews'): col('--diner');
+    s += `<g class="pin ${active?'psel':''}" data-loc="${k}" data-viz-id="place-${k}" data-label="${p.label}">
+      ${active?`<circle cx="${p.x}" cy="${p.y}" r="13" fill="${c}" opacity="0.25"><animate attributeName="r" values="10;18;10" dur="1.6s" repeatCount="indefinite"/></circle>`:''}
+      <circle class="pdot" cx="${p.x}" cy="${p.y}" r="5.5" fill="${c}" stroke="#05070f" stroke-width="1.5"/>
+      <text x="${p.x}" y="${p.y-10}" text-anchor="middle">${p.label}</text></g>`;
+  }
+  cut.innerHTML = s;
+  cut.querySelectorAll('.pin').forEach(pin=>pin.addEventListener('click',()=>{
+    const first=beats.find(b=>b.loc===pin.dataset.loc); if(first) select(first.id);
+  }));
+}
+
+/* ---------------- DETAIL + ROSTER ---------------- */
+function renderDetail(b){
+  const p=places[b.loc];
+  const badge = b.danger
+    ? `<span class="badge" style="background:${col('--creature')}22;color:${col('--creature')};border:1px solid ${col('--creature')}66">⚠ turning point</span>`
+    : `<span class="badge" style="background:${tcol(b.thread)}22;color:${tcol(b.thread)};border:1px solid ${tcol(b.thread)}55">${THREAD[b.thread].label}</span>`;
+  const chips=(b.chars||[]).map(c=>`<span class="chip">${c}</span>`).join('');
+  const song=b.song?`<div class="chip" style="border-color:${col('--colony')}55">♪ ${b.song}</div>`:'';
+  document.getElementById('detail').innerHTML = `
+    ${badge}
+    <h3>${b.t} · ${b.title}</h3>
+    <div class="dloc">${p?p.label:b.loc} · ${stratumOf(b.depth).short.toLowerCase()}</div>
+    <div class="dsum">${b.sum}</div>
+    <div class="quote">“${b.quote}”<span class="by">— ${b.by}</span></div>
+    <div class="chips">${chips}${song}</div>`;
+}
+function renderRoster(){
+  const active=new Set(sel.chars||[]);
+  let h='';
+  roster.forEach(([title,fac,people])=>{
+    h+=`<h3 style="color:${col('--'+fac)}">${title}</h3>`;
+    people.forEach(([name,role])=>{
+      const on=active.has(name);
+      h+=`<div class="fac" style="opacity:${on?1:.5}">
+        <span class="dot" style="background:${col('--'+fac)};box-shadow:${on?`0 0 8px ${col('--'+fac)}`:'none'}"></span>
+        <b>${name}</b><span class="role">— ${role}</span></div>`;
+    });
+  });
+  document.getElementById('roster').innerHTML=h;
+}
+
+/* ---------------- SELECT / DRIVE ---------------- */
+function paint(b){
+  renderDial(b); renderReadout(b); renderDetail(b); renderCut(); renderRoster();
+  document.querySelectorAll('.node').forEach(n=>n.classList.toggle('nsel',+n.dataset.id===b.id));
+  const px=xOf(b.id), ph=document.getElementById('ph');
+  if(ph){ph.querySelector('line').setAttribute('x1',px);ph.querySelector('line').setAttribute('x2',px);
+    ph.querySelector('path').setAttribute('d',`M${px-6} ${YTOP-20} L${px+6} ${YTOP-20} L${px} ${YTOP-10} Z`);}
+}
+function select(id){sel=beats.find(b=>b.id===id);saveHash({b:id});paint(sel);}
+function step(dir){const i=beats.findIndex(b=>b.id===sel.id);
+  const ni=Math.max(0,Math.min(N-1,i+dir));select(beats[ni].id);}
+
+document.getElementById('prev').addEventListener('click',()=>{stopPlay();step(-1);});
+document.getElementById('next').addEventListener('click',()=>{stopPlay();step(1);});
+window.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea'))return;
+  if(e.key==='ArrowLeft'){stopPlay();step(-1);e.preventDefault();}
+  else if(e.key==='ArrowRight'){stopPlay();step(1);e.preventDefault();}
+});
+
+// drag playhead → nearest beat
+let dragging=false;
+braid.addEventListener('mousedown',e=>{if(e.target.classList.contains('phgrip')){dragging=true;e.preventDefault();}});
+window.addEventListener('mouseup',()=>dragging=false);
+window.addEventListener('mousemove',e=>{if(!dragging)return;
+  const r=braid.getBoundingClientRect();const sx=(e.clientX-r.left)/r.width*1000;
+  let best=beats[0],bd=1e9;beats.forEach(b=>{const d=Math.abs(xOf(b.id)-sx);if(d<bd){bd=d;best=b;}});
+  if(best.id!==sel.id) select(best.id);
+});
+
+// play the edit
+let playing=null;
+const playBtn=document.getElementById('play');
+function stopPlay(){if(playing){clearInterval(playing);playing=null;playBtn.textContent='▶ Play the edit';}}
+playBtn.addEventListener('click',()=>{
+  if(playing){stopPlay();return;}
+  playBtn.textContent='⏸ Pause';let i=beats.findIndex(b=>b.id===sel.id);
+  playing=setInterval(()=>{i++;if(i>=N){stopPlay();return;}select(beats[i].id);},1500);
+});
+
+renderBraid();
+paint(sel);
+</script>
+</body>
+</html>

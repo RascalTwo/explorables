@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FROM S1E1 — Long Day's Journey Into Night · hero</title>
+<style>
+  :root{
+    --fg:#eef1f6; --muted:#93a2bd; --amber:#ffb54a; --dusk:#d6824a;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000}
+  .og-card{
+    position:relative; width:1200px; height:630px; overflow:hidden;
+    color:var(--fg); font-family:var(--sans);
+    /* the day→night sky the whole pilot runs across, left to right */
+    background:linear-gradient(90deg,
+      #2a4a74 0%, #6f7fa0 16%, #c9a86a 33%, #d6824a 46%,
+      #8a5a70 60%, #3a3560 74%, #141634 86%, #070912 100%);
+  }
+  /* sun sinking into a moon along an arc — the countdown */
+  .arc{position:absolute; left:0; top:0; width:1200px; height:630px}
+  .sun{
+    position:absolute; left:300px; top:150px; width:96px; height:96px; border-radius:50%;
+    background:radial-gradient(circle at 42% 40%, #ffe6a6 0%, #ffb54a 55%, #e07a2a 100%);
+    box-shadow:0 0 90px 24px rgba(255,181,74,.45);
+  }
+  .moon{
+    position:absolute; right:150px; top:96px; width:78px; height:78px; border-radius:50%;
+    background:radial-gradient(circle at 38% 36%, #cfd8e8 0%, #8f9bb4 52%, #5b6784 100%);
+    box-shadow:0 0 54px 6px rgba(150,170,210,.25);
+  }
+  .moon::after{content:""; position:absolute; inset:-2px; border-radius:50%;
+    box-shadow:inset -16px -12px 24px rgba(8,10,24,.6)}
+  .stars{position:absolute; inset:0}
+  .stars i{position:absolute; width:2px; height:2px; border-radius:50%; background:#eef1f6}
+  /* treeline */
+  .trees{position:absolute; left:0; right:0; bottom:0; width:100%; height:300px}
+  /* first watcher eyes at the dark end */
+  .eyes{position:absolute; right:206px; bottom:120px; width:20px; height:6px}
+  .eye{position:absolute; top:0; width:4px; height:4px; border-radius:50%; background:#d64560;
+    box-shadow:0 0 8px 2px rgba(214,69,96,.8)}
+  .eye.l{left:0} .eye.r{right:0}
+  .stage{position:absolute; inset:0; z-index:5}
+  .kicker{position:absolute; top:70px; left:0; right:0; text-align:center;
+    font-size:15px; letter-spacing:6px; text-transform:uppercase; color:#fff2d8; font-weight:600;
+    text-shadow:0 1px 8px rgba(0,0,0,.5)}
+  .wordmark{position:absolute; top:104px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-weight:700; font-size:66px; letter-spacing:16px; text-indent:16px;
+    color:#fff; text-shadow:0 2px 20px rgba(0,0,0,.5)}
+  .wordmark .o{color:var(--amber); text-shadow:0 0 22px rgba(255,181,74,.7)}
+  .title{position:absolute; top:300px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-weight:700; font-size:74px; line-height:1.02; letter-spacing:.5px;
+    color:#f6f2e6; text-shadow:0 3px 30px rgba(0,0,0,.6)}
+  .title em{font-style:italic; color:#ffd68a}
+  .rule{position:absolute; top:470px; left:50%; transform:translateX(-50%); width:80px; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,214,138,.6),transparent)}
+  .essence{position:absolute; top:492px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-style:italic; font-size:27px; color:#e7e2d2;
+    text-shadow:0 2px 16px rgba(0,0,0,.55)}
+  .meta{position:absolute; bottom:34px; left:60px; right:60px; display:flex;
+    align-items:center; justify-content:space-between; font-size:13px; letter-spacing:1.5px;
+    text-transform:uppercase; color:#cdd6e6; text-shadow:0 1px 6px rgba(0,0,0,.6)}
+  .tag{display:inline-flex; align-items:center; gap:8px; color:#ffd68a;
+    border:1px solid rgba(255,181,74,.5); background:rgba(20,16,7,.6);
+    border-radius:999px; padding:6px 14px; letter-spacing:1.3px}
+  .vignette{position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(130% 120% at 50% 40%, transparent 54%, rgba(0,0,0,.5) 100%)}
+  .grain{position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay; pointer-events:none}
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="stars">
+      <i style="right:120px;top:70px"></i><i style="right:250px;top:130px;opacity:.7"></i>
+      <i style="right:320px;top:60px;opacity:.6"></i><i style="right:90px;top:170px;opacity:.8"></i>
+      <i style="right:200px;top:200px;opacity:.5"></i><i style="right:410px;top:110px;opacity:.5"></i>
+    </div>
+    <svg class="trees" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#0b1220" opacity="0.85" d="M-20 300 L-20 160 L30 110 L70 172 L110 84 L150 176 L190 120 L230 172
+        L275 74 L320 182 L365 104 L408 172 L450 60 L495 178 L540 120 L580 170
+        L625 82 L670 180 L715 100 L758 172 L800 68 L845 178 L890 116 L930 172
+        L975 84 L1020 180 L1065 110 L1108 172 L1150 74 L1195 178 L1220 120 L1220 300 Z"/>
+      <path fill="#05070f" d="M-30 300 L-30 195 L30 112 L90 200 L150 80 L210 204 L270 132 L330 196
+        L390 66 L450 204 L510 116 L570 198 L630 78 L690 204 L750 122 L810 196
+        L870 62 L930 204 L990 110 L1050 198 L1110 86 L1170 204 L1230 132 L1230 300 Z"/>
+    </svg>
+    <div class="eyes"><span class="eye l"></span><span class="eye r"></span></div>
+
+    <div class="stage">
+      <div class="kicker">FROM · Season One · Episode One</div>
+      <div class="wordmark">FR<span class="o">O</span>M</div>
+      <div class="title">Long Day&rsquo;s Journey<br><em>Into Night</em></div>
+      <div class="rule"></div>
+      <div class="essence">Dusk, a stolen daylight, then the dark comes back.</div>
+      <div class="meta">
+        <span>MGM+ &nbsp;&middot;&nbsp; The pilot, hour by hour</span>
+        <span class="tag">96 nights without incident &mdash; resets tonight</span>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+    <svg class="grain" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+  </div>
+</body>
+</html>
