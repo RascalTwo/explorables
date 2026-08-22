@@ -1,0 +1,2897 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pairwise Sorter</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="Pairwise Sorter">
+<meta name="viz:description" content="Rank any list by answering &quot;which is better?&quot; one pair at a time. Binary insertion with you as the comparator, so it asks about n·log₂n questions instead of comparing everything to everything.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  body { max-width: 1600px; margin: 0 auto; padding: 24px 32px; }
+  /* Prose keeps a readable measure even on a wide page — a 1500px-long sentence is
+     genuinely hard to scan. Cards, lists and the textarea take the full width. */
+  .aihint, #setup > p.sub, #import > p.sub, details.fmt p { max-width: 92ch; }
+  textarea { width: 100%; min-height: 240px; background: var(--panel); color: var(--text);
+             border: 1px solid var(--border); border-radius: 8px; padding: 12px;
+             font: 14px/1.6 ui-monospace, monospace; resize: vertical; }
+  button { background: var(--panel); color: var(--text); border: 1px solid var(--border);
+           border-radius: 8px; padding: 8px 14px; font-size: 14px; cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .4; cursor: default; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #06101d; font-weight: 600; }
+
+  .duel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0 18px; }
+  .opt { position: relative;
+         background: var(--panel); border: 2px solid var(--border); border-radius: 12px;
+         padding: 32px 24px; min-height: 180px; display: flex; flex-direction: column;
+         align-items: center; justify-content: center; gap: 14px;
+         text-align: center; transition: border-color .12s; }
+  .opt:has(.choose:hover) { border-color: var(--accent); }
+  .opt .txt { font-size: 20px; line-height: 1.4; overflow-wrap: anywhere; }
+  /* The CARD is inert content; this button is the only thing that casts a vote. That is
+     what lets the card hold images, links and video without fighting a role="button". */
+  /* .body takes the slack and centres its own content, so the button always sits on the
+     card's bottom edge — and since the grid makes both cards equal height, the two
+     buttons line up however tall or short the content is. */
+  .opt .body { flex: 1; display: flex; flex-direction: column; align-items: center;
+               justify-content: center; gap: 14px; width: 100%; }
+  .choose { width: 100%; margin-top: 14px; font-weight: 600; }
+  .choose:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* One image gets the whole card; several tile 2-up, so a page is at most two rows. */
+  .opt .media { display: grid; gap: 8px; justify-items: center; align-items: center; width: 100%; }
+  .opt .media[data-n="1"] { grid-template-columns: 1fr; }
+  .opt .media:not([data-n="1"]) { grid-template-columns: 1fr 1fr; }
+  /* Scale with the card instead of a fixed cap — a wide page should show a bigger picture. */
+  .opt img, .opt video { max-width: 100%; max-height: min(340px, 34vh); border-radius: 8px; object-fit: contain; }
+  .opt .media:not([data-n="1"]) img, .opt .media:not([data-n="1"]) video { max-height: min(150px, 18vh); }
+  .medianav { display: flex; align-items: center; justify-content: center; gap: 10px;
+              font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .medianav button { padding: 1px 9px; font-size: 14px; line-height: 1.3; }
+  .opt .desc { font-size: 13px; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
+  .opt a, .results a { color: var(--accent); font-size: 12px; text-decoration: none; }
+  .opt a:hover, .results a:hover { text-decoration: underline; }
+
+  .opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-color: var(--accent); }
+  .optwrap { position: relative; display: flex; }
+  .optwrap .opt { flex: 1; padding-top: 48px; }
+  /* Overlaid on the card but SIBLINGS of it — nesting a link or button inside a
+     role="button" is invalid and unreachable by keyboard. Absolute position gives
+     the "inside the card" look without the nesting. */
+  .act { position: absolute; top: 10px; z-index: 2;
+         display: inline-flex; align-items: center; justify-content: center;
+         width: 30px; height: 30px; padding: 0; border-radius: 8px;
+         border: 1px solid var(--border); background: color-mix(in srgb, var(--bg) 75%, transparent);
+         color: var(--muted); font-size: 14px; line-height: 1; text-decoration: none;
+         cursor: pointer; opacity: .4; transition: opacity .12s, color .12s, border-color .12s; }
+  .optwrap:hover .act, .act:focus-visible { opacity: 1; }
+  .act.open { left: 10px; }
+  .act.edit { right: 46px; }
+  .act.rm   { right: 10px; }
+  .act.open:hover, .act.edit:hover { color: var(--accent); border-color: var(--accent); }
+  .act.rm:hover   { color: var(--danger); border-color: var(--danger); }
+  .act.rm svg { width: 15px; height: 15px; }
+
+  /* Media opens for a closer look instead of casting a vote. */
+  .opt img { cursor: zoom-in; }
+  #lightbox { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;
+              background: rgba(0,0,0,.88); padding: 64px; }
+  /* 100%/100% + contain SCALES UP to fill the screen. max-width alone can't: an <img>
+     never grows past its natural size, so a 478px gif stayed 478px. */
+  #lightbox img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
+  #lightboxClose { position: absolute; top: 18px; right: 22px; width: 36px; height: 36px; font-size: 16px; }
+  .lbnav { position: absolute; top: 50%; transform: translateY(-50%);
+           width: 46px; height: 72px; font-size: 22px; }
+  #lightboxPrev { left: 14px; }
+  #lightboxNext { right: 14px; }
+  #lightboxCount { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+                   color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+  #benchList { list-style: none; padding: 0; margin: 10px 0 0; }
+  #benchList li { display: flex; align-items: center; gap: 12px; padding: 6px 0;
+                    border-bottom: 1px solid var(--border); }
+  #benchList li .item { flex: 1; color: var(--muted); overflow-wrap: anywhere; }
+  #benchList button { padding: 3px 10px; font-size: 12px; }
+  /* Per-row affordances, quiet until you go looking for them. */
+  .rowact { padding: 1px 8px; font-size: 12px; opacity: .35; transition: opacity .12s; }
+  .results li:hover .rowact, .rowact:focus-visible { opacity: 1; }
+  .rowact.bench:hover { color: var(--danger); border-color: var(--danger); }
+
+  details.fmt { margin: 12px 0; font-size: 13px; color: var(--muted); }
+  details.fmt summary { cursor: pointer; }
+  details.fmt code { background: var(--panel); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+  details.fmt td { padding: 5px 14px 5px 0; vertical-align: top; }
+
+  .bar { height: 8px; background: var(--panel); border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+  .bar > i { display: block; height: 100%; background: var(--accent); transition: width .25s; }
+  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .sub { color: var(--muted); font-size: 13px; }
+
+  .results { list-style: none; padding: 0; counter-reset: none; }
+  .results li { display: flex; gap: 14px; align-items: baseline; padding: 9px 12px;
+                  border-bottom: 1px solid var(--border); }
+  /* Actions cluster on the right whatever sits between them and the title, which is
+     why this is margin-auto on the group rather than flex:1 on the title — tags and
+     the open-link would otherwise get dragged along with the buttons. */
+  #results li .rowacts { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
+  #results li { flex-wrap: wrap; }
+
+  /* Expandable rows: the title is a real button, and the detail is a full-width
+     flex item so it lands on its own line under the row it belongs to. */
+  .titlebtn { background: none; border: 0; padding: 0; color: var(--text);
+              font: inherit; text-align: left; cursor: pointer; }
+  .titlebtn::before { content: "▸"; display: inline-block; width: 1em;
+                      color: var(--muted); transition: transform .12s; }
+  .titlebtn[aria-expanded="true"]::before { transform: rotate(90deg); }
+  .titlebtn:hover { color: var(--accent); }
+  .titlebtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  /* A row with nothing to reveal gets no caret, so it needs the caret's width back or
+     its title sits a character to the left of every other row's. */
+  #results li span.item::before { content: ""; display: inline-block; width: 1em; }
+  #results li .detail { flex-basis: 100%; padding: 10px 0 4px 3.4em; }
+  .detail .strip { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .detail .strip img, .detail .strip video { max-height: 130px; max-width: 220px;
+                                             border-radius: 6px; object-fit: contain; }
+  .detail .strip img { cursor: zoom-in; }
+  .detail .desc { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .detail .none { color: var(--muted); font-size: 12px; }
+  #expandAll { margin-left: auto; }
+  .results li .rank { min-width: 2.2em; text-align: right; color: var(--accent);
+                        font-variant-numeric: tabular-nums; font-weight: 600; }
+  .results li.tied .rank { color: var(--warn); }
+
+  .tabs { display: flex; gap: 6px; }
+  .tab { padding: 5px 12px; font-size: 13px; color: var(--muted); background: transparent; }
+  .tab.active { color: var(--text); background: var(--panel); border-color: var(--accent); }
+  .tab b { color: var(--accent); font-variant-numeric: tabular-nums; }
+  #cmpList li { display: flex; align-items: center; gap: 12px; }
+  #cmpList li .item { flex: 1; overflow-wrap: anywhere; }
+  #cmpList li .beat { color: var(--muted); padding: 0 4px; }
+  #cmpList button { padding: 3px 10px; font-size: 12px; }
+  #cmpList button:hover { border-color: var(--danger); color: var(--danger); }
+  #cmpList li.conflict { border-left: 3px solid var(--warn); padding-left: 9px; }
+  #cmpList li.conflict .why { color: var(--warn); font-size: 12px; }
+  .banner { background: var(--panel); border: 1px solid var(--warn); border-left-width: 3px;
+            border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--text); }
+  .banner button { padding: 3px 10px; font-size: 12px; margin-left: 10px; }
+  .banner.info { border-color: var(--accent); }
+  .aihint { border: 1px dashed var(--border); border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; }
+  .aihint code { background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+  #unplaced li { color: var(--muted); }
+  #listbar { margin: 0 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  #listPick, #listName { background: var(--panel); color: var(--text); border: 1px solid var(--border);
+                         border-radius: 8px; padding: 7px 10px; font-size: 14px; }
+  #listName { flex: 1; min-width: 140px; max-width: 380px; }
+  #listbar { justify-content: flex-start; }
+  #listbar > :nth-child(3) { margin-left: auto; }   /* push the actions to the right edge */
+  #deleteList.armed { border-color: var(--danger); color: var(--danger); }
+
+  /* ── search ── display-only filtering, never scopes the sort ── */
+  .search { display: flex; align-items: center; gap: 10px; margin: 12px 0; }
+  .search input { flex: 1; max-width: 340px; background: var(--panel); color: var(--text);
+                  border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 14px; }
+  .search .count { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .search button { padding: 3px 10px; font-size: 12px; }
+  /* A filtered list must never be mistaken for a short one. */
+  .filtering { border-left: 3px solid var(--warn); padding-left: 11px; }
+
+  /* The setup view filters into a READ-ONLY list beside the textarea rather than
+     filtering the textarea itself — its text is the input to Save & sort, so a
+     filtered textarea that got saved would drop every line it was hiding. */
+  #editFiltered { list-style: none; padding: 0; margin: 0; max-height: 420px; overflow: auto;
+                  border: 1px solid var(--border); border-radius: 8px; background: var(--panel); }
+  #editFiltered li { padding: 7px 12px; border-bottom: 1px solid var(--border);
+                     font: 13px/1.5 ui-monospace, monospace; overflow-wrap: anywhere; }
+  #editFiltered li:last-child { border-bottom: 0; }
+
+  /* ── tags ── */
+  .tag { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px;
+         border: 1px solid var(--border); border-radius: 999px;
+         font-size: 12px; color: var(--muted); background: var(--panel);
+         white-space: nowrap; }
+  .tag.on { border-color: var(--accent); color: var(--accent); }
+  .tag b { font-weight: 600; }
+  .taglist { display: flex; flex-wrap: wrap; gap: 6px; }
+  .opt .taglist { justify-content: center; }
+  .results li .taglist { flex: 0 0 auto; }
+
+  /* ── tier order ── */
+  #tierPanel { margin: 10px 0 4px; }
+  #tierList { list-style: none; padding: 0; margin: 10px 0; counter-reset: tier; }
+  #tierList li { display: flex; align-items: center; gap: 10px; padding: 6px 0;
+                 border-bottom: 1px solid var(--border); }
+  #tierList li .n { color: var(--accent); font-variant-numeric: tabular-nums; min-width: 1.6em; }
+  #tierList li .item { flex: 1; }
+  #tierList button { padding: 2px 9px; font-size: 12px; }
+  #tierAdd, .tierw { background: var(--panel); color: var(--text); border: 1px solid var(--border);
+             border-radius: 8px; padding: 6px 9px; font-size: 13px; }
+  .tierw { width: 5.5em; font-variant-numeric: tabular-nums; }
+  #settled { color: var(--accent); font-variant-numeric: tabular-nums; cursor: help; }
+  #tierPanel label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+  #combineNote { margin: 0 0 6px; }
+  /* The divider IS the "separation line" — only drawn when tiers are actually on. */
+  .results li.tierrule { border-bottom: 0; padding: 16px 12px 6px;
+                         color: var(--muted); font-size: 12px; letter-spacing: .06em;
+                         text-transform: uppercase; gap: 10px; }
+  .results li.tierrule::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── item editor ── */
+  #editor { border: 1px solid var(--border); border-radius: 12px; background: var(--bg);
+            color: var(--text); padding: 0; max-width: 620px; width: calc(100vw - 48px); }
+  #editor::backdrop { background: rgba(0,0,0,.7); }
+  #editorForm { display: flex; flex-direction: column; gap: 14px; padding: 22px 24px; }
+  #editorForm h2 { margin: 0; font-size: 17px; }
+  #editorForm label { display: flex; flex-direction: column; gap: 5px;
+                      font-size: 13px; color: var(--muted); }
+  #editorForm input[type=text], #editorForm input[type=url], #editorForm textarea {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 10px; width: 100%;
+    /* NOT `font: …/1.5 inherit` — `inherit` is not a family, which invalidates the whole
+       shorthand and drops the page's monospace textarea rule straight back in. */
+    font-family: inherit; font-size: 14px; line-height: 1.5; }
+  #editorForm textarea { resize: vertical; min-height: 64px; }
+  /* Let the tag field share its row with Add instead of shoving it onto the next line. */
+  #edTagInput { flex: 1; width: auto; }
+  #editorForm input:focus-visible, #editorForm textarea:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 1px; }
+  .field > .lbl { font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; }
+  #edTagChips { margin-bottom: 8px; }
+  #edTagChips .tag { cursor: default; }
+  #edTagChips .tag button { padding: 0 2px; font-size: 13px; line-height: 1;
+                            border: 0; background: none; color: inherit; cursor: pointer; }
+  #edMediaRows { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+  #edMediaRows .mrow { display: flex; gap: 6px; align-items: center; }
+  #edMediaRows .mrow input { flex: 1; }
+  #edMediaRows .mrow button { padding: 4px 9px; font-size: 12px; }
+  #edError { color: var(--danger); font-size: 13px; margin: 0; }
+  .hide { display: none !important; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pairwise Sorter">
+<meta property="og:description" content="Rank any list by answering &quot;which is better?&quot; one pair at a time. Binary insertion with you as the comparator, so it asks about n·log₂n questions instead of comparing everything to everything.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/pairwise-sorter/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/pairwise-sorter/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <div class="viz-header">
+    <h1>Pairwise Sorter</h1>
+    <div class="sub">You are the comparator — ~n·log₂n choices instead of ranking the whole list in your head.</div>
+  </div>
+
+  <!-- Discoverable by a human reading the page AND by an agent reading its text. -->
+  <p class="sub aihint">
+    <strong>Driving this with an AI?</strong> Don't click through the UI — this page exposes a
+    scripting API at <code>window.pairwiseSorter</code>. Run
+    <code>window.pairwiseSorter.help()</code> in the page console for the full surface
+    (load items, read state, export, answer, everything the buttons do).
+  </p>
+
+  <div id="lightbox" class="hide" role="dialog" aria-modal="true" aria-label="Enlarged image">
+    <button id="lightboxClose" aria-label="Close enlarged image">✕</button>
+    <button class="lbnav" id="lightboxPrev" aria-label="Previous image">‹</button>
+    <img id="lightboxImg" alt="">
+    <button class="lbnav" id="lightboxNext" aria-label="Next image">›</button>
+    <span id="lightboxCount"></span>
+  </div>
+
+  <div class="row" id="listbar">
+    <select id="listPick" title="Switch list"></select>
+    <input id="listName" placeholder="List name" title="Rename this list">
+    <button id="newList">+ New list</button>
+    <button id="importBtn">Import JSON</button>
+    <button id="deleteList">Delete</button>
+  </div>
+
+  <!-- ── import ── -->
+  <section id="import" class="hide">
+    <p class="sub">Paste a full export — items <em>and</em> comparisons. It lands as a new list, so nothing you already have is touched.</p>
+    <textarea id="importText" placeholder='{"format": "pairwise-sorter/1", "name": "…", "items": [...], "comparisons": [...]}'></textarea>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="doImport">Import as new list</button>
+      <button id="cancelImport">Cancel</button>
+      <span class="sub" id="importHint"></span>
+    </div>
+  </section>
+
+  <!-- ── setup ── -->
+  <section id="setup">
+    <p class="sub">One item per line — plain text, markdown links, pipe-separated fields, or a JSON array.</p>
+    <div class="search">
+      <input id="searchEdit" type="search" placeholder="Filter by title…" aria-label="Filter items by title">
+      <span class="count" id="searchEditCount"></span>
+      <button class="hide" id="searchEditClear">Clear</button>
+    </div>
+    <textarea id="input" placeholder="Cold brew&#10;[Flat white](https://example.com/fw)&#10;Sony WH-1000XM5 | https://example.com/p | https://example.com/x.jpg | Noise cancelling"></textarea>
+    <ul id="editFiltered" class="hide"></ul>
+    <details class="fmt">
+      <summary>Input formats</summary>
+      <table>
+        <tr><td><code>Cold brew</code></td><td>plain text</td></tr>
+        <tr><td><code>[Title](https://…)</code></td><td>titled link</td></tr>
+        <tr><td><code>Title | https://… | https://….jpg | https://….mp4 | Description</code></td><td>full card</td></tr>
+        <tr><td><code>#gameplay #qol</code></td><td>tags (a field of <code>#</code>-tokens)</td></tr>
+        <tr><td><code>[{"title":"…","url":"…","media":["…","…"],"desc":"…","tags":["…"]}]</code></td><td>JSON array</td></tr>
+      </table>
+      <p>Pipe fields are matched by <em>content, not order</em>. A URL ending in a media extension
+         (<code>jpg png gif webp avif svg mp4 webm mov</code>) is always media; the <em>first</em> URL
+         without one becomes the link; every other URL is media too. First plain text is the title,
+         the rest is the description. Videos render with controls; gifs just work as images.</p>
+      <p>JSON field aliases: <code>media</code>/<code>images</code>/<code>img</code>/<code>image</code>/<code>thumbnail</code>
+         (string or array), <code>url</code>/<code>link</code>/<code>href</code>,
+         <code>title</code>/<code>name</code>/<code>label</code>,
+         <code>desc</code>/<code>description</code>/<code>subtitle</code>,
+         <code>tags</code>/<code>tag</code>/<code>labels</code>/<code>categories</code>.</p>
+    </details>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="start">Save &amp; sort</button>
+      <span class="sub" id="setupHint"></span>
+    </div>
+  </section>
+
+  <!-- ── comparing ── -->
+  <section id="compare" class="hide">
+    <div class="row" style="justify-content:space-between">
+      <strong>Which is better?</strong>
+      <span class="sub"><b id="settled" title="">~0% settled</b> &nbsp;·&nbsp; <span id="count"></span></span>
+    </div>
+    <div class="duel">
+      <!-- The card is the button. Its link and remove control are SIBLINGS, not children:
+           nesting an <a> or <button> inside a role="button" is invalid and unusable by
+           keyboard/screen readers. -->
+      <div class="optwrap">
+        <div class="opt" id="optA">
+          <div class="body"></div>
+          <button class="choose" id="chooseA">←&nbsp; Choose this</button>
+        </div>
+        <a class="act open hide" id="linkA" target="_blank" rel="noopener" title="Open in a new tab" aria-label="Open in a new tab">↗</a>
+        <button class="act edit" id="edA" title="Edit this item" aria-label="Edit this item">✎</button>
+        <button class="act rm" id="rmA" title="Bench this item" aria-label="Bench this item">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 4h11M6.4 4V2.6h3.2V4M4.2 4l.6 9.4h6.4L11.8 4M6.6 6.6v4.8M9.4 6.6v4.8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="optwrap">
+        <div class="opt" id="optB">
+          <div class="body"></div>
+          <button class="choose" id="chooseB">Choose this &nbsp;→</button>
+        </div>
+        <a class="act open hide" id="linkB" target="_blank" rel="noopener" title="Open in a new tab" aria-label="Open in a new tab">↗</a>
+        <button class="act edit" id="edB" title="Edit this item" aria-label="Edit this item">✎</button>
+        <button class="act rm" id="rmB" title="Bench this item" aria-label="Bench this item">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 4h11M6.4 4V2.6h3.2V4M4.2 4l.6 9.4h6.4L11.8 4M6.6 6.6v4.8M9.4 6.6v4.8"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="row" style="justify-content:center">
+      <button id="tie">Equal &nbsp;<span class="sub">(↓ or =)</span></button>
+    </div>
+    <div class="bar" style="margin:24px 0 10px"><i id="fill" style="width:0"></i></div>
+    <!-- The "you can stop now" nudge. It only appears once answering more has
+         stopped changing the order, which is a different question from whether
+         the sort has run out of comparisons to make. -->
+    <p id="stopNote" class="banner info hide">
+      <span id="stopText"></span>
+      <button id="stopNow">See the list</button>
+    </p>
+    <div class="row" style="justify-content:space-between">
+      <button id="undo">↩ Undo</button>
+      <span class="row">
+        <button id="pause">See list so far</button>
+        <button id="edit">Edit list</button>
+        <button id="resetAnswers">Reset answers</button>
+      </span>
+    </div>
+  </section>
+
+  <!-- ── done ── -->
+  <section id="done" class="hide">
+    <div class="row" style="justify-content:space-between">
+      <strong id="doneTitle">Sorted — best first</strong>
+      <span class="tabs">
+        <button class="tab active" id="tabRanking"><b id="cItems">0</b> items</button>
+        <button class="tab" id="tabComparisons"><b id="cCmp">0</b> comparisons</button>
+      </span>
+    </div>
+    <p id="conflictBanner" class="banner hide"></p>
+    <p id="resolveNote" class="banner info hide"></p>
+    <p id="partialNote" class="banner info hide"></p>
+    <p id="settledNote" class="sub"></p>
+
+    <!-- Tiers are DECLARED, never inferred: the tool synthesises cross-tier answers
+         from this order instead of asking, so part of the ranking below is asserted
+         rather than revealed. The note under the list says so. -->
+    <details class="fmt" id="tierPanel">
+      <summary>Tier order — <span id="tierSummary">off</span></summary>
+      <p>List tags here to make them tiers. Anything in a higher tier automatically outranks
+         anything in a lower one, so you are never asked to compare across the divide.
+         Items whose tags aren't listed sit in an untiered band at the bottom and are asked
+         about normally.</p>
+      <div class="row" style="margin:10px 0">
+        <span class="lbl">Combine tiers by</span>
+        <label><input type="radio" name="combine" id="combineOrder" value="order"> Strict order</label>
+        <label><input type="radio" name="combine" id="combineWeights" value="weights"> Weights</label>
+      </div>
+      <p id="combineNote" class="sub"></p>
+      <ol id="tierList"></ol>
+      <div class="row">
+        <select id="tierAdd" aria-label="Tag to add as a tier"></select>
+        <button id="tierAddBtn">Add tier</button>
+      </div>
+      <p id="tierOverride" class="hide"></p>
+    </details>
+
+    <div class="search">
+      <input id="searchDone" type="search" placeholder="Filter by title…" aria-label="Filter by title">
+      <span class="count" id="searchDoneCount"></span>
+      <button class="hide" id="searchDoneClear">Clear</button>
+      <button id="expandAll">Expand all</button>
+      <button id="collapseAll">Collapse all</button>
+    </div>
+    <p id="tierNote" class="sub hide"></p>
+    <ol class="results" id="results"></ol>
+    <p class="sub hide" id="unplacedNote"></p>
+    <ul class="results hide" id="unplaced"></ul>
+    <ul class="results hide" id="cmpList"></ul>
+    <p class="sub hide" id="cmpEmpty">No comparisons recorded yet.</p>
+    <div class="row" style="margin-top:18px">
+      <button class="primary hide" id="resume">↩ Resume sorting</button>
+      <button id="copyJson">Export JSON</button>
+      <button id="undo2">↩ Undo last choice</button>
+      <button id="edit2">Edit list</button>
+      <button id="resetAnswers2">Reset answers</button>
+    </div>
+  </section>
+
+  <!-- ── benched (shared by the compare and done screens) ── -->
+  <!-- "Benched", not "Removed": out of the ranking, still on the team, one click from
+       coming back. The old wording had to apologise for itself with "(kept here, not
+       deleted)" — the right word carries that on its own. -->
+  <section id="benchPanel" class="hide">
+    <details class="fmt" id="benchDetails">
+      <summary>Benched — <span id="benchCount">0</span></summary>
+      <div class="row" style="margin-top:10px">
+        <button id="subAll">Sub all in</button>
+        <span class="sub">Answers and the bench are separate — resetting answers leaves the bench alone.</span>
+      </div>
+      <ul id="benchList"></ul>
+    </details>
+  </section>
+
+  <!-- ── item editor ── a real form, reachable from every place an item is shown ── -->
+  <dialog id="editor">
+    <form id="editorForm" method="dialog">
+      <h2>Edit item</h2>
+      <label>Title <input id="edTitle" type="text" required></label>
+      <label>Link <input id="edUrl" type="url" placeholder="https://…"></label>
+      <label>Description <textarea id="edDesc" rows="3"></textarea></label>
+      <div class="field">
+        <span class="lbl">Tags</span>
+        <div class="taglist" id="edTagChips"></div>
+        <div class="row">
+          <input id="edTagInput" type="text" list="edTagOptions" placeholder="Add a tag, then Enter">
+          <datalist id="edTagOptions"></datalist>
+          <button type="button" id="edTagAdd">Add</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="lbl">Media — images and video, in order</span>
+        <div id="edMediaRows"></div>
+        <button type="button" id="edMediaAdd">+ Add media</button>
+      </div>
+      <p id="edError" class="hide"></p>
+      <div class="row">
+        <button type="submit" class="primary" id="edSave">Save</button>
+        <button type="button" id="edCancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+<script type="module">
+import { esc } from "/_kit/viz.js";
+
+const $ = s => document.querySelector(s);
+// Frozen. The trailing v4 is historical: bumping the KEY used to be how shape changes
+// were handled, and it "worked" by abandoning everyone's data. Shape changes are
+// migrations now (see MIGRATIONS below), so this string never changes again.
+const KEY = "pairwise-sorter/v4";
+const ABORT = Symbol("abort");
+const MEDIA_EXT = /\.(png|jpe?g|gif|webp|avif|svg|bmp|ico|mp4|webm|mov|m4v|ogv)([?#]|$)/i;
+const VIDEO_EXT = /\.(mp4|webm|mov|m4v|ogv)([?#]|$)/i;
+
+// ── input parsing ─────────────────────────────────────────────────────────
+// One item model — {title, url, media[], desc} — and several ways to type it. Plain
+// text is just the case where only `title` is set, so nothing downstream ever
+// branches on "what kind of list is this".
+
+// `tags` is deliberately NOT part of an item's identity (see idOf below) — retagging
+// mid-sort must never cost you an answer you already gave.
+// A tag is an identifier, so it cannot contain whitespace: the text form writes tags
+// as `#a #b`, and a tag like "open world" round-tripped back as DESCRIPTION text —
+// silently, taking any tier built on it down with it. Hyphenating at construction
+// covers every entry path at once (editor, pipes, JSON, scripting API), and the
+// change is visible on the chip rather than happening behind your back.
+const tagOf = t => String(t).trim().replace(/^#/, "").replace(/\s+/g, "-");
+
+const item = (title, url = "", media = [], desc = "", tags = []) =>
+  ({ title: String(title), url, media: [media].flat().filter(Boolean).map(String), desc,
+     tags: [...new Set([tags].flat().filter(Boolean).map(tagOf).filter(Boolean))] });
+
+const TAG_FIELD = /^#\S/;
+// NOT `label` — that is already a title alias, and a title is not a tag.
+const asTags = o => o.tags ?? o.tag ?? o.labels ?? o.categories ?? o.category ?? [];
+
+function parseItems(raw) {
+  const t = raw.trim();
+  if (t.startsWith("[") || t.startsWith("{")) {
+    try {
+      let parsed = JSON.parse(t);
+      // A whole export pasted in here: take its items (comparisons need Import JSON).
+      if (parsed && !Array.isArray(parsed) && Array.isArray(parsed.items)) parsed = parsed.items;
+      return (Array.isArray(parsed) ? parsed : [parsed]).map(o => typeof o === "string" ? item(o) : item(
+        o.title ?? o.name ?? o.label ?? "",
+        o.url ?? o.link ?? o.href ?? "",
+        o.media ?? o.images ?? o.img ?? o.image ?? o.thumbnail ?? [],
+        o.desc ?? o.description ?? o.subtitle ?? "",
+        asTags(o)));
+    } catch { /* not valid JSON after all — fall through to line mode */ }
+  }
+  return t.split("\n").map(l => l.trim()).filter(Boolean).map(parseLine);
+}
+
+function parseLine(line) {
+  // [Title](url) rest… → normalise into pipe fields, then fall through.
+  const md = line.match(/^\[(.+?)\]\((\S+?)\)\s*\|?\s*(.*)$/);
+  const src = md ? [md[1], md[2], md[3]].filter(Boolean).join(" | ") : line;
+
+  let url = "";
+  const media = [], text = [], tags = [];
+  for (const f of src.split("|").map(s => s.trim()).filter(Boolean)) {
+    // A field of nothing but #-tokens is the tag field. Requiring EVERY token to start
+    // with # keeps "Half-Life #2 remastered" a title rather than half a tag list.
+    if (TAG_FIELD.test(f) && f.split(/\s+/).every(t => t.startsWith("#")))
+      tags.push(...f.split(/\s+/).map(t => t.slice(1)).filter(Boolean));
+    else if (!/^https?:\/\//i.test(f)) text.push(f);
+    else if (MEDIA_EXT.test(f)) media.push(f);   // a media extension is always media…
+    else if (!url) url = f;                      // …the first URL without one is the link…
+    else media.push(f);                          // …and every other URL is media too.
+  }
+  return item(text[0] || url || media[0] || src, url, media, text.slice(1).join(" — "), tags);
+}
+
+// A card shows at most two rows of media (2×2) and pages through the rest, so twenty
+// product shots can't push the title and Choose button off the screen.
+const MEDIA_PER_PAGE = 4;
+
+/**
+ * A tag as a chip — display only. A tiered tag carries its tier number, so you can see
+ * which side of the divide an item is on without leaving the card.
+ */
+const tagChip = t => {
+  const tier = priority.indexOf(t);
+  return `<span class="tag${tier >= 0 ? " on" : ""}" data-tag="${esc(t)}"`
+    + (tier >= 0 ? ` title="Tier ${tier + 1}"` : "") + ">"
+    + (tier >= 0 ? `<b>${tier + 1}</b>` : "") + `#${esc(t)}</span>`;
+};
+
+const mediaTag = m => VIDEO_EXT.test(m)
+  // Extensionless URLs land here as <img>: plenty of image CDNs omit the extension,
+  // and a broken <img> degrades more quietly than a broken <video>.
+  ? `<video src="${esc(m)}" controls loop muted playsinline preload="metadata"></video>`
+  : `<img src="${esc(m)}" alt="" loading="lazy">`;
+
+/** Draw an item into a card, showing only the fields it actually has. */
+function render(el, it, page = 0) {
+  const pages = Math.max(1, Math.ceil(it.media.length / MEDIA_PER_PAGE));
+  page = (page % pages + pages) % pages;                       // wrap both ways
+  const slice = it.media.slice(page * MEDIA_PER_PAGE, (page + 1) * MEDIA_PER_PAGE);
+
+  el.innerHTML = [
+    slice.length && `<div class="media" data-n="${slice.length}">${slice.map(mediaTag).join("")}</div>`,
+    pages > 1 && `<div class="medianav">
+        <button class="mprev" aria-label="Previous images">‹</button>
+        <span>${page + 1} / ${pages}</span>
+        <button class="mnext" aria-label="More images">›</button>
+      </div>`,
+    `<div class="txt">${esc(it.title)}</div>`,
+    it.desc && `<div class="desc">${esc(it.desc)}</div>`,
+    it.tags.length && `<div class="taglist">${it.tags.map(tagChip).join("")}</div>`,
+    // The "open" link lives outside the card, alongside the edit and bench controls.
+  ].filter(Boolean).join("");
+
+  const prev = el.querySelector(".mprev"), next = el.querySelector(".mnext");
+  if (prev) prev.onclick = () => render(el, it, page - 1);
+  if (next) next.onclick = () => render(el, it, page + 1);
+}
+
+// ── identity ──────────────────────────────────────────────────────────────
+// The textarea is INPUT, not storage. Answers are keyed on an item's identity
+// (title + link), never on its position — so reordering lines, editing a
+// description, swapping an image, or adding items leaves every answer you
+// already gave intact. Only pairs whose items are gone drop out.
+const SEP = "\u0001";
+const SEP_ID = "\u0000";
+const idOf = it => (it?.title ?? "") + SEP_ID + (it?.url ?? "");
+const pairKey = (a, b) => {
+  const [x, y] = [idOf(items[a]), idOf(items[b])];
+  return x < y ? x + SEP + y : y + SEP + x;
+};
+const flipOf = (a, b) => idOf(items[a]) < idOf(items[b]) ? 1 : -1;
+const byId = id => items.find(it => idOf(it) === id);
+
+// ── state ─────────────────────────────────────────────────────────────────
+// The sort is deterministic, so replaying the decision log from scratch
+// reconstructs any point in the session — undo, reload, resume, remove and
+// list-switching all fall out of that, with no need to serialise the recursion.
+let db = { current: null, lists: {} };
+let items = [], log = [], benched = new Set();
+// Tag names, best tier first. Empty = tiers off, and the sorter asks about everything.
+// Per LIST, not global: `#visual` means nothing to your coffee list.
+let priority = [];
+// Parallel to `priority`. Only read in "weights" mode, where a lower tier's best
+// item can outrank a higher tier's worst — which strict mode can never allow.
+let weights = [];
+let combine = "order";                        // "order" = strict tiers · "weights" = scored
+let answers = new Map(), token = 0, pending = null, order = [];
+let partial = { placed: [], remaining: [] };   // live progress while a sort is running
+let repause = false;                          // re-enter the paused view after an edit restarts the sort
+
+const ranked = () => order.map(i => items[i]);
+const live = () => items.map((_, i) => i).filter(i => !benched.has(idOf(items[i])));
+const newId = () => "l" + Math.random().toString(36).slice(2, 9);
+const allTags = () => [...new Set(items.flatMap(it => it.tags))].sort();
+
+// ── tiers ─────────────────────────────────────────────────────────────────
+// A DECLARED order, never an inferred one: the tool has no opinion about which tag
+// beats which, it only applies the one you set. That is why the ranking has to say
+// out loud which part of it is asserted rather than answered.
+
+/** Lowest priority index among an item's tags — Infinity for the untiered bottom band. */
+const tierOf = it => (it?.tags ?? []).reduce((best, t) => {
+  const i = priority.indexOf(t);
+  return i >= 0 && i < best ? i : best;
+}, Infinity);
+
+const tierName = t => t === Infinity ? "untiered" : "#" + priority[t];
+
+/**
+ * The synthesised verdict for a cross-tier pair, or null when the pair must be asked
+ * about: tiers off, same tier, or both untiered. Never written to `log` — this is
+ * computed fresh every time, so reordering the tiers re-cuts the whole ranking with
+ * nothing stale left behind.
+ */
+function tierVerdict(a, b) {
+  if (!priority.length) return null;
+  const ta = tierOf(items[a]), tb = tierOf(items[b]);
+  if (ta === tb) return null;
+  return ta < tb ? -1 : 1;
+}
+
+function save() {
+  const l = db.lists[db.current];
+  if (l) Object.assign(l, { items, log, benched: [...benched], priority, weights, combine });
+  // Stamped on every write, never inferred on read — but never LOWERED. A stale tab
+  // running an older build must not relabel data a newer one wrote, or that newer
+  // build would re-run migrations it has already applied.
+  db.version = Math.max(SCHEMA, Number.isInteger(db.version) ? db.version : SCHEMA);
+  localStorage.setItem(KEY, JSON.stringify(db));
+}
+
+// ── migrations ────────────────────────────────────────────────────────────
+// Ordered and APPEND-ONLY: MIGRATIONS[i] takes the database from version i to i+1,
+// and `db.version` records how far it has come. Never edit or reorder one after it
+// ships — somebody's stored data has already run it, and rewriting history here
+// means their next load applies the wrong transform to the wrong shape.
+//
+// EVERY shape change needs one, including merely adding a field with a default.
+// There is no second normalising pass anywhere to fall back on, on purpose — one
+// would only ever fix the list you opened while leaving the rest of storage stale,
+// and would hide the missing migration rather than surface it. The discipline is
+// the whole mechanism: change the shape of an item or a list, add a step here.
+
+const MIGRATIONS = [
+  // 0 → 1: baseline. Everything stored before versioning predates `tags` on items
+  // and `priority`/`weights`/`combine` on lists, in any combination.
+  db => {
+    for (const l of Object.values(db.lists ?? {})) {
+      l.items = (Array.isArray(l.items) ? l.items : [])
+        .filter(it => it && typeof it === "object")
+        .map(it => item(it.title ?? "", it.url ?? "", it.media ?? [], it.desc ?? "", it.tags ?? []));
+      l.log = Array.isArray(l.log) ? l.log : [];
+      l.priority = (Array.isArray(l.priority) ? l.priority : []).filter(t => typeof t === "string");
+      // Kept the same length as `priority` so the two can never slip apart.
+      l.weights = l.priority.map((_, i) => Number(l.weights?.[i]) > 0 ? Number(l.weights[i]) : 1);
+      l.combine = l.combine === "weights" ? "weights" : "order";
+    }
+  },
+  // 1 → 2: `removed` → `benched`. The UI, the export and the API have all called it
+  // the bench since the rename; storage was the last holdout. Exactly the kind of
+  // change normalisation cannot do for you, which is why this system exists.
+  db => {
+    for (const l of Object.values(db.lists ?? {})) {
+      l.benched = (Array.isArray(l.benched) ? l.benched : l.removed ?? [])
+        .filter(x => typeof x === "string");
+      delete l.removed;
+    }
+  },
+];
+const SCHEMA = MIGRATIONS.length;
+
+/** Bring a database up to SCHEMA, in place. Returns the number of steps applied. */
+function migrate(db) {
+  const from = Number.isInteger(db.version) ? db.version : 0;
+  // Data from a NEWER build than this one. Running our older migrations over it would
+  // corrupt it, and we cannot know what it did — leave it alone and let the readers,
+  // which are all defensive, cope. Downgrading a browser tab should not eat a list.
+  if (from > SCHEMA) {
+    console.warn("pairwiseSorter — stored data is version " + from + " but this build only "
+      + "knows " + SCHEMA + ". Leaving it as-is; reload to pick up the newer build.");
+    return 0;
+  }
+  for (let v = from; v < SCHEMA; v++) MIGRATIONS[v](db);
+  db.version = SCHEMA;
+  return SCHEMA - from;
+}
+
+function loadDb() {
+  let d;
+  try {
+    d = JSON.parse(localStorage.getItem(KEY));
+  } catch { /* corrupt or absent — start fresh rather than dying on load */ }
+  if (!d || !d.lists || typeof d.lists !== "object") return { current: null, lists: {}, version: SCHEMA };
+  const steps = migrate(d);
+  if (steps) console.log(`%cpairwiseSorter`, "font-weight:bold",
+    `— migrated stored data ${d.version - steps} → ${d.version} (${steps} step${steps > 1 ? "s" : ""})`);
+  return d;
+}
+
+function openList(id) {
+  token++;                 // abandon any sort still running for the previous list
+  pending = null;
+  // Both hold INDEXES into the outgoing list's `items`. Anything that redraws the
+  // ranking between here and run() would read them against the incoming items and
+  // walk off the end, so they are cleared before `items` is swapped, not after.
+  order = [];
+  partial = { placed: [], remaining: [] };
+  db.current = id;
+  const l = db.lists[id] || {};
+  // Trusted, because loadDb has already migrated the whole database to SCHEMA. There
+  // is deliberately no second normalising pass here: it would only fix the list you
+  // happen to open, in memory, leaving every other list in storage stale — and it
+  // would hide a missing migration instead of letting it surface.
+  items = l.items;
+  // A key without the separator isn't a real pair — it would render as undefined and
+  // can never match a comparison, so drop it rather than carry it around.
+  log = (Array.isArray(l.log) ? l.log : [])
+    .filter(e => Array.isArray(e) && e.length === 2 && typeof e[0] === "string" && e[0].includes(SEP));
+  benched = new Set((Array.isArray(l.benched) ? l.benched : []).filter(x => typeof x === "string"));
+  // A tier naming a tag no item carries is dead weight — drop it rather than render it.
+  priority = (Array.isArray(l.priority) ? l.priority : []).filter(t => typeof t === "string");
+  // Kept the same length as `priority` everywhere, so the two can never slip apart.
+  weights = priority.map((_, i) => Number(l.weights?.[i]) > 0 ? Number(l.weights[i]) : 1);
+  combine = l.combine === "weights" ? "weights" : "order";
+  setQuery("");                       // a filter from the previous list would read as data loss
+  expanded.clear();                   // …and so would rows left open from another list
+  $("#listName").value = l.name || "Untitled";
+  $("#input").value = toText(items);
+  $("#setupHint").textContent = "";
+  renderListPick();
+  save();
+  if (items.length > 1) run(); else show("setup");
+}
+
+function newList() {
+  const id = newId();
+  db.lists[id] = { name: `List ${Object.keys(db.lists).length + 1}`,
+                   items: [], log: [], benched: [], priority: [], weights: [], combine: "order" };
+  openList(id);
+}
+
+function renderListPick() {
+  const sel = $("#listPick");
+  sel.innerHTML = "";
+  for (const [id, l] of Object.entries(db.lists)) {
+    const o = document.createElement("option");
+    o.value = id;
+    o.textContent = `${l.name || "Untitled"} (${(l.items || []).length})`;
+    sel.append(o);
+  }
+  sel.value = db.current;
+}
+
+/** Worst-case comparisons for binary insertion on n items — what the progress bar counts against. */
+function worstCase(n) {
+  let total = 0;
+  for (let k = 1; k < n; k++) total += Math.ceil(Math.log2(k + 1));
+  return total;
+}
+
+/**
+ * Still a worst case, just an honest one. With tiers on, cross-tier pairs are answered
+ * for free, so the only questions left are within-tier ones — the budget is the sum of
+ * each tier's worst case rather than the whole list's.
+ */
+function budget() {
+  const ids = live();
+  if (!priority.length) return worstCase(ids.length);
+  const perTier = new Map();
+  for (const i of ids) {
+    const t = tierOf(items[i]);
+    perTier.set(t, (perTier.get(t) ?? 0) + 1);
+  }
+  return [...perTier.values()].reduce((sum, n) => sum + worstCase(n), 0);
+}
+
+// Warm the media of items we are about to show. Images only — preloading video would
+// pull far more bytes than the glance it saves.
+const prefetched = new Set();
+function prefetch(...idxs) {
+  for (const i of idxs) {
+    for (const m of items[i]?.media ?? []) {
+      if (VIDEO_EXT.test(m) || prefetched.has(m)) continue;
+      prefetched.add(m);
+      new Image().src = m;
+    }
+  }
+}
+
+/**
+ * Draw whatever the two cards currently point at. Separate from cmp() so an inline edit
+ * can refresh a card WITHOUT touching `pending` — editing an item mid-duel must not cost
+ * you the question you were in the middle of.
+ */
+function paintCards() {
+  for (const side of ["A", "B"]) {
+    const idx = +$(`#opt${side}`).dataset.idx;
+    const it = items[idx];
+    if (!it) continue;
+    render($(`#opt${side} .body`), it);
+    $(`#choose${side}`).setAttribute("aria-label", `Choose ${it.title}`);
+    const link = $(`#link${side}`);
+    link.classList.toggle("hide", !it.url);
+    if (it.url) link.href = it.url;
+  }
+}
+
+/** Ask the human about items a and b. -1 = a better, 1 = b better, 0 = equal. */
+function cmp(a, b, my) {
+  const k = pairKey(a, b), flip = flipOf(a, b);
+  // Order matters and IS the policy: your own answer is consulted first, so a direct
+  // answer about a specific pair always beats the tier order. That is also the escape
+  // hatch — to promote one item across the divide, just answer that one pair.
+  if (answers.has(k)) return Promise.resolve(answers.get(k) * flip);
+  const tier = tierVerdict(a, b);
+  if (tier !== null) return Promise.resolve(tier);
+
+  $("#optA").dataset.idx = a;
+  $("#optB").dataset.idx = b;
+  paintCards();
+  const total = budget();
+  $("#count").textContent = `${log.length} of ~${total} comparisons`;
+  $("#fill").style.width = Math.min(100, log.length / total * 100) + "%";
+  // The bar counts questions ASKED against a worst case; this counts what you would
+  // actually keep if you stopped right now, which is the thing worth knowing.
+  const at = placement();
+  $("#settled").textContent = `${at.placed} of ${at.total} placed`;
+  $("#settled").title = "Items already placed are in their final order — "
+    + "stopping now costs you the unplaced ones, it does not disturb these.";
+
+  const canStop = at.pct >= STOP_AT && at.placed < at.total;
+  $("#stopNote").classList.toggle("hide", !canStop);
+  if (canStop) $("#stopText").textContent =
+    `${at.placed} of ${at.total} items are placed, and placed items are already in their `
+    + "final order — you can stop here and keep them. The rest simply have no position yet.";
+
+  return new Promise((resolve, reject) => {
+    pending = v => {
+      if (my !== token) return reject(ABORT);
+      answers.set(k, v * flip);
+      log.push([k, v * flip]);
+      save();
+      resolve(v);
+    };
+    // Editing answers from the paused view restarts the sort, which would otherwise
+    // dump you back into the chooser. Slip straight back to the list you were reading.
+    if (repause) { repause = false; pauseToList(true); }
+  });
+}
+
+/**
+ * Binary insertion sort: take each item in turn and binary-search its slot among the
+ * ones already placed.
+ *
+ * This is what makes adding an item cheap. `items` is append-stable, so appending one
+ * leaves every earlier insertion identical — those comparisons all replay from cache
+ * and only the newcomer is asked about, costing ~log2(n) questions. Merge sort
+ * re-partitioned on every count change and asked pairs it had never asked before.
+ * It is also fewer comparisons overall: ~n·log2n − 1.44n against merge sort's ~n·log2n.
+ */
+async function sortItems(arr, my) {
+  const out = [];
+  for (let n = 0; n < arr.length; n++) {
+    // Expose the partial order so "See list so far" can show real progress mid-sort.
+    partial = { placed: [...out], remaining: arr.slice(n) };
+    prefetch(arr[n + 1]);                       // the next item to be placed
+    let lo = 0, hi = out.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      // Exactly two slots can be probed next, depending on this answer — warm both.
+      prefetch(out[(lo + mid) >> 1], out[(mid + 1 + hi) >> 1]);
+      const v = await cmp(arr[n], out[mid], my);
+      if (v < 0) hi = mid; else lo = mid + 1;   // ties fall after, keeping order stable
+    }
+    out.splice(lo, 0, arr[n]);
+  }
+  return out;
+}
+
+/**
+ * Group items joined by a chain of "equal" answers. Without this, A = B and B = C only
+ * shares a rank when the pair happened to be compared directly and land adjacent.
+ */
+function tieClasses() {
+  const parent = new Map(items.map(it => [idOf(it), idOf(it)]));
+  const find = x => { while (parent.get(x) !== x) { parent.set(x, parent.get(parent.get(x))); x = parent.get(x); } return x; };
+  for (const [k, v] of log) {
+    if (v !== 0) continue;
+    const [a, b] = k.split(SEP);
+    if (!parent.has(a) || !parent.has(b)) continue;
+    const ra = find(a), rb = find(b);
+    if (ra !== rb) parent.set(ra, rb);
+  }
+  return find;
+}
+
+/**
+ * Answers the finished ranking disagrees with. Any cycle (A>B, B>C, C>A) must violate at
+ * least one of its own answers once flattened to a line, so this catches inconsistency
+ * without building the graph — and points at the specific answers you can act on.
+ */
+function findConflicts(rankById) {
+  const bad = new Map();
+  log.forEach(([k, v], n) => {
+    const [x, y] = k.split(SEP);
+    if (!rankById.has(x) || !rankById.has(y)) return;
+    const rx = rankById.get(x), ry = rankById.get(y);
+    if (v === 0) { if (rx !== ry) bad.set(n, "you called these equal, but they ranked apart"); }
+    else {
+      const [win, lose] = v < 0 ? [rx, ry] : [ry, rx];
+      if (win >= lose) bad.set(n, "this answer disagrees with the final ranking");
+    }
+  });
+  return bad;
+}
+
+async function run() {
+  const my = ++token;
+  pending = null;
+  paused = false;
+  order = [];
+  partial = { placed: [], remaining: [] };
+  conflicts = new Map();          // only meaningful once a sort completes; never carry it over
+  showPartialChrome(false);
+  answers = new Map(log);
+  const remaining = live();
+  $("#resolveNote").classList.add("hide");
+  $("#stopNote").classList.add("hide");
+  renderBench();
+  renderTierPanel();
+  show(remaining.length < 2 ? "done" : "compare");
+  try {
+    const sorted = await sortItems(remaining, my);
+    if (my === token) finish(sorted);
+  } catch (e) {
+    if (e !== ABORT) throw e;
+  }
+}
+
+let conflicts = new Map();
+let paused = false;
+
+// ── expanding a row ───────────────────────────────────────────────────────
+// A ranked row shows only its title, so media and descriptions were invisible once
+// the duelling was over. Which rows are open is VIEW state, not data: it is keyed on
+// item id so it survives a re-sort, but it is never saved and it clears with the list.
+let expanded = new Set();
+
+/** The media strip and description that sit under an expanded row. */
+function detailFor(it) {
+  const d = document.createElement("div");
+  d.className = "detail";
+  if (it.media.length) {
+    const strip = document.createElement("div");
+    strip.className = "strip";
+    strip.innerHTML = it.media.map(mediaTag).join("");
+    // Same gesture as the duel cards: a thumbnail opens for a closer look. The gallery
+    // is this item's own pictures, so arrowing through stays inside the row you opened.
+    const pool = it.media.filter(m => !VIDEO_EXT.test(m));
+    strip.onclick = e => {
+      const img = e.target.closest("img");
+      if (img) openLightbox(img.src, pool);
+    };
+    d.append(strip);
+  }
+  if (it.desc) {
+    const p = document.createElement("p");
+    p.className = "desc";
+    p.textContent = it.desc;
+    d.append(p);
+  }
+  return d;
+}
+
+function toggleExpand(id) {
+  if (expanded.has(id)) expanded.delete(id); else expanded.add(id);
+  redrawRanking();
+}
+
+/** Repaint the list in place. Cheaper and less disruptive than re-running the sort. */
+function redrawRanking() {
+  renderRanking(currentOrder());
+  applySearch();
+}
+
+const expandable = () => currentOrder()
+  .filter(i => items[i] && (items[i].media.length || items[i].desc))
+  .map(i => idOf(items[i]));
+
+$("#expandAll").onclick = () => { expanded = new Set(expandable()); redrawRanking(); };
+$("#collapseAll").onclick = () => { expanded.clear(); redrawRanking(); };
+
+/** Draw a ranked list into #results and return each item's rank by id. */
+function renderRanking(orderArr) {
+  const cls = tieClasses();
+  const ol = $("#results");
+  ol.innerHTML = "";
+  const rankById = new Map();
+  let rank = 0, lastTier = null;
+  orderArr.forEach((idx, pos) => {
+    const it = items[idx];
+    // The "separation line" — only in STRICT mode. There each tier really is one
+    // contiguous block, so the rule marks a real divide. Under weights the tiers
+    // interleave by design, and a rule at every change would just be noise.
+    const tier = priority.length && combine === "order" ? tierOf(it) : null;
+    if (tier !== null && tier !== lastTier) {
+      const rule = document.createElement("li");
+      rule.className = "tierrule";
+      rule.textContent = tierName(tier);
+      ol.append(rule);
+      lastTier = tier;
+    }
+    // Share a rank with the item above when a chain of "equal" answers connects them.
+    const tied = pos > 0 && cls(idOf(items[orderArr[pos - 1]])) === cls(idOf(items[idx]));
+    if (!tied) rank = pos + 1;
+    rankById.set(idOf(it), rank);
+    const li = document.createElement("li");
+    if (tied) li.className = "tied";
+    // Ranks stay TRUE ranks under a filter: #23 reads "23" even when it is the only row
+    // on screen, so a filtered view can never be misread as a short list.
+    li.innerHTML = `<span class="rank">${tied ? "=" : rank}</span>`;
+
+    // Only rows with something to reveal get an expander. A caret that opens nothing
+    // is worse than no caret, so plain items stay plain text.
+    const id = idOf(it);
+    const detailed = it.media.length > 0 || !!it.desc;
+    const title = document.createElement(detailed ? "button" : "span");
+    title.className = detailed ? "item titlebtn" : "item";
+    title.textContent = it.title;
+    if (detailed) {
+      title.setAttribute("aria-expanded", String(expanded.has(id)));
+      title.title = "Show media and description";
+      title.onclick = () => toggleExpand(id);
+    }
+    li.append(title);
+    if (it.tags.length) {
+      const tl = document.createElement("span");
+      tl.className = "taglist";
+      tl.innerHTML = it.tags.map(tagChip).join("");
+      li.append(tl);
+    }
+
+    const acts = document.createElement("span");
+    acts.className = "rowacts";
+    if (it.url) {
+      const a = document.createElement("a");
+      a.href = it.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "↗";
+      a.title = "Open in a new tab";
+      a.setAttribute("aria-label", `Open ${it.title} in a new tab`);
+      acts.append(a);
+    }
+    const ed = document.createElement("button");
+    ed.className = "rowact";
+    ed.textContent = "✎";
+    ed.title = "Edit this item";
+    ed.setAttribute("aria-label", `Edit ${it.title}`);
+    ed.onclick = () => openEditor(idx);
+    // The bench was one-way from the UI: every benched row had "Sub in", but nothing
+    // sent an item the other way once the ranking was finished. Answers are kept, so
+    // subbing back in later restores its place without re-asking anything.
+    const bn = document.createElement("button");
+    bn.className = "rowact bench";
+    bn.textContent = "Bench";
+    bn.title = "Take this out of the ranking — its answers are kept";
+    bn.setAttribute("aria-label", `Bench ${it.title}`);
+    bn.onclick = () => { keepPlace(); benched.add(idOf(it)); save(); run(); };
+    acts.append(ed, bn);
+    li.append(acts);
+    if (detailed && expanded.has(id)) li.append(detailFor(it));
+    li.classList.toggle("hide", !matches(it.title));
+    ol.append(li);
+  });
+  return rankById;
+}
+
+/**
+ * Step out of the chooser to see how far the sort has got, without abandoning it.
+ * The pending question stays alive — this only swaps which screen is showing — so
+ * resuming picks up exactly where it left off.
+ */
+function pauseToList(keepTab = false) {
+  if (!pending) return false;
+  paused = true;
+  renderRanking(partial.placed);
+  const ul = $("#unplaced");
+  ul.innerHTML = "";
+  for (const idx of partial.remaining) {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="rank">·</span><span class="item">${esc(items[idx].title)}</span>`;
+    ul.append(li);
+  }
+  $("#partialNote").textContent =
+    `Sorting in progress — ${partial.placed.length} of ${partial.placed.length + partial.remaining.length} placed so far. `
+    + "This order is provisional; the rest slot in as you keep answering.";
+  $("#unplacedNote").textContent = partial.remaining.length ? "Not placed yet" : "";
+  $("#cItems").textContent = partial.placed.length;
+  $("#cCmp").textContent = log.length;
+  conflicts = new Map();                 // a half-done order can't be judged for contradictions
+  renderComparisons();
+  if (!keepTab) doneTab = "ranking";     // re-pausing after an edit stays on the tab you were reading
+  applyTab();
+  showPartialChrome(true);
+  show("done");
+  return true;
+}
+
+function showPartialChrome(on) {
+  $("#partialNote").classList.toggle("hide", !on);
+  $("#resume").classList.toggle("hide", !on);
+  $("#unplaced").classList.toggle("hide", !on || !partial.remaining.length);
+  $("#unplacedNote").classList.toggle("hide", !on || !partial.remaining.length);
+  if (on) $("#conflictBanner").classList.add("hide");
+}
+
+/**
+ * Stay in the list across a re-sort. For benching OUT only.
+ *
+ * Benching an item can raise a NEW question — binary insertion may have used it as a
+ * pivot, so pairs it stood between were never asked directly. That question has to
+ * surface, but not by throwing you out of the ranking you were reading; this drops you
+ * back into the list view with "Resume sorting", which the paused flow already handles.
+ *
+ * Deliberately NOT used when subbing an item back IN. That direction is an explicit
+ * request to give something a position, so going straight to the chooser is the answer
+ * to what you just asked for, not an interruption.
+ */
+const keepPlace = () => { repause = screenNow() === "done"; };
+
+function resumeSorting() {
+  if (!pending) return false;
+  paused = false;
+  showPartialChrome(false);
+  show("compare");
+  return true;
+}
+
+function finish(sorted) {
+  // The sort settles the order; weights only re-read positions out of it. Keeping
+  // the sort's result in `partial` means an edit still resumes from where it was.
+  order = weightedOrder(sorted);
+  paused = false;
+  partial = { placed: [...sorted], remaining: [] };
+  showPartialChrome(false);
+  const rankById = renderRanking(order);
+
+  conflicts = findConflicts(rankById);
+  const banner = $("#conflictBanner");
+  banner.classList.toggle("hide", conflicts.size === 0);
+  if (conflicts.size) {
+    const many = conflicts.size > 1;
+    banner.textContent = `⚠ ${conflicts.size} answer${many ? "s" : ""} ${many ? "contradict" : "contradicts"} `
+      + "the ranking — your choices can't all be true at once.";
+    const b = document.createElement("button");
+    b.textContent = "Show them";
+    b.onclick = () => { doneTab = "comparisons"; applyTab(); };
+    banner.append(b);
+    const fix = document.createElement("button");
+    fix.textContent = "Resolve";
+    fix.title = "Reorder to contradict as few of your answers as possible";
+    fix.onclick = resolveConflicts;
+    banner.append(fix);
+  }
+
+  $("#cItems").textContent = order.length;
+  $("#cCmp").textContent = log.length;
+  $("#resolveNote").classList.add("hide");        // a fresh sort supersedes any earlier resolve
+  $("#settledNote").textContent = "";
+  renderComparisons();
+  renderTierPanel();
+  applyTab();
+  show("done");
+}
+
+/**
+ * Reorder to contradict as few answers as possible, and say by how much.
+ *
+ * Deliberately a BUTTON, not something that happens on its own. Automatic
+ * reordering would mean the ranking could shift under you for reasons you never
+ * asked about — the same reason the sort, not a model, still decides the order.
+ */
+function resolveConflicts() {
+  const pref = buildPrefs();
+  const before = disagreements(order, pref);
+  const next = minimiseDisagreements(order, pref);
+  const after = disagreements(next, pref);
+  if (after >= before) {
+    $("#resolveNote").classList.remove("hide");
+    $("#resolveNote").textContent =
+      `Already as consistent as this search can make it — ${before} answer`
+      + `${before === 1 ? "" : "s"} still contradicted. Those are genuine cycles: no order can `
+      + "satisfy them all, so the fix is to change an answer.";
+    return;
+  }
+  order = next;
+  // The conflicts that survive the BEST order are the real ones — the minimal set
+  // worth reconsidering, rather than artefacts of the order the sort happened to build.
+  conflicts = findConflicts(renderRanking(order));
+  renderComparisons();
+  applyTab();
+  $("#resolveNote").classList.remove("hide");
+  $("#resolveNote").textContent =
+    `Reordered — now contradicts ${after} of your answers, down from ${before}. `
+    + "This is a best-effort search rather than a proof of the true minimum, and it lasts "
+    + "until the next change re-runs the sort.";
+  save();
+}
+
+/** The answers themselves, newest last — each one deletable on its own. */
+function renderComparisons() {
+  const ul = $("#cmpList");
+  ul.innerHTML = "";
+  log.forEach(([k, v], n) => {
+    const [x, y] = k.split(SEP).map(idParts);
+    const li = document.createElement("li");
+    const txt = document.createElement("span");
+    txt.className = "item";
+    if (v === 0) {
+      txt.append(y.title, mark(" = "), x.title);
+    } else {
+      // The stored verdict is relative to the key's sorted order: -1 means x won.
+      const [won, lost] = v < 0 ? [x, y] : [y, x];
+      txt.append(won.title, mark(" › "), lost.title);
+    }
+    const btn = document.createElement("button");
+    btn.textContent = "delete";
+    btn.title = "Forget this answer — it will be asked again if the sort still needs it";
+    btn.onclick = () => { repause = paused; log.splice(n, 1); save(); run(); };
+    li.append(txt);
+    if (conflicts.has(n)) {
+      li.className = "conflict";
+      const why = document.createElement("span");
+      why.className = "why";
+      why.textContent = conflicts.get(n);
+      li.append(why);
+    }
+    li.append(btn);
+    // A row survives the filter if EITHER side matches — you are looking for the answers
+    // that involve a thing, not for answers whose left-hand side happens to be it.
+    li.classList.toggle("hide", !matches(x.title) && !matches(y.title));
+    ul.append(li);
+  });
+}
+
+const mark = t => { const s = document.createElement("span"); s.className = "beat"; s.textContent = t; return s; };
+
+let doneTab = "ranking";
+function applyTab() {
+  const isCmp = doneTab === "comparisons";
+  $("#results").classList.toggle("hide", isCmp);
+  $("#cmpList").classList.toggle("hide", !isCmp);
+  $("#cmpEmpty").classList.toggle("hide", !isCmp || log.length > 0);
+  $("#tabRanking").classList.toggle("active", !isCmp);
+  $("#tabComparisons").classList.toggle("active", isCmp);
+  $("#doneTitle").textContent = isCmp ? "Comparisons you made" : "Sorted — best first";
+  // Nothing to expand on the comparisons tab — those rows are the answers, not the items.
+  $("#expandAll").classList.toggle("hide", isCmp);
+  $("#collapseAll").classList.toggle("hide", isCmp);
+  applySearch();          // "showing N of M" counts whichever list is on screen
+}
+
+/** Benched items are out of the ranking, never destroyed — each keeps a way back in. */
+function renderBench() {
+  $("#benchCount").textContent = benched.size;
+  const ul = $("#benchList");
+  ul.innerHTML = "";
+  for (const id of benched) {
+    const it = byId(id);
+    if (!it) continue;                 // its item was edited away — nothing to show or restore
+    const idx = items.indexOf(it);
+    const li = document.createElement("li");
+    const label = document.createElement("span");
+    label.className = "item";
+    label.textContent = it.title;
+    const ed = document.createElement("button");
+    ed.textContent = "✎";
+    ed.title = "Edit this item";
+    ed.setAttribute("aria-label", `Edit ${it.title}`);
+    ed.onclick = () => openEditor(idx);
+    const btn = document.createElement("button");
+    btn.className = "subin";
+    btn.textContent = "Sub in";
+    btn.onclick = () => { repause = paused; benched.delete(id); save(); run(); };
+    li.append(label, ed, btn);
+    li.classList.toggle("hide", !matches(it.title));
+    ul.append(li);
+  }
+}
+
+const show = id => {
+  ["setup", "compare", "done", "import"].forEach(s => $("#" + s).classList.toggle("hide", s !== id));
+  const onSort = id === "compare" || id === "done";
+  $("#benchPanel").classList.toggle("hide", !onSort || !benched.size);
+  applySearch();
+};
+
+function answer(v) { if (pending) { const p = pending; pending = null; p(v); } }
+
+function undo() {
+  if (!log.length) return;
+  repause = paused;
+  log.pop();
+  save();
+  run();
+}
+
+/** Serialise back to the pipe/markdown syntax, so output can be re-pasted as input. */
+const toText = list => list.map(i =>
+  [i.title, i.url, ...i.media, i.tags.map(t => "#" + t).join(" "), i.desc]
+    .filter(Boolean).join(" | ")).join("\n");
+
+// ── export / import ───────────────────────────────────────────────────────
+// An interchange format, not a memory dump: comparisons are written as readable
+// {a, b, verdict} pairs rather than the internal composite key, so an export stays
+// hand-editable and keeps working if the internal key encoding ever changes again.
+
+const idParts = id => { const [title, url = ""] = id.split(SEP_ID); return { title, url }; };
+
+function exportPayload() {
+  return {
+    // /2 added `tags`, `priority`, and renamed `removed` to `benched`; /3 adds tier
+    // `weights` and the `combine` mode. Import still reads /1 and /2 — they simply
+    // have no weights, which is the same as every weight being 1.
+    format: "pairwise-sorter/3",
+    name: db.lists[db.current]?.name || "Untitled",
+    items,
+    priority,
+    weights,
+    combine,
+    benched: [...benched].map(idParts),
+    comparisons: log.map(([k, v]) => {
+      const [a, b] = k.split(SEP);
+      return { a: idParts(a), b: idParts(b), verdict: v };   // -1 a better · 1 b better · 0 equal
+    }),
+    ranking: ranked().map(i => i.title),   // derived convenience for humans; ignored on import
+  };
+}
+
+/** Build a fresh list from an exported payload. Returns the new list's id. */
+function importPayload(data) {
+  if (!data || typeof data !== "object") throw new Error("not a JSON object");
+  const source = Array.isArray(data) ? data : data.items;
+  if (!Array.isArray(source)) throw new Error("no `items` array");
+
+  const its = [...new Map(source
+    .map(o => typeof o === "string" ? item(o) : item(o.title ?? o.name ?? "", o.url ?? o.link ?? "",
+                                                     o.media ?? o.img ?? [], o.desc ?? o.description ?? "",
+                                                     asTags(o)))
+    .map(i => [idOf(i), i])).values()];
+  if (its.length < 2) throw new Error("needs at least 2 distinct items");
+
+  const kept = new Set(its.map(idOf));
+  let skipped = 0;
+  const lg = [];
+  for (const c of Array.isArray(data.comparisons) ? data.comparisons : []) {
+    const x = idOf(c?.a), y = idOf(c?.b);
+    if (x === y || !kept.has(x) || !kept.has(y)) { skipped++; continue; }
+    const v = c.verdict > 0 ? 1 : c.verdict < 0 ? -1 : 0;
+    // Re-normalise to the internal key order; the verdict flips with the operands.
+    lg.push(x < y ? [x + SEP + y, v] : [y + SEP + x, -v]);
+  }
+  // `benched` since /2, `removed` in /1 — read either.
+  const rm = [data.benched, data.removed].flatMap(a => Array.isArray(a) ? a : [])
+    .map(o => idOf(o)).filter(id => kept.has(id));
+  const tagged = new Set(its.flatMap(i => i.tags));
+  const pri = [], wts = [];
+  (Array.isArray(data.priority) ? data.priority : []).forEach((t, i) => {
+    const tag = typeof t === "string" ? t : tagOf(t?.tag ?? "");
+    if (!tagged.has(tag) || pri.includes(tag)) return;
+    pri.push(tag);
+    const w = Number(typeof t === "object" ? t.weight : data.weights?.[i]);
+    wts.push(w > 0 ? w : 1);
+  });
+
+  const id = newId();
+  db.lists[id] = { name: data.name || "Imported", items: its, log: lg, benched: rm,
+                   priority: pri, weights: wts,
+                   combine: data.combine === "weights" ? "weights" : "order" };
+  return { id, count: its.length, kept: lg.length, skipped };
+}
+
+// ── analysis ──────────────────────────────────────────────────────────────
+// Everything below READS the log and derives something to show. None of it picks
+// the next question — that stays with the sort. A comparison sort is already close
+// to an optimal question-picker, because it never spends a comparison on a pair
+// transitivity has already settled (Maystre & Grossglauser, ICML 2017), and keeping
+// it means adding an item still cannot reshuffle a ranking you had settled.
+
+/**
+ * How much of the ranking is already final, and can you stop.
+ *
+ * This deliberately measures PLACEMENT, not statistical confidence. A Bradley-Terry
+ * fit over this log was built and then removed: a comparison sort asks exactly one
+ * question per adjacency and never repeats one, so every adjacency rests on a single
+ * observation and no model can be confident about any of them. Measured on clean,
+ * fully-sorted data the best z-score reachable was ~0.7 (≈76%) at every list size and
+ * every regularisation strength — a "confidence" reading that could never move.
+ *
+ * What IS true, and more useful: binary insertion only ever ADDS to the placed set,
+ * so items already placed are in their final order relative to each other. Stopping
+ * early costs you the items not yet placed — it does not corrupt the ones that are.
+ */
+function placement() {
+  const placed = partial.placed.length;
+  const total = placed + partial.remaining.length;
+  return { placed, total, pct: total ? Math.round(placed / total * 100) : 100 };
+}
+const STOP_AT = 50;      // % placed at which offering to stop stops being premature
+
+// ── minimum feedback arc set ──────────────────────────────────────────────
+// A cycle in your answers means no order can satisfy all of them, so the honest
+// question is which order violates the FEWEST. On a complete tournament that is
+// Slater's problem; sparse, it is weighted minimum feedback arc set. Both are
+// NP-hard, so this is vertex-relocation local search seeded from the current
+// order — best effort, and the UI says so rather than claiming the true minimum.
+
+function buildPrefs() {
+  const pref = new Map();
+  for (const [k, v] of log) {
+    if (v === 0) continue;            // a tie is never a disagreement, whichever way it falls
+    const [x, y] = k.split(SEP);
+    const [w, l] = v < 0 ? [x, y] : [y, x];
+    pref.set(w + SEP + l, (pref.get(w + SEP + l) ?? 0) + 1);
+  }
+  return pref;
+}
+const beats = (pref, a, b) => pref.get(idOf(items[a]) + SEP + idOf(items[b])) ?? 0;
+
+/** Total weight of answers this order contradicts. */
+function disagreements(orderArr, pref) {
+  let total = 0;
+  for (let i = 0; i < orderArr.length; i++)
+    for (let j = i + 1; j < orderArr.length; j++)
+      total += beats(pref, orderArr[j], orderArr[i]);   // the later item won — a contradiction
+  return total;
+}
+
+function minimiseDisagreements(orderArr, pref, maxPasses = 25) {
+  let cur = [...orderArr];
+  for (let pass = 0; pass < maxPasses; pass++) {
+    let moved = false;
+    for (let i = 0; i < cur.length; i++) {
+      const v = cur[i];
+      const rest = cur.slice(0, i).concat(cur.slice(i + 1));
+      // Sweep every reinsertion point, carrying the running cost so the whole
+      // scan for one item is O(n) rather than O(n²).
+      let cost = rest.reduce((s, r) => s + beats(pref, r, v), 0);   // v ahead of everyone
+      let best = 0, bestCost = cost;
+      for (let at = 1; at <= rest.length; at++) {
+        const r = rest[at - 1];                     // r crosses from behind v to ahead of it
+        cost += beats(pref, v, r) - beats(pref, r, v);
+        if (cost < bestCost) { bestCost = cost; best = at; }
+      }
+      rest.splice(best, 0, v);
+      if (best !== i) moved = true;
+      cur = rest;
+    }
+    if (!moved) break;                              // a whole pass with nothing to gain
+  }
+  return cur;
+}
+
+// ── tag weights ───────────────────────────────────────────────────────────
+// The tier ORDER decides which questions get skipped; the tier WEIGHTS decide how
+// the answers combine. Both are needed and neither is redundant: without the order
+// the sort would have to ask the very cross-tier questions this feature exists to
+// avoid, and it is that sort order the weights then read positions out of.
+
+/**
+ * Rank-Order Centroid (Barron & Barrett 1996) — the priority vector that minimises
+ * worst-case error when ORDER is all you know. Naive 1/n, 2/n… would assert every
+ * gap is the same size, which no pairwise answer ever told us.
+ */
+function roc(rank, n) {
+  let s = 0;
+  for (let i = rank; i <= n; i++) s += 1 / i;
+  return s / n;
+}
+
+/**
+ * Re-rank by weighted score: sum of (tier weight × position within that tier).
+ *
+ * It has to be a SUM, not a weighted mean. Dividing by the total weight an item
+ * carries cancels the weight out entirely whenever an item has one tag — which is
+ * most of them — so "10x more important" and "equally important" produced identical
+ * rankings. Summing is also what AHP itself does across criteria.
+ *
+ * Untiered items keep the bottom band they have in strict mode: the tool still
+ * refuses to assert a position you never asserted. And an item carrying two weighted
+ * tags does score higher than one carrying a single tag, which is the honest reading
+ * — it is good along two axes you said you cared about.
+ */
+function weightedOrder(base) {
+  if (!priority.length || combine !== "weights") return base;
+  const within = new Map(priority.map(t => [t, []]));
+  for (const idx of base)
+    for (const t of items[idx].tags) within.get(t)?.push(idx);
+
+  const local = new Map();                         // "tag\0idx" -> ROC priority
+  for (const [t, list] of within)
+    list.forEach((idx, i) => local.set(t + SEP + idx, roc(i + 1, list.length)));
+
+  const scored = [], untiered = [];
+  for (const idx of base) {
+    const tags = items[idx].tags.filter(t => within.has(t));
+    if (!tags.length) { untiered.push(idx); continue; }
+    let score = 0;
+    for (const t of tags) score += weightOf(t) * local.get(t + SEP + idx);
+    scored.push([idx, score]);
+  }
+  // Stable within equal scores, so the sort's order still breaks every tie.
+  return scored.map((e, i) => [...e, i])
+    .sort((a, b) => b[1] - a[1] || a[2] - b[2])
+    .map(e => e[0])
+    .concat(untiered);
+}
+
+const weightOf = t => {
+  const i = priority.indexOf(t);
+  return i < 0 ? 0 : (weights[i] > 0 ? weights[i] : 1);
+};
+
+// ── search ────────────────────────────────────────────────────────────────
+// Display only. It hides rows; it never changes what gets compared, what gets stored,
+// or what gets saved. Title-only, because the title is the only field these views show.
+
+let query = "";
+const matches = title => !query || String(title).toLowerCase().includes(query);
+
+function setQuery(v) {
+  query = String(v ?? "").trim().toLowerCase();
+  for (const id of ["#searchDone", "#searchEdit"]) if ($(id).value !== v) $(id).value = v ?? "";
+  // Re-mark the rows, then re-run the chrome that reports what is hidden.
+  renderComparisons();
+  renderBench();
+  const src = currentOrder();
+  if (src.length) renderRanking(src);
+  applySearch();
+}
+
+/** Re-apply the filter's visible consequences: counts, dangling rules, and the save lock. */
+function applySearch() {
+  const on = !!query;
+
+  // Tier rules whose whole tier got filtered away would read as empty sections.
+  const rows = [...$("#results").children];
+  rows.forEach((li, i) => {
+    if (!li.classList.contains("tierrule")) return;
+    let anyVisible = false;
+    for (let j = i + 1; j < rows.length && !rows[j].classList.contains("tierrule"); j++)
+      if (!rows[j].classList.contains("hide")) { anyVisible = true; break; }
+    li.classList.toggle("hide", !anyVisible);
+  });
+
+  const shown = sel => [...$(sel).children].filter(li => !li.classList.contains("hide")
+    && !li.classList.contains("tierrule")).length;
+  const total = sel => [...$(sel).children].filter(li => !li.classList.contains("tierrule")).length;
+  const listSel = doneTab === "comparisons" ? "#cmpList" : "#results";
+  report("#searchDoneCount", "#searchDoneClear", on, shown(listSel), total(listSel));
+  $("#results").classList.toggle("filtering", on);
+  $("#cmpList").classList.toggle("filtering", on);
+  $("#benchList").classList.toggle("filtering", on);
+
+  // The setup view's textarea IS the input to Save & sort, so it is never filtered in
+  // place — a filtered textarea that got saved would drop every line it was hiding.
+  // Instead the matches are listed read-only beside it and saving is locked out.
+  const lines = $("#input").value.split("\n").map(l => l.trim()).filter(Boolean);
+  const hits = lines.filter(l => matches(parseLine(l).title));
+  $("#editFiltered").innerHTML = on
+    ? (hits.map(l => `<li>${esc(l)}</li>`).join("") || `<li class="sub">No titles match.</li>`)
+    : "";
+  $("#editFiltered").classList.toggle("hide", !on);
+  $("#input").classList.toggle("hide", on);
+  report("#searchEditCount", "#searchEditClear", on, hits.length, lines.length);
+  $("#start").disabled = on;
+  $("#start").textContent = on ? "Clear the filter to save" : "Save & sort";
+}
+
+function report(countSel, clearSel, on, shown, total) {
+  $(countSel).textContent = on ? `showing ${shown} of ${total}` : "";
+  $(clearSel).classList.toggle("hide", !on);
+}
+
+for (const [input, clear] of [["#searchDone", "#searchDoneClear"], ["#searchEdit", "#searchEditClear"]]) {
+  $(input).oninput = e => setQuery(e.target.value);
+  $(clear).onclick = () => setQuery("");
+}
+
+// ── renaming ──────────────────────────────────────────────────────────────
+/**
+ * Identity is title+url, so renaming an item used to orphan every answer about it — and
+ * report it as "answers dropped with deleted items" when nothing had been deleted.
+ * Carry the history across instead.
+ *
+ * The subtle part: a pair key stores its two ids in sorted order and the verdict is
+ * relative to THAT order. A rename can change which id sorts first, so the key has to be
+ * re-normalised and the verdict negated when it flips. Miss that and a rename silently
+ * inverts every answer about the renamed item.
+ */
+function migrateId(oldId, newId) {
+  if (oldId === newId) return;
+  log = log.map(([k, v]) => {
+    const [x, y] = k.split(SEP);
+    if (x !== oldId && y !== oldId) return [k, v];
+    const nx = x === oldId ? newId : x, ny = y === oldId ? newId : y;
+    return nx < ny ? [nx + SEP + ny, v] : [ny + SEP + nx, -v];
+  });
+  if (benched.has(oldId)) { benched.delete(oldId); benched.add(newId); }
+}
+
+// ── item editor ───────────────────────────────────────────────────────────
+// One form, opened from every place an item is shown. It writes straight to items[i]
+// and never round-trips through the textarea, so nothing can be lost by omission.
+
+let editing = -1, edTags = [], edMedia = [];
+
+function openEditor(idx) {
+  const it = items[idx];
+  if (!it) return;
+  editing = idx;
+  edTags = [...it.tags];
+  edMedia = [...it.media];
+  $("#edTitle").value = it.title;
+  $("#edUrl").value = it.url;
+  $("#edDesc").value = it.desc;
+  $("#edTagInput").value = "";
+  $("#edError").classList.add("hide");
+  $("#edTagOptions").innerHTML = allTags().map(t => `<option value="${esc(t)}">`).join("");
+  drawEdTags();
+  drawEdMedia();
+  $("#editor").showModal();
+  $("#edTitle").focus();
+}
+
+const editorOpen = () => $("#editor").open;
+
+function drawEdTags() {
+  $("#edTagChips").innerHTML = edTags.length ? "" : `<span class="sub">No tags yet.</span>`;
+  edTags.forEach((t, i) => {
+    const chip = document.createElement("span");
+    chip.className = "tag";
+    chip.append("#" + t);
+    const x = document.createElement("button");
+    x.type = "button";
+    x.textContent = "×";
+    x.setAttribute("aria-label", `Remove tag ${t}`);
+    x.onclick = () => { edTags.splice(i, 1); drawEdTags(); };
+    chip.append(x);
+    $("#edTagChips").append(chip);
+  });
+}
+
+function addEdTag() {
+  // Commas split, so pasting "gameplay, qol" does the obvious thing.
+  for (const raw of $("#edTagInput").value.split(",")) {
+    const t = tagOf(raw);
+    if (t && !edTags.includes(t)) edTags.push(t);
+  }
+  $("#edTagInput").value = "";
+  drawEdTags();
+}
+
+function drawEdMedia() {
+  const box = $("#edMediaRows");
+  box.innerHTML = "";
+  edMedia.forEach((m, i) => {
+    const row = document.createElement("div");
+    row.className = "mrow";
+    const inp = document.createElement("input");
+    inp.type = "url";
+    inp.value = m;
+    inp.setAttribute("aria-label", `Media URL ${i + 1}`);
+    inp.oninput = () => { edMedia[i] = inp.value; };
+    row.append(inp);
+    // Arrows rather than drag: reorderable from the keyboard, and a tenth of the code.
+    for (const [label, d] of [["↑", -1], ["↓", 1]]) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = label;
+      b.disabled = d < 0 ? i === 0 : i === edMedia.length - 1;
+      b.setAttribute("aria-label", `Move media ${i + 1} ${d < 0 ? "up" : "down"}`);
+      b.onclick = () => { [edMedia[i], edMedia[i + d]] = [edMedia[i + d], edMedia[i]]; drawEdMedia(); };
+      row.append(b);
+    }
+    const rm = document.createElement("button");
+    rm.type = "button";
+    rm.textContent = "✕";
+    rm.setAttribute("aria-label", `Remove media ${i + 1}`);
+    rm.onclick = () => { edMedia.splice(i, 1); drawEdMedia(); };
+    row.append(rm);
+    box.append(row);
+  });
+  if (!edMedia.length) box.innerHTML = `<span class="sub">No media yet.</span>`;
+}
+
+$("#edTagAdd").onclick = addEdTag;
+$("#edTagInput").onkeydown = e => {
+  if (e.key !== "Enter") return;
+  e.preventDefault();   // Enter in this field adds a tag; it must not submit the form
+  addEdTag();
+};
+$("#edMediaAdd").onclick = () => { edMedia.push(""); drawEdMedia(); };
+$("#edCancel").onclick = () => $("#editor").close();
+
+$("#editorForm").onsubmit = e => {
+  e.preventDefault();
+  const it = items[editing];
+  if (!it) return;
+  addEdTag();                                   // a tag left typed but not added still counts
+  const next = item($("#edTitle").value.trim(), $("#edUrl").value.trim(),
+                    edMedia.map(m => m.trim()).filter(Boolean), $("#edDesc").value.trim(), edTags);
+  if (!next.title) return fail("A title is required.");
+
+  const oldId = idOf(it), newId = idOf(next);
+  // A rename onto an existing item is a MERGE, not a rename — two histories that may
+  // disagree. Refuse it rather than guess which one wins.
+  if (oldId !== newId && items.some((o, j) => j !== editing && idOf(o) === newId))
+    return fail("Another item already has that title and link.");
+
+  const tierChanged = priority.length && tierOf(it) !== tierOf(next);
+  migrateId(oldId, newId);
+  items[editing] = next;
+  save();
+  $("#editor").close();
+
+  // Only a tier change can move things, and only then is it worth losing your place.
+  // Everything else repaints where it stands — including mid-duel, so an edit never
+  // costs you the question you were part-way through.
+  if (tierChanged || screenNow() === "done") { repause = paused; run(); }
+  else paintCards();
+};
+
+const fail = msg => { $("#edError").textContent = msg; $("#edError").classList.remove("hide"); };
+
+// ── tier order ────────────────────────────────────────────────────────────
+
+/** Answers of yours that the tier order would have decided the other way. Yours win. */
+function tierOverrides() {
+  if (!priority.length) return [];
+  const idx = new Map(items.map((it, i) => [idOf(it), i]));
+  return log.reduce((out, [k, v], n) => {
+    const [x, y] = k.split(SEP);
+    if (!idx.has(x) || !idx.has(y)) return out;
+    const t = tierVerdict(idx.get(x), idx.get(y));
+    if (t !== null && t !== v) out.push(n);
+    return out;
+  }, []);
+}
+
+function renderTierPanel() {
+  const tags = allTags();
+  $("#tierPanel").classList.toggle("hide", !tags.length);
+  $("#tierSummary").textContent = priority.length
+    ? priority.map(t => "#" + t).join(" › ") : "off";
+
+  const ol = $("#tierList");
+  ol.innerHTML = priority.length ? "" : `<li class="sub">No tiers — every pair gets asked about.</li>`;
+  priority.forEach((t, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="n">${i + 1}</span><span class="item">#${esc(t)}</span>`;
+    if (combine === "weights") {
+      const w = document.createElement("input");
+      w.type = "number";
+      w.className = "tierw";
+      w.min = "0.1"; w.step = "0.1";
+      w.value = String(weights[i] ?? 1);
+      w.setAttribute("aria-label", `Weight for ${t}`);
+      // Commit on change, not on every keystroke — re-cutting the ranking under a
+      // half-typed "0." would be both wrong and jarring.
+      w.onchange = () => {
+        const v = Number(w.value);
+        weights[i] = v > 0 ? v : 1;
+        retier();
+      };
+      li.append(w);
+    }
+    for (const [label, d] of [["↑", -1], ["↓", 1]]) {
+      const b = document.createElement("button");
+      b.textContent = label;
+      b.disabled = d < 0 ? i === 0 : i === priority.length - 1;
+      b.setAttribute("aria-label", `Move ${t} ${d < 0 ? "up" : "down"}`);
+      // `weights` is positional, so every move of a tier has to move its weight too.
+      b.onclick = () => {
+        [priority[i], priority[i + d]] = [priority[i + d], priority[i]];
+        [weights[i], weights[i + d]] = [weights[i + d], weights[i]];
+        retier();
+      };
+      li.append(b);
+    }
+    const rm = document.createElement("button");
+    rm.textContent = "✕";
+    rm.setAttribute("aria-label", `Remove tier ${t}`);
+    rm.onclick = () => { priority.splice(i, 1); weights.splice(i, 1); retier(); };
+    li.append(rm);
+    ol.append(li);
+  });
+
+  $("#combineOrder").checked = combine === "order";
+  $("#combineWeights").checked = combine === "weights";
+  $("#combineNote").textContent = combine === "weights"
+    ? "Every tier contributes in proportion to its weight, so a lower tier's best item can "
+      + "outrank a higher tier's worst. Position within a tier is scored by rank-order centroid, "
+      + "which is the fairest reading of an order when order is all you told it."
+    : "A higher tier beats a lower one outright, whatever the items are.";
+
+  const free = tags.filter(t => !priority.includes(t));
+  $("#tierAdd").innerHTML = free.map(t => `<option value="${esc(t)}">#${esc(t)}</option>`).join("");
+  $("#tierAdd").disabled = $("#tierAddBtn").disabled = !free.length;
+
+  const over = tierOverrides();
+  const note = $("#tierOverride");
+  note.classList.toggle("hide", !over.length);
+  if (over.length) {
+    note.textContent = `${over.length} answer${over.length > 1 ? "s" : ""} of yours `
+      + `${over.length > 1 ? "override" : "overrides"} the tier order — yours win. `;
+    const b = document.createElement("button");
+    b.textContent = "Drop them";
+    b.title = "Forget those answers and let the tier order decide those pairs";
+    b.onclick = () => {
+      const drop = new Set(tierOverrides());
+      log = log.filter((_, n) => !drop.has(n));
+      save();
+      retier();
+    };
+    note.append(b);
+  }
+
+  // Say out loud which part of the ranking is asserted rather than answered.
+  $("#tierNote").classList.toggle("hide", !priority.length);
+  $("#tierNote").textContent = !priority.length ? ""
+    : combine === "weights"
+      ? "Tiers are on, so positions across tiers come from the weights you set, not from "
+        + "answers you gave. Within a tier the order is entirely yours."
+      : "Tiers are on, so cross-tier positions come from the tier order you set, not from "
+        + "answers you gave. Within a tier the order is entirely yours.";
+}
+
+/** Re-cut the ranking after a tier change. No answers are re-asked — nothing is stale. */
+function retier() {
+  repause = paused;
+  save();
+  run();
+}
+
+$("#tierAddBtn").onclick = () => {
+  const t = $("#tierAdd").value;
+  if (t && !priority.includes(t)) { priority.push(t); weights.push(1); retier(); }
+};
+
+for (const el of ["#combineOrder", "#combineWeights"])
+  $(el).onchange = e => { combine = e.target.value; retier(); };
+
+// ── wiring ────────────────────────────────────────────────────────────────
+$("#start").onclick = () => {
+  const parsed = parseItems($("#input").value);
+  const byId = new Map();
+  const dupes = [];
+  for (const it of parsed) {
+    const id = idOf(it);
+    if (byId.has(id)) dupes.push(it.title); else byId.set(id, it);
+  }
+  if (byId.size < 2) { $("#setupHint").textContent = "Need at least 2 distinct items."; return; }
+
+  // Keep surviving items in their EXISTING order and append only genuinely new ones.
+  // That append-stability is what lets binary insertion replay every earlier answer
+  // from cache, so adding an item costs ~log2(n) questions instead of a re-sort.
+  // It also means reordering lines in the textarea changes nothing.
+  const oldIds = new Set(items.map(idOf));
+  const next = items.filter(it => byId.has(idOf(it))).map(it => byId.get(idOf(it)))
+    .concat([...byId.values()].filter(it => !oldIds.has(idOf(it))));
+
+  // Keep every answer whose BOTH items still exist; only deleted items lose theirs.
+  const kept = new Set(next.map(idOf));
+  const before = log.length;
+  log = log.filter(([k]) => k.split(SEP).every(id => kept.has(id)));
+  benched = new Set([...benched].filter(id => kept.has(id)));
+  items = next;
+  // A tier naming a tag no item carries any more is dead weight in the panel.
+  const stillTagged = new Set(items.flatMap(it => it.tags));
+  weights = priority.map((t, i) => [t, weights[i]]).filter(([t]) => stillTagged.has(t)).map(([, w]) => w);
+  priority = priority.filter(t => stillTagged.has(t));
+  save();
+
+  const dropped = before - log.length;
+  $("#setupHint").textContent = [
+    dupes.length && `Merged ${dupes.length} duplicate${dupes.length > 1 ? "s" : ""}: ${[...new Set(dupes)].join(", ")}.`,
+    dropped && `${dropped} answer${dropped > 1 ? "s" : ""} dropped with deleted items.`,
+  ].filter(Boolean).join(" ");
+  renderListPick();   // the picker shows each list's item count — refresh it after an edit
+  run();
+};
+
+// Only the Choose button votes. The card itself is inert, so images, links and video
+// inside it are free to be clicked without ever casting a vote.
+for (const [side, v] of [["A", -1], ["B", 1]]) {
+  const card = $(`#opt${side}`);
+  $(`#choose${side}`).onclick = () => answer(v);
+  card.onclick = e => {
+    const img = e.target.closest("img");
+    if (img) openLightbox(img.src);              // inspect it larger; never a vote
+  };
+  $(`#rm${side}`).onclick = () => {
+    const i = +card.dataset.idx;
+    if (!Number.isInteger(i) || !items[i]) return;   // no comparison rendered yet
+    benched.add(idOf(items[i]));
+    save();
+    run();
+  };
+  $(`#ed${side}`).onclick = () => {
+    const i = +card.dataset.idx;
+    if (Number.isInteger(i) && items[i]) openEditor(i);
+  };
+}
+
+// Every image on screen becomes a gallery, so ← / → step between both cards' pictures.
+let gallery = [], galleryAt = 0;
+
+function openLightbox(src, pool) {
+  // Built from the ITEMS, not the DOM, so paged-out pictures are still in the gallery.
+  // An expanded ranking row passes its own pictures instead of the two duel cards'.
+  gallery = pool ?? ["#optA", "#optB"]
+    .flatMap(s => items[+$(s).dataset.idx]?.media ?? [])
+    .filter(m => !VIDEO_EXT.test(m));
+  if (!gallery.length) gallery = [src];
+  galleryAt = Math.max(0, gallery.indexOf(src));
+  drawLightbox();
+  $("#lightbox").classList.remove("hide");
+  $("#lightboxClose").focus();
+}
+function drawLightbox() {
+  const many = gallery.length > 1;
+  $("#lightboxImg").src = gallery[galleryAt] ?? "";
+  $("#lightboxCount").textContent = many ? `${galleryAt + 1} / ${gallery.length}` : "";
+  $("#lightboxPrev").classList.toggle("hide", !many);
+  $("#lightboxNext").classList.toggle("hide", !many);
+}
+function stepLightbox(d) {
+  if (gallery.length < 2) return;
+  galleryAt = (galleryAt + d + gallery.length) % gallery.length;
+  drawLightbox();
+}
+const lightboxOpen = () => !$("#lightbox").classList.contains("hide");
+const closeLightbox = () => { $("#lightbox").classList.add("hide"); $("#lightboxImg").removeAttribute("src"); };
+$("#lightboxClose").onclick = closeLightbox;
+$("#lightboxPrev").onclick = () => stepLightbox(-1);
+$("#lightboxNext").onclick = () => stepLightbox(1);
+$("#lightbox").onclick = e => { if (e.target.id === "lightbox") closeLightbox(); };
+
+$("#pause").onclick = $("#stopNow").onclick = () => pauseToList();
+$("#resume").onclick = () => resumeSorting();
+$("#tie").onclick = () => answer(0);
+$("#undo").onclick = $("#undo2").onclick = undo;
+
+$("#edit").onclick = $("#edit2").onclick = () => {
+  token++;
+  pending = null;
+  $("#input").value = toText(items);
+  $("#setupHint").textContent = "";
+  show("setup");
+};
+// Answers and the bench are separate decisions. Clearing your answers said nothing
+// about wanting every benched item back in the ranking — and putting them back is a
+// click away ("Sub all in") while re-benching a dozen items is not.
+$("#resetAnswers").onclick = $("#resetAnswers2").onclick = () => {
+  log = [];
+  save();
+  run();
+};
+
+$("#subAll").onclick = () => {
+  repause = paused;
+  benched = new Set();
+  save();
+  run();
+};
+
+$("#listPick").onchange = e => openList(e.target.value);
+$("#newList").onclick = () => newList();
+$("#listName").oninput = () => {
+  const l = db.lists[db.current];
+  if (!l) return;
+  l.name = $("#listName").value;
+  save();
+  renderListPick();
+};
+
+// Two-click delete instead of confirm() — a modal dialog would block the page.
+let armed = false;
+const disarm = () => {
+  armed = false;
+  $("#deleteList").textContent = "Delete";
+  $("#deleteList").classList.remove("armed");
+};
+$("#deleteList").onclick = () => {
+  if (!armed) {
+    armed = true;
+    $("#deleteList").textContent = "Really delete?";
+    $("#deleteList").classList.add("armed");
+    setTimeout(disarm, 4000);
+    return;
+  }
+  delete db.lists[db.current];
+  db.current = null;
+  disarm();
+  const next = Object.keys(db.lists)[0];
+  if (next) openList(next); else newList();
+};
+
+/** navigator.clipboard needs focus + permission; execCommand still works inside a click. */
+async function toClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch { /* not focused, or no permission — try the legacy path before giving up */ }
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+  document.body.append(ta);
+  ta.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch { ok = false; }
+  ta.remove();
+  return ok;
+}
+
+/** Report what actually happened — never claim "Copied" without checking. */
+async function copyBtn(btn, label, text) {
+  const ok = await toClipboard(text);
+  btn.textContent = ok ? "Copied" : "Copy failed — use Export JSON box";
+  if (!ok) $("#importText").value = text;   // still reachable: the text is put somewhere selectable
+  setTimeout(() => btn.textContent = label, ok ? 1200 : 2600);
+}
+
+$("#tabRanking").onclick = () => { doneTab = "ranking"; applyTab(); };
+$("#tabComparisons").onclick = () => { doneTab = "comparisons"; applyTab(); };
+$("#copyJson").onclick = e =>
+  copyBtn(e.target, "Export JSON", JSON.stringify(exportPayload(), null, 2));
+
+$("#importBtn").onclick = () => {
+  token++;                      // pause any sort in progress; Cancel puts it back
+  pending = null;
+  $("#importHint").textContent = "";
+  show("import");
+};
+$("#cancelImport").onclick = () => { items.length > 1 ? run() : show("setup"); };
+$("#doImport").onclick = () => {
+  let result;
+  try {
+    result = importPayload(JSON.parse($("#importText").value));
+  } catch (err) {
+    $("#importHint").textContent = "Could not import: " + err.message;
+    return;
+  }
+  $("#importText").value = "";
+  openList(result.id);
+  $("#setupHint").textContent =
+    `Imported ${result.count} items and ${result.kept} comparisons`
+    + (result.skipped ? ` (${result.skipped} skipped — items not in the list)` : "") + ".";
+};
+
+// ── scripting API ─────────────────────────────────────────────────────────
+// Every button on this page has an equivalent here, so an agent never has to click
+// or screenshot. Each call returns JSON-serialisable state: a browser tool returns
+// the last expression, so "do it AND tell me what happened" must be one call.
+
+const screenNow = () => ["setup", "compare", "done", "import"]
+  .find(s => !$("#" + s).classList.contains("hide")) ?? "setup";
+/**
+ * Resolve a list reference (id or name) to exactly one id.
+ * Names are NOT unique — nothing stops two lists sharing one. Picking the first match
+ * silently acted on the wrong list, which read as "delete did nothing" when the other
+ * copy stayed behind. Ambiguity is now an error, and ids are always accepted.
+ */
+function resolveList(ref) {
+  if (db.lists[ref]) return ref;                       // already an id
+  const hits = Object.keys(db.lists).filter(id => db.lists[id].name === ref);
+  if (hits.length === 1) return hits[0];
+  const have = Object.values(db.lists).map(l => l.name).join(", ");
+  if (!hits.length) throw new Error(`no list named ${JSON.stringify(ref)} — have: ${have}`);
+  throw new Error(
+    `${hits.length} lists are named ${JSON.stringify(ref)} — pass an id instead: ${hits.join(", ")}`);
+}
+const asItems = arr => (Array.isArray(arr) ? arr : [])
+  .map(o => typeof o === "string" ? item(o)
+    : item(o.title ?? o.name ?? "", o.url ?? o.link ?? "", o.media ?? o.img ?? [],
+           o.desc ?? o.description ?? "", asTags(o)));
+const pub = it => it && { title: it.title, url: it.url, media: it.media, desc: it.desc, tags: it.tags };
+
+/** Resolve an item by exact title. Ambiguity is an error, never a silent first-match. */
+function findItem(title) {
+  const hits = items.map((it, i) => [it, i]).filter(([it]) => it.title === title);
+  if (hits.length === 1) return hits[0][1];
+  if (!hits.length) throw new Error(`no item titled ${JSON.stringify(title)}`);
+  throw new Error(`${hits.length} items are titled ${JSON.stringify(title)} — titles must be unique to address one`);
+}
+
+// While a sort is running, `order` is last run's result — report the live partial
+// order instead, so `placed` and `ranking` can never disagree.
+const inProgress = () => !!pending || paused;
+const currentOrder = () => inProgress() ? partial.placed : order;
+
+// Answering resolves a promise and the sort continues in microtasks, so a synchronous
+// read straight after the last answer would see a half-finished order. Mutating methods
+// return a settled snapshot instead: `await P.answer("a")` is always the true state.
+const settled = async () => { await new Promise(r => setTimeout(r, 0)); return apiState(); };
+
+function apiState() {
+  const remaining = live();
+  const a = +$("#optA").dataset.idx, b = +$("#optB").dataset.idx;
+  const asking = screenNow() === "compare" && pending;
+  return {
+    list: db.lists[db.current]?.name ?? null,
+    screen: screenNow(),
+    paused,
+    items: items.length,
+    active: remaining.length,
+    benched: [...benched].map(id => byId(id)?.title).filter(Boolean),
+    answered: log.length,
+    estimatedTotal: budget(),
+    placed: currentOrder().length,
+    complete: !inProgress() && screenNow() === "done",
+    pending: asking ? { a: pub(items[a]), b: pub(items[b]) } : null,
+    conflicts: conflicts.size,
+    priority: [...priority],
+    weights: [...weights],
+    combine,
+    tierOverrides: tierOverrides().length,
+    tags: allTags(),
+    query,
+    ranking: currentOrder().map(i => items[i]?.title).filter(Boolean),
+  };
+}
+
+window.pairwiseSorter = {
+  version: "1",
+
+  help() {
+    return [
+      "pairwiseSorter v1 — rank a list by pairwise comparison. Every UI action has a method here.",
+      "",
+      "READ",
+      "  help()               this text",
+      "  state()              current list, screen, progress, the pair being asked, conflict count",
+      "                       (readers are sync; every method that CHANGES something returns a",
+      "                        Promise of the settled state — await it)",
+      "  ranking()            [{rank, title, url, tied}] — final, or partial while sorting",
+      "  comparisons()        [{a, b, verdict, conflicts}] every answer given (verdict: -1 a, 1 b, 0 equal)",
+      "  conflicts()          only the answers the ranking contradicts",
+      "  lists()              [{name, items, answered, complete}]",
+      "",
+      "LISTS",
+      "  newList(name?)       create and switch to an empty list",
+      "  openList(ref)        switch to a list by name or id (names are not unique — ids always work)",
+      "  renameList(name)     rename the current list",
+      "  deleteList(ref?)     delete a list by name or id (defaults to the current one)",
+      "",
+      "ITEMS   item = string | {title, url?, media?: string[], desc?, tags?: string[]}",
+      "  load(items, {name, replace=true})   set the list's items (the usual entry point)",
+      "  addItems(items)      append; only the new items get asked about (~log2(n) questions each)",
+      "  setItemsText(text)   same, using the textarea syntax (pipes / markdown links / #tags / JSON)",
+      "  editItem(title, patch)    change any field — {title, url, desc, media, tags}. Renaming",
+      "                            CARRIES the item's answers across; a rename onto an existing",
+      "                            item is refused rather than merged",
+      "  tag(title, tags) / untag(title, tags)   add or remove tags (tags never cost you answers)",
+      "  bench(title)         take an item out of the ranking (kept, not deleted). Its answers",
+      "                       survive, so subbing it back in restores its place, re-asking nothing",
+      "  benchMany(titles)    bench a batch with ONE re-sort — use this for bulk, not a loop",
+      "  subIn(title)         put a benched item back",
+      "  removeItem(title) / restoreItem(title)   the pre-'benched' names, still supported",
+      "",
+      "TIERS   a DECLARED order over tags. Cross-tier pairs are answered from it instead of",
+      "        being asked, so you never compare across the divide. Nothing is inferred, and",
+      "        synthesised verdicts are never written to the log.",
+      "  priority()           the current tiers, best first, as [{tag, weight}]",
+      "  setPriority(tags)    set them — ['gameplay','visual'] or [{tag,weight}]. [] turns tiers off",
+      "  combineBy(mode)      'order' = a higher tier wins outright · 'weights' = tiers contribute",
+      "                       in proportion, so a lower tier's best can outrank a higher tier's worst",
+      "  overrides()          your own answers that contradict the tier order (yours win)",
+      "  dropOverrides()      forget those answers and let the tier order decide those pairs",
+      "",
+      "STOPPING / CONSISTENCY   read-only; none of this decides what gets asked next",
+      "  placement()          {placed, total, pct} — placed items are ALREADY in their final",
+      "                       order, so stopping early costs you the unplaced ones and nothing else",
+      "  resolve()            reorder to contradict as few of your answers as possible",
+      "                       (best-effort local search, not a proof of the true minimum)",
+      "",
+      "SEARCH  display only — never changes what is compared, stored or saved",
+      "  search(text)         filter every list view by title. search('') clears it",
+      "",
+      "ANSWERING",
+      "  answer('a'|'b'|'equal')   answer the current question ('left'/'right' also accepted)",
+      "  undo()                    drop the most recent answer",
+      "  deleteComparison(i)       drop answer i (index from comparisons())",
+      "  resetAnswers()            clear every answer — items and the bench are untouched",
+      "  subAll()                  bring every benched item back into the ranking",
+      "",
+      "VIEWS",
+      "  pause() / resume()   leave the chooser to see the partial order, then go back",
+      "  goto('setup'|'compare'|'done'|'import')",
+      "  tab('ranking'|'comparisons')",
+      "  expand(title, on?)   open a ranked row to show its media and description",
+      "  expandAll() / collapseAll()   every row that has something to show",
+      "",
+      "DATA",
+      "  schema()             stored-data version this build expects. Saved data carries its",
+      "                       own `version` and is migrated up to this on load, once, in order",
+      "  exportJSON()         {format, name, items, priority, benched, comparisons, ranking}",
+      "  importJSON(data)     load an export as a NEW list, leaving existing ones alone",
+      "",
+      "NOTE: answer() exists for replay and testing. If an AI answers the questions, the",
+      "ranking is the AI's preferences, not yours — which defeats the point of this tool.",
+    ].join("\n");
+  },
+
+  state: apiState,
+
+  ranking() {
+    const src = currentOrder();
+    const cls = tieClasses();
+    let rank = 0;
+    return src.map((idx, pos) => {
+      const tied = pos > 0 && cls(idOf(items[src[pos - 1]])) === cls(idOf(items[idx]));
+      if (!tied) rank = pos + 1;
+      return { rank, tied, ...pub(items[idx]) };
+    });
+  },
+
+  comparisons() {
+    return log.map(([k, v], i) => {
+      const [x, y] = k.split(SEP).map(idParts);
+      return { index: i, a: x, b: y, verdict: v, conflicts: conflicts.has(i), why: conflicts.get(i) ?? null };
+    });
+  },
+  conflicts() { return this.comparisons().filter(c => c.conflicts); },
+
+  lists() {
+    return Object.entries(db.lists).map(([id, l]) => ({
+      id, name: l.name, items: (l.items ?? []).length, answered: (l.log ?? []).length,
+      current: id === db.current,
+    }));
+  },
+
+  newList(name) {
+    newList();
+    if (name) { db.lists[db.current].name = name; $("#listName").value = name; save(); renderListPick(); }
+    return settled();
+  },
+  openList(ref) {
+    openList(resolveList(ref));
+    return settled();
+  },
+  renameList(name) {
+    if (!db.lists[db.current]) throw new Error("no current list");
+    db.lists[db.current].name = String(name);
+    $("#listName").value = String(name);
+    save(); renderListPick();
+    return settled();
+  },
+  deleteList(ref) {
+    const id = ref === undefined ? db.current : resolveList(ref);
+    if (!id) throw new Error("no current list to delete");
+    delete db.lists[id];
+    if (db.current === id) {
+      db.current = null;
+      const next = Object.keys(db.lists)[0];
+      if (next) openList(next); else newList();
+    } else save();
+    return settled();
+  },
+
+  load(list, { name, replace = true } = {}) {
+    const next = asItems(list);
+    if (!next.length) throw new Error("no items given");
+    // The LIST needs 2+, not the batch — addItems([oneThing]) is perfectly valid.
+    if ((replace ? next.length : items.length + next.length) < 2)
+      throw new Error("need at least 2 items in the list");
+    if (name) this.renameList(name);
+    setQuery("");                    // saving is locked while filtering — clear it first
+    $("#input").value = toText((replace ? [] : items).concat(next));
+    $("#start").click();
+    return settled();
+  },
+  addItems(list) { return this.load(list, { replace: false }); },
+  setItemsText(text) {
+    setQuery("");
+    $("#input").value = String(text);
+    $("#start").click();
+    return settled();
+  },
+
+  bench(title) { return this.benchMany([title]); },
+  /**
+   * Bench any number of items with ONE re-sort and ONE returned state object.
+   *
+   * Benching in a loop over a scripting bridge pays the round-trip and the cost of
+   * serialising a whole state snapshot — a 250-item `ranking` array among other
+   * things — on every single call. In-page the per-call work is ~6ms flat regardless
+   * of media, so the overhead lives in the round-trip; collapsing N of them into one
+   * fixes that wherever it actually sits.
+   *
+   * Every title is resolved BEFORE anything mutates, so one typo fails the whole
+   * batch instead of leaving half of it applied.
+   */
+  benchMany(titles) {
+    const ids = [titles].flat().map(t => idOf(items[findItem(t)]));
+    for (const id of ids) benched.add(id);
+    keepPlace();
+    save(); run();
+    return settled();
+  },
+  subIn(title) {
+    const id = [...benched].find(r => byId(r)?.title === title);
+    if (!id) throw new Error(`${JSON.stringify(title)} is not benched`);
+    benched.delete(id);
+    repause = paused;
+    save(); run();
+    return settled();
+  },
+  // The old names, kept so anything already scripted against v1 keeps working.
+  removeItem(title) { return this.bench(title); },
+  restoreItem(title) { return this.subIn(title); },
+
+  editItem(title, patch = {}) {
+    const i = findItem(title);
+    const cur = items[i];
+    const next = item(patch.title ?? cur.title, patch.url ?? cur.url,
+                      patch.media ?? cur.media, patch.desc ?? cur.desc, patch.tags ?? cur.tags);
+    if (!next.title) throw new Error("a title is required");
+    const oldId = idOf(cur), newId = idOf(next);
+    if (oldId !== newId && items.some((o, j) => j !== i && idOf(o) === newId))
+      throw new Error("another item already has that title and link");
+    migrateId(oldId, newId);
+    items[i] = next;
+    const stillTagged = new Set(items.flatMap(it => it.tags));
+    priority = priority.filter(t => stillTagged.has(t));
+    repause = paused;
+    save(); run();
+    return settled();
+  },
+  tag(title, tags) {
+    const cur = items[findItem(title)];
+    return this.editItem(title, { tags: [...cur.tags, ...[tags].flat()] });
+  },
+  untag(title, tags) {
+    const drop = new Set([tags].flat().map(tagOf));
+    const cur = items[findItem(title)];
+    return this.editItem(title, { tags: cur.tags.filter(t => !drop.has(t)) });
+  },
+
+  priority() { return priority.map((tag, i) => ({ tag, weight: weights[i] ?? 1 })); },
+  setPriority(tags) {
+    const known = new Set(allTags());
+    // Accepts plain tags or {tag, weight} — a weight only matters in "weights" mode.
+    const seen = new Map();
+    for (const e of [tags].flat().filter(Boolean)) {
+      const tag = tagOf(typeof e === "string" ? e : e.tag ?? e.name ?? "");
+      if (tag && !seen.has(tag)) seen.set(tag, Number(typeof e === "object" ? e.weight : 1) > 0
+        ? Number(e.weight) : 1);
+    }
+    const unknown = [...seen.keys()].filter(t => !known.has(t));
+    if (unknown.length)
+      throw new Error(`no item carries ${unknown.map(t => "#" + t).join(", ")} — have: ${[...known].join(", ") || "none"}`);
+    priority = [...seen.keys()];
+    weights = [...seen.values()];
+    retier();
+    return settled();
+  },
+  combineBy(mode) {
+    if (!["order", "weights"].includes(mode))
+      throw new Error("combineBy expects 'order' or 'weights'");
+    combine = mode;
+    retier();
+    return settled();
+  },
+  placement,
+  resolve() {
+    const pref = buildPrefs();
+    const before = disagreements(order, pref);
+    resolveConflicts();
+    return { before, after: disagreements(order, pref), note: $("#resolveNote").textContent };
+  },
+  overrides() {
+    const all = this.comparisons();
+    return tierOverrides().map(n => all[n]);
+  },
+  dropOverrides() {
+    const drop = new Set(tierOverrides());
+    log = log.filter((_, n) => !drop.has(n));
+    save(); retier();
+    return settled();
+  },
+
+  search(text) { setQuery(text ?? ""); return settled(); },
+
+  answer(choice) {
+    const map = { a: -1, left: -1, b: 1, right: 1, equal: 0, tie: 0, same: 0 };
+    const v = map[String(choice).toLowerCase()];
+    if (v === undefined) throw new Error("answer expects 'a' | 'b' | 'equal'");
+    if (!pending) throw new Error("nothing is being asked right now — screen is " + screenNow());
+    answer(v);
+    return settled();
+  },
+  undo() { undo(); return settled(); },
+  deleteComparison(i) {
+    if (!Number.isInteger(i) || i < 0 || i >= log.length) throw new Error(`no comparison at index ${i}`);
+    repause = paused;
+    log.splice(i, 1); save(); run();
+    return settled();
+  },
+  resetAnswers() { log = []; save(); run(); return settled(); },
+  subAll() { benched = new Set(); save(); run(); return settled(); },
+
+  pause() { if (!pauseToList()) throw new Error("nothing to pause — no question is open"); return settled(); },
+  resume() { if (!resumeSorting()) throw new Error("nothing to resume"); return settled(); },
+  goto(screen) {
+    if (!["setup", "compare", "done", "import"].includes(screen)) throw new Error("unknown screen: " + screen);
+    if (screen === "compare" && pending) resumeSorting(); else show(screen);
+    return settled();
+  },
+  tab(which) {
+    if (!["ranking", "comparisons"].includes(which)) throw new Error("tab expects 'ranking' or 'comparisons'");
+    doneTab = which; applyTab();
+    return settled();
+  },
+
+  expand(title, on = true) {
+    const it = items[findItem(title)];
+    if (!it.media.length && !it.desc)
+      throw new Error(`${JSON.stringify(title)} has no media or description to show`);
+    if (on) expanded.add(idOf(it)); else expanded.delete(idOf(it));
+    redrawRanking();
+    return settled();
+  },
+  expandAll() { expanded = new Set(expandable()); redrawRanking(); return settled(); },
+  collapseAll() { expanded.clear(); redrawRanking(); return settled(); },
+
+  schema() { return SCHEMA; },
+  exportJSON() { return exportPayload(); },
+  async importJSON(data) {
+    const r = importPayload(typeof data === "string" ? JSON.parse(data) : data);
+    openList(r.id);
+    return { ...(await settled()), imported: { items: r.count, comparisons: r.kept, skipped: r.skipped } };
+  },
+};
+
+
+console.log("%cpairwiseSorter", "font-weight:bold",
+  "— scripting API available. Run window.pairwiseSorter.help() for the full surface.");
+addEventListener("keydown", e => {
+  // The editor owns every key while it is open. Without this, an arrow press with focus
+  // on one of its buttons would fall through and cast a vote behind the dialog.
+  if (editorOpen()) return;
+  // While the lightbox is open it owns the arrows — they must never leak through and vote.
+  if (lightboxOpen()) {
+    const act = { Escape: closeLightbox, ArrowLeft: () => stepLightbox(-1), ArrowRight: () => stepLightbox(1) }[e.key];
+    if (act) { e.preventDefault(); act(); }
+    return;
+  }
+  if ($("#compare").classList.contains("hide")) return;
+  if (e.target.matches("input, textarea, select")) return;   // don't hijack keys while renaming
+  // Space is NOT bound here: it activates whichever button has keyboard focus.
+  const k = { ArrowLeft: -1, ArrowRight: 1, ArrowDown: 0, "=": 0 }[e.key];
+  if (k !== undefined) { e.preventDefault(); answer(k); }
+  else if (e.key === "Backspace") { e.preventDefault(); undo(); }
+});
+
+// ── boot ──────────────────────────────────────────────────────────────────
+db = loadDb();
+const firstList = db.lists[db.current] ? db.current : Object.keys(db.lists)[0];
+if (firstList) openList(firstList); else newList();
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>
+

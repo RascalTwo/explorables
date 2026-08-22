@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+  <meta name="viz:triaged" content="true">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jujutsu (jj) — the pitch, the catches</title>
+<meta name="viz:title" content="Jujutsu (jj) — the pitch, the catches">
+<meta name="viz:description" content="What Jujutsu (jj) genuinely buys you over Git — the real wins and the rough edges that bite — so you can judge whether the switch is worth it.">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --bg-3: #161a25;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --jj: #6ee7b7;
+    --jj-2: #34d399;
+    --jj-glow: rgba(110, 231, 183, 0.18);
+    --git: #f59e0b;
+    --git-2: #fb923c;
+    --git-glow: rgba(245, 158, 11, 0.15);
+    --danger: #f87171;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.55; }
+  body { background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(110,231,183,0.07), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(245,158,11,0.05), transparent 60%),
+    var(--bg);
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 64px 28px 120px; }
+  h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.01em; }
+  h1 { font-size: 3.4rem; line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.03em; }
+  h2 { font-size: 2rem; margin: 80px 0 12px; letter-spacing: -0.02em; }
+  h3 { font-size: 1.2rem; margin: 0 0 8px; }
+  p { color: var(--fg-dim); margin: 0 0 14px; }
+  code, kbd { font-family: var(--mono); font-size: 0.92em; }
+  a { color: var(--jj); text-decoration: none; border-bottom: 1px dotted var(--jj); }
+  a:hover { color: var(--jj-2); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+
+  /* hero */
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.78rem; color: var(--jj); background: var(--jj-glow); padding: 4px 10px; border-radius: 999px; margin-bottom: 24px; letter-spacing: 0.04em; }
+  .eyebrow .dot { width: 6px; height: 6px; background: var(--jj); border-radius: 50%; box-shadow: 0 0 8px var(--jj); }
+  .lede { font-size: 1.25rem; color: var(--fg-dim); max-width: 720px; margin-bottom: 32px; }
+  .lede strong { color: var(--fg); font-weight: 600; }
+
+  /* tagline grid */
+  .pitch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0 12px; }
+  .pitch .tile { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 16px; }
+  .pitch .tile .k { font-family: var(--mono); font-size: 0.74rem; color: var(--fg-faint); letter-spacing: 0.08em; text-transform: uppercase; }
+  .pitch .tile .v { font-size: 1.05rem; color: var(--fg); margin-top: 6px; font-weight: 600; }
+  .pitch .tile .s { font-size: 0.9rem; color: var(--fg-dim); margin-top: 6px; }
+
+  /* concept cards */
+  .concepts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 20px; position: relative; overflow: hidden; }
+  .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--jj), transparent); opacity: 0.5; }
+  .card .num { position: absolute; top: 16px; right: 18px; font-family: var(--mono); font-size: 0.8rem; color: var(--fg-faint); }
+  .card h3 { color: var(--fg); }
+  .card .git-says, .card .jj-says { display: block; margin-top: 12px; font-size: 0.92rem; line-height: 1.5; }
+  .card .git-says { color: var(--fg-dim); }
+  .card .jj-says { color: var(--fg); }
+  .card .git-says::before { content: "git: "; color: var(--git); font-family: var(--mono); font-size: 0.78rem; }
+  .card .jj-says::before { content: "jj:  "; color: var(--jj); font-family: var(--mono); font-size: 0.78rem; white-space: pre; }
+
+  /* workflow comparison */
+  .compare { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; margin-top: 24px; overflow: hidden; }
+  .compare .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); background: var(--bg-3); }
+  .compare .tab { flex: 1; padding: 14px 18px; font-family: var(--mono); font-size: 0.85rem; color: var(--fg-dim); cursor: pointer; background: transparent; border: 0; border-right: 1px solid var(--line); text-align: left; transition: all 0.15s; }
+  .compare .tab:last-child { border-right: 0; }
+  .compare .tab:hover { color: var(--fg); background: rgba(255,255,255,0.02); }
+  .compare .tab.active { color: var(--fg); background: var(--bg-2); border-bottom: 2px solid var(--jj); margin-bottom: -1px; }
+  .compare .body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .compare .col { padding: 20px 22px; }
+  .compare .col + .col { border-left: 1px solid var(--line); }
+  .compare .col-h { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .compare .col.git .col-h { color: var(--git); }
+  .compare .col.jj .col-h { color: var(--jj); }
+  .compare .col-h .badge { background: var(--bg-3); border: 1px solid var(--line); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; }
+  .compare .col.git .col-h .badge { color: var(--git); }
+  .compare .col.jj .col-h .badge { color: var(--jj); }
+  .compare pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 0 0 12px; font-size: 0.86rem; line-height: 1.6; overflow-x: auto; color: var(--fg); white-space: pre; }
+  .compare pre .cmd { color: var(--jj); }
+  .compare pre .git-cmd { color: var(--git); }
+  .compare pre .cm { color: var(--fg-faint); }
+  .compare pre .out { color: var(--fg-dim); }
+  .compare .note { font-size: 0.88rem; color: var(--fg-dim); }
+  .compare .pain { font-size: 0.85rem; color: var(--git); margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--git); }
+  .compare .win { font-size: 0.85rem; color: var(--jj); margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--jj); }
+
+  /* table */
+  .table-wrap { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 14px 18px; text-align: left; font-size: 0.92rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  th { background: var(--bg-3); font-family: var(--mono); font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-dim); }
+  th.git-h { color: var(--git); }
+  th.jj-h { color: var(--jj); }
+  td.dim { color: var(--fg-dim); }
+  td code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  /* dont-use list */
+  .dont { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 4px 0; margin-top: 16px; }
+  .dont .row { display: grid; grid-template-columns: 36px 1fr; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--line); align-items: start; }
+  .dont .row:last-child { border-bottom: 0; }
+  .dont .icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(248,113,113,0.1); color: var(--danger); display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--mono); flex-shrink: 0; }
+  .dont h4 { margin: 0 0 4px; font-size: 1rem; color: var(--fg); }
+  .dont p { margin: 0; font-size: 0.92rem; }
+
+  /* verdict */
+  .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  .verdict .box { padding: 22px; border-radius: 14px; border: 1px solid var(--line); }
+  .verdict .yes { background: linear-gradient(180deg, rgba(110,231,183,0.07), transparent); border-color: rgba(110,231,183,0.3); }
+  .verdict .no { background: linear-gradient(180deg, rgba(248,113,113,0.05), transparent); border-color: rgba(248,113,113,0.25); }
+  .verdict h3 { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .verdict .yes h3 { color: var(--jj); }
+  .verdict .no h3 { color: var(--danger); }
+  .verdict ul { margin: 8px 0 0; padding-left: 18px; color: var(--fg-dim); font-size: 0.95rem; }
+  .verdict li { margin-bottom: 6px; }
+
+  /* footer */
+  footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--fg-faint); font-size: 0.85rem; }
+  footer a { color: var(--fg-dim); border-bottom-color: var(--fg-faint); }
+  footer a:hover { color: var(--jj); border-bottom-color: var(--jj); }
+  footer .src { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 24px; margin-top: 10px; }
+
+  /* helpers */
+  .hi { color: var(--fg); }
+  .jjk { color: var(--jj); font-family: var(--mono); }
+  .gitk { color: var(--git); font-family: var(--mono); }
+  .muted { color: var(--fg-faint); }
+
+  /* === REBASE RACE === */
+  .rebase-race { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .race-panel { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; }
+  .race-panel header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .race-panel header h3 { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--mono); font-size: 0.95rem; }
+  .race-git header h3 { color: var(--git); }
+  .race-jj header h3 { color: var(--jj); }
+  .race-panel header h3 .blob { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .race-git header h3 .blob { background: var(--git); box-shadow: 0 0 8px var(--git-glow); }
+  .race-jj header h3 .blob { background: var(--jj); box-shadow: 0 0 8px var(--jj-glow); }
+  .play { border: 0; padding: 8px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: var(--mono); font-size: 0.82rem; transition: transform 0.1s, opacity 0.2s; }
+  .play:hover { transform: translateY(-1px); }
+  .play:active { transform: translateY(0); }
+  .play[data-race="git"] { background: var(--git); color: var(--bg); }
+  .play[data-race="jj"] { background: var(--jj); color: var(--bg); }
+  .play:disabled { opacity: 0.5; cursor: wait; transform: none; }
+  .commit-graph { width: 100%; height: 360px; background: var(--bg-3); border-radius: 10px; display: block; }
+  .commit-graph .rail { stroke: var(--line); stroke-width: 2; }
+  .commit-graph .rail-old { stroke: var(--line); stroke-width: 2; stroke-dasharray: 4 4; opacity: 0.6; transition: opacity 0.5s; }
+  .commit-graph.done .rail-old { opacity: 0.15; }
+  .commit-graph .rail-new { stroke: var(--line); stroke-width: 2; opacity: 0; transition: opacity 0.5s; }
+  .commit-graph.done .rail-new { opacity: 1; }
+  .commit { transition: transform 0.8s cubic-bezier(0.34, 1.2, 0.64, 1); }
+  .commit circle { stroke: var(--bg); stroke-width: 2; transition: fill 0.3s, stroke 0.3s, stroke-width 0.3s; }
+  .commit.type-main circle { fill: var(--git); }
+  .commit.type-feat circle { fill: var(--jj); }
+  .commit.in-conflict circle { stroke: var(--danger); stroke-width: 3.5; filter: drop-shadow(0 0 6px rgba(248,113,113,0.55)); }
+  .commit.resolved circle { fill: var(--jj-2); }
+  .commit text { fill: var(--fg); font-family: var(--mono); font-size: 11px; font-weight: 500; dominant-baseline: middle; }
+  .commit .conflict-badge { font-size: 9px; fill: var(--danger); opacity: 0; transition: opacity 0.3s; font-weight: 700; }
+  .commit.in-conflict .conflict-badge { opacity: 1; }
+  .race-status { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px; }
+  .metric { background: var(--bg-3); padding: 8px 10px; border-radius: 6px; }
+  .metric span { font-family: var(--mono); font-size: 0.68rem; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; display: block; }
+  .metric strong { font-size: 1.3rem; color: var(--fg); font-variant-numeric: tabular-nums; font-family: var(--mono); display: block; margin-top: 2px; }
+  .race-log { margin-top: 12px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font-family: var(--mono); font-size: 0.76rem; height: 90px; overflow-y: auto; color: var(--fg-dim); line-height: 1.5; }
+  .race-log .line { padding: 0; }
+  .race-log .warn { color: var(--danger); }
+  .race-log .ok { color: var(--jj); }
+
+  /* === WORKING COPY FLOW === */
+  .wc-demo { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-top: 24px; }
+  .wc-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+  .wc-btn { background: var(--bg-3); border: 1px solid var(--line); color: var(--fg); padding: 8px 14px; border-radius: 6px; font-family: var(--mono); font-size: 0.82rem; cursor: pointer; transition: all 0.15s; }
+  .wc-btn:hover:not(:disabled) { border-color: var(--jj); color: var(--jj); }
+  .wc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .wc-btn.primary { background: var(--jj); color: var(--bg); border-color: var(--jj); font-weight: 600; }
+  .wc-btn.primary:hover:not(:disabled) { background: var(--jj-2); border-color: var(--jj-2); color: var(--bg); }
+  .wc-counters { margin-left: auto; display: flex; gap: 16px; font-family: var(--mono); font-size: 0.85rem; }
+  .wc-counters span { color: var(--fg-dim); }
+  .wc-counters strong { color: var(--fg); font-variant-numeric: tabular-nums; }
+  .wc-counters .git-count strong { color: var(--git); }
+  .wc-counters .jj-count strong { color: var(--jj); }
+  .wc-tracks { display: flex; flex-direction: column; gap: 28px; }
+  .wc-track { position: relative; }
+  .wc-track .label { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .wc-track.git .label { color: var(--git); }
+  .wc-track.jj .label { color: var(--jj); }
+  .wc-track .stages { display: grid; gap: 12px; align-items: center; }
+  .wc-track.git .stages { grid-template-columns: 1fr 60px 1fr 60px 1fr; }
+  .wc-track.jj .stages { grid-template-columns: 1fr; max-width: 280px; }
+  .wc-stage { background: var(--bg-3); border: 1.5px dashed var(--line); border-radius: 10px; padding: 16px 14px; min-height: 110px; position: relative; transition: border-color 0.3s, background 0.3s; }
+  .wc-stage .stage-name { font-family: var(--mono); font-size: 0.72rem; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .wc-stage.has-file { border-color: var(--jj); border-style: solid; background: rgba(110, 231, 183, 0.04); }
+  .wc-track.git .wc-stage.has-file { border-color: var(--git); background: rgba(245, 158, 11, 0.04); }
+  .wc-arrow { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+  .wc-arrow .head { color: var(--fg-faint); font-size: 1.4rem; }
+  .wc-arrow .op { font-family: var(--mono); font-size: 0.7rem; color: var(--fg-faint); text-align: center; }
+  .file-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; font-family: var(--mono); font-size: 0.8rem; color: var(--fg); opacity: 0; transform: translateY(8px); transition: opacity 0.4s, transform 0.4s; }
+  .file-chip.show { opacity: 1; transform: translateY(0); }
+  .file-chip .dirty { color: var(--danger); font-weight: 700; }
+  .file-chip .clean { color: var(--jj); }
+
+  /* === STEPS BAR CHART === */
+  .steps-chart { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 24px 28px; margin-top: 24px; }
+  .steps-chart .legend { display: flex; gap: 18px; margin-bottom: 18px; font-family: var(--mono); font-size: 0.78rem; }
+  .steps-chart .legend .key { display: flex; align-items: center; gap: 6px; color: var(--fg-dim); }
+  .steps-chart .legend .swatch { width: 12px; height: 12px; border-radius: 3px; }
+  .steps-chart .legend .swatch.git { background: var(--git); }
+  .steps-chart .legend .swatch.jj { background: var(--jj); }
+  .task-row { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .task-row:last-child { border-bottom: 0; }
+  .task-row .task-name { font-size: 0.92rem; color: var(--fg); margin-bottom: 8px; }
+  .bars { display: grid; gap: 6px; }
+  .bar { display: grid; grid-template-columns: 36px 1fr 60px; align-items: center; gap: 10px; }
+  .bar .who { font-family: var(--mono); font-size: 0.72rem; color: var(--fg-faint); text-transform: uppercase; }
+  .bar.git .who { color: var(--git); }
+  .bar.jj .who { color: var(--jj); }
+  .bar .track { background: var(--bg-3); border-radius: 4px; height: 16px; overflow: hidden; position: relative; }
+  .bar .fill { height: 100%; width: 0; border-radius: 4px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  .bar.git .fill { background: linear-gradient(90deg, var(--git), var(--git-2)); }
+  .bar.jj .fill { background: linear-gradient(90deg, var(--jj), var(--jj-2)); }
+  .bar .count { font-family: var(--mono); font-size: 0.82rem; color: var(--fg); font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 820px) {
+    h1 { font-size: 2.4rem; }
+    .pitch { grid-template-columns: 1fr; }
+    .concepts { grid-template-columns: 1fr; }
+    .compare .body { grid-template-columns: 1fr; }
+    .compare .col + .col { border-left: 0; border-top: 1px solid var(--line); }
+    .verdict { grid-template-columns: 1fr; }
+    footer .src { grid-template-columns: 1fr; }
+    .rebase-race { grid-template-columns: 1fr; }
+    .wc-track.git .stages { grid-template-columns: 1fr; }
+    .wc-arrow { transform: rotate(90deg); padding: 8px 0; }
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jujutsu (jj) — the pitch, the catches">
+<meta property="og:description" content="What Jujutsu (jj) genuinely buys you over Git — the real wins and the rough edges that bite — so you can judge whether the switch is worth it.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/jujutsu-vs-git/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/jujutsu-vs-git/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<main>
+
+  <div class="eyebrow"><span class="dot"></span>VERSION CONTROL · GIT-COMPATIBLE</div>
+  <h1>Jujutsu (<span style="color: var(--jj)">jj</span>)</h1>
+  <p class="lede">
+    A new front-end for your existing Git repos. Built at Google. Same <code>.git</code> folder, same remotes, your teammates don't have to switch — but <strong>the model under your hands is radically different.</strong> Whether that's a gift or a tax depends on how much you rewrite history.
+  </p>
+
+  <div class="pitch">
+    <div class="tile">
+      <div class="k">No staging area</div>
+      <div class="v">Your working copy <em>is</em> a commit.</div>
+      <div class="s">Every save is already tracked. No <code>git add</code>, no "did I stash that?"</div>
+    </div>
+    <div class="tile">
+      <div class="k">Universal undo</div>
+      <div class="v"><code>jj undo</code> reverses anything.</div>
+      <div class="s">Rebases, squashes, branch moves, abandons — all atomic, all reversible from one log.</div>
+    </div>
+    <div class="tile">
+      <div class="k">Conflicts are data</div>
+      <div class="v">Commit broken merges.</div>
+      <div class="s">Conflicts ride along through rebases until you have time to resolve them.</div>
+    </div>
+  </div>
+
+  <h2>The rebase race</h2>
+  <p>You forked 3 commits off main. Someone landed 3 more commits to main while you were working, and two of yours will conflict with the new tip. Hit play on both.</p>
+
+  <div class="rebase-race">
+
+    <div class="race-panel race-git">
+      <header>
+        <h3><span class="blob"></span>Git</h3>
+        <button class="play" data-race="git">▶ Run rebase</button>
+      </header>
+      <svg viewBox="0 0 320 380" class="commit-graph" id="git-graph">
+        <line x1="90" y1="30" x2="90" y2="350" class="rail" />
+        <line x1="240" y1="200" x2="240" y2="320" class="rail-old" />
+        <path d="M 90 350 Q 165 360 240 320" fill="none" class="rail-old" />
+        <line x1="90" y1="50" x2="90" y2="200" class="rail-new" />
+
+        <g class="commit type-main" transform="translate(90 340)"><circle r="13"/><text x="-38" y="4">M0</text></g>
+        <g class="commit type-main" transform="translate(90 290)"><circle r="13"/><text x="-38" y="4">M1</text></g>
+        <g class="commit type-main" transform="translate(90 240)"><circle r="13"/><text x="-38" y="4">M2</text></g>
+        <g class="commit type-main" transform="translate(90 190)"><circle r="13"/><text x="-38" y="4">M3</text></g>
+
+        <g class="commit type-feat" id="g-f1" data-init-x="240" data-init-y="290" transform="translate(240 290)">
+          <circle r="13"/>
+          <text x="22" y="4">F1</text>
+          <text x="22" y="20" class="conflict-badge">conflict</text>
+        </g>
+        <g class="commit type-feat" id="g-f2" data-init-x="240" data-init-y="240" transform="translate(240 240)">
+          <circle r="13"/>
+          <text x="22" y="4">F2</text>
+          <text x="22" y="20" class="conflict-badge">conflict</text>
+        </g>
+        <g class="commit type-feat" id="g-f3" data-init-x="240" data-init-y="190" transform="translate(240 190)">
+          <circle r="13"/>
+          <text x="22" y="4">F3</text>
+          <text x="22" y="20" class="conflict-badge">conflict</text>
+        </g>
+      </svg>
+      <div class="race-status">
+        <div class="metric"><span>Commands</span><strong id="git-cmds">0</strong></div>
+        <div class="metric"><span>Stops</span><strong id="git-stops">0</strong></div>
+        <div class="metric"><span>Conflicts</span><strong id="git-conflicts">0</strong></div>
+      </div>
+      <div class="race-log" id="git-log"></div>
+    </div>
+
+    <div class="race-panel race-jj">
+      <header>
+        <h3><span class="blob"></span>jj</h3>
+        <button class="play" data-race="jj">▶ Run rebase</button>
+      </header>
+      <svg viewBox="0 0 320 380" class="commit-graph" id="jj-graph">
+        <line x1="90" y1="30" x2="90" y2="350" class="rail" />
+        <line x1="240" y1="200" x2="240" y2="320" class="rail-old" />
+        <path d="M 90 350 Q 165 360 240 320" fill="none" class="rail-old" />
+        <line x1="90" y1="50" x2="90" y2="200" class="rail-new" />
+
+        <g class="commit type-main" transform="translate(90 340)"><circle r="13"/><text x="-38" y="4">M0</text></g>
+        <g class="commit type-main" transform="translate(90 290)"><circle r="13"/><text x="-38" y="4">M1</text></g>
+        <g class="commit type-main" transform="translate(90 240)"><circle r="13"/><text x="-38" y="4">M2</text></g>
+        <g class="commit type-main" transform="translate(90 190)"><circle r="13"/><text x="-38" y="4">M3</text></g>
+
+        <g class="commit type-feat" id="j-f1" data-init-x="240" data-init-y="290" transform="translate(240 290)">
+          <circle r="13"/>
+          <text x="22" y="4">F1</text>
+          <text x="22" y="20" class="conflict-badge">conflict</text>
+        </g>
+        <g class="commit type-feat" id="j-f2" data-init-x="240" data-init-y="240" transform="translate(240 240)">
+          <circle r="13"/>
+          <text x="22" y="4">F2</text>
+          <text x="22" y="20" class="conflict-badge">conflict</text>
+        </g>
+        <g class="commit type-feat" id="j-f3" data-init-x="240" data-init-y="190" transform="translate(240 190)">
+          <circle r="13"/>
+          <text x="22" y="4">F3</text>
+          <text x="22" y="20" class="conflict-badge">conflict</text>
+        </g>
+      </svg>
+      <div class="race-status">
+        <div class="metric"><span>Commands</span><strong id="jj-cmds">0</strong></div>
+        <div class="metric"><span>Stops</span><strong id="jj-stops">0</strong></div>
+        <div class="metric"><span>Conflicts</span><strong id="jj-conflicts">0</strong></div>
+      </div>
+      <div class="race-log" id="jj-log"></div>
+    </div>
+
+  </div>
+
+  <p style="margin-top: 14px; font-size: 0.9rem; color: var(--fg-faint);">
+    Note the difference in <em>stops</em>. Git halts the operation on each conflict; you must resolve <code>--continue</code> before any other work. jj stores the conflict <em>inside the commit</em> and keeps going — you can leave it conflicted overnight if you want, and rebase or branch off it in the meantime.
+  </p>
+
+  <h2>The five mental-model shifts</h2>
+  <p>If you only learn five things, learn these. Everything else in jj falls out of them.</p>
+
+  <div class="concepts">
+
+    <div class="card">
+      <div class="num">01</div>
+      <h3>The working copy is a commit (<span class="jjk">@</span>)</h3>
+      <p>Every file change is automatically snapshotted into the commit at the head of your current "change." There's no untracked/staged/committed three-state limbo.</p>
+      <span class="git-says">Working tree → index → HEAD. Three states, two boundaries (<code>add</code>, <code>commit</code>) you must cross.</span>
+      <span class="jj-says">Working tree <em>is</em> a commit called <code>@</code>. Edits update it in place on every <code>jj</code> invocation.</span>
+    </div>
+
+    <div class="card">
+      <div class="num">02</div>
+      <h3>No index. Just <span class="jjk">split</span> and <span class="jjk">squash</span></h3>
+      <p>You don't pre-stage hunks. You commit everything, then sculpt: split a commit in two, squash work into an earlier one, move hunks between adjacent commits.</p>
+      <span class="git-says"><code>git add -p</code>, <code>reset</code>, <code>commit --amend</code>, <code>rebase -i</code> — different verbs for related ideas.</span>
+      <span class="jj-says"><code>jj split</code>, <code>jj squash</code>, <code>jj squash -i</code>. Same verbs work whether the target is your latest commit or one ten back.</span>
+    </div>
+
+    <div class="card">
+      <div class="num">03</div>
+      <h3>Descendants auto-rebase</h3>
+      <p>Edit a commit deep in the stack and every child rebases automatically. Stacked-PR workflows stop being a chore.</p>
+      <span class="git-says">Rewrite an ancestor → orphan all descendants → <code>git rebase --onto</code> dance to reattach them.</span>
+      <span class="jj-says">Edit ancestor → children move with it. If conflicts arise, they're committed and you fix them when convenient.</span>
+    </div>
+
+    <div class="card">
+      <div class="num">04</div>
+      <h3>Conflicts are first-class commit content</h3>
+      <p>A merge or rebase with conflicts doesn't halt the operation. The conflict markers are stored <em>in the commit</em> and propagate down the stack. You resolve at your leisure.</p>
+      <span class="git-says">Conflict → repo in limbo state → must resolve before any other operation.</span>
+      <span class="jj-says">Conflict → committed as a conflicted commit → continue working, rebase other things, resolve when you choose.</span>
+    </div>
+
+    <div class="card">
+      <div class="num">05</div>
+      <h3>Operation log = total undo</h3>
+      <p><code>jj op log</code> records every state-changing operation across <em>all</em> refs atomically. <code>jj undo</code> walks it backwards. Lost a branch? Bad rebase? One command.</p>
+      <span class="git-says">Per-ref reflogs. <code>git reflog</code>, find the SHA, <code>reset --hard</code>. Sometimes also <code>fsck --lost-found</code>.</span>
+      <span class="jj-says"><code>jj undo</code>. That's it. Repeat to keep undoing. <code>jj op restore &lt;id&gt;</code> for surgical rewinds.</span>
+    </div>
+
+    <div class="card">
+      <div class="num">06</div>
+      <h3>Branches are optional ("bookmarks")</h3>
+      <p>jj tracks every head of the commit graph automatically. You don't have to name a line of work to keep it alive. Names ("bookmarks") exist when you need to push or share — not as scaffolding to remember what you were doing.</p>
+      <span class="git-says">Need a branch to keep work findable. Detached HEAD = warning sign.</span>
+      <span class="jj-says">Anonymous heads are normal. Slap a bookmark on it only when you're ready to push.</span>
+    </div>
+
+  </div>
+
+  <h2>The working copy, visualized</h2>
+  <p>Git's three-state model vs jj's one-state model. Click "Edit file" and walk through what each tool needs from you to durably capture that edit.</p>
+
+  <div class="wc-demo">
+    <div class="wc-controls">
+      <button class="wc-btn primary" id="wc-edit">✏️ Edit file</button>
+      <button class="wc-btn" id="wc-add" disabled>git add</button>
+      <button class="wc-btn" id="wc-commit" disabled>git commit</button>
+      <button class="wc-btn" id="wc-reset" style="margin-left: 6px;">↻ Reset</button>
+      <div class="wc-counters">
+        <span class="git-count">git actions: <strong id="wc-git-count">0</strong></span>
+        <span class="jj-count">jj actions: <strong id="wc-jj-count">0</strong></span>
+      </div>
+    </div>
+
+    <div class="wc-tracks">
+
+      <div class="wc-track git">
+        <div class="label">Git — three states, two boundaries</div>
+        <div class="stages">
+          <div class="wc-stage" id="wc-wt">
+            <div class="stage-name">Working tree</div>
+            <span class="file-chip" id="chip-wt">foo.py <span class="dirty">●</span></span>
+          </div>
+          <div class="wc-arrow"><span class="head">→</span><span class="op">git add</span></div>
+          <div class="wc-stage" id="wc-idx">
+            <div class="stage-name">Index (staging)</div>
+            <span class="file-chip" id="chip-idx">foo.py <span class="dirty">●</span></span>
+          </div>
+          <div class="wc-arrow"><span class="head">→</span><span class="op">git commit</span></div>
+          <div class="wc-stage" id="wc-head">
+            <div class="stage-name">HEAD (history)</div>
+            <span class="file-chip" id="chip-head">foo.py <span class="clean">✓</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wc-track jj">
+        <div class="label">jj — your working copy <em>is</em> a commit</div>
+        <div class="stages">
+          <div class="wc-stage" id="wc-jj-at">
+            <div class="stage-name"><code>@</code> &nbsp;the commit you're in</div>
+            <span class="file-chip" id="chip-jj">foo.py <span class="clean">✓ snapshotted automatically</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <h2>Steps to common tasks</h2>
+  <p>How many discrete commands each tool needs for typical history-shaping work. Bars scroll into view and fill on first sight.</p>
+
+  <div class="steps-chart" id="steps-chart">
+    <div class="legend">
+      <div class="key"><div class="swatch git"></div>Git</div>
+      <div class="key"><div class="swatch jj"></div>jj</div>
+    </div>
+
+    <div class="task-row">
+      <div class="task-name">Amend a commit 5 entries back in your stack</div>
+      <div class="bars">
+        <div class="bar git"><span class="who">git</span><div class="track"><div class="fill" data-w="60"></div></div><span class="count">6 cmds</span></div>
+        <div class="bar jj"><span class="who">jj</span><div class="track"><div class="fill" data-w="10"></div></div><span class="count">1 cmd</span></div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <div class="task-name">Split a commit into two</div>
+      <div class="bars">
+        <div class="bar git"><span class="who">git</span><div class="track"><div class="fill" data-w="55"></div></div><span class="count">6 cmds</span></div>
+        <div class="bar jj"><span class="who">jj</span><div class="track"><div class="fill" data-w="10"></div></div><span class="count">1 cmd</span></div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <div class="task-name">Rebase a 3-commit stack onto updated main (no conflicts)</div>
+      <div class="bars">
+        <div class="bar git"><span class="who">git</span><div class="track"><div class="fill" data-w="35"></div></div><span class="count">4 cmds</span></div>
+        <div class="bar jj"><span class="who">jj</span><div class="track"><div class="fill" data-w="20"></div></div><span class="count">2 cmds</span></div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <div class="task-name">Rebase same stack (2 conflicting commits)</div>
+      <div class="bars">
+        <div class="bar git"><span class="who">git</span><div class="track"><div class="fill" data-w="80"></div></div><span class="count">8 cmds + 2 halts</span></div>
+        <div class="bar jj"><span class="who">jj</span><div class="track"><div class="fill" data-w="20"></div></div><span class="count">2 cmds + 0 halts</span></div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <div class="task-name">Undo the last operation (multi-ref)</div>
+      <div class="bars">
+        <div class="bar git"><span class="who">git</span><div class="track"><div class="fill" data-w="45"></div></div><span class="count">~4 cmds, error-prone</span></div>
+        <div class="bar jj"><span class="who">jj</span><div class="track"><div class="fill" data-w="10"></div></div><span class="count">1 cmd: <code>jj undo</code></span></div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <div class="task-name">Capture a save (one file edit)</div>
+      <div class="bars">
+        <div class="bar git"><span class="who">git</span><div class="track"><div class="fill" data-w="25"></div></div><span class="count">3 cmds</span></div>
+        <div class="bar jj"><span class="who">jj</span><div class="track"><div class="fill" data-w="0"></div></div><span class="count">0 cmds</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Same task, both tools</h2>
+  <p>Pick a workflow. The git column is what most teams actually type; the jj column is the same intent expressed in jj's primitives.</p>
+
+  <div class="compare">
+    <div class="tabs">
+      <button class="tab active" data-tab="amend">Amend an old commit</button>
+      <button class="tab" data-tab="split">Split a messy commit</button>
+      <button class="tab" data-tab="rebase">Rebase a stack onto main</button>
+      <button class="tab" data-tab="oops">Oops, undo that rebase</button>
+    </div>
+
+    <div class="body" id="cmp-amend">
+      <div class="col git">
+        <div class="col-h">Git <span class="badge">friction: high</span></div>
+<pre><span class="cm"># find the commit, mark for fixup</span>
+<span class="git-cmd">git log --oneline</span>
+<span class="cm"># edit files...</span>
+<span class="git-cmd">git add -p</span>
+<span class="git-cmd">git commit --fixup=abc123</span>
+<span class="git-cmd">git rebase -i --autosquash main</span>
+<span class="cm"># resolve any conflicts, --continue x3</span></pre>
+        <div class="pain">If the fixup is 5 commits back and the stack has conflicts, this is a 10-minute ordeal.</div>
+      </div>
+      <div class="col jj">
+        <div class="col-h">jj <span class="badge">friction: low</span></div>
+<pre><span class="cm"># edit files, then:</span>
+<span class="cmd">jj squash --into abc123</span>
+<span class="cm"># descendants auto-rebase</span>
+<span class="cm"># if conflict: keep working, fix later</span></pre>
+        <div class="win">One command. The conflict (if any) is now sitting in a commit you can fix on your own schedule.</div>
+      </div>
+    </div>
+
+    <div class="body" id="cmp-split" style="display:none">
+      <div class="col git">
+        <div class="col-h">Git <span class="badge">friction: medium</span></div>
+<pre><span class="git-cmd">git rebase -i HEAD~3</span>
+<span class="cm"># mark commit as 'edit'</span>
+<span class="git-cmd">git reset HEAD^</span>
+<span class="git-cmd">git add -p</span>   <span class="cm"># pick hunks for first half</span>
+<span class="git-cmd">git commit -m "first half"</span>
+<span class="git-cmd">git add .</span>
+<span class="git-cmd">git commit -m "second half"</span>
+<span class="git-cmd">git rebase --continue</span></pre>
+        <div class="pain">Two-step rebase dance. Easy to forget where you are mid-flow.</div>
+      </div>
+      <div class="col jj">
+        <div class="col-h">jj <span class="badge">friction: low</span></div>
+<pre><span class="cmd">jj split -r abc123</span>
+<span class="cm"># interactive diff editor opens</span>
+<span class="cm"># pick what goes in the first commit</span>
+<span class="cm"># rest stays in the second</span></pre>
+        <div class="win">Works on any commit in history. No staged rebase, no continue, no mode confusion.</div>
+      </div>
+    </div>
+
+    <div class="body" id="cmp-rebase" style="display:none">
+      <div class="col git">
+        <div class="col-h">Git <span class="badge">friction: high</span></div>
+<pre><span class="git-cmd">git checkout main &amp;&amp; git pull</span>
+<span class="git-cmd">git checkout feature-3</span>
+<span class="git-cmd">git rebase main</span>
+<span class="cm"># conflict! resolve, --continue</span>
+<span class="git-cmd">git checkout feature-4</span>
+<span class="git-cmd">git rebase feature-3</span>
+<span class="cm"># conflict! resolve, --continue</span>
+<span class="git-cmd">git checkout feature-5</span>
+<span class="git-cmd">git rebase feature-4</span>
+<span class="cm"># ... and so on</span></pre>
+        <div class="pain">Each branch tip rebased individually. <a href="https://github.com/ezyang/ghstack">ghstack</a> / <a href="https://graphite.dev/">graphite</a> exist because this hurts.</div>
+      </div>
+      <div class="col jj">
+        <div class="col-h">jj <span class="badge">friction: low</span></div>
+<pre><span class="cmd">jj git fetch</span>
+<span class="cmd">jj rebase -d main</span>
+<span class="cm"># whole stack moves at once</span>
+<span class="cm"># conflicts (if any) committed</span>
+<span class="cm"># in-place; keep working or fix now</span></pre>
+        <div class="win">The killer feature. Stacked-PR workflows feel native instead of bolted on.</div>
+      </div>
+    </div>
+
+    <div class="body" id="cmp-oops" style="display:none">
+      <div class="col git">
+        <div class="col-h">Git <span class="badge">friction: medium · stressful</span></div>
+<pre><span class="git-cmd">git reflog</span>
+<span class="cm"># scroll, find the pre-rebase SHA</span>
+<span class="git-cmd">git reset --hard HEAD@{12}</span>
+<span class="cm"># hope you picked the right one</span>
+<span class="cm"># now do the same for every branch</span>
+<span class="cm"># that the rebase moved</span></pre>
+        <div class="pain">Reflog is per-ref. A multi-branch operation = multi-step recovery.</div>
+      </div>
+      <div class="col jj">
+        <div class="col-h">jj <span class="badge">friction: trivial</span></div>
+<pre><span class="cmd">jj undo</span>
+<span class="cm"># done. all refs restored atomically.</span></pre>
+        <div class="win">The operation log treats the whole repo state as the unit of undo. This is the single most-cited reason people switch.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Cheat sheet</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Intent</th><th class="git-h">Git</th><th class="jj-h">jj</th></tr></thead>
+      <tbody>
+        <tr><td>Start working on something new</td><td class="dim"><code>git checkout -b feat</code></td><td><code>jj new</code></td></tr>
+        <tr><td>Save current state</td><td class="dim"><code>git add . && git commit -m</code></td><td>nothing — auto-snapshotted; describe later with <code>jj describe</code></td></tr>
+        <tr><td>See history</td><td class="dim"><code>git log --graph</code></td><td><code>jj log</code></td></tr>
+        <tr><td>Edit an old commit's message</td><td class="dim"><code>git rebase -i &lt;sha&gt;^</code></td><td><code>jj describe -r &lt;rev&gt;</code></td></tr>
+        <tr><td>Move work onto latest main</td><td class="dim"><code>git rebase main</code></td><td><code>jj rebase -d main</code></td></tr>
+        <tr><td>Combine two commits</td><td class="dim"><code>git rebase -i</code> (squash)</td><td><code>jj squash</code></td></tr>
+        <tr><td>Split a commit</td><td class="dim">edit-rebase dance</td><td><code>jj split</code></td></tr>
+        <tr><td>Undo last operation</td><td class="dim"><code>git reflog</code> + <code>reset --hard</code></td><td><code>jj undo</code></td></tr>
+        <tr><td>Push to GitHub</td><td class="dim"><code>git push origin feat</code></td><td><code>jj bookmark set feat -r @</code> then <code>jj git push</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>When <em>not</em> to use jj</h2>
+  <p>The honest part. jj is pre-1.0, the CLI is still evolving, and entire ecosystems (GUIs, hooks, hosted-service integrations) assume git. Here's where the friction outweighs the wins.</p>
+
+  <div class="dont">
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>You don't rewrite history</h4>
+        <p>If your workflow is "commit, push, merge, never look back," 70% of jj's value evaporates. The win is in sculpting commits — split, squash, reorder, restack. Linear-only workflows get a marginal upgrade at best.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>You live in a Git GUI (Sourcetree, Tower, JetBrains, GitKraken)</h4>
+        <p>Almost no GUI speaks jj natively yet. You'd be dropping to a CLI for the operations you used to click, and the underlying model is different enough that "just use the git view" lies to you about state.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>Your team has git hooks doing real work</h4>
+        <p>jj's git-backend operations can trigger hooks, but the integration is incomplete and varies by hook type. Mission-critical pre-commit / pre-push automation, signed commits, and gpg-sign requirements still have rough edges — verify before committing your team's flow to it.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>Heavy Git LFS, submodules, or partial-clone needs</h4>
+        <p>Support is improving but historically weaker than git itself. If your repo's main pain point is one of these, jj is solving the wrong problem for you.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>You're on Windows with SSH-only remotes via libgit2</h4>
+        <p>The bundled libgit2 SSH transport has known gaps. Workable — but expect to configure <code>ssh-agent</code> and possibly fall back to the system git binary for pushes.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>You're shipping to production tomorrow</h4>
+        <p>jj is stable enough for daily use (Google uses it internally, ~30k stars, active dev), but it isn't 1.0. CLI flags shift between releases. If you can't tolerate occasional "what changed in jj 0.X?" troubleshooting, wait.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">!</div>
+      <div>
+        <h4>You're learning git for the first time</h4>
+        <p>Counterintuitive, but: jj's abstractions are cleaner, yet the world runs on git. Learning jj first leaves you unable to debug a CI snag, read a Stack Overflow answer, or pair-program with anyone using git. Learn git's mental model first, <em>then</em> graduate to jj if you want.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>So, should I switch?</h2>
+  <div class="verdict">
+    <div class="box yes">
+      <h3>✓ Yes, probably</h3>
+      <ul>
+        <li>You routinely have 3+ commits stacked and rebase them onto main.</li>
+        <li>You use <code>git rebase -i</code> at least once a week.</li>
+        <li>You've ever lost work and dug through reflog.</li>
+        <li>You use ghstack, graphite, or hand-rolled stacked-PR tools.</li>
+        <li>You like trying new tools and reverting on a whim — jj coexists with git on the same repo, so the cost of trying is genuinely low.</li>
+      </ul>
+    </div>
+    <div class="box no">
+      <h3>✗ Not yet</h3>
+      <ul>
+        <li>Your team standardizes on a Git GUI and you can't deviate.</li>
+        <li>Your repo depends on submodules / LFS / commit signing.</li>
+        <li>You don't rewrite history and don't want to start.</li>
+        <li>You're still building muscle memory for git itself.</li>
+        <li>You're allergic to running pre-1.0 software on serious work.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top: 28px; font-size: 0.95rem;">
+    <span class="hi">The tl;dr:</span> jj isn't "git but better" in the abstract — it's <em>git but better for the specific workflows where git is worst</em>. If those workflows are your daily life, the upgrade is dramatic. If they aren't, you'll learn a new tool to do the same thing.
+  </p>
+
+  <footer>
+    <div>Sources (all primary / 🟢):</div>
+    <div class="src">
+      <a href="http://docs.jj-vcs.dev/latest/">Jujutsu official docs</a>
+      <a href="http://docs.jj-vcs.dev/latest/git-comparison/">jj ↔ git comparison page</a>
+      <a href="https://github.com/jj-vcs/jj">github.com/jj-vcs/jj</a>
+      <a href="https://tonyfinn.com/blog/jj/">Tony Finn — Jujutsu, a git-compatible VCS</a>
+      <a href="https://mwolson.org/blog/2026-01-22-first-week-with-jujutsu-vcs/">Mike Olson — First Week with Jujutsu</a>
+      <a href="https://kubamartin.com/posts/introduction-to-the-jujutsu-vcs/">Kuba Martin — Introduction and Patterns</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // === Workflow tabs ===
+  document.querySelectorAll('.compare .tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.compare .tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.compare .body').forEach(b => b.style.display = 'none');
+      btn.classList.add('active');
+      document.getElementById('cmp-' + btn.dataset.tab).style.display = 'grid';
+    });
+  });
+
+  // === REBASE RACE ===
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  function resetRace(prefix) {
+    ['f1', 'f2', 'f3'].forEach(id => {
+      const el = document.getElementById(`${prefix}-${id}`);
+      if (!el) return;
+      if (el.__timer) clearInterval(el.__timer);
+      const x = parseFloat(el.dataset.initX);
+      const y = parseFloat(el.dataset.initY);
+      el.setAttribute('transform', `translate(${x} ${y})`);
+      el.__pos = { x, y };
+      el.classList.remove('in-conflict', 'resolved');
+    });
+    const graph = document.getElementById(prefix === 'g' ? 'git-graph' : 'jj-graph');
+    graph.classList.remove('done');
+    const panel = prefix === 'g' ? 'git' : 'jj';
+    ['cmds', 'stops', 'conflicts'].forEach(k => {
+      document.getElementById(`${panel}-${k}`).textContent = '0';
+    });
+    document.getElementById(`${panel}-log`).innerHTML = '';
+  }
+
+  function setMetric(panel, key, val) {
+    document.getElementById(`${panel}-${key}`).textContent = val;
+  }
+
+  function log(panel, text, cls = '') {
+    const el = document.getElementById(`${panel}-log`);
+    const line = document.createElement('div');
+    line.className = 'line ' + cls;
+    line.textContent = text;
+    el.appendChild(line);
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function easeOutBack(t) {
+    const c1 = 1.3, c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  }
+
+  function moveCommit(id, x, y, duration = 800) {
+    const el = document.getElementById(id);
+    if (el.__timer) clearInterval(el.__timer);
+    const cur = el.__pos || { x: parseFloat(el.dataset.initX), y: parseFloat(el.dataset.initY) };
+    const x0 = cur.x, y0 = cur.y, t0 = performance.now();
+    const fps = 60;
+    el.__timer = setInterval(() => {
+      const t = Math.min(1, (performance.now() - t0) / duration);
+      const e = easeOutBack(t);
+      const cx = x0 + (x - x0) * e;
+      const cy = y0 + (y - y0) * e;
+      el.setAttribute('transform', `translate(${cx} ${cy})`);
+      if (t >= 1) {
+        clearInterval(el.__timer);
+        el.__timer = null;
+        el.__pos = { x, y };
+      }
+    }, 1000 / fps);
+  }
+
+  async function runGit() {
+    const btn = document.querySelector('.play[data-race="git"]');
+    btn.disabled = true;
+    resetRace('g');
+    await wait(300);
+
+    let cmds = 0, stops = 0, conflicts = 0;
+    document.getElementById('git-graph').classList.add('done');
+
+    cmds++; setMetric('git', 'cmds', cmds);
+    log('git', '$ git fetch origin');
+    await wait(600);
+
+    cmds++; setMetric('git', 'cmds', cmds);
+    log('git', '$ git rebase origin/main');
+    await wait(500);
+
+    // F1 — lands, has conflict
+    log('git', '  applying F1...');
+    moveCommit('g-f1', 90, 140);
+    await wait(900);
+    document.getElementById('g-f1').classList.add('in-conflict');
+    conflicts++; setMetric('git', 'conflicts', conflicts);
+    stops++; setMetric('git', 'stops', stops);
+    log('git', '! CONFLICT in F1 — rebase halted', 'warn');
+    await wait(1600);
+    cmds++; setMetric('git', 'cmds', cmds);
+    log('git', '$ # ...edit files, resolve conflict');
+    await wait(700);
+    cmds++; setMetric('git', 'cmds', cmds);
+    log('git', '$ git add . && git rebase --continue');
+    document.getElementById('g-f1').classList.remove('in-conflict');
+    document.getElementById('g-f1').classList.add('resolved');
+    await wait(700);
+
+    // F2 — clean
+    log('git', '  applying F2...');
+    moveCommit('g-f2', 90, 90);
+    await wait(900);
+    document.getElementById('g-f2').classList.add('resolved');
+    log('git', '  F2 applied cleanly', 'ok');
+    await wait(500);
+
+    // F3 — conflict
+    log('git', '  applying F3...');
+    moveCommit('g-f3', 90, 40);
+    await wait(900);
+    document.getElementById('g-f3').classList.add('in-conflict');
+    conflicts++; setMetric('git', 'conflicts', conflicts);
+    stops++; setMetric('git', 'stops', stops);
+    log('git', '! CONFLICT in F3 — rebase halted', 'warn');
+    await wait(1600);
+    cmds++; setMetric('git', 'cmds', cmds);
+    log('git', '$ # ...edit files, resolve conflict');
+    await wait(700);
+    cmds++; setMetric('git', 'cmds', cmds);
+    log('git', '$ git add . && git rebase --continue');
+    document.getElementById('g-f3').classList.remove('in-conflict');
+    document.getElementById('g-f3').classList.add('resolved');
+    await wait(500);
+
+    log('git', '✓ rebase complete', 'ok');
+    btn.disabled = false;
+    btn.textContent = '↻ Run again';
+  }
+
+  async function runJJ() {
+    const btn = document.querySelector('.play[data-race="jj"]');
+    btn.disabled = true;
+    resetRace('j');
+    await wait(300);
+
+    document.getElementById('jj-graph').classList.add('done');
+
+    setMetric('jj', 'cmds', 1);
+    log('jj', '$ jj git fetch');
+    await wait(500);
+
+    setMetric('jj', 'cmds', 2);
+    log('jj', '$ jj rebase -d main');
+    await wait(400);
+
+    // All three move together
+    moveCommit('j-f1', 90, 140);
+    moveCommit('j-f2', 90, 90);
+    moveCommit('j-f3', 90, 40);
+    await wait(900);
+
+    // Conflicts are committed inline
+    document.getElementById('j-f1').classList.add('in-conflict');
+    document.getElementById('j-f3').classList.add('in-conflict');
+    document.getElementById('j-f2').classList.add('resolved');
+    setMetric('jj', 'conflicts', 2);
+    log('jj', '  F1: conflicts recorded in commit');
+    log('jj', '  F2: applied cleanly', 'ok');
+    log('jj', '  F3: conflicts recorded in commit');
+    await wait(600);
+    log('jj', '✓ rebase complete — resolve conflicts when convenient', 'ok');
+
+    btn.disabled = false;
+    btn.textContent = '↻ Run again';
+  }
+
+  document.querySelector('.play[data-race="git"]').addEventListener('click', runGit);
+  document.querySelector('.play[data-race="jj"]').addEventListener('click', runJJ);
+
+  // === WORKING COPY DEMO ===
+  let wcState = 'idle';
+  let wcGitCount = 0, wcJjCount = 0;
+
+  const $ = id => document.getElementById(id);
+  function setWc(state) {
+    wcState = state;
+    $('chip-wt').classList.toggle('show', state === 'wt' || state === 'idx' || state === 'head');
+    $('chip-idx').classList.toggle('show', state === 'idx' || state === 'head');
+    $('chip-head').classList.toggle('show', state === 'head');
+    $('wc-wt').classList.toggle('has-file', state === 'wt' || state === 'idx' || state === 'head');
+    $('wc-idx').classList.toggle('has-file', state === 'idx' || state === 'head');
+    $('wc-head').classList.toggle('has-file', state === 'head');
+
+    $('chip-jj').classList.toggle('show', state !== 'idle');
+    $('wc-jj-at').classList.toggle('has-file', state !== 'idle');
+
+    $('wc-edit').disabled = state !== 'idle';
+    $('wc-add').disabled = state !== 'wt';
+    $('wc-commit').disabled = state !== 'idx';
+  }
+
+  $('wc-edit').addEventListener('click', () => {
+    wcGitCount++; wcJjCount++;
+    $('wc-git-count').textContent = wcGitCount;
+    $('wc-jj-count').textContent = wcJjCount;
+    setWc('wt');
+  });
+  $('wc-add').addEventListener('click', () => {
+    wcGitCount++;
+    $('wc-git-count').textContent = wcGitCount;
+    setWc('idx');
+  });
+  $('wc-commit').addEventListener('click', () => {
+    wcGitCount++;
+    $('wc-git-count').textContent = wcGitCount;
+    setWc('head');
+  });
+  $('wc-reset').addEventListener('click', () => {
+    wcGitCount = 0; wcJjCount = 0;
+    $('wc-git-count').textContent = 0;
+    $('wc-jj-count').textContent = 0;
+    setWc('idle');
+  });
+  setWc('idle');
+
+  // === BAR CHART (animate on scroll-into-view) ===
+  const chart = $('steps-chart');
+  const fillChart = () => chart.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%');
+  const chartObs = new IntersectionObserver((entries, obs) => {
+    if (entries.some(e => e.isIntersecting)) { fillChart(); obs.disconnect(); }
+  }, { threshold: 0.05 });
+  chartObs.observe(chart);
+  // Failsafe if observer never fires (e.g. tab restored already past the chart)
+  setTimeout(() => { if (chart.querySelector('.fill').style.width === '') fillChart(); }, 2500);
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

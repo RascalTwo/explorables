@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --true: #3fb950;
+    --dram: #d29922;
+    --inv:  #f85149;
+    --cut:  #bc8cff;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(63,185,80,0.10), transparent 58%),
+      radial-gradient(950px 560px at 106% 4%, rgba(248,81,73,0.08), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  .left { width: 620px; padding: 64px 20px 64px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--true); background: rgba(63,185,80,0.10);
+    border: 1px solid rgba(63,185,80,0.22);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 30px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--true); box-shadow: 0 0 10px var(--true); }
+
+  .title { font-size: 92px; line-height: 0.93; font-weight: 800; letter-spacing: -0.05em; }
+  .title .hl { color: var(--true); }
+
+  .essence { margin-top: 28px; font-size: 29px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; max-width: 505px; }
+  .essence .inv { color: var(--inv); }
+  .essence .hl { color: var(--true); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 480px; }
+  .sub code { font-family: var(--mono); font-size: 0.9em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 13.5px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 13px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--true); box-shadow: 0 0 6px rgba(63,185,80,0.5); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 64px 60px 8px; position: relative; z-index: 2; }
+  .panel {
+    width: 420px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.05em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 12px; color: var(--fg-faint); }
+
+  svg.strip { width: 100%; display: block; }
+
+  .foot { display: flex; gap: 26px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .stat .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 27px; line-height: 1; }
+  .stat.a .n { color: var(--inv); }
+  .stat.b .n { color: var(--true); }
+  .stat .l { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 6px; }
+  .stat .d { font-size: 12.5px; color: var(--fg-dim); margin-top: 3px; line-height: 1.35; max-width: 165px; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>Film vs. history &middot; Hacksaw Ridge, 2016</div>
+
+      <div class="title">Unbelievable.<br><span class="hl">And true.</span></div>
+
+      <div class="essence">
+        Hollywood <span class="inv">invented</span> the romance and the court-martial. It never had to invent <span class="hl">the cliff</span>.
+      </div>
+
+      <div class="sub">
+        20 story beats from Mel Gibson&rsquo;s film, checked one by one against Desmond Doss&rsquo;s <code>Medal of Honor</code> citation and the Army&rsquo;s own 1987 interview with him.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>75 men lowered</span>
+        <span class="chip"><span class="tk"></span>0 weapons carried</span>
+        <span class="chip"><span class="tk"></span>~400 ft cliff</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">20 beats, in story order</span>
+          <span class="s">verdict per frame</span>
+        </div>
+
+        <svg class="strip" viewBox="0 0 380 196" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .lab  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #5b6378; letter-spacing: 0.06em; }
+              .labi { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10.5px; fill: #f85149; letter-spacing: 0.06em; font-weight: 700; }
+              .labt { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10.5px; fill: #3fb950; letter-spacing: 0.06em; font-weight: 700; }
+              .key  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #9aa1b1; dominant-baseline: middle; }
+              .cell { stroke: #0b0d12; stroke-width: 1; }
+            </style>
+          </defs>
+
+          <!-- brackets over the two halves -->
+          <path d="M12,26 L12,18 L205.5,18 L205.5,26" stroke="#f85149" stroke-width="1.2" opacity="0.5" fill="none"/>
+          <path d="M210,26 L210,18 L367.5,18 L367.5,26" stroke="#3fb950" stroke-width="1.2" opacity="0.5" fill="none"/>
+          <text class="labi" x="12"    y="11">BEFORE THE RIDGE &middot; 11</text>
+          <text class="labt" x="367.5" y="11" text-anchor="end">OKINAWA &amp; AFTER &middot; 9</text>
+
+          <!-- film strip body -->
+          <rect x="4" y="34" width="372" height="96" rx="5" fill="#0a0d12" stroke="#232838"/>
+
+          <!-- sprocket holes -->
+          <g fill="#161a25">
+            <rect x="10"  y="39" width="9" height="7" rx="1.8"/><rect x="10"  y="118" width="9" height="7" rx="1.8"/>
+            <rect x="46"  y="39" width="9" height="7" rx="1.8"/><rect x="46"  y="118" width="9" height="7" rx="1.8"/>
+            <rect x="82"  y="39" width="9" height="7" rx="1.8"/><rect x="82"  y="118" width="9" height="7" rx="1.8"/>
+            <rect x="118" y="39" width="9" height="7" rx="1.8"/><rect x="118" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="154" y="39" width="9" height="7" rx="1.8"/><rect x="154" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="190" y="39" width="9" height="7" rx="1.8"/><rect x="190" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="226" y="39" width="9" height="7" rx="1.8"/><rect x="226" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="262" y="39" width="9" height="7" rx="1.8"/><rect x="262" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="298" y="39" width="9" height="7" rx="1.8"/><rect x="298" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="334" y="39" width="9" height="7" rx="1.8"/><rect x="334" y="118" width="9" height="7" rx="1.8"/>
+            <rect x="358" y="39" width="9" height="7" rx="1.8"/><rect x="358" y="118" width="9" height="7" rx="1.8"/>
+          </g>
+
+          <!-- the 20 beats, real verdicts, real order -->
+          <!-- 1 dram, 2 dram, 3 true, 4 inv, 5 true, 6 true, 7 true, 8 inv, 9 inv, 10 inv, 11 cut -->
+          <!-- 12 true,13 true,14 true,15 inv,16 true,17 dram,18 cut,19 true,20 cut -->
+          <g class="cell">
+            <rect x="12"  y="52" width="13.5" height="60" rx="2" fill="#d29922"/>
+            <rect x="30"  y="52" width="13.5" height="60" rx="2" fill="#d29922"/>
+            <rect x="48"  y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="66"  y="52" width="13.5" height="60" rx="2" fill="#f85149"/>
+            <rect x="84"  y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="102" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="120" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="138" y="52" width="13.5" height="60" rx="2" fill="#f85149"/>
+            <rect x="156" y="52" width="13.5" height="60" rx="2" fill="#f85149"/>
+            <rect x="174" y="52" width="13.5" height="60" rx="2" fill="#f85149"/>
+            <rect x="192" y="52" width="13.5" height="60" rx="2" fill="#bc8cff"/>
+            <rect x="210" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="228" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="246" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="264" y="52" width="13.5" height="60" rx="2" fill="#f85149"/>
+            <rect x="282" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="300" y="52" width="13.5" height="60" rx="2" fill="#d29922"/>
+            <rect x="318" y="52" width="13.5" height="60" rx="2" fill="#bc8cff"/>
+            <rect x="336" y="52" width="13.5" height="60" rx="2" fill="#3fb950"/>
+            <rect x="354" y="52" width="13.5" height="60" rx="2" fill="#bc8cff"/>
+          </g>
+
+          <!-- the boundary: he reaches the ridge -->
+          <line x1="207.75" y1="30" x2="207.75" y2="136" stroke="#e6e8ee" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
+          <text class="lab" x="207.75" y="147" text-anchor="middle" fill="#9aa1b1">he reaches the ridge</text>
+
+          <!-- key -->
+          <g transform="translate(4,160)">
+            <rect x="0" y="0" width="372" height="26" rx="6" fill="#0a0d12" stroke="#232838"/>
+            <rect x="12"  y="9.5" width="8" height="8" rx="1.5" fill="#3fb950"/><text class="key" x="26"  y="14">kept true</text>
+            <rect x="94"  y="9.5" width="8" height="8" rx="1.5" fill="#d29922"/><text class="key" x="108" y="14">dramatized</text>
+            <rect x="196" y="9.5" width="8" height="8" rx="1.5" fill="#f85149"/><text class="key" x="210" y="14">invented</text>
+            <rect x="284" y="9.5" width="8" height="8" rx="1.5" fill="#bc8cff"/><text class="key" x="298" y="14">left out</text>
+          </g>
+        </svg>
+
+        <div class="foot">
+          <div class="stat a">
+            <div class="n">6 of 8</div>
+            <div class="l">distortions</div>
+            <div class="d">land before he ever climbs the cliff</div>
+          </div>
+          <div class="stat b">
+            <div class="n">9</div>
+            <div class="l">kept true</div>
+            <div class="d">the rope, the prayer, the Medal of Honor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
