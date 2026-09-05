@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Token Ledger</title>
+<meta name="viz:posture" content="local">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:title" content="The Token Ledger">
+<meta name="viz:description" content="188 days of Claude Code on one laptop: 65 billion tokens billed, 433 million written. Where the other 99.34% went, and why.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  /* The whole page argues one number: 0.66%. So the palette is built to make a
+     four-cell sliver findable inside 654 cells — `--out` is the only saturated
+     colour on the page, everything else is a grey-blue that recedes. Resist
+     brightening the other three; the contrast IS the finding. */
+  :root {
+    --cr:   #3d4f63;   /* cache read  — the bulk, deliberately dull */
+    --cc:   #7a6234;   /* cache write */
+    --inp:  #4a4a7a;   /* fresh input */
+    --out:  #3fb950;   /* output — the only thing that got written */
+  }
+  body { margin:0; font-family:ui-sans-serif,system-ui,sans-serif }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 18px 80px }
+  .lede { color:var(--muted); max-width:70ch; line-height:1.55; margin:6px 0 0 }
+  .lede b { color:var(--text) }
+
+  section { margin-top:52px; scroll-margin-top:16px }
+  h2 { font-size:15px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+       border-bottom:1px solid var(--border); padding-bottom:8px; margin:0 0 6px }
+  h2 .n { color:var(--accent); margin-right:9px }
+  .sub2 { color:var(--muted); font-size:13px; margin:0 0 18px; max-width:76ch; line-height:1.5 }
+
+  /* headline figures — the four numbers the page exists to compare */
+  .heads { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 6px }
+  .head { background:var(--panel); border:1px solid var(--border); border-radius:8px;
+          padding:11px 15px; min-width:126px }
+  .head .v { font-size:25px; font-weight:650; font-variant-numeric:tabular-nums; line-height:1.15 }
+  .head .k { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:3px }
+  .head.hero .v { color:var(--out) }
+
+  .row { display:flex; gap:22px; align-items:flex-start; flex-wrap:wrap }
+  .grow { flex:1 1 420px; min-width:340px }
+
+  /* ---- waffle -------------------------------------------------------------- */
+  #waffle { width:100%; height:auto; display:block }
+  #waffle rect { transition:opacity .32s ease, fill .32s ease }
+  #waffle rect.dim { opacity:.13 }
+  #waffle rect.hot { stroke:var(--text); stroke-width:1.4 }
+  .step-text { min-height:76px; background:var(--panel); border:1px solid var(--border);
+               border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:13px 16px;
+               font-size:14px; line-height:1.55; margin-top:14px }
+  .step-text b { color:var(--text) }
+  .step-text .big { font-size:19px; font-weight:650; font-variant-numeric:tabular-nums }
+
+  .legend { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:14px; font-size:12.5px }
+  .legend .li { display:flex; align-items:center; gap:7px; cursor:default }
+  .swatch { width:12px; height:12px; border-radius:3px; flex:none }
+  .legend .num { color:var(--muted); font-variant-numeric:tabular-nums }
+
+  /* ---- generic chart chrome ------------------------------------------------ */
+  svg text { fill:var(--muted); font-size:11px; font-family:ui-sans-serif,system-ui,sans-serif }
+  svg text.lbl { fill:var(--text) }
+  .ax line, .ax path { stroke:var(--border) }
+  .gridline { stroke:var(--border); stroke-opacity:.5 }
+
+  .ctl { display:flex; gap:9px; align-items:center; flex-wrap:wrap; margin:0 0 12px; font-size:12.5px }
+  .ctl button { background:var(--panel); color:var(--text); border:1px solid var(--border);
+                border-radius:6px; padding:5px 11px; cursor:pointer; font-size:12.5px; font-family:inherit }
+  .ctl button:hover { border-color:var(--accent) }
+  .ctl button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent) }
+  .ctl .hint { color:var(--muted) }
+
+  /* readout panels sit beside a chart and restate the selection numerically */
+  .readout { background:var(--panel); border:1px solid var(--border); border-radius:8px;
+             padding:14px 16px; flex:0 0 268px; font-size:13px }
+  .readout h4 { margin:0 0 10px; font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted) }
+  .readout dl { display:grid; grid-template-columns:1fr auto; gap:7px 12px; margin:0 }
+  .readout dt { color:var(--muted) }
+  .readout dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; font-weight:550 }
+  .readout dd.em { color:var(--accent) }
+  .readout .note { margin-top:12px; padding-top:11px; border-top:1px solid var(--border);
+                   color:var(--muted); font-size:11.5px; line-height:1.5 }
+
+  .tip { position:fixed; pointer-events:none; z-index:50; background:#05080e; border:1px solid var(--border);
+         border-radius:6px; padding:7px 10px; font-size:12px; line-height:1.45; opacity:0;
+         transition:opacity .1s; max-width:280px; box-shadow:0 6px 22px #0009 }
+  .tip.on { opacity:1 }
+  .tip .t { font-weight:600; color:var(--text) }
+  .tip .m { color:var(--muted) }
+
+  .bar-track { fill:var(--border); fill-opacity:.32 }
+  .hitrow { fill:transparent; cursor:default }
+  .hitrow:hover + .hl, .hl.on { opacity:1 }
+
+  .foot { margin-top:56px; padding-top:18px; border-top:1px solid var(--border);
+          color:var(--muted); font-size:12px; line-height:1.65; max-width:82ch }
+  .foot code { background:var(--panel); padding:1px 5px; border-radius:4px; font-size:11.5px }
+  .foot b { color:var(--text) }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="viz-header">
+    <h1>The Token Ledger</h1>
+    <div class="sub">Every Claude Code turn on this laptop, <span id="hdr-range">—</span> · <span id="hdr-sessions">—</span> sessions · <span id="hdr-msgs">—</span> assistant turns</div>
+  </div>
+
+  <p class="lede">
+    <b>What am I looking at:</b> a full accounting of one person's local Claude Code transcripts,
+    read straight out of <code style="font-size:.92em">~/.claude/projects/**/*.jsonl</code>. Each panel encodes a
+    real measured quantity — no estimates except where labelled. The page argues one thing:
+    <b>almost none of what you pay for is what the model writes.</b>
+  </p>
+
+  <div class="heads" id="heads"></div>
+
+  <!-- ═══ ACT 1 ═════════════════════════════════════════════════════════════ -->
+  <section id="act1">
+    <h2><span class="n">01</span>The ratio</h2>
+    <p class="sub2">
+      One square = 100 million tokens. They are sorted by kind, so the block you see
+      <em>is</em> the bill. Step through to peel the layers off — arrow keys work.
+    </p>
+
+    <div class="ctl" id="waffle-ctl"></div>
+    <div class="row">
+      <div class="grow">
+        <svg id="waffle" viewBox="0 0 840 330" role="img" aria-label="Waffle chart: 654 squares of 100M tokens each, coloured by token class"></svg>
+        <div class="legend" id="waffle-legend"></div>
+      </div>
+      <div style="flex:0 0 300px; min-width:280px">
+        <div class="step-text" id="step-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ACT 2 ═════════════════════════════════════════════════════════════ -->
+  <section id="act2">
+    <h2><span class="n">02</span>Why — the staircase</h2>
+    <p class="sub2">
+      A chat has no memory, so every turn re-sends the whole conversation. Turn 300 pays for
+      turns 1–299 again. Here is that curve, measured across <span id="stair-n">—</span> real sessions:
+      the context billed on turn <i>t</i>, against <i>t</i>. <b>Drag the handle</b> — or use ←/→ — to
+      price a session of that length.
+    </p>
+
+    <div class="ctl" id="stair-ctl"></div>
+    <div class="row">
+      <div class="grow">
+        <svg id="stair" viewBox="0 0 860 400" role="img" aria-label="Context billed per turn versus turn number, log x axis"></svg>
+      </div>
+      <div class="readout" id="stair-readout"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ACT 3 ═════════════════════════════════════════════════════════════ -->
+  <section id="act3">
+    <h2><span class="n">03</span>Where it went</h2>
+    <p class="sub2">
+      <b>Drag across the chart to select a date range</b> — every panel below recomputes for it.
+      Double-click to reset. Height is tokens per day, stacked by kind.
+    </p>
+
+    <div class="ctl" id="days-ctl"></div>
+    <div class="row">
+      <div class="grow">
+        <svg id="days" viewBox="0 0 860 300" role="img" aria-label="Daily token usage over 188 days, stacked by token class, brushable"></svg>
+      </div>
+      <div class="readout" id="days-readout"></div>
+    </div>
+
+    <div class="ctl" style="margin-top:34px">
+      <b style="font-weight:600; font-size:12.5px">show the four panels below in</b>
+      <button id="u-cost" aria-pressed="true">dollars</button>
+      <button id="u-tok" aria-pressed="false">tokens</button>
+      <span class="hint">they rank differently — output is priced 5× input, so writing-heavy work climbs in dollars</span>
+    </div>
+
+    <div class="row" style="margin-top:14px; gap:30px">
+      <div style="flex:1 1 380px; min-width:330px">
+        <h3 style="font-size:13px; margin:0 0 3px">Projects</h3>
+        <p class="sub2" style="margin-bottom:10px" id="cap-projects"></p>
+        <svg id="projects" viewBox="0 0 420 330" role="img" aria-label="Horizontal bars of spend per project"></svg>
+      </div>
+      <div style="flex:1 1 380px; min-width:330px">
+        <h3 style="font-size:13px; margin:0 0 3px">Tools called</h3>
+        <p class="sub2" style="margin-bottom:10px">Split by who called it: the session you were watching, or a subagent you weren't. Priced by the turn that issued the call — see the footnotes.</p>
+        <svg id="tools" viewBox="0 0 420 330" role="img" aria-label="Diverging bars of tool calls, main session versus subagent"></svg>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:34px; gap:30px">
+      <div style="flex:1 1 380px; min-width:330px">
+        <h3 style="font-size:13px; margin:0 0 3px">Models</h3>
+        <p class="sub2" style="margin-bottom:10px">Every model that answered. Hover for its list rate and cost per turn.</p>
+        <svg id="models" viewBox="0 0 420 250" role="img" aria-label="Horizontal bars of tokens per model"></svg>
+      </div>
+      <div style="flex:1 1 380px; min-width:330px">
+        <h3 style="font-size:13px; margin:0 0 3px">Hour of day</h3>
+        <p class="sub2" style="margin-bottom:10px" id="cap-clock"></p>
+        <svg id="clock" viewBox="0 0 420 250" role="img" aria-label="Radial chart of tokens by hour of day"></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script type="module">
+import { stepper, $, saveHash, loadHash } from "/_kit/viz.js";
+
+const D = await (await fetch("data.json")).json();
+
+/* ── formatting ──────────────────────────────────────────────────────────── */
+const fT = n => n >= 1e9 ? (n/1e9).toFixed(n/1e9 >= 100 ? 0 : 2) + "B"
+              : n >= 1e6 ? (n/1e6).toFixed(n/1e6 >= 100 ? 0 : 1) + "M"
+              : n >= 1e3 ? (n/1e3).toFixed(n/1e3 >= 100 ? 0 : 1) + "k" : String(n);
+const fN = n => n.toLocaleString("en-US");
+const f$ = n => n >= 1000 ? "$" + Math.round(n).toLocaleString("en-US")
+              : n >= 10 ? "$" + n.toFixed(0) : "$" + n.toFixed(2);
+const fPct = n => (n < 0.01 ? n.toFixed(3) : n < 1 ? n.toFixed(2) : n.toFixed(1)) + "%";
+const SVGNS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, parent) => {
+  const n = document.createElementNS(SVGNS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v != null) n.setAttribute(k, v);
+  parent?.appendChild(n);
+  return n;
+};
+
+/* Token classes, in the order they are peeled in Act 1. `key` matches data.json. */
+const CLASSES = [
+  { key:"cr",  label:"Cache read",   colour:"var(--cr)",  blurb:"Context you already sent, re-sent and re-billed on the next turn. Billed at 0.1× the input rate — cheap per token, and there are 62.7 billion of them." },
+  { key:"cc",  label:"Cache write",  colour:"var(--cc)",  blurb:"The premium for putting that context into the cache in the first place: 1.25× (5-minute TTL) or 2× (1-hour)." },
+  { key:"out", label:"Output",       colour:"var(--out)", blurb:"Everything the model actually wrote — every line of code, every explanation, every tool call." },
+  { key:"in",  label:"Fresh input",  colour:"var(--inp)", blurb:"Genuinely new uncached input. The smallest line on the bill." },
+];
+const TOT = CLASSES.reduce((s, c) => s + D.tot[c.key], 0);
+
+/* Cost per token class, rebuilt from the per-model rows so it reconciles to the
+   same total the rest of the page quotes. Cache writes use each model's real
+   1h/5m mix rather than an assumed TTL — the two multipliers differ by 60%. */
+const CLASS_COST = (() => {
+  const acc = { in:0, cc:0, cr:0, out:0 };
+  for (const m of D.models) {
+    const r = D.rates[m.fam];
+    if (!r) continue;
+    const [ri, ro] = r;
+    const tt = m.ttl1h + m.ttl5m;
+    const wr = tt ? (m.ttl1h * D.rates.write1h + m.ttl5m * D.rates.write5m) / tt : D.rates.write5m;
+    acc.in  += m.in  * ri / 1e6;
+    acc.cr  += m.cr  * ri * D.rates.cacheRead / 1e6;
+    acc.cc  += m.cc  * ri * wr / 1e6;
+    acc.out += m.out * ro / 1e6;
+  }
+  return acc;
+})();
+
+/* ── tooltip ─────────────────────────────────────────────────────────────── */
+const tipEl = $("#tip");
+const tip = {
+  show(e, html) {
+    tipEl.innerHTML = html;
+    tipEl.classList.add("on");
+    const r = tipEl.getBoundingClientRect();
+    tipEl.style.left = Math.min(e.clientX + 14, innerWidth - r.width - 10) + "px";
+    tipEl.style.top  = Math.max(8, e.clientY - r.height - 12) + "px";
+  },
+  hide() { tipEl.classList.remove("on"); },
+};
+const hoverable = (node, html) => {
+  node.addEventListener("pointermove", e => tip.show(e, typeof html === "function" ? html() : html));
+  node.addEventListener("pointerleave", tip.hide);
+};
+
+/* ── header + headline figures ───────────────────────────────────────────── */
+const days = D.days;
+const fmtDay = s => new Date(s + "T12:00:00Z").toLocaleDateString("en-US", { month:"short", day:"numeric", year:"numeric", timeZone:"UTC" });
+$("#hdr-range").textContent = fmtDay(days[0].d) + " → " + fmtDay(days.at(-1).d);
+$("#hdr-sessions").textContent = fN(D.sessions);
+$("#hdr-msgs").textContent = fN(D.tot.msgs);
+
+const HEADS = [
+  { k:"tokens billed",   v:fT(TOT),                  t:`${fN(TOT)} tokens across ${fN(D.tot.msgs)} assistant turns` },
+  { k:"notional bill",   v:f$(D.cost),               t:"At public list prices. Actually paid for by a flat-rate subscription — see the footnotes." },
+  { k:"tokens written",  v:fT(D.tot.out), hero:true, t:`${fN(D.tot.out)} output tokens — the only tokens that are new text` },
+  { k:"of the tokens",   v:fPct(100 * D.tot.out / TOT), hero:true, t:"Output as a share of all tokens billed" },
+  { k:"…but of the bill", v:fPct(100 * CLASS_COST.out / D.cost), hero:true,
+    t:`${f$(CLASS_COST.out)} of ${f$(D.cost)}. Output is priced 5× input, so it is a far bigger share of the money than of the tokens.` },
+  { k:"read : written",  v:Math.round(TOT / D.tot.out) + " : 1", t:"Tokens paid for, per token produced" },
+];
+$("#heads").innerHTML = HEADS.map(h =>
+  `<div class="head${h.hero ? " hero" : ""}" title="${h.t}"><div class="v">${h.v}</div><div class="k">${h.k}</div></div>`
+).join("");
+
+/* ═══ ACT 1 — waffle ═══════════════════════════════════════════════════════
+   654 cells of 100M. Cell counts use largest-remainder so the rounded parts
+   sum to exactly the number of cells drawn — otherwise the "4 green cells"
+   claim in the copy could silently disagree with the picture. */
+const CELL_TOK = 1e8, COLS = 42;
+const rawCells = CLASSES.map(c => TOT ? (D.tot[c.key] / CELL_TOK) : 0);
+const nCells = Math.round(TOT / CELL_TOK);
+let counts = rawCells.map(Math.floor);
+{
+  let short = nCells - counts.reduce((a, b) => a + b, 0);
+  const order = rawCells.map((v, i) => [v - Math.floor(v), i]).sort((a, b) => b[0] - a[0]);
+  for (let i = 0; short > 0; i++, short--) counts[order[i % order.length][1]]++;
+}
+counts = counts.map((n, i) => Math.max(n, D.tot[CLASSES[i].key] > 0 ? 1 : 0)); // never vanish a real class
+
+const wsvg = $("#waffle"), W_S = 19, W_G = 2.6;
+const ROWS = Math.ceil(nCells / COLS);
+wsvg.setAttribute("viewBox", `0 0 ${COLS * W_S + 4} ${ROWS * W_S + 4}`);
+const cells = [];
+{
+  let i = 0;
+  counts.forEach((n, ci) => {
+    const c = CLASSES[ci];
+    for (let k = 0; k < n; k++, i++) {
+      const r = el("rect", {
+        x: (i % COLS) * W_S + 2, y: Math.floor(i / COLS) * W_S + 2,
+        width: W_S - W_G, height: W_S - W_G, rx: 2.5, fill: c.colour,
+        "data-viz-id": `cell-${c.key}-${k}`,
+        "data-label": `100M tokens — ${c.label}`,
+      }, wsvg);
+      cells.push({ node:r, key:c.key });
+    }
+  });
+}
+cells.forEach(({ node, key }) => {
+  const c = CLASSES.find(x => x.key === key);
+  hoverable(node, `<div class="t">100M tokens · ${c.label}</div>
+    <div class="m">${c.label} totals ${fT(D.tot[key])} — ${fPct(100 * D.tot[key] / TOT)} of the tokens
+    but <b style="color:var(--text)">${f$(CLASS_COST[key])}</b> — ${fPct(100 * CLASS_COST[key] / D.cost)} of the bill.
+    One square costs about ${f$(CLASS_COST[key] / counts[CLASSES.indexOf(c)])}.</div>`);
+});
+
+$("#waffle-legend").innerHTML = CLASSES.map(c =>
+  `<div class="li"><span class="swatch" style="background:${c.colour}"></span>
+   <span>${c.label}</span>
+   <span class="num">${fT(D.tot[c.key])} · ${fPct(100 * D.tot[c.key] / TOT)} of tokens ·
+   <b style="color:var(--text)">${f$(CLASS_COST[c.key])}</b> · ${fPct(100 * CLASS_COST[c.key] / D.cost)} of bill</span></div>`
+).join("");
+
+const outCells = counts[CLASSES.findIndex(c => c.key === "out")];
+const STEPS = [
+  { focus:null, html:`<span class="big">${fT(TOT)} tokens.</span><br>
+      ${nCells} squares, 100 million each — every assistant turn on this machine since ${fmtDay(days[0].d)}.
+      At list price that is <b>${f$(D.cost)}</b>. Now watch what it is made of.` },
+  { focus:"cr", html:`<span class="big">${fPct(100 * D.tot.cr / TOT)} is cache reads — ${f$(CLASS_COST.cr)}.</span><br>
+      ${CLASSES[0].blurb} Half your bill (${fPct(100 * CLASS_COST.cr / D.cost)}) is re-reading.` },
+  { focus:"cc", html:`<span class="big">${fT(D.tot.cc)} is cache writes — ${f$(CLASS_COST.cc)}.</span><br>
+      ${CLASSES[1].blurb} Only ${fPct(100 * D.tot.cc / TOT)} of the tokens, but
+      <b>${fPct(100 * CLASS_COST.cc / D.cost)} of the bill</b> — a write costs up to 20× what a read costs.` },
+  { focus:"in", html:`<span class="big">${fT(D.tot.in)} is fresh input — ${f$(CLASS_COST.in)}.</span><br>
+      ${CLASSES[3].blurb} Everything you actually typed, plus every file read and every tool result,
+      the first time it was seen.` },
+  { focus:"out", html:`<span class="big" style="color:var(--out)">${outCells} squares — ${f$(CLASS_COST.out)}.</span><br>
+      <b>${fT(D.tot.out)} output tokens</b>: ${fPct(100 * D.tot.out / TOT)} of the ledger but
+      <b>${fPct(100 * CLASS_COST.out / D.cost)} of the bill</b>, because output is priced 5× input.
+      That is the entire body of work — every edit, every answer, every command — and you paid for
+      <b>${Math.round(TOT / D.tot.out)} tokens per token of it.</b>` },
+];
+const stepText = $("#step-text");
+const ctl = $("#waffle-ctl");
+ctl.innerHTML = `<button id="wprev">←</button><button id="wnext">→</button>
+  <span class="hint" id="wpos"></span><span class="hint">· hover any square</span>`;
+const wstep = stepper({
+  n: STEPS.length, hashKey: "s",
+  onStep(i) {
+    const s = STEPS[i];
+    stepText.innerHTML = s.html;
+    cells.forEach(({ node, key }) => {
+      node.classList.toggle("dim", !!s.focus && key !== s.focus);
+      node.classList.toggle("hot", s.focus === "out" && key === "out");
+    });
+    $("#wpos").textContent = `${i + 1} / ${STEPS.length}`;
+  },
+});
+$("#wprev").onclick = () => wstep.prev();
+$("#wnext").onclick = () => wstep.next();
+
+/* ═══ ACT 2 — the staircase ════════════════════════════════════════════════
+   x is log(turn) because session lengths span 1..800; y is linear because the
+   claim is "this grows without bound", and a log y would flatten exactly that. */
+const SW = 860, SH = 400, SM = { l:62, r:16, t:18, b:44 };
+const stair = D.stair;
+$("#stair-n").textContent = fN(stair[0].n);
+const CEIL = 1e6;                                     // the 1M context window
+const yMaxS = CEIL * 1.04;
+const sx = t => SM.l + (Math.log(t) / Math.log(stair.at(-1).t)) * (SW - SM.l - SM.r);
+const sy = v => SH - SM.b - (v / yMaxS) * (SH - SM.t - SM.b);
+
+const ssvg = $("#stair");
+{
+  // gridlines + axes
+  for (let v = 0; v <= 1e6; v += 2e5) {
+    el("line", { x1:SM.l, x2:SW - SM.r, y1:sy(v), y2:sy(v), class:"gridline" }, ssvg);
+    el("text", { x:SM.l - 8, y:sy(v) + 4, "text-anchor":"end" }, ssvg).textContent = fT(v);
+  }
+  for (const t of [1, 2, 5, 10, 25, 50, 100, 200, 400, 800]) {
+    if (t > stair.at(-1).t) continue;
+    el("text", { x:sx(t), y:SH - SM.b + 17, "text-anchor":"middle" }, ssvg).textContent = t;
+  }
+  el("text", { x:(SM.l + SW - SM.r) / 2, y:SH - 6, "text-anchor":"middle", class:"lbl" }, ssvg)
+    .textContent = "turn number within one session  (log scale)";
+  el("text", { x:14, y:SH / 2, "text-anchor":"middle", class:"lbl",
+               transform:`rotate(-90 14 ${SH / 2})` }, ssvg)
+    .textContent = "tokens billed as input on that turn";
+
+  // the 1M context ceiling — the wall these curves are walking into
+  el("line", { x1:SM.l, x2:SW - SM.r, y1:sy(CEIL), y2:sy(CEIL),
+               stroke:"var(--danger)", "stroke-dasharray":"5 4", "stroke-opacity":.75 }, ssvg);
+  el("text", { x:SW - SM.r, y:sy(CEIL) - 7, "text-anchor":"end", fill:"var(--danger)" }, ssvg)
+    .textContent = "1M context window";
+
+  // p25–p75 band
+  const band = stair.map(d => `${sx(d.t)},${sy(d.p75)}`).join(" ") + " " +
+               stair.slice().reverse().map(d => `${sx(d.t)},${sy(d.p25)}`).join(" ");
+  el("polygon", { points:band, fill:"var(--accent)", "fill-opacity":.13,
+                  "data-viz-id":"stair-band", "data-label":"p25–p75 of context billed" }, ssvg);
+  el("polyline", { points:stair.map(d => `${sx(d.t)},${sy(d.p90)}`).join(" "), fill:"none",
+                   stroke:"var(--accent)", "stroke-opacity":.42, "stroke-dasharray":"4 3",
+                   "data-viz-id":"stair-p90", "data-label":"90th percentile" }, ssvg);
+}
+// real session traces, drawn faint behind the median
+const traceNodes = D.traces.map((tr, i) => {
+  const pts = tr.y.map((v, k) => {
+    const t = 1 + Math.round(k * (tr.n - 1) / Math.max(1, tr.y.length - 1));
+    return `${sx(Math.max(1, t))},${sy(Math.min(v, yMaxS))}`;
+  }).join(" ");
+  const n = el("polyline", { points:pts, fill:"none", stroke:`var(--c${(i % 8) + 1})`,
+                             "stroke-width":1, "stroke-opacity":.55,
+                             "data-viz-id":`trace-${tr.id}`,
+                             "data-label":`session ${tr.id} in ${tr.label}, ${tr.n} turns` }, ssvg);
+  hoverable(n, `<div class="t">one real session · ${tr.n} turns</div><div class="m">${tr.label} · id ${tr.id}</div>`);
+  return n;
+});
+el("polyline", { points:stair.map(d => `${sx(d.t)},${sy(d.med)}`).join(" "), fill:"none",
+                 stroke:"var(--accent)", "stroke-width":2.4,
+                 "data-viz-id":"stair-median", "data-label":"median context billed per turn" }, ssvg);
+
+// draggable handle
+const handle = el("g", { "data-viz-id":"stair-handle", "data-label":"turn selector" }, ssvg);
+const hLine = el("line", { y1:SM.t, y2:SH - SM.b, stroke:"var(--text)", "stroke-width":1.2, "stroke-opacity":.8 }, handle);
+const hDot  = el("circle", { r:5.5, fill:"var(--accent)", stroke:"var(--bg)", "stroke-width":2 }, handle);
+const hGrab = el("rect", { y:0, width:26, height:SH, fill:"transparent", cursor:"ew-resize" }, handle);
+
+// cumulative billed input for a session that ran exactly T turns (median path)
+const cum = []; { let s = 0; for (const d of stair) { s += d.med; cum.push(s); } }
+const atTurn = T => stair[Math.min(stair.length - 1, Math.max(0, T - 1))];
+// blended $/token for input-side tokens, derived from the real ledger rather than assumed
+const inputTok = D.tot.in + D.tot.cc + D.tot.cr;
+const OUT_SHARE = D.tot.out / inputTok;                       // output tokens per input token, measured
+const BLENDED_IN = (D.cost - (D.tot.out / 1e6) * 25) / (inputTok / 1e6);
+
+let T = loadHash().t ?? 160;
+const ro = $("#stair-readout");
+function drawStair() {
+  T = Math.min(stair.at(-1).t, Math.max(1, Math.round(T)));
+  const d = atTurn(T), x = sx(d.t);
+  hLine.setAttribute("x1", x); hLine.setAttribute("x2", x);
+  hDot.setAttribute("cx", x); hDot.setAttribute("cy", sy(d.med));
+  hGrab.setAttribute("x", x - 13);
+  const billed = cum[Math.min(cum.length - 1, T - 1)];
+  const written = billed * OUT_SHARE;
+  ro.innerHTML = `<h4>a session ${T} turns long</h4><dl>
+    <dt>context on turn ${T}</dt><dd>${fT(d.med)}</dd>
+    <dt>vs. turn 1</dt><dd>${(d.med / stair[0].med).toFixed(1)}×</dd>
+    <dt>input billed, turns 1–${T}</dt><dd class="em">${fT(billed)}</dd>
+    <dt>≈ output written</dt><dd>${fT(written)}</dd>
+    <dt>≈ cost of the session</dt><dd class="em">${f$(billed / 1e6 * BLENDED_IN + written / 1e6 * 25)}</dd>
+    <dt>sessions that got this far</dt><dd>${fN(d.n)}</dd>
+  </dl>
+  <div class="note">Median path. ${fPct(100 * d.n / stair[0].n)} of the ${fN(stair[0].n)} sessions
+  reached turn ${T}; the band is the middle half of them. Cost uses this ledger's own blended
+  input rate (${(BLENDED_IN).toFixed(2)} $/MTok) — see the footnotes.</div>`;
+  saveHash({ ...loadHash(), t:T });
+}
+{
+  const inv = px => Math.exp((px - SM.l) / (SW - SM.l - SM.r) * Math.log(stair.at(-1).t));
+  const toLocal = e => {
+    const r = ssvg.getBoundingClientRect();
+    return (e.clientX - r.left) / r.width * SW;
+  };
+  let dragging = false;
+  const move = e => { if (dragging) { T = inv(toLocal(e)); drawStair(); } };
+  ssvg.addEventListener("pointerdown", e => { dragging = true; ssvg.setPointerCapture(e.pointerId); move(e); });
+  ssvg.addEventListener("pointermove", move);
+  ssvg.addEventListener("pointerup", () => { dragging = false; });
+  ssvg.addEventListener("pointercancel", () => { dragging = false; });
+  ssvg.setAttribute("tabindex", "0");
+  ssvg.addEventListener("keydown", e => {
+    const step = e.shiftKey ? 10 : 1;
+    if (e.key === "ArrowRight") { T = Math.round(T * (1 + 0.06 * step)) + 1; drawStair(); e.preventDefault(); }
+    if (e.key === "ArrowLeft")  { T = Math.round(T / (1 + 0.06 * step)) - 1; drawStair(); e.preventDefault(); }
+  });
+}
+$("#stair-ctl").innerHTML =
+  `<button id="tr-toggle" aria-pressed="true">real session traces</button>
+   <span class="hint">drag the chart · ←/→ to step (⇧ faster) · click the chart first for keys</span>`;
+$("#tr-toggle").onclick = e => {
+  const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+  e.currentTarget.setAttribute("aria-pressed", String(on));
+  traceNodes.forEach(n => n.setAttribute("visibility", on ? "visible" : "hidden"));
+};
+drawStair();
+
+/* ═══ ACT 3 — daily series with a brush ════════════════════════════════════ */
+const DW = 860, DH = 300, DM = { l:62, r:16, t:16, b:40 };
+const dsvg = $("#days");
+const dayMax = Math.max(...days.map(d => d.cr + d.cc + d.out + d.in));
+const dx = i => DM.l + (i / (days.length - 1)) * (DW - DM.l - DM.r);
+const bandW = (DW - DM.l - DM.r) / days.length;
+
+/* One outlier day is 6× the median, so linear flattens five months into noise.
+   sqrt keeps zero at zero and areas still comparable, so it is the default;
+   linear stays one click away because only linear is honest about the outlier. */
+let daySqrt = true;
+const dy = v => {
+  const f = daySqrt ? Math.sqrt(v / dayMax) : v / dayMax;
+  return DH - DM.b - f * (DH - DM.t - DM.b);
+};
+
+let dayBars = [], brushRect = null;
+function drawDays() {
+  dsvg.innerHTML = "";
+  const ticks = daySqrt ? [0, 5e7, 2e8, 45e7, 8e8, 125e7, 18e8] : [0, 3e8, 6e8, 9e8, 12e8, 15e8, 18e8];
+  for (const v of ticks) {
+    if (v > dayMax) continue;
+    el("line", { x1:DM.l, x2:DW - DM.r, y1:dy(v), y2:dy(v), class:"gridline" }, dsvg);
+    el("text", { x:DM.l - 8, y:dy(v) + 4, "text-anchor":"end" }, dsvg).textContent = fT(v);
+  }
+  days.forEach((d, i) => {
+    if (!d.d.endsWith("-01")) return;
+    el("line", { x1:dx(i), x2:dx(i), y1:DM.t, y2:DH - DM.b, class:"gridline" }, dsvg);
+    el("text", { x:dx(i), y:DH - DM.b + 15, "text-anchor":"middle" }, dsvg)
+      .textContent = new Date(d.d + "T12:00:00Z").toLocaleDateString("en-US", { month:"short", timeZone:"UTC" });
+  });
+  el("text", { x:14, y:DH / 2, "text-anchor":"middle", class:"lbl", transform:`rotate(-90 14 ${DH / 2})` }, dsvg)
+    .textContent = `tokens billed per day${daySqrt ? "  (√ scale)" : ""}`;
+
+  dayBars = days.map((d, i) => {
+    const g = el("g", { "data-viz-id":`day-${d.d}`, "data-label":`${d.d}: ${fT(d.cr + d.cc + d.out + d.in)} tokens` }, dsvg);
+    let acc = 0;
+    for (const c of CLASSES) {
+      const v = d[c.key];
+      if (!v) continue;
+      el("rect", { x:dx(i) - bandW / 2 + 0.25, y:dy(acc + v), width:Math.max(0.9, bandW - 0.5),
+                   height:Math.max(0.4, dy(acc) - dy(acc + v)), fill:c.colour }, g);
+      acc += v;
+    }
+    hoverable(g, `<div class="t">${fmtDay(d.d)}</div>
+      <div class="m">${fT(d.cr + d.cc + d.out + d.in)} tokens · ${f$(d.cost)} · ${fN(d.msgs)} turns · ${d.sess} session${d.sess === 1 ? "" : "s"}</div>`);
+    return g;
+  });
+  brushRect = el("rect", { y:DM.t, height:DH - DM.t - DM.b, fill:"var(--accent)", "fill-opacity":.12,
+                           stroke:"var(--accent)", "stroke-opacity":.55, visibility:"hidden",
+                           "pointer-events":"none", "data-viz-id":"brush", "data-label":"selected date range" }, dsvg);
+}
+drawDays();
+
+/* Everything downstream of the brush reads `sel` — one selection, one redraw. */
+let sel = null;                                     // [i0, i1] inclusive, or null for all
+const selDays = () => sel ? days.slice(sel[0], sel[1] + 1) : days;
+
+const dro = $("#days-readout");
+function redrawSelection() {
+  const S = selDays();
+  const sum = k => S.reduce((a, d) => a + (d[k] || 0), 0);
+  const tok = sum("cr") + sum("cc") + sum("out") + sum("in");
+  const cost = sum("cost"), side = sum("side"), main = sum("main");
+  dayBars.forEach((g, i) => g.setAttribute("opacity", !sel || (i >= sel[0] && i <= sel[1]) ? "1" : ".22"));
+  if (sel) {
+    brushRect.setAttribute("visibility", "visible");
+    brushRect.setAttribute("x", dx(sel[0]) - bandW / 2);
+    brushRect.setAttribute("width", Math.max(2, dx(sel[1]) - dx(sel[0]) + bandW));
+  } else brushRect.setAttribute("visibility", "hidden");
+
+  const busiest = S.reduce((a, b) => (b.cost > a.cost ? b : a), S[0]);
+  dro.innerHTML = `<h4>${sel ? fmtDay(S[0].d) + " → " + fmtDay(S.at(-1).d) : "all " + days.length + " active days"}</h4><dl>
+    <dt>active days</dt><dd>${S.length}</dd>
+    <dt>sessions</dt><dd>${fN(sum("sess"))}</dd>
+    <dt>tokens</dt><dd>${fT(tok)}</dd>
+    <dt>written</dt><dd>${fT(sum("out"))}</dd>
+    <dt>notional bill</dt><dd class="em">${f$(cost)}</dd>
+    <dt>per active day</dt><dd>${f$(cost / S.length)}</dd>
+    <dt>tool calls</dt><dd>${fN(sum("tools"))}</dd>
+    <dt>done by subagents</dt><dd>${fPct(100 * side / Math.max(1, side + main))}</dd>
+  </dl>
+  <div class="note">Priciest day in range: <b>${fmtDay(busiest.d)}</b> at ${f$(busiest.cost)}
+  across ${busiest.sess} session${busiest.sess === 1 ? "" : "s"}.</div>`;
+  drawProjects(); drawTools(); drawModels(); drawClock();
+}
+{
+  const idxAt = e => {
+    const r = dsvg.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width * DW;
+    return Math.min(days.length - 1, Math.max(0, Math.round((x - DM.l) / (DW - DM.l - DM.r) * (days.length - 1))));
+  };
+  let anchor = null;
+  dsvg.addEventListener("pointerdown", e => { anchor = idxAt(e); dsvg.setPointerCapture(e.pointerId); });
+  dsvg.addEventListener("pointermove", e => {
+    if (anchor == null) return;
+    const j = idxAt(e);
+    sel = [Math.min(anchor, j), Math.max(anchor, j)];
+    if (sel[0] === sel[1]) sel = null;
+    redrawSelection();
+  });
+  dsvg.addEventListener("pointerup", () => { anchor = null; });
+  dsvg.addEventListener("dblclick", () => { sel = null; redrawSelection(); });
+}
+$("#days-ctl").innerHTML = `<button id="d-all">whole period</button>
+  <button id="d-30">last 30 days</button><button id="d-peak">peak week</button>
+  <button id="d-scale" aria-pressed="true">√ scale</button>
+  <span class="hint">or drag on the chart · double-click resets</span>`;
+$("#d-scale").onclick = e => {
+  daySqrt = !daySqrt;
+  e.currentTarget.setAttribute("aria-pressed", String(daySqrt));
+  e.currentTarget.textContent = daySqrt ? "√ scale" : "linear";
+  drawDays(); redrawSelection();
+};
+$("#d-all").onclick = () => { sel = null; redrawSelection(); };
+$("#d-30").onclick  = () => { sel = [Math.max(0, days.length - 30), days.length - 1]; redrawSelection(); };
+$("#d-peak").onclick = () => {
+  let best = 0, bi = 0;
+  for (let i = 0; i + 7 <= days.length; i++) {
+    const s = days.slice(i, i + 7).reduce((a, d) => a + d.cost, 0);
+    if (s > best) { best = s; bi = i; }
+  }
+  sel = [bi, bi + 6]; redrawSelection();
+};
+
+/* ── Act 3 small multiples ────────────────────────────────────────────────
+   Projects / tools / models are not stored per-day, so they cannot honestly
+   follow the brush. They are scaled by the brush's share of total tokens and
+   labelled as such rather than silently redrawn as if they were exact. */
+const scaleNote = () => {
+  const S = selDays();
+  const tok = S.reduce((a, d) => a + d.cr + d.cc + d.out + d.in, 0);
+  return sel ? tok / (TOT || 1) : 1;
+};
+
+function hbars(svgSel, rows, { w = 420, rowH, valFmt, capKey = null, title }) {
+  const svg = $(svgSel);
+  svg.innerHTML = "";
+  const h = rows.length * rowH + 14;
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  const L = 132, R = 62, max = Math.max(...rows.map(r => r.v)) || 1;
+  rows.forEach((r, i) => {
+    const y = i * rowH + 6, bh = rowH - 6;
+    const bw = (r.v / max) * (w - L - R);
+    el("rect", { x:L, y, width:w - L - R, height:bh, rx:2, class:"bar-track" }, svg);
+    const g = el("g", { "data-viz-id":`${title}-${r.k}`, "data-label":`${r.k}: ${valFmt(r.v)}` }, svg);
+    el("rect", { x:L, y, width:Math.max(1, bw), height:bh, rx:2, fill:r.colour || "var(--accent)",
+                 "fill-opacity":.82 }, g);
+    if (capKey != null && r.cap > 0) {
+      // floored at 1.5px purely so it exists as a mark; at true scale it is
+      // sub-pixel on every project, which is the finding, not a rendering bug.
+      const cw = Math.max(1.5, (r.cap / max) * (w - L - R));
+      el("rect", { x:L + bw - cw, y, width:cw, height:bh, rx:2, fill:"var(--out)" }, g);
+    }
+    el("text", { x:L - 8, y:y + bh - 2, "text-anchor":"end", class:"lbl" }, svg).textContent = r.k;
+    el("text", { x:L + Math.max(1, bw) + 7, y:y + bh - 2 }, svg).textContent = valFmt(r.v);
+    el("rect", { x:0, y, width:w, height:bh, class:"hitrow" }, svg);
+    hoverable(g, r.tip);
+  });
+}
+
+/* One switch drives every panel below. Dollars is the default because tokens
+   flatter the cheap classes — 62.7B cache reads and 433M output look 145:1 in
+   tokens and 3:1 in money, and the money is the one you act on. */
+let UNIT = "cost";
+const uVal = (tokens, cost) => UNIT === "cost" ? cost : tokens;
+const uFmt = v => UNIT === "cost" ? f$(v) : fT(v);
+
+function drawProjects() {
+  const s = scaleNote();
+  // The green tip is invisible in tokens and a fifth of the bar in dollars.
+  // Saying so is the whole reason the toggle exists, so the caption tracks it.
+  $("#cap-projects").innerHTML = `Repo the session was rooted in. Bar length is
+    ${UNIT === "cost" ? "spend" : "tokens"}; the green tip is what came back as written output —
+    ${UNIT === "cost"
+      ? `about a fifth of every bar, because output is priced 5× input.`
+      : `a sliver on every project. Switch to dollars and it grows.`}`;
+  const rows = D.projects.slice(0, 12).map(p => ({
+    k: p.name.length > 21 ? p.name.slice(0, 20) + "…" : p.name,
+    v: uVal(p.tok, p.cost) * s,
+    // the output share, in whatever unit is showing — output is 5× the input
+    // rate, so this tip is visibly fatter in dollars than in tokens
+    cap: uVal(p.out, p.out / 1e6 * 25) * s,
+    tip: `<div class="t">${p.name}</div><div class="m"><b style="color:var(--text)">${f$(p.cost * s)}</b> ·
+      ${fT(p.tok * s)} tokens · ${fT(p.out * s)} written (${fPct(100 * p.out / p.tok)} of its tokens)<br>
+      ${f$(p.cost / D.cost * 100)} in every $100 of the whole ledger</div>`,
+  }));
+  hbars("#projects", rows, { rowH:26, valFmt:uFmt, capKey:"cap", title:"project" });
+}
+function drawTools() {
+  const s = scaleNote();
+  const svg = $("#tools"); svg.innerHTML = "";
+  const rows = D.tools.slice(0, 12);
+  const w = 420, rowH = 26, h = rows.length * rowH + 22;
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  // max comes from the *scaled* values so a brush rescales every bar together
+  // rather than shrinking the whole chart toward zero. In dollar mode the split
+  // is still by call count — cost is attributed per call, so the ratio holds.
+  const val = r => uVal(r.n, r.cost);
+  const mid = 208, half = 96,
+        max = Math.max(...rows.map(r => Math.max(r.main, r.side) / r.n * val(r))) * s || 1;
+  el("text", { x:mid - 6, y:11, "text-anchor":"end", fill:"var(--accent)" }, svg).textContent = "← you watched";
+  el("text", { x:mid + 6, y:11, fill:"var(--c5)" }, svg).textContent = "subagents →";
+  rows.forEach((r, i) => {
+    const y = i * rowH + 20, bh = rowH - 7;
+    const per = val(r) / r.n;                       // value carried by one call
+    const mw = (r.main * per * s / max) * half, sw = (r.side * per * s / max) * half;
+    const g = el("g", { "data-viz-id":`tool-${r.name}`,
+                        "data-label":`${r.name}: ${fN(r.n)} calls, ${f$(r.cost)}` }, svg);
+    el("rect", { x:mid - mw, y, width:Math.max(0.8, mw), height:bh, rx:2, fill:"var(--accent)", "fill-opacity":.8 }, g);
+    el("rect", { x:mid, y, width:Math.max(0.8, sw), height:bh, rx:2, fill:"var(--c5)", "fill-opacity":.8 }, g);
+    const nm = r.name.replace(/^mcp__[a-z-]+__/, "▸").replace(/_/g, " ");
+    el("text", { x:mid - half - 8, y:y + bh - 2, "text-anchor":"end", class:"lbl" }, svg)
+      .textContent = nm.length > 17 ? nm.slice(0, 16) + "…" : nm;
+    el("text", { x:mid + half + 8, y:y + bh - 2 }, svg).textContent = uFmt(val(r) * s);
+    hoverable(g, `<div class="t">${r.name}</div><div class="m">
+      <b style="color:var(--text)">${f$(r.cost * s)}</b> across ${fN(Math.round(r.n * s))} calls —
+      ${f$(r.cost / r.n)} per call.<br>
+      ${fN(Math.round(r.main * s))} in the main session, ${fN(Math.round(r.side * s))} by subagents
+      (${fPct(100 * r.side / r.n)}).</div>`);
+  });
+}
+function drawModels() {
+  const s = scaleNote();
+  const FAMC = { opus:"var(--c1)", fable:"var(--c4)", sonnet:"var(--c3)", haiku:"var(--c6)", other:"var(--border)" };
+  const rows = D.models.filter(m => m.fam !== "other").map(m => {
+    const tok = m.in + m.cc + m.cr + m.out;
+    return { k:m.model.replace(/^claude-/, "").replace(/-\d{8}$/, ""), v:uVal(tok, m.cost) * s, colour:FAMC[m.fam],
+      tip:`<div class="t">${m.model}</div><div class="m"><b style="color:var(--text)">${f$(m.cost * s)}</b> ·
+        ${fT(tok * s)} tokens · ${fN(Math.round(m.msgs * s))} turns · ${fT(m.out * s)} written<br>
+        ${f$(m.cost / m.msgs)} per turn · list rate $${D.rates[m.fam][0]}/$${D.rates[m.fam][1]} per MTok</div>` };
+  });
+  hbars("#models", rows, { rowH:26, valFmt:uFmt, title:"model" });
+}
+function drawClock() {
+  const s = scaleNote();
+  const svg = $("#clock"); svg.innerHTML = "";
+  const W = 420, H = 250, cx = W / 2, cy = H / 2 + 4, r0 = 34, r1 = 112;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  $("#cap-clock").textContent = `Local time (America/Chicago). Radius is ${
+    UNIT === "cost" ? "spend" : "tokens billed"} in that hour, all ${days.length} days pooled.`;
+  const hv = h => uVal(h.tok, h.cost);
+  const max = Math.max(...D.hours.map(hv)) || 1;
+  for (const rr of [r0, r1]) el("circle", { cx, cy, r:rr, fill:"none", class:"gridline" }, svg);
+  D.hours.forEach(h => {
+    const a0 = (h.h / 24) * 2 * Math.PI - Math.PI / 2, a1 = ((h.h + 1) / 24) * 2 * Math.PI - Math.PI / 2 - 0.012;
+    const frac = hv(h) / max, rr = r0 + frac * (r1 - r0);
+    const P = (a, r) => `${cx + Math.cos(a) * r},${cy + Math.sin(a) * r}`;
+    const p = el("path", {
+      d:`M ${P(a0, r0)} L ${P(a0, rr)} A ${rr} ${rr} 0 0 1 ${P(a1, rr)} L ${P(a1, r0)} A ${r0} ${r0} 0 0 0 ${P(a0, r0)} Z`,
+      fill:"var(--accent)", "fill-opacity":.28 + .55 * frac, stroke:"var(--bg)", "stroke-width":.6,
+      "data-viz-id":`hour-${h.h}`, "data-label":`${h.h}:00 — ${f$(h.cost)}, ${fT(h.tok)} tokens` }, svg);
+    hoverable(p, `<div class="t">${String(h.h).padStart(2, "0")}:00–${String((h.h + 1) % 24).padStart(2, "0")}:00</div>
+      <div class="m"><b style="color:var(--text)">${f$(h.cost * s)}</b> · ${fT(h.tok * s)} tokens ·
+      ${fN(Math.round(h.msgs * s))} turns<br>${fPct(100 * h.cost / D.cost)} of the whole bill</div>`);
+    if (h.h % 3 === 0) {
+      const am = (a0 + a1) / 2;
+      el("text", { x:cx + Math.cos(am) * (r1 + 15), y:cy + Math.sin(am) * (r1 + 15) + 4, "text-anchor":"middle" }, svg)
+        .textContent = String(h.h).padStart(2, "0");
+    }
+  });
+  const peak = D.hours.reduce((a, b) => (hv(b) > hv(a) ? b : a));
+  el("text", { x:cx, y:cy - 8, "text-anchor":"middle", class:"lbl", "font-size":"15", "font-weight":"650" }, svg)
+    .textContent = String(peak.h).padStart(2, "0") + ":00";
+  el("text", { x:cx, y:cy + 7, "text-anchor":"middle", "font-size":"10.5" }, svg)
+    .textContent = "peak · " + uFmt(hv(peak) * s);
+  // working hours vs the rest — the number the shape is really about
+  const work = D.hours.filter(h => h.h >= 7 && h.h < 18).reduce((a, h) => a + h.cost, 0);
+  el("text", { x:cx, y:cy + 21, "text-anchor":"middle", "font-size":"10" }, svg)
+    .textContent = fPct(100 * work / D.cost) + " in 07–18";
+}
+
+for (const [id, u] of [["#u-cost", "cost"], ["#u-tok", "tokens"]]) {
+  $(id).onclick = () => {
+    UNIT = u;
+    $("#u-cost").setAttribute("aria-pressed", String(UNIT === "cost"));
+    $("#u-tok").setAttribute("aria-pressed", String(UNIT === "tokens"));
+    drawProjects(); drawTools(); drawModels(); drawClock();
+  };
+}
+
+redrawSelection();
+
+/* ── footnotes: every assumption the numbers rest on ─────────────────────── */
+$("#foot").innerHTML = `
+  <p><b>Where the data comes from.</b> Every <code>type:"assistant"</code> record in
+  <code>~/.claude/projects/**/*.jsonl</code> — ${fN(D.tot.msgs)} of them across ${fN(D.sessions)} sessions and
+  ${days.length} active days. Token counts are the API's own <code>usage</code> block, not estimates.
+  Sidechain records (subagents) are included everywhere except the Act&nbsp;2 staircase, which follows the
+  main conversation only.</p>
+
+  <p><b>Why a cache write costs more than a cache read.</b> The conversation is held server-side
+  between turns. Putting it there is a <em>write</em> and costs <b>more</b> than ordinary input —
+  ${D.rates.write5m}× if you want it kept for 5 minutes, ${D.rates.write1h}× for an hour. Reading it
+  back costs <b>${D.rates.cacheRead}×</b>, a tenth of ordinary input. So the 1-hour option is rent paid
+  up front to survive a long gap, and the 5-minute one is cheaper but re-charges the write premium
+  every time you pause. This machine's traffic is mostly 1-hour, which is why cache writes are only
+  ${fPct(100 * D.tot.cc / TOT)} of the tokens but ${fPct(100 * CLASS_COST.cc / D.cost)} of the bill.
+  Each model is priced with its own measured 1h/5m mix, not an assumed one.</p>
+
+  <p><b>How tools are priced.</b> A tool call has no price of its own — what it costs is the turn that
+  issued it. So each call is charged the full cost of its assistant turn, split evenly when one turn
+  fired several calls. Turns that called at least one tool account for
+  <b>${f$(D.toolCostTotal)}</b> — ${fPct(100 * D.toolCostTotal / D.cost)} of the whole bill; the rest went
+  to turns that just answered. Read this as "turns that reach for Bash are expensive turns", not
+  "Bash itself burns tokens".</p>
+
+  <p><b>The bill is notional.</b> ${f$(D.cost)} is what this traffic would cost at public list prices:
+  Opus $${D.rates.opus[0]}/$${D.rates.opus[1]} per MTok in/out, Fable $${D.rates.fable[0]}/$${D.rates.fable[1]},
+  Sonnet $${D.rates.sonnet[0]}/$${D.rates.sonnet[1]}, Haiku $${D.rates.haiku[0]}/$${D.rates.haiku[1]};
+  cache reads at ${D.rates.cacheRead}× the input rate and cache writes at ${D.rates.write5m}× (5-minute TTL)
+  or ${D.rates.write1h}× (1-hour), split per model using the real TTL breakdown in each record.
+  None of it was actually billed this way — this is subscription usage. Sonnet&nbsp;5's promotional
+  introductory rate is ignored (it is 0.3% of the total).</p>
+
+  <p><b>What is measured vs. modelled.</b> Act 1 and the daily chart are exact sums. In Act 2, the
+  per-turn curve is a real percentile across ${fN(stair[0].n)} sessions, but the session-cost readout
+  integrates the <em>median</em> path — a typical session, not any particular one — and prices it with this
+  ledger's own blended input rate. The project, tool, model and clock panels are not stored per-day, so
+  when you brush a range they scale by that range's share of tokens rather than being recomputed exactly;
+  treat them as proportions, not counts.</p>
+
+  <p><b>The finding, stated plainly.</b> ${fPct(100 * D.tot.out / TOT)} of the tokens were new text. The
+  remaining ${fPct(100 - 100 * D.tot.out / TOT)} was the same conversation, read again — which is what an
+  agent <em>is</em>: a loop that re-reads everything it knows before each move. Caching is what makes that
+  affordable; at full input price the same traffic would have cost
+  ${f$((D.tot.in + D.tot.cc + D.tot.cr) / 1e6 * 5 + D.tot.out / 1e6 * 25)}.</p>
+
+  <p style="opacity:.72">Extracted ${D.generated}. Cross-check: per-day costs sum to
+  ${f$(D.costCheck)} against ${f$(D.cost)} summed per model.</p>`;
+</script>
+</body>
+</html>

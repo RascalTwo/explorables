@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Props · State · Context — the basketball cut</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="React">
+<meta name="viz:title" content="Props · State · Context (basketball)">
+<meta name="viz:description" content="Where React data lives and who can see it, explained for basketball nerds.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1520px; margin: 0 auto; padding: 12px 14px 20px; }
+  .layout { display: grid; grid-template-columns: 400px 1fr; gap: 22px; align-items: start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  /* ---- narrative ---- */
+  .narr .tag {
+    display:inline-block; font: 600 11px/1 var(--mono); letter-spacing:.08em;
+    text-transform:uppercase; padding:4px 8px; border-radius:6px; margin-bottom:10px;
+    background:var(--panel-2); border:1px solid var(--border);
+  }
+  .narr[data-c="props"]   .tag { color:var(--accent); border-color:#2b4f7e; }
+  .narr[data-c="state"]   .tag { color:var(--good);   border-color:#245c32; }
+  .narr[data-c="context"] .tag { color:var(--c4);     border-color:#4a3a6b; }
+  .narr h2 { margin:.1em 0 .5em; font-size:21px; }
+  .narr p { color:var(--text); line-height:1.6; margin:0 0 14px; }
+  .narr b.hl { color:var(--text); }
+  .narr[data-c="props"]   b.hl { color:var(--accent); }
+  .narr[data-c="state"]   b.hl { color:var(--good); }
+  .narr[data-c="context"] b.hl { color:var(--c4); }
+  pre.code {
+    background:#0a0e14; border:1px solid var(--border); border-radius:8px;
+    padding:12px 14px; overflow-x:auto; font:13px/1.55 var(--mono); color:#c9d4e3;
+    margin:0 0 16px; white-space:pre; tab-size:2;
+  }
+  pre.code .k { color:#ff7b72; }   /* keyword */
+  pre.code .f { color:#d2a8ff; }   /* function/component */
+  pre.code .s { color:#a5d6ff; }   /* string/value */
+  pre.code .c { color:#6e7781; font-style:italic; } /* comment */
+
+  /* ---- nav ---- */
+  .nav { display:flex; align-items:center; gap:10px; margin-top:4px; }
+  .nav button {
+    font:600 13px var(--sans); padding:8px 14px; border-radius:8px; cursor:pointer;
+    background:var(--panel-2); color:var(--text); border:1px solid var(--border);
+  }
+  .nav button:hover:not(:disabled){ border-color:var(--accent); }
+  .nav button:disabled{ opacity:.35; cursor:default; }
+  .dots { display:flex; gap:7px; margin-left:auto; }
+  .dot { width:9px; height:9px; border-radius:50%; background:var(--border); cursor:pointer; border:none; padding:0; }
+  .dot.on { background:var(--accent); }
+
+  /* ---- stage ---- */
+  .stage svg { width:100%; height:auto; display:block; background:var(--panel); border:1px solid var(--border); border-radius:12px; }
+
+  .box { fill:var(--panel-2); stroke:var(--border); stroke-width:1.5; transition:.35s; cursor:help; }
+
+  .tip { position:fixed; z-index:50; max-width:248px; pointer-events:none; display:none;
+    background:var(--panel-2); border:1px solid var(--border); border-radius:8px;
+    padding:9px 11px; box-shadow:0 8px 24px #000a; font:13px/1.45 var(--sans); color:var(--text); }
+  .tip b { display:block; margin-bottom:3px; font:600 12px var(--mono); color:var(--accent); }
+  .node .vsvg-label { color:var(--text); display:flex; flex-direction:column; justify-content:center;
+    align-items:center; text-align:center; height:100%; pointer-events:none; }
+  .node .vsvg-label .nm { font:600 14px var(--mono); }
+  .node .vsvg-label .sb { font:11px var(--sans); color:var(--muted); margin-top:3px; }
+  .node.dim { opacity:.28; }
+  .node.on .box { stroke-width:2.5; }
+  .n-props   .box { stroke:var(--accent); }
+  .n-state   .box { stroke:var(--good); }
+  .n-context .box { stroke:var(--c4); }
+  .node.pulse .box { animation:pulse .55s ease; }
+  @keyframes pulse { 0%,100%{stroke-width:2.5} 50%{stroke-width:7; filter:drop-shadow(0 0 6px var(--good));} }
+
+  .edge { stroke:var(--border); stroke-width:2; fill:none; transition:.35s; }
+  .edge.hot { stroke:var(--accent); stroke-width:3; }
+
+  .ball { fill:#e8a13c; stroke:#7a4d12; stroke-width:1.5; }
+  .fxtag { font:600 12px var(--mono); }
+  .fxtag rect { stroke-width:1.5; rx:6; }
+
+  .beam { stroke:var(--c4); stroke-width:2; fill:none; stroke-dasharray:6 6;
+    opacity:0; animation:beam .9s ease forwards; }
+  @keyframes beam { from{opacity:0; stroke-dashoffset:60;} to{opacity:.85; stroke-dashoffset:0;} }
+
+  .relay { fill:var(--warn); }
+  .ctxtok { fill:var(--c4); }
+
+  .cap { color:var(--muted); font:13px var(--sans); margin:12px 2px 0; }
+  .cap b { color:var(--text); }
+
+  /* ---- legend ---- */
+  .legend { display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; padding:12px 14px;
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; }
+  .legend .li { display:flex; align-items:baseline; gap:8px; font-size:13px; }
+  .legend .sw { width:11px; height:11px; border-radius:3px; transform:translateY(1px); }
+  .legend .li b { font-family:var(--mono); }
+</style>
+</head>
+<body>
+  <div class="viz-header">
+    <h1>Props · State · Context</h1>
+    <div class="sub">One question — <em>where does this data live, and who can see it?</em> — explained for basketball nerds.</div>
+  </div>
+
+  <div class="layout">
+    <!-- NARRATIVE -->
+    <div class="panel narr" id="narr" data-c="setup">
+      <span class="tag" id="t-tag">The roster</span>
+      <h2 id="t-title"></h2>
+      <div id="t-body"></div>
+      <pre class="code" id="t-code"></pre>
+      <div class="nav">
+        <button id="prev">‹ Back</button>
+        <button id="next">Next ›</button>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+
+    <!-- STAGE -->
+    <div class="stage">
+      <svg id="court" viewBox="0 0 860 500" aria-label="component tree"></svg>
+      <div class="cap" id="cap"></div>
+      <div class="legend">
+        <div class="li"><span class="sw" style="background:var(--accent)"></span><b>props</b> = the pass (down only)</div>
+        <div class="li"><span class="sw" style="background:var(--good)"></span><b>state</b> = your own dribble</div>
+        <div class="li"><span class="sw" style="background:var(--c4)"></span><b>context</b> = the jumbotron</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip" id="tip"></div>
+
+<script type="module">
+import { arrowMarkers, connect, side, center, labelBox, esc, $, saveHash, loadHash } from "/_kit/viz.js";
+
+const svg = $("#court");
+
+// --- nodes: defined once, everything derives from these ---
+const N = {
+  jumbo: { x:24,  y:22,  w:200, h:60, nm:"🕒 GameClock", sb:"<Context.Provider>" },
+  game:  { x:340, y:26,  w:190, h:66, nm:"<Game>",       sb:"the franchise · root" },
+  score: { x:60,  y:208, w:210, h:70, nm:"<Scoreboard>", sb:"shows the score" },
+  team:  { x:560, y:208, w:170, h:66, nm:"<Team>",       sb:"the bench" },
+  pg:    { x:412, y:396, w:130, h:82, nm:"<Player>",     sb:"PG" },
+  sg:    { x:558, y:396, w:130, h:82, nm:"<Player>",     sb:"SG" },
+  c:     { x:704, y:396, w:130, h:82, nm:"<Player>",     sb:"C" },
+};
+const EDGES = [["game","score"],["game","team"],["team","pg"],["team","sg"],["team","c"]];
+
+// --- static render: defs, edges, nodes, fx layer ---
+svg.innerHTML = `
+  <defs>${arrowMarkers()}</defs>
+  <g id="edges">${EDGES.map(([a,b],i)=>
+    `<path class="edge" data-edge="${a}-${b}" d="${connect(N[a],N[b])}"/>`).join("")}</g>
+  <g id="nodes">${Object.entries(N).map(([id,n])=>
+    `<g class="node" data-id="${id}"><rect class="box" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="10"/>${
+      labelBox(n, `<div class="nm">${esc(n.nm)}</div><div class="sb">${esc(n.sb)}</div>`)}</g>`).join("")}</g>
+  <g id="fx"></g>`;
+
+const fx = svg.querySelector("#fx");
+const nodeEl = id => svg.querySelector(`.node[data-id="${id}"]`);
+const edgeEl = (a,b) => svg.querySelector(`[data-edge="${a}-${b}"]`);
+
+// hover tooltips: the basketball ↔ React mapping for each node
+const leafTip = ["⛹️ Player — leaf + state",
+  "On-court component. Owns its own state with useState (dribbles, stamina); reads shared context directly. The end of the line — no children to pass to."];
+const TIPS = {
+  jumbo: ["🕒 Jumbotron — Context",
+    "A value the Provider broadcasts once. Any component below reads it with useContext, no matter how deep — nobody in between has to pass it along."],
+  game: ["🏟️ Game — root",
+    "Top of the tree. Holds the big-picture state and passes props down. The front office calling the plays."],
+  score: ["📊 Scoreboard — props child",
+    "Pure display. Gets score through props (read-only) and re-renders whenever that prop changes. Never owns the number."],
+  team: ["🔁 Team — the middleman",
+    "A middle layer. Often just relays props from Game down to the Players — the component that makes prop-drilling painful."],
+  pg: leafTip, sg: leafTip, c: leafTip,
+};
+const tip = $("#tip");
+svg.querySelector("#nodes").addEventListener("mousemove", e => {
+  const g = e.target.closest(".node"), t = g && TIPS[g.dataset.id];
+  if (!t) { tip.style.display = "none"; return; }
+  tip.innerHTML = `<b>${t[0]}</b>${esc(t[1])}`;
+  tip.style.display = "block";
+  tip.style.left = Math.min(e.clientX + 14, innerWidth - 262) + "px";
+  tip.style.top  = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8) + "px";
+});
+svg.addEventListener("mouseleave", () => tip.style.display = "none");
+
+// small svg helpers
+const tagAt = (n, text, color, dy=-14) => {
+  const c = center(n);
+  return `<g class="fxtag" transform="translate(${c.x},${n.y+dy})" text-anchor="middle">
+    <rect x="-46" y="-15" width="92" height="22" rx="6" fill="var(--panel)" stroke="${color}"/>
+    <text y="1" fill="${color}">${text}</text></g>`;
+};
+
+let dribbles = 0; // module-scoped: this is "state" surviving outside React, on purpose
+
+// ---------------- STEPS ----------------
+const STEPS = [
+  { c:"setup", tag:"The roster", title:"Every app is a roster",
+    body:`A React app is a <b class="hl">tree of components</b> — exactly like a team's depth chart.
+      <code>&lt;Game&gt;</code> at the top, <code>&lt;Team&gt;</code> under it, <code>&lt;Player&gt;</code> on the floor.
+      The only real question in React is: <b class="hl">where does a piece of data live, and who's allowed to see it?</b>
+      Three answers — props, state, context. Each is a different way to move the ball.`,
+    code:`<Game>
+  <Scoreboard />
+  <Team>
+    <Player pos="PG" />
+    <Player pos="SG" />
+  </Team>
+</Game>`,
+    cap:`<b>The court.</b> This tree never goes away — every concept below is just data moving through it.`,
+    on:[], fx:()=>{} },
+
+  { c:"props", tag:"Props", title:"Props — passing the ball down",
+    body:`A parent hands data to a child, like a coach calling a play or a guard feeding the post.
+      Strictly <b class="hl">one direction: down</b>. The child can <b class="hl">read</b> a prop but never reassign it —
+      you don't rip the ball out of the passer's hands and rewrite the play.
+      Need to send something back up? You don't pass up — you <b class="hl">call for the ball</b>:
+      the parent hands down a function, the child invokes it.`,
+    code:`function Game() {
+  return <Scoreboard score={102} />;
+  // ↑ pass the value DOWN
+}
+
+function Scoreboard({ score }) {  // catch
+  return <h1>{score}</h1>;        // read-only
+}`,
+    cap:`<b>🏀 The pass.</b> <code>score=102</code> travels <code>&lt;Game&gt;</code> → <code>&lt;Scoreboard&gt;</code>. The dashed line back up is <code>onScore()</code> — a callback, the only way "up".`,
+    on:["game","score"], style:{game:"n-props",score:"n-props"},
+    fx(){
+      edgeEl("game","score").classList.add("hot");
+      const p = connect(N.game, N.score);
+      // the ball travels down the edge, then the prop tag lands
+      fx.innerHTML = `
+        <circle class="ball" r="11">
+          <animateMotion dur="1.3s" fill="freeze" path="${p}"/>
+        </circle>
+        <path class="edge" d="${connect(N.score,N.game)}" stroke="var(--muted)"
+              stroke-dasharray="5 5" marker-end="url(#ah)" opacity=".6"/>
+        <text x="${center(N.game).x-118}" y="172" text-anchor="middle"
+              fill="var(--muted)" font="11px var(--mono)">↑ onScore()</text>
+        <g opacity="0">
+          <animate attributeName="opacity" begin="1.2s" dur=".4s" to="1" fill="freeze"/>
+          ${tagAt(N.score,"score: 102","var(--accent)")}
+        </g>`;
+    } },
+
+  { c:"state", tag:"State", title:"State — what a player owns",
+    body:`State is data a component owns and controls itself — a player's live <b class="hl">dribble count</b>,
+      stamina, whether they've got the ball. Only that component can change it. And when it does
+      (<code>setDribbles</code>), React <b class="hl">re-renders</b> that component — the number on screen updates.
+      <b class="hl">Click the SG</b> below to bump the count and watch the re-render fire.`,
+    code:`function Player() {
+  const [dribbles, setDribbles] =
+    useState(0);
+
+  return (
+    <button onClick={() =>
+      setDribbles(dribbles + 1)}>
+      dribbles: {dribbles}
+    </button>
+  );
+  // owned & changed here → re-render
+}`,
+    cap:`<b>⛹️ The dribble.</b> Nobody passed this in. The SG owns it; only the SG changes it; changing it re-renders <em>only</em> the SG.`,
+    on:["sg"], style:{sg:"n-state"},
+    fx(){
+      const n = N.sg, c = center(n);
+      fx.innerHTML = `<g id="dribUI" style="cursor:pointer">
+        <rect x="${n.x+12}" y="${n.y+n.h-30}" width="${n.w-24}" height="22" rx="6"
+              fill="var(--good)" opacity=".18" stroke="var(--good)"/>
+        <text id="dribTxt" x="${c.x}" y="${n.y+n.h-14}" text-anchor="middle"
+              fill="var(--good)" font="600 12px var(--mono)">dribbles: ${dribbles} ▲</text></g>`;
+      svg.querySelector("#dribUI").onclick = () => {
+        dribbles++;                                   // mutate own state
+        svg.querySelector("#dribTxt").textContent = `dribbles: ${dribbles} ▲`;
+        const g = nodeEl("sg"); g.classList.remove("pulse"); void g.offsetWidth; g.classList.add("pulse"); // re-render flash
+      };
+    } },
+
+  { c:"context", tag:"Context", title:"Context — the jumbotron",
+    body:`Some things the whole arena needs at once: the game clock, the score, the home colors.
+      You don't relay the clock hand-to-hand to all five players — you put it on the
+      <b class="hl">jumbotron</b> and everyone just looks up. Context is a value a
+      <b class="hl">Provider</b> broadcasts; any component below reads it directly with
+      <code>useContext</code> — no matter how deep, with nobody in between relaying it.`,
+    code:`const GameClock = createContext();
+
+<GameClock.Provider value="7:24">
+  <Team />        {/* no clock prop */}
+</GameClock.Provider>
+
+// any descendant, however deep:
+const clock = useContext(GameClock);`,
+    cap:`<b>🕒 The jumbotron.</b> One broadcast, every component reads it. No edge of the tree carried it.`,
+    on:["jumbo"], style:{jumbo:"n-context"},
+    fx(){
+      const j = side(N.jumbo,"bottom");
+      const targets = ["game","score","team","pg","sg","c"];
+      fx.innerHTML = targets.map((id,i)=>{
+        const t = center(N[id]);
+        return `<path class="beam" style="animation-delay:${i*0.08}s" d="M${j.x},${j.y} L${t.x},${t.y}"/>`;
+      }).join("") + targets.map(id=>tagAt(N[id],"🕒 7:24","var(--c4)", -2)).join("");
+    } },
+
+  { c:"context", tag:"Decide", title:"Prop-drilling vs. the jumbotron",
+    body:`Without context, getting the clock to a player means <b class="hl">prop-drilling</b>:
+      <code>&lt;Game&gt;</code> → <code>&lt;Team&gt;</code> → <code>&lt;Player&gt;</code>, every layer relaying a
+      value it doesn't even use (the amber dots). Annoying at 3 layers, miserable at 8. The
+      <b class="hl">jumbotron skips the relay</b> (purple). The trade: don't put <em>everything</em> up there —
+      context that changes constantly re-renders every reader.`,
+    code:`// Where should this data live?
+
+Owned & changed by ONE component?
+    → useState
+Parent → child, a hop or two?
+    → props
+Many readers, deep, rarely changes?
+    → useContext
+    (theme · user · locale · clock)`,
+    cap:`<b>The call.</b> Amber = drill the prop through every layer. Purple = one broadcast. Pick by how many need it and how often it changes.`,
+    on:["game","team","pg"],
+    fx(){
+      const drill = connect(N.game,N.team), drill2 = connect(N.team,N.pg);
+      edgeEl("game","team").classList.add("hot");
+      edgeEl("team","pg").classList.add("hot");
+      const j = side(N.jumbo,"bottom"), pgc = center(N.pg);
+      fx.innerHTML = `
+        <circle class="relay" r="9"><animateMotion dur="1s" fill="freeze" path="${drill}"/></circle>
+        <circle class="relay" r="9" opacity="0">
+          <animate attributeName="opacity" begin="1s" dur="0.1s" to="1" fill="freeze"/>
+          <animateMotion dur="1s" begin="1s" fill="freeze" path="${drill2}"/></circle>
+        <text x="${center(N.team).x}" y="${N.team.y-8}" text-anchor="middle"
+              fill="var(--warn)" font="600 11px var(--mono)">relays clock ↓ (unused)</text>
+        <path class="beam" style="animation-delay:1.6s" d="M${j.x},${j.y} L${pgc.x},${pgc.y}"/>
+        <circle class="ctxtok" r="9" opacity="0">
+          <animate attributeName="opacity" begin="1.8s" dur="0.1s" to="1" fill="freeze"/>
+          <animateMotion dur="0.7s" begin="1.8s" fill="freeze" path="M${j.x},${j.y} L${pgc.x},${pgc.y}"/></circle>
+      `;
+    } },
+];
+
+// ---------------- driver ----------------
+let i = loadHash().step ?? 0;
+i = Math.max(0, Math.min(STEPS.length-1, i));
+
+// tokenize a line of JSX, escaping each piece — robust against `<`, `{`, `&` etc.
+const hi = line => {
+  const re = /(\/\/.*$)|("[^"]*"|'[^']*')|(\b(?:function|const|let|return|import|from|export)\b|=>)|(<\/?[A-Z][\w.]*|\b(?:useState|useContext|createContext)\b)/g;
+  let out="", last=0, m;
+  while ((m = re.exec(line))) {
+    out += esc(line.slice(last, m.index));
+    out += `<span class="${m[1]?'c':m[2]?'s':m[3]?'k':'f'}">${esc(m[0])}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(line.slice(last));
+};
+const renderCode = code => code.split("\n").map(hi).join("\n");
+
+function show(){
+  const s = STEPS[i];
+  // narrative
+  const narr = $("#narr"); narr.dataset.c = s.c;
+  $("#t-tag").textContent = s.tag;
+  $("#t-title").textContent = s.title;
+  $("#t-body").innerHTML = `<p>${s.body}</p>`;
+  $("#t-code").innerHTML = renderCode(s.code);
+  $("#cap").innerHTML = s.cap;
+
+  // reset stage
+  svg.querySelectorAll(".edge").forEach(e=>e.classList.remove("hot"));
+  svg.querySelectorAll(".node").forEach(g=>{
+    g.classList.remove("on","dim","pulse","n-props","n-state","n-context");
+  });
+  fx.innerHTML = "";
+
+  // apply step emphasis
+  const on = new Set(s.on);
+  if (on.size) svg.querySelectorAll(".node").forEach(g=>{
+    g.classList.toggle("on", on.has(g.dataset.id));
+    g.classList.toggle("dim", !on.has(g.dataset.id));
+  });
+  if (s.style) for (const [id,cls] of Object.entries(s.style)) nodeEl(id).classList.add(cls);
+  s.fx();
+
+  // nav
+  $("#prev").disabled = i===0;
+  $("#next").disabled = i===STEPS.length-1;
+  $("#dots").querySelectorAll(".dot").forEach((d,k)=>d.classList.toggle("on",k===i));
+  saveHash({step:i});
+}
+
+// dots
+$("#dots").innerHTML = STEPS.map((_,k)=>`<button class="dot" data-k="${k}" aria-label="step ${k+1}"></button>`).join("");
+$("#dots").onclick = e => { const k=e.target.dataset?.k; if(k!=null){ i=+k; show(); } };
+$("#prev").onclick = ()=>{ if(i>0){i--;show();} };
+$("#next").onclick = ()=>{ if(i<STEPS.length-1){i++;show();} };
+addEventListener("keydown", e=>{
+  if(e.key==="ArrowRight"||e.key===" "){ if(i<STEPS.length-1){i++;show();} }
+  if(e.key==="ArrowLeft"){ if(i>0){i--;show();} }
+});
+
+show();
+</script>
+</body>
+</html>

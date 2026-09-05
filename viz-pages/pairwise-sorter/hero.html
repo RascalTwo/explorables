@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pairwise Sorter — card</title>
+<!-- Built on the OG kit, so this card tracks the viz's tokens instead of keeping a
+     parallel palette. Re-shoot after any edit: verify.ts <url> --og -->
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<link rel="stylesheet" href="/_kit/viz-og.css">
+<style>
+  /* Only what the kit does not already say. */
+  .duel { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .duel .opt {
+    width: 168px; height: 118px; border-radius: 14px;
+    background: var(--bg); border: 2px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px;
+    font-size: 19px; font-weight: 600; color: var(--text);
+  }
+  .duel .opt.win {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .duel .opt .k { font-size: 10px; letter-spacing: .16em; color: var(--muted); text-transform: uppercase; font-weight: 700; }
+  .vs { font-size: 15px; font-weight: 800; color: var(--muted); letter-spacing: .12em; }
+  .down { text-align: center; font-size: 22px; color: var(--muted); margin: 14px 0 12px; }
+
+  .rank { display: flex; flex-direction: column; }
+  .rank .row { display: flex; align-items: center; gap: 13px; padding: 8px 4px;
+               border-bottom: 1px solid var(--border); font-size: 17px; color: var(--text); }
+  .rank .row:last-child { border-bottom: 0; }
+  .rank .n { width: 18px; text-align: right; font-weight: 800; color: var(--accent); }
+  .rank .row.tie .n { color: var(--warn); }
+  .rank .bar { flex: 1; height: 7px; border-radius: 4px;
+               background: color-mix(in srgb, var(--accent) 55%, transparent); }
+  .rank .row:nth-child(2) .bar { width: 80%; background: color-mix(in srgb, var(--accent) 40%, transparent); }
+  .rank .row:nth-child(3) .bar { width: 62%; background: color-mix(in srgb, var(--accent) 28%, transparent); }
+  .rank .row:nth-child(4) .bar { width: 44%; background: color-mix(in srgb, var(--warn) 40%, transparent); }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>EXPLORABLE</div>
+      <h1 class="title">Pairwise Sorter</h1>
+      <p class="essence">
+        Never rank a list in your head again. Answer
+        <span class="hl">“which is better?”</span> one pair at a time
+        and the whole order falls out.
+      </p>
+      <p class="sub">
+        Binary insertion with you as the comparator — about <code>n·log₂n</code> questions,
+        not everything against everything.
+      </p>
+      <div class="chips">
+        <span class="chip">ties allowed</span>
+        <span class="chip">resumable</span>
+        <span class="chip">spots contradictions</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap"><span class="t">One question at a time</span><span class="s">7 items · 13 answers</span></div>
+        <div class="duel">
+          <div class="opt"><span>Cold brew</span><span class="k">← left</span></div>
+          <div class="vs">VS</div>
+          <div class="opt win"><span>Espresso</span><span class="k">right →</span></div>
+        </div>
+        <div class="down">↓</div>
+        <div class="rank">
+          <div class="row"><span class="n">1</span><span>Espresso</span><span class="bar"></span></div>
+          <div class="row"><span class="n">2</span><span>Cortado</span><span class="bar"></span></div>
+          <div class="row"><span class="n">3</span><span>Cold brew</span><span class="bar"></span></div>
+          <div class="row tie"><span class="n">=</span><span>Drip coffee</span><span class="bar"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

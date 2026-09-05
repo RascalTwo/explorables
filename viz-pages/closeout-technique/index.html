@@ -1,0 +1,1289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="Basketball">
+<meta name="viz:title" content="The Closeout">
+<meta name="viz:description" content="Learn to close out on a shooter: sprint the gap, chop your feet, hold an arm's-length cushion, and angle your closeout to force a side. Seven interactive views — a 3D body-mechanics orbit and a reactive sandbox that grades your possession and punishes every mistake.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<script type="importmap">{ "imports": { "three": "https://esm.sh/three@0.160.0", "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/" } }</script>
+<style>
+  body { margin: 0; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 24px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 18px 0 22px; border-bottom: 1px solid var(--line, #2c3647); }
+  .tabs button { font: inherit; cursor: pointer; background: transparent; color: var(--ink-dim, #9fb0c3);
+    border: none; border-bottom: 2px solid transparent; padding: 10px 12px 12px; margin-bottom: -1px; font-size: 13.5px; }
+  .tabs button:hover { color: var(--ink, #e7ecf3); }
+  .tabs button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .two { display: grid; grid-template-columns: minmax(340px, 540px) 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  svg.court { width: 100%; height: auto; display: block; border-radius: 14px; touch-action: none; background:#15110a; }
+  .controls { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .controls button { font: inherit; cursor: pointer; background: var(--panel-2, #1b2230); color: var(--ink, #e7ecf3);
+    border: 1px solid var(--line, #2c3647); border-radius: 9px; padding: 8px 14px; }
+  .controls button:hover { border-color: var(--accent); }
+  .controls button.primary { background: var(--accent); color: #06121f; border-color: var(--accent); font-weight: 600; }
+  input[type=range] { flex: 1; min-width: 110px; accent-color: var(--accent); }
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step { padding: 13px 15px; border: 1px solid var(--line, #2c3647); border-radius: 12px; background: var(--panel, #141a24);
+    cursor: pointer; transition: border-color .15s, background .15s; }
+  .step:hover { border-color: var(--accent); }
+  .step.active { border-color: var(--accent); background: #16202e; box-shadow: 0 0 0 1px var(--accent) inset; }
+  .step h3 { margin: 0 0 4px; font-size: 14.5px; display: flex; align-items: center; gap: 9px; }
+  .step .num { display: inline-grid; place-items: center; width: 21px; height: 21px; border-radius: 50%;
+    background: var(--accent); color: #06121f; font-size: 12px; font-weight: 700; flex: none; }
+  .step p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-dim, #9fb0c3); }
+  .legend { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 11px; font-size: 12.5px; color: var(--ink-dim, #9fb0c3); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .prose { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .prose b { color: var(--ink, #e7ecf3); }
+  .prose h3 { color: var(--ink, #e7ecf3); margin: 16px 0 6px; font-size: 15px; }
+  .verdict { margin-top: 14px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line, #2c3647); background: var(--panel, #141a24); }
+  .verdict .big { font-size: 19px; font-weight: 700; }
+  .verdict.open { border-color: #e2493f; box-shadow: 0 0 0 1px #e2493f inset; } .verdict.open .big { color: #e2493f; }
+  .verdict.bad { border-color: #e2493f; box-shadow: 0 0 0 1px #e2493f inset; } .verdict.bad .big { color: #e2493f; }
+  .verdict.ok { border-color: #e2b23f; box-shadow: 0 0 0 1px #e2b23f inset; } .verdict.ok .big { color: #e2b23f; }
+  .verdict.good { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; } .verdict.good .big { color: var(--accent); }
+  .hint { font-size: 13px; color: var(--ink-dim, #9fb0c3); margin-top: 12px; }
+  .tldr { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .tldr b { color: var(--ink, #e7ecf3); }
+  .meter { margin-top:12px; }
+  .meter .lab { font-size:12px; color:var(--ink-dim,#9fb0c3); display:flex; justify-content:space-between; margin-bottom:4px; }
+  .meter .track { height:10px; border-radius:6px; background:var(--panel-2,#1b2230); border:1px solid var(--line,#2c3647); overflow:hidden; }
+  .meter .fill { height:100%; width:0%; background:var(--accent); transition:width .08s linear, background .2s; }
+  .cues { list-style:none; padding:0; margin:14px 0 0; display:flex; flex-direction:column; gap:9px; }
+  .cues li { display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--ink-dim,#9fb0c3); opacity:.4; transition:opacity .3s; }
+  .cues li.on { opacity:1; }
+  .cues .tick { flex:none; width:20px; height:20px; border-radius:50%; border:1.5px solid var(--line,#2c3647);
+    display:grid; place-items:center; font-size:12px; color:transparent; }
+  .cues li.on .tick { border-color:var(--accent); background:var(--accent); color:#06121f; }
+  .cues b { color:var(--ink,#e7ecf3); }
+  /* segmented control + sandbox */
+  .ctlrow { display:flex; align-items:center; gap:12px; margin-top:12px; flex-wrap:wrap; }
+  .ctlrow > .lbl { font-size:12.5px; color:var(--ink-dim,#9fb0c3); width:78px; flex:none; }
+  .seg { display:inline-flex; border:1px solid var(--line,#2c3647); border-radius:9px; overflow:hidden; }
+  .seg button { font:inherit; font-size:12.5px; cursor:pointer; background:var(--panel-2,#1b2230); color:var(--ink-dim,#9fb0c3);
+    border:none; border-right:1px solid var(--line,#2c3647); padding:7px 12px; }
+  .seg button:last-child { border-right:none; }
+  .seg button.active { background:var(--accent); color:#06121f; font-weight:600; }
+  .scorecard { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }
+  .sc { padding:9px 8px; border-radius:10px; border:1px solid var(--line,#2c3647); background:var(--panel,#141a24); text-align:center; }
+  .sc .k { font-size:11px; color:var(--ink-dim,#9fb0c3); text-transform:uppercase; letter-spacing:.04em; }
+  .sc .v { font-size:15px; font-weight:700; margin-top:3px; color:var(--ink-dim,#9fb0c3); }
+  .sc.pass { border-color:var(--accent); } .sc.pass .v { color:var(--accent); }
+  .sc.fail { border-color:#e2493f; } .sc.fail .v { color:#e2493f; }
+  .grade { display:inline-grid; place-items:center; width:52px; height:52px; border-radius:12px; font-size:28px; font-weight:800;
+    border:2px solid var(--line,#2c3647); color:var(--ink-dim,#9fb0c3); }
+  .d3-canvas { width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden; background:#0c0a06; }
+  /* data-grounding band strip (Cushion tab) */
+  .numbers { margin-top:16px; }
+  .numbers .nlabel { font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-dim,#9fb0c3); margin-bottom:7px; }
+  .bands { position:relative; display:flex; gap:3px; margin-top:26px; }
+  .band { border-radius:8px; padding:8px 6px 7px; text-align:center; background:var(--panel-2,#1b2230); border:1px solid var(--line,#2c3647); }
+  .band.good { border-color:#36c98f; background:#122a20; }
+  .band .bpct { font-size:15px; font-weight:800; color:var(--ink,#e7ecf3); }
+  .band.good .bpct { color:#36c98f; }
+  .band .bname { font-size:10.5px; color:var(--ink-dim,#9fb0c3); margin-top:2px; line-height:1.3; }
+  .ftmarker { position:absolute; top:-9px; width:0; height:0; margin-left:-6px;
+    border-left:6px solid transparent; border-right:6px solid transparent; border-top:8px solid var(--accent);
+    transition:left .08s linear; }
+  .ftmarker::after { content:attr(data-ft); position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+    font-size:10.5px; font-weight:700; color:var(--accent); white-space:nowrap; }
+  .neffect { font-size:12.5px; line-height:1.55; color:var(--ink-dim,#9fb0c3); margin:12px 0 0; }
+  .neffect b { color:var(--ink,#e7ecf3); }
+  .ncite { font-size:11px; line-height:1.5; color:#6b7688; margin:8px 0 0; }
+  .ncite a { color:#6b7688; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="viz-header" style="padding:0;">
+    <h1 style="margin:0;">The Closeout</h1>
+    <div class="sub">A shooter caught the ball and you're a step late. Sprint out, chop your feet, hold a cushion, force a side — then try it yourself and get graded. Seven ways to see it.</div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="move" class="active">1 · The Closeout</button>
+    <button data-tab="cushion">2 · The Cushion</button>
+    <button data-tab="side">3 · Force a Side</button>
+    <button data-tab="feet">4 · The Footwork</button>
+    <button data-tab="d3">5 · 3D View</button>
+    <button data-tab="sandbox">6 · You Try It</button>
+    <button data-tab="drill">7 · Live Drill</button>
+    <button data-tab="read">8 · Read the Man</button>
+    <button data-tab="team">9 · In a Defense</button>
+    <button data-tab="sources">10 · Sources</button>
+  </nav>
+
+  <!-- ============ TAB 1: THE CLOSEOUT ============ -->
+  <section id="tab-move" class="tab active">
+    <div class="two">
+      <div>
+        <svg class="court move-court" viewBox="0 0 500 490" aria-label="Top-down closeout animation">
+          <g class="courtbg"></g>
+          <path class="trail" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.45"/>
+          <g class="prints"></g>
+          <g class="off" data-viz-id="shooter" data-label="Shooter"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <line class="hand" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <g class="def" data-viz-id="defender" data-label="You (defender)"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">D</text></g>
+        </svg>
+        <div class="controls">
+          <button class="play primary">▶ Play</button>
+          <button class="restart">↺ Restart</button>
+          <input class="scrub" type="range" min="0" max="1000" value="0">
+        </div>
+        <div class="meter">
+          <div class="lab"><span>Your speed</span><span class="spd-word">—</span></div>
+          <div class="track"><div class="spd-fill fill"></div></div>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--accent)"></i> You (defender)</span>
+          <span><i class="dot" style="background:#36c98f"></i> Shooter</span>
+          <span><i class="dot" style="background:#ff9b3c"></i> Ball</span>
+        </div>
+      </div>
+      <div>
+        <p class="tldr"><b>The job:</b> the ball just got swung to a shooter and you're helping one pass away. Cover ground
+        <i>fast</i>, then arrive <i>under control</i> — close enough to contest, balanced enough to stop a drive. Hit ▶ and
+        watch your speed meter drop as you chop your feet.</p>
+        <div class="steps move-steps" style="margin-top:14px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: THE CUSHION ============ -->
+  <section id="tab-cushion" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court cush-court" viewBox="0 0 500 490" aria-label="Cushion distance simulator">
+          <g class="courtbg"></g>
+          <circle class="ideal" fill="none" stroke="#36c98f" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.7"/>
+          <path class="drive" fill="none" stroke="#e2493f" stroke-width="2.5" stroke-dasharray="4 4" opacity="0"/>
+          <g class="off" data-viz-id="cush-shooter" data-label="Shooter"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <line class="hand" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <g class="def" data-viz-id="cush-defender" data-label="You (defender)"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">D</text></g>
+          <text class="stamp" x="250" y="330" text-anchor="middle" font-size="24" font-weight="800" opacity="0"></text>
+        </svg>
+        <div class="controls">
+          <span style="font-size:13px;color:var(--ink-dim,#9fb0c3);">Crowd&nbsp;him</span>
+          <input class="cushrange" type="range" min="0" max="100" value="30">
+          <span style="font-size:13px;color:var(--ink-dim,#9fb0c3);">Give&nbsp;space</span>
+          <button class="cushrun primary">▶ Run it</button>
+        </div>
+        <div class="legend">
+          <span>Slide the dial to set your <b style="color:var(--accent)">cushion</b>, then run it.</span>
+          <span style="color:#36c98f">◌ arm's length</span>
+        </div>
+      </div>
+      <div>
+        <div class="verdict cush-verdict"><div class="big">—</div><p class="cush-text" style="margin:6px 0 0;font-size:13px;color:var(--ink-dim,#9fb0c3);line-height:1.5;"></p></div>
+        <div class="numbers">
+          <div class="nlabel">By the numbers — NBA player-tracking, 3-pt%</div>
+          <div class="bands">
+            <div class="band" style="flex:2"><div class="bpct">~29%</div><div class="bname">Very tight<br>0–2 ft</div></div>
+            <div class="band good" style="flex:2"><div class="bpct">~29%</div><div class="bname">Tight · arm's length<br>2–4 ft</div></div>
+            <div class="band" style="flex:2"><div class="bpct">~34%</div><div class="bname">Open<br>4–6 ft</div></div>
+            <div class="band" style="flex:3"><div class="bpct">~38%</div><div class="bname">Wide open<br>6+ ft</div></div>
+            <div class="ftmarker" data-ft="" style="left:30%"></div>
+          </div>
+          <p class="neffect">Closing a <b>wide-open</b> three (~38%) down to an <b>arm's-length contest</b> (~29%) is a <b>~10-point</b>
+          swing league-wide — up to <b>~17</b> for a shooter like Korver (55%→38%). That gap <i>is</i> the closeout.</p>
+          <p class="ncite">Bands are official NBA tracking (Very&nbsp;Tight/Tight/Open/Wide&nbsp;Open); 3P% ≈ 2020–22 league via
+          tracking-based analyses. The blow-by / drive outcomes elsewhere in this viz are <b>coaching heuristics</b> — no public
+          tracking stat measures them.</p>
+        </div>
+        <div class="prose">
+          <h3>Why an arm's length?</h3>
+          <p>Stick your arm out and your fingertips should just graze his jersey. That single step of space is the whole game:</p>
+          <p><b>Too tight</b> and you've got nowhere to go — one shot-fake or jab and he's driving past, or you foul him.
+          <b>Too soft</b> and you're waving at a wide-open shooter from a mile away. The sweet spot is one step:
+          <b>close enough to bother the shot, far enough to slide with a drive.</b></p>
+          <p>Chopping your feet on the way in (Tab&nbsp;1) is <i>how</i> you hold that cushion — it kills your momentum so you
+          stop at a step instead of flying into him.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: FORCE A SIDE ============ -->
+  <section id="tab-side" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court side-court" viewBox="0 0 500 490" aria-label="Force-a-side simulator">
+          <g class="courtbg"></g>
+          <path class="wall" fill="#e2493f" fill-opacity="0.12" stroke="none"/>
+          <path class="lane" fill="none" stroke="#e2b23f" stroke-width="3" stroke-dasharray="6 5" opacity="0" marker-end="url(#side-ar)"/>
+          <path class="sdrive" fill="none" stroke="#e2493f" stroke-width="2.5" opacity="0"/>
+          <defs><marker id="side-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e2b23f"/></marker></defs>
+          <g class="help" opacity="0.85"><circle r="12" fill="#7a6bd6" stroke="#241a3a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">H</text></g>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <line class="hhi" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+          <line class="hlo" stroke="#5fd0ff" stroke-width="3" stroke-linecap="round"/>
+          <g class="def"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">D</text></g>
+          <text class="sstamp" x="250" y="335" text-anchor="middle" font-size="22" font-weight="800" opacity="0"></text>
+        </svg>
+        <div class="ctlrow">
+          <span class="lbl">Force him</span>
+          <div class="seg side-seg">
+            <button data-f="baseline" class="active">Baseline</button>
+            <button data-f="straight">Straight up</button>
+            <button data-f="middle">Middle</button>
+          </div>
+          <button class="side-run primary">▶ Drive it</button>
+        </div>
+        <div class="legend">
+          <span style="color:var(--accent)">▮ high hand (shot)</span>
+          <span style="color:#5fd0ff">▮ low hand (ball)</span>
+          <span style="color:#e2493f">▨ taken away</span>
+          <span><i class="dot" style="background:#7a6bd6"></i> help</span>
+        </div>
+      </div>
+      <div>
+        <div class="verdict side-verdict"><div class="big">—</div><p class="side-text" style="margin:6px 0 0;font-size:13px;color:var(--ink-dim,#9fb0c3);line-height:1.5;"></p></div>
+        <div class="prose">
+          <h3>Distance isn't enough — angle matters</h3>
+          <p>A perfect cushion still gets beaten if you close out <i>square</i> to a live driver: he just picks a side. Good
+          closeouts arrive <b>on an angle</b>, shading one shoulder to <b>take a direction away</b>.</p>
+          <p><b>High-low hands:</b> your <b style="color:var(--accent)">top hand</b> is up in the shot; your
+          <b style="color:#5fd0ff">low hand</b> walls off the drive you're taking away. Here you funnel him <b>baseline</b>,
+          into the short corner where <b style="color:#7a6bd6">help</b> is waiting — not <b>middle</b>, into the open lane.</p>
+          <p>Try all three and drive it: forcing middle feeds the layup; square is a coin flip; forcing baseline is contained.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 4: THE FOOTWORK ============ -->
+  <section id="tab-feet" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court feet-court" viewBox="0 0 300 430" aria-label="Chop-step rhythm">
+          <rect x="6" y="6" width="288" height="418" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <g class="off" transform="translate(150 70)"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle r="5.5" cy="-15" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <text x="150" y="102" text-anchor="middle" font-size="11" fill="#7d8aa0">↑ the shooter</text>
+          <g class="feet-prints"></g>
+        </svg>
+      </div>
+      <div>
+        <div class="ctlrow" style="margin-top:0;">
+          <span class="lbl">Technique</span>
+          <div class="seg feet-seg">
+            <button data-m="chop" class="active">Chop-step</button>
+            <button data-m="sprint">Sprint-stop (1-2)</button>
+          </div>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:12px; margin:14px 0 2px;">
+          <div class="feet-phase" style="font-size:24px; font-weight:800; color:var(--accent); line-height:1;">Ready</div>
+          <button class="feet-run primary" style="margin-left:auto;">▶ Run it</button>
+        </div>
+        <div class="meter" style="margin-top:14px;">
+          <div class="lab"><span>Balance / control</span><span class="tr-bal-v">—</span></div>
+          <div class="track"><div class="tr-bal fill" style="background:#36c98f"></div></div>
+        </div>
+        <div class="meter" style="margin-top:8px;">
+          <div class="lab"><span>Closing speed (how fast you get there)</span><span class="tr-spd-v">—</span></div>
+          <div class="track"><div class="tr-spd fill" style="background:#e2b23f"></div></div>
+        </div>
+        <div class="verdict feet-when good" style="margin-top:12px;"><div class="big" style="font-size:14px;">Best vs —</div><p class="feet-when-t" style="margin:5px 0 0;font-size:12.5px;color:var(--ink-dim,#9fb0c3);line-height:1.5;"></p></div>
+        <ul class="cues feet-cues"></ul>
+        <div class="prose">
+          <h3>Chop or sprint-stop? It's a real debate</h3>
+          <p>The classic teaching is <b>chop your feet</b> — break the sprint into short steps to arrive low and balanced. But
+          plenty of coaches now argue the chop is over-taught and <i>slow</i>: it bleeds so much speed you arrive a beat late
+          and give up the contest. Their answer is the <b>sprint-stop</b> — a hard sprint into a quick <b>1-2 plant</b> — which
+          gets you there faster to bother the shot, trading a little balance for a lot of closing speed.</p>
+          <p>Neither is universally right. <b>Read the matchup:</b> sprint-stop a <b>shooter</b> to contest the shot in time;
+          chop-step a live <b>driver</b> so you can still slide when he attacks. Toggle the two and watch the tradeoff.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 5: 3D VIEW ============ -->
+  <section id="tab-d3" class="tab">
+    <div class="two">
+      <div>
+        <div class="d3-canvas"></div>
+        <div class="controls">
+          <button class="d3play primary">▶ Play</button>
+          <input class="d3scrub" type="range" min="0" max="1000" value="0">
+          <label style="font-size:12.5px;color:var(--ink-dim,#9fb0c3);display:inline-flex;gap:5px;align-items:center;"><input class="d3rot" type="checkbox" checked> spin</label>
+          <button class="d3side">Side view</button>
+        </div>
+        <div class="legend"><span>🖱 drag to orbit · scroll to zoom · <b>Side view</b> snaps to a coach's-eye angle</span></div>
+      </div>
+      <div>
+        <div class="verdict good" style="margin-top:0;">
+          <div class="big" style="font-size:16px;" id="d3phaseTitle">The sprint</div>
+          <p class="d3phase" style="margin-top:6px;font-size:13px;color:var(--ink-dim,#9fb0c3);line-height:1.5;">Press ▶ and orbit around the closeout.</p>
+        </div>
+        <div class="prose">
+          <h3>What the top-down can't show</h3>
+          <p>From above you see the path and the cushion. From the side you see the <b>body</b>: on the sprint you're tall and
+          fast; as you chop, your <b>hips drop</b> and your <b>chest stays up</b> — that low, wide base is what lets you change
+          direction.</p>
+          <p>At the cushion you land in a <b>staggered stance</b> with your <b>top hand high</b> in the shot and your
+          <b>low hand out</b> to wall the drive. Tall and reaching = beaten. Low and balanced = a real contest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 6: YOU TRY IT (SANDBOX) ============ -->
+  <section id="tab-sandbox" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court sb-court" viewBox="0 0 500 490" aria-label="Reactive closeout sandbox">
+          <g class="courtbg"></g>
+          <circle class="ideal" fill="none" stroke="#36c98f" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.55"/>
+          <path class="sbdrive" fill="none" stroke="#e2493f" stroke-width="2.5" opacity="0"/>
+          <g class="help" opacity="0"><circle r="12" fill="#7a6bd6" stroke="#241a3a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">H</text></g>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <line class="hhi" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <line class="hlo" stroke="#5fd0ff" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <g class="def"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">D</text></g>
+          <text class="sbstamp" x="250" y="335" text-anchor="middle" font-size="22" font-weight="800" opacity="0"></text>
+        </svg>
+        <div class="ctlrow"><span class="lbl">Cushion</span>
+          <span style="font-size:12px;color:var(--ink-dim,#9fb0c3)">crowd</span>
+          <input class="sb-cush" type="range" min="0" max="100" value="30">
+          <span style="font-size:12px;color:var(--ink-dim,#9fb0c3)">soft</span>
+        </div>
+        <div class="ctlrow"><span class="lbl">Approach</span>
+          <span style="font-size:12px;color:var(--ink-dim,#9fb0c3)">flew in</span>
+          <input class="sb-ctrl" type="range" min="0" max="100" value="75">
+          <span style="font-size:12px;color:var(--ink-dim,#9fb0c3)">chopped</span>
+        </div>
+        <div class="ctlrow"><span class="lbl">Force</span>
+          <div class="seg sb-force">
+            <button data-f="baseline" class="active">Baseline</button>
+            <button data-f="straight">Straight</button>
+            <button data-f="middle">Middle</button>
+          </div>
+        </div>
+        <div class="ctlrow"><span class="lbl">Leave on</span>
+          <div class="seg sb-timing">
+            <button data-t="early" class="active">The pass</button>
+            <button data-t="late">The catch</button>
+          </div>
+          <button class="sb-run primary" style="margin-left:auto;">▶ Run possession</button>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex; gap:14px; align-items:center;">
+          <div class="grade" id="sbGrade">—</div>
+          <div class="verdict sb-verdict" style="margin:0; flex:1;"><div class="big" style="font-size:17px;">Set it up, then run it</div><p class="sb-text" style="margin:5px 0 0;font-size:13px;color:var(--ink-dim,#9fb0c3);line-height:1.5;">You control the closeout. The shooter reacts to your mistakes — get all four right for an A.</p></div>
+        </div>
+        <div class="scorecard">
+          <div class="sc" data-k="distance"><div class="k">Distance</div><div class="v">—</div></div>
+          <div class="sc" data-k="balance"><div class="k">Balance</div><div class="v">—</div></div>
+          <div class="sc" data-k="angle"><div class="k">Angle</div><div class="v">—</div></div>
+          <div class="sc" data-k="timing"><div class="k">Timing</div><div class="v">—</div></div>
+        </div>
+        <div class="prose">
+          <h3>All four, every time</h3>
+          <p>A great closeout is <b>distance</b> (an arm's length), <b>balance</b> (chopped down, not flying),
+          <b>angle</b> (force baseline, take the middle away), and <b>timing</b> (leave on the flight of the pass, not after
+          the catch). Miss any one and a real shooter makes you pay — an open look, a blow-by, or a straight-line drive.</p>
+          <p class="hint">Tip: crowd him and he rips past; jog and he shoots; force him middle and he's at the rim; leave late
+          and you never arrive. Only the full recipe holds up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 7: LIVE DRILL (REAL-TIME) ============ -->
+  <section id="tab-drill" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court drill-court" viewBox="0 0 500 490" aria-label="Real-time closeout drill" style="cursor:none;">
+          <g class="courtbg"></g>
+          <circle class="dideal" fill="none" stroke="#36c98f" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.5"/>
+          <circle class="dgather" fill="none" stroke="#e2b23f" stroke-width="2" stroke-dasharray="5 4" opacity="0"/>
+          <path class="ddrive" fill="none" stroke="#e2493f" stroke-width="2.5" opacity="0"/>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <line class="dhand" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <g class="def"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">D</text></g>
+          <circle class="dcursor" r="6" fill="none" stroke="#e7ecf3" stroke-width="1.5" opacity="0.45"/>
+          <text class="dstamp" x="250" y="335" text-anchor="middle" font-size="26" font-weight="800" opacity="0"></text>
+        </svg>
+        <div class="controls">
+          <button class="d-start primary">▶ Start / new rep</button>
+          <div style="display:flex;gap:16px;margin-left:auto;font-size:13.5px;color:var(--ink-dim,#9fb0c3);">
+            <span>Stops <b class="d-stops" style="color:var(--accent)">0</b></span>
+            <span>Buckets <b class="d-buckets" style="color:#e2493f">0</b></span>
+            <span>Streak <b class="d-streak" style="color:#36c98f">0</b></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="verdict d-msg" style="color:var(--ink,#e7ecf3);font-size:14px;line-height:1.5;">Press <b>Start</b>, then steer your defender with the cursor.</div>
+        <div class="prose">
+          <h3>This one you actually play</h3>
+          <p>Your defender <b>chases your cursor with real momentum</b> — the white ring is where you're pointing, the
+          <b style="color:var(--accent)">D</b> is where your body actually is. Yank the cursor at the shooter and you'll
+          <i>overshoot</i>, exactly like flying in without chopping.</p>
+          <p>The shooter reads you every frame: too far and he <b>rises up</b>; too tight or off-balance and he
+          <b>drives past</b>; arrive at an arm's length under control and hold it — <b>contested, stop.</b> If he drives,
+          keep your cursor <i>between him and the rim</i> to wall it off.</p>
+          <p class="hint">Sprint out, then <b>ease the cursor to a stop</b> at the green ring — that's the chop. Chain stops
+          to build a streak.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 8: READ THE MAN ============ -->
+  <section id="tab-read" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court read-court" viewBox="0 0 500 490" aria-label="Closeout adjusted to the offensive player">
+          <g class="courtbg"></g>
+          <circle class="rideal" fill="none" stroke="#36c98f" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.6"/>
+          <line class="rcush" stroke="#9fb0c3" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.55"/>
+          <text class="rcush-lab" font-size="12" fill="#9fb0c3" text-anchor="middle"></text>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle r="5.5" cx="-13" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <line class="rhi" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <g class="def"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">D</text></g>
+        </svg>
+        <div class="ctlrow">
+          <span class="lbl">He's a…</span>
+          <div class="seg read-seg">
+            <button data-t="shooter" class="active">Shooter</button>
+            <button data-t="pump">Pump-faker</button>
+            <button data-t="driver">Driver</button>
+            <button data-t="none">Non-shooter</button>
+          </div>
+        </div>
+        <div class="legend"><span>The green ring is how close you should get. <b style="color:var(--accent)">▮</b> high hand.</span></div>
+      </div>
+      <div>
+        <div class="verdict read-verdict"><div class="big">—</div><p class="read-rule" style="margin:6px 0 0;font-size:13px;color:var(--ink-dim,#9fb0c3);line-height:1.5;"></p></div>
+        <div class="verdict read-mistake" style="border-color:#e2493f;box-shadow:0 0 0 1px #e2493f inset;"><div class="big" style="font-size:14px;color:#e2493f;">The mistake</div><p class="read-mistake-t" style="margin:5px 0 0;font-size:12.5px;color:var(--ink-dim,#9fb0c3);line-height:1.5;"></p></div>
+        <div class="prose">
+          <h3>The best closeout depends on the man</h3>
+          <p>Distance, speed, and whether you even throw a high hand all change with <i>who has the ball</i>. The rule of thumb
+          coaches use: <b>sprint ~90% and break down late on a shooter</b> (get there, contest); <b>sprint only halfway and
+          break down early on a driver</b> (sit on the drive, give the jumper).</p>
+          <p>The two special cases: a <b>pump-faker</b> — contest with a high hand but <b>never leave your feet</b>; and a
+          <b>non-shooter</b> — don't close out at all, stay in the gap and dare him to shoot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 9: IN A DEFENSE ============ -->
+  <section id="tab-team" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court team-court" viewBox="0 0 500 490" aria-label="Closeout within a team rotation">
+          <g class="courtbg"></g>
+          <path class="pass" fill="none" stroke="#ff9b3c" stroke-width="2" stroke-dasharray="7 5" opacity="0"/>
+          <path class="dtrail" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 5" opacity="0.4"/>
+          <path class="htrail" fill="none" stroke="#7a6bd6" stroke-width="2" stroke-dasharray="5 5" opacity="0.35"/>
+          <g class="o1"><circle r="13" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">1</text></g>
+          <g class="o2"><circle r="13" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">2</text></g>
+          <circle class="tball" r="6" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/>
+          <g class="help"><circle r="12" fill="#7a6bd6" stroke="#241a3a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">H</text></g>
+          <line class="hand" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0"/>
+          <g class="def"><circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="#06121f">D</text></g>
+        </svg>
+        <div class="controls">
+          <button class="team-play primary">▶ Run the rotation</button>
+          <input class="team-scrub" type="range" min="0" max="1000" value="0">
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--accent)"></i> You</span>
+          <span><i class="dot" style="background:#7a6bd6"></i> Help (low man)</span>
+          <span><i class="dot" style="background:#36c98f"></i> Offense</span>
+          <span><i class="dot" style="background:#ff9b3c"></i> Ball</span>
+        </div>
+      </div>
+      <div>
+        <p class="tldr"><b>Closeouts don't happen in a vacuum.</b> You're late because you were doing your job — helping. And you
+        can close out <i>hard</i> because there's help behind you. Press play.</p>
+        <div class="steps team-steps" style="margin-top:14px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 10: SOURCES ============ -->
+  <section id="tab-sources" class="tab">
+    <div style="max-width:820px;">
+      <p class="tldr" style="margin-bottom:6px;">Where the claims come from. Evidence tier: 🟢 primary (official tracking / source
+      data) · 🟡 secondary (analysis or coaching site citing data or established fundamentals).</p>
+
+      <div class="prose">
+        <h3>Shooting % and the value of a contest</h3>
+        <ul style="margin:0;padding-left:18px;line-height:1.7;">
+          <li>Defender-distance brackets — <b>Very Tight 0–2 ft · Tight 2–4 ft · Open 4–6 ft · Wide Open 6+ ft</b> — are official NBA player-tracking categories. 🟢 <a href="https://www.nba.com/stats/players/shots-closest-defender" target="_blank" rel="noopener">NBA.com/stats — Closest Defender</a></li>
+          <li>3P% by band (~<b>38%</b> wide open, ~<b>34%</b> open, ~<b>29%</b> contested; ~2020–22 league). 🟡 <a href="https://www.thestrick.land/strick/a-study-on-3-point-shooting-should-we-change-how-we-contextualize-3-point-defense-in-nba-advanced-stats-analytics" target="_blank" rel="noopener">thestrick.land</a> · 🟡 <a href="https://jeremylu43.github.io/nba_contested_shooting/" target="_blank" rel="noopener">Jeremy Lu (2020-21)</a> · 🟡 <a href="https://bestballstats.com/2022/09/18/true-shooting-ability-separating-shooting-talent-from-shot-circumstances/" target="_blank" rel="noopener">Best Ball Stats</a></li>
+          <li>Contest effect size — ~<b>10-point</b> league swing wide-open→contested; up to ~<b>17</b> for a shooter (Korver 55%→38%). 🟡 <a href="https://bestballstats.com/2022/09/18/true-shooting-ability-separating-shooting-talent-from-shot-circumstances/" target="_blank" rel="noopener">Best Ball Stats</a></li>
+          <li>Caveat: for <i>pull-up</i> jumpers, defender distance moves efficiency only ~2 pts — the big contest effect is on catch-and-shoot. 🟡 <a href="https://fansided.com/2018/02/16/nylon-calculus-diminishing-returns-step-back-jumper/" target="_blank" rel="noopener">Nylon Calculus</a></li>
+        </ul>
+
+        <h3>Closeout fundamentals &amp; distance</h3>
+        <ul style="margin:0;padding-left:18px;line-height:1.7;">
+          <li>Close out to an <b>arm's length</b> — "reach out and you should just graze the jersey." 🟡 <a href="https://www.coachesclipboard.net/DefenseCloseOutDrill.html" target="_blank" rel="noopener">Coach's Clipboard</a> · 🟡 <a href="https://www.hooperuniversity.com/breakdowns/the-right-way-to-closeout-and-contest" target="_blank" rel="noopener">Hooper University</a> · 🟡 <a href="https://www.breakthroughbasketball.com/defense/keys-close-outs.html" target="_blank" rel="noopener">Breakthrough Basketball</a></li>
+          <li>Sprint, then <b>chop the feet / high hands / under control</b>; delaying lets the shooter use your momentum to drive past. 🟡 <a href="https://www.breakthroughbasketball.com/defense/keys-close-outs.html" target="_blank" rel="noopener">Breakthrough Basketball</a></li>
+          <li>Leaving your feet / jumping leads to <b>fouls and blow-bys</b>. 🟡 <a href="https://www.basketballforcoaches.com/dribble-drive-offense/" target="_blank" rel="noopener">Basketball For Coaches</a></li>
+          <li>Read the man — <b>sprint ~90% + break down late vs a shooter; sprint halfway + break down early vs a driver.</b> 🟡 <a href="https://pgcbasketball.com/blog/smarter-closeouts-defend-shooters-drivers-complete-players/" target="_blank" rel="noopener">PGC Basketball</a></li>
+        </ul>
+
+        <h3>The chop vs. sprint-stop debate</h3>
+        <ul style="margin:0;padding-left:18px;line-height:1.7;">
+          <li>The classic chop-step vs. the modern sprint-stop (1-2) — the argument that the choice depends on your defensive priority, driven by how much proximity swings shooting %. 🟡 <a href="https://lockdowndefense.substack.com/p/to-chop-or-not-to-chop" target="_blank" rel="noopener">Lockdown Defense — "To Chop or Not to Chop"</a></li>
+        </ul>
+
+        <h3 style="color:#e2b23f;">What's measured vs. what's coaching judgment</h3>
+        <p>Being straight about it: the <b>defender-distance bands and their FG%</b> are real tracking data. But several numbers
+        in the interactive sims are <b>coaching heuristics, not measured</b>:</p>
+        <ul style="margin:0;padding-left:18px;line-height:1.7;">
+          <li>The exact pixel thresholds in the Cushion / Sandbox / Live Drill (where "tight," "good," "soft" fall) are tuned for teaching, not calibrated to data.</li>
+          <li><b>Blow-by / drive rates off a closeout</b> — there is no public tracking stat for these; the outcomes are modeled from coaching consensus.</li>
+          <li>A numeric <b>feet</b> value for "arm's length" (~2–3 ft) is reasoned from human arm reach; sources only ever say "arm's length."</li>
+        </ul>
+        <p class="hint" style="margin-top:14px;">Research compiled July 2026. Bands and effect direction are stable season-to-season; per-band percentages are rounded from the seasons noted above.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module">
+const RIM = { x: 250, y: 56 };
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const norm=(a)=>{const l=Math.hypot(a.x,a.y)||1;return{x:a.x/l,y:a.y/l};};
+const sub=(a,b)=>({x:a.x-b.x,y:a.y-b.y});
+const add=(a,b)=>({x:a.x+b.x,y:a.y+b.y});
+const mul=(a,k)=>({x:a.x*k,y:a.y*k});
+const perp=(a)=>({x:-a.y,y:a.x});
+const ease=(p)=>p*p*(3-2*p);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function along(pts, a){ const segs=pts.length-1; const x=clamp(a,0,1)*segs;
+  const i=Math.min(segs-1,Math.floor(x)); let f=ease(x-i);
+  return {x:pts[i].x+(pts[i+1].x-pts[i].x)*f, y:pts[i].y+(pts[i+1].y-pts[i].y)*f}; }
+const sampleKf=(kf,t)=>{ t=clamp(t,0,1); for(let i=0;i<kf.length-1;i++){const a=kf[i],b=kf[i+1];
+  if(t>=a.t&&t<=b.t){const p=b.t===a.t?0:ease((t-a.t)/(b.t-a.t));return{x:a.x+(b.x-a.x)*p,y:a.y+(b.y-a.y)*p};}}
+  const l=kf[kf.length-1];return{x:l.x,y:l.y}; };
+const pathD=(pts)=>pts.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");
+
+const COURT = `
+  <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+  <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+  <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+  <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+  <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+  <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+  <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>`;
+
+const O = { x: 405, y: 205 };          // shooter, right wing at the 3pt line
+const HELP = { x: 255, y: 195 };       // your help position, one pass away
+const dir = norm(sub(O, HELP));        // help -> shooter unit
+const toMid = norm(sub({x:250,y:210}, O));  // from shooter toward the middle/lane
+const toBase = mul(toMid,-1);          // toward baseline / sideline
+
+/* ---------------- TAB 1: THE CLOSEOUT ---------------- */
+function initMove(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const defKeys=[{t:0,x:HELP.x,y:HELP.y},{t:.18,x:288,y:197},{t:.42,x:326,y:200},
+    {t:.58,x:348,y:201},{t:.72,x:362,y:202},{t:.85,x:371,y:203},{t:1,x:375,y:203}];
+  const prints=[
+    {t:.10,x:274,y:190,k:'sprint'},{t:.26,x:300,y:208,k:'sprint'},{t:.40,x:324,y:190,k:'sprint'},
+    {t:.56,x:344,y:208,k:'chop'},{t:.64,x:352,y:196,k:'chop'},{t:.72,x:360,y:208,k:'chop'},
+    {t:.80,x:367,y:197,k:'chop'},{t:.90,x:373,y:208,k:'chop'},{t:.95,x:366,y:196,k:'chop'}];
+  const STEPS=[
+    {t0:0,name:"You're a step late",body:"The ball gets swung to a shooter on the wing. From your help position in the gap, the shot is coming — close the distance now."},
+    {t0:.15,name:"Sprint the gap",body:"Cover the first two-thirds flat-out with long, hard strides. This is the only part where you run at full speed."},
+    {t0:.55,name:"Chop your feet — break down",body:"Before you arrive, shorten into quick choppy steps. Each chop bleeds off momentum so you don't fly past. Butt drops, chest up."},
+    {t0:.80,name:"High hand at the cushion",body:"Arrive about an arm's length away, on balance, top hand up to contest. Close enough to bother the shot, low enough to slide with a drive."},
+  ];
+  const stepsEl=$(".move-steps");
+  STEPS.forEach((s,i)=>{const d=document.createElement("div");d.className="step";
+    d.innerHTML=`<h3><span class="num">${i+1}</span>${s.name}</h3><p>${s.body}</p>`;
+    d.addEventListener("click",()=>{pause();setT(s.t0+0.001);});stepsEl.appendChild(d);});
+  const off=$(".off"),def=$(".def"),ball=$(".ball"),trail=$(".trail"),printsG=$(".prints"),
+        hand=$(".hand"),scrub=$(".scrub"),playBtn=$(".play"),spdFill=$(".spd-fill"),spdWord=$(".spd-word");
+  off.setAttribute("transform",`translate(${O.x} ${O.y})`);
+  ball.setAttribute("cx",-13); ball.setAttribute("cy",0);
+  let pts=[]; for(let i=0;i<=60;i++)pts.push(sampleKf(defKeys,i/60)); trail.setAttribute("d",pathD(pts));
+  const speedAt=(t)=>{const a=sampleKf(defKeys,clamp(t-.01,0,1)),b=sampleKf(defKeys,clamp(t+.01,0,1));return dist(a,b)/0.02;};
+  function render(t){
+    const p=sampleKf(defKeys,t); def.setAttribute("transform",`translate(${p.x} ${p.y})`);
+    printsG.innerHTML="";
+    prints.forEach(pr=>{ if(t>=pr.t-.001){ const chop=pr.k==='chop';
+      const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+      g.innerHTML=`<ellipse cx="${pr.x}" cy="${pr.y}" rx="${chop?5.5:5}" ry="${chop?7:11}" fill="${chop?'var(--accent)':'#5b6b82'}" opacity="${chop?0.95:0.6}"/>`;
+      printsG.appendChild(g);} });
+    if(t>=.86){ const k=ease((t-.86)/.14); hand.setAttribute("opacity",k);
+      hand.setAttribute("x1",p.x);hand.setAttribute("y1",p.y);
+      hand.setAttribute("x2",p.x+(O.x-p.x)*0.62);hand.setAttribute("y2",p.y-16); }
+    else hand.setAttribute("opacity",0);
+    const sp=t<.001?0:clamp(speedAt(t)/9,0,1); spdFill.style.width=(sp*100).toFixed(0)+"%";
+    spdFill.style.background = sp>.6 ? "#e2493f" : sp>.3 ? "var(--accent)" : "#36c98f";
+    spdWord.textContent = t<.001 ? "—" : sp>.6 ? "sprint" : sp>.3 ? "chopping…" : "under control";
+    let active=0;STEPS.forEach((s,i)=>{if(t>=s.t0)active=i;});
+    root.querySelectorAll(".step").forEach((el,i)=>el.classList.toggle("active",i===active));
+    scrub.value=Math.round(t*1000);
+  }
+  let playing=false,raf=null,t=0,last=0; const DUR=5200;
+  function tick(ts){if(!last)last=ts;t+=(ts-last)/DUR;last=ts;if(t>=1){t=1;render(t);pause();return;}render(t);raf=requestAnimationFrame(tick);}
+  function play(){if(playing)return;if(t>=1)t=0;playing=true;last=0;playBtn.textContent="❚❚ Pause";raf=requestAnimationFrame(tick);}
+  function pause(){playing=false;if(raf)cancelAnimationFrame(raf);raf=null;playBtn.textContent="▶ Play";}
+  function setT(v){t=clamp(v,0,1);render(t);}
+  playBtn.addEventListener("click",()=>playing?pause():play());
+  $(".restart").addEventListener("click",()=>{pause();setT(0);play();});
+  scrub.addEventListener("input",()=>{pause();setT(scrub.value/1000);});
+  render(0);
+  return { onHide: pause };
+}
+
+/* ---------------- TAB 2: THE CUSHION ---------------- */
+function initCushion(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const IDEAL=32;
+  const off=$(".off"),def=$(".def"),ball=$(".ball"),hand=$(".hand"),drive=$(".drive"),
+        ideal=$(".ideal"),stamp=$(".stamp"),range=$(".cushrange"),runBtn=$(".cushrun"),
+        vEl=$(".cush-verdict"),vBig=vEl.querySelector(".big"),vText=$(".cush-text");
+  off.setAttribute("transform",`translate(${O.x} ${O.y})`);
+  ideal.setAttribute("cx",O.x);ideal.setAttribute("cy",O.y);ideal.setAttribute("r",IDEAL);
+  const cushOf=(v)=>6+(v/100)*84;
+  const classify=(c)=> c<16 ? "tight" : c>52 ? "soft" : "good";
+  const defPos=(c)=>({x:O.x-dir.x*c, y:O.y-dir.y*c});
+  const feetOf=(c)=>c/8;                 // px → ft (arm's length ~32px ≈ 4 ft, top of the Tight band)
+  const marker=$(".ftmarker");
+  const COPY={
+    tight:{cls:"bad",big:"🛡 BLOW-BY",txt:"You crowded him (0–2 ft, “very tight”). One jab or shot-fake and he drives right past into the space behind you — or you foul him. No cushion means no room to react."},
+    good:{cls:"good",big:"✓ CONTESTED",txt:"An arm's length (~2–4 ft, “tight”). NBA tracking: a look this contested falls to ~29% from three vs ~38% wide open — you just cost him ~10 points of efficiency, and you've kept a step to slide with a drive."},
+    soft:{cls:"open",big:"🏀 OPEN SHOT",txt:"Too much space — a 6+ ft look is “wide open,” worth the full ~38% from three. Closing out means closing the gap; don't jog at him."},
+  };
+  function still(c){
+    const p=defPos(c); def.setAttribute("transform",`translate(${p.x} ${p.y})`);
+    ball.setAttribute("cx",-13);ball.setAttribute("cy",0);
+    hand.setAttribute("opacity",0);drive.setAttribute("opacity",0);stamp.setAttribute("opacity",0);
+    const k=classify(c); const co=COPY[k]; vEl.className="verdict cush-verdict "+co.cls;
+    vBig.textContent=co.big; vText.textContent=co.txt;
+    ideal.setAttribute("stroke", k==="good" ? "#36c98f" : "#6b7a8f");
+    if(marker){ const ft=feetOf(c); marker.style.left=clamp(ft/9,0,1)*100+"%"; marker.setAttribute("data-ft",ft.toFixed(1)+" ft"); }
+  }
+  let raf=null;
+  function stop(){ if(raf){cancelAnimationFrame(raf);raf=null;} runBtn.textContent="▶ Run it"; }
+  function run(){
+    stop(); const c=cushOf(+range.value), k=classify(c), start=defPos(c);
+    let a=0,last=0; const DUR=1600; runBtn.textContent="❚❚";
+    function frame(ts){ if(!last)last=ts; a+=(ts-last)/DUR; last=ts; const e=clamp(a,0,1);
+      if(k==="tight"){
+        const path=[O,{x:start.x-18,y:start.y+34},{x:RIM.x+30,y:120},{x:RIM.x,y:78}];
+        const o=along(path,e); off.setAttribute("transform",`translate(${o.x} ${o.y})`);
+        const n=norm(sub(along(path,Math.min(1,e+.05)),o)); ball.setAttribute("cx",n.x*13);ball.setAttribute("cy",n.y*13);
+        drive.setAttribute("d",pathD(path)); drive.setAttribute("opacity",.7);
+      } else {
+        ball.setAttribute("cx",0); ball.setAttribute("cy",-e*40);
+        if(k==="good"){ hand.setAttribute("opacity",e);
+          hand.setAttribute("x1",start.x);hand.setAttribute("y1",start.y);
+          hand.setAttribute("x2",O.x);hand.setAttribute("y2",O.y-20); }
+      }
+      if(e>=1){ stamp.setAttribute("opacity",1);
+        stamp.setAttribute("fill", k==="good" ? "var(--accent)" : "#e2493f");
+        stamp.textContent = COPY[k].big; stop(); return; }
+      raf=requestAnimationFrame(frame);
+    }
+    off.setAttribute("transform",`translate(${O.x} ${O.y})`); stamp.setAttribute("opacity",0);
+    raf=requestAnimationFrame(frame);
+  }
+  range.addEventListener("input",()=>{ stop(); still(cushOf(+range.value)); });
+  runBtn.addEventListener("click",()=> raf ? (stop(),still(cushOf(+range.value))) : run());
+  still(cushOf(+range.value));
+  return { onHide: ()=>{ stop(); still(cushOf(+range.value)); } };
+}
+
+/* ---------------- TAB 3: FORCE A SIDE ---------------- */
+function initSide(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const HELPB={x:300,y:120};   // low man in the short corner / baseline help
+  const off=$(".off"),def=$(".def"),ball=$(".ball"),help=$(".help"),
+        wall=$(".wall"),lane=$(".lane"),sdrive=$(".sdrive"),
+        hhi=$(".hhi"),hlo=$(".hlo"),stamp=$(".sstamp"),
+        vEl=$(".side-verdict"),vBig=vEl.querySelector(".big"),vText=$(".side-text");
+  off.setAttribute("transform",`translate(${O.x} ${O.y})`); ball.setAttribute("cx",-13);
+  help.setAttribute("transform",`translate(${HELPB.x} ${HELPB.y})`);
+  let force="baseline", raf=null;
+  const IDEAL=30;
+  // defender shades to the side he's TAKING AWAY, funneling to the open side
+  const CFG={
+    baseline:{ shade:toMid, give:toBase, cls:"good",
+      big:"✓ CONTAINED", txt:"You shaded his middle and forced him baseline — right into the short corner where help is waiting. Contested shot or a walled-off drive. This is the goal." },
+    straight:{ shade:{x:0,y:0}, give:null, cls:"ok",
+      big:"⚠ 50/50", txt:"Square closeout. You contest the shot, but you took no side away — a live driver just picks one. Fine against a shooter, dangerous against a driver." },
+    middle:{ shade:toBase, give:toMid, cls:"bad",
+      big:"🏀 LAYUP", txt:"You shaded baseline and forced him middle — straight into the open lane with no one home. This is the mistake: never force middle." },
+  };
+  function still(){
+    const c=CFG[force];
+    const d=add(O, add(mul(dir,-IDEAL), mul(c.shade,10)));  // arm's length, shaded toward taken side
+    def.setAttribute("transform",`translate(${d.x} ${d.y})`);
+    // high hand up toward shot; low hand toward the side being walled off
+    hhi.setAttribute("x1",d.x);hhi.setAttribute("y1",d.y);hhi.setAttribute("x2",O.x);hhi.setAttribute("y2",O.y-20);hhi.setAttribute("opacity",1);
+    if(force==="straight"){ hlo.setAttribute("opacity",0); wall.setAttribute("d",""); lane.setAttribute("opacity",0); }
+    else {
+      const lp=add(d, mul(c.shade,26));
+      hlo.setAttribute("x1",d.x);hlo.setAttribute("y1",d.y);hlo.setAttribute("x2",lp.x);hlo.setAttribute("y2",lp.y);hlo.setAttribute("opacity",1);
+      // shaded "taken away" wedge from shooter toward the walled side
+      const w1=add(O,mul(c.shade,90)), wp=perp(c.shade);
+      const a=add(O,mul(wp,16)), b=add(O,mul(wp,-16));
+      wall.setAttribute("d",`M ${a.x} ${a.y} L ${add(w1,mul(wp,26)).x} ${add(w1,mul(wp,26)).y} L ${add(w1,mul(wp,-26)).x} ${add(w1,mul(wp,-26)).y} L ${b.x} ${b.y} Z`);
+      // forced-lane arrow toward the give side
+      const g1=add(O,mul(c.give,30)), g2=add(O,mul(c.give,95));
+      lane.setAttribute("d",`M ${g1.x} ${g1.y} L ${g2.x} ${g2.y}`); lane.setAttribute("opacity",.9);
+    }
+    sdrive.setAttribute("opacity",0); stamp.setAttribute("opacity",0);
+    vEl.className="verdict side-verdict "+c.cls; vBig.textContent=c.big; vText.textContent=c.txt;
+  }
+  function stop(){ if(raf){cancelAnimationFrame(raf);raf=null;} }
+  function run(){
+    stop(); const c=CFG[force]; still();
+    const d0={x:+def.getAttribute("transform").split("(")[1].split(" ")[0], y:+def.getAttribute("transform").split(" ")[1].slice(0,-1)};
+    let path, shoots = force==="straight";
+    if(force==="baseline") path=[O, add(O,mul(toBase,42)), {x:330,y:110}, HELPB];   // driven baseline into help
+    else if(force==="middle") path=[O, add(O,mul(toMid,50)), {x:295,y:150}, {x:262,y:80}]; // middle to rim
+    let a=0,last=0; const DUR=1500;
+    function frame(ts){ if(!last)last=ts; a+=(ts-last)/DUR; last=ts; const e=clamp(a,0,1);
+      if(shoots){ ball.setAttribute("cx",0); ball.setAttribute("cy",-e*38); }
+      else { const o=along(path,e); off.setAttribute("transform",`translate(${o.x} ${o.y})`);
+        const n=norm(sub(along(path,Math.min(1,e+.05)),o)); ball.setAttribute("cx",n.x*13);ball.setAttribute("cy",n.y*13);
+        sdrive.setAttribute("d",pathD(path)); sdrive.setAttribute("opacity",.65);
+        sdrive.setAttribute("stroke", force==="baseline" ? "#36c98f" : "#e2493f"); }
+      if(e>=1){ stamp.setAttribute("opacity",1); stamp.setAttribute("fill", c.cls==="bad"||c.cls==="open"?"#e2493f":c.cls==="ok"?"#e2b23f":"var(--accent)");
+        stamp.textContent=c.big; stop(); return; }
+      raf=requestAnimationFrame(frame);
+    }
+    off.setAttribute("transform",`translate(${O.x} ${O.y})`);
+    raf=requestAnimationFrame(frame);
+  }
+  root.querySelectorAll(".side-seg button").forEach(b=>b.addEventListener("click",()=>{
+    root.querySelectorAll(".side-seg button").forEach(x=>x.classList.toggle("active",x===b));
+    force=b.dataset.f; stop(); still();
+  }));
+  $(".side-run").addEventListener("click",run);
+  still();
+  return { onHide: ()=>{ stop(); still(); } };
+}
+
+/* ---------------- TAB 4: THE FOOTWORK (chop-step vs sprint-stop) ---------------- */
+function initFeet(root){
+  const $=(s)=>root.querySelector(s);
+  const printsG=$(".feet-prints"), phaseEl=$(".feet-phase"), runBtn=$(".feet-run"),
+        feetCues=$(".feet-cues"), whenEl=$(".feet-when"), whenBig=whenEl.querySelector(".big"), whenT=$(".feet-when-t");
+  const MODES={
+    chop:{ bal:92, spd:52, whenCls:"good",
+      whenBig:"Best vs a DRIVER", whenT:"The chop keeps you low and balanced, so when he puts it on the floor you can slide and cut off the drive — worth arriving a beat later.",
+      strides:[
+        {x:132,y:360,k:'sprint'},{x:168,y:322,k:'sprint'},{x:132,y:286,k:'sprint'},
+        {x:160,y:255,k:'chop'},{x:138,y:236,k:'chop'},{x:158,y:218,k:'chop'},{x:140,y:202,k:'chop'},
+        {x:157,y:150,k:'stance'},{x:135,y:132,k:'stance'}],
+      cues:[["Sprint two-thirds","Long hard strides to cover ground."],["Chop your feet","Short quick steps bleed off momentum."],["Sink your hips","Butt down, chest up, low base."],["High hand at a step","Balanced, contest, and ready to slide."]] },
+    sprint:{ bal:64, spd:92, whenCls:"ok",
+      whenBig:"Best vs a SHOOTER", whenT:"Sprint hard and plant a quick 1-2 stop. You arrive a half-beat sooner with a higher contest — trading some balance for getting there in time.",
+      strides:[
+        {x:132,y:360,k:'sprint'},{x:170,y:318,k:'sprint'},{x:130,y:276,k:'sprint'},{x:168,y:232,k:'sprint'},
+        {x:162,y:174,k:'stance',n:'1'},{x:138,y:150,k:'stance',n:'2'}],
+      cues:[["Sprint all the way","Don't decelerate early — cover ground fast."],["Plant 1-2","Two quick steps to gather and stop, chest up."],["High hand, now","Get the top hand up fast to contest the shot."],["Recover to slide","Less margin — be ready if he drives past."]] },
+  };
+  let mode="chop", timers=[];
+  const drawPrint=(p)=>{ const chop=p.k!=='sprint';
+    const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+    const fill = p.k==='stance' ? '#36c98f' : chop ? 'var(--accent)' : '#5b6b82';
+    g.innerHTML=`<ellipse cx="${p.x}" cy="${p.y}" rx="${chop?6:5.5}" ry="${chop?7.5:12}" fill="${fill}"/>`+
+      (p.n?`<text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="11" font-weight="800" fill="#06231a">${p.n}</text>`:'');
+    printsG.appendChild(g); g.animate([{opacity:.15},{opacity:1}],{duration:180,fill:'forwards'}); };
+  const clear=()=>{ timers.forEach(clearTimeout); timers=[]; };
+  const cues=()=>[...feetCues.querySelectorAll("li")];
+  const lightCue=(i)=>{ const c=cues()[i]; if(c) c.classList.add("on"); };
+  function renderMode(){
+    const m=MODES[mode];
+    feetCues.innerHTML = m.cues.map(([b,t],i)=>`<li data-cue="${i}"><span class="tick">✓</span><div><b>${b}.</b> ${t}</div></li>`).join("");
+    $(".tr-bal").style.width=m.bal+"%"; $(".tr-bal-v").textContent = m.bal>=85?"high":m.bal>=60?"solid":"low";
+    $(".tr-spd").style.width=m.spd+"%"; $(".tr-spd-v").textContent = m.spd>=85?"high":m.spd>=60?"solid":"low";
+    whenEl.className="verdict feet-when "+m.whenCls; whenBig.textContent=m.whenBig; whenT.textContent=m.whenT;
+  }
+  function reset(){ clear(); printsG.innerHTML=""; phaseEl.textContent="Ready"; phaseEl.style.color="var(--accent)"; cues().forEach(c=>c.classList.remove("on")); }
+  function run(){
+    reset(); const S=MODES[mode].strides; let t=200;
+    S.forEach((p)=>{ const gap = p.k==='sprint'?230 : p.k==='chop'?165 : 150;
+      timers.push(setTimeout(()=>{ drawPrint(p);
+        phaseEl.textContent = p.k==='sprint'?'SPRINT' : p.k==='chop'?'chop · chop · chop' : (p.n?('plant '+p.n):'BREAK DOWN');
+        phaseEl.style.color = p.k==='sprint'?'#e2493f' : p.k==='chop'?'var(--accent)':'#36c98f'; }, t));
+      t += gap; });
+    const total=t;
+    [0,1,2,3].forEach(i=>timers.push(setTimeout(()=>lightCue(i), 260 + i*(total/4.2))));
+    timers.push(setTimeout(()=>{ phaseEl.textContent="High hand ✋ — contest!"; phaseEl.style.color="#36c98f"; lightCue(3); }, total+120));
+  }
+  root.querySelectorAll(".feet-seg button").forEach(b=>b.addEventListener("click",()=>{
+    root.querySelectorAll(".feet-seg button").forEach(x=>x.classList.toggle("active",x===b));
+    mode=b.dataset.m; reset(); renderMode(); }));
+  runBtn.addEventListener("click",run);
+  renderMode(); reset();
+  return { onHide: reset };
+}
+
+/* ---------------- TAB 5: 3D VIEW ---------------- */
+function initD3(root){
+  const host=root.querySelector(".d3-canvas");
+  const playBtn=root.querySelector(".d3play"), scrub=root.querySelector(".d3scrub"),
+        rotChk=root.querySelector(".d3rot"), sideBtn=root.querySelector(".d3side"),
+        phaseEl=root.querySelector(".d3phase"), titleEl=root.querySelector("#d3phaseTitle");
+  let THREE,OrbitControls,scene,cam,renderer,controls,raf=null,built=false,a=0,last=0,playing=false;
+  const DUR=6000; const figs={};
+  // ground coords: rim at z=-22,x=0. shooter on right wing. defender closes out from help.
+  const SHOOTER=[8,-9];
+  const rootKf=[[0,-3,-3],[.2,1,-5.5],[.42,4.6,-8],[.58,5.7,-8.6],[.74,6.1,-8.9],[1,6.3,-9]];
+  const sample3=(kf,t)=>{ for(let i=0;i<kf.length-1;i++){const A=kf[i],B=kf[i+1];
+    if(t>=A[0]&&t<=B[0]){const p=B[0]===A[0]?0:ease((t-A[0])/(B[0]-A[0]));return[A[1]+(B[1]-A[1])*p,A[2]+(B[2]-A[2])*p];}}
+    const L=kf[kf.length-1];return[L[1],L[2]]; };
+  // Footstep plants along the path: long sprint strides that shrink to short chops, then a wide stance.
+  // Each foot alternates L/R; positions are offset perpendicular to travel so the base has width.
+  const PLANTS=[
+    {t:.08,side:'L',kind:'sprint'},{t:.20,side:'R',kind:'sprint'},{t:.33,side:'L',kind:'sprint'},
+    {t:.45,side:'R',kind:'chop'},{t:.53,side:'L',kind:'chop'},{t:.61,side:'R',kind:'chop'},{t:.69,side:'L',kind:'chop'},
+    {t:.80,side:'R',kind:'stance'},{t:.88,side:'L',kind:'stance'}].map(p=>{
+      const [x,z]=sample3(rootKf,p.t); const [x2,z2]=sample3(rootKf,Math.min(1,p.t+.02));
+      const dx=x2-x,dz=z2-z,l=Math.hypot(dx,dz)||1; const px=-dz/l,pz=dx/l;   // left-perp of travel
+      const w=p.kind==='sprint'?.42:p.kind==='chop'?.6:.95, s=p.side==='L'?1:-1;
+      return {...p, pos:{x:x+px*w*s, z:z+pz*w*s}};
+    });
+  const F0=(s)=>({x:sample3(rootKf,0)[0]+s*.42, z:sample3(rootKf,0)[1], y:0});
+  function feet(t){
+    let fL=F0(-1), fR=F0(1);
+    for(let i=0;i<PLANTS.length;i++){ const p=PLANTS[i];
+      if(p.t<=t){ if(p.side==='L') fL={x:p.pos.x,z:p.pos.z,y:0}; else fR={x:p.pos.x,z:p.pos.z,y:0}; continue; }
+      // first future plant = the swinging foot; lift it in an arc from its last plant to the next
+      const from = p.side==='L'?fL:fR, prevT = i>0?PLANTS[i-1].t:0;
+      const e=clamp((t-prevT)/(p.t-prevT),0,1);
+      const lift=Math.sin(e*Math.PI)*(p.kind==='sprint'?.6:.28);
+      const sx=from.x+(p.pos.x-from.x)*e, sz=from.z+(p.pos.z-from.z)*e;
+      if(p.side==='L') fL={x:sx,z:sz,y:lift}; else fR={x:sx,z:sz,y:lift};
+      break;
+    }
+    return {fL,fR};
+  }
+  const PHASES=[[0,"The sprint","Tall and fast — long strides eating up the gap. No control yet, all speed."],
+    [.42,"Chop it down","Steps shorten, hips start to drop. You're trading speed for balance."],
+    [.58,"Sink the hips","Butt down, chest up, base wide. This low stance is what lets you move any direction."],
+    [.78,"High hand, contest","Landed at an arm's length. Top hand high in the shot, low hand out to wall the drive."]];
+  const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+  function makeFigure(color,scale=1){
+    const g=new THREE.Group(); const mat=new THREE.MeshStandardMaterial({color,roughness:.55,metalness:.05});
+    const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.7*scale,1.5*scale,6,12),mat);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.55*scale,18,18),mat);
+    g.add(torso,head);
+    const limb=(r,l)=>{const m=new THREE.Mesh(new THREE.CapsuleGeometry(r,l,4,8),mat);m.geometry.translate(0,-l/2,0);g.add(m);return m;};
+    const legL=limb(.22*scale,1.7*scale),legR=limb(.22*scale,1.7*scale),armL=limb(.18*scale,1.4*scale),armR=limb(.18*scale,1.4*scale);
+    scene.add(g); return {g,torso,head,legL,legR,armL,armR,scale};
+  }
+  function aimLimb(mesh,from,to){ const d=new THREE.Vector3().subVectors(to,from); const len=d.length()||.001;
+    mesh.position.copy(from); mesh.quaternion.setFromUnitVectors(V(0,-1,0),d.clone().normalize());
+    mesh.scale.y=len/(mesh.geometry.parameters.length||1); }
+  // crouch 0..1 lowers hips; legs aim at actual world foot positions (fL/fR), so the figure steps.
+  function pose(f,pos,crouch,fL,fR,hhi,hlo,leanFwd){
+    const [x,z]=pos; const drop=crouch*1.0; const bob=(fL.y+fR.y)*.22;  // torso rises on the swing
+    f.g.position.set(x,0,z); f.g.rotation.set(leanFwd||0,0,0);
+    const hipY=1.5-drop+bob, shY=3.0-drop*1.3+bob;
+    f.torso.position.set(0,2.3-drop*1.15+bob,0); f.head.position.set(0,3.7-drop*1.3+bob,0);
+    const hipL=V(-.4,hipY,0),hipR=V(.4,hipY,0),shL=V(-.6,shY,0),shR=V(.6,shY,0);
+    aimLimb(f.legL,hipL,V(fL.x-x,fL.y,fL.z-z));
+    aimLimb(f.legR,hipR,V(fR.x-x,fR.y,fR.z-z));
+    aimLimb(f.armR,shR, hhi?V(hhi[0]-x,hhi[1],hhi[2]-z):V(.9,1.6,.2));
+    aimLimb(f.armL,shL, hlo?V(hlo[0]-x,hlo[1],hlo[2]-z):V(-.9,1.5,.2));
+  }
+  function build(){
+    scene=new THREE.Scene(); scene.background=new THREE.Color(0x0c0a06);
+    const w=host.clientWidth||520,h=host.clientHeight||520;
+    cam=new THREE.PerspectiveCamera(42,w/h,.1,200); cam.position.set(16,14,18);
+    renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setSize(w,h); renderer.setPixelRatio(Math.min(2,devicePixelRatio));
+    host.appendChild(renderer.domElement);
+    scene.add(new THREE.AmbientLight(0xffffff,.55));
+    const dl=new THREE.DirectionalLight(0xfff0d8,1.1); dl.position.set(10,20,8); scene.add(dl);
+    const floor=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.MeshStandardMaterial({color:0x241a0e,roughness:.95}));
+    floor.rotation.x=-Math.PI/2; floor.position.z=-6; scene.add(floor);
+    const paint=new THREE.Mesh(new THREE.PlaneGeometry(11,22),new THREE.MeshStandardMaterial({color:0x3a2b14,roughness:.95}));
+    paint.rotation.x=-Math.PI/2; paint.position.set(0,.02,-11); scene.add(paint);
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,9),new THREE.MeshStandardMaterial({color:0x888888}));
+    pole.position.set(0,4.5,-23.5); scene.add(pole);
+    const board=new THREE.Mesh(new THREE.BoxGeometry(6,3.5,.2),new THREE.MeshStandardMaterial({color:0xcbb78a}));
+    board.position.set(0,8,-22.7); scene.add(board);
+    const rim=new THREE.Mesh(new THREE.TorusGeometry(1.4,.13,12,28),new THREE.MeshStandardMaterial({color:0xff7a3c,roughness:.4}));
+    rim.rotation.x=Math.PI/2; rim.position.set(0,6.6,-21); scene.add(rim);
+    figs.ball=new THREE.Mesh(new THREE.SphereGeometry(.5,18,18),new THREE.MeshStandardMaterial({color:0xff9b3c,roughness:.5})); scene.add(figs.ball);
+    figs.off=makeFigure(0x36c98f); figs.def=makeFigure(0x4aa8ff,1.0);
+    // ground footprints — the stride pattern, laid down as you pass each plant
+    figs.plants=PLANTS.map(p=>{
+      const col=p.kind==='sprint'?0x5b6b82:p.kind==='chop'?0x4aa8ff:0x36c98f;
+      const m=new THREE.Mesh(new THREE.CylinderGeometry(p.kind==='stance'?.44:.36,.32,.05,16),
+        new THREE.MeshStandardMaterial({color:col,roughness:.85}));
+      m.position.set(p.pos.x,.03,p.pos.z); m.visible=false; scene.add(m); return m;
+    });
+    controls=new OrbitControls(cam,renderer.domElement); controls.target.set(3,2,-8);
+    controls.enableDamping=true; controls.minDistance=8; controls.maxDistance=55; controls.maxPolarAngle=Math.PI/2.05; controls.update();
+    window.addEventListener("resize",onResize);
+  }
+  function onResize(){ if(!renderer)return; const w=host.clientWidth||520,h=host.clientHeight||520; cam.aspect=w/h; cam.updateProjectionMatrix(); renderer.setSize(w,h); }
+  function render(t){
+    const [x,z]=sample3(rootKf,t);
+    const crouch=clamp((t-.35)/.35,0,1);            // stand → sink
+    const {fL,fR}=feet(t);                          // stepping feet
+    if(figs.plants) figs.plants.forEach((m,i)=>m.visible = PLANTS[i].t<=t);
+    // shooter holds ball at chest, raises to shoot at very end
+    const shoot=clamp((t-.9)/.1,0,1);
+    figs.ball.position.set(SHOOTER[0]-1.1, 2.4+shoot*2.2, SHOOTER[1]+.3);
+    const sfL={x:SHOOTER[0]-.5,z:SHOOTER[1]+.1,y:0}, sfR={x:SHOOTER[0]+.5,z:SHOOTER[1]-.1,y:0};
+    pose(figs.off,SHOOTER,.15,sfL,sfR,[SHOOTER[0]-1,2.6+shoot*2,SHOOTER[1]+.4],[SHOOTER[0]+.6,2.2,SHOOTER[1]-.2],0);
+    // defender: high right hand toward the ball once close; low left hand walls the middle (−x side)
+    const close=t>.7;
+    const hhi= close ? [SHOOTER[0]-1, 4.2, SHOOTER[1]+.3] : [x+1.2,2.4,z+.2];
+    const hlo= close ? [x-1.4, .8, z+.6] : [x-1,1.6,z+.2];
+    pose(figs.def,[x,z],crouch,fL,fR,hhi,hlo, (1-crouch)*.18);
+    let ph=PHASES[0]; PHASES.forEach(p=>{if(t>=p[0])ph=p;});
+    titleEl.textContent=ph[1]; phaseEl.textContent=ph[2]; scrub.value=Math.round(t*1000);
+  }
+  function loop(ts){ if(!last)last=ts; if(playing){ a+=(ts-last)/DUR; if(a>=1){a=1;playing=false;playBtn.textContent="↺ Play again";} render(a);} last=ts;
+    controls.autoRotate=rotChk.checked; controls.autoRotateSpeed=.7; controls.update(); renderer.render(scene,cam); raf=requestAnimationFrame(loop); }
+  async function onShow(){
+    if(!built){ THREE=await import("three"); ({OrbitControls}=await import("three/addons/controls/OrbitControls.js")); build(); render(0); built=true; }
+    onResize(); if(!raf){ last=0; raf=requestAnimationFrame(loop); }
+  }
+  function onHide(){ if(raf){cancelAnimationFrame(raf);raf=null;} }
+  playBtn.addEventListener("click",()=>{ if(playing){playing=false;playBtn.textContent="▶ Play";} else {if(a>=1)a=0;playing=true;last=0;playBtn.textContent="❚❚ Pause";} });
+  scrub.addEventListener("input",()=>{ playing=false; playBtn.textContent="▶ Play"; a=scrub.value/1000; if(built)render(a); });
+  sideBtn.addEventListener("click",()=>{ if(!built)return; rotChk.checked=false; cam.position.set(20,4,-8); controls.target.set(4,2.5,-8.5); controls.update(); });
+  return { onShow, onHide };
+}
+
+/* ---------------- TAB 6: YOU TRY IT (SANDBOX) ---------------- */
+function initSandbox(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const HELPB={x:300,y:120};
+  const off=$(".off"),def=$(".def"),ball=$(".ball"),help=$(".help"),ideal=$(".ideal"),
+        drive=$(".sbdrive"),hhi=$(".hhi"),hlo=$(".hlo"),stamp=$(".sbstamp"),
+        gradeEl=$("#sbGrade"),vEl=$(".sb-verdict"),vBig=vEl.querySelector(".big"),vText=$(".sb-text");
+  const cush=$(".sb-cush"),ctrl=$(".sb-ctrl");
+  let force="baseline", timing="early", raf=null;
+  const cushOf=(v)=>6+(v/100)*84;
+  off.setAttribute("transform",`translate(${O.x} ${O.y})`); ball.setAttribute("cx",-13);
+  ideal.setAttribute("cx",O.x);ideal.setAttribute("cy",O.y);ideal.setAttribute("r",30);
+  help.setAttribute("transform",`translate(${HELPB.x} ${HELPB.y})`);
+  const shadeOf=()=> force==="baseline"?toMid : force==="middle"?toBase : {x:0,y:0};
+  function defPos(){ const c=cushOf(+cush.value); return add(O, add(mul(dir,-c), mul(shadeOf(),9))); }
+  function evalPossession(){
+    const c=cushOf(+cush.value), control=(+ctrl.value)/100, late=timing==="late";
+    const cards={ distance:c>=16&&c<=52, balance:control>=0.45, angle:force==="baseline", timing:!late };
+    let type,title,text;
+    if(late && c<70){ type="open"; title="OPEN SHOT"; text="You left after the catch — the ball is up before you arrive. Leave on the flight of the pass, not the catch."; }
+    else if(c>52){ type="open"; title="OPEN SHOT"; text="Too soft — you pulled up and gave a clean look. Closing out means closing the gap."; }
+    else if(c<16){ type="blowby"; title="BLOW-BY"; text="You crowded him. One rip-through and he's past you before you can move a foot."; }
+    else if(control<0.45){ type="blowby"; title="BLOW-BY"; text="You flew in out of control — no chop, no balance. He drove and you couldn't slide with him."; }
+    else if(force==="middle"){ type="drive"; title="DRIVE TO THE RIM"; text="Good cushion, but you forced him MIDDLE — straight into the open lane. Take the middle away, force baseline."; }
+    else if(force==="straight"){ type="contest"; title="CONTESTED — but 50/50"; text="Square closeout: you bothered the shot, but took no side away. A live driver just picks one. Force him a way."; }
+    else { type="contained"; title="CONTAINED ✓"; text="Arm's length, chopped down and balanced, forced baseline into help. Contested shot or a walled-off drive. Textbook."; }
+    const grade = type==="contained"?"A" : type==="contest"?"B" : type==="open"?"D":"C";
+    const cls = type==="contained"?"good" : type==="contest"?"ok":"bad";
+    return {type,title,text,grade,cls,cards};
+  }
+  function paintScorecard(cards,live){
+    root.querySelectorAll(".sc").forEach(sc=>{ const k=sc.dataset.k; const v=sc.querySelector(".v");
+      if(!live){ sc.className="sc"; v.textContent="—"; return; }
+      const ok=cards[k]; sc.className="sc "+(ok?"pass":"fail"); v.textContent=ok?"✓":"✗"; });
+  }
+  function still(){
+    const d=defPos(); def.setAttribute("transform",`translate(${d.x} ${d.y})`);
+    off.setAttribute("transform",`translate(${O.x} ${O.y})`); ball.setAttribute("cx",-13); ball.setAttribute("cy",0);
+    // hands preview
+    hhi.setAttribute("x1",d.x);hhi.setAttribute("y1",d.y);hhi.setAttribute("x2",O.x);hhi.setAttribute("y2",O.y-20);hhi.setAttribute("opacity",.85);
+    if(force==="straight"){ hlo.setAttribute("opacity",0); }
+    else { const lp=add(d,mul(shadeOf(),24)); hlo.setAttribute("x1",d.x);hlo.setAttribute("y1",d.y);hlo.setAttribute("x2",lp.x);hlo.setAttribute("y2",lp.y);hlo.setAttribute("opacity",.85); }
+    drive.setAttribute("opacity",0); stamp.setAttribute("opacity",0); help.setAttribute("opacity",0);
+  }
+  function stop(){ if(raf){cancelAnimationFrame(raf);raf=null;} $(".sb-run").textContent="▶ Run possession"; }
+  function run(){
+    stop(); const r=evalPossession(); const d0=defPos();
+    gradeEl.textContent=r.grade; gradeEl.style.borderColor=r.cls==="good"?"var(--accent)":r.cls==="ok"?"#e2b23f":"#e2493f";
+    gradeEl.style.color=gradeEl.style.borderColor;
+    vEl.className="verdict sb-verdict "+r.cls; vBig.textContent=r.title; vText.textContent=r.text;
+    paintScorecard(r.cards,true);
+    // build shooter action
+    let path=null, shoot=false, showHelp=false;
+    if(r.type==="open"||r.type==="contest"){ shoot=true; }
+    else if(r.type==="contained"){ path=[O, add(O,mul(toBase,40)), {x:330,y:110}, HELPB]; showHelp=true; }
+    else if(r.type==="drive"){ path=[O, add(O,mul(toMid,50)), {x:295,y:150}, {x:262,y:80}]; }
+    else if(r.type==="blowby"){ const way=(force==="middle")?toMid:toBase; path=[O, add(d0,mul(way,10)), add(O,mul(way,60)), {x:RIM.x+ (way.x>0?34:-4),y:120}, {x:RIM.x,y:78}]; }
+    $(".sb-run").textContent="❚❚";
+    let a=0,last=0; const DUR=1600;
+    function frame(ts){ if(!last)last=ts; a+=(ts-last)/DUR; last=ts; const e=clamp(a,0,1);
+      if(shoot){ ball.setAttribute("cx",0); ball.setAttribute("cy",-e*40);
+        if(r.type==="contest"){ hhi.setAttribute("opacity",1); } }
+      else { const o=along(path,e); off.setAttribute("transform",`translate(${o.x} ${o.y})`);
+        const n=norm(sub(along(path,Math.min(1,e+.05)),o)); ball.setAttribute("cx",n.x*13);ball.setAttribute("cy",n.y*13);
+        drive.setAttribute("d",pathD(path)); drive.setAttribute("opacity",.65);
+        drive.setAttribute("stroke", r.type==="contained" ? "#36c98f" : "#e2493f");
+        if(showHelp){ help.setAttribute("opacity", e); } }
+      if(e>=1){ stamp.setAttribute("opacity",1);
+        stamp.setAttribute("fill", r.cls==="good"?"var(--accent)":r.cls==="ok"?"#e2b23f":"#e2493f");
+        stamp.textContent=r.title; stop(); return; }
+      raf=requestAnimationFrame(frame);
+    }
+    off.setAttribute("transform",`translate(${O.x} ${O.y})`);
+    raf=requestAnimationFrame(frame);
+  }
+  cush.addEventListener("input",()=>{stop();still();paintScorecard(null,false);});
+  ctrl.addEventListener("input",()=>{stop();still();paintScorecard(null,false);});
+  root.querySelectorAll(".sb-force button").forEach(b=>b.addEventListener("click",()=>{
+    root.querySelectorAll(".sb-force button").forEach(x=>x.classList.toggle("active",x===b)); force=b.dataset.f; stop(); still(); paintScorecard(null,false); }));
+  root.querySelectorAll(".sb-timing button").forEach(b=>b.addEventListener("click",()=>{
+    root.querySelectorAll(".sb-timing button").forEach(x=>x.classList.toggle("active",x===b)); timing=b.dataset.t; }));
+  $(".sb-run").addEventListener("click",()=> raf ? (stop(),still()) : run());
+  still();
+  return { onHide: ()=>{ stop(); still(); } };
+}
+
+/* ---------------- TAB 7: IN A DEFENSE ---------------- */
+function initTeam(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const O1s={x:120,y:210}, O1e={x:96,y:118};   // ball-handler drives baseline (left)
+  const O2={x:405,y:230};                        // weak-side shooter (right wing)
+  const Dhelp={x:250,y:150}, Dtag={x:180,y:150}; // you: at the nail, tag the driver, then close out
+  const Hs={x:250,y:300}, He={x:250,y:200};      // low man rotates up
+  const o1=$(".o1"),o2=$(".o2"),tball=$(".tball"),help=$(".help"),def=$(".def"),hand=$(".hand"),
+        pass=$(".pass"),dtrail=$(".dtrail"),htrail=$(".htrail"),scrub=$(".team-scrub"),playBtn=$(".team-play");
+  o2.setAttribute("transform",`translate(${O2.x} ${O2.y})`);
+  // keyframes over t
+  const o1K=[{t:0,...O1s},{t:.32,...O1e},{t:.45,...O1e},{t:1,...O1e}];
+  const defK=[{t:0,...Dhelp},{t:.30,...Dtag},{t:.45,x:220,y:165},{t:.72,x:355,y:225},{t:.86,x:372,y:227},{t:1,x:376,y:228}];
+  const helpK=[{t:0,...Hs},{t:.45,...Hs},{t:.55,x:255,y:250},{t:1,...He}];
+  const STEPS=[
+    {t0:0,name:"You're in help",body:"Ball on the left. You're off your man with two feet in the paint — in the gap, ready to stop a drive. This is correct."},
+    {t0:.15,name:"The drive pulls you in",body:"The ball-handler attacks baseline. You slide over to tag him. Now you're two passes from the shooter — that's why every closeout starts late."},
+    {t0:.35,name:"The skip pass",body:"He kicks it crosscourt to the open shooter on the weak side. The ball travels a long way — your cue to sprint."},
+    {t0:.50,name:"Closeout — with help behind",body:"You sprint-closeout to the shooter while the low man rotates up to cover the paint. Because help is behind you, you can close out hard and take away the drive."},
+  ];
+  const stepsEl=$(".team-steps");
+  STEPS.forEach((s,i)=>{const d=document.createElement("div");d.className="step";
+    d.innerHTML=`<h3><span class="num">${i+1}</span>${s.name}</h3><p>${s.body}</p>`;
+    d.addEventListener("click",()=>{pause();setT(s.t0+0.001);});stepsEl.appendChild(d);});
+  let dpts=[]; for(let i=0;i<=60;i++)dpts.push(sampleKf(defK,i/60)); dtrail.setAttribute("d",pathD(dpts));
+  let hpts=[]; for(let i=0;i<=40;i++)hpts.push(sampleKf(helpK,i/40)); htrail.setAttribute("d",pathD(hpts));
+  function render(t){
+    const p1=sampleKf(o1K,t), pd=sampleKf(defK,t), ph=sampleKf(helpK,t);
+    o1.setAttribute("transform",`translate(${p1.x} ${p1.y})`);
+    def.setAttribute("transform",`translate(${pd.x} ${pd.y})`);
+    help.setAttribute("transform",`translate(${ph.x} ${ph.y})`);
+    // ball: with O1 until .35, flies to O2 by .5, then held by O2
+    let b;
+    if(t<.35) b={x:p1.x,y:p1.y};
+    else if(t<.5){ const e=ease((t-.35)/.15); b={x:p1.x+(O2.x-p1.x)*e,y:p1.y+(O2.y-p1.y)*e}; }
+    else b={x:O2.x,y:O2.y};
+    tball.setAttribute("cx",b.x); tball.setAttribute("cy",b.y);
+    pass.setAttribute("d",`M ${O1e.x} ${O1e.y} L ${O2.x} ${O2.y}`);
+    pass.setAttribute("opacity", (t>=.34&&t<.55)?0.9:0.12);
+    if(t>=.88){ const k=ease((t-.88)/.12); hand.setAttribute("opacity",k);
+      hand.setAttribute("x1",pd.x);hand.setAttribute("y1",pd.y);hand.setAttribute("x2",O2.x);hand.setAttribute("y2",O2.y-20); }
+    else hand.setAttribute("opacity",0);
+    let active=0;STEPS.forEach((s,i)=>{if(t>=s.t0)active=i;});
+    root.querySelectorAll(".team-steps .step").forEach((el,i)=>el.classList.toggle("active",i===active));
+    scrub.value=Math.round(t*1000);
+  }
+  let playing=false,raf=null,t=0,last=0; const DUR=6800;
+  function tick(ts){if(!last)last=ts;t+=(ts-last)/DUR;last=ts;if(t>=1){t=1;render(t);pause();return;}render(t);raf=requestAnimationFrame(tick);}
+  function play(){if(playing)return;if(t>=1)t=0;playing=true;last=0;playBtn.textContent="❚❚ Pause";raf=requestAnimationFrame(tick);}
+  function pause(){playing=false;if(raf)cancelAnimationFrame(raf);raf=null;playBtn.textContent="▶ Run the rotation";}
+  function setT(v){t=clamp(v,0,1);render(t);}
+  playBtn.addEventListener("click",()=>playing?pause():play());
+  scrub.addEventListener("input",()=>{pause();setT(scrub.value/1000);});
+  render(0);
+  return { onHide: pause };
+}
+
+/* ---------------- TAB 8: READ THE MAN ---------------- */
+function initRead(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const off=$(".off"), def=$(".def"), ideal=$(".rideal"), cush=$(".rcush"), cushLab=$(".rcush-lab"),
+        hi=$(".rhi"), vEl=$(".read-verdict"), vBig=vEl.querySelector(".big"), rule=$(".read-rule"),
+        mEl=$(".read-mistake"), mText=$(".read-mistake-t");
+  off.setAttribute("transform",`translate(${O.x} ${O.y})`);
+  const TYPES={
+    shooter:{c:30,hand:true,cls:"good",ring:"#36c98f",lab:"arm's length",title:"Knockdown shooter — contest hard",
+      rule:"Sprint ~90% and break down late, high hand up in his face. Get there and take the shot away — you can live with the drive because he'll bury an open look.",
+      mistake:"A soft or late closeout gives up a wide-open three (~38%). Against a shooter, a beat late is a bucket."},
+    pump:{c:32,hand:true,cls:"good",ring:"#36c98f",lab:"arm's length — stay DOWN",title:"Pump-faker — high hand, feet down",
+      rule:"Close out under control with a high hand, but NEVER leave your feet. Hand vertical, mirror the ball, and let him shoot into your contest.",
+      mistake:"Bite the pump fake and jump — now you foul him on the shot or he steps through you for a layup."},
+    driver:{c:56,hand:false,cls:"ok",ring:"#e2b23f",lab:"a step off",title:"Driver — sit on the drive",
+      rule:"Sprint only halfway, break down early, and give ground. Sit on the drive and make him prove he can hit the (contested) jumper.",
+      mistake:"Fly all the way out on a driver and he blows right by — you handed him the rim."},
+    none:{c:82,hand:false,cls:"bad",ring:"#6b7a8f",lab:"sag — stay home",title:"Non-shooter — don't close out",
+      rule:"Barely close out at all. Stay in the gap with your hands down, clog the drive, and dare a non-shooter to beat you with a jumper he doesn't have.",
+      mistake:"Running a hard closeout at a guy who can't shoot wastes your position and opens a driving lane for the whole team."},
+  };
+  function show(t){
+    const c=TYPES[t]; const p={x:O.x-dir.x*c.c, y:O.y-dir.y*c.c};
+    def.setAttribute("transform",`translate(${p.x} ${p.y})`);
+    ideal.setAttribute("cx",O.x);ideal.setAttribute("cy",O.y);ideal.setAttribute("r",c.c);ideal.setAttribute("stroke",c.ring);
+    cush.setAttribute("x1",p.x);cush.setAttribute("y1",p.y);cush.setAttribute("x2",O.x);cush.setAttribute("y2",O.y);
+    const mid={x:(p.x+O.x)/2,y:(p.y+O.y)/2-8}; cushLab.setAttribute("x",mid.x);cushLab.setAttribute("y",mid.y);cushLab.textContent=c.lab;
+    if(c.hand){ hi.setAttribute("opacity",1);hi.setAttribute("x1",p.x);hi.setAttribute("y1",p.y);hi.setAttribute("x2",O.x);hi.setAttribute("y2",O.y-20); }
+    else hi.setAttribute("opacity",0);
+    vEl.className="verdict read-verdict "+c.cls; vBig.textContent=c.title; rule.textContent=c.rule; mText.textContent=c.mistake;
+  }
+  root.querySelectorAll(".read-seg button").forEach(b=>b.addEventListener("click",()=>{
+    root.querySelectorAll(".read-seg button").forEach(x=>x.classList.toggle("active",x===b)); show(b.dataset.t); }));
+  show("shooter");
+  return {};
+}
+
+/* ---------------- TAB 7: LIVE DRILL (REAL-TIME) ---------------- */
+function initDrill(root){
+  const $=(s)=>root.querySelector(s);
+  $(".courtbg").innerHTML = COURT;
+  const svg=$(".drill-court"), off=$(".off"), def=$(".def"), ball=$(".ball"),
+        drive=$(".ddrive"), hand=$(".dhand"), stamp=$(".dstamp"), cursor=$(".dcursor"), ideal=$(".dideal"), gatherEl=$(".dgather");
+  const stopsEl=$(".d-stops"), bucketsEl=$(".d-buckets"), streakEl=$(".d-streak"),
+        msgEl=$(".d-msg"), startBtn=$(".d-start");
+  // shooter spawns — each rep picks one, so angles + help geometry vary
+  const SPOTS=[
+    {o:{x:405,y:205},d:{x:265,y:200}},{o:{x:448,y:112},d:{x:300,y:150}},{o:{x:250,y:272},d:{x:250,y:196}},
+    {o:{x:95,y:205},d:{x:235,y:200}},{o:{x:52,y:112},d:{x:200,y:150}}];
+  // tunables
+  const OPEN=62, CROWD=20, CONTEST=50, FLY=250, HOLDMAX=.6, VMAX=420, OSPEED=300, DUR_CAP=2.8;
+  let D={x:265,y:200}, Dv={x:0,y:0}, O={x:405,y:205}, pointer={x:265,y:200};
+  function placeSpot(s){ O={...s.o}; D={...s.d}; pointer={...s.d}; Dv={x:0,y:0};
+    ideal.setAttribute("cx",O.x); ideal.setAttribute("cy",O.y); ideal.setAttribute("r",30);
+    gatherEl.setAttribute("cx",O.x); gatherEl.setAttribute("cy",O.y); }
+  placeSpot(SPOTS[0]);
+  // gather (reaction window) scales with the closeout distance, so a far spawn gives you time to arrive
+  let repGather=.9, gatherR0=120;
+  let state="idle", stateT=0, containT=0, driveDir={x:0,y:0}, oTrace=[];
+  let stops=0, buckets=0, streak=0, raf=null, lastTs=0;
+  const pt=svg.createSVGPoint();
+  const toSvg=(e)=>{ pt.x=e.clientX; pt.y=e.clientY; const p=pt.matrixTransform(svg.getScreenCTM().inverse()); return {x:p.x,y:p.y}; };
+  const onMove=(e)=>{ pointer=toSvg(e); };
+  svg.addEventListener("pointermove",onMove); svg.addEventListener("mousemove",onMove);
+  function setMsg(t,cls){ msgEl.textContent=t; msgEl.className="verdict d-msg "+(cls||""); }
+  function draw(){
+    def.setAttribute("transform",`translate(${D.x} ${D.y})`);
+    off.setAttribute("transform",`translate(${O.x} ${O.y})`);
+    cursor.setAttribute("cx",pointer.x); cursor.setAttribute("cy",pointer.y);
+  }
+  function idle(){ placeSpot(SPOTS[0]); state="idle";
+    drive.setAttribute("opacity",0);stamp.setAttribute("opacity",0);hand.setAttribute("opacity",0);gatherEl.setAttribute("opacity",0);
+    ball.setAttribute("cx",-13);ball.setAttribute("cy",0);
+    setMsg("Press Start, then steer your defender with the cursor. Sprint out, then break down at the ring.","");
+    draw();
+  }
+  function newRep(){ placeSpot(SPOTS[Math.floor(Math.random()*SPOTS.length)]); state="ready";stateT=0;containT=0;oTrace=[];
+    gatherR0=dist(D,O); repGather=clamp(gatherR0/220 + .4, .65, 1.6);   // farther closeout → more time
+    drive.setAttribute("opacity",0);stamp.setAttribute("opacity",0);hand.setAttribute("opacity",0);
+    ball.setAttribute("cx",-13);ball.setAttribute("cy",0);
+    setMsg("Close out! Get inside the shrinking yellow ring before he's set.","");
+    draw();
+  }
+  function finish(kind,text){
+    state="done"; stateT=0; const good=kind==="stop";
+    if(good){stops++;streak++;} else {buckets++;streak=0;}
+    stopsEl.textContent=stops; bucketsEl.textContent=buckets; streakEl.textContent=streak;
+    gatherEl.setAttribute("opacity",0);
+    stamp.setAttribute("opacity",1); stamp.setAttribute("fill",good?"var(--accent)":"#e2493f");
+    stamp.textContent = good?"STOP ✓":"BUCKET";
+    setMsg(text + "  —  press Start for the next rep.", good?"good":"bad");
+  }
+  function startDrive(){
+    state="drive"; stateT=0; oTrace=[{x:O.x,y:O.y}];
+    // burst toward the rim, biased to whichever side the defender isn't covering
+    const toRim=norm(sub(RIM,O)), p=perp(toRim);
+    const lat=(D.x-O.x)*p.x + (D.y-O.y)*p.y;          // defender's lateral position vs the rim line
+    driveDir = norm(add(toRim, mul(p, (lat>0?-1:1)*0.9)));
+    setMsg("He's attacking — cut him off! Get between him and the rim.","");
+  }
+  function step(dt){
+    // defender momentum: accelerate toward the cursor, damped, speed-capped → yanking overshoots
+    Dv.x += (pointer.x-D.x)*10*dt; Dv.y += (pointer.y-D.y)*10*dt;
+    Dv.x *= (1-5.5*dt); Dv.y *= (1-5.5*dt);
+    const sp=Math.hypot(Dv.x,Dv.y); if(sp>VMAX){ Dv.x*=VMAX/sp; Dv.y*=VMAX/sp; }
+    D.x=clamp(D.x+Dv.x*dt,30,470); D.y=clamp(D.y+Dv.y*dt,30,460);
+    const vmag=Math.hypot(Dv.x,Dv.y); stateT+=dt;
+    if(state==="ready"){
+      const pr=clamp(stateT/repGather,0,1);            // shrinking "he's gathering" window
+      gatherEl.setAttribute("r", 30 + (1-pr)*gatherR0); gatherEl.setAttribute("opacity", .3+.45*(1-pr));
+      if(stateT>=repGather){ state="hold"; stateT=0; gatherEl.setAttribute("opacity",0); setMsg("He's set — contest or contain!",""); }
+    }
+    else if(state==="hold"){
+      const d=dist(D,O);
+      if(d>OPEN){ state="shoot"; stateT=0; }
+      else if(d<CROWD){ startDrive(); }
+      else if(vmag>FLY){ startDrive(); }
+      else { containT+=dt; if(containT>=HOLDMAX){ state="shoot"; stateT=0; } }
+    }
+    else if(state==="shoot"){
+      const e=clamp(stateT/.42,0,1); ball.setAttribute("cx",0); ball.setAttribute("cy",-e*44);
+      const d=dist(D,O);
+      if(d<=CONTEST){ hand.setAttribute("opacity",1); hand.setAttribute("x1",D.x);hand.setAttribute("y1",D.y);hand.setAttribute("x2",O.x);hand.setAttribute("y2",O.y-20); }
+      else hand.setAttribute("opacity",0);
+      if(e>=1){ if(dist(D,O)<=CONTEST) finish("stop","Balanced at the cushion — you contested the shot clean. Stop.");
+        else finish("bucket","Too much space — wide-open jumper. You have to close the gap."); }
+    }
+    else if(state==="drive"){
+      const tgt = stateT>.22 ? {x:RIM.x,y:74} : {x:O.x+driveDir.x*40,y:O.y+driveDir.y*40};
+      const dx=tgt.x-O.x,dy=tgt.y-O.y,l=Math.hypot(dx,dy)||1;
+      O.x+=dx/l*OSPEED*dt; O.y+=dy/l*OSPEED*dt;
+      oTrace.push({x:O.x,y:O.y}); drive.setAttribute("d",pathD(oTrace)); drive.setAttribute("opacity",.6);
+      const nb=norm({x:dx,y:dy}); ball.setAttribute("cx",nb.x*13); ball.setAttribute("cy",nb.y*13);
+      if(dist(D,O)<27 && dist(D,RIM) < dist(O,RIM)+4){ finish("stop","You stayed in front and walled off the drive. Contained — stop."); return; }
+      if(dist(O,RIM)<34){ finish("bucket","He beat you to the rim — you were too crowded or flying to slide with him."); return; }
+      if(stateT>DUR_CAP){ finish("stop","He couldn't turn the corner on you — contained."); return; }
+    }
+    draw();
+  }
+  function loop(ts){ if(!lastTs)lastTs=ts; let dt=(ts-lastTs)/1000; lastTs=ts; dt=Math.min(dt,.05);
+    if(state==="idle"||state==="done") draw(); else step(dt);
+    raf=requestAnimationFrame(loop); }
+  startBtn.addEventListener("click",newRep);
+  idle();
+  return {
+    onShow(){ lastTs=0; if(!raf) raf=requestAnimationFrame(loop); },
+    onHide(){ if(raf){cancelAnimationFrame(raf);raf=null;} if(state!=="idle") idle(); }
+  };
+}
+
+/* ---------------- TABS ---------------- */
+const safe=(fn,el)=>{ try{ return fn(el); }catch(e){ console.error("tab init failed:",e); return null; } };
+const inits = {
+  move:    safe(initMove, document.getElementById("tab-move")),
+  cushion: safe(initCushion, document.getElementById("tab-cushion")),
+  side:    safe(initSide, document.getElementById("tab-side")),
+  feet:    safe(initFeet, document.getElementById("tab-feet")),
+  d3:      safe(initD3, document.getElementById("tab-d3")),
+  sandbox: safe(initSandbox, document.getElementById("tab-sandbox")),
+  drill:   safe(initDrill, document.getElementById("tab-drill")),
+  read:    safe(initRead, document.getElementById("tab-read")),
+  team:    safe(initTeam, document.getElementById("tab-team")),
+};
+document.getElementById("tabs").addEventListener("click",(e)=>{
+  const b=e.target.closest("button[data-tab]"); if(!b) return;
+  const id=b.dataset.tab;
+  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("active",x===b));
+  document.querySelectorAll(".tab").forEach(s=>s.classList.toggle("active",s.id==="tab-"+id));
+  Object.entries(inits).forEach(([k,api])=>{ if(k!==id && api && api.onHide) api.onHide(); });
+  const cur=inits[id]; if(cur && cur.onShow) cur.onShow();
+});
+</script>
+</body>
+</html>

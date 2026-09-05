@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coding Challenge Walkthroughs — freeCodeCamp & LeetCode, visualized</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="DSA">
+<meta name="viz:title" content="Coding Challenge Walkthroughs — freeCodeCamp & LeetCode, visualized">
+<meta name="viz:description" content="Interactive, step-through explainers for coding challenges from freeCodeCamp's dailies and LeetCode — the problem, the visual intuition, the gotcha, and idiomatic TypeScript. Each tab is badged by source with a link to the original; where a problem has one, flip between brute-force and optimized approaches and watch the difference.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { padding-bottom: 64px; }
+  .viz-header { max-width: 1480px; margin: 0 auto; }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 0 16px; }
+
+  /* Tab bar */
+  .tabs {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 6px; flex-wrap: wrap;
+    padding: 12px 16px; margin: 0 auto; max-width: 1480px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    font: 600 12.5px var(--sans); color: var(--muted);
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 12px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  }
+  .tab:hover { color: var(--text); border-color: var(--accent); }
+  .tab.active { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+  .tab .n { opacity: .6; font-variant-numeric: tabular-nums; }
+  .tab.active .n { opacity: .8; }
+
+  /* source badges — fCC (green) vs LeetCode (orange), so a glance tells them apart */
+  .srcbadge { font: 800 9px var(--sans); letter-spacing: .04em; padding: 2px 5px; border-radius: 5px; line-height: 1; }
+  .src-fcc { color: var(--good); background: color-mix(in srgb, var(--good) 16%, transparent); }
+  .src-leetcode { color: var(--warn); background: color-mix(in srgb, var(--warn) 18%, transparent); }
+  .tab.active .srcbadge { color: var(--bg); background: color-mix(in srgb, var(--bg) 22%, transparent); }
+  .tab[data-source="leetcode"] { border-left: 3px solid var(--warn); }
+  .tab[data-source="leetcode"].active { background: var(--warn); border-color: var(--warn); }
+  .srcpill { font: 700 11px var(--sans); letter-spacing: .02em; padding: 2px 8px; border-radius: 999px; }
+  .srcpill.src-fcc { color: var(--good); border: 1px solid color-mix(in srgb, var(--good) 45%, transparent); }
+  .srcpill.src-leetcode { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 50%, transparent); }
+  .eyebrow .orig { color: var(--accent); text-decoration: none; border-bottom: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); }
+  .eyebrow .orig:hover { border-bottom-style: solid; }
+  /* A merged multi-day series links each part: "originals ↗ 1 2 3 4 5 6". */
+  .eyebrow .origs .orig { display: inline-block; min-width: 1.15em; text-align: center; border-bottom: 0;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 4px;
+    padding: 0 3px; margin-left: 2px; line-height: 1.4; }
+  .eyebrow .origs .orig:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 15%, transparent); }
+
+  section.problem { display: none; padding: 24px 0 8px; }
+  section.problem.active { display: block; }
+
+  h2.ptitle { margin: 0 0 2px; font-size: 22px; letter-spacing: -.02em; }
+  .eyebrow { color: var(--accent); font: 700 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+  .statement { color: var(--text); margin: 12px 0 18px; max-width: 760px; }
+  .statement code, code.inl { background: var(--panel-2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px; font: 12.5px var(--mono); color: var(--text); }
+  .statement .rule { color: var(--muted); }
+
+  /* pattern filter / index bar (between the intro and the sticky tabs) */
+  .patternbar { max-width: 1480px; margin: 0 auto; padding: 8px 16px 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
+  .pat-lead { font: 700 10.5px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .pat-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pat-chip { font: 600 12px var(--sans); color: var(--muted); background: var(--panel); border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .pat-chip:hover { color: var(--text); border-color: var(--accent); }
+  .pat-chip.on { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+  .pat-chip .pc { font: 700 10px var(--mono); opacity: .55; font-variant-numeric: tabular-nums; }
+  .pat-chip.on .pc { opacity: .85; }
+  .pat-tell { flex-basis: 100%; font: 13px/1.5 var(--sans); color: var(--text); background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin-top: 2px; max-width: 900px; }
+  .pat-tell b { color: var(--accent); }
+
+  /* clickable pattern label in a problem's eyebrow */
+  .pat-link { font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; border-bottom: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); }
+  .pat-link:hover { border-bottom-style: solid; }
+
+  /* "how to spot it" clue under the statement */
+  .spot { max-width: 760px; margin: -4px 0 18px; background: color-mix(in srgb, var(--accent) 7%, var(--panel)); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border)); border-radius: 10px; padding: 9px 13px; }
+  .spot-k { display: block; font: 700 10px var(--sans); letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .spot-b { color: var(--text); font-size: 13.5px; line-height: 1.55; }
+
+  .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 880px) { .layout { grid-template-columns: 1.35fr 1fr; align-items: start; } }
+
+  .demo { min-height: 60px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; align-items: center; }
+  .chip {
+    font: 600 12px var(--mono); color: var(--text);
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 7px; padding: 5px 9px; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip.on { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .chip.bad.on { background: var(--danger); border-color: var(--danger); }
+  .chip.good.on { background: var(--good); border-color: var(--good); }
+  input[type=text], input[type=number] {
+    font: 13px var(--mono); color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 7px; padding: 6px 9px; min-width: 0;
+  }
+  input[type=range] { accent-color: var(--accent); }
+  .ctl-label { color: var(--muted); font-size: 12px; }
+
+  aside .approach { margin: 0 0 12px; }
+  aside h3 { margin: 0 0 6px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+  aside .approach p { margin: 0 0 8px; color: var(--text); }
+  pre.code {
+    margin: 0; background: #0a0e14; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px; overflow: auto; font: 12px/1.55 var(--mono); color: #c9d1d9;
+    max-height: 460px;
+  }
+  pre.code .kw { color: #ff7b72; } pre.code .ty { color: #79c0ff; }
+  pre.code .st { color: #a5d6ff; } pre.code .cm { color: #8b949e; font-style: italic; }
+  pre.code .fn { color: #d2a8ff; } pre.code .nu { color: #79c0ff; }
+
+  .badge { display: inline-flex; align-items: center; gap: 6px; font: 700 13px var(--sans); padding: 5px 11px; border-radius: 8px; }
+  .badge.ok { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); border: 1px solid var(--good); }
+  .badge.no { background: color-mix(in srgb, var(--danger) 18%, transparent); color: var(--danger); border: 1px solid var(--danger); }
+  .mono { font-family: var(--mono); }
+  .muted { color: var(--muted); }
+  .big { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tag { font: 600 11px var(--mono); padding: 2px 7px; border-radius: 5px; border: 1px solid var(--border); }
+
+  /* schema rows */
+  .srow { display: flex; align-items: baseline; gap: 8px; padding: 3px 0; font: 12.5px var(--mono); border-bottom: 1px dashed color-mix(in srgb, var(--border) 60%, transparent); }
+  .srow .mark { width: 16px; flex: none; text-align: center; }
+  .srow .k { color: var(--accent); }
+  .srow .exp { color: var(--muted); }
+  .srow.bad { background: color-mix(in srgb, var(--danger) 9%, transparent); }
+  .srow.bad .got { color: var(--danger); font-weight: 700; }
+  .srow.head .got { color: var(--muted); }
+
+  /* digit boxes (luhn) */
+  .digits { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dbox { width: 46px; border: 1px solid var(--border); border-radius: 8px; padding: 6px 0; text-align: center; background: var(--panel-2); }
+  .dbox .d { font: 700 18px var(--mono); }
+  .dbox .x { font: 11px var(--mono); color: var(--muted); height: 14px; }
+  .dbox.dbl { border-color: var(--accent); }
+  .dbox.dbl .d { color: var(--accent); }
+  .dbox.dbl .x { color: var(--accent); }
+
+  /* cards (poker) */
+  .hand { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pcard { width: 52px; height: 72px; border-radius: 8px; background: #f4f6fb; color: #11151c; border: 1px solid #c9d1d9;
+           display: flex; flex-direction: column; align-items: center; justify-content: center; font: 700 20px var(--sans); }
+  .pcard.red { color: #c1121f; }
+  .pcard .s { font-size: 20px; line-height: 1; }
+  .ladder { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+  .rung { display: flex; justify-content: space-between; padding: 4px 9px; border-radius: 6px; font: 12.5px var(--mono); color: var(--muted); border: 1px solid transparent; }
+  .rung.on { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--text); border-color: var(--accent); font-weight: 700; }
+  .rung .v { opacity: .55; }
+
+  /* chips/units (blood, dna, sort) */
+  .units { display: flex; flex-wrap: wrap; gap: 5px; }
+  .unit { font: 700 12px var(--mono); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border); }
+  .unit.used { opacity: .25; text-decoration: line-through; }
+  .bt-O { color: var(--c1); border-color: color-mix(in srgb, var(--c1) 60%, var(--border)); }
+  .bt-A { color: var(--c2); border-color: color-mix(in srgb, var(--c2) 60%, var(--border)); }
+  .bt-B { color: var(--c3); border-color: color-mix(in srgb, var(--c3) 60%, var(--border)); }
+  .bt-AB { color: var(--c4); border-color: color-mix(in srgb, var(--c4) 60%, var(--border)); }
+  .pt { padding: 4px 8px; border-radius: 6px; font: 700 12px var(--mono); border: 1px solid var(--border); }
+  .pt.served { background: color-mix(in srgb, var(--good) 18%, transparent); border-color: var(--good); }
+  .pt.unserved { background: color-mix(in srgb, var(--danger) 16%, transparent); border-color: var(--danger); opacity: .8; }
+
+  .strand { font: 700 15px var(--mono); letter-spacing: 3px; display: flex; flex-wrap: wrap; }
+  .base { width: 1ch; } .base.mut { color: var(--danger); background: color-mix(in srgb, var(--danger) 22%, transparent); border-radius: 3px; }
+  .idxrow { font: 11px var(--mono); color: var(--muted); letter-spacing: 3px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .num { font: 700 14px var(--mono); padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border); background: var(--panel-2); }
+  .num.wrong { border-color: var(--danger); color: var(--danger); }
+  .num.right { border-color: var(--good); color: var(--good); }
+
+  /* variant switcher (basic ↔ optimized) */
+  .variant-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 4px 0 18px; }
+  .variant-bar .vlab { font: 700 10.5px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .vswitch { display: inline-flex; background: var(--panel); border: 1px solid var(--border); border-radius: 999px; padding: 3px; gap: 3px; }
+  .vpill { font: 700 12.5px var(--sans); color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .vpill .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: .5; }
+  .vpill:hover { color: var(--text); }
+  .vpill.on { color: var(--bg); background: var(--accent); }
+  .vpill.on.brute { background: var(--warn); }
+  .vpill.on.opt   { background: var(--good); }
+  .vpill.on .dot  { opacity: 1; }
+  .vstep { font: 600 11px var(--mono); color: var(--muted); }
+  .vstep b { color: var(--accent); }
+
+  /* cost / work badges — the "why optimize" payload */
+  .demo-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .cost { font: 700 12px var(--mono); padding: 4px 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--panel-2); color: var(--text); }
+  .cost.brute { border-color: var(--warn); color: var(--warn); }
+  .cost.opt   { border-color: var(--good); color: var(--good); }
+  .opcount { display: inline-flex; align-items: baseline; gap: 6px; font: 12px var(--sans); color: var(--muted); }
+  .opcount .n { font: 800 17px var(--mono); font-variant-numeric: tabular-nums; color: var(--text); }
+  .opcount.hot .n { color: var(--danger); }
+  .opcount.cool .n { color: var(--good); }
+
+  /* generic brute-grid: many candidate cells, pass/fail colored (parens, itinerary) */
+  .cand-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+  .cand { font: 700 12px var(--mono); padding: 5px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--panel-2); color: var(--muted); }
+  .cand.pass { border-color: var(--good); color: var(--good); background: color-mix(in srgb, var(--good) 12%, transparent); }
+  .cand.fail { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); color: color-mix(in srgb, var(--danger) 78%, var(--muted)); opacity: .72; }
+  .more { font: 600 12px var(--mono); color: var(--muted); align-self: center; padding: 0 4px; }
+
+  /* divisor sweep (prime brute) */
+  .sweep { display: flex; flex-wrap: wrap; gap: 3px; }
+  .dv { width: 26px; height: 22px; display: flex; align-items: center; justify-content: center; font: 600 11px var(--mono); border-radius: 4px; border: 1px solid var(--border); background: var(--panel-2); color: var(--muted); }
+  .dv.tested { color: var(--text); }
+  .dv.hit { background: var(--good); color: var(--bg); border-color: var(--good); font-weight: 800; }
+  .dv.skipped { opacity: .25; }
+  .dv.past { border-color: var(--warn); color: var(--warn); }
+
+  .note { font-size: 12.5px; color: var(--muted); border-left: 2px solid var(--accent); padding: 2px 0 2px 10px; margin: 12px 0 0; }
+  .result-line { margin: 14px 0 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  table.cmp { border-collapse: collapse; font: 12px var(--mono); }
+  table.cmp td, table.cmp th { border: 1px solid var(--border); padding: 4px 9px; text-align: center; }
+  table.cmp th { color: var(--muted); font-weight: 600; }
+  svg { max-width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body>
+  <div class="viz-header">
+    <h1>Coding Challenge Walkthroughs</h1>
+    <div class="sub">Coding challenges as interactive walkthroughs — from <b style="color:var(--good)">freeCodeCamp</b>'s dailies and <b style="color:var(--warn)">LeetCode</b>. Each is the problem, the visual intuition, the gotcha, and idiomatic TypeScript; every tab is badged by source with a link to the original. Where a problem has a naive way and a clever way, flip the <b>Approach</b> toggle to watch the brute-force version strain and the optimized one glide. Pick a tab. Poke at everything.<br><br><span class="muted">freeCodeCamp's daily challenge ran for exactly one year — <b>#1 <i>Vowel Balance</i></b> on 11 Aug 2025 through <b>#365 <i>The Last Challenge: Bucket Fill 3</i></b> on 10 Aug 2026 — and no longer publishes new ones; the dailies now replay from the start. So this gallery covers a <b>finished</b> set rather than chasing a moving one: <b>#293 to #365 is complete, every day of it</b>, and the back-fill into #1–292 has begun.</span></div>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+  <main class="wrap" id="main"></main>
+  <script type="module">
+    import { mountGallery } from "./shared.js";
+    import challenges from "./registry.js";
+    mountGallery(challenges, document.getElementById("tabs"), document.getElementById("main"));
+  </script>
+</body>
+</html>

@@ -1,0 +1,3047 @@
+{
+  "2025-08-11": {
+    "n": 1,
+    "title": "Vowel Balance",
+    "fn": "isBalanced",
+    "tests": [
+      {
+        "text": "isBalanced(\"racecar\") should return true.",
+        "assert": "assert.isTrue(isBalanced(\"racecar\"));"
+      },
+      {
+        "text": "isBalanced(\"Lorem Ipsum\") should return true.",
+        "assert": "assert.isTrue(isBalanced(\"Lorem Ipsum\"));"
+      },
+      {
+        "text": "isBalanced(\"Kitty Ipsum\") should return false.",
+        "assert": "assert.isFalse(isBalanced(\"Kitty Ipsum\"));"
+      },
+      {
+        "text": "isBalanced(\"string\") should return false.",
+        "assert": "assert.isFalse(isBalanced(\"string\"));"
+      },
+      {
+        "text": "isBalanced(\" \") should return true.",
+        "assert": "assert.isTrue(isBalanced(\" \"));"
+      },
+      {
+        "text": "isBalanced(\"abcdefghijklmnopqrstuvwxyz\") should return false.",
+        "assert": "assert.isFalse(isBalanced(\"abcdefghijklmnopqrstuvwxyz\"));"
+      },
+      {
+        "text": "isBalanced(\"123A#b!E&#x26;*456-o.U\") should return true.",
+        "assert": "assert.isTrue(isBalanced(\"123A#b!E&*456-o.U\"));"
+      }
+    ]
+  },
+  "2025-08-12": {
+    "n": 2,
+    "title": "Base Check",
+    "fn": "isValidNumber",
+    "tests": [
+      {
+        "text": "isValidNumber(\"10101\", 2) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"10101\", 2))"
+      },
+      {
+        "text": "isValidNumber(\"10201\", 2) should return false.",
+        "assert": "assert.isFalse(isValidNumber(\"10201\", 2))"
+      },
+      {
+        "text": "isValidNumber(\"76543210\", 8) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"76543210\", 8))"
+      },
+      {
+        "text": "isValidNumber(\"9876543210\", 8) should return false.",
+        "assert": "assert.isFalse(isValidNumber(\"9876543210\", 8))"
+      },
+      {
+        "text": "isValidNumber(\"9876543210\", 10) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"9876543210\", 10))"
+      },
+      {
+        "text": "isValidNumber(\"ABC\", 10) should return false.",
+        "assert": "assert.isFalse(isValidNumber(\"ABC\", 10))"
+      },
+      {
+        "text": "isValidNumber(\"ABC\", 16) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"ABC\", 16))"
+      },
+      {
+        "text": "isValidNumber(\"Z\", 36) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"Z\", 36))"
+      },
+      {
+        "text": "isValidNumber(\"ABC\", 20) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"ABC\", 20))"
+      },
+      {
+        "text": "isValidNumber(\"4B4BA9\", 16) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"4B4BA9\", 16))"
+      },
+      {
+        "text": "isValidNumber(\"5G3F8F\", 16) should return false.",
+        "assert": "assert.isFalse(isValidNumber(\"5G3F8F\", 16))"
+      },
+      {
+        "text": "isValidNumber(\"5G3F8F\", 17) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"5G3F8F\", 17))"
+      },
+      {
+        "text": "isValidNumber(\"abc\", 10) should return false.",
+        "assert": "assert.isFalse(isValidNumber(\"abc\", 10))"
+      },
+      {
+        "text": "isValidNumber(\"abc\", 16) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"abc\", 16))"
+      },
+      {
+        "text": "isValidNumber(\"AbC\", 16) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"AbC\", 16))"
+      },
+      {
+        "text": "isValidNumber(\"z\", 36) should return true.",
+        "assert": "assert.isTrue(isValidNumber(\"z\", 36))"
+      }
+    ]
+  },
+  "2025-08-13": {
+    "n": 3,
+    "title": "Fibonacci Sequence",
+    "fn": "fibonacciSequence",
+    "tests": [
+      {
+        "text": "fibonacciSequence([0, 1], 20) should return [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181].",
+        "assert": "assert.deepEqual(fibonacciSequence([0, 1], 20), [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]);"
+      },
+      {
+        "text": "fibonacciSequence([21, 32], 1) should return [21].",
+        "assert": "assert.deepEqual(fibonacciSequence([21, 32], 1), [21]);"
+      },
+      {
+        "text": "fibonacciSequence([0, 1], 0) should return [].",
+        "assert": "assert.deepEqual(fibonacciSequence([0, 1], 0), []);"
+      },
+      {
+        "text": "fibonacciSequence([10, 20], 2) should return [10, 20].",
+        "assert": "assert.deepEqual(fibonacciSequence([10, 20], 2), [10, 20]);"
+      },
+      {
+        "text": "fibonacciSequence([123456789, 987654321], 5) should return [123456789, 987654321, 1111111110, 2098765431, 3209876541].",
+        "assert": "assert.deepEqual(fibonacciSequence([123456789, 987654321], 5), [123456789, 987654321, 1111111110, 2098765431, 3209876541]);"
+      }
+    ]
+  },
+  "2025-08-14": {
+    "n": 4,
+    "title": "S  P  A  C  E  J  A  M",
+    "fn": "spaceJam",
+    "tests": [
+      {
+        "text": "spaceJam(\"freeCodeCamp\") should return \"F R E E C O D E C A M P\".",
+        "assert": "assert.equal(spaceJam(\"freeCodeCamp\"), \"F  R  E  E  C  O  D  E  C  A  M  P\");"
+      },
+      {
+        "text": "spaceJam(\" free Code Camp \") should return \"F R E E C O D E C A M P\".",
+        "assert": "assert.equal(spaceJam(\"   free   Code   Camp   \"), \"F  R  E  E  C  O  D  E  C  A  M  P\");"
+      },
+      {
+        "text": "spaceJam(\"Hello World?!\") should return \"H E L L O W O R L D ? !\".",
+        "assert": "assert.equal(spaceJam(\"Hello World?!\"), \"H  E  L  L  O  W  O  R  L  D  ?  !\");"
+      },
+      {
+        "text": "spaceJam(\"C@t$ &#x26; D0g$\") should return \"C @ T $ &#x26; D 0 G $\".",
+        "assert": "assert.equal(spaceJam(\"C@t$ & D0g$\"), \"C  @  T  $  &  D  0  G  $\");"
+      },
+      {
+        "text": "spaceJam(\"allyourbase\") should return \"A L L Y O U R B A S E\".",
+        "assert": "assert.equal(spaceJam(\"all your base\"), \"A  L  L  Y  O  U  R  B  A  S  E\");"
+      }
+    ]
+  },
+  "2025-08-15": {
+    "n": 5,
+    "title": "Jbelmud Text",
+    "fn": "jbelmu",
+    "tests": [
+      {
+        "text": "jbelmu(\"hello world\") should return \"hello wlord\".",
+        "assert": "assert.equal(jbelmu(\"hello world\"), \"hello wlord\");"
+      },
+      {
+        "text": "jbelmu(\"i love jumbled text\") should return \"i love jbelmud text\".",
+        "assert": "assert.equal(jbelmu(\"i love jumbled text\"), \"i love jbelmud text\");"
+      },
+      {
+        "text": "jbelmu(\"freecodecamp is my favorite place to learn to code\") should return \"faccdeeemorp is my faiortve pacle to laern to cdoe\".",
+        "assert": "assert.equal(jbelmu(\"freecodecamp is my favorite place to learn to code\"), \"faccdeeemorp is my faiortve pacle to laern to cdoe\");"
+      },
+      {
+        "text": "jbelmu(\"the quick brown fox jumps over the lazy dog\") should return \"the qciuk borwn fox jmpus oevr the lazy dog\".",
+        "assert": "assert.equal(jbelmu(\"the quick brown fox jumps over the lazy dog\"), \"the qciuk borwn fox jmpus oevr the lazy dog\");"
+      }
+    ]
+  },
+  "2025-08-16": {
+    "n": 6,
+    "title": "Anagram Checker",
+    "fn": "areAnagrams",
+    "tests": [
+      {
+        "text": "areAnagrams(\"listen\", \"silent\") should return true.",
+        "assert": "assert.isTrue(areAnagrams(\"listen\", \"silent\"));"
+      },
+      {
+        "text": "areAnagrams(\"School master\", \"The classroom\") should return true.",
+        "assert": "assert.isTrue(areAnagrams(\"School master\", \"The classroom\"));"
+      },
+      {
+        "text": "areAnagrams(\"A gentleman\", \"Elegant man\") should return true.",
+        "assert": "assert.isTrue(areAnagrams(\"A gentleman\", \"Elegant man\"));"
+      },
+      {
+        "text": "areAnagrams(\"Hello\", \"World\") should return false.",
+        "assert": "assert.isFalse(areAnagrams(\"Hello\", \"World\"));"
+      },
+      {
+        "text": "areAnagrams(\"apple\", \"banana\") should return false.",
+        "assert": "assert.isFalse(areAnagrams(\"apple\", \"banana\"));"
+      },
+      {
+        "text": "areAnagrams(\"cat\", \"dog\") should return false.",
+        "assert": "assert.isFalse(areAnagrams(\"cat\", \"dog\"));"
+      }
+    ]
+  },
+  "2025-08-17": {
+    "n": 7,
+    "title": "Targeted Sum",
+    "fn": "findTarget",
+    "tests": [
+      {
+        "text": "findTarget([2, 7, 11, 15], 9) should return [0, 1].",
+        "assert": "assert.deepEqual(findTarget([2, 7, 11, 15], 9), [0, 1]);"
+      },
+      {
+        "text": "findTarget([3, 2, 4, 5], 6) should return [1, 2].",
+        "assert": "assert.deepEqual(findTarget([3, 2, 4, 5], 6), [1, 2]);"
+      },
+      {
+        "text": "findTarget([1, 3, 5, 6, 7, 8], 15) should return [4, 5].",
+        "assert": "assert.deepEqual(findTarget([1, 3, 5, 6, 7, 8], 15), [4, 5]);"
+      },
+      {
+        "text": "findTarget([1, 3, 5, 7], 14) should return \"Target not found\".",
+        "assert": "assert.equal(findTarget([1, 3, 5, 7], 14), \"Target not found\");"
+      }
+    ]
+  },
+  "2025-08-18": {
+    "n": 8,
+    "title": "Factorializer",
+    "fn": "factorial",
+    "tests": [
+      {
+        "text": "factorial(0) should return 1.",
+        "assert": "assert.equal(factorial(0), 1);"
+      },
+      {
+        "text": "factorial(5) should return 120.",
+        "assert": "assert.equal(factorial(5), 120);"
+      },
+      {
+        "text": "factorial(20) should return 2432902008176640000.",
+        "assert": "assert.equal(factorial(20), 2432902008176640000);"
+      }
+    ]
+  },
+  "2025-08-19": {
+    "n": 9,
+    "title": "Sum of Squares",
+    "fn": "sumOfSquares",
+    "tests": [
+      {
+        "text": "sumOfSquares(5) should return 55.",
+        "assert": "assert.equal(sumOfSquares(5), 55);"
+      },
+      {
+        "text": "sumOfSquares(10) should return 385.",
+        "assert": "assert.equal(sumOfSquares(10), 385);"
+      },
+      {
+        "text": "sumOfSquares(25) should return 5525.",
+        "assert": "assert.equal(sumOfSquares(25), 5525);"
+      },
+      {
+        "text": "sumOfSquares(500) should return 41791750.",
+        "assert": "assert.equal(sumOfSquares(500), 41791750);"
+      },
+      {
+        "text": "sumOfSquares(1000) should return 333833500.",
+        "assert": "assert.equal(sumOfSquares(1000), 333833500);"
+      }
+    ]
+  },
+  "2025-08-20": {
+    "n": 10,
+    "title": "3 Strikes",
+    "fn": "squaresWithThree",
+    "tests": [
+      {
+        "text": "squaresWithThree(1) should return 0.",
+        "assert": "assert.equal(squaresWithThree(1), 0);"
+      },
+      {
+        "text": "squaresWithThree(10) should return 1.",
+        "assert": "assert.equal(squaresWithThree(10), 1);"
+      },
+      {
+        "text": "squaresWithThree(100) should return 19.",
+        "assert": "assert.equal(squaresWithThree(100), 19);"
+      },
+      {
+        "text": "squaresWithThree(1000) should return 326.",
+        "assert": "assert.equal(squaresWithThree(1000), 326);"
+      },
+      {
+        "text": "squaresWithThree(10000) should return 4531.",
+        "assert": "assert.equal(squaresWithThree(10000), 4531);"
+      }
+    ]
+  },
+  "2025-08-21": {
+    "n": 11,
+    "title": "Mile Pace",
+    "fn": "milePace",
+    "tests": [
+      {
+        "text": "milePace(3, \"24:00\") should return \"08:00\".",
+        "assert": "assert.equal(milePace(3, \"24:00\"), \"08:00\");"
+      },
+      {
+        "text": "milePace(1, \"06:45\") should return \"06:45\".",
+        "assert": "assert.equal(milePace(1, \"06:45\"), \"06:45\");"
+      },
+      {
+        "text": "milePace(2, \"07:00\") should return \"03:30\".",
+        "assert": "assert.equal(milePace(2, \"07:00\"), \"03:30\");"
+      },
+      {
+        "text": "milePace(26.2, \"120:35\") should return \"04:36\".",
+        "assert": "assert.equal(milePace(26.2, \"120:35\"), \"04:36\");"
+      }
+    ]
+  },
+  "2025-08-22": {
+    "n": 12,
+    "title": "Message Decoder",
+    "fn": "decode",
+    "tests": [
+      {
+        "text": "decode(\"Xlmw mw e wigvix qiwweki.\", 4) should return \"This is a secret message.\"",
+        "assert": "assert.equal(decode(\"Xlmw mw e wigvix qiwweki.\", 4), \"This is a secret message.\");"
+      },
+      {
+        "text": "decode(\"Byffi Qilfx!\", 20) should return \"Hello World!\"",
+        "assert": "assert.equal(decode(\"Byffi Qilfx!\", 20), \"Hello World!\");"
+      },
+      {
+        "text": "decode(\"Zqd xnt njzx?\", -1) should return \"Are you okay?\"",
+        "assert": "assert.equal(decode(\"Zqd xnt njzx?\", -1), \"Are you okay?\");"
+      },
+      {
+        "text": "decode(\"oannLxmnLjvy\", 9) should return \"freeCodeCamp\"",
+        "assert": "assert.equal(decode(\"oannLxmnLjvy\", 9), \"freeCodeCamp\");"
+      }
+    ]
+  },
+  "2025-08-23": {
+    "n": 13,
+    "title": "Unnatural Prime",
+    "fn": "isUnnaturalPrime",
+    "tests": [
+      {
+        "text": "isUnnaturalPrime(1) should return false.",
+        "assert": "assert.isFalse(isUnnaturalPrime(1));"
+      },
+      {
+        "text": "isUnnaturalPrime(-1) should return false.",
+        "assert": "assert.isFalse(isUnnaturalPrime(-1));"
+      },
+      {
+        "text": "isUnnaturalPrime(19) should return true.",
+        "assert": "assert.isTrue(isUnnaturalPrime(19));"
+      },
+      {
+        "text": "isUnnaturalPrime(-23) should return true.",
+        "assert": "assert.isTrue(isUnnaturalPrime(-23));"
+      },
+      {
+        "text": "isUnnaturalPrime(0) should return false.",
+        "assert": "assert.isFalse(isUnnaturalPrime(0));"
+      },
+      {
+        "text": "isUnnaturalPrime(97) should return true.",
+        "assert": "assert.isTrue(isUnnaturalPrime(97));"
+      },
+      {
+        "text": "isUnnaturalPrime(-61) should return true.",
+        "assert": "assert.isTrue(isUnnaturalPrime(-61));"
+      },
+      {
+        "text": "isUnnaturalPrime(99) should return false.",
+        "assert": "assert.isFalse(isUnnaturalPrime(99));"
+      },
+      {
+        "text": "isUnnaturalPrime(-44) should return false.",
+        "assert": "assert.isFalse(isUnnaturalPrime(-44));"
+      }
+    ]
+  },
+  "2025-08-24": {
+    "n": 14,
+    "title": "Character Battle",
+    "fn": "battle",
+    "tests": [
+      {
+        "text": "battle(\"Hello\", \"World\") should return \"We lost\".",
+        "assert": "assert.equal(battle(\"Hello\", \"World\"), \"We lost\");"
+      },
+      {
+        "text": "battle(\"pizza\", \"salad\") should return \"We won\".",
+        "assert": "assert.equal(battle(\"pizza\", \"salad\"), \"We won\");"
+      },
+      {
+        "text": "battle(\"C@T5\", \"D0G$\") should return \"We won\".",
+        "assert": "assert.equal(battle(\"C@T5\", \"D0G$\"), \"We won\");"
+      },
+      {
+        "text": "battle(\"kn!ght\", \"orc\") should return \"Opponent retreated\".",
+        "assert": "assert.equal(battle(\"kn!ght\", \"orc\"), \"Opponent retreated\");"
+      },
+      {
+        "text": "battle(\"PC\", \"Mac\") should return \"We retreated\".",
+        "assert": "assert.equal(battle(\"PC\", \"Mac\"), \"We retreated\");"
+      },
+      {
+        "text": "battle(\"Wizards\", \"Dragons\") should return \"It was a tie\".",
+        "assert": "assert.equal(battle(\"Wizards\", \"Dragons\"), \"It was a tie\");"
+      },
+      {
+        "text": "battle(\"Mr. Smith\", \"Dr. Jones\") should return \"It was a tie\".",
+        "assert": "assert.equal(battle(\"Mr. Smith\", \"Dr. Jones\"), \"It was a tie\");"
+      }
+    ]
+  },
+  "2025-08-25": {
+    "n": 15,
+    "title": "camelCase",
+    "fn": "toCamelCase",
+    "tests": [
+      {
+        "text": "toCamelCase(\"hello world\") should return \"helloWorld\".",
+        "assert": "assert.equal(toCamelCase(\"hello world\"), \"helloWorld\");"
+      },
+      {
+        "text": "toCamelCase(\"HELLO WORLD\") should return \"helloWorld\".",
+        "assert": "assert.equal(toCamelCase(\"HELLO WORLD\"), \"helloWorld\");"
+      },
+      {
+        "text": "toCamelCase(\"secret agent-X\") should return \"secretAgentX\".",
+        "assert": "assert.equal(toCamelCase(\"secret agent-X\"), \"secretAgentX\");"
+      },
+      {
+        "text": "toCamelCase(\"FREE cODE cAMP\") should return \"freeCodeCamp\".",
+        "assert": "assert.equal(toCamelCase(\"FREE cODE cAMP\"), \"freeCodeCamp\");"
+      },
+      {
+        "text": "toCamelCase(\"ye old-_-sea faring_buccaneer_-_with a - peg__leg----and a_parrot_ _named- _squawk\") should return \"yeOldSeaFaringBuccaneerWithAPegLegAndAParrotNamedSquawk\".",
+        "assert": "assert.equal(toCamelCase(\"ye old-_-sea  faring_buccaneer_-_with a - peg__leg----and a_parrot_ _named- _squawk\"), \"yeOldSeaFaringBuccaneerWithAPegLegAndAParrotNamedSquawk\");"
+      }
+    ]
+  },
+  "2025-08-26": {
+    "n": 16,
+    "title": "Reverse Parenthesis",
+    "fn": "decode",
+    "tests": [
+      {
+        "text": "decode(\"(f(b(dc)e)a)\") should return \"abcdef\".",
+        "assert": "assert.equal(decode(\"(f(b(dc)e)a)\"), \"abcdef\");"
+      },
+      {
+        "text": "decode(\"((is?)(a(t d)h)e(n y( uo)r)aC)\") should return \"Can you read this?\".",
+        "assert": "assert.equal(decode(\"((is?)(a(t d)h)e(n y( uo)r)aC)\"), \"Can you read this?\");"
+      },
+      {
+        "text": "decode(\"f(Ce(re))o((e(aC)m)d)p\") should return \"freeCodeCamp\".",
+        "assert": "assert.equal(decode(\"f(Ce(re))o((e(aC)m)d)p\"), \"freeCodeCamp\");"
+      }
+    ]
+  },
+  "2025-08-27": {
+    "n": 17,
+    "title": "Unorder of Operations",
+    "fn": "evaluate",
+    "tests": [
+      {
+        "text": "evaluate([5, 6, 7, 8, 9], ['+', '-']) should return 3",
+        "assert": "assert.equal(evaluate([5, 6, 7, 8, 9], ['+', '-']), 3);"
+      },
+      {
+        "text": "evaluate([17, 61, 40, 24, 38, 14], ['+', '%']) should return 38",
+        "assert": "assert.equal(evaluate([17, 61, 40, 24, 38, 14], ['+', '%']), 38);"
+      },
+      {
+        "text": "evaluate([20, 2, 4, 24, 12, 3], ['*', '/']) should return 60",
+        "assert": "assert.equal(evaluate([20, 2, 4, 24, 12, 3], ['*', '/']), 60);"
+      },
+      {
+        "text": "evaluate([11, 4, 10, 17, 2], ['*', '*', '%']) should return 30",
+        "assert": "assert.equal(evaluate([11, 4, 10, 17, 2], ['*', '*', '%']), 30);"
+      },
+      {
+        "text": "evaluate([33, 11, 29, 13], ['/', '-']) should return -2",
+        "assert": "assert.equal(evaluate([33, 11, 29, 13], ['/', '-']), -2);"
+      }
+    ]
+  },
+  "2025-08-28": {
+    "n": 18,
+    "title": "Second Best",
+    "fn": "getLaptopCost",
+    "tests": [
+      {
+        "text": "getLaptopCost([1500, 2000, 1800, 1400], 1900) should return 1800",
+        "assert": "assert.equal(getLaptopCost([1500, 2000, 1800, 1400], 1900), 1800);"
+      },
+      {
+        "text": "getLaptopCost([1500, 2000, 2000, 1800, 1400], 1900) should return 1800",
+        "assert": "assert.equal(getLaptopCost([1500, 2000, 2000, 1800, 1400], 1900), 1800);"
+      },
+      {
+        "text": "getLaptopCost([2099, 1599, 1899, 1499], 2200) should return 1899",
+        "assert": "assert.equal(getLaptopCost([2099, 1599, 1899, 1499], 2200), 1899);"
+      },
+      {
+        "text": "getLaptopCost([2099, 1599, 1899, 1499], 1000) should return 0",
+        "assert": "assert.equal(getLaptopCost([2099, 1599, 1899, 1499], 1000), 0);"
+      },
+      {
+        "text": "getLaptopCost([1200, 1500, 1600, 1800, 1400, 2000], 1450) should return 1400",
+        "assert": "assert.equal(getLaptopCost([1200, 1500, 1600, 1800, 1400, 2000], 1450), 1400);"
+      }
+    ]
+  },
+  "2025-08-29": {
+    "n": 19,
+    "title": "Candlelight",
+    "fn": "burnCandles",
+    "tests": [
+      {
+        "text": "burnCandles(7, 2) should return 13",
+        "assert": "assert.equal(burnCandles(7, 2), 13);"
+      },
+      {
+        "text": "burnCandles(10, 5) should return 12",
+        "assert": "assert.equal(burnCandles(10, 5), 12);"
+      },
+      {
+        "text": "burnCandles(20, 3) should return 29",
+        "assert": "assert.equal(burnCandles(20, 3), 29);"
+      },
+      {
+        "text": "burnCandles(17, 4) should return 22",
+        "assert": "assert.equal(burnCandles(17, 4), 22);"
+      },
+      {
+        "text": "burnCandles(2345, 3) should return 3517",
+        "assert": "assert.equal(burnCandles(2345, 3), 3517);"
+      }
+    ]
+  },
+  "2025-08-30": {
+    "n": 20,
+    "title": "Array Duplicates",
+    "fn": "findDuplicates",
+    "tests": [
+      {
+        "text": "findDuplicates([1, 2, 3, 4, 5]) should return [].",
+        "assert": "assert.deepEqual(findDuplicates([1, 2, 3, 4, 5]), []);"
+      },
+      {
+        "text": "findDuplicates([1, 2, 3, 4, 1, 2]) should return [1, 2].",
+        "assert": "assert.deepEqual(findDuplicates([1, 2, 3, 4, 1, 2]), [1, 2]);"
+      },
+      {
+        "text": "findDuplicates([2, 34, 0, 1, -6, 23, 5, 3, 2, 5, 67, -6, 23, 2, 43, 2, 12, 0, 2, 4, 4]) should return [-6, 0, 2, 4, 5, 23].",
+        "assert": "assert.deepEqual(findDuplicates([2, 34, 0, 1, -6, 23, 5, 3, 2, 5, 67, -6, 23, 2, 43, 2, 12, 0, 2, 4, 4]), [-6, 0, 2, 4, 5, 23]);"
+      }
+    ]
+  },
+  "2025-08-31": {
+    "n": 21,
+    "title": "Hex Generator",
+    "fn": "generateHex",
+    "tests": [
+      {
+        "text": "generateHex(\"yellow\") should return \"Invalid color\".",
+        "assert": "assert.equal(generateHex(\"yellow\"), \"Invalid color\");"
+      },
+      {
+        "text": "generateHex(\"red\") should return a six-character string.",
+        "assert": "assert.lengthOf(generateHex(\"red\"), 6);"
+      },
+      {
+        "text": "generateHex(\"red\") should return a valid six-character hex color code.",
+        "assert": "const hex = generateHex(\"red\").toUpperCase();\nconst isValidHex = /^[0-9A-F]{6}$/.test(hex);\nassert.isTrue(isValidHex);"
+      },
+      {
+        "text": "generateHex(\"red\") should return a valid hex color with a higher red value than other colors.",
+        "assert": "const hex = generateHex(\"red\").toUpperCase();\nconst isValidHex = /^[0-9A-F]{6}$/.test(hex);\nassert.isTrue(isValidHex);\n\nconst r = parseInt(hex.slice(0, 2), 16);\nconst g = parseInt(hex.slice(2, 4), 16);\nconst b = parseInt(hex.slice(4, 6), 16);\n\nassert.isAbove(r, g);\nassert.isAbove(r, b);"
+      },
+      {
+        "text": "Calling generateHex(\"red\") twice should return two different hex color values where red is dominant.",
+        "assert": "const hex1 = generateHex(\"red\").toUpperCase();\nconst isValidHex1 = /^[0-9A-F]{6}$/.test(hex1)\nassert.isTrue(isValidHex1);\n\nconst r1 = parseInt(hex1.slice(0, 2), 16);\nconst g1 = parseInt(hex1.slice(2, 4), 16);\nconst b1 = parseInt(hex1.slice(4, 6), 16);\n\nassert.isAbove(r1, g1);\nassert.isAbove(r1, b1);\n\nconst hex2 = generateHex(\"red\").toUpperCase();\nconst isValidHex2 = /^[0-9A-F]{6}$/.test(hex2);\nassert.isTrue(isValidHex2);\n\nconst r2 = parseInt(hex2.slice(0, 2), 16);\nconst g2 = parseInt(hex2.slice(2, 4), 16);\nconst b2 = parseInt(hex2.slice(4, 6), 16);\n\nassert.isAbove(r2, g2);\nassert.isAbove(r2, b2);\nassert.notEqual(hex1, hex2);"
+      },
+      {
+        "text": "Calling generateHex(\"green\") twice should return two different hex color values where green is dominant.",
+        "assert": "const hex1 = generateHex(\"green\").toUpperCase();\nconst isValidHex1 = /^[0-9A-F]{6}$/.test(hex1)\nassert.isTrue(isValidHex1);\n\nconst r1 = parseInt(hex1.slice(0, 2), 16);\nconst g1 = parseInt(hex1.slice(2, 4), 16);\nconst b1 = parseInt(hex1.slice(4, 6), 16);\n\nassert.isAbove(g1, r1);\nassert.isAbove(g1, b1);\n\nconst hex2 = generateHex(\"green\").toUpperCase();\nconst isValidHex2 = /^[0-9A-F]{6}$/.test(hex2);\nassert.isTrue(isValidHex2);\n\nconst r2 = parseInt(hex2.slice(0, 2), 16);\nconst g2 = parseInt(hex2.slice(2, 4), 16);\nconst b2 = parseInt(hex2.slice(4, 6), 16);\n\nassert.isAbove(g2, r2);\nassert.isAbove(g2, b2);\nassert.notEqual(hex1, hex2);"
+      },
+      {
+        "text": "Calling generateHex(\"blue\") twice should return two different hex color values where blue is dominant.",
+        "assert": "const hex1 = generateHex(\"blue\").toUpperCase();\nconst isValidHex1 = /^[0-9A-F]{6}$/.test(hex1)\nassert.isTrue(isValidHex1);\n\nconst r1 = parseInt(hex1.slice(0, 2), 16);\nconst g1 = parseInt(hex1.slice(2, 4), 16);\nconst b1 = parseInt(hex1.slice(4, 6), 16);\n\nassert.isAbove(b1, r1);\nassert.isAbove(b1, g1);\n\nconst hex2 = generateHex(\"blue\").toUpperCase();\nconst isValidHex2 = /^[0-9A-F]{6}$/.test(hex2);\nassert.isTrue(isValidHex2);\n\nconst r2 = parseInt(hex2.slice(0, 2), 16);\nconst g2 = parseInt(hex2.slice(2, 4), 16);\nconst b2 = parseInt(hex2.slice(4, 6), 16);\n\nassert.isAbove(b2, r2);\nassert.isAbove(b2, g2);\nassert.notEqual(hex1, hex2);"
+      }
+    ]
+  },
+  "2025-09-01": {
+    "n": 22,
+    "title": "Tribonacci Sequence",
+    "fn": "tribonacciSequence",
+    "tests": [
+      {
+        "text": "tribonacciSequence([0, 0, 1], 20) should return [0, 0, 1, 1, 2, 4, 7, 13, 24, 44, 81, 149, 274, 504, 927, 1705, 3136, 5768, 10609, 19513].",
+        "assert": "assert.deepEqual(tribonacciSequence([0, 0, 1], 20), [0, 0, 1, 1, 2, 4, 7, 13, 24, 44, 81, 149, 274, 504, 927, 1705, 3136, 5768, 10609, 19513]);"
+      },
+      {
+        "text": "tribonacciSequence([21, 32, 43], 1) should return [21].",
+        "assert": "assert.deepEqual(tribonacciSequence([21, 32, 43], 1), [21]);"
+      },
+      {
+        "text": "tribonacciSequence([0, 0, 1], 0) should return [].",
+        "assert": "assert.deepEqual(tribonacciSequence([0, 0, 1], 0), []);"
+      },
+      {
+        "text": "tribonacciSequence([10, 20, 30], 2) should return [10, 20].",
+        "assert": "assert.deepEqual(tribonacciSequence([10, 20, 30], 2), [10, 20]);"
+      },
+      {
+        "text": "tribonacciSequence([10, 20, 30], 3) should return [10, 20, 30].",
+        "assert": "assert.deepEqual(tribonacciSequence([10, 20, 30], 3), [10, 20, 30]);"
+      },
+      {
+        "text": "tribonacciSequence([123, 456, 789], 8) should return [123, 456, 789, 1368, 2613, 4770, 8751, 16134].",
+        "assert": "assert.deepEqual(tribonacciSequence([123, 456, 789], 8), [123, 456, 789, 1368, 2613, 4770, 8751, 16134]);"
+      }
+    ]
+  },
+  "2025-09-02": {
+    "n": 23,
+    "title": "RGB to Hex",
+    "fn": "rgbToHex",
+    "tests": [
+      {
+        "text": "rgbToHex(\"rgb(255, 255, 255)\") should return \"#ffffff\".",
+        "assert": "assert.equal(rgbToHex(\"rgb(255, 255, 255)\"), \"#ffffff\");"
+      },
+      {
+        "text": "rgbToHex(\"rgb(1, 11, 111)\") should return \"#010b6f\".",
+        "assert": "assert.equal(rgbToHex(\"rgb(1, 11, 111)\"), \"#010b6f\");"
+      },
+      {
+        "text": "rgbToHex(\"rgb(173, 216, 230)\") should return \"#add8e6\".",
+        "assert": "assert.equal(rgbToHex(\"rgb(173, 216, 230)\"), \"#add8e6\");"
+      },
+      {
+        "text": "rgbToHex(\"rgb(79, 123, 201)\") should return \"#4f7bc9\".",
+        "assert": "assert.equal(rgbToHex(\"rgb(79, 123, 201)\"), \"#4f7bc9\");"
+      }
+    ]
+  },
+  "2025-09-03": {
+    "n": 24,
+    "title": "Pangram",
+    "fn": "isPangram",
+    "tests": [
+      {
+        "text": "isPangram(\"hello\", \"helo\") should return true",
+        "assert": "assert.isTrue(isPangram(\"hello\", \"helo\"));"
+      },
+      {
+        "text": "isPangram(\"hello\", \"hel\") should return false",
+        "assert": "assert.isFalse(isPangram(\"hello\", \"hel\"));"
+      },
+      {
+        "text": "isPangram(\"hello\", \"helow\") should return false",
+        "assert": "assert.isFalse(isPangram(\"hello\", \"helow\"));"
+      },
+      {
+        "text": "isPangram(\"hello world\", \"helowrd\") should return true",
+        "assert": "assert.isTrue(isPangram(\"hello world\", \"helowrd\"));"
+      },
+      {
+        "text": "isPangram(\"Hello World!\", \"helowrd\") should return true",
+        "assert": "assert.isTrue(isPangram(\"Hello World!\", \"helowrd\"));"
+      },
+      {
+        "text": "isPangram(\"Hello World!\", \"heliowrd\") should return false",
+        "assert": "assert.isFalse(isPangram(\"Hello World!\", \"heliowrd\"));"
+      },
+      {
+        "text": "isPangram(\"freeCodeCamp\", \"frcdmp\") should return false",
+        "assert": "assert.isFalse(isPangram(\"freeCodeCamp\", \"frcdmp\"));"
+      },
+      {
+        "text": "isPangram(\"The quick brown fox jumps over the lazy dog.\", \"abcdefghijklmnopqrstuvwxyz\") should return true",
+        "assert": "assert.isTrue(isPangram(\"The quick brown fox jumps over the lazy dog.\", \"abcdefghijklmnopqrstuvwxyz\"));"
+      }
+    ]
+  },
+  "2025-09-04": {
+    "n": 25,
+    "title": "Vowel Repeater",
+    "fn": "repeatVowels",
+    "tests": [
+      {
+        "text": "repeatVowels(\"hello world\") should return \"helloo wooorld\".",
+        "assert": "assert.equal(repeatVowels(\"hello world\"), \"helloo wooorld\");"
+      },
+      {
+        "text": "repeatVowels(\"freeCodeCamp\") should return \"freeeCooodeeeeCaaaaamp\".",
+        "assert": "assert.equal(repeatVowels(\"freeCodeCamp\"), \"freeeCooodeeeeCaaaaamp\");"
+      },
+      {
+        "text": "repeatVowels(\"AEIOU\") should return \"AEeIiiOoooUuuuu\".",
+        "assert": "assert.equal(repeatVowels(\"AEIOU\"), \"AEeIiiOoooUuuuu\");"
+      },
+      {
+        "text": "repeatVowels(\"I like eating ice cream in Iceland\") should return \"I liikeee eeeeaaaaatiiiiiing iiiiiiiceeeeeeee creeeeeeeeeaaaaaaaaaam iiiiiiiiiiin Iiiiiiiiiiiiceeeeeeeeeeeeelaaaaaaaaaaaaaand\".",
+        "assert": "assert.equal(repeatVowels(\"I like eating ice cream in Iceland\"), \"I liikeee eeeeaaaaatiiiiiing iiiiiiiceeeeeeee creeeeeeeeeaaaaaaaaaam iiiiiiiiiiin Iiiiiiiiiiiiceeeeeeeeeeeeelaaaaaaaaaaaaaand\");"
+      }
+    ]
+  },
+  "2025-09-05": {
+    "n": 26,
+    "title": "IPv4 Validator",
+    "fn": "isValidIPv4",
+    "tests": [
+      {
+        "text": "isValidIPv4(\"192.168.1.1\") should return true.",
+        "assert": "assert.isTrue(isValidIPv4(\"192.168.1.1\"));"
+      },
+      {
+        "text": "isValidIPv4(\"0.0.0.0\") should return true.",
+        "assert": "assert.isTrue(isValidIPv4(\"0.0.0.0\"));"
+      },
+      {
+        "text": "isValidIPv4(\"255.01.50.111\") should return false.",
+        "assert": "assert.isFalse(isValidIPv4(\"255.01.50.111\"));"
+      },
+      {
+        "text": "isValidIPv4(\"255.00.50.111\") should return false.",
+        "assert": "assert.isFalse(isValidIPv4(\"255.00.50.111\"));"
+      },
+      {
+        "text": "isValidIPv4(\"256.101.50.115\") should return false.",
+        "assert": "assert.isFalse(isValidIPv4(\"256.101.50.115\"));"
+      },
+      {
+        "text": "isValidIPv4(\"192.168.101.\") should return false.",
+        "assert": "assert.isFalse(isValidIPv4(\"192.168.101.\"));"
+      },
+      {
+        "text": "isValidIPv4(\"192168145213\") should return false.",
+        "assert": "assert.isFalse(isValidIPv4(\"192168145213\"));"
+      }
+    ]
+  },
+  "2026-05-30": {
+    "n": 293,
+    "title": "Best Hand",
+    "fn": "getBestHand",
+    "tests": [
+      {
+        "text": "getBestHand([\"7s\", \"7h\", \"7d\", \"2c\", \"5h\"]) should return \"Three of a Kind\".",
+        "assert": "assert.equal(getBestHand([\"7s\", \"7h\", \"7d\", \"2c\", \"5h\"]), \"Three of a Kind\");"
+      },
+      {
+        "text": "getBestHand([\"Ks\", \"Kh\", \"Kd\", \"4s\", \"4h\"]) should return \"Full House\".",
+        "assert": "assert.equal(getBestHand([\"Ks\", \"Kh\", \"Kd\", \"4s\", \"4h\"]), \"Full House\");"
+      },
+      {
+        "text": "getBestHand([\"2h\", \"5h\", \"7h\", \"9h\", \"Jh\"]) should return \"Flush\".",
+        "assert": "assert.equal(getBestHand([\"2h\", \"5h\", \"7h\", \"9h\", \"Jh\"]), \"Flush\");"
+      },
+      {
+        "text": "getBestHand([\"As\", \"Ah\", \"Ad\", \"Ac\", \"Kh\"]) should return \"Four of a Kind\".",
+        "assert": "assert.equal(getBestHand([\"As\", \"Ah\", \"Ad\", \"Ac\", \"Kh\"]), \"Four of a Kind\");"
+      },
+      {
+        "text": "getBestHand([\"Ts\", \"Th\", \"9d\", \"9c\", \"8h\"]) should return \"Two Pair\".",
+        "assert": "assert.equal(getBestHand([\"Ts\", \"Th\", \"9d\", \"9c\", \"8h\"]), \"Two Pair\");"
+      },
+      {
+        "text": "getBestHand([\"9c\", \"8c\", \"7c\", \"6c\", \"5c\"]) should return \"Straight Flush\".",
+        "assert": "assert.equal(getBestHand([\"9c\", \"8c\", \"7c\", \"6c\", \"5c\"]), \"Straight Flush\");"
+      },
+      {
+        "text": "getBestHand([\"As\", \"Kh\", \"Jd\", \"8c\", \"5h\"]) should return \"High Card\".",
+        "assert": "assert.equal(getBestHand([\"As\", \"Kh\", \"Jd\", \"8c\", \"5h\"]), \"High Card\");"
+      },
+      {
+        "text": "getBestHand([\"As\", \"2h\", \"3d\", \"4c\", \"5h\"]) should return \"Straight\".",
+        "assert": "assert.equal(getBestHand([\"As\", \"2h\", \"3d\", \"4c\", \"5h\"]), \"Straight\");"
+      },
+      {
+        "text": "getBestHand([\"Ts\", \"Th\", \"7c\", \"6d\", \"5h\"]) should return \"Pair\".",
+        "assert": "assert.equal(getBestHand([\"Ts\", \"Th\", \"7c\", \"6d\", \"5h\"]), \"Pair\");"
+      },
+      {
+        "text": "getBestHand([\"As\", \"Ks\", \"Qs\", \"Js\", \"Ts\"]) should return \"Royal Flush\".",
+        "assert": "assert.equal(getBestHand([\"As\", \"Ks\", \"Qs\", \"Js\", \"Ts\"]), \"Royal Flush\");"
+      }
+    ]
+  },
+  "2026-05-31": {
+    "n": 294,
+    "title": "Parentheses Combinations",
+    "fn": "getCombinations",
+    "tests": [
+      {
+        "text": "getCombinations(2) should return 2.",
+        "assert": "assert.equal(getCombinations(2), 2);"
+      },
+      {
+        "text": "getCombinations(3) should return 5.",
+        "assert": "assert.equal(getCombinations(3), 5);"
+      },
+      {
+        "text": "getCombinations(5) should return 42.",
+        "assert": "assert.equal(getCombinations(5), 42);"
+      },
+      {
+        "text": "getCombinations(8) should return 1430.",
+        "assert": "assert.equal(getCombinations(8), 1430);"
+      },
+      {
+        "text": "getCombinations(13) should return 742900.",
+        "assert": "assert.equal(getCombinations(13), 742900);"
+      }
+    ]
+  },
+  "2026-06-01": {
+    "n": 295,
+    "title": "Schema Validator Part 1",
+    "fn": "isValidSchema",
+    "tests": [
+      {
+        "text": "isValidSchema({ username: \"bob\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"bob\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"jen\", posts: 30 }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"jen\", posts: 30 }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: 7 }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: 7 }));"
+      },
+      {
+        "text": "isValidSchema({ posts: 25 }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ posts: 25 }));"
+      }
+    ]
+  },
+  "2026-06-02": {
+    "n": 296,
+    "title": "Schema Validator Part 2",
+    "fn": "isValidSchema",
+    "tests": [
+      {
+        "text": "isValidSchema({ username: \"alice\", posts: 10, verified: false }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"alice\", posts: 10, verified: false }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"carol\", posts: 15, verified: true, followers: 25 }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"carol\", posts: 15, verified: true, followers: 25 }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"frank\", posts: \"21\", verified: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"frank\", posts: \"21\", verified: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"sam\", posts: 17, verified: \"false\" }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"sam\", posts: 17, verified: \"false\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"bill\", verified: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"bill\", verified: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"fred\", verified: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"fred\", verified: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: 5, posts: 10, verified: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: 5, posts: 10, verified: true }));"
+      }
+    ]
+  },
+  "2026-06-03": {
+    "n": 297,
+    "title": "Schema Validator Part 3",
+    "fn": "isValidSchema",
+    "tests": [
+      {
+        "text": "isValidSchema({ username: \"henry\", posts: 0, verified: true, role: \"staff\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"henry\", posts: 0, verified: true, role: \"staff\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"sara\", posts: 45, verified: false, role: \"creator\", followers: 70 }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"sara\", posts: 45, verified: false, role: \"creator\", followers: 70 }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"penelope\", posts: 20, verified: true, role: \"admin\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"penelope\", posts: 20, verified: true, role: \"admin\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"kevin\", posts: 0, verified: false, role: \"user\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"kevin\", posts: 0, verified: false, role: \"user\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"george\", posts: 15, verified: true, role: \"moderator\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"george\", posts: 15, verified: true, role: \"moderator\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"david\", posts: 0, verified: false, role: \"guest\" }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"david\", posts: 0, verified: false, role: \"guest\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"wendy\", posts: 10, verified: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"wendy\", posts: 10, verified: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"fabian\", posts: 1, verified: true, role: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"fabian\", posts: 1, verified: true, role: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: 8, posts: 1, verified: true, role: \"user\" }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: 8, posts: 1, verified: true, role: \"user\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"penny\", posts: \"10\", verified: true, role: \"staff\" }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"penny\", posts: \"10\", verified: true, role: \"staff\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"john\", posts: \"1\", verified: \"true\", role: \"admin\" }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"john\", posts: \"1\", verified: \"true\", role: \"admin\" }));"
+      }
+    ]
+  },
+  "2026-06-04": {
+    "n": 298,
+    "title": "Schema Validator Part 4",
+    "fn": "isValidSchema",
+    "tests": [
+      {
+        "text": "isValidSchema({ username: \"vivian\", posts: 1, verified: false, role: \"user\", supporter: true }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"vivian\", posts: 1, verified: false, role: \"user\", supporter: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"rudolph\", posts: 15, verified: true, role: \"creator\" }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"rudolph\", posts: 15, verified: true, role: \"creator\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"hernandez\", posts: 35, verified: true, role: \"moderator\", supporter: false, followers: 55 }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"hernandez\", posts: 35, verified: true, role: \"moderator\", supporter: false, followers: 55 }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"julia\", posts: 50, verified: true, role: \"admin\", supporter: \"true\" }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"julia\", posts: 50, verified: true, role: \"admin\", supporter: \"true\" }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"bernard\", posts: 0, verified: true, role: \"friend\", supporter: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"bernard\", posts: 0, verified: true, role: \"friend\", supporter: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"felix\", posts: 40, verified: \"yes\", role: \"staff\", supporter: false }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"felix\", posts: 40, verified: \"yes\", role: \"staff\", supporter: false }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"jimmy\", posts: true, verified: false, role: \"creator\", supporter: true }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"jimmy\", posts: true, verified: false, role: \"creator\", supporter: true }));"
+      },
+      {
+        "text": "isValidSchema({ username: true, posts: 30, verified: true, role: \"moderator\", supporter: false }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: true, posts: 30, verified: true, role: \"moderator\", supporter: false }));"
+      }
+    ]
+  },
+  "2026-06-05": {
+    "n": 299,
+    "title": "Schema Validator Part 5",
+    "fn": "isValidSchema",
+    "tests": [
+      {
+        "text": "isValidSchema({ username: \"gill\", posts: 12, verified: false, role: \"creator\", supporter: false, badges: [ \"early-adopter\", \"popular\" ] }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"gill\", posts: 12, verified: false, role: \"creator\", supporter: false, badges: [ \"early-adopter\", \"popular\" ] }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"tonya\", posts: 299, verified: true, role: \"moderator\", supporter: true, badges: [ \"streak-master\", \"veteran\" ], followers: 1233 }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"tonya\", posts: 299, verified: true, role: \"moderator\", supporter: true, badges: [ \"streak-master\", \"veteran\" ], followers: 1233 }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"zara\", posts: 0, verified: false, role: \"user\", supporter: false, badges: [] }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ username: \"zara\", posts: 0, verified: false, role: \"user\", supporter: false, badges: [] }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"nicole\", posts: 65, verified: true, role: \"admin\", supporter: false, badges: [ \"first-post\", 18 ] }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"nicole\", posts: 65, verified: true, role: \"admin\", supporter: false, badges: [ \"first-post\", 18 ] }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"tim\", posts: 25, verified: true, role: \"staff\", supporter: false }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"tim\", posts: 25, verified: true, role: \"staff\", supporter: false }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"charlie\", posts: 0, verified: false, role: \"user\", supporter: \"no\", badges: [ \"first-post\", \"anniversary\" ] }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"charlie\", posts: 0, verified: false, role: \"user\", supporter: \"no\", badges: [ \"first-post\", \"anniversary\" ] }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"wanda\", posts: 15, verified: true, role: \"friend\", supporter: true, badges: [ \"popular\" ] }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"wanda\", posts: 15, verified: true, role: \"friend\", supporter: true, badges: [ \"popular\" ] }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"guy\", posts: 5, verified: \"false\", role: \"staff\", supporter: true, badges: [ \"helper\" ] }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"guy\", posts: 5, verified: \"false\", role: \"staff\", supporter: true, badges: [ \"helper\" ] }));"
+      },
+      {
+        "text": "isValidSchema({ username: \"carrie\", verified: true, role: \"moderator\", supporter: true, badges: [ \"helper\", \"sharer\" ] }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: \"carrie\", verified: true, role: \"moderator\", supporter: true, badges: [ \"helper\", \"sharer\" ] }));"
+      },
+      {
+        "text": "isValidSchema({ username: true, posts: 75, verified: true, role: \"creator\", supporter: true, badges: [ \"veteran\" ] }) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ username: true, posts: 75, verified: true, role: \"creator\", supporter: true, badges: [ \"veteran\" ] }));"
+      }
+    ]
+  },
+  "2026-06-06": {
+    "n": 300,
+    "title": "Schema Validator Part 6",
+    "fn": "isValidSchema",
+    "tests": [
+      {
+        "text": "isValidSchema({ users: [{ username: \"ron\", posts: 14, verified: true, role: \"creator\", badges: [ \"early-adopter\" ]}, { username: \"cher\", posts: 25, verified: true, role: \"moderator\", supporter: true, followers: 20, badges: [ \"helper\" ]}]}) should return true.",
+        "assert": "assert.isTrue(isValidSchema({users: [{ username: \"ron\", posts: 14, verified: true, role: \"creator\", badges: [ \"early-adopter\" ]}, { username: \"cher\", posts: 25, verified: true, role: \"moderator\", supporter: true, followers: 20, badges: [ \"helper\" ]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [] }) should return true.",
+        "assert": "assert.isTrue(isValidSchema({ users: [] }));"
+      },
+      {
+        "text": "isValidSchema({ users: { username: \"anne\", posts: 0, verified: false, role: \"user\", supporter: false, badges: []}}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: { username: \"anne\", posts: 0, verified: false, role: \"user\", supporter: false, badges: []}}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ username: \"tony\", posts: 10, verified: true, role: \"creator\", supporter: true, badges: [\"liked\", 6]}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ username: \"tony\", posts: 10, verified: true, role: \"creator\", supporter: true, badges: [\"liked\", 6]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ username: \"ursula\", posts: 3, verified: false, role: \"user\", supporter: \"false\", badges: [\"comeback\"]}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ username: \"ursula\", posts: 3, verified: false, role: \"user\", supporter: \"false\", badges: [\"comeback\"]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ username: \"benny\", posts: 55, verified: true, role: \"superstar\", supporter: true, badges: [\"veteran\"]}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ username: \"benny\", posts: 55, verified: true, role: \"superstar\", supporter: true, badges: [\"veteran\"]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ username: \"chase\", posts: 1, verified: \"yes\", role: \"staff\", supporter: false, badges: [\"superstar\"]}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ username: \"chase\", posts: 1, verified: \"yes\", role: \"staff\", supporter: false, badges: [\"superstar\"]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ username: \"carla\", posts: \"10\", verified: false, role: \"user\", supporter: false, badges: [\"newbie\"]}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ username: \"carla\", posts: \"10\", verified: false, role: \"user\", supporter: false, badges: [\"newbie\"]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ posts: 4, verified: false, role: \"admin\", supporter: false, badges: [\"superuser\", \"veteran\"]}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ posts: 4, verified: false, role: \"admin\", supporter: false, badges: [\"superuser\", \"veteran\"]}]}));"
+      },
+      {
+        "text": "isValidSchema({ users: [{ username: \"harold\", posts: 80, verified: true, role: \"creator\", supporter: true, badges: [\"liked\", \"hero\"]}, { username: \"kim\", posts: 11, verified: false, role: \"admin\", supporter: true, badges: [\"first\"]}, {}]}) should return false.",
+        "assert": "assert.isFalse(isValidSchema({ users: [{ username: \"harold\", posts: 80, verified: true, role: \"creator\", supporter: true, badges: [\"liked\", \"hero\"]}, { username: \"kim\", posts: 11, verified: false, role: \"admin\", supporter: true, badges: [\"first\"]}, {}]}));"
+      }
+    ]
+  },
+  "2026-06-07": {
+    "n": 301,
+    "title": "Last Load",
+    "fn": "lastLoadDate",
+    "tests": [
+      {
+        "text": "lastLoadDate(10, [2, 2, 2, 2, 2, 2, 2]) should return 5.",
+        "assert": "assert.equal(lastLoadDate(10, [2, 2, 2, 2, 2, 2, 2]), 5);"
+      },
+      {
+        "text": "lastLoadDate(16, [2, 3, 0, 3, 4, 2, 1]) should return 7.",
+        "assert": "assert.equal(lastLoadDate(16, [2, 3, 0, 3, 4, 2, 1]), 7);"
+      },
+      {
+        "text": "lastLoadDate(33, [5, 0, 4, 3, 3, 2]) should return 11.",
+        "assert": "assert.equal(lastLoadDate(33, [5, 0, 4, 3, 3, 2]), 11);"
+      },
+      {
+        "text": "lastLoadDate(50, [2, 0, 2, 9, 12, 0, 2]) should return 12.",
+        "assert": "assert.equal(lastLoadDate(50, [2, 0, 2, 9, 12, 0, 2]), 12);"
+      },
+      {
+        "text": "lastLoadDate(20, [13, 9, 12, 10, 8]) should return 1.",
+        "assert": "assert.equal(lastLoadDate(20, [13, 9, 12, 10, 8]), 1);"
+      }
+    ]
+  },
+  "2026-06-08": {
+    "n": 302,
+    "title": "Jet Lagged",
+    "fn": "getJetLagHours",
+    "tests": [
+      {
+        "text": "getJetLagHours(\"Istanbul\", \"Hong Kong\", 10, \"east\") should return 6.5.",
+        "assert": "assert.equal(getJetLagHours(\"Istanbul\", \"Hong Kong\", 10, \"east\"), 6.5);"
+      },
+      {
+        "text": "getJetLagHours(\"London\", \"New York\", 8, \"west\") should return 5.8.",
+        "assert": "assert.equal(getJetLagHours(\"London\", \"New York\", 8, \"west\"), 5.8);"
+      },
+      {
+        "text": "getJetLagHours(\"Hong Kong\", \"Tokyo\", 4, \"east\") should return 1.6.",
+        "assert": "assert.equal(getJetLagHours(\"Hong Kong\", \"Tokyo\", 4, \"east\"), 1.6);"
+      },
+      {
+        "text": "getJetLagHours(\"Dubai\", \"London\", 7, \"west\") should return 4.7.",
+        "assert": "assert.equal(getJetLagHours(\"Dubai\", \"London\", 7, \"west\"), 4.7);"
+      },
+      {
+        "text": "getJetLagHours(\"Los Angeles\", \"Hong Kong\", 15, \"west\") should return 17.5.",
+        "assert": "assert.equal(getJetLagHours(\"Los Angeles\", \"Hong Kong\", 15, \"west\"), 17.5);"
+      },
+      {
+        "text": "getJetLagHours(\"Tokyo\", \"Dubai\", 9, \"west\") should return 5.9.",
+        "assert": "assert.equal(getJetLagHours(\"Tokyo\", \"Dubai\", 9, \"west\"), 5.9);"
+      },
+      {
+        "text": "getJetLagHours(\"New York\", \"Istanbul\", 10, \"east\") should return 9.5.",
+        "assert": "assert.equal(getJetLagHours(\"New York\", \"Istanbul\", 10, \"east\"), 9.5);"
+      }
+    ]
+  },
+  "2026-06-09": {
+    "n": 303,
+    "title": "Roommates",
+    "fn": "getRoommates",
+    "tests": [
+      {
+        "text": "getRoommates([{ \"name\": \"Alice\", \"group\": \"A\" }, { \"name\": \"Bob\", \"group\": \"B\" }, { \"name\": \"Carol\", \"group\": \"A\" }]) should return [\"Alice and Carol\", \"Bob\"].",
+        "assert": "assert.deepEqual(getRoommates([{ \"name\": \"Alice\", \"group\": \"A\" }, { \"name\": \"Bob\", \"group\": \"B\" }, { \"name\": \"Carol\", \"group\": \"A\" }]).sort(), [\"Alice and Carol\", \"Bob\"].sort());"
+      },
+      {
+        "text": "getRoommates([{ \"name\": \"John\", \"group\": \"C\" }, { \"name\": \"Julia\", \"group\": \"C\" }, { \"name\": \"Jim\", \"group\": \"C\" }]) should return [\"John and Julia\", \"Jim\"].",
+        "assert": "assert.deepEqual(getRoommates([{ \"name\": \"John\", \"group\": \"C\" }, { \"name\": \"Julia\", \"group\": \"C\" }, { \"name\": \"Jim\", \"group\": \"C\" }]).sort(), [\"John and Julia\", \"Jim\"].sort());"
+      },
+      {
+        "text": "getRoommates([{ \"name\": \"Adam\", \"group\": \"D\" }, { \"name\": \"Abraham\", \"group\": \"E\" }, { \"name\": \"Austin\", \"group\": \"E\" }, { \"name\": \"Augustus\", \"group\": \"D\" }, { \"name\": \"Angelica\", \"group\": \"D\" }, { \"name\": \"Aaron\", \"group\": \"E\" }]) should return [\"Adam and Augustus\", \"Angelica\", \"Abraham and Austin\", \"Aaron\"].",
+        "assert": "assert.deepEqual(getRoommates([{ \"name\": \"Adam\", \"group\": \"D\" }, { \"name\": \"Abraham\", \"group\": \"E\" }, { \"name\": \"Austin\", \"group\": \"E\" }, { \"name\": \"Augustus\", \"group\": \"D\" }, { \"name\": \"Angelica\", \"group\": \"D\" }, { \"name\": \"Aaron\", \"group\": \"E\" }]).sort(), [\"Adam and Augustus\", \"Angelica\", \"Abraham and Austin\", \"Aaron\"].sort());"
+      },
+      {
+        "text": "getRoommates([{ \"name\": \"Frank\", \"group\": \"A\" }, { \"name\": \"Emitt\", \"group\": \"B\" }, { \"name\": \"Daria\", \"group\": \"F\" }, { \"name\": \"Charles\", \"group\": \"D\" }, { \"name\": \"Bailey\", \"group\": \"A\" }, { \"name\": \"Albert\", \"group\": \"F\" }]) should return [\"Frank and Bailey\", \"Emitt\", \"Daria and Albert\", \"Charles\"].",
+        "assert": "assert.deepEqual(getRoommates([{ \"name\": \"Frank\", \"group\": \"A\" }, { \"name\": \"Emitt\", \"group\": \"B\" }, { \"name\": \"Daria\", \"group\": \"F\" }, { \"name\": \"Charles\", \"group\": \"D\" }, { \"name\": \"Bailey\", \"group\": \"A\" }, { \"name\": \"Albert\", \"group\": \"F\" }]).sort(), [\"Frank and Bailey\", \"Emitt\", \"Daria and Albert\", \"Charles\"].sort());"
+      },
+      {
+        "text": "getRoommates([{ \"name\": \"Kevin\", \"group\": \"A\" }, { \"name\": \"Yuri\", \"group\": \"A\" }, { \"name\": \"Hugo\", \"group\": \"B\" }, { \"name\": \"Violet\", \"group\": \"A\" }, { \"name\": \"Brett\", \"group\": \"A\" }, { \"name\": \"Wayne\", \"group\": \"B\" }]) should return [\"Kevin and Yuri\", \"Violet and Brett\", \"Hugo and Wayne\"].",
+        "assert": "assert.deepEqual(getRoommates([{ \"name\": \"Kevin\", \"group\": \"A\" }, { \"name\": \"Yuri\", \"group\": \"A\" }, { \"name\": \"Hugo\", \"group\": \"B\" }, { \"name\": \"Violet\", \"group\": \"A\" }, { \"name\": \"Brett\", \"group\": \"A\" }, { \"name\": \"Wayne\", \"group\": \"B\" }]).sort(), [\"Kevin and Yuri\", \"Violet and Brett\", \"Hugo and Wayne\"].sort());"
+      }
+    ]
+  },
+  "2026-06-10": {
+    "n": 304,
+    "title": "Itinerary Arrangements",
+    "fn": "getItineraryCount",
+    "tests": [
+      {
+        "text": "getItineraryCount([\"library\", \"park\"]) should return 2.",
+        "assert": "assert.equal(getItineraryCount([\"library\", \"park\"]), 2);"
+      },
+      {
+        "text": "getItineraryCount([\"library\", \"park\", \"arcade\"]) should return 18.",
+        "assert": "assert.equal(getItineraryCount([\"library\", \"park\", \"arcade\"]), 18);"
+      },
+      {
+        "text": "getItineraryCount([\"library\", \"park\", \"arcade\", \"store\"]) should return 120.",
+        "assert": "assert.equal(getItineraryCount([\"library\", \"park\", \"arcade\", \"store\"]), 120);"
+      },
+      {
+        "text": "getItineraryCount([\"library\", \"park\", \"arcade\", \"store\", \"cafe\"]) should return 840.",
+        "assert": "assert.equal(getItineraryCount([\"library\", \"park\", \"arcade\", \"store\", \"cafe\"]), 840);"
+      },
+      {
+        "text": "getItineraryCount([\"library\", \"park\", \"arcade\", \"store\", \"cafe\", \"market\", \"museum\"]) should return 55440.",
+        "assert": "assert.equal(getItineraryCount([\"library\", \"park\", \"arcade\", \"store\", \"cafe\", \"market\", \"museum\"]), 55440);"
+      }
+    ]
+  },
+  "2026-06-11": {
+    "n": 305,
+    "title": "Idea Rankings",
+    "fn": "analyzeIdeas",
+    "tests": [
+      {
+        "text": "analyzeIdeas([[\"Add logging\", 2, 5, 15], [\"SEO optimization\", 4, 8, 20], [\"Fix bug\", 1, 3, 5]]) should return [\"Fix bug\", \"Add logging\", \"SEO optimization\"].",
+        "assert": "assert.deepEqual(analyzeIdeas([[\"Add logging\", 2, 5, 15], [\"SEO optimization\", 4, 8, 20], [\"Fix bug\", 1, 3, 5]]), [\"Fix bug\", \"Add logging\", \"SEO optimization\"]);"
+      },
+      {
+        "text": "analyzeIdeas([[\"Dark mode\", 1, 3, 8], [\"Real-time collaboration feature\", 6, 12, 20], [\"Add tooltip\", 1, 2, 4]]) should return [\"Add tooltip\", \"Dark mode\", \"Real-time collaboration feature\"].",
+        "assert": "assert.deepEqual(analyzeIdeas([[\"Dark mode\", 1, 3, 8], [\"Real-time collaboration feature\", 6, 12, 20], [\"Add tooltip\", 1, 2, 4]]), [\"Add tooltip\", \"Dark mode\", \"Real-time collaboration feature\"]);"
+      },
+      {
+        "text": "analyzeIdeas([[\"Update user profile page\", 3, 7, 14], [\"Add pagination\", 2, 5, 10], [\"Add tags\", 2, 3, 6], [\"Fix login bug\", 1, 4, 8]]) should return [\"Add tags\", \"Fix login bug\", \"Add pagination\", \"Update user profile page\"].",
+        "assert": "assert.deepEqual(analyzeIdeas([[\"Update user profile page\", 3, 7, 14], [\"Add pagination\", 2, 5, 10], [\"Add tags\", 2, 3, 6], [\"Fix login bug\", 1, 4, 8]]), [\"Add tags\", \"Fix login bug\", \"Add pagination\", \"Update user profile page\"]);"
+      },
+      {
+        "text": "analyzeIdeas([[\"Migrate database\", 14, 25, 40], [\"Add chat assistant\", 8, 15, 24], [\"Redesign onboarding flow\", 3, 7, 13], [\"Add language support\", 6, 11, 18]]) should return [\"Redesign onboarding flow\", \"Add language support\", \"Add chat assistant\", \"Migrate database\"].",
+        "assert": "assert.deepEqual(analyzeIdeas([[\"Migrate database\", 14, 25, 40], [\"Add chat assistant\", 8, 15, 24], [\"Redesign onboarding flow\", 3, 7, 13], [\"Add language support\", 6, 11, 18]]), [\"Redesign onboarding flow\", \"Add language support\", \"Add chat assistant\", \"Migrate database\"]);"
+      },
+      {
+        "text": "analyzeIdeas([[\"Add email notifications\", 3, 7, 10], [\"Migrate deployment flow\", 6, 10, 16], [\"Add push notifications\", 2, 6, 10], [\"Optimize continuous integration\", 5, 8, 15], [\"Analyze user patterns\", 5, 10, 18], [\"Create onboarding curriculum\", 6, 15, 25]]) should return [\"Add push notifications\", \"Add email notifications\", \"Analyze user patterns\", \"Migrate deployment flow\", \"Optimize continuous integration\", \"Create onboarding curriculum\"].",
+        "assert": "assert.deepEqual(analyzeIdeas([[\"Add email notifications\", 3, 7, 10], [\"Migrate deployment flow\", 6, 10, 16], [\"Add push notifications\", 2, 6, 10], [\"Optimize continuous integration\", 5, 8, 15], [\"Analyze user patterns\", 5, 10, 18], [\"Create onboarding curriculum\", 6, 15, 25]]), [\"Add push notifications\", \"Add email notifications\", \"Analyze user patterns\", \"Migrate deployment flow\", \"Optimize continuous integration\", \"Create onboarding curriculum\"]);"
+      }
+    ]
+  },
+  "2026-06-12": {
+    "n": 306,
+    "title": "HTML Content Extractor",
+    "fn": "extractContent",
+    "tests": [
+      {
+        "text": "extractContent('&#x3C;p>hello world&#x3C;/p>') should return \"hello world\".",
+        "assert": "assert.equal(extractContent('<p>hello world</p>'), \"hello world\");"
+      },
+      {
+        "text": "extractContent('&#x3C;p>hello &#x3C;span>world&#x3C;/span>&#x3C;/p>') should return \"hello world\".",
+        "assert": "assert.equal(extractContent('<p>hello <span>world</span></p>'), \"hello world\");"
+      },
+      {
+        "text": "extractContent('&#x3C;a href=\"example.com\">Click me&#x3C;/a>') should return \"Click me\".",
+        "assert": "assert.equal(extractContent('<a href=\"example.com\">Click me</a>'), \"Click me\");"
+      },
+      {
+        "text": "extractContent('&#x3C;p>&#x3C;button onClick=\"learnToCode()\">Learn&#x3C;/button> to &#x3C;code>code&#x3C;code> &#x3C;br/>for &#x3C;strong>free&#x3C;/strong> &#x3C;br/>on &#x3C;a href=\"https://freecodecamp.org/\" target=\"_blank\">&#x3C;span class=\"highlight\">freecodecamp&#x3C;/span>.org&#x3C;/a>') should return \"Learn to code for free on freecodecamp.org\".",
+        "assert": "assert.equal(extractContent('<p><button onClick=\"learnToCode()\">Learn</button> to <code>code<code> <br/>for <strong>free</strong> <br/>on <a href=\"https://freecodecamp.org/\" target=\"_blank\"><span class=\"highlight\">freecodecamp</span>.org</a>'), \"Learn to code for free on freecodecamp.org\");"
+      },
+      {
+        "text": "extractContent('&#x3C;div class=\"container\">&#x3C;h1 id=\"title\">Welcome to &#x3C;strong>My&#x3C;/strong> Website.&#x3C;/h1>&#x3C;p>This is a &#x3C;a href=\"https://example.com\" target=\"_blank\">link&#x3C;/a> to something &#x3C;em>really&#x3C;/em> &#x3C;span class=\"highlight\">important&#x3C;/span>.&#x3C;/p>&#x3C;ul>&#x3C;li>Item &#x3C;strong>one&#x3C;/strong>&#x3C;/li>&#x3C;li>Item &#x3C;em>two&#x3C;/em>&#x3C;/li>&#x3C;li>Item three&#x3C;/li>&#x3C;/ul>&#x3C;img src=\"pic.jpg\" alt=\"A picture\"/>&#x3C;p class=\"footer\">Contact us at &#x3C;a href=\"mailto:hello@example.com\">hello@example.com&#x3C;/a> for &#x3C;span>more &#x3C;strong>info&#x3C;/strong>&#x3C;/span>.&#x3C;/p>&#x3C;/div>') should return \"Welcome to My Website.This is a link to something really important.Item oneItem twoItem threeContact us at hello@example.com for more info.\".",
+        "assert": "assert.equal(extractContent('<div class=\"container\"><h1 id=\"title\">Welcome to <strong>My</strong> Website.</h1><p>This is a <a href=\"https://example.com\" target=\"_blank\">link</a> to something <em>really</em> <span class=\"highlight\">important</span>.</p><ul><li>Item <strong>one</strong></li><li>Item <em>two</em></li><li>Item three</li></ul><img src=\"pic.jpg\" alt=\"A picture\"/><p class=\"footer\">Contact us at <a href=\"mailto:hello@example.com\">hello@example.com</a> for <span>more <strong>info</strong></span>.</p></div>'), \"Welcome to My Website.This is a link to something really important.Item oneItem twoItem threeContact us at hello@example.com for more info.\");"
+      }
+    ]
+  },
+  "2026-06-13": {
+    "n": 307,
+    "title": "Zoning Regulations",
+    "fn": "getZoneViolations",
+    "tests": [
+      {
+        "text": "getZoneViolations([[\"R\", \"C\"], [\"\", \"C\"]]) should return [[0, 0], [0, 1]].",
+        "assert": "assert.deepEqual(getZoneViolations([[\"R\", \"C\"], [\"\", \"C\"]]).sort(), [[0, 0], [0, 1]]);"
+      },
+      {
+        "text": "getZoneViolations([[\"\", \"i\"], [\"\", \"R\"], [\"R\", \"I\"]]) should return [[0, 1], [1, 1]].",
+        "assert": "assert.deepEqual(getZoneViolations([[\"\", \"i\"], [\"\", \"R\"], [\"R\", \"I\"]]).sort(), [[0, 1], [1, 1]]);"
+      },
+      {
+        "text": "getZoneViolations([[\"A\", \"i\", \"C\"], [\"A\", \"\", \"C\"], [\"R\", \"R\", \"I\"]]) should return [].",
+        "assert": "assert.deepEqual(getZoneViolations([[\"A\", \"i\", \"C\"], [\"A\", \"\", \"C\"], [\"R\", \"R\", \"I\"]]).sort(), []);"
+      },
+      {
+        "text": "getZoneViolations([[\"R\", \"R\", \"C\", \"R\", \"R\"], [\"R\", \"I\", \"C\", \"\", \"A\"], [\"R\", \"R\", \"\", \"i\", \"A\"]]) should return [[0, 1], [0, 2], [0, 3]].",
+        "assert": "assert.deepEqual(getZoneViolations([[\"R\", \"R\", \"C\", \"R\", \"R\"], [\"R\", \"I\", \"C\", \"\", \"A\"], [\"R\", \"R\", \"\", \"i\", \"A\"]]).sort(), [[0, 1], [0, 2], [0, 3]]);"
+      },
+      {
+        "text": "getZoneViolations([[\"R\", \"A\", \"A\", \"\", \"i\", \"i\"], [\"R\", \"I\", \"\", \"C\", \"i\", \"i\"], [\"R\", \"\", \"C\", \"C\", \"A\", \"A\"], [\"R\", \"R\", \"C\", \"I\", \"R\", \"R\"]]) should return [[2, 3], [2, 4], [3, 1], [3, 2]].",
+        "assert": "assert.deepEqual(getZoneViolations([[\"R\", \"A\", \"A\", \"\", \"i\", \"i\"], [\"R\", \"I\", \"\", \"C\", \"i\", \"i\"], [\"R\", \"\", \"C\", \"C\", \"A\", \"A\"], [\"R\", \"R\", \"C\", \"I\", \"R\", \"R\"]]).sort(), [[2, 3], [2, 4], [3, 1], [3, 2]]);"
+      }
+    ]
+  },
+  "2026-06-14": {
+    "n": 308,
+    "title": "Credit Card Validator",
+    "fn": "isValidCard",
+    "tests": [
+      {
+        "text": "isValidCard(\"4532015112830366\") should return true.",
+        "assert": "assert.isTrue(isValidCard(\"4532015112830366\"));"
+      },
+      {
+        "text": "isValidCard(\"5425233430109903\") should return true.",
+        "assert": "assert.isTrue(isValidCard(\"5425233430109903\"));"
+      },
+      {
+        "text": "isValidCard(\"371449635398431\") should return true.",
+        "assert": "assert.isTrue(isValidCard(\"371449635398431\"));"
+      },
+      {
+        "text": "isValidCard(\"6011111111111117\") should return true.",
+        "assert": "assert.isTrue(isValidCard(\"6011111111111117\"));"
+      },
+      {
+        "text": "isValidCard(\"4532015112830367\") should return false.",
+        "assert": "assert.isFalse(isValidCard(\"4532015112830367\"));"
+      },
+      {
+        "text": "isValidCard(\"1234567890123456\") should return false.",
+        "assert": "assert.isFalse(isValidCard(\"1234567890123456\"));"
+      },
+      {
+        "text": "isValidCard(\"4532015112830368\") should return false.",
+        "assert": "assert.isFalse(isValidCard(\"4532015112830368\"));"
+      }
+    ]
+  },
+  "2026-06-15": {
+    "n": 309,
+    "title": "Number Sort",
+    "fn": "sortNumbers",
+    "tests": [
+      {
+        "text": "sortNumbers(\"3,1,2\") should return [1, 2, 3].",
+        "assert": "assert.deepEqual(sortNumbers(\"3,1,2\"), [1, 2, 3]);"
+      },
+      {
+        "text": "sortNumbers(\"5,3,8,1,9,2\") should return [1, 2, 3, 5, 8, 9].",
+        "assert": "assert.deepEqual(sortNumbers(\"5,3,8,1,9,2\"), [1, 2, 3, 5, 8, 9]);"
+      },
+      {
+        "text": "sortNumbers(\"12,61,49,80,19,50,77,38\") should return [12, 19, 38, 49, 50, 61, 77, 80].",
+        "assert": "assert.deepEqual(sortNumbers(\"12,61,49,80,19,50,77,38\"), [12, 19, 38, 49, 50, 61, 77, 80]);"
+      },
+      {
+        "text": "sortNumbers(\"0,6,-19,44,-2,7,0\") should return [-19, -2, 0, 0, 6, 7, 44].",
+        "assert": "assert.deepEqual(sortNumbers(\"0,6,-19,44,-2,7,0\"), [-19, -2, 0, 0, 6, 7, 44]);"
+      }
+    ]
+  },
+  "2026-06-16": {
+    "n": 310,
+    "title": "British to American",
+    "fn": "britishToAmerican",
+    "tests": [
+      {
+        "text": "britishToAmerican(\"I love the colour blue.\") should return \"I love the color blue.\"",
+        "assert": "assert.equal(britishToAmerican(\"I love the colour blue.\"), \"I love the color blue.\");"
+      },
+      {
+        "text": "britishToAmerican(\"The fibre optic cable is new.\") should return \"The fiber optic cable is new.\"",
+        "assert": "assert.equal(britishToAmerican(\"The fibre optic cable is new.\"), \"The fiber optic cable is new.\");"
+      },
+      {
+        "text": "britishToAmerican(\"It's an honour to meet someone with such humour.\") should return \"It's an honor to meet someone with such humor.\"",
+        "assert": "assert.equal(britishToAmerican(\"It's an honour to meet someone with such humour.\"), \"It's an honor to meet someone with such humor.\");"
+      },
+      {
+        "text": "britishToAmerican(\"The unrecognised artist analysed his colour palette at the centre.\") should return \"The unrecognized artist analyzed his color palette at the center.\"",
+        "assert": "assert.equal(britishToAmerican(\"The unrecognised artist analysed his colour palette at the centre.\"), \"The unrecognized artist analyzed his color palette at the center.\");"
+      },
+      {
+        "text": "britishToAmerican(\"The offence analysed, with organisation, the defence centre and recognised that the neighbouring labouror was humourous, flavourful, and colourful.\") should return \"The offense analyzed, with organisation, the defense center and recognized that the neighboring laboror was humorous, flavorful, and colorful.\"",
+        "assert": "assert.equal(britishToAmerican(\"The offence analysed, with organisation, the defence centre and recognised that the neighbouring labouror was humourous, flavourful, and colourful.\"), \"The offense analyzed, with organisation, the defense center and recognized that the neighboring laboror was humorous, flavorful, and colorful.\");"
+      }
+    ]
+  },
+  "2026-06-17": {
+    "n": 311,
+    "title": "Spellcaster",
+    "fn": "cast",
+    "tests": [
+      {
+        "text": "cast(\"fihwl\") should return 33.",
+        "assert": "assert.equal(cast(\"fihwl\"), 33);"
+      },
+      {
+        "text": "cast(\"lwswfi\") should return 45.",
+        "assert": "assert.equal(cast(\"lwswfi\"), 45);"
+      },
+      {
+        "text": "cast(\"wislhfl\") should return 37.",
+        "assert": "assert.equal(cast(\"wislhfl\"), 37);"
+      },
+      {
+        "text": "cast(\"sihwlih\") should return 50.",
+        "assert": "assert.equal(cast(\"sihwlih\"), 50);"
+      },
+      {
+        "text": "cast(\"wishlfihwslwifihl\") should return 101.",
+        "assert": "assert.equal(cast(\"wishlfihwslwifihl\"), 101);"
+      }
+    ]
+  },
+  "2026-06-18": {
+    "n": 312,
+    "title": "Streaming Cost",
+    "fn": "getStreamingBill",
+    "tests": [
+      {
+        "text": "getStreamingBill([{ format: \"HD\", type: \"rent\" }], \"none\") should return \"$3.99\".",
+        "assert": "assert.equal(getStreamingBill([{ format: \"HD\", type: \"rent\" }], \"none\"), \"$3.99\");"
+      },
+      {
+        "text": "getStreamingBill([{ format: \"HD\", type: \"buy\" }], \"premium\") should return \"$9.74\".",
+        "assert": "assert.equal(getStreamingBill([{ format: \"HD\", type: \"buy\" }], \"premium\"), \"$9.74\");"
+      },
+      {
+        "text": "getStreamingBill([{ format: \"HD\", type: \"rent\" }, { format: \"HD\", type: \"rent\" }, { format: \"HD\", type: \"buy\" }], \"basic\") should return \"$18.87\".",
+        "assert": "assert.equal(getStreamingBill([{ format: \"HD\", type: \"rent\" }, { format: \"HD\", type: \"rent\" }, { format: \"HD\", type: \"buy\" }], \"basic\"), \"$18.87\");"
+      },
+      {
+        "text": "getStreamingBill([{ format: \"4K\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }], \"premium\") should return \"$44.98\".",
+        "assert": "assert.equal(getStreamingBill([{ format: \"4K\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }], \"premium\"), \"$44.98\");"
+      },
+      {
+        "text": "getStreamingBill([{ format: \"HD\", type: \"rent\" }, { format: \"4K\", type: \"rent\" }, { format: \"HD\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }], \"none\") should return \"$42.96\".",
+        "assert": "assert.equal(getStreamingBill([{ format: \"HD\", type: \"rent\" }, { format: \"4K\", type: \"rent\" }, { format: \"HD\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }], \"none\"), \"$42.96\");"
+      },
+      {
+        "text": "getStreamingBill([{ format: \"HD\", type: \"rent\" }, { format: \"4K\", type: \"rent\" }, { format: \"HD\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }], \"basic\") should return \"$38.66\".",
+        "assert": "assert.equal(getStreamingBill([{ format: \"HD\", type: \"rent\" }, { format: \"4K\", type: \"rent\" }, { format: \"HD\", type: \"buy\" }, { format: \"4K\", type: \"buy\" }], \"basic\"), \"$38.66\");"
+      }
+    ]
+  },
+  "2026-06-19": {
+    "n": 313,
+    "title": "Rental Cost",
+    "fn": "getRentalCost",
+    "tests": [
+      {
+        "text": "getRentalCost(\"2026-06-18T18:30:00Z\", \"2026-06-19T10:30:00Z\", 1) should return \"$4.99\".",
+        "assert": "assert.equal(getRentalCost(\"2026-06-18T18:30:00Z\", \"2026-06-19T10:30:00Z\", 1), \"$4.99\");"
+      },
+      {
+        "text": "getRentalCost(\"2026-06-18T14:30:00Z\", \"2026-06-20T12:30:00Z\", 1) should return \"$12.97\".",
+        "assert": "assert.equal(getRentalCost(\"2026-06-18T14:30:00Z\", \"2026-06-20T12:30:00Z\", 1), \"$12.97\");"
+      },
+      {
+        "text": "getRentalCost(\"2026-06-18T10:15:00Z\", \"2026-06-18T19:45:00Z\", 3) should return \"$3.99\".",
+        "assert": "assert.equal(getRentalCost(\"2026-06-18T10:15:00Z\", \"2026-06-18T19:45:00Z\", 3), \"$3.99\");"
+      },
+      {
+        "text": "getRentalCost(\"2026-06-18T15:20:00Z\", \"2026-06-23T08:10:00Z\", 3) should return \"$9.97\".",
+        "assert": "assert.equal(getRentalCost(\"2026-06-18T15:20:00Z\", \"2026-06-23T08:10:00Z\", 3), \"$9.97\");"
+      },
+      {
+        "text": "getRentalCost(\"2026-06-18T12:00:00Z\", \"2026-06-25T12:00:00Z\", 7) should return \"$2.99\".",
+        "assert": "assert.equal(getRentalCost(\"2026-06-18T12:00:00Z\", \"2026-06-25T12:00:00Z\", 7), \"$2.99\");"
+      },
+      {
+        "text": "getRentalCost(\"2026-06-18T08:00:00Z\", \"2027-06-18T14:00:00Z\", 7) should return \"$358.40\".",
+        "assert": "assert.equal(getRentalCost(\"2026-06-18T08:00:00Z\", \"2027-06-18T14:00:00Z\", 7), \"$358.40\");"
+      }
+    ]
+  },
+  "2026-06-20": {
+    "n": 314,
+    "title": "Prime Factorization",
+    "fn": "primeFactorization",
+    "tests": [
+      {
+        "text": "primeFactorization(20) should return [2, 2, 5].",
+        "assert": "assert.deepEqual(primeFactorization(20), [2, 2, 5]);"
+      },
+      {
+        "text": "primeFactorization(17) should return [17].",
+        "assert": "assert.deepEqual(primeFactorization(17), [17]);"
+      },
+      {
+        "text": "primeFactorization(15) should return [3, 5].",
+        "assert": "assert.deepEqual(primeFactorization(15), [3, 5]);"
+      },
+      {
+        "text": "primeFactorization(35) should return [5, 7].",
+        "assert": "assert.deepEqual(primeFactorization(35), [5, 7]);"
+      },
+      {
+        "text": "primeFactorization(999) should return [3, 3, 3, 37].",
+        "assert": "assert.deepEqual(primeFactorization(999), [3, 3, 3, 37]);"
+      },
+      {
+        "text": "primeFactorization(360) should return [2, 2, 2, 3, 3, 5].",
+        "assert": "assert.deepEqual(primeFactorization(360), [2, 2, 2, 3, 3, 5]);"
+      },
+      {
+        "text": "primeFactorization(510510) should return [2, 3, 5, 7, 11, 13, 17].",
+        "assert": "assert.deepEqual(primeFactorization(510510), [2, 3, 5, 7, 11, 13, 17]);"
+      }
+    ]
+  },
+  "2026-06-21": {
+    "n": 315,
+    "title": "Summer Solstice",
+    "fn": "getDaytimeHours",
+    "tests": [
+      {
+        "text": "getDaytimeHours(0) should return \"🌑🌑🌑🌑🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑🌑🌑🌑🌑\".",
+        "assert": "assert.equal(getDaytimeHours(0), \"🌑🌑🌑🌑🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑🌑🌑🌑🌑\");"
+      },
+      {
+        "text": "getDaytimeHours(90) should return \"☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️\".",
+        "assert": "assert.equal(getDaytimeHours(90), \"☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️\");"
+      },
+      {
+        "text": "getDaytimeHours(-90) should return \"🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑\".",
+        "assert": "assert.equal(getDaytimeHours(-90), \"🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑🌑\");"
+      },
+      {
+        "text": "getDaytimeHours(-33) should return \"🌑🌑🌑🌑🌑🌑🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑🌑🌑🌑🌑🌑🌑\".",
+        "assert": "assert.equal(getDaytimeHours(-33), \"🌑🌑🌑🌑🌑🌑🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑🌑🌑🌑🌑🌑🌑\");"
+      },
+      {
+        "text": "getDaytimeHours(66.5) should return \"🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑\".",
+        "assert": "assert.equal(getDaytimeHours(66.5), \"🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑\");"
+      },
+      {
+        "text": "getDaytimeHours(40) should return \"🌑🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑🌑\".",
+        "assert": "assert.equal(getDaytimeHours(40), \"🌑🌑🌑☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌑🌑🌑\");"
+      },
+      {
+        "text": "getDaytimeHours(-50) should return \"🌑🌑🌑🌑🌑🌑🌑🌑🌑☀️☀️☀️☀️☀️☀️🌑🌑🌑🌑🌑🌑🌑🌑🌑\".",
+        "assert": "assert.equal(getDaytimeHours(-50), \"🌑🌑🌑🌑🌑🌑🌑🌑🌑☀️☀️☀️☀️☀️☀️🌑🌑🌑🌑🌑🌑🌑🌑🌑\");"
+      }
+    ]
+  },
+  "2026-06-22": {
+    "n": 316,
+    "title": "1337 Speak",
+    "fn": "makeLeet",
+    "tests": [
+      {
+        "text": "makeLeet(\"cool\") should return \"c001\".",
+        "assert": "assert.equal(makeLeet(\"cool\"), \"c001\");"
+      },
+      {
+        "text": "makeLeet(\"leet\") should return \"1337\".",
+        "assert": "assert.equal(makeLeet(\"leet\"), \"1337\");"
+      },
+      {
+        "text": "makeLeet(\"hacker\") should return \"h4ck3r\".",
+        "assert": "assert.equal(makeLeet(\"hacker\"), \"h4ck3r\");"
+      },
+      {
+        "text": "makeLeet(\"satellite\") should return \"547311173\".",
+        "assert": "assert.equal(makeLeet(\"satellite\"), \"547311173\");"
+      },
+      {
+        "text": "makeLeet(\"abcdefghijklmnopqrstuvwxyz\") should return \"4bcd3f9h1jk1mn0pqr57uvwxyz\".",
+        "assert": "assert.equal(makeLeet(\"abcdefghijklmnopqrstuvwxyz\"), \"4bcd3f9h1jk1mn0pqr57uvwxyz\");"
+      }
+    ]
+  },
+  "2026-06-23": {
+    "n": 317,
+    "title": "BMI Calculator",
+    "fn": "calculateBmi",
+    "tests": [
+      {
+        "text": "calculateBmi(180, 70) should return 25.8.",
+        "assert": "assert.equal(calculateBmi(180, 70), 25.8);"
+      },
+      {
+        "text": "calculateBmi(140, 64) should return 24.0.",
+        "assert": "assert.equal(calculateBmi(140, 64), 24.0);"
+      },
+      {
+        "text": "calculateBmi(160, 76) should return 19.5.",
+        "assert": "assert.equal(calculateBmi(160, 76), 19.5);"
+      },
+      {
+        "text": "calculateBmi(200, 60) should return 39.1.",
+        "assert": "assert.equal(calculateBmi(200, 60), 39.1);"
+      },
+      {
+        "text": "calculateBmi(150, 68) should return 22.8.",
+        "assert": "assert.equal(calculateBmi(150, 68), 22.8);"
+      }
+    ]
+  },
+  "2026-06-24": {
+    "n": 318,
+    "title": "DNA Mutations",
+    "fn": "detectMutations",
+    "tests": [
+      {
+        "text": "detectMutations(\"ATCG\", \"ATGG\") should return [2].",
+        "assert": "assert.deepEqual(detectMutations(\"ATCG\", \"ATGG\"), [2]);"
+      },
+      {
+        "text": "detectMutations(\"ATGCGTACGTTAGC\", \"ATGCATACGATTGC\") should return [4, 9, 11].",
+        "assert": "assert.deepEqual(detectMutations(\"ATGCGTACGTTAGC\", \"ATGCATACGATTGC\"), [4, 9, 11]);"
+      },
+      {
+        "text": "detectMutations(\"GATCTAGCTAGGCTAGCTAG\", \"GATCTAGCTAGGCTAGCTAG\") should return [].",
+        "assert": "assert.deepEqual(detectMutations(\"GATCTAGCTAGGCTAGCTAG\", \"GATCTAGCTAGGCTAGCTAG\"), []);"
+      },
+      {
+        "text": "detectMutations(\"TCAGATCATGGCTAGCTACGATCAGCTAGCATGCATATCGACTG\", \"TCAGATCATGGCTAGAGCTGATCAGCTAGCATGCATATCGACTG\") should return [15, 16, 17, 18].",
+        "assert": "assert.deepEqual(detectMutations(\"TCAGATCATGGCTAGCTACGATCAGCTAGCATGCATATCGACTG\", \"TCAGATCATGGCTAGAGCTGATCAGCTAGCATGCATATCGACTG\"), [15, 16, 17, 18]);"
+      },
+      {
+        "text": "detectMutations(\"ACGTCAGTACGCACATGACCATTGACATA\", \"AACGTCAGTACGCACATGACCATTGACAT\") should return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 23, 24, 25, 26, 27, 28].",
+        "assert": "assert.deepEqual(detectMutations(\"ACGTCAGTACGCACATGACCATTGACATA\", \"AACGTCAGTACGCACATGACCATTGACAT\"), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 23, 24, 25, 26, 27, 28]);"
+      }
+    ]
+  },
+  "2026-06-25": {
+    "n": 319,
+    "title": "Frontmatter Parser",
+    "fn": "parseFrontmatter",
+    "tests": [
+      {
+        "text": "parseFrontmatter(\"---\\ntitle: My Post\\ndraft: false\\nviews: 100\\n---\") should return { title: \"My Post\", draft: false, views: 100 }.",
+        "assert": "assert.deepEqual(parseFrontmatter(\"---\\ntitle: My Post\\ndraft: false\\nviews: 100\\n---\"), { title: \"My Post\", draft: false, views: 100 });"
+      },
+      {
+        "text": "parseFrontmatter(\"---\\nid: 6a174db57256a112f932195c\\ntitle: My Book\\nlocale: en\\nwordCount: 10000\\npublished: false\\n---\") should return { id: \"6a174db57256a112f932195c\", title: \"My Book\", locale: \"en\", wordCount: 10000, published: false }.",
+        "assert": "assert.deepEqual(parseFrontmatter(\"---\\nid: 6a174db57256a112f932195c\\ntitle: My Book\\nlocale: en\\nwordCount: 10000\\npublished: false\\n---\"), { id: \"6a174db57256a112f932195c\", title: \"My Book\", locale: \"en\", wordCount: 10000, published: false });"
+      },
+      {
+        "text": "parseFrontmatter(\"---\\nversion: 1.0.0\\nurl: https://example.com\\nprivate: true\\n---\") should return { version: \"1.0.0\", url: \"https://example.com\", private: true }.",
+        "assert": "assert.deepEqual(parseFrontmatter(\"---\\nversion: 1.0.0\\nurl: https://example.com\\nprivate: true\\n---\"), { version: \"1.0.0\", url: \"https://example.com\", private: true });"
+      },
+      {
+        "text": "parseFrontmatter(\"---\\nrating: 4.5\\nprice: 9.99\\n---\") should return { rating: 4.5, price: 9.99 }.",
+        "assert": "assert.deepEqual(parseFrontmatter(\"---\\nrating: 4.5\\nprice: 9.99\\n---\"), { rating: 4.5, price: 9.99 });"
+      }
+    ]
+  },
+  "2026-06-26": {
+    "n": 320,
+    "title": "Blood Bank",
+    "fn": "triageBlood",
+    "tests": [
+      {
+        "text": "triageBlood([\"O\", \"A\", \"B\", \"AB\"], [\"O\", \"A\", \"B\", \"AB\"]) should return \"4 of 4 patients served\".",
+        "assert": "assert.equal(triageBlood([\"O\", \"A\", \"B\", \"AB\"], [\"O\", \"A\", \"B\", \"AB\"]), \"4 of 4 patients served\");"
+      },
+      {
+        "text": "triageBlood([\"A\", \"A\", \"B\", \"B\", \"AB\"], [\"O\", \"A\", \"B\", \"B\", \"B\"]) should return \"3 of 5 patients served\".",
+        "assert": "assert.equal(triageBlood([\"A\", \"A\", \"B\", \"B\", \"AB\"], [\"O\", \"A\", \"B\", \"B\", \"B\"]), \"3 of 5 patients served\");"
+      },
+      {
+        "text": "triageBlood([\"O\", \"A\", \"B\", \"AB\"], [\"AB\", \"AB\", \"AB\", \"AB\", \"AB\"]) should return \"4 of 5 patients served\".",
+        "assert": "assert.equal(triageBlood([\"O\", \"A\", \"B\", \"AB\"], [\"AB\", \"AB\", \"AB\", \"AB\", \"AB\"]), \"4 of 5 patients served\");"
+      },
+      {
+        "text": "triageBlood([\"O\", \"O\", \"O\", \"O\", \"O\"], [\"O\", \"A\", \"B\", \"AB\"]) should return \"4 of 4 patients served\".",
+        "assert": "assert.equal(triageBlood([\"O\", \"O\", \"O\", \"O\", \"O\"], [\"O\", \"A\", \"B\", \"AB\"]), \"4 of 4 patients served\");"
+      },
+      {
+        "text": "triageBlood([\"A\", \"O\", \"B\", \"AB\", \"B\", \"AB\", \"O\", \"A\", \"A\"], [\"O\", \"A\", \"B\", \"AB\", \"A\", \"B\", \"A\", \"A\", \"B\", \"A\", \"B\"]) should return \"8 of 11 patients served\".",
+        "assert": "assert.equal(triageBlood([\"A\", \"O\", \"B\", \"AB\", \"B\", \"AB\", \"O\", \"A\", \"A\"], [\"O\", \"A\", \"B\", \"AB\", \"A\", \"B\", \"A\", \"A\", \"B\", \"A\", \"B\"]), \"8 of 11 patients served\");"
+      },
+      {
+        "text": "triageBlood([\"O\", \"B\", \"AB\", \"AB\", \"O\", \"A\", \"A\", \"AB\", \"O\", \"B\", \"B\", \"AB\", \"A\", \"B\", \"AB\"], [\"O\", \"A\", \"B\", \"B\", \"A\", \"B\", \"AB\", \"A\", \"B\", \"A\", \"O\", \"AB\", \"AB\", \"O\"]) should return \"13 of 14 patients served\".",
+        "assert": "assert.equal(triageBlood([\"O\", \"B\", \"AB\", \"AB\", \"O\", \"A\", \"A\", \"AB\", \"O\", \"B\", \"B\", \"AB\", \"A\", \"B\", \"AB\"], [\"O\", \"A\", \"B\", \"B\", \"A\", \"B\", \"AB\", \"A\", \"B\", \"A\", \"O\", \"AB\", \"AB\", \"O\"]), \"13 of 14 patients served\");"
+      }
+    ]
+  },
+  "2026-06-27": {
+    "n": 321,
+    "title": "Periodic Spelling",
+    "fn": "getPeriodicSpelling",
+    "tests": [
+      {
+        "text": "getPeriodicSpelling(\"neon\") should return [\"Ne\", \"O\", \"N\"].",
+        "assert": "assert.deepEqual(getPeriodicSpelling(\"neon\"), [\"Ne\", \"O\", \"N\"]);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"rational\") should return [\"Ra\", \"Ti\", \"O\", \"N\", \"Al\"].",
+        "assert": "assert.deepEqual(getPeriodicSpelling(\"rational\"), [\"Ra\", \"Ti\", \"O\", \"N\", \"Al\"]);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"yarn\") should return [\"Y\", \"Ar\", \"N\"].",
+        "assert": "assert.deepEqual(getPeriodicSpelling(\"yarn\"), [\"Y\", \"Ar\", \"N\"]);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"carbon\") should return [\"C\", \"Ar\", \"B\", \"O\", \"N\"] or [\"Ca\", \"Rb\", \"O\", \"N\"].",
+        "assert": "const result = JSON.stringify(getPeriodicSpelling(\"carbon\"));\nconst path1 = JSON.stringify([\"C\", \"Ar\", \"B\", \"O\", \"N\"]);\nconst path2 = JSON.stringify([\"Ca\", \"Rb\", \"O\", \"N\"]);\nassert.isTrue(result === path1 || result === path2);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"noisy\") should return [\"N\", \"O\", \"I\", \"S\", \"Y\"] or [\"No\", \"I\", \"S\", \"Y\"].",
+        "assert": "const result = JSON.stringify(getPeriodicSpelling(\"noisy\"));\nconst path1 = JSON.stringify([\"N\", \"O\", \"I\", \"S\", \"Y\"]);\nconst path2 = JSON.stringify([\"No\", \"I\", \"S\", \"Y\"]);\nassert.isTrue(result === path1 || result === path2);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"bicycles\") should return [\"B\", \"I\", \"C\", \"Y\", \"Cl\", \"Es\"] or [\"Bi\", \"C\", \"Y\", \"Cl\", \"Es\"].",
+        "assert": "const result = JSON.stringify(getPeriodicSpelling(\"bicycles\"));\nconst path1 = JSON.stringify([\"B\", \"I\", \"C\", \"Y\", \"Cl\", \"Es\"]);\nconst path2 = JSON.stringify([\"Bi\", \"C\", \"Y\", \"Cl\", \"Es\"]);\nassert.isTrue(result === path1 || result === path2);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"optics\") should return [\"O\", \"P\", \"Ti\", \"C\", \"S\"], [\"O\", \"P\", \"Ti\", \"Cs\"], [\"O\", \"Pt\", \"I\", \"C\", \"S\"], or [\"O\", \"Pt\", \"I\", \"Cs\"].",
+        "assert": "const result = JSON.stringify(getPeriodicSpelling(\"optics\"));\nconst path1 = JSON.stringify([\"O\", \"P\", \"Ti\", \"C\", \"S\"]);\nconst path2 = JSON.stringify([\"O\", \"P\", \"Ti\", \"Cs\"]);\nconst path3 = JSON.stringify([\"O\", \"Pt\", \"I\", \"C\", \"S\"]);\nconst path4 = JSON.stringify([\"O\", \"Pt\", \"I\", \"Cs\"]);\nassert.isTrue(result === path1 || result === path2 || result === path3 || result === path4);"
+      },
+      {
+        "text": "getPeriodicSpelling(\"value\") should return [].",
+        "assert": "assert.deepEqual(getPeriodicSpelling(\"value\"), []);"
+      }
+    ]
+  },
+  "2026-06-28": {
+    "n": 322,
+    "title": "Connect 3",
+    "fn": "connectThree",
+    "tests": [
+      {
+        "text": "connectThree([[\"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\"], [\"\", \"Y\", \"\", \"\"], [\"Y\", \"R\", \"R\", \"R\"]]) should return [\"R\", [3, 1], [3, 2], [3, 3]].",
+        "assert": "assert.deepEqual(connectThree([[\"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\"], [\"\", \"Y\", \"\", \"\"], [\"Y\", \"R\", \"R\", \"R\"]]), [\"R\", [3, 1], [3, 2], [3, 3]]);"
+      },
+      {
+        "text": "connectThree([[\"\", \"\", \"\", \"\"], [\"\", \"Y\", \"Y\", \"\"], [\"\", \"Y\", \"R\", \"R\"], [\"\", \"Y\", \"R\", \"R\"]]) should return [\"Y\", [1, 1], [2, 1], [3, 1]].",
+        "assert": "assert.deepEqual(connectThree([[\"\", \"\", \"\", \"\"], [\"\", \"Y\", \"Y\", \"\"], [\"\", \"Y\", \"R\", \"R\"], [\"\", \"Y\", \"R\", \"R\"]]), [\"Y\", [1, 1], [2, 1], [3, 1]]);"
+      },
+      {
+        "text": "connectThree([[\"\", \"\", \"Y\", \"R\"], [\"\", \"Y\", \"R\", \"Y\"], [\"\", \"R\", \"Y\", \"R\"], [\"\", \"R\", \"Y\", \"R\"]]) should return [\"R\", [0, 3], [1, 2], [2, 1]].",
+        "assert": "assert.deepEqual(connectThree([[\"\", \"\", \"Y\", \"R\"], [\"\", \"Y\", \"R\", \"Y\"], [\"\", \"R\", \"Y\", \"R\"], [\"\", \"R\", \"Y\", \"R\"]]), [\"R\", [0, 3], [1, 2], [2, 1]]);"
+      },
+      {
+        "text": "connectThree([[\"\", \"Y\", \"\", \"\"], [\"\", \"Y\", \"Y\", \"\"], [\"\", \"R\", \"R\", \"Y\"], [\"R\", \"R\", \"Y\", \"R\"]]) should return [\"Y\", [0, 1], [1, 2], [2, 3]].",
+        "assert": "assert.deepEqual(connectThree([[\"\", \"Y\", \"\", \"\"], [\"\", \"Y\", \"Y\", \"\"], [\"\", \"R\", \"R\", \"Y\"], [\"R\", \"R\", \"Y\", \"R\"]]), [\"Y\", [0, 1], [1, 2], [2, 3]]);"
+      },
+      {
+        "text": "connectThree([[\"Y\", \"R\", \"R\", \"Y\"], [\"R\", \"Y\", \"Y\", \"R\"], [\"Y\", \"R\", \"R\", \"Y\"], [\"R\", \"Y\", \"Y\", \"R\"]]) should return [].",
+        "assert": "assert.deepEqual(connectThree([[\"Y\", \"R\", \"R\", \"Y\"], [\"R\", \"Y\", \"Y\", \"R\"], [\"Y\", \"R\", \"R\", \"Y\"], [\"R\", \"Y\", \"Y\", \"R\"]]), []);"
+      }
+    ]
+  },
+  "2026-06-29": {
+    "n": 323,
+    "title": "Song Mood Finder",
+    "fn": "getMood",
+    "tests": [
+      {
+        "text": "getMood(\"rock\", 111) should return \"happy\".",
+        "assert": "assert.equal(getMood(\"rock\", 111), \"happy\");"
+      },
+      {
+        "text": "getMood(\"electronic\", 74) should return \"focus\".",
+        "assert": "assert.equal(getMood(\"electronic\", 74), \"focus\");"
+      },
+      {
+        "text": "getMood(\"classical\", 180) should return \"happy\".",
+        "assert": "assert.equal(getMood(\"classical\", 180), \"happy\");"
+      },
+      {
+        "text": "getMood(\"rock\", 155) should return \"hype\".",
+        "assert": "assert.equal(getMood(\"rock\", 155), \"hype\");"
+      },
+      {
+        "text": "getMood(\"electronic\", 90) should return \"happy\".",
+        "assert": "assert.equal(getMood(\"electronic\", 90), \"happy\");"
+      },
+      {
+        "text": "getMood(\"classical\", 67) should return \"focus\".",
+        "assert": "assert.equal(getMood(\"classical\", 67), \"focus\");"
+      },
+      {
+        "text": "getMood(\"pop\", 100) should return \"happy\".",
+        "assert": "assert.equal(getMood(\"pop\", 100), \"happy\");"
+      },
+      {
+        "text": "getMood(\"electronic\", 135) should return \"hype\".",
+        "assert": "assert.equal(getMood(\"electronic\", 135), \"hype\");"
+      }
+    ]
+  },
+  "2026-06-30": {
+    "n": 324,
+    "title": "Duplicate Character Count",
+    "fn": "duplicateCharacterCount",
+    "tests": [
+      {
+        "text": "duplicateCharacterCount(\"aloha\", \"hei\") should return 1.",
+        "assert": "assert.equal(duplicateCharacterCount(\"aloha\", \"hei\"), 1);"
+      },
+      {
+        "text": "duplicateCharacterCount(\"jambo\", \"bonjour\") should return 4.",
+        "assert": "assert.equal(duplicateCharacterCount(\"jambo\", \"bonjour\"), 4);"
+      },
+      {
+        "text": "duplicateCharacterCount(\"hello\", \"hola\") should return 3.",
+        "assert": "assert.equal(duplicateCharacterCount(\"hello\", \"hola\"), 3);"
+      },
+      {
+        "text": "duplicateCharacterCount(\"ola\", \"hej\") should return 0.",
+        "assert": "assert.equal(duplicateCharacterCount(\"ola\", \"hej\"), 0);"
+      },
+      {
+        "text": "duplicateCharacterCount(\"ciao\", \"konnichiwa\") should return 5.",
+        "assert": "assert.equal(duplicateCharacterCount(\"ciao\", \"konnichiwa\"), 5);"
+      },
+      {
+        "text": "duplicateCharacterCount(\"merhaba\", \"xin chao\") should return 2.",
+        "assert": "assert.equal(duplicateCharacterCount(\"merhaba\", \"xin chao\"), 2);"
+      },
+      {
+        "text": "duplicateCharacterCount(\"hello world\", \"hello to everyone around the world\") should return 26.",
+        "assert": "assert.equal(duplicateCharacterCount(\"hello world\", \"hello to everyone around the world\"), 26);"
+      }
+    ]
+  },
+  "2026-07-01": {
+    "n": 325,
+    "title": "Lucky Number",
+    "fn": "getLuckyNumber",
+    "tests": [
+      {
+        "text": "getLuckyNumber(\"John Doe\") should return 21.",
+        "assert": "assert.equal(getLuckyNumber(\"John Doe\"), 21);"
+      },
+      {
+        "text": "getLuckyNumber(\"Olivia Lewis\") should return 52.",
+        "assert": "assert.equal(getLuckyNumber(\"Olivia Lewis\"), 52);"
+      },
+      {
+        "text": "getLuckyNumber(\"James Wilson\") should return 18.",
+        "assert": "assert.equal(getLuckyNumber(\"James Wilson\"), 18);"
+      },
+      {
+        "text": "getLuckyNumber(\"Elizabeth Hernandez\") should return 81.",
+        "assert": "assert.equal(getLuckyNumber(\"Elizabeth Hernandez\"), 81);"
+      },
+      {
+        "text": "getLuckyNumber(\"Mike Walker\") should return 32.",
+        "assert": "assert.equal(getLuckyNumber(\"Mike Walker\"), 32);"
+      },
+      {
+        "text": "getLuckyNumber(\"Chloe Perez\") should return 13.",
+        "assert": "assert.equal(getLuckyNumber(\"Chloe Perez\"), 13);"
+      }
+    ]
+  },
+  "2026-07-02": {
+    "n": 326,
+    "title": "Max Profit",
+    "fn": "getMaxProfit",
+    "tests": [
+      {
+        "text": "getMaxProfit([5, 6], 50) should return \"10.00\".",
+        "assert": "assert.equal(getMaxProfit([5, 6], 50), \"10.00\");"
+      },
+      {
+        "text": "getMaxProfit([8, 2, 5, 10], 20) should return \"80.00\".",
+        "assert": "assert.equal(getMaxProfit([8, 2, 5, 10], 20), \"80.00\");"
+      },
+      {
+        "text": "getMaxProfit([4, 5, 3, 6], 20) should return \"18.00\".",
+        "assert": "assert.equal(getMaxProfit([4, 5, 3, 6], 20), \"18.00\");"
+      },
+      {
+        "text": "getMaxProfit([54.40, 51.22, 53.99, 50.28, 53.01, 52.84], 200) should return \"8.31\".",
+        "assert": "assert.equal(getMaxProfit([54.40, 51.22, 53.99, 50.28, 53.01, 52.84], 200), \"8.31\");"
+      },
+      {
+        "text": "getMaxProfit([15.38, 15.01, 14.99, 14.62, 14.28], 80) should return \"0.00\".",
+        "assert": "assert.equal(getMaxProfit([15.38, 15.01, 14.99, 14.62, 14.28], 80), \"0.00\");"
+      },
+      {
+        "text": "getMaxProfit([121.45, 126.82, 122.91, 124.65, 128.83, 128.83, 127.33], 1230.25) should return \"73.80\".",
+        "assert": "assert.equal(getMaxProfit([121.45, 126.82, 122.91, 124.65, 128.83, 128.83, 127.33], 1230.25), \"73.80\");"
+      }
+    ]
+  },
+  "2026-07-03": {
+    "n": 327,
+    "title": "Database Migration",
+    "fn": "migrateRecord",
+    "tests": [
+      {
+        "text": "migrateRecord({ username: \"\", posts: 0 }, { verified: true }) should return { username: \"\", posts: 0, verified: true }.",
+        "assert": "assert.deepEqual(migrateRecord({ username: \"\", posts: 0 }, { verified: true }), { username: \"\", posts: 0, verified: true });"
+      },
+      {
+        "text": "migrateRecord({ username: \"\", posts: 0 }, { username: \"camper\", posts: 5 }) should return { username: \"camper\", posts: 5 }.",
+        "assert": "assert.deepEqual(migrateRecord({ username: \"\", posts: 0 }, { username: \"camper\", posts: 5 }), { username: \"camper\", posts: 5 });"
+      },
+      {
+        "text": "migrateRecord({ username: \"\", posts: 0, verified: false }, { username: \"camper\" }) should return { username: \"camper\", posts: 0, verified: false }.",
+        "assert": "assert.deepEqual(migrateRecord({ username: \"\", posts: 0, verified: false }, { username: \"camper\" }), { username: \"camper\", posts: 0, verified: false });"
+      },
+      {
+        "text": "migrateRecord({ username: \"\", posts: 0 }, { username: \"camper\", role: \"admin\" }) should return { username: \"camper\", role: \"admin\", posts: 0 }.",
+        "assert": "assert.deepEqual(migrateRecord({ username: \"\", posts: 0 }, { username: \"camper\", role: \"admin\" }), { username: \"camper\", role: \"admin\", posts: 0 });"
+      },
+      {
+        "text": "migrateRecord({ username: \"\", email: \"\", posts: 0, verified: false, role: \"user\", banned: false }, { username: \"camper\", email: \"camper@freecodecamp.org\", role: \"admin\" }) should return { username: \"camper\", email: \"camper@freecodecamp.org\", role: \"admin\", posts: 0, verified: false, banned: false }.",
+        "assert": "assert.deepEqual(migrateRecord({ username: \"\", email: \"\", posts: 0, verified: false, role: \"user\", banned: false }, { username: \"camper\", email: \"camper@freecodecamp.org\", role: \"admin\" }), { username: \"camper\", email: \"camper@freecodecamp.org\", role: \"admin\", posts: 0, verified: false, banned: false });"
+      }
+    ]
+  },
+  "2026-07-04": {
+    "n": 328,
+    "title": "Kaprekar's Routine",
+    "fn": "kaprekar",
+    "tests": [
+      {
+        "text": "kaprekar(1234) should return 3.",
+        "assert": "assert.equal(kaprekar(1234), 3);"
+      },
+      {
+        "text": "kaprekar(2025) should return 6.",
+        "assert": "assert.equal(kaprekar(2025), 6);"
+      },
+      {
+        "text": "kaprekar(7173) should return 4.",
+        "assert": "assert.equal(kaprekar(7173), 4);"
+      },
+      {
+        "text": "kaprekar(3164) should return 7.",
+        "assert": "assert.equal(kaprekar(3164), 7);"
+      },
+      {
+        "text": "kaprekar(8082) should return 2.",
+        "assert": "assert.equal(kaprekar(8082), 2);"
+      }
+    ]
+  },
+  "2026-07-05": {
+    "n": 329,
+    "title": "Bucket Fill",
+    "fn": "bucketFill",
+    "tests": [
+      {
+        "text": "bucketFill([[\"R\", \"G\"], [\"R\", \"G\"]], [0, 1], \"B\") should return [[\"R\", \"B\"], [\"R\", \"B\"]].",
+        "assert": "assert.deepEqual(bucketFill([[\"R\", \"G\"], [\"R\", \"G\"]], [0, 1], \"B\"), [[\"R\", \"B\"], [\"R\", \"B\"]]);"
+      },
+      {
+        "text": "bucketFill([[\"Y\", \"G\", \"G\"], [\"Y\", \"Y\", \"Y\"], [\"B\", \"Y\", \"R\"]], [1, 2], \"B\") should return [[\"B\", \"G\", \"G\"], [\"B\", \"B\", \"B\"], [\"B\", \"B\", \"R\"]].",
+        "assert": "assert.deepEqual(bucketFill([[\"Y\", \"G\", \"G\"], [\"Y\", \"Y\", \"Y\"], [\"B\", \"Y\", \"R\"]], [1, 2], \"B\"), [[\"B\", \"G\", \"G\"], [\"B\", \"B\", \"B\"], [\"B\", \"B\", \"R\"]]);"
+      },
+      {
+        "text": "bucketFill([[\"O\", \"O\", \"P\"], [\"P\", \"O\", \"O\"], [\"P\", \"P\", \"O\"]], [2, 0], \"R\") should return [[\"O\", \"O\", \"P\"], [\"R\", \"O\", \"O\"], [\"R\", \"R\", \"O\"]].",
+        "assert": "assert.deepEqual(bucketFill([[\"O\", \"O\", \"P\"], [\"P\", \"O\", \"O\"], [\"P\", \"P\", \"O\"]], [2, 0], \"R\"), [[\"O\", \"O\", \"P\"], [\"R\", \"O\", \"O\"], [\"R\", \"R\", \"O\"]]);"
+      },
+      {
+        "text": "bucketFill([[\"T\", \"T\", \"R\", \"T\"], [\"R\", \"T\", \"R\", \"T\"], [\"R\", \"T\", \"R\", \"T\"], [\"T\", \"T\", \"T\", \"T\"]], [0, 3], \"Y\") should return [[\"Y\", \"Y\", \"R\", \"Y\"], [\"R\", \"Y\", \"R\", \"Y\"], [\"R\", \"Y\", \"R\", \"Y\"], [\"Y\", \"Y\", \"Y\", \"Y\"]].",
+        "assert": "assert.deepEqual(bucketFill([[\"T\", \"T\", \"R\", \"T\"], [\"R\", \"T\", \"R\", \"T\"], [\"R\", \"T\", \"R\", \"T\"], [\"T\", \"T\", \"T\", \"T\"]], [0, 3], \"Y\"), [[\"Y\", \"Y\", \"R\", \"Y\"], [\"R\", \"Y\", \"R\", \"Y\"], [\"R\", \"Y\", \"R\", \"Y\"], [\"Y\", \"Y\", \"Y\", \"Y\"]]);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"B\", \"G\", \"B\"], [\"R\", \"B\", \"B\", \"G\"], [\"B\", \"G\", \"B\", \"R\"], [\"B\", \"G\", \"G\", \"B\"]], [2, 2], \"G\") should return [[\"G\", \"G\", \"G\", \"B\"], [\"R\", \"G\", \"G\", \"G\"], [\"B\", \"G\", \"G\", \"R\"], [\"B\", \"G\", \"G\", \"B\"]].",
+        "assert": "assert.deepEqual(bucketFill([[\"G\", \"B\", \"G\", \"B\"], [\"R\", \"B\", \"B\", \"G\"], [\"B\", \"G\", \"B\", \"R\"], [\"B\", \"G\", \"G\", \"B\"]], [2, 2], \"G\"), [[\"G\", \"G\", \"G\", \"B\"], [\"R\", \"G\", \"G\", \"G\"], [\"B\", \"G\", \"G\", \"R\"], [\"B\", \"G\", \"G\", \"B\"]]);"
+      }
+    ]
+  },
+  "2026-07-06": {
+    "n": 330,
+    "title": "lowercase words",
+    "fn": "getLowercaseWords",
+    "tests": [
+      {
+        "text": "getLowercaseWords(\"hello GOOD world\") should return \"hello world\".",
+        "assert": "assert.equal(getLowercaseWords(\"hello GOOD world\"), \"hello world\");"
+      },
+      {
+        "text": "getLowercaseWords(\"these are all lowercase\") should return \"these are all lowercase\".",
+        "assert": "assert.equal(getLowercaseWords(\"these are all lowercase\"), \"these are all lowercase\");"
+      },
+      {
+        "text": "getLowercaseWords(\"less is NoT more\") should return \"less is more\".",
+        "assert": "assert.equal(getLowercaseWords(\"less is NoT more\"), \"less is more\");"
+      },
+      {
+        "text": "getLowercaseWords(\"DonT eat pizza every OTHER day\") should return \"eat pizza every day\".",
+        "assert": "assert.equal(getLowercaseWords(\"DonT eat pizza every OTHER day\"), \"eat pizza every day\");"
+      },
+      {
+        "text": "getLowercaseWords(\"the Super quick AND snEaky brown fox Leapt anD jumped over aNd AROUND the lazy SloW dog\") should return \"the quick brown fox jumped over the lazy dog\".",
+        "assert": "assert.equal(getLowercaseWords(\"the Super quick AND snEaky brown fox Leapt anD jumped over aNd AROUND the lazy SloW dog\"), \"the quick brown fox jumped over the lazy dog\");"
+      }
+    ]
+  },
+  "2026-07-07": {
+    "n": 331,
+    "title": "Nearest Multiple",
+    "fn": "roundToNearestMultiple",
+    "tests": [
+      {
+        "text": "roundToNearestMultiple(5, 3) should return 6.",
+        "assert": "assert.equal(roundToNearestMultiple(5, 3), 6);"
+      },
+      {
+        "text": "roundToNearestMultiple(17, 4) should return 16.",
+        "assert": "assert.equal(roundToNearestMultiple(17, 4), 16);"
+      },
+      {
+        "text": "roundToNearestMultiple(43, 5) should return 45.",
+        "assert": "assert.equal(roundToNearestMultiple(43, 5), 45);"
+      },
+      {
+        "text": "roundToNearestMultiple(38, 11) should return 33.",
+        "assert": "assert.equal(roundToNearestMultiple(38, 11), 33);"
+      },
+      {
+        "text": "roundToNearestMultiple(93, 12) should return 96.",
+        "assert": "assert.equal(roundToNearestMultiple(93, 12), 96);"
+      }
+    ]
+  },
+  "2026-07-08": {
+    "n": 332,
+    "title": "Issue Triage",
+    "fn": "triageIssue",
+    "tests": [
+      {
+        "text": "triageIssue(86400000, \"Lets fix it\") should return \"leave it\".",
+        "assert": "assert.equal(triageIssue(86400000, \"Lets fix it\"), \"leave it\");"
+      },
+      {
+        "text": "triageIssue(1209600000, \"still waiting\") should return \"bump it\".",
+        "assert": "assert.equal(triageIssue(1209600000, \"still waiting\"), \"bump it\");"
+      },
+      {
+        "text": "triageIssue(864000000, \"bump\") should return \"close it\".",
+        "assert": "assert.equal(triageIssue(864000000,  \"bump\"), \"close it\");"
+      },
+      {
+        "text": "triageIssue(604800000, \"Do we still want this?\") should return \"bump it\".",
+        "assert": "assert.equal(triageIssue(604800000, \"Do we still want this?\"), \"bump it\");"
+      },
+      {
+        "text": "triageIssue(604800000, \"Bumping this\") should return \"close it\".",
+        "assert": "assert.equal(triageIssue(604800000, \"Bumping this\"), \"close it\");"
+      },
+      {
+        "text": "triageIssue(345600000, \"I'll make a PR\") should return \"leave it\".",
+        "assert": "assert.equal(triageIssue(345600000, \"I'll make a PR\"), \"leave it\");"
+      }
+    ]
+  },
+  "2026-07-09": {
+    "n": 333,
+    "title": "Issue Triage 2",
+    "fn": "triageIssue",
+    "tests": [
+      {
+        "text": "triageIssue(\"app crashes with error\", []) should return [\"bug\", \"needs triage\"].",
+        "assert": "assert.deepEqual(triageIssue(\"app crashes with error\", []).sort(), [\"bug\", \"needs triage\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"app crashes with error\", [\"bug\", \"needs triage\"]) should return [\"bug\", \"help wanted\"].",
+        "assert": "assert.deepEqual(triageIssue(\"app crashes with error\", [\"bug\", \"needs triage\"]).sort(), [\"bug\", \"help wanted\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"add dark mode\", []) should return [\"enhancement\", \"discussing\"].",
+        "assert": "assert.deepEqual(triageIssue(\"add dark mode\", []).sort(), [\"enhancement\", \"discussing\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"add dark mode\", [\"enhancement\", \"discussing\"]) should return [\"enhancement\", \"help wanted\"].",
+        "assert": "assert.deepEqual(triageIssue(\"add dark mode\", [\"enhancement\", \"discussing\"]).sort(), [\"enhancement\", \"help wanted\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"xss security bug\", []) should return [\"bug\", \"needs triage\", \"critical\"].",
+        "assert": "assert.deepEqual(triageIssue(\"xss security bug\", []).sort(), [\"bug\", \"needs triage\", \"critical\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"security vulnerability in auth\", []) should return [\"critical\"].",
+        "assert": "assert.deepEqual(triageIssue(\"security vulnerability in auth\", []).sort(), [\"critical\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"easy a11y fix\", [\"bug\", \"needs triage\"]) should return [\"bug\", \"good first issue\"].",
+        "assert": "assert.deepEqual(triageIssue(\"easy a11y fix\", [\"bug\", \"needs triage\"]).sort(), [\"bug\", \"good first issue\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"planned api migration\", [\"enhancement\", \"discussing\"]) should return [\"enhancement\", \"on the roadmap\"].",
+        "assert": "assert.deepEqual(triageIssue(\"planned api migration\", [\"enhancement\", \"discussing\"]).sort(), [\"enhancement\", \"on the roadmap\"].sort());"
+      },
+      {
+        "text": "triageIssue(\"improve security\", [\"enhancement\", \"discussing\"]) should return [\"enhancement\", \"help wanted\", \"critical\"].",
+        "assert": "assert.deepEqual(triageIssue(\"improve security\", [\"enhancement\", \"discussing\"]).sort(), [\"enhancement\", \"help wanted\", \"critical\"].sort());"
+      }
+    ]
+  },
+  "2026-07-10": {
+    "n": 334,
+    "title": "Exact Change",
+    "fn": "exactChange",
+    "tests": [
+      {
+        "text": "exactChange(3) should return 1.",
+        "assert": "assert.equal(exactChange(3), 1);"
+      },
+      {
+        "text": "exactChange(9) should return 2.",
+        "assert": "assert.equal(exactChange(9), 2);"
+      },
+      {
+        "text": "exactChange(17) should return 6.",
+        "assert": "assert.equal(exactChange(17), 6);"
+      },
+      {
+        "text": "exactChange(39) should return 24.",
+        "assert": "assert.equal(exactChange(39), 24);"
+      },
+      {
+        "text": "exactChange(61) should return 73.",
+        "assert": "assert.equal(exactChange(61), 73);"
+      },
+      {
+        "text": "exactChange(99) should return 213.",
+        "assert": "assert.equal(exactChange(99), 213);"
+      }
+    ]
+  },
+  "2026-07-11": {
+    "n": 335,
+    "title": "Five Dice",
+    "fn": "fiveDice",
+    "tests": [
+      {
+        "text": "fiveDice([1, 1, 1, 1, 1]) should return \"five of a kind\".",
+        "assert": "assert.equal(fiveDice([1, 1, 1, 1, 1]), \"five of a kind\");"
+      },
+      {
+        "text": "fiveDice([5, 5, 5, 6, 5]) should return \"four of a kind\".",
+        "assert": "assert.equal(fiveDice([5, 5, 5, 6, 5]), \"four of a kind\");"
+      },
+      {
+        "text": "fiveDice([2, 5, 6, 4, 3]) should return \"large straight\".",
+        "assert": "assert.equal(fiveDice([2, 5, 6, 4, 3]), \"large straight\");"
+      },
+      {
+        "text": "fiveDice([4, 3, 3, 3, 1]) should return \"three of a kind\".",
+        "assert": "assert.equal(fiveDice([4, 3, 3, 3, 1]), \"three of a kind\");"
+      },
+      {
+        "text": "fiveDice([4, 6, 2, 6, 5]) should return \"pair\".",
+        "assert": "assert.equal(fiveDice([4, 6, 2, 6, 5]), \"pair\");"
+      },
+      {
+        "text": "fiveDice([1, 4, 5, 6, 2]) should return \"no pair\".",
+        "assert": "assert.equal(fiveDice([1, 4, 5, 6, 2]), \"no pair\");"
+      },
+      {
+        "text": "fiveDice([1, 3, 4, 6, 2]) should return \"small straight\".",
+        "assert": "assert.equal(fiveDice([1, 3, 4, 6, 2]), \"small straight\");"
+      },
+      {
+        "text": "fiveDice([2, 2, 5, 2, 5]) should return \"full house\".",
+        "assert": "assert.equal(fiveDice([2, 2, 5, 2, 5]), \"full house\");"
+      },
+      {
+        "text": "fiveDice([6, 4, 5, 6, 4]) should return \"two pair\".",
+        "assert": "assert.equal(fiveDice([6, 4, 5, 6, 4]), \"two pair\");"
+      }
+    ]
+  },
+  "2026-07-12": {
+    "n": 336,
+    "title": "Horoscope Match",
+    "fn": "horoscopeMatch",
+    "tests": [
+      {
+        "text": "horoscopeMatch(\"Libra\", \"Sagittarius\") should return \"80%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Libra\", \"Sagittarius\"), \"80%\");"
+      },
+      {
+        "text": "horoscopeMatch(\"Gemini\", \"Scorpio\") should return \"20%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Gemini\", \"Scorpio\"), \"20%\");"
+      },
+      {
+        "text": "horoscopeMatch(\"Pisces\", \"Aries\") should return \"40%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Pisces\", \"Aries\"), \"40%\");"
+      },
+      {
+        "text": "horoscopeMatch(\"Capricorn\", \"Cancer\") should return \"50%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Capricorn\", \"Cancer\"), \"50%\");"
+      },
+      {
+        "text": "horoscopeMatch(\"Aquarius\", \"Aquarius\") should return \"100%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Aquarius\", \"Aquarius\"), \"100%\");"
+      },
+      {
+        "text": "horoscopeMatch(\"Virgo\", \"Taurus\") should return \"90%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Virgo\", \"Taurus\"), \"90%\");"
+      },
+      {
+        "text": "horoscopeMatch(\"Leo\", \"Scorpio\") should return \"30%\".",
+        "assert": "assert.equal(horoscopeMatch(\"Leo\", \"Scorpio\"), \"30%\");"
+      }
+    ]
+  },
+  "2026-07-13": {
+    "n": 337,
+    "title": "Tally Counter",
+    "fn": "getTallyCount",
+    "tests": [
+      {
+        "text": "getTallyCount(\"||||\") should return 4.",
+        "assert": "assert.equal(getTallyCount(\"||||\"), 4);"
+      },
+      {
+        "text": "getTallyCount(\"||||/\") should return 5.",
+        "assert": "assert.equal(getTallyCount(\"||||/\"), 5);"
+      },
+      {
+        "text": "getTallyCount(\"||||/ |||\") should return 8.",
+        "assert": "assert.equal(getTallyCount(\"||||/ |||\"), 8);"
+      },
+      {
+        "text": "getTallyCount(\"||||/ ||||/ ||||/ ||\") should return 17.",
+        "assert": "assert.equal(getTallyCount(\"||||/ ||||/ ||||/ ||\"), 17);"
+      },
+      {
+        "text": "getTallyCount(\"||||/ ||||/ ||||/ ||||/ ||||/ ||||/ ||||/ ||||/ |\") should return 41.",
+        "assert": "assert.equal(getTallyCount(\"||||/ ||||/ ||||/ ||||/ ||||/ ||||/ ||||/ ||||/ |\"), 41);"
+      }
+    ]
+  },
+  "2026-07-14": {
+    "n": 338,
+    "title": "Pet Age Calculator",
+    "fn": "petYears",
+    "tests": [
+      {
+        "text": "petYears(\"dog\", 5) should return 35.",
+        "assert": "assert.equal(petYears(\"dog\", 5), 35);"
+      },
+      {
+        "text": "petYears(\"cat\", 9) should return 54.",
+        "assert": "assert.equal(petYears(\"cat\", 9), 54);"
+      },
+      {
+        "text": "petYears(\"rabbit\", 3) should return 24.",
+        "assert": "assert.equal(petYears(\"rabbit\", 3), 24);"
+      },
+      {
+        "text": "petYears(\"hamster\", 4) should return 120.",
+        "assert": "assert.equal(petYears(\"hamster\", 4), 120);"
+      },
+      {
+        "text": "petYears(\"guinea pig\", 5) should return 60.",
+        "assert": "assert.equal(petYears(\"guinea pig\", 5), 60);"
+      },
+      {
+        "text": "petYears(\"goldfish\", 2) should return 12.",
+        "assert": "assert.equal(petYears(\"goldfish\", 2), 12);"
+      },
+      {
+        "text": "petYears(\"bird\", 1) should return 5.",
+        "assert": "assert.equal(petYears(\"bird\", 1), 5);"
+      }
+    ]
+  },
+  "2026-07-15": {
+    "n": 339,
+    "title": "Array Chunks",
+    "fn": "chunkArray",
+    "tests": [
+      {
+        "text": "chunkArray([1, 2, 3, 4, 5, 6], 3) should return [[1, 2, 3], [4, 5, 6]].",
+        "assert": "assert.deepEqual(chunkArray([1, 2, 3, 4, 5, 6], 3), [[1, 2, 3], [4, 5, 6]]);"
+      },
+      {
+        "text": "chunkArray([1, \"two\", 3, \"four\", 5, \"six\", 7, \"eight\"], 2) should return [[1, \"two\"], [3, \"four\"], [5, \"six\"], [7, \"eight\"]].",
+        "assert": "assert.deepEqual(chunkArray([1, \"two\", 3, \"four\", 5, \"six\", 7, \"eight\"], 2), [[1, \"two\"], [3, \"four\"], [5, \"six\"], [7, \"eight\"]]);"
+      },
+      {
+        "text": "chunkArray([1, 2, 3, 4, 5], 3) should return [[1, 2, 3], [4, 5]].",
+        "assert": "assert.deepEqual(chunkArray([1, 2, 3, 4, 5], 3), [[1, 2, 3], [4, 5]]);"
+      },
+      {
+        "text": "chunkArray([\"a\", \"b\", \"c\", \"d\", \"e\"], 1) should return [[\"a\"], [\"b\"], [\"c\"], [\"d\"], [\"e\"]].",
+        "assert": "assert.deepEqual(chunkArray([\"a\", \"b\", \"c\", \"d\", \"e\"], 1), [[\"a\"], [\"b\"], [\"c\"], [\"d\"], [\"e\"]]);"
+      },
+      {
+        "text": "chunkArray([1, 2, 3], 5) should return [[1, 2, 3]].",
+        "assert": "assert.deepEqual(chunkArray([1, 2, 3], 5), [[1, 2, 3]]);"
+      }
+    ]
+  },
+  "2026-07-16": {
+    "n": 340,
+    "title": "Pig Latin Converter",
+    "fn": "pigLatin",
+    "tests": [
+      {
+        "text": "pigLatin(\"universe\") should return \"universeway\".",
+        "assert": "assert.equal(pigLatin(\"universe\"), \"universeway\");"
+      },
+      {
+        "text": "pigLatin(\"hello\") should return \"ellohay\".",
+        "assert": "assert.equal(pigLatin(\"hello\"), \"ellohay\");"
+      },
+      {
+        "text": "pigLatin(\"hello universe\") should return \"ellohay universeway\".",
+        "assert": "assert.equal(pigLatin(\"hello universe\"), \"ellohay universeway\");"
+      },
+      {
+        "text": "pigLatin(\"Hello universe\") should return \"Ellohay universeway\".",
+        "assert": "assert.equal(pigLatin(\"Hello universe\"), \"Ellohay universeway\");"
+      },
+      {
+        "text": "pigLatin(\"Pig Latin is fun\") should return \"Igpay Atinlay isway unfay\".",
+        "assert": "assert.equal(pigLatin(\"Pig Latin is fun\"), \"Igpay Atinlay isway unfay\");"
+      },
+      {
+        "text": "pigLatin(\"The quick brown fox jumped over the lazy dog\") should return \"Ethay uickqay ownbray oxfay umpedjay overway ethay azylay ogday\".",
+        "assert": "assert.equal(pigLatin(\"The quick brown fox jumped over the lazy dog\"), \"Ethay uickqay ownbray oxfay umpedjay overway ethay azylay ogday\");"
+      }
+    ]
+  },
+  "2026-07-17": {
+    "n": 341,
+    "title": "Birthday Countdown",
+    "fn": "daysUntilBirthday",
+    "tests": [
+      {
+        "text": "daysUntilBirthday(\"2026-07-16\", \"9/7\") should return 53.",
+        "assert": "assert.equal(daysUntilBirthday(\"2026-07-16\", \"9/7\"), 53);"
+      },
+      {
+        "text": "daysUntilBirthday(\"2026-07-16\", \"3/22\") should return 249.",
+        "assert": "assert.equal(daysUntilBirthday(\"2026-07-16\", \"3/22\"), 249);"
+      },
+      {
+        "text": "daysUntilBirthday(\"2026-07-16\", \"7/16\") should return 365.",
+        "assert": "assert.equal(daysUntilBirthday(\"2026-07-16\", \"7/16\"), 365);"
+      },
+      {
+        "text": "daysUntilBirthday(\"2024-02-28\", \"3/1\") should return 2.",
+        "assert": "assert.equal(daysUntilBirthday(\"2024-02-28\", \"3/1\"), 2);"
+      },
+      {
+        "text": "daysUntilBirthday(\"2023-04-24\", \"12/30\") should return 250.",
+        "assert": "assert.equal(daysUntilBirthday(\"2023-04-24\", \"12/30\"), 250);"
+      },
+      {
+        "text": "daysUntilBirthday(\"2024-03-01\", \"2/29\") should return 1460.",
+        "assert": "assert.equal(daysUntilBirthday(\"2024-03-01\", \"2/29\"), 1460);"
+      },
+      {
+        "text": "daysUntilBirthday(\"2096-03-01\", \"2/29\") should return 2920.",
+        "assert": "assert.equal(daysUntilBirthday(\"2096-03-01\", \"2/29\"), 2920);"
+      }
+    ]
+  },
+  "2026-07-18": {
+    "n": 342,
+    "title": "Dice Odds",
+    "fn": "getOdds",
+    "tests": [
+      {
+        "text": "getOdds(1, 5) should return \"1 in 6\".",
+        "assert": "assert.equal(getOdds(1, 5), \"1 in 6\");"
+      },
+      {
+        "text": "getOdds(2, 4) should return \"1 in 12\".",
+        "assert": "assert.equal(getOdds(2, 4), \"1 in 12\");"
+      },
+      {
+        "text": "getOdds(3, 10) should return \"1 in 8\".",
+        "assert": "assert.equal(getOdds(3, 10), \"1 in 8\");"
+      },
+      {
+        "text": "getOdds(4, 7) should return \"1 in 65\".",
+        "assert": "assert.equal(getOdds(4, 7), \"1 in 65\");"
+      },
+      {
+        "text": "getOdds(5, 26) should return \"1 in 111\".",
+        "assert": "assert.equal(getOdds(5, 26), \"1 in 111\");"
+      },
+      {
+        "text": "getOdds(6, 35) should return \"1 in 7776\".",
+        "assert": "assert.equal(getOdds(6, 35), \"1 in 7776\");"
+      }
+    ]
+  },
+  "2026-07-19": {
+    "n": 343,
+    "title": "Elevator Stops",
+    "fn": "elevatorStops",
+    "tests": [
+      {
+        "text": "elevatorStops(5, [2, 8, 3, 9]) should return [3, 2, 8, 9].",
+        "assert": "assert.deepEqual(elevatorStops(5, [2, 8, 3, 9]), [3, 2, 8, 9]);"
+      },
+      {
+        "text": "elevatorStops(6, [2, 10, 8, 3, 1, 9]) should return [8, 9, 10, 3, 2, 1].",
+        "assert": "assert.deepEqual(elevatorStops(6, [2, 10, 8, 3, 1, 9]), [8, 9, 10, 3, 2, 1]);"
+      },
+      {
+        "text": "elevatorStops(1, [4, 8, 3, 6, 9]) should return [3, 4, 6, 8, 9].",
+        "assert": "assert.deepEqual(elevatorStops(1, [4, 8, 3, 6, 9]), [3, 4, 6, 8, 9]);"
+      },
+      {
+        "text": "elevatorStops(12, [6, 10, 7, 3, 1, 4]) should return [10, 7, 6, 4, 3, 1].",
+        "assert": "assert.deepEqual(elevatorStops(12, [6, 10, 7, 3, 1, 4]), [10, 7, 6, 4, 3, 1]);"
+      },
+      {
+        "text": "elevatorStops(11, [2, 8, 23, 5, 12, 10, 6, 9, 19]) should return [10, 9, 8, 6, 5, 2, 12, 19, 23].",
+        "assert": "assert.deepEqual(elevatorStops(11, [2, 8, 23, 5, 12, 10, 6, 9, 19]), [10, 9, 8, 6, 5, 2, 12, 19, 23]);"
+      }
+    ]
+  },
+  "2026-07-20": {
+    "n": 344,
+    "title": "Golden Ratio",
+    "fn": "isGoldenRatio",
+    "tests": [
+      {
+        "text": "isGoldenRatio(21, 34) should return true.",
+        "assert": "assert.isTrue(isGoldenRatio(21, 34));"
+      },
+      {
+        "text": "isGoldenRatio(15, 20) should return false.",
+        "assert": "assert.isFalse(isGoldenRatio(15, 20));"
+      },
+      {
+        "text": "isGoldenRatio(8, 13) should return true.",
+        "assert": "assert.isTrue(isGoldenRatio(8, 13));"
+      },
+      {
+        "text": "isGoldenRatio(10, 16) should return false.",
+        "assert": "assert.isFalse(isGoldenRatio(10, 16));"
+      },
+      {
+        "text": "isGoldenRatio(1618, 1000) should return true.",
+        "assert": "assert.isTrue(isGoldenRatio(1618, 1000));"
+      },
+      {
+        "text": "isGoldenRatio(88, 55) should return false.",
+        "assert": "assert.isFalse(isGoldenRatio(88, 55));"
+      }
+    ]
+  },
+  "2026-07-21": {
+    "n": 345,
+    "title": "Word Blender",
+    "fn": "blendWords",
+    "tests": [
+      {
+        "text": "blendWords(\"turtle\", \"toucan\") should return \"turcan\".",
+        "assert": "assert.equal(blendWords(\"turtle\", \"toucan\"), \"turcan\");"
+      },
+      {
+        "text": "blendWords(\"chipmunk\", \"flamingo\") should return \"chipingo\".",
+        "assert": "assert.equal(blendWords(\"chipmunk\", \"flamingo\"), \"chipingo\");"
+      },
+      {
+        "text": "blendWords(\"falcon\", \"pelican\") should return \"falican\".",
+        "assert": "assert.equal(blendWords(\"falcon\", \"pelican\"), \"falican\");"
+      },
+      {
+        "text": "blendWords(\"hyena\", \"iguana\") should return \"hyana\".",
+        "assert": "assert.equal(blendWords(\"hyena\", \"iguana\"), \"hyana\");"
+      },
+      {
+        "text": "blendWords(\"scorpion\", \"gorilla\") should return \"scorilla\".",
+        "assert": "assert.equal(blendWords(\"scorpion\", \"gorilla\"), \"scorilla\");"
+      },
+      {
+        "text": "blendWords(\"platypus\", \"wolverine\") should return \"platerine\".",
+        "assert": "assert.equal(blendWords(\"platypus\", \"wolverine\"), \"platerine\");"
+      }
+    ]
+  },
+  "2026-07-22": {
+    "n": 346,
+    "title": "Piggy Bank",
+    "fn": "piggyBank",
+    "tests": [
+      {
+        "text": "piggyBank({ pennies: 3, nickels: 5, dimes: 2, quarters: 6 }) should return \"$1.98\".",
+        "assert": "assert.equal(piggyBank({ pennies: 3, nickels: 5, dimes: 2, quarters: 6 }), \"$1.98\");"
+      },
+      {
+        "text": "piggyBank({ pennies: 1, nickels: 1, dimes: 1, quarters: 1 }) should return \"$0.41\".",
+        "assert": "assert.equal(piggyBank({ pennies: 1, nickels: 1, dimes: 1, quarters: 1 }), \"$0.41\");"
+      },
+      {
+        "text": "piggyBank({ nickels: 8, dimes: 6, quarters: 5 }) should return \"$2.25\".",
+        "assert": "assert.equal(piggyBank({ nickels: 8, dimes: 6, quarters: 5 }), \"$2.25\");"
+      },
+      {
+        "text": "piggyBank({}) should return \"$0.00\".",
+        "assert": "assert.equal(piggyBank({}), \"$0.00\");"
+      },
+      {
+        "text": "piggyBank({ pennies: 146, nickels: 11, dimes: 0, quarters: 19 }) should return \"$6.76\".",
+        "assert": "assert.equal(piggyBank({ pennies: 146, nickels: 11, dimes: 0, quarters: 19 }), \"$6.76\");"
+      }
+    ]
+  },
+  "2026-07-23": {
+    "n": 347,
+    "title": "Game Theory",
+    "fn": "playGame",
+    "tests": [
+      {
+        "text": "playGame(\"CCCC\", \"CCCC\") should return [12, 12].",
+        "assert": "assert.deepEqual(playGame(\"CCCC\", \"CCCC\"), [12, 12]);"
+      },
+      {
+        "text": "playGame(\"DDDD\", \"DDDD\") should return [4, 4].",
+        "assert": "assert.deepEqual(playGame(\"DDDD\", \"DDDD\"), [4, 4]);"
+      },
+      {
+        "text": "playGame(\"CCDD\", \"CDDD\") should return [5, 10].",
+        "assert": "assert.deepEqual(playGame(\"CCDD\", \"CDDD\"), [5, 10]);"
+      },
+      {
+        "text": "playGame(\"CCCDCDCCCDDC\", \"CCDDCDCDDCCD\") should return [24, 34].",
+        "assert": "assert.deepEqual(playGame(\"CCCDCDCCCDDC\", \"CCDDCDCDDCCD\"), [24, 34]);"
+      },
+      {
+        "text": "playGame(\"DDCCDDDDCDDCDDDCDD\", \"CCDCCCDCCCDCCCCDCC\") should return [66, 21].",
+        "assert": "assert.deepEqual(playGame(\"DDCCDDDDCDDCDDDCDD\", \"CCDCCCDCCCDCCCCDCC\"), [66, 21]);"
+      }
+    ]
+  },
+  "2026-07-24": {
+    "n": 348,
+    "title": "Loan Calculator",
+    "fn": "getLoanSchedule",
+    "tests": [
+      {
+        "text": "getLoanSchedule(1000, 0, 200) should return [1000, 800, 600, 400, 200, 0].",
+        "assert": "assert.deepEqual(getLoanSchedule(1000, 0, 200), [1000, 800, 600, 400, 200, 0]);"
+      },
+      {
+        "text": "getLoanSchedule(1000, 5, 200) should return [1000, 804, 608, 410, 212, 13, 0].",
+        "assert": "assert.deepEqual(getLoanSchedule(1000, 5, 200), [1000, 804, 608, 410, 212, 13, 0]);"
+      },
+      {
+        "text": "getLoanSchedule(10, 50, 1) should return [10, 9, 9, 8, 8, 7, 6, 5, 5, 4, 3, 2, 1, 0, 0].",
+        "assert": "assert.deepEqual(getLoanSchedule(10, 50, 1), [10, 9, 9, 8, 8, 7, 6, 5, 5, 4, 3, 2, 1, 0, 0]);"
+      },
+      {
+        "text": "getLoanSchedule(5500, 8, 400) should return [5500, 5137, 4771, 4403, 4032, 3659, 3283, 2905, 2525, 2141, 1756, 1367, 977, 583, 187, 0].",
+        "assert": "assert.deepEqual(getLoanSchedule(5500, 8, 400), [5500, 5137, 4771, 4403, 4032, 3659, 3283, 2905, 2525, 2141, 1756, 1367, 977, 583, 187, 0]);"
+      },
+      {
+        "text": "getLoanSchedule(50000, 5.2, 1650) should return [50000, 48567, 47127, 45681, 44229, 42771, 41306, 39835, 38358, 36874, 35384, 33887, 32384, 30874, 29358, 27835, 26306, 24770, 23227, 21678, 20122, 18559, 16990, 15413, 13830, 12240, 10643, 9039, 7428, 5810, 4186, 2554, 915, 0].",
+        "assert": "assert.deepEqual(getLoanSchedule(50000, 5.2, 1650), [50000, 48567, 47127, 45681, 44229, 42771, 41306, 39835, 38358, 36874, 35384, 33887, 32384, 30874, 29358, 27835, 26306, 24770, 23227, 21678, 20122, 18559, 16990, 15413, 13830, 12240, 10643, 9039, 7428, 5810, 4186, 2554, 915, 0]);"
+      }
+    ]
+  },
+  "2026-07-25": {
+    "n": 349,
+    "title": "Cell Signal",
+    "fn": "findSignal",
+    "tests": [
+      {
+        "text": "findSignal([[0, 0, 1], [0, 1, 0], [0, 0, 1]]) should return [1, 2].",
+        "assert": "assert.deepEqual(findSignal([[0, 0, 1], [0, 1, 0], [0, 0, 1]]), [1, 2]);"
+      },
+      {
+        "text": "findSignal([[0, 2, 0], [1, 0, 0], [0, 0, 1]]) should return [2, 1].",
+        "assert": "assert.deepEqual(findSignal([[0, 2, 0], [1, 0, 0], [0, 0, 1]]), [2, 1]);"
+      },
+      {
+        "text": "findSignal([[0, 0, 2, 0], [0, 0, 0, 0], [2, 0, 0, 0], [0, 0, 0, 1]]) should return [2, 2].",
+        "assert": "assert.deepEqual(findSignal([[0, 0, 2, 0], [0, 0, 0, 0], [2, 0, 0, 0], [0, 0, 0, 1]]), [2, 2]);"
+      },
+      {
+        "text": "findSignal([[0, 3, 0, 0, 0], [0, 0, 0, 0, 2], [0, 0, 0, 0, 0], [4, 0, 0, 0, 0], [0, 0, 0, 0, 0]]) should return [3, 4].",
+        "assert": "assert.deepEqual(findSignal([[0, 3, 0, 0, 0], [0, 0, 0, 0, 2], [0, 0, 0, 0, 0], [4, 0, 0, 0, 0], [0, 0, 0, 0, 0]]), [3, 4]);"
+      },
+      {
+        "text": "findSignal([[3, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 2, 0, 0, 0, 2]]) should return [3, 3].",
+        "assert": "assert.deepEqual(findSignal([[3, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 2, 0, 0, 0, 2]]), [3, 3]);"
+      }
+    ]
+  },
+  "2026-07-26": {
+    "n": 350,
+    "title": "Letter Distance",
+    "fn": "letterDistance",
+    "tests": [
+      {
+        "text": "letterDistance(\"abc\", \"bcd\") should return 3.",
+        "assert": "assert.equal(letterDistance(\"abc\", \"bcd\"), 3);"
+      },
+      {
+        "text": "letterDistance(\"abc\", \"xyz\") should return 9.",
+        "assert": "assert.equal(letterDistance(\"abc\", \"xyz\"), 9);"
+      },
+      {
+        "text": "letterDistance(\"encrypt\", \"decrypt\") should return 10.",
+        "assert": "assert.equal(letterDistance(\"encrypt\", \"decrypt\"), 10);"
+      },
+      {
+        "text": "letterDistance(\"algorithm\", \"codeblock\") should return 43.",
+        "assert": "assert.equal(letterDistance(\"algorithm\", \"codeblock\"), 43);"
+      },
+      {
+        "text": "letterDistance(\"lobster\", \"penguin\") should return 47.",
+        "assert": "assert.equal(letterDistance(\"lobster\", \"penguin\"), 47);"
+      },
+      {
+        "text": "letterDistance(\"alligator\", \"crocodile\") should return 55.",
+        "assert": "assert.equal(letterDistance(\"alligator\", \"crocodile\"), 55);"
+      }
+    ]
+  },
+  "2026-07-27": {
+    "n": 351,
+    "title": "Pronic Number",
+    "fn": "isPronic",
+    "tests": [
+      {
+        "text": "isPronic(6) should return true.",
+        "assert": "assert.isTrue(isPronic(6));"
+      },
+      {
+        "text": "isPronic(15) should return false.",
+        "assert": "assert.isFalse(isPronic(15));"
+      },
+      {
+        "text": "isPronic(12) should return true.",
+        "assert": "assert.isTrue(isPronic(12));"
+      },
+      {
+        "text": "isPronic(132) should return true.",
+        "assert": "assert.isTrue(isPronic(132));"
+      },
+      {
+        "text": "isPronic(80) should return false.",
+        "assert": "assert.isFalse(isPronic(80));"
+      },
+      {
+        "text": "isPronic(0) should return true.",
+        "assert": "assert.isTrue(isPronic(0));"
+      }
+    ]
+  },
+  "2026-07-28": {
+    "n": 352,
+    "title": "Contrast Rating 1",
+    "fn": "getContrastRating",
+    "tests": [
+      {
+        "text": "getContrastRating(\"7.5\", false) should return \"AAA\".",
+        "assert": "assert.equal(getContrastRating(\"7.5\", false), \"AAA\");"
+      },
+      {
+        "text": "getContrastRating(\"4.8\", false) should return \"AA\".",
+        "assert": "assert.equal(getContrastRating(\"4.8\", false), \"AA\");"
+      },
+      {
+        "text": "getContrastRating(\"4.2\", false) should return \"Fail\".",
+        "assert": "assert.equal(getContrastRating(\"4.2\", false), \"Fail\");"
+      },
+      {
+        "text": "getContrastRating(\"4.5\", true) should return \"AAA\".",
+        "assert": "assert.equal(getContrastRating(\"4.5\", true), \"AAA\");"
+      },
+      {
+        "text": "getContrastRating(\"3.0\", true) should return \"AA\".",
+        "assert": "assert.equal(getContrastRating(\"3.0\", true), \"AA\");"
+      },
+      {
+        "text": "getContrastRating(\"2.7\", false) should return \"Fail\".",
+        "assert": "assert.equal(getContrastRating(\"2.7\", false), \"Fail\");"
+      }
+    ]
+  },
+  "2026-07-29": {
+    "n": 353,
+    "title": "Contrast Rating 2",
+    "fn": "getContrastRating",
+    "tests": [
+      {
+        "text": "getContrastRating(1.0, 0.0, false) should return \"AAA\".",
+        "assert": "assert.equal(getContrastRating(1.0, 0.0, false), \"AAA\");"
+      },
+      {
+        "text": "getContrastRating(0.9015, 0.1364, false) should return \"AA\".",
+        "assert": "assert.equal(getContrastRating(0.9015, 0.1364, false), \"AA\");"
+      },
+      {
+        "text": "getContrastRating(0.8965, 0.1628, false) should return \"Fail\".",
+        "assert": "assert.equal(getContrastRating(0.8965, 0.1628, false), \"Fail\");"
+      },
+      {
+        "text": "getContrastRating(0.7469, 0.0957, true) should return \"AAA\".",
+        "assert": "assert.equal(getContrastRating(0.7469, 0.0957, true), \"AAA\");"
+      },
+      {
+        "text": "getContrastRating(0.7489, 0.2018, true) should return \"AA\".",
+        "assert": "assert.equal(getContrastRating(0.7489, 0.2018, true), \"AA\");"
+      },
+      {
+        "text": "getContrastRating(0.6571, 0.1974, true) should return \"Fail\".",
+        "assert": "assert.equal(getContrastRating(0.6571, 0.1974, true), \"Fail\");"
+      }
+    ]
+  },
+  "2026-07-30": {
+    "n": 354,
+    "title": "Contrast Rating 3",
+    "fn": "getContrastRating",
+    "tests": [
+      {
+        "text": "getContrastRating([255, 255, 255], [0, 0, 0], false) should return \"AAA\".",
+        "assert": "assert.equal(getContrastRating([255, 255, 255], [0, 0, 0], false), \"AAA\");"
+      },
+      {
+        "text": "getContrastRating([215, 188, 188], [55, 55, 55], false) should return \"AA\".",
+        "assert": "assert.equal(getContrastRating([215, 188, 188], [55, 55, 55], false), \"AA\");"
+      },
+      {
+        "text": "getContrastRating([143, 144, 210], [46, 47, 61], false) should return \"Fail\".",
+        "assert": "assert.equal(getContrastRating([143, 144, 210], [46, 47, 61], false), \"Fail\");"
+      },
+      {
+        "text": "getContrastRating([167, 167, 210], [53, 10, 53], true) should return \"AAA\".",
+        "assert": "assert.equal(getContrastRating([167, 167, 210], [53, 10, 53], true), \"AAA\");"
+      },
+      {
+        "text": "getContrastRating([135, 147, 155], [60, 70, 90], true) should return \"AA\".",
+        "assert": "assert.equal(getContrastRating([135, 147, 155], [60, 70, 90], true), \"AA\");"
+      },
+      {
+        "text": "getContrastRating([125, 210, 195], [105, 130, 90], true) should return \"Fail\".",
+        "assert": "assert.equal(getContrastRating([125, 210, 195], [105, 130, 90], true), \"Fail\");"
+      }
+    ]
+  },
+  "2026-07-31": {
+    "n": 355,
+    "title": "Morse Code",
+    "fn": "decodeMorse",
+    "tests": [
+      {
+        "text": "decodeMorse(\"--..\") should return \"Z\".",
+        "assert": "assert.equal(decodeMorse(\"--..\"), \"Z\");"
+      },
+      {
+        "text": "decodeMorse(\"... --- ...\") should return \"SOS\".",
+        "assert": "assert.equal(decodeMorse(\"... --- ...\"), \"SOS\");"
+      },
+      {
+        "text": "decodeMorse(\"..-. .-. . . -.-. --- -.. . -.-. .- -- .--.\") should return \"FREECODECAMP\".",
+        "assert": "assert.equal(decodeMorse(\"..-. .-. . . -.-. --- -.. . -.-. .- -- .--.\"), \"FREECODECAMP\");"
+      },
+      {
+        "text": "decodeMorse(\".... . .-.. .-.. --- .-- --- .-. .-.. -..\") should return \"HELLO WORLD\".",
+        "assert": "assert.equal(decodeMorse(\".... . .-.. .-.. ---   .-- --- .-. .-.. -..\"), \"HELLO WORLD\");"
+      },
+      {
+        "text": "decodeMorse(\"- .... . --.- ..- .. -.-. -.- -... .-. --- .-- -. ..-. --- -..- .--- ..- -- .--. . -.. --- ...- . .-. - .... . .-.. .- --.. -.-- -.. --- --.\") should return \"THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG\".",
+        "assert": "assert.equal(decodeMorse(\"- .... .   --.- ..- .. -.-. -.-   -... .-. --- .-- -.   ..-. --- -..-   .--- ..- -- .--. . -..   --- ...- . .-.   - .... .   .-.. .- --.. -.--   -.. --- --.\"), \"THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG\");"
+      }
+    ]
+  },
+  "2026-08-01": {
+    "n": 356,
+    "title": "Magic Square Solver",
+    "fn": "solveMagicSquare",
+    "tests": [
+      {
+        "text": "solveMagicSquare([[2, 7, 6], [9, 0, 1], [4, 3, 8]]) should return 5.",
+        "assert": "assert.equal(solveMagicSquare([[2, 7, 6], [9, 0, 1], [4, 3, 8]]), 5);"
+      },
+      {
+        "text": "solveMagicSquare([[0, 14, 12], [18, 10, 2], [8, 6, 16]]) should return 4.",
+        "assert": "assert.equal(solveMagicSquare([[0, 14, 12], [18, 10, 2], [8, 6, 16]]), 4);"
+      },
+      {
+        "text": "solveMagicSquare([[12, 17, 16], [19, 0, 10], [14, 13, 18]]) should return \"impossible\".",
+        "assert": "assert.equal(solveMagicSquare([[12, 17, 16], [19, 0, 10], [14, 13, 18]]), \"impossible\");"
+      },
+      {
+        "text": "solveMagicSquare([[15, 35, 31], [43, 27, 11], [23, 19, 0]]) should return 39.",
+        "assert": "assert.equal(solveMagicSquare([[15, 35, 31], [43, 27, 11], [23, 19, 0]]), 39);"
+      },
+      {
+        "text": "solveMagicSquare([[26, 41, 14], [47, 35, 0], [32, 29, 44]]) should return \"impossible\".",
+        "assert": "assert.equal(solveMagicSquare([[26, 41, 14], [47, 35, 0], [32, 29, 44]]), \"impossible\");"
+      }
+    ]
+  },
+  "2026-08-02": {
+    "n": 357,
+    "title": "Food Chain",
+    "fn": "getFoodChain",
+    "tests": [
+      {
+        "text": "getFoodChain([[\"cat\", \"mouse\"]]) should return [\"cat\", \"mouse\"].",
+        "assert": "assert.deepEqual(getFoodChain([[\"cat\", \"mouse\"]]), [\"cat\", \"mouse\"]);"
+      },
+      {
+        "text": "getFoodChain([[\"wolf\", \"deer\"], [\"deer\", \"grass\"]]) should return [\"wolf\", \"deer\", \"grass\"].",
+        "assert": "assert.deepEqual(getFoodChain([[\"wolf\", \"deer\"], [\"deer\", \"grass\"]]), [\"wolf\", \"deer\", \"grass\"]);"
+      },
+      {
+        "text": "getFoodChain([[\"hawk\", \"snake\"], [\"snake\", \"frog\"], [\"frog\", \"fly\"]]) should return [\"hawk\", \"snake\", \"frog\", \"fly\"].",
+        "assert": "assert.deepEqual(getFoodChain([[\"hawk\", \"snake\"], [\"snake\", \"frog\"], [\"frog\", \"fly\"]]), [\"hawk\", \"snake\", \"frog\", \"fly\"]);"
+      },
+      {
+        "text": "getFoodChain([[\"rabbit\", \"grass\"], [\"fox\", \"rabbit\"], [\"eagle\", \"fox\"]]) should return [\"eagle\", \"fox\", \"rabbit\", \"grass\"].",
+        "assert": "assert.deepEqual(getFoodChain([[\"rabbit\", \"grass\"], [\"fox\", \"rabbit\"], [\"eagle\", \"fox\"]]), [\"eagle\", \"fox\", \"rabbit\", \"grass\"]);"
+      },
+      {
+        "text": "getFoodChain([[\"seal\", \"salmon\"], [\"herring\", \"shrimp\"], [\"orca\", \"seal\"], [\"shrimp\", \"plankton\"], [\"salmon\", \"herring\"]]) should return [\"orca\", \"seal\", \"salmon\", \"herring\", \"shrimp\", \"plankton\"].",
+        "assert": "assert.deepEqual(getFoodChain([[\"seal\", \"salmon\"], [\"herring\", \"shrimp\"], [\"orca\", \"seal\"], [\"shrimp\", \"plankton\"], [\"salmon\", \"herring\"]]), [\"orca\", \"seal\", \"salmon\", \"herring\", \"shrimp\", \"plankton\"]);"
+      }
+    ]
+  },
+  "2026-08-03": {
+    "n": 358,
+    "title": "Emoji Translator",
+    "fn": "getEmojiPhrase",
+    "tests": [
+      {
+        "text": "getEmojiPhrase(\"🪨⭐\") should return \"rock star\".",
+        "assert": "assert.equal(getEmojiPhrase(\"🪨⭐\"), \"rock star\");"
+      },
+      {
+        "text": "getEmojiPhrase(\"🥵🐕\") should return \"hot dog\".",
+        "assert": "assert.equal(getEmojiPhrase(\"🥵🐕\"), \"hot dog\");"
+      },
+      {
+        "text": "getEmojiPhrase(\"👶🦈\") should return \"baby shark\".",
+        "assert": "assert.equal(getEmojiPhrase(\"👶🦈\"), \"baby shark\");"
+      },
+      {
+        "text": "getEmojiPhrase(\"⭐🐟\") should return \"star fish\".",
+        "assert": "assert.equal(getEmojiPhrase(\"⭐🐟\"), \"star fish\");"
+      },
+      {
+        "text": "getEmojiPhrase(\"🧊🧊👶\") should return \"ice ice baby\".",
+        "assert": "assert.equal(getEmojiPhrase(\"🧊🧊👶\"), \"ice ice baby\");"
+      },
+      {
+        "text": "getEmojiPhrase(\"🐱🐟🍲\") should return \"cat fish soup\".",
+        "assert": "assert.equal(getEmojiPhrase(\"🐱🐟🍲\"), \"cat fish soup\");"
+      }
+    ]
+  },
+  "2026-08-04": {
+    "n": 359,
+    "title": "Golf Handicap Calculator",
+    "fn": "calculateHandicap",
+    "tests": [
+      {
+        "text": "calculateHandicap([72, 72, 72], [72, 72, 72]) should return 0.",
+        "assert": "assert.equal(calculateHandicap([72, 72, 72], [72, 72, 72]), 0);"
+      },
+      {
+        "text": "calculateHandicap([80, 76, 78, 78], [72, 72, 72, 72]) should return 6.",
+        "assert": "assert.equal(calculateHandicap([80, 76, 78, 78], [72, 72, 72, 72]), 6);"
+      },
+      {
+        "text": "calculateHandicap([42, 45, 46, 44], [36, 36, 36, 36]) should return 8.3.",
+        "assert": "assert.equal(calculateHandicap([42, 45, 46, 44], [36, 36, 36, 36]), 8.3);"
+      },
+      {
+        "text": "calculateHandicap([85, 80, 76, 79, 82], [72, 72, 72, 71, 71]) should return 8.8.",
+        "assert": "assert.equal(calculateHandicap([85, 80, 76, 79, 82], [72, 72, 72, 71, 71]), 8.8);"
+      },
+      {
+        "text": "calculateHandicap([41, 50, 48, 52, 46, 49], [35, 37, 35, 37, 35, 37]) should return 11.7.",
+        "assert": "assert.equal(calculateHandicap([41, 50, 48, 52, 46, 49], [35, 37, 35, 37, 35, 37]), 11.7);"
+      }
+    ]
+  },
+  "2026-08-05": {
+    "n": 360,
+    "title": "Spoken Duration",
+    "fn": "getSpokenDuration",
+    "tests": [
+      {
+        "text": "getSpokenDuration(3723) should return \"1 hour, 2 minutes and 3 seconds\".",
+        "assert": "assert.equal(getSpokenDuration(3723), \"1 hour, 2 minutes and 3 seconds\");"
+      },
+      {
+        "text": "getSpokenDuration(7295) should return \"2 hours, 1 minute and 35 seconds\".",
+        "assert": "assert.equal(getSpokenDuration(7295), \"2 hours, 1 minute and 35 seconds\");"
+      },
+      {
+        "text": "getSpokenDuration(8521) should return \"2 hours, 22 minutes and 1 second\".",
+        "assert": "assert.equal(getSpokenDuration(8521), \"2 hours, 22 minutes and 1 second\");"
+      },
+      {
+        "text": "getSpokenDuration(435) should return \"7 minutes and 15 seconds\".",
+        "assert": "assert.equal(getSpokenDuration(435), \"7 minutes and 15 seconds\");"
+      },
+      {
+        "text": "getSpokenDuration(14455) should return \"4 hours and 55 seconds\".",
+        "assert": "assert.equal(getSpokenDuration(14455), \"4 hours and 55 seconds\");"
+      },
+      {
+        "text": "getSpokenDuration(72000) should return \"20 hours\".",
+        "assert": "assert.equal(getSpokenDuration(72000), \"20 hours\");"
+      },
+      {
+        "text": "getSpokenDuration(1) should return \"1 second\".",
+        "assert": "assert.equal(getSpokenDuration(1), \"1 second\");"
+      }
+    ]
+  },
+  "2026-08-06": {
+    "n": 361,
+    "title": "Spoken Time",
+    "fn": "getSpokenTime",
+    "tests": [
+      {
+        "text": "getSpokenTime(90, 0) should return \"3 o'clock\".",
+        "assert": "assert.equal(getSpokenTime(90, 0), \"3 o'clock\");"
+      },
+      {
+        "text": "getSpokenTime(160, 120) should return \"20 minutes past 5\".",
+        "assert": "assert.equal(getSpokenTime(160, 120), \"20 minutes past 5\");"
+      },
+      {
+        "text": "getSpokenTime(255, 180) should return \"half past 8\".",
+        "assert": "assert.equal(getSpokenTime(255, 180), \"half past 8\");"
+      },
+      {
+        "text": "getSpokenTime(67.5, 92) should return \"quarter past 2\".",
+        "assert": "assert.equal(getSpokenTime(67.5, 92), \"quarter past 2\");"
+      },
+      {
+        "text": "getSpokenTime(200, 240) should return \"20 minutes to 7\".",
+        "assert": "assert.equal(getSpokenTime(200, 240), \"20 minutes to 7\");"
+      },
+      {
+        "text": "getSpokenTime(322.5, 273) should return \"quarter to 11\".",
+        "assert": "assert.equal(getSpokenTime(322.5, 273), \"quarter to 11\");"
+      },
+      {
+        "text": "getSpokenTime(117.5, 335) should return \"5 minutes to 4\".",
+        "assert": "assert.equal(getSpokenTime(117.5, 335), \"5 minutes to 4\");"
+      }
+    ]
+  },
+  "2026-08-07": {
+    "n": 362,
+    "title": "Nonogram Validator",
+    "fn": "isValidNonogram",
+    "tests": [
+      {
+        "text": "isValidNonogram([3, 2], [1, 1, 1, 0, 1, 1]) should return true.",
+        "assert": "assert.isTrue(isValidNonogram([3, 2], [1, 1, 1, 0, 1, 1]));"
+      },
+      {
+        "text": "isValidNonogram([3, 2], [0, 1, 1, 1, 1, 1]) should return false.",
+        "assert": "assert.isFalse(isValidNonogram([3, 2], [0, 1, 1, 1, 1, 1]));"
+      },
+      {
+        "text": "isValidNonogram([1, 1, 1, 1], [1, 0, 1, 0, 1, 0, 1, 0, 1]) should return false.",
+        "assert": "assert.isFalse(isValidNonogram([1, 1, 1, 1], [1, 0, 1, 0, 1, 0, 1, 0, 1]));"
+      },
+      {
+        "text": "isValidNonogram([1, 1, 1, 1], [0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0]) should return true.",
+        "assert": "assert.isTrue(isValidNonogram([1, 1, 1, 1], [0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0]));"
+      },
+      {
+        "text": "isValidNonogram([3, 2, 3], [0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0]) should return true.",
+        "assert": "assert.isTrue(isValidNonogram([3, 2, 3], [0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0]));"
+      },
+      {
+        "text": "isValidNonogram([3, 2, 3], [0, 0, 0, 1, 0, 0, 1, 0, 0, 0]) should return false.",
+        "assert": "assert.isFalse(isValidNonogram([3, 2, 3], [0, 0, 0, 1, 0, 0, 1, 0, 0, 0]));"
+      }
+    ]
+  },
+  "2026-08-08": {
+    "n": 363,
+    "title": "Bucket Fill 2",
+    "fn": "bucketFill",
+    "tests": [
+      {
+        "text": "bucketFill([[\"R\", \"R\"], [\"R\", \"R\"]], \"G\") should return 1.",
+        "assert": "assert.equal(bucketFill([[\"R\", \"R\"], [\"R\", \"R\"]], \"G\"), 1);"
+      },
+      {
+        "text": "bucketFill([[\"B\", \"B\", \"B\"], [\"B\", \"B\", \"B\"], [\"B\", \"B\", \"B\"]], \"B\") should return 0.",
+        "assert": "assert.equal(bucketFill([[\"B\", \"B\", \"B\"], [\"B\", \"B\", \"B\"], [\"B\", \"B\", \"B\"]], \"B\"), 0);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"Y\", \"Y\"], [\"G\", \"Y\", \"G\"], [\"Y\", \"Y\", \"G\"]], \"R\") should return 3.",
+        "assert": "assert.equal(bucketFill([[\"G\", \"Y\", \"Y\"], [\"G\", \"Y\", \"G\"], [\"Y\", \"Y\", \"G\"]], \"R\"), 3);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"G\", \"P\", \"Y\"], [\"O\", \"P\", \"P\", \"P\"], [\"O\", \"O\", \"P\", \"G\"], [\"G\", \"O\", \"O\", \"G\"]], \"P\") should return 5.",
+        "assert": "assert.equal(bucketFill([[\"G\", \"G\", \"P\", \"Y\"], [\"O\", \"P\", \"P\", \"P\"], [\"O\", \"O\", \"P\", \"G\"], [\"G\", \"O\", \"O\", \"G\"]], \"P\"), 5);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"G\", \"C\", \"C\", \"O\"], [\"B\", \"Y\", \"B\", \"Y\", \"O\"], [\"B\", \"J\", \"O\", \"J\", \"B\"], [\"G\", \"Y\", \"Y\", \"Y\", \"B\"], [\"G\", \"P\", \"P\", \"G\", \"G\"]], \"Y\") should return 12.",
+        "assert": "assert.equal(bucketFill([[\"G\", \"G\", \"C\", \"C\", \"O\"], [\"B\", \"Y\", \"B\", \"Y\", \"O\"], [\"B\", \"J\", \"O\", \"J\", \"B\"], [\"G\", \"Y\", \"Y\", \"Y\", \"B\"], [\"G\", \"P\", \"P\", \"G\", \"G\"]], \"Y\"), 12);"
+      }
+    ]
+  },
+  "2026-08-09": {
+    "n": 364,
+    "title": "Between Two Buckets",
+    "fn": "mixPaint",
+    "tests": [
+      {
+        "text": "mixPaint({ color: [250, 250, 250], fullness: 50 }, { color: [0, 0, 0], fullness: 50 }) should return [125, 125, 125].",
+        "assert": "assert.deepEqual(mixPaint({ color: [250, 250, 250], fullness: 50 }, { color: [0, 0, 0], fullness: 50 }), [125, 125, 125]);"
+      },
+      {
+        "text": "mixPaint({ color: [250, 250, 250], fullness: 80 }, { color: [0, 0, 0], fullness: 20 }) should return [200, 200, 200].",
+        "assert": "assert.deepEqual(mixPaint({ color: [250, 250, 250], fullness: 80 }, { color: [0, 0, 0], fullness: 20 }), [200, 200, 200]);"
+      },
+      {
+        "text": "mixPaint({ color: [100, 150, 200], fullness: 30 }, { color: [100, 150, 200], fullness: 70 }) should return [100, 150, 200].",
+        "assert": "assert.deepEqual(mixPaint({ color: [100, 150, 200], fullness: 30 }, { color: [100, 150, 200], fullness: 70 }), [100, 150, 200]);"
+      },
+      {
+        "text": "mixPaint({ color: [143, 143, 101], fullness: 45 }, { color: [100, 204, 204], fullness: 90 }) should return [114, 184, 170].",
+        "assert": "assert.deepEqual(mixPaint({ color: [143, 143, 101], fullness: 45 }, { color: [100, 204, 204], fullness: 90 }), [114, 184, 170]);"
+      },
+      {
+        "text": "mixPaint({ color: [15, 134, 249], fullness: 29 }, { color: [97, 178, 55], fullness: 54 }) should return [68, 163, 123].",
+        "assert": "assert.deepEqual(mixPaint({ color: [15, 134, 249], fullness: 29 }, { color: [97, 178, 55], fullness: 54 }), [68, 163, 123]);"
+      }
+    ]
+  },
+  "2026-08-10": {
+    "n": 365,
+    "title": "The Last Challenge: Bucket Fill 3",
+    "fn": "bucketFill",
+    "tests": [
+      {
+        "text": "bucketFill([[\"B\", \"B\"], [\"B\", \"B\"]], \"R\") should return 1.",
+        "assert": "assert.equal(bucketFill([[\"B\", \"B\"], [\"B\", \"B\"]], \"R\"), 1);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"G\", \"G\"], [\"G\", \"G\", \"G\"], [\"G\", \"G\", \"G\"]], \"G\") should return 0.",
+        "assert": "assert.equal(bucketFill([[\"G\", \"G\", \"G\"], [\"G\", \"G\", \"G\"], [\"G\", \"G\", \"G\"]], \"G\"), 0);"
+      },
+      {
+        "text": "bucketFill([[\"P\", \"P\", \"Y\"], [\"Y\", \"P\", \"Y\"], [\"Y\", \"P\", \"P\"]], \"O\") should return 2.",
+        "assert": "assert.equal(bucketFill([[\"P\", \"P\", \"Y\"], [\"Y\", \"P\", \"Y\"], [\"Y\", \"P\", \"P\"]], \"O\"), 2);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"Y\", \"C\", \"C\"], [\"Y\", \"Y\", \"Y\", \"B\"], [\"C\", \"Y\", \"B\", \"B\"], [\"C\", \"B\", \"B\", \"C\"]], \"R\") should return 4.",
+        "assert": "assert.equal(bucketFill([[\"G\", \"Y\", \"C\", \"C\"], [\"Y\", \"Y\", \"Y\", \"B\"], [\"C\", \"Y\", \"B\", \"B\"], [\"C\", \"B\", \"B\", \"C\"]], \"R\"), 4);"
+      },
+      {
+        "text": "bucketFill([[\"G\", \"G\", \"O\", \"O\"], [\"G\", \"Y\", \"B\", \"Y\"], [\"B\", \"Y\", \"B\", \"Y\"], [\"B\", \"Y\", \"B\", \"Y\"], [\"G\", \"G\", \"G\", \"G\"]], \"P\") should return 5.",
+        "assert": "assert.equal(bucketFill([[\"G\", \"G\", \"O\", \"O\"], [\"G\", \"Y\", \"B\", \"Y\"], [\"B\", \"Y\", \"B\", \"Y\"], [\"B\", \"Y\", \"B\", \"Y\"], [\"G\", \"G\", \"G\", \"G\"]], \"P\"), 5);"
+      },
+      {
+        "text": "bucketFill([[\"R\", \"G\", \"R\", \"G\"], [\"R\", \"G\", \"R\", \"G\"], [\"B\", \"B\", \"B\", \"B\"], [\"B\", \"B\", \"B\", \"B\"], [\"R\", \"G\", \"R\", \"G\"]], \"Y\") should return 3.",
+        "assert": "assert.equal(bucketFill([[\"R\", \"G\", \"R\", \"G\"], [\"R\", \"G\", \"R\", \"G\"], [\"B\", \"B\", \"B\", \"B\"], [\"B\", \"B\", \"B\", \"B\"], [\"R\", \"G\", \"R\", \"G\"]], \"Y\"), 3);"
+      }
+    ]
+  }
+}

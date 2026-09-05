@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot Brand Kits, without the jargon</title>
+
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="Microsoft 365">
+<meta name="viz:title" content="Copilot Brand Kits, without the jargon">
+<meta name="viz:description" content="What a brand actually is, what a Microsoft 365 Copilot Brand Kit turns it into, and the uncomfortable part: Copilot enforces some brand rules like laws and others like suggestions. Seventeen rules, four views, one red zone you have to staff with a human.">
+
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1120px; margin: 0 auto; padding: 28px 22px 90px; }
+  .lede { color: var(--muted); font-size: 15px; line-height: 1.62; max-width: 78ch; }
+  .lede strong { color: var(--text); font-weight: 600; }
+  h2 { font-size: 19px; margin: 46px 0 6px; letter-spacing: -.01em; }
+  h2 .num { color: var(--faint); font-variant-numeric: tabular-nums; margin-right: 9px; font-weight: 500; }
+  .note { color: var(--faint); font-size: 12.5px; line-height: 1.55; max-width: 82ch; }
+
+  /* ---- stepper chrome ---- */
+  .steps { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 14px; }
+  .step-btn {
+    background: var(--panel); border: 1px solid var(--border); color: var(--muted);
+    border-radius: 999px; padding: 7px 15px; font: 500 12.5px var(--sans);
+    cursor: pointer; transition: background .18s, border-color .18s, color .18s;
+  }
+  .step-btn:hover { color: var(--text); border-color: var(--faint); }
+  .step-btn[aria-current="true"] { background: var(--panel-2); border-color: var(--accent); color: var(--text); }
+  .step-btn .k { color: var(--faint); font-variant-numeric: tabular-nums; margin-right: 7px; }
+  .step-btn[aria-current="true"] .k { color: var(--accent); }
+
+  .caption { min-height: 62px; margin: 0 0 8px; font-size: 14px; line-height: 1.6; color: var(--muted); max-width: 88ch; }
+  .caption b { color: var(--text); font-weight: 600; }
+  .caption em { color: var(--text); font-style: normal; font-weight: 600; }
+
+  /* ---- figure ---- */
+  .figwrap { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 6px; }
+  svg { display: block; width: 100%; height: auto; }
+  .pill-g { transition: transform .78s cubic-bezier(.4,0,.2,1); cursor: pointer; }
+  .pill-g rect { transition: fill .5s, stroke .5s, opacity .5s; }
+  .pill-g:hover rect, .pill-g.sel rect { stroke-width: 2.4; }
+  .pill-g.dim { opacity: .17; }
+  .layer { transition: opacity .5s; }
+  .layer.off { opacity: 0; pointer-events: none; }
+  .ax { fill: var(--faint); font: 11px var(--sans); }
+  .axname { fill: var(--muted); font: 600 12px var(--sans); letter-spacing: .03em; }
+  .bandname { fill: var(--muted); font: 600 12.5px var(--sans); }
+  .bandsub { fill: var(--faint); font: 11px var(--sans); }
+  .gridline { stroke: var(--border); stroke-width: 1; }
+  .zonelab { fill: var(--faint); font: 600 10.5px var(--sans); letter-spacing: .07em; text-transform: uppercase; }
+
+  /* ---- detail readout ---- */
+  .readout {
+    margin-top: 12px; background: var(--panel-2); border: 1px solid var(--border);
+    border-left: 3px solid var(--faint); border-radius: 8px; padding: 13px 16px; min-height: 84px;
+    transition: border-left-color .3s;
+  }
+  .readout .r-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .readout .r-name { font: 600 14.5px var(--sans); color: var(--text); }
+  .readout .r-why { font-size: 13.5px; line-height: 1.6; color: var(--muted); max-width: 84ch; }
+  .readout .r-why b { color: var(--text); font-weight: 600; }
+  .readout .r-idle { color: var(--faint); font-size: 13.5px; }
+  .rbars { display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
+  .rbar { font: 11px var(--sans); color: var(--faint); }
+  .rbar .track { width: 128px; height: 6px; background: var(--panel); border: 1px solid var(--border); border-radius: 4px; margin-top: 4px; overflow: hidden; }
+  .rbar .fill { height: 100%; transition: width .4s; }
+
+  .legend { margin-top: 14px; }
+  .legend-item { cursor: pointer; user-select: none; transition: opacity .2s; }
+  .legend-item.muted-out { opacity: .34; }
+
+  /* ---- policy matrix ---- */
+  .matrix { border-collapse: separate; border-spacing: 0; margin-top: 14px; font-size: 13px; width: 100%; max-width: 760px; }
+  .matrix th, .matrix td { border: 1px solid var(--border); padding: 10px 13px; text-align: left; }
+  .matrix th { background: var(--panel-2); color: var(--muted); font-weight: 600; font-size: 12px; }
+  .matrix td { background: var(--panel); color: var(--text); }
+  .matrix td.no { color: var(--muted); }
+  .matrix tr.trap td { background: rgba(248,81,73,.11); border-color: var(--danger); }
+  .matrix tr.trap td:last-child { color: var(--danger); font-weight: 600; }
+  .matrix tr.win td:last-child { color: var(--good); font-weight: 600; }
+
+  ul.gather { color: var(--muted); font-size: 14px; line-height: 1.72; max-width: 80ch; padding-left: 20px; }
+  ul.gather b { color: var(--text); font-weight: 600; }
+  footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid var(--border); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pill-g, .pill-g rect, .layer, .rbar .fill { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>Copilot Brand Kits, without the jargon</h1>
+  <p class="sub">What a brand is · what a Brand Kit turns it into · and which rules Copilot will actually hold the line on</p>
+</div>
+
+<p class="lede">
+  A Brand Kit is your brand guidelines, converted into something a machine can apply without judgement.
+  The catch is that <strong>only some of it converts.</strong> Below are seventeen brand rules a real organisation would
+  have. Step through the four views to watch them sort themselves — first by what kind of rule they are, then by
+  what shape they take inside the kit, and finally by how much of your brand Copilot is actually able to enforce.
+</p>
+
+<h2><span class="num">01</span>The same seventeen rules, four ways</h2>
+
+<div class="steps" id="steps"></div>
+<p class="caption" id="caption"></p>
+
+<div class="figwrap">
+  <svg id="fig" viewBox="0 0 1000 610" role="img" aria-label="Seventeen brand rules repositioned across four views: brand anatomy, form inside the kit, enforcement strength, and business risk.">
+    <g id="l-bands"  class="layer"></g>
+    <g id="l-cols"   class="layer off"></g>
+    <g id="l-zones"  class="layer off"></g>
+    <g id="l-quad"   class="layer off"></g>
+    <g id="l-axes"   class="layer off"></g>
+    <g id="l-pills"></g>
+  </svg>
+</div>
+
+<div class="legend" id="legend"></div>
+
+<div class="readout" id="readout">
+  <div class="r-idle">Hover or tap any rule to see why it lands where it does. Arrow keys move between views.</div>
+</div>
+
+<p class="note" style="margin-top:12px">
+  <b>Units, and an honest caveat.</b> “Enforcement” is how reliably Copilot reproduces that rule unprompted, 0–100.
+  “Cost if wrong” is what it costs the organisation when it doesn’t, 0–100. These are <em>calibrated judgement, not measurement</em> —
+  Microsoft publishes no such numbers. The <em>ordering</em> is the claim, and it follows directly from documented
+  mechanism: a rule stored as a file is applied deterministically, a rule stored as prose is interpreted by a model.
+  Labels are nudged a few pixels vertically so they don’t overlap; horizontal position is exact.
+</p>
+
+<h2><span class="num">02</span>Where a Brand Kit actually reaches</h2>
+<p class="lede" style="margin-bottom:4px">
+  A Brand Kit governs <strong>what Copilot generates</strong> — and nothing else. Within that, coverage is
+  uneven enough that “we set up a Brand Kit” and “our output is on-brand” are very different claims.
+</p>
+
+<div class="figwrap" style="margin-top:14px">
+  <svg id="scope" viewBox="0 0 1000 400" role="img" aria-label="Horizontal bars showing how deeply the Brand Kit reaches into each Microsoft 365 surface, from PowerPoint at the deepest to Loop, Whiteboard and Forms at none."></svg>
+</div>
+
+<div class="panel" style="margin-top:14px;padding:15px 18px">
+  <div style="font:600 13px var(--sans);color:var(--text);margin-bottom:9px">Outside the kit’s reach entirely — three things it is <em style="font-style:normal;color:var(--danger)">not</em> for</div>
+  <ul class="gather" style="margin:0">
+    <li><b>Anyone working without Copilot.</b> Someone who opens PowerPoint and types is governed by your <b>template</b> and the Organization Asset Library, not by the kit. Put the same <code>.potx</code> in both so the two paths agree.</li>
+    <li><b>How your SharePoint intranet looks.</b> That is the SharePoint / Microsoft 365 <b>Brand Center</b> — a separate feature, set up separately, that predates Copilot. The two are converging but are not the same store.</li>
+    <li><b>Anything outside Microsoft 365.</b> Your website, your print, your email platform, your design tools. The kit has no reach there at all.</li>
+  </ul>
+</div>
+
+<h2><span class="num">03</span>How a kit actually reaches the page</h2>
+<p class="lede" style="margin-bottom:4px">
+  Assets and rules flow left to right — but notice the red step. Nothing on this diagram happens
+  automatically. <strong>Someone has to pick the kit.</strong> There is no tenant setting that forces it.
+</p>
+
+<div class="figwrap" style="margin-top:14px">
+  <svg id="pipe" viewBox="0 0 1000 400" role="img" aria-label="Flow diagram: brand sources feed a Brand Kit, which is governed by two admin policies, then passes through a manual user selection step before Copilot generates an artifact, with an optional manual Brand Reviewer loop."></svg>
+</div>
+
+<h2><span class="num">04</span>Who is allowed to touch it</h2>
+<p class="lede" style="margin-bottom:2px">
+  Two separate policies in <code>config.office.com</code> govern brand kits, and they <strong>AND</strong> together.
+  Row three is the trap: putting someone in the brand-manager group but <em>not</em> the creation group locks them out entirely.
+</p>
+
+<table class="matrix">
+  <thead>
+    <tr><th style="width:30%">In “Restrict brand kit creation” group</th><th style="width:30%">In “Elevated role for Brand Managers” group</th><th>What they can actually do</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="no">No</td><td class="no">No</td><td class="no">Consume official kits only — can’t create or edit</td></tr>
+    <tr><td>Yes</td><td class="no">No</td><td>Personal kits only — can’t publish anything official</td></tr>
+    <tr class="trap"><td class="no">No</td><td>Yes</td><td>Nothing. Can’t create or edit at all — the trap</td></tr>
+    <tr class="win"><td>Yes</td><td>Yes</td><td>Full brand manager — creates and publishes official kits</td></tr>
+  </tbody>
+</table>
+<p class="note" style="margin-top:10px">Both policies take up to 24 hours to take effect. The Elevated-role policy additionally must sit on a tenant-scoped configuration at <b>priority 0</b>, or it silently does nothing.</p>
+
+<h2><span class="num">05</span>What to actually go and collect</h2>
+<ul class="gather">
+  <li><b>The current brand guidelines PDF.</b> One document, PDF only — Copilot parses it to extract palette, voice, logo and typography rules. Ask who owns it and when it was last revised.</li>
+  <li><b>The approved PowerPoint template as <code>.potx</code></b>, authored in PowerPoint for Windows or Mac (Web-authored templates aren’t supported), ideally with sample slides showing each layout in use — that’s how Copilot learns which layout to pick.</li>
+  <li><b>Every approved logo variant</b>, and the photo library — <em>tagged</em>. Filename, description and keywords are what drive image retrieval accuracy.</li>
+  <li><b>A named brand manager.</b> This is a governance decision, not an IT one.</li>
+  <li><b>A human review step</b> for everything in the red zone above. That is the whole finding.</li>
+</ul>
+
+<footer>
+  <p class="note">
+    Setup is roughly an afternoon of configuration. Agreeing on which blue is the real blue is the actual project.
+    <br>Mechanism, policy names and licensing verified against Microsoft Learn and support.microsoft.com, August 2026.
+    Requires a Microsoft 365 Copilot Premium licence.
+  </p>
+</footer>
+
+<script type="module">
+import { arrowMarkers, connect, side, labelBox, $, $$, stepper } from "/_kit/viz.js";
+
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ------------------------------------------------------------------ data --
+   Seventeen brand rules a real organisation would plausibly hold.
+   `mech` is the shape the rule takes once it is inside the kit, and it is the
+   thing that drives `rel` — that causal link is the point of the whole figure. */
+const RULES = [
+  { id:"layouts",   label:"Slide layouts",        cat:"structure", mech:"file",  rel:96, cost:38,
+    why:"Lives in the <b>.potx</b> as real layout definitions. Copilot picks <i>from</i> your layouts rather than inventing one — this is structural, not stylistic." },
+  { id:"placehold", label:"Placeholder geometry", cat:"structure", mech:"file",  rel:93, cost:30,
+    why:"Boxes sit where your template says. The one documented failure: Copilot will not resize a placeholder or shrink the font when generated text overruns it." },
+  { id:"docstruct", label:"Document structure",   cat:"structure", mech:"file",  rel:89, cost:34,
+    why:"The Word Agent builds from your branded template, so headings and section order inherit from the file rather than from a prompt." },
+  { id:"xltables",  label:"Excel table formats",  cat:"structure", mech:"file",  rel:88, cost:28,
+    why:"An <b>.xltx</b> uploaded to the kit gives workbooks consistent formatting. Note there is no Brand Reviewer for Excel — nothing checks the result." },
+
+  { id:"primary",   label:"Primary palette",      cat:"visual", mech:"value", rel:86, cost:58,
+    why:"Stored as exact hex values and substituted literally. Very little room for the model to drift." },
+  { id:"headfont",  label:"Heading typeface",     cat:"visual", mech:"value", rel:84, cost:46,
+    why:"A theme font in the template, reinforced by the kit. Reliable where the font is actually installed or embedded." },
+  { id:"bodyfont",  label:"Body typeface",        cat:"visual", mech:"value", rel:82, cost:32,
+    why:"Same mechanism as headings. Lower cost because a wrong body font reads as sloppy rather than as a different institution." },
+  { id:"secondary", label:"Secondary palette",    cat:"visual", mech:"value", rel:80, cost:38,
+    why:"Applied reliably, but <i>which</i> secondary gets used where is a judgement call the model makes." },
+  { id:"logofile",  label:"Logo artwork",         cat:"visual", mech:"value", rel:78, cost:88,
+    why:"The file itself is placed dependably. Cost is high because the logo is the one element an outsider will always recognise as wrong." },
+
+  { id:"chartcol",  label:"Chart colour use",     cat:"visual", mech:"asset", rel:57, cost:42,
+    why:"Copilot draws from your palette but chooses the mapping. Series order and emphasis are not yours." },
+  { id:"photo",     label:"Photography choice",   cat:"visual", mech:"asset", rel:52, cost:46,
+    why:"Copilot selects from your approved library — but <i>which</i> image depends almost entirely on how well the files are tagged." },
+  { id:"icons",     label:"Icon selection",       cat:"visual", mech:"asset", rel:47, cost:24,
+    why:"Same selection problem as photography, with lower stakes. A slightly off icon rarely costs anything." },
+  { id:"logoclear", label:"Logo clear-space rule",cat:"visual", mech:"asset", rel:44, cost:72,
+    why:"The logo <i>file</i> is an asset; the rule about margin, minimum size and which variant on which background is <b>prose in the PDF</b>. Copilot places the mark, then crowds it." },
+
+  { id:"tone",      label:"Measured, formal tone",cat:"verbal", mech:"prose", rel:38, cost:52,
+    why:"Extracted from the guidelines PDF as instructions to the model. It usually lands — but 'usually' is the operative word." },
+  { id:"terms",     label:"Approved terminology",  cat:"verbal", mech:"prose", rel:29, cost:94,
+    why:"The words you are obliged to use for your own products, people and services — “members” not “customers”, “associates” not “staff”, the exact product name. There is no <i>partly correct</i> here, and it lives as a sentence in a PDF." },
+  { id:"required",  label:"Required legal text",   cat:"verbal", mech:"prose", rel:21, cost:97,
+    why:"Disclaimers, trademark lines, mandatory disclosures. Copilot has no concept of <b>mandatory</b> — text that should have been there and isn’t produces no error, no warning and no visual tell." },
+  { id:"forbidden", label:"Forbidden claims",      cat:"verbal", mech:"prose", rel:18, cost:96,
+    why:"Things you are not allowed to say: guarantees, superlatives, competitor comparisons. A prohibition, not a pattern — the hardest thing to encode, because you are asking a model to reliably produce a <i>negative</i>." },
+];
+
+const CAT = {
+  structure: { name:"Structure & layout", sub:"the shape of the thing", color:"var(--c7)" },
+  visual:    { name:"Visual identity",    sub:"how it looks",           color:"var(--c4)" },
+  verbal:    { name:"Verbal identity",    sub:"how it speaks",          color:"var(--c8)" },
+};
+const MECH = {
+  file:  { name:"A file",   sub:".potx · .xltx",        tier:"Structure",    color:"var(--good)",
+           blurb:"Copilot uses your actual document. Nearly deterministic." },
+  value: { name:"A value",  sub:"hex codes · font names", tier:"Substitution", color:"var(--c5)",
+           blurb:"Swapped in literally. Very little to get wrong." },
+  asset: { name:"A library",sub:"logos · photos · icons", tier:"Selection",    color:"var(--warn)",
+           blurb:"Copilot chooses from what you supplied. Tagging decides quality." },
+  prose: { name:"A sentence", sub:"the guidelines PDF",   tier:"Judgement",    color:"var(--danger)",
+           blurb:"Read as instructions. This is model interpretation, not enforcement." },
+};
+const MECH_ORDER = ["file","value","asset","prose"];
+
+const MODES = [
+  { key:"anatomy", tab:"What a brand is",
+    cap:"A brand is not a logo — it is a <b>rulebook</b>, and it has three parts. <em>Structure</em> is the shape of the artefact: layouts, placeholders, section order. <em>Visual identity</em> is how it looks. <em>Verbal identity</em> is how it speaks — tone, and the words the institution is allowed to use about itself. All three matter equally to a reader. They do not survive the trip into Copilot equally." },
+  { key:"mechanism", tab:"What it becomes in the kit",
+    cap:"Now regrouped by the <b>shape each rule takes once it is inside the Brand Kit</b>. This is the step that decides everything downstream. A rule that becomes a file gets applied. A rule that becomes a sentence in a PDF gets <em>interpreted</em>. Notice that verbal identity has nowhere to go except the rightmost column." },
+  { key:"gradient", tab:"How hard it is enforced",
+    cap:"Same rules, now placed by <b>how reliably Copilot reproduces them unprompted</b>. The four zones are not four features — they are four <em>mechanisms</em>, and the ordering falls straight out of the previous view. The closer a rule is to a file, the harder Copilot holds it. The closer to prose, the softer." },
+  { key:"risk", tab:"Where that actually hurts",
+    cap:"The view that matters. Vertical axis is now <b>what it costs you when that rule breaks</b>. Most rules sort themselves harmlessly. Four do not — they land top-left, where enforcement is weakest and the consequences are worst. <em>That quadrant is your review process.</em> It is not a coincidence that they are all language rules — the ones carrying legal or contractual weight." },
+];
+
+/* --------------------------------------------------------------- geometry */
+const PX0 = 92, PX1 = 962, PY0 = 46, PY1 = 540;
+const H = 27, GAP_X = 9, GAP_Y = 7;
+const sx = v => PX0 + (v / 100) * (PX1 - PX0);
+const sy = v => PY1 - (v / 100) * (PY1 - PY0);
+const wOf = r => Math.max(92, Math.min(212, r.label.length * 6.5 + 26));
+
+for (const r of RULES) { r.w = wOf(r); r.h = H; }
+
+/** Flow items into centred rows within [x0,x1]. Returns rows of {items,width}. */
+function packRows(items, x0, x1) {
+  const max = x1 - x0, rows = [];
+  let row = [], w = 0;
+  for (const it of items) {
+    if (row.length && w + GAP_X + it.w > max) { rows.push({ items: row, w }); row = []; w = 0; }
+    w += (row.length ? GAP_X : 0) + it.w;
+    row.push(it);
+  }
+  if (row.length) rows.push({ items: row, w });
+  return rows;
+}
+
+function placeRows(rows, x0, x1, yTop, out) {
+  let y = yTop;
+  for (const { items, w } of rows) {
+    let x = x0 + (x1 - x0 - w) / 2;
+    for (const it of items) { out[it.id] = { x, y }; x += it.w + GAP_X; }
+    y += H + GAP_Y;
+  }
+  return y;
+}
+
+/* -- view 1: grouped into three anatomy bands ---------------------------- */
+function layoutAnatomy() {
+  const pos = {}, bands = [];
+  const order = ["structure", "visual", "verbal"];
+  let y = PY0 + 34;
+  for (const cat of order) {
+    const members = RULES.filter(r => r.cat === cat);
+    const rows = packRows(members, PX0, PX1);
+    bands.push({ cat, top: y - 30, height: rows.length * (H + GAP_Y) + 34 });
+    y = placeRows(rows, PX0, PX1, y, pos) + 44;
+  }
+  // Centre the whole stack in the plot area rather than letting it hang from the top.
+  const shift = Math.max(0, (PY1 - PY0 - (y - 44 - PY0 - 34)) / 2 - 34);
+  for (const k in pos) pos[k].y += shift;
+  for (const b of bands) b.top += shift;
+  return { pos, bands };
+}
+
+/* -- view 2: four columns, one per mechanism ----------------------------- */
+function layoutMechanism() {
+  const pos = {}, colW = (PX1 - PX0) / 4;
+  MECH_ORDER.forEach((m, i) => {
+    const members = RULES.filter(r => r.mech === m);
+    const cx = PX0 + colW * i + colW / 2;
+    const top = PY0 + 96 + (5 - members.length) * (H + GAP_Y + 4) / 2;
+    members.forEach((r, j) => { pos[r.id] = { x: cx - r.w / 2, y: top + j * (H + GAP_Y + 4) }; });
+  });
+  return { pos };
+}
+
+/* -- view 3: 1-D beeswarm along the enforcement axis --------------------- */
+function layoutGradient() {
+  const pos = {}, lanes = [], mid = (PY0 + PY1) / 2 + 10;
+  const sorted = [...RULES].sort((a, b) => a.rel - b.rel);
+  for (const r of sorted) {
+    const x = sx(r.rel) - r.w / 2;
+    let lane = lanes.findIndex(right => right + 10 < x);
+    if (lane === -1) { lane = lanes.length; lanes.push(0); }
+    lanes[lane] = x + r.w;
+    // lane 0 centred, then alternating above / below
+    const step = Math.ceil(lane / 2) * (H + 8) * (lane % 2 ? -1 : 1);
+    pos[r.id] = { x, y: mid + step - H / 2 };
+  }
+  const ys = Object.values(pos).map(p => p.y);
+  return { pos, top: Math.min(...ys) - 58, bottom: Math.max(...ys) + H + 20 };
+}
+
+/* -- view 4: enforcement x cost, with vertical de-overlap ---------------- */
+function layoutRisk() {
+  const pos = {};
+  for (const r of RULES) pos[r.id] = { x: sx(r.rel) - r.w / 2, y: sy(r.cost) - H / 2, y0: sy(r.cost) - H / 2 };
+  // Relax vertically only, so horizontal position stays exact.
+  for (let it = 0; it < 160; it++) {
+    for (const a of RULES) for (const b of RULES) {
+      if (a.id >= b.id) continue;
+      const A = pos[a.id], B = pos[b.id];
+      const ox = Math.min(A.x + a.w, B.x + b.w) - Math.max(A.x, B.x);
+      const oy = Math.min(A.y + H, B.y + H) - Math.max(A.y, B.y);
+      if (ox <= 2 || oy <= 2) continue;
+      const push = Math.min(oy / 2 + .5, 2.6) * (A.y < B.y ? -1 : 1);
+      A.y += push; B.y -= push;
+    }
+    for (const r of RULES) {
+      const p = pos[r.id];
+      p.y = Math.max(PY0 + 2, Math.min(PY1 - H - 2, p.y * 0.988 + p.y0 * 0.012));
+    }
+  }
+  return { pos };
+}
+
+const LAYOUTS = {
+  anatomy: layoutAnatomy(), mechanism: layoutMechanism(),
+  gradient: layoutGradient(), risk: layoutRisk(),
+};
+
+/* ------------------------------------------------------------ static layers */
+// Anatomy band headers
+$("#l-bands").innerHTML = LAYOUTS.anatomy.bands.map(b => {
+  const c = CAT[b.cat];
+  return `<g>
+    <rect x="${PX0 - 26}" y="${b.top}" width="${PX1 - PX0 + 52}" height="${b.height}" rx="10"
+          fill="${c.color}" fill-opacity=".05" stroke="${c.color}" stroke-opacity=".26"/>
+    <text class="bandname" x="${PX0 - 12}" y="${b.top + 20}">${c.name}</text>
+    <text class="bandsub" x="${PX0 - 12 + c.name.length * 7.4 + 12}" y="${b.top + 20}">${c.sub}</text>
+  </g>`;
+}).join("");
+
+// Mechanism column headers
+$("#l-cols").innerHTML = MECH_ORDER.map((m, i) => {
+  const colW = (PX1 - PX0) / 4, cx = PX0 + colW * i + colW / 2, M = MECH[m];
+  return `<g>
+    <rect x="${cx - colW / 2 + 7}" y="${PY0 + 6}" width="${colW - 14}" height="${PY1 - PY0 - 40}" rx="10"
+          fill="${M.color}" fill-opacity=".05" stroke="${M.color}" stroke-opacity=".24"/>
+    <text class="zonelab" x="${cx}" y="${PY0 + 30}" text-anchor="middle" fill="${M.color}">${M.tier}</text>
+    <text class="bandname" x="${cx}" y="${PY0 + 54}" text-anchor="middle">it becomes ${M.name.toLowerCase()}</text>
+    <text class="bandsub" x="${cx}" y="${PY0 + 72}" text-anchor="middle">${M.sub}</text>
+    ${labelBox({ x: cx - colW / 2 + 14, y: PY1 - 88, w: colW - 28, h: 54 },
+      `<span style="font-size:11.5px;line-height:1.45;color:var(--faint)">${M.blurb}</span>`)}
+  </g>`;
+}).join("");
+
+// Enforcement zones (view 3)
+const ZONES = [
+  { a: 0,  b: 40,  m: "prose" }, { a: 40, b: 65,  m: "asset" },
+  { a: 65, b: 87,  m: "value" }, { a: 87, b: 100, m: "file"  },
+];
+$("#l-zones").innerHTML = ZONES.map(z => {
+  const M = MECH[z.m], x = sx(z.a), w = sx(z.b) - sx(z.a);
+  const ZT = LAYOUTS.gradient.top, ZB = LAYOUTS.gradient.bottom;
+  return `<g>
+    <rect x="${x}" y="${ZT}" width="${w}" height="${ZB - ZT}"
+          fill="${M.color}" fill-opacity=".055" stroke="${M.color}" stroke-opacity=".2"/>
+    <text class="zonelab" x="${x + w / 2}" y="${ZT + 22}" text-anchor="middle" fill="${M.color}">${M.tier}</text>
+    <text class="bandsub" x="${x + w / 2}" y="${ZT + 40}" text-anchor="middle">${M.name.toLowerCase()}</text>
+  </g>`;
+}).join("");
+
+// Risk quadrants (view 4)
+const RX = sx(55), RY = sy(65);
+$("#l-quad").innerHTML = `
+  <rect x="${PX0}" y="${PY0}" width="${RX - PX0}" height="${RY - PY0}"
+        fill="var(--danger)" fill-opacity=".085" stroke="var(--danger)" stroke-opacity=".5" stroke-dasharray="5 4"/>
+  <rect x="${RX}" y="${RY}" width="${PX1 - RX}" height="${PY1 - RY}"
+        fill="var(--good)" fill-opacity=".05" stroke="var(--good)" stroke-opacity=".24"/>
+  <text class="zonelab" x="${PX0 + 2}" y="${RY + 22}" fill="var(--danger)">Weakly enforced · expensive when wrong</text>
+  <text class="bandsub" x="${PX0 + 2}" y="${RY + 40}" fill="var(--text)">These four are your review process — nothing in the product covers them.</text>
+  <text class="zonelab" x="${PX1 - 12}" y="${PY1 - 14}" text-anchor="end" fill="var(--good)">Handled for you</text>`;
+
+// Axes (views 3 and 4)
+$("#l-axes").innerHTML = `
+  <line class="gridline" x1="${PX0}" y1="${PY1 + 8}" x2="${PX1}" y2="${PY1 + 8}"/>
+  ${[0, 25, 50, 75, 100].map(v =>
+    `<text class="ax" x="${sx(v)}" y="${PY1 + 26}" text-anchor="middle">${v}</text>`).join("")}
+  <text class="axname" x="${PX0}" y="${PY1 + 48}">← Copilot barely holds it</text>
+  <text class="axname" x="${(PX0 + PX1) / 2}" y="${PY1 + 48}" text-anchor="middle">HOW RELIABLY COPILOT ENFORCES IT</text>
+  <text class="axname" x="${PX1}" y="${PY1 + 48}" text-anchor="end">Copilot just does it →</text>
+  <g id="yaxis" class="layer off">
+    <line class="gridline" x1="${PX0 - 12}" y1="${PY0}" x2="${PX0 - 12}" y2="${PY1}"/>
+    ${[0, 50, 100].map(v =>
+      `<text class="ax" x="${PX0 - 20}" y="${sy(v) + 4}" text-anchor="end">${v}</text>`).join("")}
+    <text class="axname" transform="translate(${PX0 - 52},${(PY0 + PY1) / 2}) rotate(-90)" text-anchor="middle">COST IF IT IS WRONG</text>
+  </g>`;
+
+/* ----------------------------------------------------------------- pills */
+$("#l-pills").innerHTML = RULES.map(r => {
+  const p = LAYOUTS.anatomy.pos[r.id];
+  return `<g class="pill-g" data-viz-id="${r.id}" data-label="${r.label}"
+             transform="translate(${p.x},${p.y})" tabindex="0" role="button" aria-label="${r.label}">
+    <rect width="${r.w}" height="${H}" rx="13.5" fill="${CAT[r.cat].color}" fill-opacity=".2"
+          stroke="${CAT[r.cat].color}" stroke-width="1.4"/>
+    ${labelBox({ x: 0, y: 0, w: r.w, h: H }, `<span style="font-size:11.5px">${r.label}</span>`)}
+  </g>`;
+}).join("");
+
+const NODE = Object.fromEntries($$(".pill-g").map(g => [g.dataset.vizId, g]));
+
+/* ------------------------------------------------------------- rendering */
+let mode = 0, filter = null, pinned = null;
+
+function render() {
+  const m = MODES[mode].key, L = LAYOUTS[m];
+  for (const r of RULES) {
+    const p = L.pos[r.id], g = NODE[r.id];
+    g.setAttribute("transform", `translate(${p.x.toFixed(1)},${p.y.toFixed(1)})`);
+    const col = m === "anatomy" ? CAT[r.cat].color : MECH[r.mech].color;
+    const rect = g.querySelector("rect");
+    rect.setAttribute("fill", col);
+    rect.setAttribute("stroke", col);
+    g.classList.toggle("dim", !!filter && r.mech !== filter && m !== "anatomy");
+  }
+  $("#l-bands").classList.toggle("off", m !== "anatomy");
+  $("#l-cols").classList.toggle("off", m !== "mechanism");
+  $("#l-zones").classList.toggle("off", m !== "gradient");
+  $("#l-quad").classList.toggle("off", m !== "risk");
+  $("#l-axes").classList.toggle("off", m !== "gradient" && m !== "risk");
+  $("#yaxis").classList.toggle("off", m !== "risk");
+  $("#caption").innerHTML = MODES[mode].cap;
+  $$("#steps .step-btn").forEach((b, i) => b.setAttribute("aria-current", String(i === mode)));
+  buildLegend();
+}
+
+function buildLegend() {
+  const anat = MODES[mode].key === "anatomy";
+  const src = anat
+    ? Object.entries(CAT).map(([k, v]) => ({ k, name: v.name, color: v.color, n: RULES.filter(r => r.cat === k).length }))
+    : MECH_ORDER.map(k => ({ k, name: `${MECH[k].tier} — ${MECH[k].name.toLowerCase()}`, color: MECH[k].color, n: RULES.filter(r => r.mech === k).length }));
+  $("#legend").innerHTML = src.map(s =>
+    `<span class="legend-item ${!anat && filter && filter !== s.k ? "muted-out" : ""}" data-k="${anat ? "" : s.k}">
+       <span class="swatch dot" style="background:${s.color}"></span>${s.name}
+       <span style="color:var(--faint);margin-left:5px">${s.n}</span>
+     </span>`).join("");
+  if (!anat) $$("#legend .legend-item").forEach(el => el.onclick = () => {
+    filter = filter === el.dataset.k ? null : el.dataset.k; render();
+  });
+}
+
+function readout(r) {
+  if (!r) {
+    $("#readout").style.borderLeftColor = "var(--faint)";
+    $("#readout").innerHTML = `<div class="r-idle">Hover or tap any rule to see why it lands where it does. Arrow keys move between views.</div>`;
+    return;
+  }
+  const M = MECH[r.mech];
+  $("#readout").style.borderLeftColor = M.color;
+  $("#readout").innerHTML = `
+    <div class="r-top">
+      <span class="r-name">${r.label}</span>
+      <span class="pill" style="color:${M.color};border-color:${M.color}">${M.tier} · ${M.name.toLowerCase()}</span>
+      <span style="color:var(--faint);font-size:12px">${CAT[r.cat].name}</span>
+    </div>
+    <div class="r-why">${r.why}</div>
+    <div class="rbars">
+      <div class="rbar">Enforcement <b style="color:var(--text)">${r.rel}</b>/100
+        <div class="track"><div class="fill" style="width:${r.rel}%;background:${M.color}"></div></div></div>
+      <div class="rbar">Cost if wrong <b style="color:var(--text)">${r.cost}</b>/100
+        <div class="track"><div class="fill" style="width:${r.cost}%;background:var(--danger)"></div></div></div>
+    </div>`;
+}
+
+for (const r of RULES) {
+  const g = NODE[r.id];
+  const show = () => { if (!pinned) readout(r); };
+  const hide = () => { if (!pinned) readout(null); };
+  g.addEventListener("pointerenter", show);
+  g.addEventListener("pointerleave", hide);
+  g.addEventListener("focus", show);
+  g.addEventListener("blur", hide);
+  const toggle = () => {
+    pinned = pinned === r.id ? null : r.id;
+    $$(".pill-g").forEach(n => n.classList.toggle("sel", n.dataset.vizId === pinned));
+    readout(pinned ? r : null);
+  };
+  g.addEventListener("click", toggle);
+  g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+}
+
+$("#steps").innerHTML = MODES.map((m, i) =>
+  `<button class="step-btn" type="button"><span class="k">${i + 1}</span>${m.tab}</button>`).join("");
+
+const st = stepper({ n: MODES.length, hashKey: "view", onStep: i => { mode = i; render(); } });
+$$("#steps .step-btn").forEach((b, i) => b.onclick = () => st.go(i));
+
+if (REDUCED) document.documentElement.style.setProperty("scroll-behavior", "auto");
+
+/* ------------------------------------------------- figure 2: the pipeline */
+const N = {
+  pdf:   { x: 26,  y: 34,  w: 172, h: 54 },
+  potx:  { x: 26,  y: 104, w: 172, h: 54 },
+  assets:{ x: 26,  y: 174, w: 172, h: 54 },
+  policy:{ x: 26,  y: 274, w: 172, h: 66 },
+  kit:   { x: 268, y: 86,  w: 168, h: 130 },
+  gate:  { x: 506, y: 108, w: 176, h: 86 },
+  gen:   { x: 752, y: 108, w: 172, h: 86 },
+  out:   { x: 752, y: 258, w: 172, h: 66 },
+  review:{ x: 506, y: 258, w: 176, h: 66 },
+};
+const box = (n, title, sub, color, dash) => `
+  <g>
+    <rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="10"
+          fill="${color}" fill-opacity=".1" stroke="${color}" stroke-width="1.5"
+          ${dash ? 'stroke-dasharray="6 4"' : ""}/>
+    ${labelBox({ x: n.x, y: n.y, w: n.w, h: n.h },
+      `<span style="font-size:12.5px;line-height:1.35"><b>${title}</b>${sub ? `<br><span style="color:var(--muted);font-size:11px">${sub}</span>` : ""}</span>`)}
+  </g>`;
+
+const edge = (a, b, color, dash) =>
+  `<path d="${connect(a, b)}" fill="none" stroke="var(--${color})" stroke-width="1.6"
+         ${dash ? 'stroke-dasharray="5 4"' : ""} marker-end="url(#ah-${color})"/>`;
+
+$("#pipe").innerHTML = `
+  <defs>${arrowMarkers()}</defs>
+  <text class="zonelab" x="26" y="20" fill="var(--faint)">What you supply</text>
+  <text class="zonelab" x="268" y="20" fill="var(--faint)">What IT governs</text>
+  <text class="zonelab" x="506" y="20" fill="var(--faint)">What a person must do</text>
+  <text class="zonelab" x="752" y="20" fill="var(--faint)">What comes out</text>
+
+  ${edge(N.pdf, N.kit, "accent")}
+  ${edge(N.potx, N.kit, "accent")}
+  ${edge(N.assets, N.kit, "accent")}
+  ${edge(N.policy, N.kit, "warn", true)}
+  ${edge(N.kit, N.gate, "accent")}
+  ${edge(N.gate, N.gen, "danger")}
+  ${edge(N.gen, N.out, "good")}
+  ${edge(N.out, N.review, "warn", true)}
+
+  ${box(N.pdf, "Brand guidelines", "one PDF · parsed for voice &amp; rules", "var(--c4)")}
+  ${box(N.potx, "Template .potx", "layouts &amp; theme — the strongest lever", "var(--good)")}
+  ${box(N.assets, "Logos &amp; photo library", "tag them or retrieval guesses", "var(--warn)")}
+  ${box(N.policy, "Two admin policies", "who may create · who may publish", "var(--warn)", true)}
+  ${box(N.kit, "The Brand Kit", "published once, tenant-wide", "var(--accent)")}
+  ${box(N.gate, "A person picks the kit", "Copilot pane → + → Select brand", "var(--danger)")}
+  ${box(N.gen, "Copilot generates", "template first, kit rules on top", "var(--accent)")}
+  ${box(N.out, "On-brand artefact", "deck · document · image", "var(--good)")}
+  ${box(N.review, "Brand Reviewer", "PowerPoint only · reports, never fixes", "var(--warn)", true)}
+
+  ${labelBox({ x: 468, y: 198, w: 256, h: 58 },
+    `<span style="font-size:11.5px;line-height:1.4;color:var(--danger);text-align:left">
+       <b>The weak link.</b> No tenant setting forces this. If nobody picks a kit, nothing above applies.</span>`)}
+`;
+
+/* --------------------------------------------- figure 3: reach by surface */
+const SURFACES = [
+  { id:"ppt",   name:"PowerPoint",                depth:92, note:"Agent, Narrative Builder, Cowork — and the only Brand Reviewer that exists anywhere" },
+  { id:"create",name:"Copilot “Create” tab",      depth:74, note:"Images, banners, posters — palette, logos and approved imagery all apply" },
+  { id:"word",  name:"Word",                      depth:62, note:"The Word Agent builds from branded templates. No brand checker." },
+  { id:"excel", name:"Excel",                     depth:46, note:"Branded .xltx templates only. No brand checker." },
+  { id:"aex",   name:"Adobe Express agent",       depth:28, note:"Loosely integrated — treat brand alignment inside Express as a manual step" },
+  { id:"olk",   name:"Outlook",                   depth:16, note:"Voice and tone rules are barely enforced here" },
+  { id:"misc",  name:"Loop · Whiteboard · Forms", depth:4,  note:"No Brand Kit support at all" },
+];
+const SX0 = 300, SX1 = 946, ROW = 44, STOP = 74;
+const depthColor = d => d >= 70 ? "var(--good)" : d >= 40 ? "var(--c5)" : d >= 20 ? "var(--warn)" : "var(--danger)";
+
+$("#scope").innerHTML = `
+  <text class="zonelab" x="286" y="30" text-anchor="end" fill="var(--faint)">Surface</text>
+  <text class="zonelab" x="${SX0}" y="30" fill="var(--faint)">How deeply the Brand Kit reaches into it</text>
+  <line class="gridline" x1="${SX0}" y1="${STOP - 16}" x2="${SX1}" y2="${STOP - 16}"/>
+  ${SURFACES.map((f, i) => {
+    const y = STOP + i * ROW, w = Math.max(3, (f.depth / 100) * (SX1 - SX0)), c = depthColor(f.depth);
+    return `<g data-viz-id="surface-${f.id}" data-label="${f.name}">
+      ${labelBox({ x: 18, y: y - 4, w: 268, h: 24 },
+        `<span style="font-size:12.5px;text-align:right;width:100%;display:block">${f.name}</span>`)}
+      <rect x="${SX0}" y="${y}" width="${SX1 - SX0}" height="16" rx="8" fill="var(--panel-2)" stroke="var(--border)"/>
+      <rect x="${SX0}" y="${y}" width="${w}" height="16" rx="8" fill="${c}" fill-opacity=".55" stroke="${c}"/>
+      ${labelBox({ x: SX0, y: y + 18, w: SX1 - SX0, h: 18 },
+        `<span style="font-size:11px;color:var(--faint);text-align:left;width:100%;display:block">${f.note}</span>`)}
+    </g>`;
+  }).join("")}
+  <text class="ax" x="${SX0}" y="${STOP + SURFACES.length * ROW + 14}">none</text>
+  <text class="ax" x="${SX1}" y="${STOP + SURFACES.length * ROW + 14}" text-anchor="end">fully governed by the kit</text>`;
+
+render();
+</script>
+</body>
+</html>
