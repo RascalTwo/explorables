@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FROM S2E1 — Strangers in a Strange Land · hero</title>
+<style>
+  :root{
+    --fg:#eaf0f8; --muted:#8ea1c0;
+    --tunnel:#38c2b0; --pit:#d98a46; --diner:#4aa3c7; --colony:#9a86ef; --creature:#d64560;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000}
+  .og-card{
+    position:relative; width:1200px; height:630px; overflow:hidden;
+    color:var(--fg); font-family:var(--sans);
+    /* night sky above, earth darkening below the surface line */
+    background:linear-gradient(180deg,#0a1120 0%, #0b1424 34%, #0e0d14 42%, #0a0810 62%, #05040a 100%);
+  }
+  .stars i{position:absolute; width:2px; height:2px; border-radius:50%; background:#cdd8ea; opacity:.6}
+  /* the surface line, rising to the Colony hill on the right */
+  .surface{position:absolute; left:0; top:0; width:1200px; height:630px}
+  /* the cross-section furniture, drawn as one SVG */
+  .stage{position:absolute; inset:0; z-index:5}
+  .kicker{position:absolute; top:58px; left:0; right:0; text-align:center;
+    font-size:15px; letter-spacing:6px; text-transform:uppercase; color:#a7f0e4; font-weight:600}
+  .kicker .dot{color:var(--pit); margin:0 12px}
+  .wordmark{position:absolute; top:90px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-weight:700; font-size:60px; letter-spacing:15px; text-indent:15px; color:#fff}
+  .wordmark .o{color:var(--tunnel); text-shadow:0 0 22px rgba(56,194,176,.6)}
+  .title{position:absolute; top:184px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-weight:700; font-size:70px; line-height:1.02; color:#f2f5fb;
+    text-shadow:0 3px 30px rgba(0,0,0,.6)}
+  .title em{font-style:italic; color:#bfe9e2}
+  .rule{position:absolute; top:284px; left:50%; transform:translateX(-50%); width:80px; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(56,194,176,.6),transparent)}
+  .essence{position:absolute; top:304px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-style:italic; font-size:26px; color:#d7deea}
+  .essence b{color:var(--pit); font-style:italic; font-weight:700}
+  .meta{position:absolute; bottom:32px; left:60px; right:60px; display:flex;
+    align-items:center; justify-content:space-between; font-size:13px; letter-spacing:1.5px;
+    text-transform:uppercase; color:#9fb0cd}
+  .tag{display:inline-flex; align-items:center; gap:8px; color:#a7f0e4;
+    border:1px solid rgba(56,194,176,.45); background:rgba(9,20,18,.65);
+    border-radius:999px; padding:6px 14px; letter-spacing:1.3px}
+  .vignette{position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(130% 120% at 50% 38%, transparent 52%, rgba(0,0,0,.55) 100%)}
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="stars">
+      <i style="left:120px;top:60px"></i><i style="left:260px;top:96px;opacity:.4"></i>
+      <i style="left:940px;top:54px"></i><i style="left:1080px;top:100px;opacity:.5"></i>
+      <i style="left:70px;top:120px;opacity:.4"></i><i style="left:1130px;top:150px;opacity:.4"></i>
+    </div>
+
+    <!-- the town cross-section: surface rising to Colony hill, a well plunging deep, tunnels beneath -->
+    <svg class="surface" viewBox="0 0 1200 630" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="earth" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#241c2e" stop-opacity="0"/>
+          <stop offset=".3" stop-color="#12101a" stop-opacity=".6"/>
+          <stop offset="1" stop-color="#050409"/>
+        </linearGradient>
+      </defs>
+      <!-- earth mass below the surface -->
+      <path d="M0 452 L360 456 Q 640 460 780 448 Q 940 434 1200 372 L1200 630 L0 630 Z" fill="#150f1c"/>
+      <path d="M0 452 L360 456 Q 640 460 780 448 Q 940 434 1200 372 L1200 630 L0 630 Z" fill="url(#earth)"/>
+      <path d="M0 452 L360 456 Q 640 460 780 448 Q 940 434 1200 372" fill="none" stroke="#3a4a63" stroke-width="1.5"/>
+      <!-- Colony House on the hill (right) -->
+      <g opacity="0.95">
+        <rect x="1006" y="336" width="120" height="70" fill="#1a1630" stroke="#39335c"/>
+        <path d="M998 336 L1066 300 L1134 336 Z" fill="#241d3f" stroke="#39335c"/>
+        <rect x="1030" y="360" width="16" height="30" fill="#9a86ef" opacity=".5"/>
+        <rect x="1086" y="360" width="16" height="30" fill="#9a86ef" opacity=".5"/>
+      </g>
+      <!-- diner + a parked bus on the surface (center) -->
+      <rect x="600" y="410" width="92" height="42" fill="#132230" stroke="#2a3f52"/>
+      <rect x="612" y="392" width="20" height="34" fill="#4aa3c7" opacity=".4"/>
+      <rect x="500" y="422" width="70" height="28" rx="3" fill="#22303e" stroke="#38536a"/>
+      <!-- the dry well: a shaft plunging deep, a small figure climbing -->
+      <rect x="176" y="446" width="34" height="150" rx="4" fill="#05040a" stroke="#3a2f28"/>
+      <ellipse cx="193" cy="446" rx="20" ry="6" fill="#0c0a10" stroke="#3a2f28"/>
+      <line x1="193" y1="450" x2="193" y2="590" stroke="#6a5638" stroke-width="1.5" stroke-dasharray="5 6" opacity=".8"/>
+      <!-- the tunnels beneath everything, with sleeping creatures -->
+      <path d="M193 590 Q 340 560 470 548 Q 620 536 760 552 Q 880 566 980 540"
+        fill="none" stroke="#0c1a18" stroke-width="30" stroke-linecap="round"/>
+      <path d="M193 590 Q 340 560 470 548 Q 620 536 760 552 Q 880 566 980 540"
+        fill="none" stroke="#38c2b0" stroke-opacity=".3" stroke-width="2.5" stroke-dasharray="4 8"/>
+      <g>
+        <circle cx="360" cy="558" r="7" fill="#d64560" opacity=".5"/><circle cx="360" cy="558" r="13" fill="#d64560" opacity=".16"/>
+        <circle cx="600" cy="544" r="7" fill="#d64560" opacity=".5"/><circle cx="600" cy="544" r="13" fill="#d64560" opacity=".16"/>
+        <circle cx="820" cy="556" r="7" fill="#d64560" opacity=".5"/><circle cx="820" cy="556" r="13" fill="#d64560" opacity=".16"/>
+      </g>
+      <!-- Boyd's climbing marker in the well -->
+      <circle cx="193" cy="520" r="8" fill="#d98a46"/><circle cx="193" cy="520" r="15" fill="#d98a46" opacity=".22"/>
+      <!-- Tabitha's marker deep in the tunnels -->
+      <circle cx="470" cy="548" r="8" fill="#38c2b0"/><circle cx="470" cy="548" r="15" fill="#38c2b0" opacity=".22"/>
+    </svg>
+
+    <div class="stage">
+      <div class="kicker">FROM · Season Two <span class="dot">&#9679;</span> Episode One</div>
+      <div class="wordmark">FR<span class="o">O</span>M</div>
+      <div class="title">Strangers in a <em>Strange Land</em></div>
+      <div class="rule"></div>
+      <div class="essence">The morning after, the town splits five ways &mdash; and some of it goes <b>underground</b>.</div>
+      <div class="meta">
+        <span>MGM+ &nbsp;&middot;&nbsp; The premiere, cut by cut</span>
+        <span class="tag">A busload of strangers just arrived</span>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </div>
+</body>
+</html>

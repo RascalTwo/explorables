@@ -1,0 +1,1155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="DevOps">
+<title>Blue-green deployment, without the jargon</title>
+<meta name="viz:title" content="Blue-green deployment, without the jargon">
+<meta name="viz:description" content="How teams put a new version of a website live without ever hanging a 'be right back' sign. Two identical copies, one front door, and a switch you can flip back in a second — stepped through four ways, because 'blue-green' means two different things depending on who's saying it.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  body { max-width: 1240px; margin: 0 auto; padding: 30px 22px 90px; }
+  h2 { font-size: 21px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .lede { color: var(--muted); max-width: 66ch; line-height: 1.6; }
+  .lede b { color: var(--text); }
+  section { margin-top: 54px; }
+  .eyebrow {
+    font: 700 11px var(--sans); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--faint, var(--muted)); margin-bottom: 10px;
+  }
+
+  /* ---------- which blue-green do you mean ---------- */
+  .conv { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0 12px; }
+  @media (max-width: 900px) { .conv { grid-template-columns: 1fr; } }
+  .conv button {
+    all: unset; cursor: pointer; display: block; padding: 17px 20px 15px;
+    border: 1px solid var(--border); border-radius: 14px; background: var(--panel);
+  }
+  .conv button:hover { border-color: var(--muted); }
+  .conv button[aria-pressed="true"] { background: var(--panel-2); border-color: var(--c4); box-shadow: 0 0 0 1px var(--c4); }
+  .conv .tagline {
+    display: block; font: 700 10px var(--sans); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--faint, var(--muted)); margin-bottom: 11px;
+  }
+  .conv button[aria-pressed="true"] .tagline { color: var(--c4); }
+  .conv svg { display: block; width: 100%; max-width: 330px; height: auto; margin-bottom: 13px; }
+  .conv b { display: block; font-size: 15.5px; margin-bottom: 4px; color: var(--text); }
+  .conv span.d { display: block; font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  .conv .gb { fill: color-mix(in srgb, var(--accent) 9%, transparent); stroke: color-mix(in srgb, var(--accent) 45%, transparent); stroke-width: 1.5; }
+  .conv .gb.g { fill: color-mix(in srgb, var(--good) 9%, transparent); stroke: color-mix(in srgb, var(--good) 45%, transparent); }
+  .conv .gb.live { fill: color-mix(in srgb, var(--accent) 28%, transparent); stroke: var(--accent); stroke-width: 2.5; }
+  .conv .gb.live.g { fill: color-mix(in srgb, var(--good) 28%, transparent); stroke: var(--good); }
+  .conv .gb.gone { fill: none; stroke: var(--border); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .conv .gl { font: 800 15px var(--mono); fill: var(--accent); text-anchor: middle; }
+  .conv .gl.g { fill: var(--good); }
+  .conv .gl.sm { font-size: 12.5px; }
+  .conv .gl.dim { opacity: .45; }
+  .conv .garr { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+  .conv .garrh { fill: var(--muted); }
+  .conv .gcap { font: 9.5px var(--sans); fill: var(--faint, var(--muted)); text-anchor: middle; }
+  .srcs { font-size: 12px; color: var(--faint, var(--muted)); margin: 0 0 30px; line-height: 1.6; }
+
+  /* ---------- stage ---------- */
+  .mech { display: grid; grid-template-columns: 372px 1fr; gap: 26px; align-items: start; }
+  @media (max-width: 980px) { .mech { grid-template-columns: 1fr; } }
+
+  .paths { display: flex; gap: 6px; margin: 0 0 13px; }
+  .paths button {
+    font: 13px var(--sans); cursor: pointer; background: var(--panel); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: 6px 15px;
+  }
+  .paths button:hover { color: var(--text); }
+  .paths button[aria-pressed="true"] { background: var(--panel-2); font-weight: 600; }
+  .paths button[data-p="well"][aria-pressed="true"] { border-color: var(--good); color: var(--good); }
+  .paths button[data-p="wrong"][aria-pressed="true"] { border-color: var(--danger); color: var(--danger); }
+
+  .steps { display: flex; flex-direction: column; gap: 5px; margin: 0 0 16px; }
+  .steps button {
+    all: unset; cursor: pointer; display: flex; gap: 10px; align-items: baseline;
+    padding: 7px 11px; border-radius: 9px; border: 1px solid transparent; color: var(--muted);
+    font: 13.5px var(--sans);
+  }
+  .steps button:hover { background: var(--panel); color: var(--text); }
+  .steps button[aria-current="true"] {
+    background: var(--panel); border-color: var(--border); color: var(--text); font-weight: 600;
+  }
+  .steps .n { font: 700 11px var(--mono); color: var(--faint, var(--muted)); width: 14px; flex: none; }
+  .steps button[aria-current="true"] .n { color: var(--accent); }
+  .fork {
+    font: 700 10px var(--sans); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--faint, var(--muted)); padding: 9px 11px 3px; border-top: 1px dashed var(--border); margin-top: 5px;
+  }
+  .fork.well { color: var(--good); }
+  .fork.wrong { color: var(--danger); }
+
+  .narr {
+    border: 1px solid var(--border); background: var(--panel); border-radius: 12px;
+    padding: 15px 17px; min-height: 168px;
+  }
+  .narr h3 { margin: 0 0 8px; font-size: 16.5px; }
+  .narr p { margin: 0; line-height: 1.65; color: var(--muted); }
+  .narr p b { color: var(--text); font-weight: 600; }
+  .narr code, .srcs code, .conv code { font: .9em var(--mono); color: var(--text); }
+
+  .nav { display: flex; align-items: center; gap: 9px; margin-top: 13px; }
+  .nav button {
+    font: 600 13px var(--sans); cursor: pointer; background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 9px; padding: 7px 15px;
+  }
+  .nav button:hover:not(:disabled) { border-color: var(--accent); }
+  .nav button:disabled { opacity: .35; cursor: default; }
+  .nav .count { font: 12px var(--mono); color: var(--muted); margin-left: auto; }
+  .kbd { font: 11px var(--mono); color: var(--faint, var(--muted)); margin-top: 9px; }
+
+  svg#stage { width: 100%; height: auto; display: block; }
+  .cap { font: 700 10px var(--sans); letter-spacing: .1em; fill: var(--muted); text-transform: uppercase; }
+  .note { font: 12px var(--sans); fill: var(--faint, var(--muted)); }
+  [data-c="b"] { --envc: var(--accent); }
+  [data-c="g"] { --envc: var(--good); }
+  [data-c="x"] { --envc: var(--muted); }
+  .wire { fill: none; stroke: var(--border); stroke-width: 2.5; }
+  .wire.on { stroke: var(--envc); stroke-width: 3; }
+  .wire.test { stroke-dasharray: 5 5; stroke: var(--warn); opacity: 0; }
+  .wire.test.on { opacity: 1; }
+  .pkt { fill: var(--c5); }
+  .pkt.test { fill: var(--warn); r: 4; }
+  #pktTop, #pktBottom, #pktTest { visibility: hidden; }
+  #pktTop.on, #pktBottom.on, #pktTest.on { visibility: visible; }
+
+  #lever { transform-box: view-box; transform-origin: 320px 262px; transition: transform .55s cubic-bezier(.5,-0.25,.3,1.35); }
+  #leverKnob { transition: fill .4s; }
+
+  .env { transition: opacity .4s; }
+  .env rect.shell { fill: var(--panel); stroke: var(--envc); stroke-width: 2; transition: stroke .5s, stroke-width .3s; }
+  .env.is-off { opacity: .32; }
+  .env.is-retired { opacity: .46; }
+  .env.is-off rect.shell, .env.is-retired rect.shell { stroke-dasharray: 7 6; stroke: var(--border); }
+  .env.is-standby { opacity: .62; }
+  .env.is-live rect.shell { stroke-width: 3.5; }
+  .env.is-broken rect.shell { stroke: var(--danger); }
+  .env.spot rect.shell { animation: spot 1.4s ease-in-out infinite; }
+  @keyframes spot { 50% { stroke-width: 6; } }
+
+  .envbox { font: 13px var(--sans); color: var(--text); height: 100%; display: flex; flex-direction: column; gap: 8px; }
+  .envtop { display: flex; align-items: center; gap: 10px; }
+  .envname { font: 800 17px var(--sans); letter-spacing: .04em; color: var(--envc); transition: color .5s; }
+  .envver { font: 14px var(--sans); color: var(--muted); }
+  .envver b { font: 800 20px var(--mono); color: var(--text); vertical-align: -1px; }
+  .envnote { display: block; font-size: 12.5px; color: var(--faint, var(--muted)); margin-top: 2px; }
+  .racks { display: flex; gap: 5px; margin-top: auto; }
+  .racks i {
+    display: block; width: 30px; height: 13px; border-radius: 3px;
+    background: color-mix(in srgb, var(--envc) 24%, transparent);
+    border: 1px solid color-mix(in srgb, var(--envc) 45%, transparent);
+  }
+  .ghostring { fill: none; stroke: var(--c4); stroke-width: 2; stroke-dasharray: 8 7; opacity: 0; transition: opacity .3s; }
+  .env.ghost .ghostring { opacity: 1; }
+  .nextup {
+    display: none; align-self: flex-start; font: 600 11.5px var(--sans); color: var(--c4);
+    border: 1px dashed color-mix(in srgb, var(--c4) 55%, transparent); border-radius: 6px; padding: 3px 8px;
+  }
+  .env.ghost .nextup { display: block; }
+
+  .legend { margin-top: 14px; }
+  .legend + .legnote { font-size: 12px; color: var(--faint, var(--muted)); margin: 7px 0 0; }
+
+  /* ---------- timeline ---------- */
+  .scen { display: flex; gap: 7px; flex-wrap: wrap; margin: 18px 0 22px; }
+  .scen button {
+    font: 13px var(--sans); cursor: pointer; background: var(--panel); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px;
+  }
+  .scen button:hover { color: var(--text); }
+  .scen button[aria-pressed="true"] { background: var(--panel-2); color: var(--text); border-color: var(--accent); font-weight: 600; }
+
+  .tl { display: grid; grid-template-columns: 214px 1fr 128px; gap: 14px 16px; align-items: center; }
+  @media (max-width: 780px) { .tl { grid-template-columns: 1fr; } .tl .tlstat { justify-self: start; } }
+  .tlname { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .tlname span { display: block; font: 11px var(--mono); color: var(--faint, var(--muted)); font-weight: 400; margin-top: 3px; }
+  .track { display: flex; height: 40px; border-radius: 7px; overflow: hidden; background: var(--panel); border: 1px solid var(--border); }
+  .seg { transition: width .45s ease; min-width: 3px; position: relative; }
+  .seg.s-old { background: color-mix(in srgb, var(--accent) 55%, var(--bg)); }
+  .seg.s-new { background: color-mix(in srgb, var(--good) 55%, var(--bg)); }
+  .seg.s-bad { background: color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  .seg.s-down { background: var(--danger); min-width: 5px; box-shadow: 0 0 0 1px var(--bg); }
+  .tlstat { text-align: right; }
+  .tlstat .n { display: block; font: 800 22px var(--mono); line-height: 1.1; color: var(--danger); }
+  .tlstat .n.ok { color: var(--good); }
+  .tlstat .l { font: 11px var(--sans); color: var(--faint, var(--muted)); }
+  .axis { position: relative; height: 20px; }
+  .axis span { position: absolute; top: 0; font: 11px var(--mono); color: var(--faint, var(--muted)); transform: translateX(-50%); }
+  .axis span::before { content: ""; position: absolute; left: 50%; top: -6px; width: 1px; height: 5px; background: var(--border); }
+
+  /* ---------- catch ---------- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 14px; margin-top: 20px; }
+  .cards .card { padding: 16px 18px; }
+  .cards h3 { margin: 0 0 7px; font-size: 15px; }
+  .cards p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+  .kicker { margin-top: 34px; font-size: 17px; line-height: 1.6; max-width: 60ch; }
+  .kicker b { color: var(--text); }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blue-green deployment, without the jargon">
+<meta property="og:description" content="How teams put a new version of a website live without ever hanging a 'be right back' sign. Two identical copies, one front door, and a switch you can flip back in a second — stepped through four ways, because 'blue-green' means two different things depending on who's saying it.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/blue-green-deployment/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/blue-green-deployment/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<header class="viz-header">
+  <h1>Blue-green deployment, without the jargon</h1>
+  <p class="sub">How a team puts a new version of a website live without ever hanging a "be right back" sign.</p>
+</header>
+
+<p class="lede">
+  <b>What you're looking at:</b> a walkthrough of one trick, in pictures. Every dot is a real
+  visitor. The two big boxes are two complete copies of the same website. The lever in the middle
+  decides which copy people actually land on. Nothing here needs a technical background — and the
+  one word worth knowing is <b>deploy</b>, which just means "put the new version where customers
+  can use it."
+</p>
+
+<section>
+  <div class="eyebrow">First · which blue-green do they mean?</div>
+  <h2>The word covers two different habits</h2>
+  <p class="lede">
+    Everyone agrees on the mechanism — two copies, one switch. They disagree about what the
+    <b>names</b> are for. Pick one and the walkthrough below changes to match.
+  </p>
+
+  <div class="conv" id="conv">
+    <button data-c="slots">
+      <span class="tagline">The original idea</span>
+      <svg viewBox="0 0 260 58" aria-label="Blue live and Green idle today; after the next release Blue is idle and Green is live">
+        <rect class="gb live" x="4" y="9" width="46" height="36" rx="7"/>
+        <text class="gl" x="27" y="32">B</text>
+        <rect class="gb g" x="54" y="9" width="46" height="36" rx="7"/>
+        <text class="gl g dim" x="77" y="32">G</text>
+        <path class="garr" d="M112 27 H132"/>
+        <path class="garrh" d="M130 22 l9 5 -9 5 z"/>
+        <rect class="gb" x="152" y="9" width="46" height="36" rx="7"/>
+        <text class="gl dim" x="175" y="32">B</text>
+        <rect class="gb live g" x="202" y="9" width="46" height="36" rx="7"/>
+        <text class="gl g" x="225" y="32">G</text>
+        <text class="gcap" x="52" y="55">today</text>
+        <text class="gcap" x="200" y="55">after the next release</text>
+      </svg>
+      <b>Two slots taking turns</b>
+      <span class="d">Blue and Green are names for two <b>long-lived</b> bays. Neither is "the real
+      one" — being live simply alternates, forever. Nothing is renamed, nothing is thrown away.</span>
+    </button>
+
+    <button data-c="promote">
+      <span class="tagline">What most cloud tools do</span>
+      <svg viewBox="0 0 260 58" aria-label="Blue live and Green the candidate today; after a successful release the old box is switched off and the former Green is now called Blue">
+        <rect class="gb live" x="4" y="9" width="46" height="36" rx="7"/>
+        <text class="gl" x="27" y="32">B</text>
+        <rect class="gb g" x="54" y="9" width="46" height="36" rx="7"/>
+        <text class="gl g dim" x="77" y="32">G</text>
+        <path class="garr" d="M112 27 H132"/>
+        <path class="garrh" d="M130 22 l9 5 -9 5 z"/>
+        <rect class="gb gone" x="152" y="9" width="46" height="36" rx="7"/>
+        <text class="gcap" x="175" y="31">off</text>
+        <rect class="gb live" x="202" y="9" width="46" height="36" rx="7"/>
+        <text class="gl sm" x="225" y="32">G→B</text>
+        <text class="gcap" x="52" y="55">today</text>
+        <text class="gcap" x="200" y="55">after a successful release</text>
+      </svg>
+      <b>Green gets promoted to Blue</b>
+      <span class="d">Blue always means "production"; Green is a <b>throwaway clone</b> built for one
+      release. Win, and you're renamed Blue — and the leftover becomes <code>blue-old</code>,
+      <i>not</i> Green, so there is no Green at all until the next release clones a new one.</span>
+    </button>
+  </div>
+
+  <p class="srcs">
+    Both are real.
+    <a href="https://martinfowler.com/bliki/BlueGreenDeployment.html" target="_blank" rel="noopener">Fowler's
+    original</a> alternates the two slots; <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-switching.html" target="_blank" rel="noopener">Amazon's
+    managed version</a> hands the winner the old one's names and sticks <code>-old</code> on the loser.
+  </p>
+</section>
+
+<section>
+  <div class="eyebrow">The mechanism · step through it</div>
+  <div class="mech">
+    <div>
+      <div class="paths" id="paths">
+        <button data-p="well">It goes well</button>
+        <button data-p="wrong">It goes wrong</button>
+      </div>
+      <div class="steps" id="steplist"></div>
+      <div class="narr"><h3 id="stTitle"></h3><p id="stBody"></p></div>
+      <div class="nav">
+        <button id="prev">← Back</button>
+        <button id="next">Next →</button>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="kbd">Arrow keys work too.</div>
+    </div>
+
+    <div>
+      <svg id="stage" viewBox="0 0 1000 500" role="img" aria-label="Visitors flowing through a front door switch into one of two identical website copies">
+        <path id="wireTrunk" class="wire" d="M 120 235 H 248"/>
+        <path id="wireTop"    class="wire" d="M 392 235 C 460 235 470 140 546 140" data-viz-id="wire-top" data-label="path from the front door to the upper copy"/>
+        <path id="wireBottom" class="wire" d="M 392 235 C 460 235 470 330 546 330" data-viz-id="wire-bottom" data-label="path from the front door to the lower copy"/>
+        <path id="wireTest"   class="wire test" d="M 332 424 C 430 424 470 400 546 372" data-viz-id="wire-test" data-label="path from your team to the copy being tested"/>
+
+        <g data-viz-id="visitors" data-label="the people using your site right now">
+          <circle cx="40" cy="212" r="7" fill="var(--c5)"/>
+          <circle cx="66" cy="200" r="7" fill="var(--c5)"/>
+          <circle cx="92" cy="214" r="7" fill="var(--c5)"/>
+          <circle cx="46" cy="240" r="7" fill="var(--c5)"/>
+          <circle cx="76" cy="238" r="7" fill="var(--c5)"/>
+          <circle cx="60" cy="264" r="7" fill="var(--c5)"/>
+        </g>
+        <text x="66" y="296" class="cap" text-anchor="middle">Visitors</text>
+
+        <rect x="248" y="182" width="144" height="104" rx="14" fill="var(--panel-2)" stroke="var(--border)" stroke-width="2" data-viz-id="front-door" data-label="the front door: one setting that routes every visitor"/>
+        <text x="320" y="205" class="cap" text-anchor="middle">The front door</text>
+        <circle cx="320" cy="262" r="8" fill="var(--muted)"/>
+        <g id="lever" data-viz-id="lever" data-label="the switch that decides which copy visitors land on">
+          <rect x="316" y="222" width="8" height="42" rx="4" fill="var(--text)"/>
+          <circle id="leverKnob" cx="320" cy="222" r="9" fill="var(--accent)"/>
+        </g>
+        <text x="320" y="332" class="note" text-anchor="middle">one setting, flipped in a second</text>
+
+        <rect x="184" y="396" width="148" height="56" rx="11" fill="var(--panel)" stroke="var(--border)" stroke-width="2" data-viz-id="team" data-label="your own team, clicking around the new copy"/>
+        <text x="258" y="422" class="cap" text-anchor="middle">Your team</text>
+        <text x="258" y="440" class="note" text-anchor="middle">a handful of people</text>
+
+        <g id="pktTrunk"></g>
+        <g id="pktTop"></g>
+        <g id="pktBottom"></g>
+        <g id="pktTest"></g>
+
+        <g class="env" id="envTop" data-c="b" data-viz-id="env-top" data-label="the upper copy of the site">
+          <rect class="shell" x="550" y="60" width="400" height="160" rx="15"/>
+          <rect class="ghostring" x="542" y="52" width="416" height="176" rx="19"/>
+          <foreignObject x="566" y="72" width="368" height="138">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="envbox">
+              <div class="envtop"><span class="envname" id="nmTop"></span><span class="pill" id="pillTop"></span></div>
+              <div class="envver" id="verTop"></div>
+              <div class="nextup" id="nxtTop"></div>
+              <div class="racks"><i></i><i></i><i></i></div>
+            </div>
+          </foreignObject>
+        </g>
+
+        <g class="env" id="envBottom" data-c="g" data-viz-id="env-bottom" data-label="the lower copy of the site">
+          <rect class="shell" x="550" y="250" width="400" height="160" rx="15"/>
+          <rect class="ghostring" x="542" y="242" width="416" height="176" rx="19"/>
+          <foreignObject x="566" y="262" width="368" height="138">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="envbox">
+              <div class="envtop"><span class="envname" id="nmBottom"></span><span class="pill" id="pillBottom"></span></div>
+              <div class="envver" id="verBottom"></div>
+              <div class="nextup" id="nxtBottom"></div>
+              <div class="racks"><i></i><i></i><i></i></div>
+            </div>
+          </foreignObject>
+        </g>
+      </svg>
+
+      <div class="legend">
+        <span class="legend-item"><span class="swatch dot" style="background:var(--c5)"></span>one visitor</span>
+        <span class="legend-item"><span class="swatch dot" style="background:var(--warn)"></span>one of your own staff, testing</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--accent)"></span>a copy named Blue</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--good)"></span>a copy named Green</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--border)"></span>switched off / not built</span>
+      </div>
+      <p class="legnote">Colour follows the <b>name</b>, not the role. Under "Green gets promoted",
+      watch a box change colour on step 7. The thick outline is where visitors are actually being sent.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Why bother · minutes your site is unusable</div>
+  <h2>The whole point is the red bit</h2>
+  <p class="lede">
+    Two ways to get a new version live, on the same clock. Bar length is <b>real time in minutes</b>;
+    the <b>red</b> stretches are the minutes nobody can use your site at all.
+    Pick a scenario and watch what happens to the red.
+  </p>
+
+  <div class="scen" id="scen"></div>
+
+  <div class="tl">
+    <div class="tlname">Upgrade the one you have<span>the obvious way</span></div>
+    <div class="track" id="trackOld"></div>
+    <div class="tlstat" id="statOld"></div>
+
+    <div class="tlname">Blue-green<span>flip between two copies</span></div>
+    <div class="track" id="trackBg"></div>
+    <div class="tlstat" id="statBg"></div>
+
+    <div></div>
+    <div class="axis" id="axis"></div>
+    <div></div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="swatch" style="background:color-mix(in srgb, var(--accent) 55%, var(--bg))"></span>old version serving people</span>
+    <span class="legend-item"><span class="swatch" style="background:color-mix(in srgb, var(--good) 55%, var(--bg))"></span>new version serving people</span>
+    <span class="legend-item"><span class="swatch" style="background:color-mix(in srgb, var(--warn) 55%, var(--bg))"></span>new version live, but misbehaving</span>
+    <span class="legend-item"><span class="swatch" style="background:var(--danger)"></span>site unusable</span>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">The catch · what it costs you</div>
+  <h2>It is not free, and it is not magic</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>You're paying for two</h3>
+      <p>For as long as both copies are up, you're renting two of everything. On a small site that's
+      lunch money. On a big one it's a real line item — the premium you pay for the insurance.</p>
+    </div>
+    <div class="card">
+      <h3>The filing cabinet isn't copied</h3>
+      <p>Orders, accounts, messages — both copies read and write the <b>same</b> records. So the new
+      version has to cope with the old version's paperwork, and the old one has to cope with the new
+      version's, in case you flip back. This is the part that actually takes planning.</p>
+    </div>
+    <div class="card">
+      <h3>Someone was mid-checkout</h3>
+      <p>Flipping the front door redirects people arriving; it doesn't teleport the ones already
+      inside. Whoever was halfway through something may have to start again, unless the two copies
+      are built to hand that over.</p>
+    </div>
+    <div class="card">
+      <h3>Your test isn't a real crowd</h3>
+      <p>A few staff clicking around is not a Tuesday lunchtime rush. Some problems only appear under
+      real traffic — which is exactly why the one-second flip back matters more than the testing did.</p>
+    </div>
+  </div>
+
+  <p class="kicker">
+    So: blue-green isn't a way to stop making mistakes. It's a way to make mistakes
+    <b>cheap to undo</b> — trading a bit of rent for the ability to change your mind in a second
+    instead of an hour.
+  </p>
+</section>
+
+<script type="module">
+import { arrowMarkers, stepper, loadHash, saveHash, $, $$, vizAudit } from "/_kit/viz.js";
+
+const stage = $("#stage");
+stage.insertAdjacentHTML("afterbegin", arrowMarkers());
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------------- traffic dots ---------------- */
+function fill(groupId, wireId, n, dur, cls = "") {
+  const g = $(groupId);
+  g.innerHTML = Array.from({ length: n }, (_, i) => `
+    <circle class="pkt ${cls}" r="5" data-viz-id="pkt-${wireId}-${i}" data-label="a visitor travelling to the live copy">
+      <animateMotion dur="${dur}s" repeatCount="indefinite" begin="-${(i * dur / n).toFixed(2)}s">
+        <mpath href="#${wireId}"/>
+      </animateMotion>
+    </circle>`).join("");
+  if (still) {
+    const path = $("#" + wireId), len = path.getTotalLength();
+    $$("circle", g).forEach((c, i) => {
+      const p = path.getPointAtLength(len * (i + 0.5) / n);
+      c.setAttribute("cx", p.x); c.setAttribute("cy", p.y);
+      c.querySelector("animateMotion")?.remove();
+    });
+  }
+}
+fill("#pktTrunk", "wireTrunk", 4, 2.0);
+fill("#pktTop",    "wireTop",    5, 2.4);
+fill("#pktBottom", "wireBottom", 5, 2.4);
+fill("#pktTest",   "wireTest",   3, 2.8, "test");
+
+/* ---------------- the walkthrough ----------------
+   Boxes are slots — "top" and "bottom". A box's NAME and COLOUR are per-step data,
+   which is the whole point: under one convention they never change, under the other
+   the winner is renamed on step 7.                                                  */
+const E = (nm, c, v, st, note) => ({ nm, c, v, st, note });
+const G = (on, txt) => ({ on, txt });
+
+const BLUE_LIVE  = E("BLUE", "b", "v4", "live", "the version everyone knows");
+const BLUE_SPARE = E("BLUE", "b", "v4", "standby", "still running, just nobody's home");
+
+/* Steps 1-5: same shape either way, a couple of lines differ. */
+const prefix = (conv) => {
+  const slots = conv === "slots";
+  return [
+    { t: "Right now", live: "top",
+      top: BLUE_LIVE,
+      bottom: E("GREEN", "g", null, "off", "doesn't exist yet"),
+      p: `One copy of your website is running and every visitor lands on it. It is called
+          <b>Blue</b>. ${slots
+            ? `Here, <b>Blue</b> and <b>Green</b> are nothing but the names of two bays — like
+               Platform 1 and Platform 2. Neither one is "the real one".`
+            : `Here, <b>Blue</b> means "production" and <b>Green</b> means "whatever is hoping to
+               become production". The names are job titles, not addresses.`}` },
+
+    { t: "Build the second copy", live: "top",
+      top: BLUE_LIVE,
+      bottom: E("GREEN", "g", null, "standby",
+        slots ? "the other bay — a permanent fixture, currently empty"
+              : "a throwaway clone of Blue, for this release only"),
+      p: slots
+        ? `You stand up a second copy beside it — same size, same setup, same everything. It is a
+           permanent fixture: this bay will still be here in a year. Nobody is being sent there yet.
+           It just sits there, humming, costing you money.`
+        : `You take a <b>copy of production</b> — same size, same setup, same everything — and that
+           copy is what "Green" means here. It exists for this one release and no longer. Nobody is
+           being sent there. It just sits there, humming, costing you money.` },
+
+    { t: "Install the new version on it", live: "top",
+      top: BLUE_LIVE,
+      bottom: E("GREEN", "g", "v5", "standby", "the new version, installed and waiting"),
+      p: `The new version goes onto the <b>empty</b> copy. Take an hour, take three — it doesn't
+          matter, because not one visitor is touching it. Everyone is still happily on Blue.` },
+
+    { t: "Try it before anyone else does", live: "top", test: true,
+      top: BLUE_LIVE,
+      bottom: E("GREEN", "g", "v5", "testing", "your team is clicking around in here"),
+      p: `Your own people go and use the new copy: click the buttons, place a fake order, check the
+          pages. If it's broken, you find out <b>now</b> — with exactly zero customers affected.` },
+
+    { t: "Flip the switch", live: "bottom",
+      top: BLUE_SPARE,
+      bottom: E("GREEN", "g", "v5", "live", "what everybody now sees"),
+      p: `One change at the front door and every arriving visitor is sent to the new copy instead.
+          There is no "be right back" page, because nothing was ever taken down — the new copy was
+          already running. <b>The flip itself takes about a second.</b>` },
+  ];
+};
+
+/* Steps 6-8: four different endings. */
+const TAILS = {
+  "slots-well": [
+    { t: "Watch it like a hawk", live: "bottom", spot: "top",
+      top: E("BLUE", "b", "v4", "standby", "your undo button — leave it running"),
+      bottom: E("GREEN", "g", "v5", "live", "what everybody now sees"),
+      p: `The temptation is to switch Blue off and stop paying for it. Don't, not yet. For the next
+          few hours it is the <b>only</b> thing standing between you and a bad afternoon.` },
+
+    { t: "It holds", live: "bottom", ghost: G("top", "v6 lands here next"),
+      top: E("BLUE", "b", "v4", "standby", "no longer the undo button — now the workshop"),
+      bottom: E("GREEN", "g", "v5", "live", "the new normal"),
+      p: `A day goes by. No fires. Blue stops being your parachute and becomes the place the
+          <b>next</b> version gets built. Look at the labels: nothing was renamed, and nothing was
+          thrown away. Green is production and it is still called Green.` },
+
+    { t: "…and next time it runs backwards", live: "bottom",
+      top: E("BLUE", "b", "v6", "standby", "the next new version, installed and waiting"),
+      bottom: E("GREEN", "g", "v5", "live", "still what everybody sees"),
+      p: `v6 installs onto Blue. You test Blue. You flip to Blue, and Green becomes the spare. That
+          is step 3 again with the colours the other way round — <b>the two bays just take turns</b>,
+          and you always have exactly one of each.` },
+  ],
+
+  "slots-wrong": [
+    { t: "Trouble", live: "bottom", spot: "bottom",
+      top: E("BLUE", "b", "v4", "standby", "still running, still untouched"),
+      bottom: E("GREEN", "g", "v5", "broken", "something only a real crowd could find"),
+      p: `Twenty minutes in, orders start failing. Real visitors are hitting it — the dots are still
+          flowing to Green. This is the moment the whole arrangement exists for.` },
+
+    { t: "Flip back", live: "top",
+      top: E("BLUE", "b", "v4", "live", "everyone's back on the version that worked"),
+      bottom: E("GREEN", "g", "v5", "broken", "parked, with the evidence still on it"),
+      p: `You move the lever. Everyone is back on the version that worked, and it's over —
+          <b>seconds, not an emergency</b>. No restoring backups, no undoing an upgrade at speed,
+          because the old copy was never touched in the first place.` },
+
+    { t: "Nothing changed hands", live: "top", ghost: G("bottom", "the fixed v5 tries again here"),
+      top: E("BLUE", "b", "v4", "live", "still Blue, still live, never replaced"),
+      bottom: E("GREEN", "g", null, "standby", "wiped, ready for another go"),
+      p: `You are on v4 — exactly where you woke up. Being live never moved for good, because it
+          only moves when the new version <b>survives</b>. Your customers had a bad few minutes
+          instead of a bad afternoon, and the next attempt picks up at step 3.` },
+  ],
+
+  "promote-well": [
+    { t: "Watch it like a hawk", live: "bottom", spot: "top",
+      top: E("BLUE", "b", "v4", "standby", "the old production — your undo button"),
+      bottom: E("GREEN", "g", "v5", "live", "still only the candidate, on probation"),
+      p: `Green is serving everybody, but it has not <b>earned</b> anything yet — it's a candidate
+          doing the job on trial. Blue is still called Blue, because Blue means production and
+          production is what you'd fall back to.` },
+
+    { t: "Green becomes Blue", live: "bottom",
+      top: E("BLUE-OLD", "x", "v4", "standby", "now blue-old1 — not Green; it's a has-been"),
+      bottom: E("BLUE", "b", "v5", "live", "promoted — this is production now"),
+      p: `It has been stable long enough. The copy that was called Green is <b>renamed</b>: it is
+          Blue now. Watch the colour change — no machine moved and no visitor noticed, the
+          <b>label</b> is the only thing that changed hands. And the old one does <b>not</b> become
+          Green. Green means "candidate", and this is a has-been: it just gets <code>-old1</code>
+          stuck on the end of its name.` },
+
+    { t: "Delete the leftover", live: "bottom", ghost: G("top", "next Green: a fresh clone of Blue"),
+      top: E("BLUE-OLD", "x", null, "retired", "deleted by hand — it was billing you until you did"),
+      bottom: E("BLUE", "b", "v5", "live", "production, full stop"),
+      p: `Nothing does this for you: the old copy is <b>kept running and kept charging</b>, just with
+          <code>-old1</code> on its name, until somebody goes and deletes it. And now there is
+          <b>no Green anywhere on this screen</b> — because Green was never a place, it was a
+          disposable copy of production made for one release. v6 gets a brand-new one, cloned from
+          Blue. <b>Blue always ends up being production.</b>
+          <br><br>Keep that leftover instead of deleting it, and reuse it as the next candidate?
+          Congratulations — you've just reinvented the other convention.` },
+  ],
+
+  "promote-wrong": [
+    { t: "Trouble", live: "bottom", spot: "bottom",
+      top: E("BLUE", "b", "v4", "standby", "the old production — your undo button"),
+      bottom: E("GREEN", "g", "v5", "broken", "something only a real crowd could find"),
+      p: `Twenty minutes in, orders start failing. Real visitors are hitting it — the dots are still
+          flowing to Green. This is the moment the whole arrangement exists for.` },
+
+    { t: "Flip back", live: "top",
+      top: E("BLUE", "b", "v4", "live", "never stopped being Blue"),
+      bottom: E("GREEN", "g", "v5", "broken", "still Green, still just a candidate"),
+      p: `You move the lever. Everyone is back on the version that worked, and it's over —
+          <b>seconds, not an emergency</b>. Notice that no renaming ever took place, so there is
+          nothing to undo: production has been sitting there called Blue the whole time.` },
+
+    { t: "The promotion never happens", live: "top",
+      top: E("BLUE", "b", "v4", "live", "production, unchanged, untouched"),
+      bottom: E("GREEN", "g", null, "off", "torn down — it never earned the name"),
+      p: `Green is thrown away without ever being called Blue. That is the difference between the
+          two habits in one picture: here the name is the <b>prize</b>, and this candidate didn't
+          win it. Build a fresh Green tomorrow and try again.` },
+  ],
+};
+
+const PILL = {
+  live:    { txt: "LIVE · ALL VISITORS", cls: "" },
+  standby: { txt: "STANDBY · NO VISITORS", cls: "" },
+  off:     { txt: "NOT BUILT", cls: "" },
+  retired: { txt: "SWITCHED OFF", cls: "" },
+  testing: { txt: "TESTING · STAFF ONLY", cls: "warn" },
+  broken:  { txt: "TROUBLE", cls: "danger" },
+};
+const PILL_TINT = { b: "accent", g: "good", x: "" };
+
+const h = loadHash();
+let conv = h.conv === "promote" ? "promote" : "slots";
+let path = h.path === "wrong" ? "wrong" : "well";
+let idx = 0;
+const steps = () => prefix(conv).concat(TAILS[conv + "-" + path]);
+
+function paintChrome() {
+  $$("#conv button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.c === conv)));
+  $$("#paths button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.p === path)));
+  $("#steplist").innerHTML = steps().map((s, i) =>
+    (i === 5 ? `<div class="fork ${path}">${path === "well" ? "…and it holds" : "…and it doesn't"}</div>` : "") +
+    `<button data-i="${i}"><span class="n">${i + 1}</span><span>${s.t}</span></button>`
+  ).join("");
+}
+
+function paintEnv(slot, cfg, ghost) {
+  const Slot = slot === "top" ? "Top" : "Bottom";
+  const g = $("#env" + Slot);
+  const marked = ghost?.on === slot;
+  g.setAttribute("class", `env is-${cfg.st}${marked ? " ghost" : ""}`);
+  g.setAttribute("data-c", cfg.c);
+  $("#nm" + Slot).textContent = cfg.nm;
+  const p = $("#pill" + Slot);
+  p.className = "pill " + (PILL[cfg.st].cls || (cfg.st === "live" ? PILL_TINT[cfg.c] : ""));
+  p.textContent = PILL[cfg.st].txt;
+  $("#ver" + Slot).innerHTML = cfg.v
+    ? `running <b>${cfg.v}</b><span class="envnote">${cfg.note}</span>`
+    : `<span class="envnote" style="margin-top:6px">${cfg.note}</span>`;
+  $("#nxt" + Slot).textContent = marked ? ghost.txt : "";
+  $("#wire" + Slot).setAttribute("data-c", cfg.c);
+}
+
+function render(i) {
+  idx = i;
+  const all = steps(), s = all[i];
+  $("#stTitle").textContent = `${i + 1}. ${s.t}`;
+  $("#stBody").innerHTML = s.p;
+  $("#count").textContent = `${i + 1} / ${all.length}`;
+  $("#prev").disabled = i === 0;
+  $("#next").disabled = i === all.length - 1;
+  $$("#steplist button").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.i === i)));
+
+  paintEnv("top", s.top, s.ghost);
+  paintEnv("bottom", s.bottom, s.ghost);
+  if (s.spot) $("#env" + (s.spot === "top" ? "Top" : "Bottom")).classList.add("spot");
+
+  const topOn = s.live === "top";
+  $("#wireTop").classList.toggle("on", topOn);
+  $("#wireBottom").classList.toggle("on", !topOn);
+  $("#pktTop").classList.toggle("on", topOn);
+  $("#pktBottom").classList.toggle("on", !topOn);
+  $("#wireTest").classList.toggle("on", !!s.test);
+  $("#pktTest").classList.toggle("on", !!s.test);
+
+  $("#lever").style.transform = `rotate(${topOn ? 28 : 152}deg)`;
+  $("#leverKnob").setAttribute("fill", `var(--${(topOn ? s.top : s.bottom).c === "b" ? "accent" : "good"})`);
+}
+
+paintChrome();
+const step = stepper({ n: 8, onStep: render, hashKey: "step" });
+$("#prev").onclick = () => step.prev();
+$("#next").onclick = () => step.next();
+$("#steplist").onclick = (e) => {
+  const b = e.target.closest("button");
+  if (b) step.go(+b.dataset.i);
+};
+function switchTo(k, v) {
+  if (k === "conv") conv = v; else path = v;
+  saveHash({ ...loadHash(), conv, path });
+  paintChrome();
+  render(idx);
+}
+$("#conv").onclick = (e) => {
+  const b = e.target.closest("button");
+  if (b && b.dataset.c !== conv) switchTo("conv", b.dataset.c);
+};
+$("#paths").onclick = (e) => {
+  const b = e.target.closest("button");
+  if (b && b.dataset.p !== path) switchTo("path", b.dataset.p);
+};
+
+/* ---------------- downtime comparison ---------------- */
+const SCALE = 125; // minutes across the full track width
+const SEC = 0.02;  // a one-second flip, in minutes
+
+const SCEN = {
+  routine: {
+    label: "A routine update",
+    old: [["old", 10], ["down", 12], ["new", 30]],
+    bg:  [["old", 10], ["down", SEC], ["new", 30]],
+  },
+  big: {
+    label: "A big, slow update",
+    old: [["old", 10], ["down", 45], ["new", 30]],
+    bg:  [["old", 10], ["down", SEC], ["new", 30]],
+  },
+  wrong: {
+    label: "…and then it goes wrong",
+    old: [["old", 10], ["down", 45], ["bad", 6], ["down", 40], ["old", 20]],
+    bg:  [["old", 10], ["down", SEC], ["bad", 6], ["down", SEC], ["old", 20]],
+  },
+};
+
+const WORD = {
+  old: "old version serving people",
+  new: "new version serving people",
+  bad: "new version live but misbehaving",
+  down: "nobody can use the site",
+};
+
+const mins = (m) => {
+  if (m >= 60) return `${Math.floor(m / 60)} h ${Math.round(m % 60)} m`;
+  if (m >= 1) return `${Math.round(m)} minutes`;
+  const s = Math.max(1, Math.round(m * 60));
+  return `${s} second${s === 1 ? "" : "s"}`;
+};
+
+function track(el, segs, id) {
+  el.innerHTML = segs.map(([k, m], i) => `
+    <div class="seg s-${k}" style="width:${(m / SCALE * 100).toFixed(3)}%"
+         data-viz-id="${id}-seg-${i}" data-label="${mins(m)}: ${WORD[k]}"
+         title="${mins(m)} — ${WORD[k]}"></div>`).join("");
+}
+
+function stat(el, segs) {
+  const down = segs.filter(([k]) => k === "down").reduce((a, [, m]) => a + m, 0);
+  el.innerHTML = `<span class="n${down < 1 ? " ok" : ""}">${mins(down)}</span><span class="l">unusable</span>`;
+}
+
+$("#scen").innerHTML = Object.entries(SCEN)
+  .map(([k, v]) => `<button data-k="${k}">${v.label}</button>`).join("");
+
+$("#axis").innerHTML = [0, 25, 50, 75, 100, 125]
+  .map((m) => `<span style="left:${m / SCALE * 100}%">${m}m</span>`).join("");
+
+function showScen(key) {
+  const s = SCEN[key];
+  track($("#trackOld"), s.old, "old");
+  track($("#trackBg"), s.bg, "bg");
+  stat($("#statOld"), s.old);
+  stat($("#statBg"), s.bg);
+  $$("#scen button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === key)));
+}
+$("#scen").onclick = (e) => {
+  const b = e.target.closest("button");
+  if (b) showScen(b.dataset.k);
+};
+showScen("routine");
+
+vizAudit();
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

@@ -1,0 +1,1155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>r2-recall — spaced repetition in a tab</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="r2-recall">
+<meta name="viz:description" content="Spaced repetition in a browser tab — no install, no account. Answer out loud with on-device speech. Bring your own deck as JSON; progress is an append-only log that never leaves your machine.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  :root { --gap: 1rem; }
+  body { max-width: 60rem; margin: 0 auto; padding: 1rem; }
+  .row { display: flex; gap: var(--gap); align-items: center; flex-wrap: wrap; }
+  .spread { justify-content: space-between; }
+  button { font: inherit; padding: .45rem .8rem; border-radius: .4rem; cursor: pointer;
+           border: 1px solid var(--viz-border, #4444); background: var(--viz-panel, #8881); color: inherit; }
+  button:hover { filter: brightness(1.25); }
+  button[aria-pressed="true"] { outline: 2px solid var(--viz-accent, #6cf); }
+  .card { border: 1px solid var(--viz-border, #4444); border-radius: .8rem; padding: 1.5rem;
+          margin: var(--gap) 0; min-height: 20rem; display: flex; flex-direction: column;
+          align-items: center; justify-content: center; gap: .8rem; text-align: center; }
+  .portrait { width: 260px; height: 260px; object-fit: cover; border-radius: .6rem; background: #8882; }
+  .prompt { font-size: 1.8rem; font-weight: 600; }
+  .answer { font-size: 2rem; font-weight: 700; }
+  .sub, .hooks { opacity: .65; font-size: .95rem; }
+  #answer { font: inherit; font-size: 1.2rem; padding: .5rem .7rem; width: min(24rem, 90vw);
+            border-radius: .4rem; border: 1px solid var(--viz-border, #4444);
+            background: var(--viz-panel, #8881); color: inherit; text-align: center; }
+  .verdict.right { color: #4ade80; } .verdict.wrong { color: #f87171; }
+  .heard { min-height: 1.4em; font-size: 1rem; opacity: .75; font-style: italic; }
+  .hint { min-height: 1.2em; font-size: .85rem; opacity: .6; }
+  .hint kbd { font: inherit; border: 1px solid var(--viz-border, #4446); border-radius: .25rem;
+              padding: 0 .3rem; opacity: .9; }
+  /* Retention overview — bar width encodes card count, x-position encodes memory strength. */
+  .buckets { display: grid; grid-template-columns: 7rem 1fr 3rem; gap: .25rem .6rem; align-items: center;
+             font-size: .85rem; margin: .5rem 0; }
+  .bucket-bar { height: 1.1rem; border-radius: .2rem; background: var(--viz-accent, #6cf); min-width: 2px; }
+  .buckets > button { all: unset; cursor: pointer; text-align: left; }
+  .buckets > button:hover { text-decoration: underline; }
+  .legend { opacity: .6; font-size: .8rem; }
+  .dim { opacity: .55; }
+  #peek { font-size: .85rem; opacity: .8; max-height: 8rem; overflow: auto; }
+  .hidden { display: none; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="r2-recall">
+<meta property="og:description" content="Spaced repetition in a browser tab — no install, no account. Answer out loud with on-device speech. Bring your own deck as JSON; progress is an append-only log that never leaves your machine.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/r2-recall/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/r2-recall/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <div class="viz-header">
+    <h1>r2-recall</h1>
+    <div class="sub">
+      Spaced repetition in a tab — no install, no account. Answer out loud or by typing; the
+      scheduler (FSRS, the same algorithm Anki uses) decides when you next see each card.
+      <strong>Nothing leaves your machine</strong> — the deck you load and the progress you build
+      both stay in this browser, and speech is recognised on-device. Press <em>Demo deck</em> to
+      see the format, or load your own JSON.
+    </div>
+  </div>
+
+  <div class="row spread">
+    <div class="row">
+      <button id="demoBtn">Demo deck</button>
+      <label class="sub">or load your own <input type="file" id="file" accept=".json"></label>
+    </div>
+    <div class="row">
+      <button id="mic" aria-pressed="false" title="Answer out loud instead of typing. Chrome will ask for the microphone once.">🎙 Answer by voice</button>
+      <button id="mylink" title="Your history lives behind this link. Personal — don't paste it in a channel.">Copy my sync link</button>
+      <button id="applink" title="The app with no history attached — safe to share">Copy app link</button>
+      <button id="export" title="Browsers evict storage — this is your backup">Export progress</button>
+      <label class="sub"><input type="file" id="import" accept=".json" class="hidden"><button id="importBtn">Import</button></label>
+    </div>
+  </div>
+
+  <div id="status" class="sub"></div>
+  <div id="gaps" class="sub"></div>
+  <div id="says" class="sub"></div>
+  <div id="sync" class="sub"></div>
+  <div id="recents" class="sub"></div>
+
+  <div class="card" id="card">
+    <div id="front"></div>
+    <div id="back" class="hidden"></div>
+    <div id="verdict" class="verdict"></div>
+    <input id="answer" placeholder="Type the answer, or press Enter to reveal" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div class="hint" id="hint"></div>
+    <div class="heard" id="heard"></div>
+    <div class="row" id="rating"></div>
+  </div>
+
+  <details open>
+    <summary>How well do you know this deck?</summary>
+    <div class="legend">Bar length = number of cards. Rows run from <em>never seen</em> down to
+      <em>solid for months</em>. Click a row to see what's in it.</div>
+    <div class="buckets" id="buckets"></div>
+    <div id="peek"></div>
+  </details>
+
+<script type="module">
+import { createEmptyCard, fsrs, generatorParameters, Rating, State } from "https://esm.sh/ts-fsrs@5.4.1";
+
+const $ = (s) => document.querySelector(s);
+const scheduler = fsrs(generatorParameters({ enable_fuzz: true }));
+
+// ─── deck ────────────────────────────────────────────────────────────────────
+// No real deck ships with this page — you bring your own JSON. This demo exists
+// so a first-time visitor has something to press, and doubles as the format spec.
+const DEMO = {
+  id: "demo",
+  name: "Demo — the deck format itself",
+  templates: [{
+    id: "q-a",
+    name: "Question → Answer",
+    front: `<div class="prompt">{{q}}</div>`,
+    back: `<div class="answer">{{a}}</div><div class="hooks">{{why}}</div>`,
+    answerField: "a",
+    requires: ["q", "a"],
+  }],
+  notes: [
+    { id: "d1", weight: 5, tags: ["demo"], fields: { q: "What holds the data in this format?", a: "Structured fields", why: "Not a rendered blob — fields are what make cards generatable." } },
+    { id: "d2", weight: 4, tags: ["demo"], fields: { q: "What is a card, exactly?", a: "A note times a template", why: "One note can emit many cards; each keeps its own schedule." } },
+    { id: "d3", weight: 3, tags: ["demo"], fields: { q: "Where does my progress live?", a: "This browser", why: "An append-only log in localStorage. Export it — browsers evict storage." } },
+    { id: "d4", weight: 2, tags: ["demo"], fields: { q: "Which scheduler decides the intervals?", a: "FSRS", why: "The same algorithm Anki ships. Two numbers per card: stability and difficulty." } },
+    { id: "d5", weight: 1, tags: ["demo"], fields: { q: "How is a spoken answer graded?", a: "Nearest match", why: "Ranked against every answer in the deck, so a near-miss name loses to the real one." } },
+  ],
+};
+
+let deck, cards, current, revealed = false;
+
+/** A card is a (note × template) pair. A template whose `requires` names a field
+ *  the note lacks emits nothing — that is how photo-less people keep text cards. */
+const buildCards = (d) =>
+  d.notes.flatMap((note) =>
+    d.templates
+      .filter((t) => t.requires.every((f) => note.fields[f]))
+      .map((t) => ({ id: `${note.id}::${t.id}`, note, tpl: t, weight: note.weight ?? 1 })),
+  );
+
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/** Templates are HTML authored by the deck (trusted); field values are escaped,
+ *  since a deck you were handed is not. */
+const render = (tplStr, fields) =>
+  tplStr.replace(/\{\{(\w+)\}\}/g, (_, f) => esc(fields[f] ?? ""));
+
+// ─── progress: an append-only log, replayed ──────────────────────────────────
+// Immutable events mean merging two devices later is concatenation, not conflict
+// resolution — and they are what an FSRS parameter optimiser trains on.
+const logKey = () => `recall:${deck.id}:log`;
+let log = [];
+
+const loadLog = () => { try { log = JSON.parse(localStorage.getItem(logKey())) ?? []; } catch { log = []; } };
+const saveLog = () => localStorage.setItem(logKey(), JSON.stringify(log));
+
+/** Fold the log into current FSRS state per card. */
+function replay() {
+  const byCard = new Map();
+  for (const [cardId, ts, rating] of log) {
+    const prev = byCard.get(cardId) ?? createEmptyCard(new Date(ts));
+    byCard.set(cardId, scheduler.next(prev, new Date(ts), rating).card);
+  }
+  return byCard;
+}
+
+const startOfToday = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); };
+
+function introducedToday() {
+  const first = new Map();
+  for (const [cardId, ts] of log) if (!first.has(cardId)) first.set(cardId, ts);
+  return [...first.values()].filter((ts) => ts >= startOfToday()).length;
+}
+
+/** Due cards first (most overdue leads), then unseen by weight. */
+function pickNext() {
+  const state = replay();
+  const now = Date.now();
+  const due = cards
+    .filter((c) => state.has(c.id) && state.get(c.id).due.getTime() <= now)
+    .sort((a, b) => state.get(a.id).due - state.get(b.id).due);
+  if (due.length) return due[0];
+
+  const fresh = cards.filter((c) => !state.has(c.id)).sort((a, b) => b.weight - a.weight);
+  return fresh[0] ?? null;
+}
+
+// ─── answer matching: a closed set, not open transcription ───────────────────
+// General speech recognition mangles names. Picking the nearest of N known
+// answers is a much easier problem, so that is the one we solve.
+// NFD first so "Renée" decomposes to "e" + a combining mark, which the ASCII
+// filter then drops — otherwise the accented letter is dropped whole.
+const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+
+function distance(a, b) {
+  const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let corner = prev[0];
+    prev[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const t = prev[j];
+      prev[j] = Math.min(prev[j] + 1, prev[j - 1] + 1, corner + (a[i - 1] === b[j - 1] ? 0 : 1));
+      corner = t;
+    }
+  }
+  return prev[b.length];
+}
+
+/**
+ * Correct iff `want` is the NEAREST of every answer in the deck — not merely
+ * within some threshold of it. Thresholding alone is wrong in both directions:
+ * it passed "Molly Vincent" for "Matt Vincent" (two different people) while
+ * rejecting "ock rem sod" for "Akrem Saed" (what a recogniser actually returns).
+ * Ranking a closed set fixes both — measured 0 false positives over all 139×138
+ * name pairs, where thresholding gave 2.
+ */
+function judge(said, want, candidates) {
+  const a = norm(said);
+  if (!a) return false;
+  let best = null, bestD = Infinity;
+  for (const c of candidates) {
+    const d = distance(a, norm(c));
+    if (d < bestD) { bestD = d; best = c; }
+  }
+  // Still bounded, so pure gibberish loses instead of snapping to a winner.
+  return best === want && bestD <= Math.max(3, Math.ceil(norm(want).length * 0.5));
+}
+
+/** Every answer this template can have — the closed set to rank against. */
+let candidates = [];
+const answersFor = (tpl) => [...new Set(
+  cards.filter((c) => c.tpl.id === tpl.id).map((c) => c.note.fields[tpl.answerField]).filter(Boolean),
+)];
+
+// ─── review loop ─────────────────────────────────────────────────────────────
+function show(card) {
+  current = card;
+  revealed = false;
+  candidates = answersFor(card.tpl);
+  resetSpeech();
+  $("#front").innerHTML = render(card.tpl.front, card.note.fields);
+  $("#back").innerHTML = render(card.tpl.back, card.note.fields);
+  $("#back").classList.add("hidden");
+  $("#verdict").textContent = "";
+  $("#verdict").className = "verdict";
+  $("#answer").value = "";
+  $("#heard").textContent = "";
+  $("#rating").innerHTML = "";
+  $("#answer").classList.remove("hidden");
+  $("#answer").focus();
+  hint();
+  refreshStatus();
+}
+
+function reveal(said) {
+  if (revealed) return;
+  revealed = true;
+  const want = current.note.fields[current.tpl.answerField] ?? "";
+  const right = said != null && judge(said, want, candidates);
+  $("#back").classList.remove("hidden");
+  $("#answer").classList.add("hidden");
+  if (said != null && said.trim()) {
+    $("#verdict").textContent = right ? "✓ correct" : `✗ you said “${said.trim()}”`;
+    $("#verdict").className = `verdict ${right ? "right" : "wrong"}`;
+  }
+  // Auto-graded, but never silently — every rating stays one click (or word) away.
+  const suggest = right ? Rating.Good : Rating.Again;
+  for (const [label, r] of [["Again", Rating.Again], ["Hard", Rating.Hard], ["Good", Rating.Good], ["Easy", Rating.Easy]]) {
+    const b = document.createElement("button");
+    b.textContent = label;
+    b.dataset.vizId = `rate-${label.toLowerCase()}`;
+    b.dataset.label = `Grade this card ${label}`;
+    if (r === suggest) b.setAttribute("aria-pressed", "true");
+    b.onclick = () => grade(r);
+    $("#rating").append(b);
+  }
+  hint();
+}
+
+function grade(rating) {
+  log.push([current.id, Date.now(), rating]);
+  saveLog();
+  syncSoon();
+  drawBuckets();
+  const next = pickNext();
+  next ? show(next) : done();
+}
+
+function done() {
+  current = null;
+  $("#front").innerHTML = `<div class="prompt">Nothing due 🎉</div>
+    <div class="sub">Every card in this deck is seen and none is due yet. Come back when one is,
+      or widen the deck \u2014 try saying "recall, show everyone".</div>`;
+  $("#back").classList.add("hidden");
+  $("#answer").classList.add("hidden");
+  $("#rating").innerHTML = "";
+  $("#verdict").textContent = "";
+  refreshStatus();
+}
+
+function refreshStatus() {
+  const state = replay();
+  const now = Date.now();
+  const due = cards.filter((c) => state.has(c.id) && state.get(c.id).due.getTime() <= now).length;
+  const seen = state.size;
+  $("#status").textContent =
+    `${cards.length} cards · ${seen} seen · ${due} due now · ${introducedToday()} new today`;
+}
+
+// ─── retention overview ──────────────────────────────────────────────────────
+const BUCKETS = [
+  ["never seen", (s) => !s],
+  ["learning", (s) => s && s.state !== State.Review],
+  ["< 1 day", (s) => s.scheduled_days < 1],
+  ["1–7 days", (s) => s.scheduled_days < 7],
+  ["1–4 weeks", (s) => s.scheduled_days < 30],
+  ["1–6 months", (s) => s.scheduled_days < 180],
+  ["6 months +", () => true],
+];
+
+function bucketOf(state) {
+  for (let i = 0; i < BUCKETS.length; i++) if (BUCKETS[i][1](state)) return i;
+  return BUCKETS.length - 1;
+}
+
+function drawBuckets() {
+  const state = replay();
+  const groups = BUCKETS.map(() => []);
+  for (const c of cards) groups[bucketOf(state.get(c.id))].push(c);
+  const max = Math.max(1, ...groups.map((g) => g.length));
+
+  $("#buckets").innerHTML = "";
+  BUCKETS.forEach(([label], i) => {
+    const btn = document.createElement("button");
+    btn.textContent = label;
+    btn.onclick = () => {
+      $("#peek").textContent = groups[i].length
+        ? groups[i].map((c) => c.note.fields[c.tpl.answerField] ?? c.id).join(" · ")
+        : "(empty)";
+    };
+    const bar = document.createElement("div");
+    bar.className = "bucket-bar";
+    bar.style.width = `${(groups[i].length / max) * 100}%`;
+    bar.dataset.vizId = `bucket-${i}`;
+    bar.dataset.label = `${groups[i].length} cards ${label}`;
+    const n = document.createElement("span");
+    n.textContent = groups[i].length;
+    $("#buckets").append(btn, bar, n);
+  });
+}
+
+/** Says what to do right now — the answer differs by mode and by whether the
+ *  card is face-up, and guessing wrong is exactly what made this confusing. */
+function hint() {
+  const listening = micOn;   // intent, not the recognition object — it restarts constantly
+  if (!current) return ($("#hint").innerHTML = "");
+  $("#hint").innerHTML = !revealed
+    ? (listening
+        ? "Say the answer, then <kbd>lock it in</kbd>. Take your time \u2014 pausing does nothing. Stuck? Say <kbd>I don't know</kbd>."
+        : "Type it and press <kbd>Enter</kbd>, or press <kbd>Enter</kbd> alone to give up.")
+    : (listening
+        ? "Now say <kbd>Again</kbd>, <kbd>Hard</kbd>, <kbd>Good</kbd> or <kbd>Easy</kbd>."
+        : "How hard was that? Pick one \u2014 the highlighted button is the suggestion.");
+}
+
+// ─── voice ───────────────────────────────────────────────────────────────────
+const COMMANDS = { again: Rating.Again, hard: Rating.Hard, good: Rating.Good, easy: Rating.Easy };
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const DEAF = "Mic is open but hearing nothing — check your input device, or just type.";
+// You commit deliberately. Silence used to commit for you, which punished
+// thinking: pause to remember a name and it graded you as wrong.
+const COMMIT = /\b(lock it in|lock in|submit|that'?s my answer)\b/i;
+const GIVEUP = /\b(i don'?t know|no idea|dunno|skip|pass)\b/i;
+
+let rec = null;
+// Intent, tracked apart from `rec`: Chrome ends a session on its own after a
+// stretch of silence even with continuous = true, so `rec` ending does not mean
+// you stopped wanting the mic on.
+let micOn = false;
+let startedAt = 0, gotAudio = false, stillborn = 0;
+// Continuous recognition accumulates results for the whole session, so each
+// card reads a window of them. `inFlightEnd` is one past the utterance being
+// spoken right now — resetting to it discards that utterance whole. Rebasing
+// onto its index instead would re-read the words that caused the reset ("lock
+// it in", "good"), which is how they bled into the next card.
+let speechFrom = 0, inFlightEnd = 0;
+const resetSpeech = () => { speechFrom = inFlightEnd; };
+
+function setMic(on) {
+  micOn = on;
+  $("#mic").textContent = on ? "\u{1F399} Listening — click to stop" : "\u{1F399} Answer by voice";
+  $("#mic").setAttribute("aria-pressed", String(on));
+  hint();
+}
+
+function micFailed(msg) {
+  setMic(false);
+  try { rec?.abort(); } catch {}
+  rec = null;
+  $("#heard").textContent = msg;
+}
+
+function handleSpeech(said, settled) {
+  // Addressing the assistant, not the card. Commands end on silence rather than
+  // a commit phrase, because you do not pause mid-command the way you pause
+  // mid-answer — that asymmetry is the whole reason answers need "lock it in".
+  const wake = said.match(WAKE);
+  if (wake) {
+    const utterance = said.slice(wake.index + wake[0].length).trim();
+    $("#heard").textContent = `\u201c${said.trim()}\u201d`;
+    if (settled && utterance) { resetSpeech(); $("#heard").textContent = ""; command(utterance); }
+    return;
+  }
+  if (!current) return;
+
+  if (!revealed) {
+    // Everything before the commit phrase is the answer, so you can ramble,
+    // correct yourself, and only then commit. Nothing fires until you do.
+    const hit = said.match(COMMIT);
+    const spoken = hit ? said.slice(0, hit.index) : said;
+    $("#heard").textContent = spoken.trim() ? `\u201c${spoken.trim()}\u201d` : "";
+    if (GIVEUP.test(spoken)) { resetSpeech(); return reveal(""); }
+    if (hit) { resetSpeech(); return reveal(spoken); }
+    return;
+  }
+  $("#heard").textContent = said.trim() ? `\u201c${said.trim()}\u201d` : "";
+  const word = norm(said).split(" ").reverse().find((w) => w in COMMANDS);
+  if (word) { resetSpeech(); grade(COMMANDS[word]); }
+}
+
+function build() {
+  // One instance, reused across restarts. Building a fresh one per restart is
+  // what let a failure compound into hundreds of thousands of sessions.
+  const r = new SR();
+  r.continuous = true;        // keep listening; no push-to-talk
+  r.interimResults = true;    // act on partials, mid-sentence
+  r.lang = "en-US";
+  // Chrome 139+ can recognise on-device, so audio never reaches a server.
+  try { if ("processLocally" in r) r.processLocally = true; } catch {}
+
+  r.onaudiostart = () => {
+    gotAudio = true;
+    stillborn = 0;
+    if ($("#heard").textContent === DEAF) $("#heard").textContent = "";
+  };
+  r.onresult = (e) => {
+    // A restarted session starts its list over, stranding the old offset.
+    if (speechFrom > e.results.length) speechFrom = 0;
+    inFlightEnd = e.results.length;
+    const chunk = [...e.results].slice(speechFrom);
+    handleSpeech(chunk.map((x) => x[0].transcript).join(" "), chunk.some((x) => x.isFinal));
+  };
+  r.onerror = (e) => {
+    if (e.error === "no-speech" || e.error === "aborted") return;   // routine; onend restarts
+    micFailed(e.error === "not-allowed"
+      ? "Microphone blocked — allow it in the address bar, then click again."
+      : `Microphone error: ${e.error}`);
+  };
+  r.onend = () => {
+    if (!micOn) return;
+    // A session that dies before the mic ever opened is a failure, not a
+    // silence timeout. Restarting it immediately turns one failure into
+    // thousands per second — a flickering recording indicator and no audio.
+    if (Date.now() - startedAt < 500 && !gotAudio) {
+      if (++stillborn >= 4) {
+        return micFailed("Speech recognition keeps stopping before the mic opens. Type your answer instead.");
+      }
+    }
+    setTimeout(() => { if (micOn) listen(); }, 500);
+  };
+  return r;
+}
+
+function listen() {
+  if (!rec) rec = build();
+  startedAt = Date.now();
+  gotAudio = false;
+  // A session can stay open while no audio ever arrives — wrong input device,
+  // muted hardware. Silence then looks identical to "listening, working fine",
+  // which is exactly the failure that made this feel broken.
+  setTimeout(() => { if (micOn && !gotAudio) $("#heard").textContent = DEAF; }, 4000);
+  try { rec.start(); }
+  catch (e) { if (e.name !== "InvalidStateError") micFailed(`Could not start the mic: ${e.name}`); }
+}
+
+function toggleMic() {
+  if (micOn) {
+    setMic(false);
+    try { rec?.abort(); } catch {}
+    rec = null;
+    if ($("#heard").textContent === DEAF) $("#heard").textContent = "";
+    return;
+  }
+  if (!SR) { $("#heard").textContent = "This browser has no Web Speech API — Chrome does."; return; }
+  stillborn = 0;
+  setMic(true);
+  listen();
+}
+
+// ─── sync: your history follows the code, not the device ─────────────────────
+// A bearer capability, exactly like a private-tldraw room id: whoever holds the
+// code is you. No account, no email, no password to lose. It lives in the URL
+// FRAGMENT so it never reaches a server log or a Referer header — the endpoint
+// gets it in a POST body instead.
+//
+// Decks deliberately do NOT sync. A deck is other people's names and faces;
+// guarding that with a shared link is not good enough, and doing it properly
+// would need the identity provider this whole design avoids. Load the file once
+// per device; your history is already there when you do.
+const SYNC_URL = "https://hgvsjhchqskii5lqrhfp64hqom0dqhwb.lambda-url.us-east-1.on.aws/";
+
+function syncCode() {
+  const fromHash = new URLSearchParams(location.hash.slice(1)).get("s");
+  if (fromHash && /^[0-9a-f]{32}$/.test(fromHash)) {
+    localStorage.setItem("recall:code", fromHash);
+    return fromHash;
+  }
+  let code = localStorage.getItem("recall:code");
+  if (!code) {
+    code = [...crypto.getRandomValues(new Uint8Array(16))]
+      .map((b) => b.toString(16).padStart(2, "0")).join("");
+    localStorage.setItem("recall:code", code);
+  }
+  // Put it back in the bar so bookmarking the page bookmarks the identity.
+  if (!fromHash) history.replaceState(null, "", `#s=${code}`);
+  return code;
+}
+
+const syncSays = (m) => { $("#sync").textContent = m; };
+let syncTimer = null;
+
+/**
+ * Push what is new, take back the union. Re-pushing is safe — the server keys an
+ * event by its own content — so the high-water mark can be sloppy without ever
+ * losing a review.
+ */
+async function syncNow() {
+  if (!deck) return;
+  const mark = Number(localStorage.getItem(`recall:${deck.id}:synced`) ?? 0);
+  const fresh = log.filter((e) => e[1] > mark);
+  syncSays("syncing…");
+  try {
+    const res = await fetch(SYNC_URL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ code: syncCode(), deckId: deck.id, events: fresh }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const { events = [] } = await res.json();
+
+    const seen = new Set(log.map((e) => e.join("|")));
+    let added = 0;
+    for (const e of events) if (!seen.has(e.join("|"))) { log.push(e); added++; }
+    if (added) { log.sort((a, b) => a[1] - b[1]); saveLog(); applyFilter(); }
+    localStorage.setItem(`recall:${deck.id}:synced`, String(log.reduce((m, e) => Math.max(m, e[1]), 0)));
+    syncSays(added ? `synced — pulled ${added} review${added === 1 ? "" : "s"} from another device` : "synced");
+  } catch (e) {
+    // Never fatal. The log on this device is the source of truth; the server is
+    // a convenience, and losing it must not cost you a study session.
+    syncSays(`offline — reviews are saved here and will sync later (${e.message})`);
+    // "Later" has to mean something. Without a retry, a session that goes offline
+    // and comes back pushes nothing until you happen to grade again or reload —
+    // and if the browser evicts storage first (Safari does, after 7 days) those
+    // reviews are gone with it.
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(syncNow, 30000);
+  }
+}
+
+/** Grading fires this; a burst of cards should cost one request, not twenty. */
+function syncSoon() {
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(syncNow, 4000);
+}
+
+// ─── recents: what you have studied, and which file it came from ─────────────
+// A page cannot reopen a file it was handed, so this is a reminder, not a link:
+// it tells you which file to pick again on a machine that has your history but
+// not your deck.
+function remember(fileName) {
+  const key = "recall:recents";
+  const list = JSON.parse(localStorage.getItem(key) ?? "[]").filter((r) => r.id !== deck.id);
+  list.unshift({ id: deck.id, name: deck.name, file: fileName ?? null, at: Date.now() });
+  localStorage.setItem(key, JSON.stringify(list.slice(0, 12)));
+  drawRecents();
+}
+
+function drawRecents() {
+  const list = JSON.parse(localStorage.getItem("recall:recents") ?? "[]");
+  $("#recents").innerHTML = list.length
+    ? "Studied before: " + list.map((r) =>
+        `${esc(r.name)}${r.file ? ` <span class="dim">(${esc(r.file)})</span>` : ""}`).join(" · ")
+    : "";
+}
+
+// ─── assistant: Chrome's built-in on-device model ────────────────────────────
+// Gemini Nano via the Prompt API. No key, no server, no page-side download —
+// Chrome supplies the model, so this stays a static shareable page. Absent
+// browser support the app simply has no assistant; nothing else changes.
+const WAKE = /\b(recall|rachel|recon)\b[,\s]*/i;   // homophones the recogniser hands back
+let assistantSession = null;
+
+const says = (msg) => { $("#says").textContent = msg; };
+const nCards = (n) => `${n} card${n === 1 ? "" : "s"}`;
+
+/**
+ * Deliberately narrow: filter and stats only. Grading and revealing already have
+ * deterministic keyword paths, and handing them to the model bought nothing while
+ * costing correctness — with "grade" in the enum, "what is the capital of France"
+ * came back as grade/good, i.e. an off-hand remark silently scoring your card.
+ * Removing the intents it did not need removed the failure mode outright.
+ *
+ * Tags are an enum of the deck's real tags, so the model picks from a closed
+ * vocabulary instead of inventing one — the same bet the answer matcher makes.
+ */
+const intentSchema = () => ({
+  type: "object",
+  properties: {
+    intent: { type: "string", enum: ["filter", "stats", "unknown"] },
+    tags: { type: "array", items: { type: "string", enum: deckTags() } },
+    mode: { type: "string", enum: ["only", "except"] },
+  },
+  required: ["intent"],
+});
+
+// Few-shots earn their place: without the first two the model inverted "skip the
+// alumni" into every-tag-but-alumni, which would have hidden the whole deck and
+// kept exactly what you asked it to drop.
+const SHOTS = [
+  { role: "user", content: "skip the alumni" },
+  { role: "assistant", content: '{"intent":"filter","tags":["alumni"],"mode":"except"}' },
+  { role: "user", content: "only the Iowa folks" },
+  { role: "assistant", content: '{"intent":"filter","tags":["loc:iowa"],"mode":"only"}' },
+  { role: "user", content: "show everyone" },
+  { role: "assistant", content: '{"intent":"filter","tags":[]}' },
+  { role: "user", content: "how many have I done" },
+  { role: "assistant", content: '{"intent":"stats"}' },
+  { role: "user", content: "what year did the Titanic sink" },
+  { role: "assistant", content: '{"intent":"unknown"}' },
+];
+
+async function assistant() {
+  if (assistantSession) return assistantSession;
+  if (!("LanguageModel" in self)) { says("This browser has no built-in model — Chrome 148+ does."); return null; }
+  const state = await LanguageModel.availability();
+  if (state === "unavailable") { says("Chrome's built-in model is unavailable on this device."); return null; }
+  says(state === "available" ? "Waking the on-device model…" : "Fetching Chrome's on-device model, one time…");
+  try {
+    assistantSession = await LanguageModel.create({
+      monitor: (m) => m.addEventListener("downloadprogress", (e) =>
+        says(`Fetching Chrome's on-device model… ${Math.round((e.loaded ?? 0) * 100)}%`)),
+      initialPrompts: [
+        { role: "system", content:
+          `You route short spoken commands for a flashcard app studying "${deck.name}".`
+          + ` Available tags: ${deckTags().join(", ")}.`
+          + ` "filter" narrows which cards are studied. List ONLY the tags the user actually named — never the others.`
+          + ` mode "only" keeps cards with those tags; mode "except" hides them. Empty tags clears the filter.`
+          + ` "stats" reports study progress. Use "unknown" for anything else, including general questions.` },
+        ...SHOTS,
+      ],
+    });
+  } catch (e) { says(`Could not start the on-device model: ${e.name}`); return null; }
+  says("");
+  return assistantSession;
+}
+
+async function command(utterance) {
+  const session = await assistant();
+  if (!session) return;
+  says(`\u201c${utterance}\u201d …`);
+  let plan;
+  try {
+    plan = JSON.parse(await session.prompt(utterance, { responseConstraint: intentSchema() }));
+  } catch (e) {
+    says(`Could not read that: ${e.name}`);
+    return;
+  }
+  if (plan.intent === "stats") {
+    const seen = replay().size;
+    return says(`${seen} of ${nCards(cards.length)} seen, ${introducedToday()} new today.`);
+  }
+  if (plan.intent === "filter") {
+    const tags = plan.tags ?? [];
+    filter = tags.length ? { tags, mode: plan.mode ?? "only" } : null;
+    applyFilter();
+    return says(tags.length
+      ? `${plan.mode === "except" ? "Hiding" : "Showing only"} ${tags.join(", ")} — ${nCards(cards.length)}.`
+      : `Studying the whole deck — ${nCards(cards.length)}.`);
+  }
+  says("Didn't catch a command in that.");
+}
+
+// ─── deck loading and filtering ──────────────────────────────────────────────
+let allCards = [];               // every card the deck can produce
+let filter = null;               // { tags: [...], mode: "only" | "except" }
+
+/** Every tag in the deck — the vocabulary the assistant is allowed to filter by. */
+const deckTags = () => [...new Set(deck.notes.flatMap((n) => n.tags ?? []))].sort();
+
+function applyFilter() {
+  const t = filter?.tags ?? [];
+  cards = !t.length
+    ? allCards
+    : allCards.filter((c) => {
+        const hit = t.some((tag) => c.note.tags?.includes(tag));
+        return filter.mode === "except" ? !hit : hit;
+      });
+  if (!cards.length) cards = allCards;   // never strand the user with an empty deck
+
+  // Notes no template could satisfy still exist — they are just unreviewable.
+  // Say so, rather than letting those people silently vanish from the deck.
+  const live = new Set(cards.map((c) => c.note.id));
+  const cardless = deck.notes.filter((n) => !live.has(n.id) && inFilter(n));
+  const label = (n) => Object.values(n.fields)[0] ?? n.id;
+  $("#gaps").textContent = cardless.length
+    ? `${cardless.length} in this deck produce no card — a field some template requires is missing: ${cardless.map(label).join(", ")}`
+    : "";
+
+  drawBuckets();
+  const next = pickNext();
+  next ? show(next) : done();
+}
+
+function inFilter(note) {
+  const t = filter?.tags ?? [];
+  if (!t.length) return true;
+  const hit = t.some((tag) => note.tags?.includes(tag));
+  return filter.mode === "except" ? !hit : hit;
+}
+
+// ─── wiring ──────────────────────────────────────────────────────────────────
+async function loadDeck(source) {
+  deck = typeof source === "string" ? await (await fetch(source)).json() : source;
+  allCards = buildCards(deck);
+  filter = deck.defaultTags?.length ? { tags: deck.defaultTags, mode: "only" } : null;
+  assistantSession = null;       // a new deck means a new tag vocabulary
+  loadLog();
+  applyFilter();
+  remember(typeof source === "string" ? null : source.__file);
+  syncNow();
+}
+
+$("#answer").addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  revealed ? grade(Rating.Good) : reveal($("#answer").value);
+});
+$("#mic").onclick = toggleMic;
+$("#export").onclick = () => {
+  const blob = new Blob([JSON.stringify({ v: 1, deckId: deck.id, log })], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `recall-${deck.id}-progress.json`;
+  a.click();
+};
+addEventListener("online", syncNow);
+addEventListener("visibilitychange", () => { if (!document.hidden) syncNow(); });
+
+$("#mylink").onclick = () => navigator.clipboard.writeText(`${location.origin}${location.pathname}#s=${syncCode()}`)
+  .then(() => syncSays("copied — this link carries your history, so keep it to yourself"));
+$("#applink").onclick = () => navigator.clipboard.writeText(`${location.origin}${location.pathname}`)
+  .then(() => syncSays("copied the plain app link — no history attached"));
+$("#importBtn").onclick = () => $("#import").click();
+$("#import").onchange = async (e) => {
+  const incoming = JSON.parse(await e.target.files[0].text());
+  // Events are immutable, so merging is dedupe-and-sort. No conflicts to resolve.
+  const seen = new Set(log.map((x) => x.join("|")));
+  for (const ev of incoming.log ?? []) if (!seen.has(ev.join("|"))) log.push(ev);
+  log.sort((a, b) => a[1] - b[1]);
+  saveLog();
+  drawBuckets();
+  refreshStatus();
+};
+$("#file").onchange = async (e) => {
+  const f = e.target.files[0];
+  const parsed = JSON.parse(await f.text());
+  parsed.__file = f.name;          // for the recents hint only; never persisted to the deck
+  loadDeck(parsed);
+};
+$("#demoBtn").onclick = () => loadDeck(DEMO);
+
+loadDeck(DEMO);
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

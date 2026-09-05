@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Reading Pod — Newcomer Walkthrough</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="The Reading Pod — Newcomer Walkthrough">
+<meta name="viz:description" content="A scroll-driven first-run journey through The Reading Pod, recreating each real screen and selling every feature from sign-up to community.">
+<style>
+  :root{
+    /* real app palette, sampled from the live logged-in UI */
+    --paper:#f2f0e9; --surface:#f7f5ef; --card:#ffffff; --line:#e4dfd3;
+    --ink:#34433b;          /* dark green-slate headings */
+    --navy:#2f3160;         /* nav text / dark labels */
+    --muted:#8b8678; --soft:#6f6a5e;
+    --teal:#5d9e86;         /* primary action */
+    --teal-d:#4f8a74;
+    --coral:#e8966c;        /* secondary / progress */
+    --coral-d:#df8455;
+    --indigo:#6164c9;       /* Menu */
+    --navy-btn:#283357;     /* Update Book */
+    --peach:#f0a878;        /* in-progress badge */
+    --maxw:1180px;
+    /* dark, for the public landing only */
+    --d-bg:#1b1b19; --d-card:#232220; --d-line:#39352f; --d-cream:#ece7da; --d-dim:#b6b0a4;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Poppins","Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-weight:800; letter-spacing:-.02em; line-height:1.1; margin:0}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+
+  #rail{position:fixed; top:0; left:0; height:3px; width:0%; background:var(--coral); z-index:60; transition:width .1s linear}
+
+  /* top nav (mirrors the app's own bar) */
+  nav.top{position:sticky; top:0; z-index:50; background:var(--surface); border-bottom:1px solid var(--line); box-shadow:0 6px 20px -16px rgba(0,0,0,.35)}
+  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; height:62px}
+  .brand{display:flex; align-items:center; gap:8px; font-weight:700; font-size:15px; color:var(--navy)}
+  .navsteps{display:flex; gap:3px; font-size:12.5px}
+  .navsteps a{padding:6px 11px; border-radius:8px; text-decoration:none; color:var(--navy); transition:.15s; opacity:.7}
+  .navsteps a:hover{background:#eceadf; opacity:1}
+  .navsteps a.on{opacity:1; color:var(--coral-d); box-shadow:inset 0 -2px 0 var(--coral)}
+  @media(max-width:880px){.navsteps{display:none}}
+
+  /* hero */
+  header.hero{padding:96px 0 64px; text-align:center; position:relative; overflow:hidden}
+  header.hero::before{content:""; position:absolute; inset:0; background:radial-gradient(60% 70% at 50% 0%, rgba(232,150,108,.16), transparent 70%); pointer-events:none}
+  .eyebrow{color:var(--coral-d); font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase}
+  header.hero h1{font-size:clamp(38px,7vw,78px); margin:16px auto 0; max-width:15ch; color:var(--ink)}
+  header.hero p.lede{max-width:62ch; margin:22px auto 0; color:var(--soft); font-size:19px}
+  .pills{display:flex; gap:9px; justify-content:center; flex-wrap:wrap; margin-top:30px}
+  .pill{border:1px solid var(--line); background:var(--card); color:var(--soft); font-size:13px; padding:7px 14px; border-radius:999px}
+  .pill b{color:var(--ink)}
+  .scrollcue{margin-top:42px; color:var(--muted); font-size:13px; letter-spacing:.1em; text-transform:uppercase; animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(7px);opacity:1}}
+
+  /* journey stop */
+  .stop{padding:72px 0; border-top:1px solid var(--line); position:relative}
+  .stoprow{display:grid; grid-template-columns:0.92fr 1.08fr; gap:52px; align-items:center}
+  .stop.flip .copy{order:2}
+  @media(max-width:920px){.stoprow{grid-template-columns:1fr; gap:30px} .stop.flip .copy{order:0}}
+
+  .step-no{display:inline-flex; align-items:center; gap:11px; color:var(--coral-d); font-weight:700; font-size:12.5px; letter-spacing:.13em; text-transform:uppercase; margin-bottom:14px}
+  .step-no .n{display:grid; place-items:center; width:30px; height:30px; border-radius:50%; border:1.5px solid var(--coral); color:var(--coral-d); font-size:13px}
+  .copy h2{font-size:clamp(26px,3.3vw,38px); color:var(--ink)}
+  .copy .who{color:var(--teal-d); font-size:14px; font-weight:600; margin:10px 0 0}
+  .copy p{color:var(--soft); font-size:16.5px; margin:15px 0 0}
+  .copy ul{margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
+  .copy li{display:flex; gap:11px; align-items:flex-start; font-size:15px; color:var(--ink)}
+  .copy li::before{content:"›"; color:var(--coral-d); font-weight:800}
+  .soon{display:inline-block; margin-bottom:13px; background:rgba(232,150,108,.14); color:var(--coral-d); border:1px solid rgba(232,150,108,.45); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 11px; border-radius:999px}
+
+  /* browser frame */
+  .mock{background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 34px 60px -34px rgba(40,35,25,.5)}
+  .mockbar{display:flex; align-items:center; gap:7px; padding:11px 14px; background:#efece3; border-bottom:1px solid var(--line)}
+  .mockbar .b{width:11px; height:11px; border-radius:50%}
+  .mockbar .b1{background:#e2705f}.mockbar .b2{background:#e7b64f}.mockbar .b3{background:#76b07f}
+  .mockbar .url{margin-left:9px; flex:1; background:#fff; border:1px solid var(--line); border-radius:6px; font-size:11.5px; color:var(--muted); padding:4px 10px; font-family:ui-monospace,monospace}
+  .appbar{display:flex; align-items:center; justify-content:space-between; padding:13px 18px; border-bottom:1px solid var(--line)}
+  .appbar .logo{display:flex; gap:6px; align-items:center; font-weight:700; font-size:12.5px; color:var(--navy)}
+  .appbar .links{display:flex; gap:13px; font-size:11.5px; color:var(--navy); opacity:.85}
+  .appbar .links .a{color:var(--coral-d); box-shadow:inset 0 -2px 0 var(--coral); opacity:1}
+  .appbar .menu{background:var(--indigo); color:#fff; font-size:11px; padding:5px 12px; border-radius:7px; font-weight:600}
+  .mbody{padding:20px}
+
+  /* buttons / chips */
+  .btn{display:inline-block; font-weight:600; font-size:12.5px; padding:8px 15px; border-radius:9px; border:none; color:#fff; white-space:nowrap}
+  .btn.teal{background:var(--teal)} .btn.coral{background:var(--coral); color:#46270f} .btn.navy{background:var(--navy-btn)}
+  .btn.ghost{background:#fff; border:1px solid var(--line); color:var(--navy)}
+  .chip{font-size:12px; padding:7px 14px; border-radius:9px; border:1px solid var(--line); background:#fff; color:var(--navy)}
+  .chip.on{background:var(--teal); color:#fff; border-color:var(--teal)}
+  .search{flex:1; background:#fff; border:1.5px solid #c9c4ea; border-radius:10px; padding:8px 13px; font-size:12.5px; color:var(--muted)}
+
+  /* dashboard */
+  .dash-grid{display:grid; grid-template-columns:1fr auto; gap:18px; align-items:start}
+  .dash-h{font-size:20px; color:var(--ink)}
+  .goalrow{display:flex; align-items:center; gap:9px; font-size:13px; color:var(--soft); margin-top:14px}
+  .goalrow .gi{width:64px; height:30px; border:1px solid var(--line); border-radius:7px; background:#fff}
+  .nowcard{border:1.5px solid var(--ink); border-radius:11px; padding:15px 16px; min-width:236px; background:#fff}
+  .nowcard .lab{font-size:15px; font-weight:800; color:var(--ink); margin-bottom:10px}
+  .nowcard .bt{font-weight:800; font-size:15px}
+  .nowcard .ba{font-size:12.5px; color:var(--soft); margin:2px 0 11px}
+  .pbar{height:8px; border-radius:99px; background:#e9e4d8; overflow:hidden}
+  .pbar > i{display:block; height:100%; background:var(--coral); border-radius:99px}
+  .pmeta{font-size:11.5px; color:var(--soft); margin-top:7px}
+  .sectrow{display:flex; align-items:center; justify-content:space-between; margin:22px 0 10px}
+  .sectrow h3{font-size:16px; color:var(--ink)}
+  .emptybox{border:1.5px solid var(--teal); border-radius:9px; padding:11px 14px; font-size:13px; color:var(--soft); display:inline-block; background:#fff}
+  .booklist{display:flex; gap:10px; flex-wrap:wrap}
+  .mini{background:#fff; border:1px solid var(--line); border-radius:9px; padding:9px 12px; font-size:12px}
+  .mini .t{font-weight:700} .mini .a{color:var(--muted); font-size:11px}
+
+  /* books grid */
+  .toolbar{display:flex; gap:9px; align-items:center; margin-bottom:16px; flex-wrap:wrap}
+  .bookcards{display:grid; grid-template-columns:repeat(3,1fr); gap:13px}
+  @media(max-width:540px){.bookcards{grid-template-columns:1fr 1fr}}
+  .bcard{background:#fff; border:1px solid var(--line); border-radius:11px; padding:15px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .bcard .bt{font-weight:800; font-size:14.5px; color:var(--ink)}
+  .bcard .row{display:flex; justify-content:space-between; align-items:baseline; margin-top:8px}
+  .bcard .ba{font-style:italic; color:var(--soft); font-size:12.5px}
+  .bcard .pg{font-size:12px; color:var(--soft)}
+  .bcard .foot{display:flex; align-items:center; justify-content:space-between; margin-top:16px}
+  .badge{font-size:9.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:4px 9px; border-radius:6px}
+  .badge.ip{background:var(--peach); color:#5a3618}
+  .badge.done{background:#9ec79a; color:#274922}
+  .badge.todo{background:#e7e2d6; color:#6f6a5e}
+
+  /* recs */
+  .reccards{display:grid; grid-template-columns:repeat(3,1fr); gap:13px}
+  @media(max-width:540px){.reccards{grid-template-columns:1fr 1fr}}
+  .rcard{background:#fff; border:1px solid var(--line); border-radius:11px; padding:15px; display:flex; flex-direction:column; min-height:128px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .rcard .bt{font-weight:800; font-size:14px; color:var(--ink)}
+  .rcard .ba{font-style:italic; color:var(--soft); font-size:12.5px; margin-top:6px}
+  .rcard .foot{margin-top:auto; display:flex; justify-content:flex-end; padding-top:14px}
+
+  /* pods */
+  .podhead{display:flex; align-items:center; justify-content:space-between; margin-bottom:6px}
+  .podhead h3{font-size:19px; color:var(--ink)}
+  .podgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px}
+  .pcard{background:#fff; border:1px solid var(--line); border-radius:11px; padding:14px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .pcard .emoji{font-size:21px}
+  .pcard .pn{font-weight:800; font-size:14px; color:var(--ink); margin-top:7px}
+  .pcard .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .ptag{font-size:10px; background:#eef3ef; color:var(--teal-d); border:1px solid #d6e6db; padding:2px 8px; border-radius:999px; font-weight:600}
+  .pcard .pd{font-size:11.5px; color:var(--soft); margin-top:9px}
+  .pcard .pf{display:flex; align-items:center; justify-content:space-between; margin-top:12px}
+  .pcard .mem{font-size:11px; color:var(--muted)}
+  .pending{border:2px dashed #c7c2b4; border-radius:11px; padding:14px 16px; margin-top:14px; color:var(--indigo); font-weight:800; font-size:15px}
+  .pending small{display:block; color:var(--muted); font-weight:400; font-size:11.5px; margin-top:4px}
+
+  /* dark landing mock */
+  .mock.dark{background:var(--d-bg); border-color:var(--d-line); color:var(--d-cream)}
+  .mock.dark .mockbar{background:#141311; border-color:var(--d-line)}
+  .mock.dark .mockbar .url{background:#000; border-color:var(--d-line); color:#7c776c}
+  .mock.dark .appbar{border-color:var(--d-line)}
+  .mock.dark .appbar .logo,.mock.dark .appbar .links{color:var(--d-cream)}
+  .lg{max-width:280px}
+  .lg .t{font-weight:800; font-size:16px; margin-bottom:13px; color:var(--d-cream)}
+  .lg label{display:block; font-size:11px; color:var(--d-dim); margin-bottom:5px}
+  .lg .input{background:#000; border:1px solid var(--d-line); border-radius:7px; padding:9px 11px; font-size:12.5px; color:#7c776c; margin-bottom:12px}
+  .lg .ghost{font-size:11px; color:#7c776c; margin-top:4px}.lg .ghost b{color:var(--d-cream)}
+  .feat3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:16px}
+  .feat{border:1px solid var(--d-line); border-radius:9px; padding:11px}
+  .feat .ic{font-size:15px}.feat .ft{font-size:11px; font-weight:700; color:var(--d-cream); margin-top:6px}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  /* roadmap */
+  .road{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:8px}
+  @media(max-width:760px){.road{grid-template-columns:1fr}}
+  .rc{background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; box-shadow:0 10px 24px -20px rgba(0,0,0,.4)}
+  .rc .ic{font-size:24px}
+  .rc h4{margin:10px 0 0; font-size:16px; color:var(--ink)}
+  .rc p{margin:7px 0 0; font-size:13.5px; color:var(--soft)}
+  .rc .tag{display:inline-block; margin-top:11px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(97,100,201,.12); color:var(--indigo)}
+
+  /* closing */
+  .closing{padding:90px 0 100px; text-align:center; border-top:1px solid var(--line); position:relative}
+  .closing::before{content:""; position:absolute; inset:0; background:radial-gradient(55% 70% at 50% 100%, rgba(93,158,134,.18), transparent 70%)}
+  .closing h2{font-size:clamp(30px,5vw,50px); position:relative; color:var(--ink)}
+  .closing p{color:var(--soft); font-size:18px; max-width:54ch; margin:18px auto 0; position:relative}
+  .cta{position:relative; margin-top:30px; display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center}
+  .cta a{text-decoration:none; font-weight:700; font-size:15px; padding:13px 26px; border-radius:11px}
+  .cta .primary{background:var(--teal); color:#fff}
+  .cta .secondary{border:1px solid var(--line); color:var(--ink); background:#fff}
+  footer{padding:28px 0 56px; text-align:center; color:var(--muted); font-size:12.5px; border-top:1px solid var(--line)}
+  footer .note{max-width:74ch; margin:0 auto 12px; color:var(--soft); font-size:13px}
+  footer code{background:#eceadf; border:1px solid var(--line); padding:2px 6px; border-radius:4px; font-size:12px}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Reading Pod — Newcomer Walkthrough">
+<meta property="og:description" content="A scroll-driven first-run journey through The Reading Pod, recreating each real screen and selling every feature from sign-up to community.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/reading-pod-walkthrough/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/reading-pod-walkthrough/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div id="rail"></div>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand"><span>📚</span> The Reading Pod</div>
+    <div class="navsteps">
+      <a href="#join" class="on">Join</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#library">Library</a>
+      <a href="#recs">Book Recs</a>
+      <a href="#pods">Pods</a>
+      <a href="#roadmap">What's Next</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">A newcomer's first 10 minutes</div>
+    <h1 class="reveal">Welcome to The Reading Pod</h1>
+    <p class="lede reveal">Your reading life — organized, tracked, and social. Follow the exact path a brand-new reader takes: from the sign-up screen, to a dashboard that tracks every page, to finding the people who get your taste.</p>
+    <div class="pills reveal">
+      <span class="pill"><b>Track</b> every page</span>
+      <span class="pill"><b>Organize</b> your library</span>
+      <span class="pill"><b>Capture</b> recs</span>
+      <span class="pill"><b>Join</b> a pod</span>
+    </div>
+    <div class="scrollcue reveal">Scroll to begin ↓</div>
+  </div>
+</header>
+
+<!-- 1 — JOIN -->
+<section class="stop" id="join">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">1</span> The door</div>
+      <h2>You're one screen away</h2>
+      <p class="who">Where every newcomer starts.</p>
+      <p>No setup maze. Land on the home page and the pitch is right there: stop juggling notes, screenshots, and half-remembered titles — keep your whole reading life in one calm, distraction-free space. Email and password, and you're in.</p>
+      <ul>
+        <li>Simple email + password sign-up — that's the whole gate</li>
+        <li>The landing page sells you the features before you commit</li>
+        <li>Five reasons to join, front and center</li>
+      </ul>
+    </div>
+    <div class="mock dark reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span class="a">Home</span><span>About</span></div></div>
+      <div class="mbody">
+        <div class="lg">
+          <div class="t">Log In</div>
+          <label>Email</label><div class="input">you@example.com</div>
+          <label>Password</label><div class="input">••••••••</div>
+          <span class="btn" style="background:#2d2d2a;color:var(--d-cream)">Login</span>
+          <div class="ghost">Don't have an account? <b>Sign Up</b></div>
+        </div>
+        <div class="feat3">
+          <div class="feat"><div class="ic">📖</div><div class="ft">Reading Life, Organized</div></div>
+          <div class="feat"><div class="ic">🔖</div><div class="ft">Never Lose a Rec</div></div>
+          <div class="feat"><div class="ic">⭐</div><div class="ft">Review While Fresh</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 — DASHBOARD -->
+<section class="stop flip" id="dashboard">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">2</span> Your command center</div>
+      <h2>A dashboard that knows where you are</h2>
+      <p class="who">The first thing you see after logging in.</p>
+      <p>"Welcome back" — then everything that matters at a glance. Set a yearly book goal, see exactly what you're <i>Currently Reading</i> with a live page-progress bar, line up your "Books to Read," and watch your "Books Read This Month" stack up.</p>
+      <ul>
+        <li>Set a <b>yearly reading goal</b> and track toward it</li>
+        <li><b>Currently Reading</b> shows real progress — 182 / 476 pages (38%)</li>
+        <li>"Books to Read" and "Read This Month" keep momentum visible</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/dashboard</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span class="a">Home</span><span>About</span><span>Books</span><span>Pods</span><span>Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="dash-grid">
+          <div>
+            <div class="dash-h">Welcome Back, Rascall!</div>
+            <div class="goalrow">This Year's Book Goal: <span class="gi"></span> <span class="btn coral">Set Goal</span></div>
+          </div>
+          <div class="nowcard">
+            <div class="lab">Currently Reading:</div>
+            <div class="bt">Project Hail Mary</div>
+            <div class="ba">by Andy Weir</div>
+            <div class="pbar"><i style="width:38%"></i></div>
+            <div class="pmeta">182 / 476 pages (38%)</div>
+          </div>
+        </div>
+        <div class="sectrow"><h3>Books to Read</h3><span class="btn teal">+ Add</span></div>
+        <div class="booklist">
+          <div class="mini"><div class="t">Babel</div><div class="a">R. F. Kuang</div></div>
+          <div class="mini"><div class="t">The Psychology of Money</div><div class="a">Morgan Housel</div></div>
+        </div>
+        <div class="sectrow"><h3>Books Read This Month</h3></div>
+        <div class="emptybox">No books completed this month yet.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 — LIBRARY -->
+<section class="stop" id="library">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">3</span> Your shelf</div>
+      <h2>Your Reading Life, Organized</h2>
+      <p class="who">The library you actually build.</p>
+      <p>Add a book in seconds — title, author, the page you're on, and total pages. The app turns that into a status (Not&nbsp;Started → In-Progress → Completed) and a progress bar. Filter by status, search your shelf, and hit <b>Update Book</b> as you read.</p>
+      <ul>
+        <li>Add books with <b>page-level progress</b>, not just "reading/read"</li>
+        <li>Filter tabs: All · Not Started · In-Progress · Completed</li>
+        <li>Search any title; update your page as you go</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/books</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span>Home</span><span>About</span><span class="a">Books</span><span>Pods</span><span>Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="toolbar">
+          <span class="chip on">All</span><span class="chip">Not Started</span><span class="chip">In-Progress</span><span class="chip">Completed</span>
+          <span class="search">Search your books…</span>
+          <span class="btn teal">Add New Book</span>
+        </div>
+        <div class="bookcards">
+          <div class="bcard"><div class="bt">Project Hail Mary</div><div class="row"><span class="ba">Andy Weir</span><span class="pg">182 / 476</span></div><div class="foot"><span class="badge ip">In-Progress</span><span class="btn navy">Update Book</span></div></div>
+          <div class="bcard"><div class="bt">Educated</div><div class="row"><span class="ba">Tara Westover</span><span class="pg">334 / 334</span></div><div class="foot"><span class="badge done">Completed</span><span class="btn navy">Update Book</span></div></div>
+          <div class="bcard"><div class="bt">Dune</div><div class="row"><span class="ba">Frank Herbert</span><span class="pg">0 / 688</span></div><div class="foot"><span class="badge todo">Not Started</span><span class="btn navy">Update Book</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 — RECS -->
+<section class="stop flip" id="recs">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">4</span> The capture</div>
+      <h2>Never Lose a Recommendation Again</h2>
+      <p class="who">The habit that makes the app stick.</p>
+      <p>A friend mentions a book, a podcast drops three, you spot one at 1am. Drop the title and author into the shared <b>Latest &amp; Greatest</b> feed and it's saved for good. See what everyone's recommending — and pull any of it straight onto your shelf with one tap of <b>Add to Library</b>.</p>
+      <ul>
+        <li>Capture a rec in two fields: title + author</li>
+        <li>A community feed of what readers are loving right now</li>
+        <li><b>Add to Library</b> turns a rec into a tracked book instantly</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/book-recs</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span>Home</span><span>About</span><span>Books</span><span>Pods</span><span class="a">Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="toolbar">
+          <strong style="font-size:15px;color:var(--ink)">Latest &amp; Greatest</strong>
+          <span class="search">Search by title or author…</span>
+          <span class="btn teal">Add Book Rec</span>
+        </div>
+        <div class="reccards">
+          <div class="rcard"><div class="bt">The Midnight Library</div><div class="ba">Matt Haig</div><div class="foot"><span class="btn coral">Add to Library</span></div></div>
+          <div class="rcard"><div class="bt">Tomorrow, and Tomorrow, and Tomorrow</div><div class="ba">Gabrielle Zevin</div><div class="foot"><span class="btn coral">Add to Library</span></div></div>
+          <div class="rcard"><div class="bt">Sapiens</div><div class="ba">Yuval Noah Harari</div><div class="foot"><span class="btn coral">Add to Library</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 — PODS -->
+<section class="stop" id="pods">
+  <div class="wrap stoprow">
+    <div class="copy reveal">
+      <div class="step-no"><span class="n">5</span> Your people</div>
+      <h2>Find Your People with Pods</h2>
+      <p class="who">Where solo reading turns social.</p>
+      <p>Reading doesn't have to be a solo sport. Pods are small communities built around genres and themes. Spin one up with a name, genre tags, and a summary — or search and <b>request to join</b> someone else's. Your pending requests sit right on the page until you're let in.</p>
+      <ul>
+        <li><b>Create a pod</b>: name, genre tags, and a summary</li>
+        <li>Search and <b>request to join</b> pods that match your taste</li>
+        <li>A "Pending Requests" area tracks where you've knocked</li>
+      </ul>
+    </div>
+    <div class="mock reveal">
+      <div class="mockbar"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="url">the-reading-pod.vercel.app/pods</span></div>
+      <div class="appbar"><div class="logo">📚 The Reading Pod</div><div class="links"><span>Home</span><span>About</span><span>Books</span><span class="a">Pods</span><span>Book Recs</span><span class="menu">Menu</span></div></div>
+      <div class="mbody">
+        <div class="toolbar"><span class="btn teal">+ Create Pod</span><span class="search" style="max-width:220px;margin-left:auto;flex:none;width:220px">Search pods…</span></div>
+        <div class="podhead"><h3>Discover pods</h3></div>
+        <div class="podgrid">
+          <div class="pcard"><div class="emoji">🐉</div><div class="pn">Fantasy Realms</div><div class="tags"><span class="ptag">fantasy</span><span class="ptag">epic</span></div><div class="pd">Doorstopper series and dragons welcome.</div><div class="pf"><span class="mem">1,204 members</span><span class="btn ghost">Request</span></div></div>
+          <div class="pcard"><div class="emoji">📈</div><div class="pn">Business &amp; Builders</div><div class="tags"><span class="ptag">business</span><span class="ptag">startups</span></div><div class="pd">Strategy and the books behind it.</div><div class="pf"><span class="mem">847 members</span><span class="btn ghost">Request</span></div></div>
+        </div>
+        <div class="pending">Pending Requests<small>Fantasy Realms — waiting for approval</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 — ROADMAP -->
+<section class="stop" id="roadmap">
+  <div class="wrap">
+    <div class="copy reveal" style="text-align:center;max-width:680px;margin:0 auto 8px">
+      <span class="soon">On the roadmap</span>
+      <h2>The pod is just getting started</h2>
+      <p>The foundation — library, recs, pods — is live today. These are the pieces the experience is building toward, promised right on the landing page.</p>
+    </div>
+    <div class="road reveal">
+      <div class="rc"><div class="ic">💬</div><h4>Talk Books, Not Algorithms</h4><p>Real conversations inside your pod — share takes, debate endings, and discover your next read through actual humans.</p><span class="tag">Coming soon</span></div>
+      <div class="rc"><div class="ic">⭐</div><h4>Review While It's Still Fresh</h4><p>The moment you finish is when your thoughts are sharpest. Drop a quick, meaningful review before "later" becomes never.</p><span class="tag">Coming soon</span></div>
+      <div class="rc"><div class="ic">🎮</div><h4>Turn Reading Into a Game</h4><p>Group reads, leaderboards, and shared goals — a whole new way to stay motivated and actually finish, together.</p><span class="tag">Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>No one reads alone.</h2>
+    <p>That's the whole idea. Track every page, organize your library, never lose a rec, and find the pod that gets your taste — all in one calm, distraction-free space.</p>
+    <div class="cta">
+      <a class="primary" href="https://the-reading-pod.vercel.app" target="_blank" rel="noopener">Open The Reading Pod ↗</a>
+      <a class="secondary" href="#join">Replay the walkthrough</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="note">Built from a real logged-in walkthrough of The Reading Pod on 2026-06-27. Screens above faithfully recreate the live UI (real theme, structure, labels, and flows) with idealized sample data. Live features today: <b>Dashboard, Books, Book Recs, Pods</b>. Reviews, pod chat, gamification, and the Profile page are not yet built — shown here as roadmap.</div>
+  📚 The Reading Pod · newcomer walkthrough
+</footer>
+
+<script>
+  const rail=document.getElementById('rail');
+  const onScroll=()=>{const h=document.documentElement;const sc=h.scrollTop/(h.scrollHeight-h.clientHeight);rail.style.width=(sc*100)+'%';};
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const links=[...document.querySelectorAll('.navsteps a')];
+  const secs=links.map(l=>document.querySelector(l.getAttribute('href')));
+  const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const id='#'+e.target.id;links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')===id));}});},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>s&&spy.observe(s));
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

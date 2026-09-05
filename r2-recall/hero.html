@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --bg:#0d1117; --line:#2c3647;
+    --ink:#e7ecf3; --dim:#9fb0c3; --accent:#58a6ff; --warm:#e2b23f; --good:#36c98f;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  html,body{ margin:0; background:#0d1117; }
+
+  .og-card{
+    width:1200px; height:630px; overflow:hidden;
+    position:relative; display:flex;
+    background:
+      radial-gradient(1000px 700px at 6% -14%, rgba(88,166,255,.13), transparent 58%),
+      radial-gradient(900px 760px at 106% 66%, rgba(54,201,143,.10), transparent 62%),
+      var(--bg);
+    color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased;
+  }
+  .og-card::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    box-shadow: inset 0 0 200px 40px rgba(0,0,0,.55);
+  }
+
+  .col-text{
+    position:relative; z-index:2; width:625px; flex:none;
+    padding:60px 36px 56px 72px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .eyebrow{
+    display:flex; align-items:center; gap:11px;
+    font-size:15px; font-weight:700; letter-spacing:.2em; color:var(--dim); margin-bottom:26px;
+  }
+  .eyebrow .tick{
+    width:11px; height:11px; border-radius:2px; flex:none;
+    background:var(--accent); box-shadow:0 0 14px rgba(88,166,255,.8);
+  }
+  .title{ margin:0; line-height:.86; }
+  .title .the{
+    display:block; font-size:32px; font-weight:800; letter-spacing:.40em;
+    color:var(--dim); margin-bottom:10px; padding-left:3px;
+  }
+  .title .big{
+    display:block; font-size:126px; font-weight:800; letter-spacing:-.035em;
+    color:var(--ink); text-transform:uppercase;
+  }
+  .tagline{ margin:28px 0 0; max-width:500px; font-size:22px; line-height:1.42; color:var(--dim); }
+  .tagline em{ color:var(--ink); font-style:normal; font-weight:700; }
+  .chapters{
+    display:flex; flex-wrap:wrap; gap:0 12px; margin-top:34px; max-width:510px;
+    font-size:13px; letter-spacing:.05em; font-weight:600; color:#6b7688;
+  }
+  .chapters .ch{ position:relative; padding-right:12px; }
+  .chapters .ch::after{
+    content:""; position:absolute; right:0; top:50%; width:4px; height:4px;
+    margin-top:-2px; border-radius:50%; background:#3a4457;
+  }
+  .chapters .ch:last-child{ padding-right:0; }
+  .chapters .ch:last-child::after{ display:none; }
+  .chapters .ch.on{ color:var(--accent); }
+
+  .col-viz{
+    position:relative; z-index:1; flex:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:24px 44px 24px 8px; border-left:1px solid rgba(88,166,255,.20);
+  }
+  .curve-wrap{ filter: drop-shadow(0 22px 44px rgba(0,0,0,.55)); }
+  .cap{ margin-top:20px; font-size:13px; font-weight:700; letter-spacing:.20em; color:var(--dim); }
+</style>
+</head>
+<body>
+  <div class="og-card">
+
+    <div class="col-text">
+      <div class="eyebrow">
+        <span class="tick"></span>
+        SPACED REPETITION&nbsp;&middot;&nbsp;NO INSTALL, NO ACCOUNT
+      </div>
+
+      <h1 class="title">
+        <span class="the">TOTAL</span>
+        <span class="big">RECALL</span>
+      </h1>
+
+      <p class="tagline">
+        Say the answer <em>out loud</em>. Recognised on-device, graded against the
+        whole deck &mdash; and <em>nothing ever leaves your machine</em>.
+      </p>
+
+      <div class="chapters">
+        <span class="ch on">Bring&nbsp;a&nbsp;Deck</span>
+        <span class="ch on">Answer&nbsp;Aloud</span>
+        <span class="ch">FSRS&nbsp;Schedules</span>
+        <span class="ch">Export&nbsp;Anywhere</span>
+      </div>
+    </div>
+
+    <!-- The forgetting curve, and what a review does to it: each review lifts
+         recall back to 1 and the next decay is flatter — which is the whole idea. -->
+    <div class="col-viz">
+      <div class="curve-wrap">
+        <svg width="410" height="330" viewBox="0 0 410 330" aria-label="Forgetting curve flattening after each review">
+          <defs>
+            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#58a6ff" stop-opacity=".26"/>
+              <stop offset="1" stop-color="#58a6ff" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- frame -->
+          <line x1="46" y1="26" x2="46" y2="256" stroke="#2c3647" stroke-width="2"/>
+          <line x1="46" y1="256" x2="392" y2="256" stroke="#2c3647" stroke-width="2"/>
+          <text x="14" y="34" font-size="12.5" fill="#9fb0c3" font-weight="600">100%</text>
+          <text x="20" y="252" font-size="12.5" fill="#9fb0c3" font-weight="600">0%</text>
+          <text x="204" y="286" text-anchor="middle" font-size="12.5" fill="#9fb0c3" font-weight="600">time &rarr;</text>
+
+          <!-- 90% retrievability target, where FSRS aims each review -->
+          <line x1="46" y1="49" x2="392" y2="49" stroke="#36c98f" stroke-width="1.5" stroke-dasharray="5 5" opacity=".65"/>
+          <text x="392" y="43" text-anchor="end" font-size="11.5" fill="#36c98f" font-weight="700">90% target</text>
+
+          <!-- decay curves, each flatter than the last -->
+          <path d="M46 26 C 74 120, 92 190, 110 232 L110 256 L46 256 Z" fill="url(#fade)"/>
+          <path d="M46 26 C 74 120, 92 190, 110 232" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round"/>
+
+          <path d="M110 26 C 152 116, 178 178, 206 214 L206 256 L110 256 Z" fill="url(#fade)"/>
+          <path d="M110 26 C 152 116, 178 178, 206 214" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round"/>
+
+          <path d="M206 26 C 268 104, 320 150, 372 176 L372 256 L206 256 Z" fill="url(#fade)"/>
+          <path d="M206 26 C 268 104, 320 150, 372 176" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- review moments: recall snaps back to full -->
+          <g font-size="11.5" font-weight="700" fill="#e2b23f" text-anchor="middle">
+            <line x1="110" y1="232" x2="110" y2="26" stroke="#e2b23f" stroke-width="2.5" opacity=".9"/>
+            <circle cx="110" cy="26" r="6.5" fill="#e2b23f" filter="url(#glow)"/>
+            <text x="110" y="308">review</text>
+
+            <line x1="206" y1="214" x2="206" y2="26" stroke="#e2b23f" stroke-width="2.5" opacity=".9"/>
+            <circle cx="206" cy="26" r="6.5" fill="#e2b23f" filter="url(#glow)"/>
+            <text x="206" y="308">review</text>
+          </g>
+
+          <!-- the payoff: intervals stretch -->
+          <g stroke="#6b7688" stroke-width="1.5" fill="none">
+            <path d="M50 272 L106 272"/><path d="M114 272 L202 272"/><path d="M210 272 L370 272"/>
+          </g>
+          <g font-size="11" fill="#6b7688" font-weight="600" text-anchor="middle">
+            <text x="78" y="269">1d</text><text x="158" y="269">6d</text><text x="290" y="269">3wk</text>
+          </g>
+        </svg>
+      </div>
+      <div class="cap">EACH REVIEW BUYS A LONGER GAP</div>
+    </div>
+
+  </div>
+</body>
+</html>
