@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How an access token is created securely</title>
+<meta name="viz:uid" content="v-a9320047f564">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="How an access token is created securely">
+<meta name="viz:description" content="Dive B of the client credentials flow: RS256, the signing input, and the claims that carry weight — with a real token you can decode on the page, because a JWT is signed and not encrypted.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  /* The token on this page is REAL: generated 2026-08-06 with node:crypto against
+     a real RSA-2048 keypair. It verifies against its public key, and flipping one
+     character of the signing input makes it fail. Every decoded value shown is
+     decoded in the browser from those bytes, not transcribed — so a reader who
+     runs the same base64url decode gets exactly what the page claims. */
+  body { max-width:1180px; margin:0 auto; padding:26px 26px 90px }
+  section { margin-top:34px }
+  h2 { font-size:17px; margin:0 0 4px; letter-spacing:-.2px }
+  h2 .n { color:var(--faint); font-variant-numeric:tabular-nums; margin-right:9px }
+  .lede { color:var(--muted); font-size:13.5px; line-height:1.6; margin:0 0 16px; max-width:78ch }
+  .lede b, p b { color:var(--text) }
+  code { font-family:var(--mono); font-size:.92em; color:#7fd7ff }
+
+  /* One colour vocabulary for the three parts of a JWT, used identically on the
+     verification dive so the two pages read as one diagram seen twice. */
+  .c-head { color:var(--c4) } .c-pay { color:var(--c5) } .c-sig { color:var(--good) }
+  .sw { display:inline-block; width:9px; height:9px; border-radius:2px;
+        background:currentColor; margin-right:7px; vertical-align:middle }
+
+  /* ---- keypair --------------------------------------------------------- */
+  .halves { display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:stretch }
+  .half { border:1px solid var(--border); border-radius:10px; padding:15px 17px;
+          background:var(--panel) }
+  .half.priv { border-color:var(--danger) }
+  .half.pub { border-color:var(--good) }
+  .half h3 { margin:0 0 3px; font-size:14px }
+  .half.priv h3 { color:var(--danger) } .half.pub h3 { color:var(--good) }
+  .half .hs { color:var(--faint); font-size:10.5px; letter-spacing:.09em;
+              text-transform:uppercase; margin-bottom:9px }
+  .half p { margin:0; color:var(--muted); font-size:12.5px; line-height:1.6 }
+  .split { display:flex; align-items:center; color:var(--faint); font-size:11px;
+           letter-spacing:.1em; writing-mode:vertical-rl; justify-content:center }
+
+  /* ---- the assembly line ----------------------------------------------- */
+  .asm { display:grid; gap:12px }
+  .row { display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:start;
+         border:1px solid var(--border); border-radius:10px; padding:13px 15px;
+         background:var(--panel); opacity:.35; transition:opacity .3s ease, border-color .3s ease }
+  .row.on { opacity:1; border-color:var(--accent) }
+  .row .rl { font-size:12.5px; font-weight:650 }
+  .row .rl small { display:block; color:var(--faint); font-weight:400; font-size:10.5px;
+                   margin-top:3px; letter-spacing:.04em; text-transform:uppercase }
+  .row .rv { font-family:var(--mono); font-size:11.5px; line-height:1.65;
+             word-break:break-all; color:var(--muted) }
+  .row .rn { color:var(--muted); font-size:12.5px; line-height:1.6; margin-top:7px;
+             font-family:var(--sans) }
+  .row .rn b { color:var(--text) }
+
+  .beat { display:flex; gap:16px; align-items:flex-start; border:1px solid var(--border);
+          border-radius:10px; padding:14px 16px; background:var(--panel); margin-top:14px }
+  .beat .no { background:var(--accent); color:#04121f; font-weight:800; border-radius:8px;
+              min-width:40px; text-align:center; padding:7px 4px; font-size:15px;
+              line-height:1.1; flex:none }
+  .beat .no small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .beat .bt { font-size:15px; font-weight:600 }
+  .beat .bd { color:var(--muted); font-size:13px; line-height:1.6; margin-top:4px }
+  .hint { color:var(--faint); font-size:11.5px; margin-top:10px }
+  .hint kbd { font-family:var(--mono); border:1px solid var(--border); border-radius:4px;
+              padding:0 5px; color:var(--muted) }
+
+  /* ---- the token itself ------------------------------------------------- */
+  .tok { font-family:var(--mono); font-size:12px; line-height:1.75; word-break:break-all;
+         background:#0a1220; border:1px solid var(--border); border-radius:10px;
+         padding:16px 18px }
+  .tok .dot { color:var(--text); font-weight:700 }
+  .tok .si { background:#131d2e; border-radius:3px; box-shadow:0 0 0 1px #2b3b5c }
+
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px }
+  .box { border:1px solid var(--border); border-radius:10px; background:var(--panel);
+         padding:14px 16px }
+  .box h4 { margin:0 0 9px; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+            color:var(--faint) }
+  .box pre { margin:0; font-family:var(--mono); font-size:11.5px; line-height:1.65;
+             color:var(--muted); white-space:pre-wrap; word-break:break-all }
+  .box pre .k { color:#7fd7ff } .box pre .s { color:var(--good) } .box pre .num { color:#e0b0ff }
+
+  button.reveal { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+                  padding:8px 14px; font-size:12.5px; font-weight:650; cursor:pointer;
+                  font-family:var(--sans) }
+  button.reveal:hover { filter:brightness(1.12) }
+  button.reveal[disabled] { background:var(--panel-2); color:var(--faint); cursor:default }
+
+  .callout { border-left:3px solid var(--warn); background:#1e1808; border-radius:0 8px 8px 0;
+             padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.6;
+             color:#e8d9b4 }
+  .callout b { color:var(--warn) } .callout i { color:#fff; font-style:italic }
+  .callout.danger { border-color:var(--danger); background:#2a1315; color:#f3c7c3 }
+  .callout.danger b { color:var(--danger) }
+  .callout.good { border-color:var(--good); background:#0d2015; color:#c6e8d1 }
+  .callout.good b { color:var(--good) }
+
+  /* ---- claims ----------------------------------------------------------- */
+  .claims { display:grid; grid-template-columns:auto auto 1fr; gap:0; font-size:12.5px;
+            border:1px solid var(--border); border-radius:10px; overflow:hidden }
+  .claims > div { padding:11px 14px; border-top:1px solid var(--border) }
+  .claims > div:nth-child(-n+3) { border-top:0; background:var(--panel-2);
+            font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint) }
+  .claims .cn { font-family:var(--mono); color:#7fd7ff; white-space:nowrap }
+  .claims .cv { font-family:var(--mono); color:var(--muted); white-space:nowrap;
+                font-size:11.5px }
+  .claims .cw { color:var(--muted); line-height:1.55 }
+  .claims .cw b { color:var(--text) }
+  .claims .hot { background:#161d13 }
+  .claims .hot .cw b { color:var(--good) }
+
+  /* ---- sourcing --------------------------------------------------------- */
+  .refs { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+  .ref { border:1px solid var(--border); border-radius:9px; padding:12px 14px;
+         background:var(--panel); font-size:12.5px; line-height:1.6; color:var(--muted) }
+  .ref b { color:#a9e2ff } .ref i { color:var(--text); font-style:normal }
+  .ours { border-left:3px solid var(--warn) }
+  .ours b { color:var(--warn); text-transform:uppercase; letter-spacing:.04em; font-size:11px }
+
+  .nav { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+  .nav a { display:inline-block; padding:9px 14px; border-radius:8px;
+           background:#151f3a; border:1px solid #3a5288; color:#9fc6ff;
+           text-decoration:none; font-size:13px }
+  .nav a:hover { background:#1d2c50; border-color:var(--accent); color:#cfe4ff }
+  .nav a.home { background:transparent; border-color:var(--border); color:var(--muted) }
+
+  /* ======================================================================
+     THE HERO FIGURE — one picture for the one thing people get wrong.
+     "Signed" gets heard as "secret", so the figure puts the two side by
+     side and lets an eye try to look through each: straight through the
+     glass on the left, flat into a wall on the right. Then it breaks the
+     seal, because "unchangeable" is what signing actually buys.
+     ====================================================================== */
+  .hero { margin:22px 0 0; border:1px solid var(--border); border-radius:14px;
+          background:linear-gradient(180deg,#0c1424,#0a1120); overflow:hidden }
+  .hero-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+              padding:14px 18px; border-bottom:1px solid var(--border) }
+  .hero-bar h2 { margin:0; font-size:15px }
+  .hero-bar .spacer { flex:1 }
+  .hero:focus { outline:none; box-shadow:0 0 0 1px var(--accent) }
+  .hero-bar button { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+                     padding:8px 15px; font-size:13px; font-weight:650; cursor:pointer;
+                     font-family:var(--sans) }
+
+  /* Step controls — same idiom as the protocol walkthroughs. Nothing advances
+     on its own unless you press play; the point is being able to stop and read. */
+  .hnarr { display:flex; gap:13px; align-items:center;
+           padding:12px 18px; border-bottom:1px solid var(--border) }
+  .hstepno { background:var(--accent); color:#04121f; font-weight:800; border-radius:7px;
+             padding:5px 9px; font-size:14px; line-height:1.05; text-align:center;
+             flex:none; min-width:34px }
+  .hstepno small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .hnarr .t { font-size:14.5px; font-weight:600; color:var(--text); line-height:1.45 }
+  .htrack { display:flex; gap:3px; padding:11px 18px 13px }
+  .htrack .tick { height:5px; flex:1; background:#1e2a41; border-radius:3px; cursor:pointer }
+  .htrack .tick:hover { background:#3b5286 }
+  .htrack .tick.done { background:#2c4a72 }
+  .htrack .tick.now { background:var(--accent) }
+
+  /* the keypair prologue — the seal needs an origin, or it is just a sticker */
+  .keybox .kb { fill:#141b2e }
+  .keybox.priv .kb { stroke:var(--danger) } .keybox.pub .kb { stroke:var(--good) }
+  .keybox .kt { font-family:var(--sans); font-size:13px; font-weight:700 }
+  .keybox.priv .kt { fill:var(--danger) } .keybox.pub .kt { fill:var(--good) }
+  .keybox .ks { font-family:var(--sans); font-size:11.5px; fill:var(--muted) }
+  .keybox.act .kb { stroke-width:3; filter:drop-shadow(0 0 9px currentColor) }
+  .hero-bar button:hover { filter:brightness(1.12) }
+  .hero-bar button.ghost { background:transparent; color:var(--muted);
+                           border:1px solid var(--border) }
+  .hero-bar button.ghost:hover { color:var(--text); border-color:var(--muted); filter:none }
+  .hero svg { display:block; width:100%; height:auto }
+
+  .hero .ttl { font-family:var(--sans); font-size:15px; font-weight:700 }
+  .hero .lbl { font-family:var(--sans); font-size:11px; letter-spacing:.09em;
+               text-transform:uppercase; fill:var(--faint) }
+  .hero .cap { font-family:var(--sans); font-size:13px; fill:var(--muted) }
+
+  /* Everything the timeline reveals starts hidden and is switched on by step. */
+  .fade { opacity:0; transition:opacity .4s ease }
+  .fade.on { opacity:1 }
+
+  .ray { stroke-width:3; stroke-dasharray:8 6; opacity:0;
+         transition:opacity .35s ease }
+  .ray.on { opacity:1; animation:ray .6s linear infinite }
+  @keyframes ray { to { stroke-dashoffset:-14 } }
+
+  .hero .verdict-txt { font-family:var(--sans); font-size:14px; font-weight:700; opacity:0;
+                       transition:opacity .4s ease }
+  .hero .verdict-txt.on { opacity:1 }
+
+  .payline { font-family:var(--mono); font-size:13px; line-height:1.75;
+             color:#cfe4ff; transition:color .4s ease }
+  .payline .k { color:var(--c5) }
+  /* Three states, not two. `dim` = the claims have not been written yet. Normal
+     = written, and the server can obviously read them. `lit` = the moment an
+     OUTSIDER reads them, which is the beat the figure is actually making. */
+  .payline.dim { color:#1a2740 }
+  .payline.dim .k { color:#1a2740 }
+  .payline.lit { color:#eaf5ff; text-shadow:0 0 13px rgba(140,220,255,.45) }
+  .payline .edited { color:var(--danger); background:#3a1a1c; border-radius:3px;
+                     padding:0 3px; font-weight:700 }
+  .blocks { font-family:var(--mono); font-size:15px; line-height:1.7; color:#2b3a55;
+            letter-spacing:2px; word-break:break-all }
+
+  .seal { transition:all .4s ease }
+  .seal.broken .sealring { stroke:var(--danger) }
+  .seal.broken .sealface { fill:#3a1a1c }
+  .seal.broken .sealtxt { fill:var(--danger) }
+  .sealcrack { opacity:0; transition:opacity .3s ease }
+  .seal.broken .sealcrack { opacity:1 }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ray.on { animation:none } .verdict-txt, .payline, .seal { transition:none }
+  }
+</style>
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>How an access token is created securely</h1>
+  <div class="sub">Dive B of <a href="../client-credentials-flow/" style="color:var(--accent)">the client credentials flow</a> — what the authorization server actually does between checking the secret and returning a string.</div>
+</div>
+
+<div class="hero" tabindex="0">
+  <div class="hero-bar">
+    <h2>Where the signature comes from — and what it is not</h2>
+    <div class="spacer"></div>
+    <button class="ghost" id="hRestart">⟲ Restart</button>
+    <button class="ghost" id="hPrev">‹ Step</button>
+    <button id="hPlay">▶ Play</button>
+    <button class="ghost" id="hNext">Step ›</button>
+  </div>
+  <div class="hnarr">
+    <div class="hstepno" id="hNo">1<small>of 8</small></div>
+    <div class="t" id="hStatus"></div>
+  </div>
+  <div class="htrack" id="hTrack"></div>
+  <svg viewBox="0 0 1120 566" role="img"
+       aria-label="Left: a signed token drawn as glass with a wax seal — an eye reads straight through it, and editing it breaks the seal. Right: an encrypted blob drawn as a solid wall the same eye cannot see into.">
+    <defs>
+      <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#1b2740" stroke-width="5"/>
+      </pattern>
+    </defs>
+
+    <!-- ============ the keypair: where the seal comes from ============ -->
+    <g class="fade" id="bKeys">
+      <g class="keybox priv" id="bPriv">
+        <rect class="kb" x="60" y="16" width="216" height="70" rx="10" stroke-width="2"/>
+        <text class="kt" x="80" y="46">Private half</text>
+        <text class="ks" x="80" y="68">signs · never leaves the building</text>
+      </g>
+      <!-- no "one keypair" chip between the boxes: they sit 20px apart and any
+           centred label overlapped both. Step 1's narration says it instead. -->
+      <g class="keybox pub" id="bPub">
+        <rect class="kb" x="296" y="16" width="216" height="70" rx="10" stroke-width="2"/>
+        <text class="kt" x="316" y="46">Public half</text>
+        <text class="ks" x="316" y="68">verifies · given to anyone</text>
+      </g>
+    </g>
+
+    <!-- ================= LEFT: signed ================= -->
+    <text class="ttl" x="285" y="122" text-anchor="middle" fill="var(--good)">A signed token</text>
+    <text class="cap" x="285" y="143" text-anchor="middle">what a JWT actually is</text>
+
+    <g class="fade" id="bGlass" data-viz-id="hero-glass" data-label="signed token">
+      <!-- glass: near-transparent fill, dashed edge — you are meant to read the
+           contents THROUGH it, which is the entire point being made -->
+      <rect x="60" y="160" width="450" height="212" rx="12"
+            fill="#0e2a1d" fill-opacity=".55" stroke="var(--good)"
+            stroke-width="2" stroke-dasharray="10 5"/>
+      <text class="lbl" x="80" y="186" fill="#8fd6ae">You can see straight through it</text>
+      <foreignObject x="78" y="196" width="360" height="160">
+        <div class="payline dim" id="bPay"></div>
+      </foreignObject>
+
+      <g class="seal fade" id="bSeal" transform="translate(452,324)">
+        <circle class="sealring" r="34" fill="none" stroke="var(--good)" stroke-width="3"/>
+        <circle class="sealface" r="29" fill="#0d2015"/>
+        <path class="sealcrack" d="M-6 -26 L4 -6 L-6 6 L5 26" stroke="var(--danger)"
+              stroke-width="3" fill="none"/>
+        <!-- paint-order puts the halo behind the glyphs so the word survives the
+             crack drawn across it -->
+        <text class="sealtxt" y="5" text-anchor="middle" fill="var(--good)"
+              stroke="#0a1120" stroke-width="3.5" style="paint-order:stroke fill;
+              font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.06em">SEAL</text>
+      </g>
+    </g>
+
+    <!-- The left ray runs UP INTO the card and reaches the text; the right one
+         stops short at the wall. That difference in length is the whole figure. -->
+    <!-- The left ray runs UP INTO the card and reaches the text; the right one
+         stops short at the wall. That difference in length is the whole figure. -->
+    <path id="bRayL" class="ray" d="M285 472 L285 320" stroke="var(--good)"/>
+    <text class="cap" id="bCapL" x="285" y="512" text-anchor="middle">&nbsp;</text>
+    <text class="verdict-txt" id="bVerdL" x="285" y="540" text-anchor="middle"
+          fill="var(--good)">&nbsp;</text>
+
+    <!-- ================= RIGHT: encrypted ================= -->
+    <g class="fade" id="bSolid" data-viz-id="hero-solid" data-label="encrypted blob">
+      <text class="ttl" x="835" y="122" text-anchor="middle" fill="var(--c4)">An encrypted blob</text>
+      <text class="cap" x="835" y="143" text-anchor="middle">what a JWT is not</text>
+      <rect x="610" y="160" width="450" height="212" rx="12"
+            fill="#141b2e" stroke="var(--c4)" stroke-width="2"/>
+      <rect x="610" y="160" width="450" height="212" rx="12" fill="url(#hatch)"/>
+      <text class="lbl" x="630" y="186" fill="#b9a6ff">Solid. Nothing to see.</text>
+      <foreignObject x="628" y="196" width="414" height="160">
+        <div class="blocks">▓▓▒▓▓▒▒▓▓▓▒▓▒▓▓▒▓▒▓▓▓▒▓▓▒▓▒▓▓▒▓▓▒▓▓▓▒▓▒▓▓▒▓▒▓▓▓▒▓▓▒▓▒▓▓▒▓▓▒▓▓▓▒▓▒▓▓▒▓▒▓▓▓▒▓</div>
+      </foreignObject>
+    </g>
+
+    <path id="bRayR" class="ray" d="M835 472 L835 394" stroke="var(--c4)"/>
+    <!-- the ray stops dead at the wall; this bar is what it hits -->
+    <rect id="bWall" class="fade" x="770" y="380" width="130" height="9" rx="4"
+          fill="var(--danger)"/>
+    <text class="cap" id="bCapR" x="835" y="512" text-anchor="middle">&nbsp;</text>
+    <text class="verdict-txt" id="bVerdR" x="835" y="540" text-anchor="middle"
+          fill="var(--c4)">&nbsp;</text>
+
+    <!-- the same observer looks at both -->
+    <g class="fade" id="bEyes">
+      <g transform="translate(285,480)">
+        <path d="M-26 0 Q0 -17 26 0 Q0 17 -26 0 z" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <circle r="7" fill="var(--muted)"/>
+      </g>
+      <g transform="translate(835,480)">
+        <path d="M-26 0 Q0 -17 26 0 Q0 17 -26 0 z" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <circle r="7" fill="var(--muted)"/>
+      </g>
+      <text class="cap" x="560" y="485" text-anchor="middle" style="font-size:12px">
+        anybody at all — no key, no permission
+      </text>
+    </g>
+  </svg>
+</div>
+
+<section id="keys">
+  <h2><span class="n">1</span>Two halves of one key, and only one of them moves</h2>
+  <p class="lede">Signing is asymmetric, and that asymmetry is the entire reason this scales. The authorization server can prove it minted a token to parties it has never met, without ever sharing anything that would let them mint one.</p>
+
+  <div class="halves">
+    <div class="half priv">
+      <div class="hs">Never leaves</div>
+      <h3>Private key</h3>
+      <p>Signs. Held only by the authorization server. Anyone who obtains it can mint tokens that every resource server will accept, so its custody <b>is</b> the security of the whole system.</p>
+    </div>
+    <div class="split">ONE KEYPAIR</div>
+    <div class="half pub">
+      <div class="hs">Published deliberately</div>
+      <h3>Public key</h3>
+      <p>Verifies. Handed out freely to anyone who needs to check a token. Publishing it costs nothing — it cannot produce a signature, only test one.</p>
+    </div>
+  </div>
+
+  <div class="callout good">
+    <b>How the public half gets to the verifier is a separate subject with its own page.</b> Key sets, <code>kid</code>, rotation, caching, discovery — none of it is repeated here.
+    <div class="nav" style="margin-top:11px"><a href="../jwks-explainer/">How signing keys are published →</a></div>
+  </div>
+</section>
+
+<section id="assembly">
+  <h2><span class="n">2</span>Assembling the token</h2>
+  <p class="lede">A JWT is not a container the server puts values into — it is a <b>string built by concatenation</b>, and the signature is computed over the exact characters that end up on the wire. Step through the five stages; each one is the literal input to the next.</p>
+
+  <div class="asm" id="asm"></div>
+
+  <div class="beat">
+    <div class="no" id="beatNo">1<small>of 5</small></div>
+    <div>
+      <div class="bt" id="beatT"></div>
+      <div class="bd" id="beatD"></div>
+    </div>
+  </div>
+  <div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> to walk the stages.</div>
+
+  <div class="callout">
+    <b>The signature covers the encoded text, not the decoded objects.</b> That is why a verifier must check the bytes it received rather than re-serialising the JSON it parsed — two different encodings of the same object produce two different signatures, and only one of them is the one that was signed.
+  </div>
+</section>
+
+<section id="plain">
+  <h2><span class="n">3</span>A JWT is signed. It is not encrypted.</h2>
+  <p class="lede">This is the point people get wrong most often, and it changes what you are willing to put in a token. Below is the real token from above. The payload is base64url — an <b>encoding</b>, not a cipher. There is no key involved in reading it, and nothing stops anyone who holds the token from doing so.</p>
+
+  <div class="tok" id="tokFull"></div>
+
+  <div style="margin-top:14px">
+    <button class="reveal" id="btnDecode">Decode the payload — no key, right here in your browser</button>
+  </div>
+
+  <div class="cols" id="decoded" hidden>
+    <div class="box">
+      <h4><span class="sw c-head"></span>Header, decoded</h4>
+      <pre id="outHead"></pre>
+    </div>
+    <div class="box">
+      <h4><span class="sw c-pay"></span>Payload, decoded</h4>
+      <pre id="outPay"></pre>
+    </div>
+  </div>
+
+  <div class="callout danger" id="afterDecode" hidden>
+    <b>Every claim was readable, and no secret was needed to read it.</b> The signature does not hide the payload; it only makes changing the payload detectable. So a token is a safe place for an identifier, a scope and an expiry — and the wrong place for anything you would not put in a log line.
+  </div>
+</section>
+
+<section id="claims">
+  <h2><span class="n">4</span>The claims that carry weight</h2>
+  <p class="lede">Values decoded from the real token. Most of these are required for an OAuth 2.0 access token by RFC 9068 §2.2. Two of them are worth more attention than they usually get.</p>
+
+  <div class="claims" id="claimTable"></div>
+
+  <div class="callout">
+    <b>Note what is <i>not</i> here: a user.</b> With no resource owner in the flow, <code>sub</code> identifies the calling application itself — RFC 9068 §2.2 says so explicitly. A token from this grant does not represent a person, and any code that assumes <code>sub</code> is a user account will be wrong the first time it meets one.
+  </div>
+</section>
+
+<section id="custody">
+  <h2><span class="n">5</span>The signing key does not have to be stored anywhere</h2>
+  <p class="lede">Worth stating because it reframes the question. Key custody is usually discussed as "which vault" — but a keypair generated in memory at startup and never written to disk is a legitimate design.</p>
+
+  <div class="cols">
+    <div class="box">
+      <h4>What it costs</h4>
+      <p style="margin:0;color:var(--muted);font-size:12.5px;line-height:1.6">A restart invalidates every token already issued. At a 60-second lifetime, that is a window of at most one minute in which callers get a rejection and fetch a new token — which they are built to do anyway, because tokens expire on their own.</p>
+    </div>
+    <div class="box">
+      <h4>What it buys</h4>
+      <p style="margin:0;color:var(--muted);font-size:12.5px;line-height:1.6">Nothing at rest. No key file, no vault entry, no backup containing it, no rotation procedure, and no way to leak it from storage — because there is no storage. Rotation becomes a restart.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Multiple instances change the answer.</b> Two servers generating their own keypairs publish two different public keys, so the verifier has to be able to hold both — which is precisely what a key set is for, and another reason the key-distribution page is worth reading before deciding this.
+  </div>
+</section>
+
+<section id="refs">
+  <h2><span class="n">6</span>Where this comes from</h2>
+  <div class="refs">
+    <div class="ref"><b>RFC 7518 §3.3</b> · <i>Digital Signature with RSASSA-PKCS1-v1_5</i> — <code>RS256</code> is "RSASSA-PKCS1-v1_5 using SHA-256", and "a key of size 2048 bits or larger MUST be used with these algorithms." Read first-party 2026-08-06.</div>
+    <div class="ref"><b>RFC 7519 §3</b> · <i>JSON Web Token (JWT)</i> — "A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters. Each part contains a base64url-encoded value."</div>
+    <div class="ref"><b>RFC 9068 §2.2</b> · <i>Data Structure</i> — the required claims <code>iss</code>, <code>exp</code>, <code>aud</code>, <code>sub</code>, <code>client_id</code>, <code>iat</code>, <code>jti</code>; and for grants with no resource owner, <code>sub</code> "SHOULD correspond to an identifier the authorization server uses to indicate the client application."</div>
+    <div class="ref"><b>RFC 9068 §2.1</b> · <i>Header</i> — <code>typ</code> is <code>at+jwt</code>, declaring this is an access token and not some other JWT. "JWT access tokens MUST NOT use 'none' as the signing algorithm."</div>
+    <div class="ref"><b>RFC 9700 §2.3</b> (BCP 240) · <i>Access Token Privilege Restriction</i> — "access tokens SHOULD be audience-restricted to a specific resource server or, if that is not feasible, to a small set of resource servers."</div>
+    <div class="ref ours"><b>ours, not a spec</b><br>The 60-second lifetime, the in-memory-keypair option and the "would you put it in a log line" test are our own judgement calls. No RFC sets a token lifetime.</div>
+  </div>
+
+  <div class="elsewhere">
+    <span class="lbl">Elsewhere — the same signing rules, from the security side</span>
+    <a href="https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html">JSON Web Token Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+    <span class="why">This page draws <em>how</em> a token gets signed; that one lists what goes
+    wrong when it is done badly. The overlap worth following: it argues signatures over MACs
+    because with a shared MAC key <b>every service that can verify a token can also mint
+    one</b> — which is the argument for the asymmetric keypair drawn in §3, stated as a
+    security consequence rather than a mechanism.</span>
+  </div>
+
+  <div class="nav">
+    <a href="../client-credentials-flow/" class="home">← Back to the flow</a>
+    <a href="../dive-credential-created/" class="home">← Previous dive · the credential</a>
+    <a href="../dive-token-verified/">Next dive · how a token is verified →</a>
+  </div>
+</section>
+
+<script type="module">
+  import { stepper, $, esc } from "/_kit/viz.js";
+
+  // ---- the real token ----------------------------------------------------
+  // node:crypto, RSA-2048, RS256, regenerated 2026-08-07 when the lifetime moved
+  // from 300 s to 60 s. Verified against its public key
+  // before being pasted here; a one-character change to the signing input makes
+  // that verification fail.
+  const H = "eyJhbGciOiJSUzI1NiIsInR5cCI6ImF0K2p3dCIsImtpZCI6Ims4RVZMZEtGOWdaUE13X3UifQ";
+  const P = "eyJpc3MiOiJodHRwczovL2FzLmV4YW1wbGUuY29tIiwic3ViIjoiOWY0YzJhZTEiLCJjbGllbnRfaWQiOiI5ZjRjMmFlMSIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwiZXhwIjoxNzg2MDQ2NDYwLCJpYXQiOjE3ODYwNDY0MDAsImp0aSI6ImU4NGJjZTRkLTIyNWQtNGY4MC1iYzRlLWE1MTgxNmVkMWQ5OSIsInNjb3BlIjoicmVwb3J0czpyZWFkIn0";
+  const S = "ffTp6QlrXOKdMpCejFzsG-9LMG_lleDP1zBO6yH2RlUO4IqozZCZYdPC4SPOCriS7Y40aanpcywKr8nBnD6JgKlOLWGtYtG_cX9cG0mUppfevp_evRfCSTKEPf0Ve-WSMDbyU-WHDUm3yMDS82syKa4CgR8s_VTt5tUuFKDBxXFlFSFFW1GtobUzZBBz3tI9oF40tG2mXGDcDgay_btJNCZ_6n_t6ZlzCugEUN6JyGPKZoVJw1LjmQCMmDtvs8rhCRTmmymcxxwkjASFpPapLR0renldedv2a8BLa2IaCHL_Au3_rWFL2QZgVNgEG3hxiJgQmxh5vtq27n5VMtg0Sw";
+  const SIGNING_INPUT = H + "." + P;
+
+  // base64url → text. Standard base64 with two substitutions and no padding,
+  // which is the whole of what "url-safe" means here.
+  const b64uDecode = s =>
+    atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4));
+
+  const headerObj  = JSON.parse(b64uDecode(H));
+  const payloadObj = JSON.parse(b64uDecode(P));
+
+  const pretty = obj => esc(JSON.stringify(obj, null, 2))
+    .replace(/&quot;([a-z_]+)&quot;:/g, '<span class="k">"$1"</span>:')
+    .replace(/: &quot;(.*?)&quot;/g, ': <span class="s">"$1"</span>')
+    .replace(/: (\d+)/g, ': <span class="num">$1</span>');
+  const clip = (s, n) => s.length > n ? s.slice(0, n) + "…" : s;
+
+  // ---- 0. the hero: signed vs encrypted ----------------------------------
+  // Same five claims on both sides; the only thing that differs is whether an
+  // uninvited eye can read them. The payload shown is decoded from the real
+  // token above, so the left panel is not an illustration of a token — it is one.
+  const PAY_ROWS = [
+    ["iss", payloadObj.iss], ["sub", payloadObj.sub],
+    ["aud", payloadObj.aud], ["exp", payloadObj.exp],
+    ["scope", payloadObj.scope],
+  ];
+  const paintPay = tampered => {
+    $("#bPay").innerHTML = PAY_ROWS.map(([k, v]) =>
+      `<div><span class="k">${k}</span>: ` +
+      (tampered && k === "scope"
+        ? `<span class="edited">reports:WRITE</span>`
+        : esc(String(v))) + `</div>`).join("");
+  };
+
+  // Eight steps, absolute rather than cumulative, so stepping backwards and
+  // jumping on the track land on exactly the same picture.
+  const HSTEPS = [
+    `The authorization server holds <b>one keypair</b> — two halves that belong together and do opposite jobs.`,
+    `The private half signs, and never leaves. The public half only <i>checks</i> signatures, so it is handed to anyone who asks. Giving it away costs nothing.`,
+    `It writes down the claims: who issued this, who it is for, when it stops working.`,
+    `Then it stamps the whole thing with the private half. <b>That stamp is the signature</b> — and that is the only thing the private key was ever used for.`,
+    `Now, for contrast, here is what an <i>encrypted</i> blob looks like. Same claims inside. Completely different treatment.`,
+    `Somebody with no key at all — not the client, not you, anybody — takes a look at both.`,
+    `On the left they read every word, instantly, for free. On the right they hit a wall. <b>That</b> is what encryption looks like, and a JWT is not it.`,
+    `Change one word on the left and the seal breaks. So signing bought you <b>unchangeable</b>. It never bought you <b>unreadable</b>.`,
+  ];
+
+  function renderHeroB(i) {
+    $("#hNo").innerHTML = (i + 1) + "<small>of " + HSTEPS.length + "</small>";
+    $("#hStatus").innerHTML = HSTEPS[i];
+    [...$("#hTrack").children].forEach((t, k) =>
+      t.className = "tick" + (k < i ? " done" : k === i ? " now" : ""));
+
+    const on = (sel, yes) => $(sel).classList.toggle("on", yes);
+    on("#bKeys", true);
+    $("#bPriv").classList.toggle("act", i === 3);
+    $("#bPub").classList.toggle("act", i === 1);
+    on("#bGlass", i >= 2);
+    on("#bSeal", i >= 3);
+    on("#bSolid", i >= 4);
+    on("#bEyes", i >= 5);
+    on("#bRayL", i >= 5);
+    on("#bRayR", i >= 5);
+    on("#bWall", i >= 6);
+    $("#bPay").classList.toggle("dim", i < 2);
+    $("#bPay").classList.toggle("lit", i >= 6);
+    paintPay(i >= 7);
+    $("#bSeal").classList.toggle("broken", i >= 7);
+    on("#bVerdL", i >= 7);
+    on("#bVerdR", i >= 7);
+
+    $("#bCapL").textContent = i >= 7 ? "anyone can read it · nobody can change it"
+                            : i >= 6 ? "read it all — instantly, for free" : " ";
+    $("#bCapR").textContent = i >= 6 ? "nothing. it needs a key just to look." : " ";
+    $("#bVerdL").textContent = "SIGNED = you cannot fake it";
+    $("#bVerdR").textContent = "ENCRYPTED = you cannot read it";
+  }
+
+  $("#hTrack").innerHTML = HSTEPS.map(() => `<div class="tick"></div>`).join("");
+  let playing = false;
+  const setPlayLabel = () => { $("#hPlay").textContent = playing ? "❚❚ Pause" : "▶ Play"; };
+
+  const HERO = stepper({
+    n: HSTEPS.length, hashKey: "hero", autoplayMs: 3400,
+    target: document.querySelector(".hero"),  // scoped: the assembly stepper owns document arrows
+    onStep: i => {
+      renderHeroB(i);
+      if (i >= HSTEPS.length - 1 && playing) { playing = false; setPlayLabel(); }
+    },
+  });
+  HERO.pause();                                // stepper autostarts when given autoplayMs
+  setPlayLabel();
+
+  $("#hPlay").onclick = () => {
+    if (playing) { HERO.pause(); playing = false; }
+    else {
+      if (HERO.current >= HSTEPS.length - 1) HERO.go(0);
+      HERO.play(); playing = true;
+    }
+    setPlayLabel();
+  };
+  $("#hNext").onclick = () => { playing = false; setPlayLabel(); HERO.next(); };
+  $("#hPrev").onclick = () => { playing = false; setPlayLabel(); HERO.prev(); };
+  $("#hRestart").onclick = () => { playing = false; setPlayLabel(); HERO.go(0); };
+  [...$("#hTrack").children].forEach((t, k) => {
+    t.onclick = () => { playing = false; setPlayLabel(); HERO.go(k); };
+  });
+
+  // ---- 2. the assembly line ---------------------------------------------
+  // Five rows, revealed cumulatively: each stage's output is the next one's input.
+  const ROWS = [
+    { l: "Header",  s: "JSON",       v: () => JSON.stringify(headerObj) },
+    { l: "Payload", s: "JSON",       v: () => JSON.stringify(payloadObj) },
+    { l: "Signing input", s: "base64url(header) . base64url(payload)",
+      v: () => `<span class="c-head">${clip(H, 46)}</span><span class="dot">.</span><span class="c-pay">${clip(P, 60)}</span>` },
+    { l: "Signature", s: "RSASSA-PKCS1-v1_5 · SHA-256",
+      v: () => `<span class="c-sig">${clip(S, 96)}</span>` },
+    { l: "The token", s: `${H.length + P.length + S.length + 2} characters on the wire`,
+      v: () => `<span class="c-head">${clip(H, 34)}</span><span class="dot">.</span><span class="c-pay">${clip(P, 34)}</span><span class="dot">.</span><span class="c-sig">${clip(S, 34)}</span>` },
+  ];
+  const BEATS = [
+    { t: "Build the header",
+      d: `Three fields: <code>alg</code> says how it will be signed, <code>typ</code> declares this is an access token rather than some other JWT, and <code>kid</code> names <b>which</b> key was used — the hook a verifier needs when there is more than one.` },
+    { t: "Build the payload",
+      d: `The claims. Who issued it, who it is for, who is calling, when it expires, and a unique id for this particular token. Nothing here is secret, because nothing here will be hidden.` },
+    { t: "Concatenate — this exact string is what gets signed",
+      d: `Each part is base64url-encoded and joined with a literal <code>.</code>. The result is the <b>JWS Signing Input</b>: not the objects, not a hash of them, but these characters.` },
+    { t: "Sign it with the private key",
+      d: `<code>RS256</code> is RSASSA-PKCS1-v1_5 with SHA-256 (RFC 7518 §3.3). The signing input is hashed, the hash is signed with the 2048-bit private key, and the 256-byte result is base64url-encoded into 342 characters.` },
+    { t: "Join with one more dot, and return it",
+      d: `That is the whole token. It goes back in a JSON response with <code>expires_in</code> and — for this grant — no refresh token. Nothing was written to a database; the token carries everything a verifier will need.` },
+  ];
+
+  $("#asm").innerHTML = ROWS.map((r, i) =>
+    `<div class="row" id="row${i}" data-viz-id="asm-${i}" data-label="${r.l}">
+       <div class="rl">${r.l}<small>${r.s}</small></div>
+       <div class="rv">${r.v()}</div>
+     </div>`).join("");
+
+  stepper({ n: BEATS.length, hashKey: "stage", onStep: i => {
+    const b = BEATS[i];
+    $("#beatNo").innerHTML = (i + 1) + "<small>of " + BEATS.length + "</small>";
+    $("#beatT").textContent = b.t;
+    $("#beatD").innerHTML = b.d;
+    // cumulative: earlier stages stay on, because the token is built up, not swapped
+    ROWS.forEach((_, k) => $("#row" + k).classList.toggle("on", k <= i));
+  }});
+
+  // ---- 3. the full token, with the signed region marked ------------------
+  $("#tokFull").innerHTML =
+    `<span class="si"><span class="c-head">${H}</span><span class="dot">.</span>` +
+    `<span class="c-pay">${P}</span></span><span class="dot">.</span>` +
+    `<span class="c-sig">${S}</span>` +
+    `<div style="margin-top:11px;font-family:var(--sans);font-size:11.5px;color:var(--faint)">` +
+    `<span class="sw c-head"></span>header &nbsp; <span class="sw c-pay"></span>payload &nbsp; ` +
+    `<span class="sw c-sig"></span>signature &nbsp;·&nbsp; the boxed region is what the signature covers</div>`;
+
+  $("#btnDecode").onclick = e => {
+    $("#outHead").innerHTML = pretty(headerObj);
+    $("#outPay").innerHTML = pretty(payloadObj);
+    $("#decoded").hidden = false;
+    $("#afterDecode").hidden = false;
+    e.target.textContent = "Decoded — with atob(), and nothing else";
+    e.target.disabled = true;
+  };
+
+  // ---- 4. claims ---------------------------------------------------------
+  // `hot` marks the two the dive exists to argue for.
+  const WHY = {
+    iss: ["Who minted it", "The verifier compares this against the issuer it trusts. A valid signature from the <b>wrong issuer</b> is still a rejection."],
+    sub: ["Who it is about", "With no user in the flow, this is the client application itself — not a person."],
+    client_id: ["Who asked for it", "The same identifier issued at registration, now carried inside the token."],
+    aud: ["Who it is for", "<b>This is what stops a token minted for one service being replayed at another.</b> Without it, any API that trusts this issuer accepts a token intended for a different one — and a compromised or merely careless downstream service becomes a way into every other one. Cheap now, painful to retrofit.", 1],
+    exp: ["When it stops working", "Expiry is the <b>only</b> thing that ends a token's life. It cannot be recalled."],
+    iat: ["When it was minted", "Lets a verifier reject tokens that are implausibly old even if the expiry is generous."],
+    jti: ["Which token this is", "<b>The handle that makes mint and use correlatable after the fact.</b> Issuing and using are two separate requests, on different connections, often minutes apart — no request-scoped trace id spans them. This does. It is also what a replay-detection cache would key on.", 1],
+    scope: ["What it permits", "What was granted, which may be less than what was asked for."],
+  };
+  $("#claimTable").innerHTML =
+    `<div>Claim</div><div>Value in this token</div><div>What it is doing</div>` +
+    Object.entries(payloadObj).map(([k, v]) => {
+      const [, why, hot] = WHY[k] || ["", "—"];
+      const c = hot ? " hot" : "";
+      const shown = k === "exp" || k === "iat"
+        ? `${v} <span style="color:var(--faint)">(${new Date(v * 1000).toISOString().replace("T", " ").slice(0, 19)}Z)</span>`
+        : esc(String(v));
+      return `<div class="cn${c}">${k}</div><div class="cv${c}">${clip(shown, 120)}</div>` +
+             `<div class="cw${c}">${why}</div>`;
+    }).join("") +
+    `<div class="cn"></div><div class="cv" style="color:var(--faint)">exp − iat</div>` +
+    `<div class="cw">= <b>${payloadObj.exp - payloadObj.iat} seconds</b>. Short lifetimes are how this design copes with having no revocation.</div>`;
+</script>
+</body>
+</html>

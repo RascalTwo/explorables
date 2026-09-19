@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What you pay for AI coding — and what it gets you</title>
+<meta name="viz:uid" content="v-3de5745f615f">
+<meta name="viz:posture" content="local">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:title" content="What you pay for AI coding — and what it gets you">
+<meta name="viz:description" content="Start owning nothing. Add subscriptions and watch the tools light up. Every plan is placed by what it costs and how far you'd trust it — and the Personal/At-work switch shows how much the field narrows once someone else's security team gets a vote.">
+<meta name="viz:tags" content="ai-agents,pricing,beginners,claude-code,copilot,cursor,entitlements">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { padding: 20px 24px 70px; }
+  .wrap { max-width: 1900px; margin: 0 auto; }
+  svg { width: 100%; height: auto; display: block; }
+
+  /* ── control bar ─────────────────────────────────────────────── */
+  .bar { display:flex; flex-wrap:wrap; gap:26px; align-items:center;
+         background:var(--panel); border:1px solid var(--border); border-radius:12px;
+         padding:13px 18px; margin:16px 0 6px; }
+  .bar .grp { display:flex; align-items:center; gap:10px; }
+  .bar .lbl { font:600 10.5px var(--sans); letter-spacing:.09em; text-transform:uppercase;
+              color:var(--faint); }
+
+  /* segmented Personal / At work */
+  .seg { display:flex; background:var(--panel-2); border:1px solid var(--border);
+         border-radius:999px; padding:3px; }
+  .seg button { font:600 12.5px var(--sans); color:var(--muted); background:none; border:0;
+                padding:6px 15px; border-radius:999px; cursor:pointer; transition:.16s; }
+  .seg button:hover { color:var(--text); }
+  .seg button[aria-pressed="true"] { background:var(--accent); color:var(--bg); }
+
+  /* budget slider — a real input, styled through kit tokens */
+  input[type=range] { appearance:none; -webkit-appearance:none; width:210px; height:4px;
+                      background:var(--border); border-radius:999px; outline:none; }
+  input[type=range]::-webkit-slider-thumb { appearance:none; -webkit-appearance:none;
+      width:16px; height:16px; border-radius:50%; background:var(--accent);
+      cursor:pointer; border:2px solid var(--bg); }
+  input[type=range]::-moz-range-thumb { width:16px; height:16px; border-radius:50%;
+      background:var(--accent); cursor:pointer; border:2px solid var(--bg); }
+  .budgetval { font:600 13px var(--mono); color:var(--accent); min-width:74px; }
+
+  .presets { display:flex; gap:6px; flex-wrap:wrap; }
+  .presets button { font:12px var(--sans); color:var(--muted); background:var(--panel-2);
+                    border:1px solid var(--border); border-radius:999px; padding:6px 12px;
+                    cursor:pointer; transition:.16s; white-space:nowrap; }
+  .presets button:hover { color:var(--text); border-color:var(--accent); }
+
+  /* receipt */
+  .receipt { margin-left:auto; display:flex; gap:22px; align-items:baseline; }
+  .receipt b { font:600 25px/1 var(--sans); color:var(--text); }
+  .receipt .u { color:var(--faint); font-size:11.5px; }
+  .receipt .spend b { color:var(--warn); }
+  .receipt .got b { color:var(--good); }
+  .clearbtn { font:11.5px var(--sans); color:var(--faint); background:none;
+              border:1px solid var(--border); border-radius:7px; padding:5px 10px;
+              cursor:pointer; transition:.16s; }
+  .clearbtn:hover { color:var(--danger); border-color:var(--danger); }
+
+  /* ── band rails (shared y-axis) ──────────────────────────────── */
+  .bandname { fill:var(--text); font:600 12.5px var(--sans); }
+  .bandsub  { fill:var(--faint); font:10.5px var(--sans); }
+  .bandnum  { fill:var(--faint); font:600 10px var(--mono); letter-spacing:.06em; }
+  .axlab { fill:var(--faint); font:10.5px var(--mono); }
+  .axtitle { fill:var(--muted); font:600 11px var(--sans); letter-spacing:.08em; }
+  .gridline { stroke:var(--border); stroke-width:1; }
+
+  /* ── plan dots (section 1) ───────────────────────────────────── */
+  .plan { cursor:pointer; }
+  .plan circle { transition:r .16s, opacity .16s, stroke-width .16s; }
+  .plan text { font:10.5px var(--sans); pointer-events:none; }
+  .plan.owned circle { stroke:var(--text); stroke-width:2.2; }
+
+  /* ── surface boxes (section 2) ───────────────────────────────── */
+  .colhead { fill:var(--muted); font:600 11.5px var(--sans); letter-spacing:.05em; }
+  .colsub  { fill:var(--faint); font:10px var(--sans); }
+  .node rect { cursor:pointer; transition:fill .18s, stroke .18s, opacity .18s; }
+  .nodelabel { flex-direction:column; align-items:flex-start; justify-content:center;
+               text-align:left; padding:5px 8px; gap:1px; pointer-events:none; }
+  .n-title { font-size:11px; font-weight:600; line-height:1.2; display:-webkit-box;
+             -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .n-how { font:9.5px/1.2 var(--mono); color:var(--faint); white-space:nowrap;
+           overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+  .locked .n-title { color:var(--faint); font-weight:500; }
+  .locked .n-how { opacity:.4; }
+
+  .sechead { margin:30px 0 2px; font-size:17px; }
+  .secsub { color:var(--muted); font-size:12.5px; margin-bottom:10px; max-width:900px; line-height:1.55; }
+  .legend { margin:10px 0 2px; }
+  .foot { color:var(--faint); font-size:12px; margin-top:18px; line-height:1.65; max-width:1100px; }
+
+  .stale { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:10px; }
+  .stale .card { padding:12px 14px; }
+  .stale h4 { margin:0 0 4px; font-size:13px; color:var(--warn); }
+  .stale p { margin:0; font-size:12.5px; color:var(--muted); line-height:1.5; }
+
+  /* ── detail drawer ───────────────────────────────────────────── */
+  .detail { margin-top:18px; }
+  .detail h3 { margin:0 0 3px; font-size:16px; }
+  .dr-sub { color:var(--muted); font-size:12px; margin-bottom:11px; }
+  .dr-grid { display:grid; grid-template-columns:150px 1fr; gap:7px 16px; font-size:13px; }
+  .dr-grid dt { color:var(--faint); }
+  .dr-grid dd { margin:0; }
+  .req { display:flex; gap:8px; align-items:baseline; margin:3px 0; font-size:12.5px; }
+  .req .mk { font:12px var(--mono); width:14px; flex:none; }
+  .ok { color:var(--good); } .no { color:var(--faint); }
+  code { background:var(--panel-2); border:1px solid var(--border); border-radius:5px;
+         padding:1px 5px; font:12px var(--mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="viz-header">
+    <h1>What you pay for AI coding — and what it actually gets you</h1>
+    <div class="sub">
+      You start owning <b>nothing</b>. Click any plan below to “buy” it and watch the tools light
+      up underneath. <b>Left–right is price, height is how far you'd trust the vendor</b> — the top
+      band clears a corporate security review today, the bottom is what you run on your own machine.
+      Flipping to <b>At work</b> doesn't thin the field as much as you'd expect; what it takes away
+      is specific, and worth seeing.
+    </div>
+  </div>
+
+  <div class="bar">
+    <div class="grp">
+      <span class="lbl">I'm doing this</span>
+      <div class="seg" id="mode">
+        <button data-mode="personal" aria-pressed="true">for myself</button>
+        <button data-mode="work" aria-pressed="false">at work</button>
+      </div>
+    </div>
+    <div class="grp">
+      <span class="lbl">Budget</span>
+      <input type="range" id="budget" min="0" max="220" step="5" value="220">
+      <span class="budgetval" id="budgetval">any</span>
+    </div>
+    <div class="grp">
+      <span class="lbl">Start me off</span>
+      <div class="presets" id="presets"></div>
+    </div>
+    <div class="receipt">
+      <span class="spend"><b id="r-spend">$0</b> <span class="u">/month</span></span>
+      <span class="got"><b id="r-got">0</b> <span class="u">of <span id="r-all">0</span> tools unlocked</span></span>
+      <button class="clearbtn" id="clear">reset</button>
+    </div>
+  </div>
+
+  <h2 class="sechead">1 · What you can pay for</h2>
+  <div class="secsub" id="s1sub"></div>
+  <div class="legend" id="legend-pay"></div>
+  <svg id="market" role="img" aria-label="Every AI coding plan placed by monthly price and how far you would trust the vendor."></svg>
+
+  <h2 class="sechead">2 · What that gets you</h2>
+  <div class="secsub" id="s2sub"></div>
+  <svg id="grid" role="img" aria-label="Every AI coding tool, grouped by trust band and by where it runs, lit up by the plans you own."></svg>
+
+  <div class="panel detail" id="drawer"></div>
+
+  <h2 class="sechead">3 · What the guides still get wrong</h2>
+  <div class="secsub">This field moves faster than the blog posts about it. Everything below changed
+    recently enough that advice you find by searching is likely to be describing a world that ended.</div>
+  <div class="stale" id="stale"></div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script type="module">
+import { arrowMarkers, labelBox, $, $$, esc, saveHash, loadHash } from "/_kit/viz.js";
+
+/* ═══ TAXONOMY ═══════════════════════════════════════════════════════════
+   Three encodings carry this page:
+     y (both charts) = trust band     — how far a security team would let you go
+     x (chart 1)     = dollars a month
+     x (chart 2)     = where the thing runs
+     colour          = HOW you pay, which beginners find harder than WHAT you pay
+   Bands are ordered best-to-worst so "At work" can simply cut everything past
+   an index, rather than each band carrying its own work-safe flag to keep in sync. */
+
+const BANDS = [
+  { id:"ent",   name:"Enterprise-safe",     sub:"clears a big-company security review today" },
+  { id:"team",  name:"Solid for a team",    sub:"real company, real certifications — smaller or younger" },
+  { id:"pers",  name:"Fine for personal",   sub:"legit and reliable; would not survive procurement" },
+  { id:"cheap", name:"Cheap, with caveats", sub:"works and costs little — jurisdiction or longevity is a real question" },
+  { id:"free",  name:"Free / self-hosted",  sub:"no vendor relationship at all: you run it, or you bring your own key" },
+];
+const WORK_CUTOFF = 2;   // "at work" keeps bands 0..1. One number, one meaning.
+
+const COLS = [
+  { id:"cli",    name:"Terminal",        sub:"a command in your shell" },
+  { id:"ide",    name:"Its own editor",  sub:"a whole app you code in" },
+  { id:"ext",    name:"Editor plug-in",  sub:"bolts onto VS Code / JetBrains" },
+  { id:"app",    name:"Desktop & browser", sub:"an app, or a tab" },
+  { id:"cloud",  name:"Cloud agent",     sub:"give it a task, get a pull request" },
+  { id:"review", name:"Reviews your PRs", sub:"comments on code you wrote" },
+  { id:"auto",   name:"API, SDK & CI",   sub:"wire it into your own code" },
+];
+
+/* How the money leaves your account. This is the distinction that actually trips
+   beginners up — "$20/mo" and "$20 of credits" behave nothing alike once you hit
+   the limit, and pay-per-token has no limit at all until the invoice arrives. */
+const PAY = {
+  seat:   { name:"Flat monthly seat", color:"var(--c7)", blurb:"Same price every month. You hit a rate limit, you wait — you don't get a surprise bill." },
+  credit: { name:"Monthly credits",   color:"var(--c4)", blurb:"An allowance that resets. Run out and you either stop or top up, so cost is capped-ish but not fixed." },
+  token:  { name:"Pay per token",     color:"var(--c5)", blurb:"No subscription; you're billed for what you use. Cheapest to start, the only one that can hand you a $400 month." },
+  free:   { name:"Free",              color:"var(--c2)", blurb:"No card. Either a genuine free tier, open source, or something you run on your own hardware." },
+};
+
+/* ═══ DATA — prices verified 2026-09-06 against vendor pricing pages; trust bands from
+   published trust centres, terms and certifications on the same date. ═══ */
+const PLANS = [
+/* Every price read off the vendor's own pricing page on 2026-09-06. Where a page
+   refuses to resolve to one number, the dot carries the published figure and the
+   drawer says so — inventing the missing half would be the one lie this page can't
+   afford, since the whole point is telling someone what to spend. */
+
+  // ── Anthropic ────────────────────────────────────────────────────────
+  { id:"claude-free", vendor:"Anthropic", ladder:"claude", name:"Claude Free", short:"Claude Free",
+    price:0, pay:"free", band:"ent", limit:"Chat on web, desktop and mobile, with a rolling 5-hour window. No coding agent.",
+    doc:"https://claude.com/pricing" },
+  { id:"claude-pro", vendor:"Anthropic", ladder:"claude", name:"Pro", short:"Claude Pro",
+    price:20, pay:"seat", band:"ent", limit:"At least 5× Free's usage per 5-hour session, plus a weekly cap. $17/mo if you pay for a year.",
+    note:"The entry ticket to Claude Code. Below this, no agent — just chat.",
+    doc:"https://claude.com/pricing" },
+  { id:"claude-max5", vendor:"Anthropic", ladder:"claude", name:"Max 5×", short:"Claude Max 5×",
+    price:100, pay:"seat", band:"ent", limit:"5× Pro's usage per 5-hour session.", doc:"https://claude.com/pricing" },
+  { id:"claude-max20", vendor:"Anthropic", ladder:"claude", name:"Max 20×", short:"Max 20×",
+    price:200, pay:"seat", band:"ent", limit:"20× Pro's usage per 5-hour session.", doc:"https://claude.com/pricing" },
+  { id:"claude-team", vendor:"Anthropic", ladder:"claude", name:"Team seat", short:"Claude Team",
+    price:25, pay:"seat", band:"ent", limit:"More usage than Pro, per seat. $20/seat on an annual commitment; a $125 premium seat gets 5× that.",
+    doc:"https://claude.com/pricing" },
+  { id:"anthropic-api", vendor:"Anthropic", name:"API key (pay per token)", short:"Anthropic API",
+    price:0, pay:"token", band:"ent", limit:"Opus 5 $5 in / $25 out per million tokens · Sonnet 5 $2/$10 · Haiku 4.5 $1/$5. Batch runs are half price.",
+    note:"Priced at zero here because there is no subscription — you pay for exactly what you use. That also means it is the only wallet on this page that can hand you a surprise bill.",
+    doc:"https://platform.claude.com/docs/en/about-claude/pricing" },
+
+  // ── OpenAI ───────────────────────────────────────────────────────────
+  { id:"chatgpt-free", vendor:"OpenAI", ladder:"chatgpt", name:"ChatGPT Free", short:"ChatGPT Free",
+    price:0, pay:"free", band:"ent", limit:"Unlimited text chat on GPT-5.6 Luna, 27K context. Limited uploads, images, voice and Codex.",
+    note:"Unusually generous for a coder: the Codex CLI signs in with a free ChatGPT account, so $0 still buys you a real terminal agent.",
+    doc:"https://chatgpt.com/pricing" },
+  { id:"chatgpt-go", vendor:"OpenAI", ladder:"chatgpt", name:"Go", short:"ChatGPT Go",
+    price:8, pay:"seat", band:"ent", limit:"More messages, uploads, images and voice; 54K context. The page notes this plan may include ads.",
+    note:"The cheapest paid tier any of the big three sell.", doc:"https://chatgpt.com/pricing" },
+  { id:"chatgpt-plus", vendor:"OpenAI", ladder:"chatgpt", name:"Plus", short:"ChatGPT Plus",
+    price:20, pay:"seat", band:"ent", limit:"GPT-6 Astra plus the GPT-5.6 reasoning line, 54K–256K context.",
+    note:"Where Codex stops being local-only: cloud tasks, PR review and Slack all start here.",
+    doc:"https://chatgpt.com/pricing" },
+  { id:"chatgpt-pro", vendor:"OpenAI", ladder:"chatgpt", name:"Pro", short:"ChatGPT Pro",
+    price:100, pay:"seat", band:"ent", limit:"“5× or 20× more usage”, 128K–400K context.", verified:false,
+    note:"Plotted at the published <b>“From $100”</b>. OpenAI describes this as a 5× or 20× plan but does not publish the 20× price anywhere official — so the real top of this ladder is somewhere to the right of this dot and I can't tell you where.",
+    doc:"https://chatgpt.com/pricing" },
+  { id:"chatgpt-business", vendor:"OpenAI", ladder:"chatgpt", name:"Business seat", short:"ChatGPT Business",
+    price:25, pay:"seat", band:"ent", limit:"Minimum two users; extra credits purchasable. $20/user on an annual commitment.",
+    doc:"https://chatgpt.com/pricing?type=team" },
+  { id:"openai-api", vendor:"OpenAI", name:"API key (pay per token)", short:"OpenAI API",
+    price:0, pay:"token", band:"ent", limit:"GPT-6 Astra $10 in / $50 out per million · GPT-5.6 Terra $2/$12 · GPT-5.6 Luna $0.20/$1.20 · GPT-5.3 Codex $1.75/$14.",
+    doc:"https://developers.openai.com/api/docs/pricing" },
+
+  // ── GitHub Copilot ───────────────────────────────────────────────────
+  { id:"gh-free", vendor:"GitHub", ladder:"copilot", name:"Copilot Free", short:"Copilot Free",
+    price:0, pay:"free", band:"ent", limit:"2,000 completions and 50 chat requests a month.",
+    note:"Free for verified students with the full feature set, which is the single best deal on this page if you qualify.",
+    doc:"https://github.com/features/copilot/plans" },
+  { id:"gh-pro", vendor:"GitHub", ladder:"copilot", name:"Copilot Pro", short:"Copilot Pro",
+    price:10, pay:"credit", band:"ent", limit:"1,000 base + 500 flex AI credits a month; unlimited completions.",
+    note:"<b>The most breadth per dollar on this page.</b> $10 puts four vendors' frontier models behind one card — Anthropic, OpenAI, Google and xAI — where every $20 rival locks you to one model family. If you buy one thing to start with, there's a strong argument it's this.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-proplus", vendor:"GitHub", ladder:"copilot", name:"Copilot Pro+", short:"Copilot Pro+",
+    price:39, pay:"credit", band:"ent", limit:"3,900 base + 3,100 flex credits a month.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-max", vendor:"GitHub", ladder:"copilot", name:"Copilot Max", short:"Copilot Max",
+    price:100, pay:"credit", band:"ent", limit:"10,000 base + 10,000 flex credits a month.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-business", vendor:"GitHub", ladder:"copilot", name:"Business seat", short:"Copilot Business",
+    price:19, pay:"credit", band:"ent", limit:"1,900 credits per user per month.",
+    note:"Buying this does not switch the agents on — an administrator still has to enable the policy. That gate is the toggle beside this chart.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-enterprise", vendor:"GitHub", ladder:"copilot", name:"Enterprise seat", short:"Copilot Enterprise",
+    price:39, pay:"credit", band:"ent", limit:"3,900 credits per user per month; requires GitHub Enterprise Cloud.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-admin", vendor:"GitHub", name:"…and your admin enabled the agent policy", short:"admin switched it on",
+    price:0, pay:"free", band:"ent",
+    limit:"Not a purchase — a checkbox someone else controls. On Business and Enterprise, the cloud agents stay dark until an org or enterprise administrator turns them on.",
+    note:"This is here because it is the most common reason a paid seat appears to do nothing. Tick it to see what your company's setup would actually give you.",
+    doc:"https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-policies" },
+
+  // ── Google ───────────────────────────────────────────────────────────
+  { id:"goog-free", vendor:"Google", ladder:"googleai", name:"Google AI (free)", short:"Google AI Free",
+    price:0, pay:"free", band:"ent", limit:"Baseline Gemini access, and — unusually — the full Antigravity editor and CLI feature set.",
+    note:"Google gates on quota, not capability: the free tier gets the same agent features as the $200 one, just less of them.",
+    doc:"https://one.google.com/about/google-ai-plans/" },
+  { id:"goog-plus", vendor:"Google", ladder:"googleai", name:"AI Plus", short:"AI Plus",
+    price:4.99, pay:"seat", band:"ent", limit:"“2× access”, 400 GB storage, shareable with up to five people.",
+    note:"The cheapest paid AI subscription of any vendor here.", doc:"https://one.google.com/about/google-ai-plans/" },
+  { id:"goog-pro", vendor:"Google", ladder:"googleai", name:"AI Pro", short:"Google AI Pro",
+    price:19.99, pay:"seat", band:"ent", limit:"“4× access”, 5 TB, $10/mo of Cloud credits. Free for a year for students.",
+    doc:"https://one.google.com/about/google-ai-plans/" },
+  { id:"goog-ultra", vendor:"Google", ladder:"googleai", name:"AI Ultra", short:"Google AI Ultra",
+    price:99.99, pay:"seat", band:"ent", limit:"“Up to 20× access”, 20 TB, $40/mo of Cloud credits, Deep Think. A 30 TB variant runs $199.99.",
+    doc:"https://one.google.com/about/google-ai-plans/" },
+  { id:"gca", vendor:"Google", name:"Gemini Code Assist Standard", short:"Code Assist",
+    price:22.80, pay:"seat", band:"ent", limit:"Per-user licence, $19/user on an annual commitment. Enterprise runs $54 ($45 annual).",
+    note:"The org-only half of Google's lineup. Individuals were cut off from Code Assist in mid-2026 and pointed at Antigravity instead — so this is now something your employer buys, not something you do.",
+    doc:"https://codeassist.google/products/business" },
+  { id:"gemini-api", vendor:"Google", name:"Gemini API key", short:"Gemini API",
+    price:0, pay:"token", band:"ent", limit:"Free to start with generous limits. Paid: Gemini 3.8 Flash $0.75 in / $3.75 out per million tokens.",
+    note:"The free key is cheaper in a way that matters — prompts sent on it are used for product improvement. The paid key adds caching and batch, and does not train on your data.",
+    doc:"https://ai.google.dev/pricing" },
+
+  // ── Amazon ───────────────────────────────────────────────────────────
+  { id:"kiro-free", vendor:"Amazon", ladder:"kiro", name:"Kiro Free", short:"Kiro Free",
+    price:0, pay:"free", band:"team", limit:"50 credits a month, including Claude Sonnet 4.5 alongside open-weight models.",
+    note:"The most interesting free tier here: Amazon gives away access to somebody else's frontier model. <b>But on the free and individual tiers Amazon may use your code to improve its services.</b> The Enterprise tier and the Bedrock API both exclude that contractually — the free one does not, which is why Kiro sits a band below the AWS platform it runs on.",
+    doc:"https://kiro.dev/pricing/" },
+  { id:"kiro-pro", vendor:"Amazon", ladder:"kiro", name:"Kiro Pro", short:"Kiro Pro",
+    price:20, pay:"credit", band:"team", limit:"1,000 credits a month plus premium models. Unused credits do not roll over.",
+    doc:"https://kiro.dev/pricing/" },
+  { id:"kiro-proplus", vendor:"Amazon", ladder:"kiro", name:"Kiro Pro+", short:"Kiro Pro+",
+    price:40, pay:"credit", band:"team", limit:"2,000 credits a month.", doc:"https://kiro.dev/pricing/" },
+  { id:"kiro-promax", vendor:"Amazon", ladder:"kiro", name:"Kiro Pro Max", short:"Kiro Pro Max",
+    price:100, pay:"credit", band:"team", limit:"5,000 credits a month.", doc:"https://kiro.dev/pricing/" },
+  { id:"kiro-power", vendor:"Amazon", ladder:"kiro", name:"Kiro Power", short:"Kiro Power",
+    price:200, pay:"credit", band:"team", limit:"10,000 credits a month; top-ups at $0.04 each.", doc:"https://kiro.dev/pricing/" },
+  { id:"bedrock", vendor:"Amazon", name:"Bedrock (pay per token)", short:"Bedrock",
+    price:0, pay:"token", band:"ent", limit:"No subscription — per-token model capacity billed to your AWS account, IAM-gated.", verified:false,
+    note:"Rates not re-verified this pass (aws.amazon.com was unreachable). This is the wallet that runs Claude Code without any Anthropic subscription.",
+    doc:"https://aws.amazon.com/bedrock/pricing/" },
+
+  // ── Cursor ───────────────────────────────────────────────────────────
+  { id:"cursor-hobby", vendor:"Cursor", ladder:"cursor", name:"Hobby", short:"Cursor Hobby",
+    price:0, pay:"free", band:"ent", limit:"A limited number of Agent requests. The page states plainly: no credit card required.",
+    doc:"https://cursor.com/pricing" },
+  { id:"cursor-pro", vendor:"Cursor", ladder:"cursor", name:"Cursor Pro", short:"Cursor Pro",
+    price:20, pay:"seat", band:"ent", limit:"Extended Agent limits, frontier models from several vendors, cloud agents. $16/mo yearly.",
+    note:"Band 1 on controls — SOC 2 Type II, ISO 27001, ISO 42001, SAML, SCIM, audit logs, and Privacy Mode enforceable by an admin. Worth knowing separately that <b>SpaceX acquired Cursor in August 2026</b> for $60bn in stock; the entity is still Anysphere and nothing has changed in the product, but that is a change of owner you might want to have decided about deliberately.",
+    doc:"https://cursor.com/pricing" },
+  { id:"cursor-proplus", vendor:"Cursor", ladder:"cursor", name:"Cursor Pro+", short:"Cursor Pro+",
+    price:60, pay:"seat", band:"ent", limit:"3× Pro's Agent limits. Same features.", doc:"https://cursor.com/pricing" },
+  { id:"cursor-ultra", vendor:"Cursor", ladder:"cursor", name:"Cursor Ultra", short:"Cursor Ultra",
+    price:200, pay:"seat", band:"ent", limit:"20× Pro's Agent limits. Same features.", doc:"https://cursor.com/pricing" },
+  { id:"cursor-teams", vendor:"Cursor", ladder:"cursor", name:"Teams seat", short:"Cursor Teams",
+    price:40, pay:"seat", band:"ent", limit:"Adds SSO, analytics and team privacy mode. $32/user yearly; a $120 premium seat gets 5×.",
+    doc:"https://cursor.com/pricing" },
+
+  // ── Editors you buy AI from ──────────────────────────────────────────
+  { id:"zed-free", vendor:"Zed", ladder:"zed", name:"Zed Personal", short:"Zed Free",
+    price:0, pay:"free", band:"pers", limit:"2,000 accepted edit predictions a month, forever — or unlimited if you bring your own API key.",
+    doc:"https://zed.dev/pricing" },
+  { id:"zed-pro", vendor:"Zed", ladder:"zed", name:"Zed Pro", short:"Zed Pro",
+    price:10, pay:"seat", band:"pers", limit:"Unlimited predictions plus $5 of included tokens a month; past that, API list price +10%.",
+    note:"A GPU-accelerated editor written in Rust, open source, with the agent built in. The +10% is honest markup rather than an opaque credit — you can compare it directly against paying the model vendor yourself.",
+    doc:"https://zed.dev/pricing" },
+  { id:"jb-free", vendor:"JetBrains", ladder:"jetbrains", name:"AI Free", short:"JetBrains Free",
+    price:0, pay:"free", band:"team", limit:"3 AI credits per 30 days. Enough to try it, not to use it.",
+    doc:"https://www.jetbrains.com/ai-ides/buy/" },
+  { id:"jb-pro", vendor:"JetBrains", ladder:"jetbrains", name:"AI Pro", short:"JetBrains AI Pro",
+    price:10, pay:"credit", band:"team", limit:"10 AI credits per 30 days, where one credit is one dollar of model usage. $100/year.",
+    note:"The most legible billing unit in the entire field: a credit is literally $1 of usage, so you can price a task instead of guessing at a multiplier. Junie is the agent; it lives inside IntelliJ, PyCharm and the rest.<br><br><b>Placed one band lower than it behaves.</b> On substance this is a 26-year-old profitable EU company with data kept in the EEA and the strongest no-training language of anyone here. It loses the top band on a technicality: it publishes no verifiable trust or compliance page, and unverifiable claims don't count. If your employer already licenses JetBrains, this is paperwork rather than risk.",
+    doc:"https://www.jetbrains.com/ai-ides/buy/" },
+  { id:"jb-ult", vendor:"JetBrains", ladder:"jetbrains", name:"AI Ultimate", short:"JetBrains Ultimate",
+    price:30, pay:"credit", band:"team", limit:"35 credits ($35 of usage) per 30 days. $300/year.",
+    doc:"https://www.jetbrains.com/ai-ides/buy/" },
+  { id:"devin-free", vendor:"Cognition", ladder:"devin", name:"Devin Free", short:"Devin Free",
+    price:0, pay:"free", band:"ent", limit:"A light quota; Cognition does not publish the number.", verified:false,
+    doc:"https://devin.ai/pricing" },
+  { id:"devin-pro", vendor:"Cognition", ladder:"devin", name:"Devin Pro", short:"Devin Pro",
+    price:20, pay:"seat", band:"ent", limit:"Adds Claude, GPT and Gemini frontier models. Quota is not stated numerically.",
+    note:"<b>Windsurf is this now.</b> windsurf.com redirects here — Cognition bought Windsurf and merged the two price ladders, so any guide still comparing “Windsurf vs Devin” as separate purchases is out of date.",
+    doc:"https://devin.ai/pricing" },
+  { id:"devin-max", vendor:"Cognition", ladder:"devin", name:"Devin Max", short:"Devin Max",
+    price:200, pay:"seat", band:"ent", limit:"Top individual tier; overage billed at API price.",
+    note:"Devin no longer prices in ACUs. Every blog quoting $2.25 per ACU is describing a scheme that is gone.",
+    doc:"https://devin.ai/pricing" },
+  { id:"replit-free", vendor:"Replit", ladder:"replit", name:"Replit Starter", short:"Replit Free",
+    price:0, pay:"free", band:"team", limit:"Some free daily usage; the amount is not published.", verified:false,
+    doc:"https://replit.com/pricing" },
+  { id:"replit-core", vendor:"Replit", ladder:"replit", name:"Replit Core", short:"Replit Core",
+    price:20, pay:"credit", band:"team", limit:"$20 of model credits a month, then effort-based pay-as-you-go. $18/mo annually.",
+    note:"Builds and hosts the app too, so it's the shortest path from an idea to a URL somebody else can open.",
+    doc:"https://replit.com/pricing" },
+  { id:"warp-free", vendor:"Warp", ladder:"warp", name:"Warp Free", short:"Warp Free",
+    price:0, pay:"free", band:"team", limit:"No included credits — you reload as you go.", doc:"https://www.warp.dev/pricing" },
+  { id:"warp-build", vendor:"Warp", ladder:"warp", name:"Warp Build", short:"Warp Build",
+    price:20, pay:"credit", band:"team", limit:"1,500 credits a month. $18/mo annually.",
+    note:"A terminal that is also the agent. Unusually broad model list for the price — Claude, GPT, Gemini and Chinese models like GLM and Kimi behind one seat.",
+    doc:"https://www.warp.dev/pricing" },
+  { id:"warp-max", vendor:"Warp", ladder:"warp", name:"Warp Max", short:"Warp Max",
+    price:200, pay:"credit", band:"team", limit:"18,000 credits a month.", doc:"https://www.warp.dev/pricing" },
+  { id:"trae-free", vendor:"ByteDance", ladder:"trae", name:"Trae Free", short:"Trae Free",
+    price:0, pay:"free", band:"cheap", limit:"5,000 autocompletions a month.", doc:"https://www.trae.ai/pricing" },
+  { id:"trae-pro", vendor:"ByteDance", ladder:"trae", name:"Trae Pro", short:"Trae Pro",
+    price:10, pay:"credit", band:"cheap", limit:"$20 of usage budget a month for $10. Lite is $3 for $5 of usage.",
+    note:"Priced below cost to buy share, and bundles OpenAI and Google models plus ByteDance's own Seed alongside MiniMax and Kimi.<br><br><b>This is the one to actually be careful with.</b> No certifications, no enterprise controls, no privacy mode, no local-only option — and independent researchers found it contacting ByteDance servers <i>regardless of the telemetry opt-out</i>, with personal data retained for five years after last use. It is in this band on conduct, not merely on jurisdiction.",
+    doc:"https://www.trae.ai/pricing" },
+
+  // ── Agents, reviewers and prompt-to-app ──────────────────────────────
+  { id:"amp-mega", vendor:"Sourcegraph", ladder:"amp", name:"Amp Megawatt", short:"Amp",
+    price:20, pay:"credit", band:"team", limit:"750 orb-hours plus $20 of credits a month.",
+    note:"Can run against an existing ChatGPT or SuperGrok subscription with no per-token fee on top — one of the few products that lets a subscription you already pay for do the work.",
+    doc:"https://ampcode.com/pricing" },
+  { id:"amp-giga", vendor:"Sourcegraph", ladder:"amp", name:"Amp Gigawatt", short:"Amp Gigawatt",
+    price:200, pay:"credit", band:"team", limit:"1,000 xxlarge orb-hours plus $200 of credits.", doc:"https://ampcode.com/pricing" },
+  { id:"augment", vendor:"Augment Code", ladder:"augment", name:"Augment Standard", short:"Augment",
+    price:20, pay:"credit", band:"team", limit:"A usage pool shared across up to 50 seats, billed at 40% over model list price. No standing free tier.",
+    note:"That +40% is the widest published markup here. You are paying it for the codebase-wide retrieval, so it is worth knowing you are paying it.",
+    doc:"https://www.augmentcode.com/pricing" },
+  { id:"tabnine", vendor:"Tabnine", ladder:"tabnine", name:"Tabnine Code Assistant", short:"Tabnine",
+    price:39, pay:"seat", band:"team", limit:"Per user, annual billing only. Model cost is +5% unless you bring your own. Agentic tier is $59.",
+    note:"The only vendor on this page with <b>no free tier at all</b> — and the one that leans hardest on self-hosting and provenance. Built for companies that need the model inside their own perimeter.",
+    doc:"https://www.tabnine.com/pricing" },
+  { id:"qodo", vendor:"Qodo", ladder:"qodo", name:"Qodo Pro Team", short:"Qodo",
+    price:30, pay:"credit", band:"team", limit:"20,000 credits a month at $0.012 each. The free trial is 14 days and needs no card.",
+    note:"Aimed squarely at pull-request review and test generation rather than at writing code with you.",
+    doc:"https://www.qodo.ai/pricing" },
+  { id:"factory", vendor:"Factory", ladder:"factory", name:"Factory Pro", short:"Factory",
+    price:20, pay:"seat", band:"team", limit:"“Droids” with a monthly allotment; Plus is $100 for ~5×, Max $200 for ~10×. No free tier.",
+    doc:"https://factory.ai/pricing" },
+  { id:"lovable-free", vendor:"Lovable", ladder:"lovable", name:"Lovable Free", short:"Lovable Free",
+    price:0, pay:"free", band:"team", limit:"5 credits a day, capped at 30 a month. States plainly: no credit card needed.",
+    doc:"https://lovable.dev/pricing" },
+  { id:"lovable-pro", vendor:"Lovable", ladder:"lovable", name:"Lovable Pro", short:"Lovable",
+    price:25, pay:"credit", band:"team", limit:"100 credits a month. $21/mo annually.",
+    note:"Describe an app in a sentence and get a deployed one. Genuinely the fastest way in if you don't write code yet — and the least like the rest of this page.",
+    doc:"https://lovable.dev/pricing" },
+  { id:"v0-free", vendor:"Vercel", ladder:"v0", name:"v0 Free", short:"v0 Free",
+    price:0, pay:"free", band:"ent", limit:"$5 of credits a month and 7 messages a day.", doc:"https://v0.app/pricing" },
+  { id:"v0-plus", vendor:"Vercel", ladder:"v0", name:"v0 Plus", short:"v0",
+    price:30, pay:"credit", band:"ent", limit:"$30 of credits per user per month, plus $2 a day for logging in.",
+    doc:"https://v0.app/pricing" },
+  { id:"bolt-free", vendor:"StackBlitz", ladder:"bolt", name:"Bolt Free", short:"Bolt Free",
+    price:0, pay:"free", band:"pers", limit:"300,000 tokens a day, one million a month.", doc:"https://bolt.new/pricing" },
+  { id:"bolt-pro", vendor:"StackBlitz", ladder:"bolt", name:"Bolt Pro", short:"Bolt",
+    price:25, pay:"credit", band:"pers", limit:"From 10 million tokens a month, and unused tokens roll over. $18/mo yearly.",
+    doc:"https://bolt.new/pricing" },
+
+  // ── Independent wallets: real companies, no procurement story ────────
+  { id:"mistral-free", vendor:"Mistral", ladder:"mistral", name:"Le Chat Free", short:"Le Chat Free",
+    price:0, pay:"free", band:"ent", limit:"Free tier including $10 a month of API credit.", doc:"https://mistral.ai/pricing" },
+  { id:"mistral-pro", vendor:"Mistral", ladder:"mistral", name:"Le Chat Pro", short:"Mistral Pro",
+    price:14.99, pay:"seat", band:"ent", limit:"Per user; Team is $24.99. Codestral on the API is $0.30 in / $0.90 out per million tokens.",
+    note:"European, which for some buyers is the entire reason to pick it. “Mistral Code” is now called Mistral Vibe and has no standalone price — it rides Le Chat or your own key.",
+    doc:"https://mistral.ai/pricing" },
+  { id:"grok-super", vendor:"xAI", ladder:"xai", name:"SuperGrok", short:"SuperGrok",
+    price:30, pay:"seat", band:"pers", limit:"Higher rate limits on Grok 4.6. SuperGrok Plus is $100; the Heavy tier's price does not render on the pricing page.",
+    note:"Also unlocks Cursor's Grok Bot — an xAI subscription paying for a Cursor surface.<br><br>xAI was acquired by SpaceX in February 2026 and rebranded SpaceXAI; its own docs now carry that name. All eleven original co-founders had reportedly left by March 2026.",
+    doc:"https://x.ai/pricing" },
+  { id:"openrouter", vendor:"OpenRouter", name:"OpenRouter wallet", short:"OpenRouter",
+    price:0, pay:"token", band:"pers", limit:"No subscription and no markup on usage — you pre-pay credits and they are debited at the provider's own rate. Topping up costs 5.5% by card.",
+    note:"<b>One key, essentially every model.</b> The single most useful thing on this page for someone who does not want to pick a vendor yet: point any bring-your-own-key tool at it and switch models without switching accounts. Free model variants exist at 50 requests a day, 1,000 once you have ever topped up $10.<br><br>Its trust story is unusual: as a router, “does this train on my code” depends on which provider your request landed on. It tracks retention and training as separate per-endpoint flags and <b>fails closed</b> — an endpoint whose policy is unclear is assumed to do both. Good engineering, but it means the guarantee is a configuration you have to audit, not a vendor you can vouch for.",
+    doc:"https://openrouter.ai/docs/faq" },
+  { id:"groq", vendor:"Groq", name:"Groq", short:"Groq",
+    price:0, pay:"token", band:"pers", limit:"Free tier needs no card: 30 requests a minute, 1,000 a day on gpt-oss-120b. Paid is per token — GPT-OSS-120B $0.15 in / $0.60 out per million.",
+    note:"Runs open-weight models on custom silicon, so it is very fast and very cheap. A good free backstop for when another free tier taps out.",
+    doc:"https://console.groq.com/docs/billing-faqs" },
+  { id:"together", vendor:"Together AI", name:"Together AI", short:"Together",
+    price:0, pay:"token", band:"team", limit:"Pay per token, no flat plan. DeepSeek V4 Flash $0.14 in / $0.28 out per million.",
+    doc:"https://together.ai/pricing" },
+  { id:"fireworks", vendor:"Fireworks AI", name:"Fireworks AI", short:"Fireworks",
+    price:0, pay:"token", band:"team", limit:"Pay per token with $1 of free credit. DeepSeek V4 Flash $0.22/$0.66, GLM 5.3 Flash $0.15/$0.50.",
+    doc:"https://docs.fireworks.ai/serverless/pricing" },
+
+  // ── Cheap, with caveats ──────────────────────────────────────────────
+  { id:"deepseek", vendor:"DeepSeek", name:"DeepSeek API", short:"DeepSeek",
+    price:0, pay:"token", band:"cheap", limit:"Per token only — no subscription exists. v4-flash $0.22 in / $0.66 out per million off-peak, roughly double at peak. Cache hits cost $0.007.",
+    note:"One to two orders of magnitude cheaper than the US frontier labs, and good enough that the price is the story. The caveat is not vague: the entity is Hangzhou DeepSeek, your data is processed in China under PRC law, and the privacy policy gives you an opt-out <i>right</i> rather than a no-training guarantee. <b>It is actively banned</b> on government devices by Italy's data-protection authority, the US Navy, NASA, the Commerce Department, 12+ US states and Czech public administration.<br><br>The weights are open, though — run them yourself and none of this applies.",
+    doc:"https://api-docs.deepseek.com/quick_start/pricing" },
+  { id:"zai-lite", vendor:"Z.ai", ladder:"zai", name:"GLM Coding Lite", short:"Z.ai GLM Lite",
+    price:18, pay:"seat", band:"cheap", limit:"10,000 credits a week. Pro is $80 for 6× that, Max $168 for 14×. Roughly 30% off if paid yearly.",
+    note:"Plugs straight into Claude Code and other bring-your-own-key tools, which is how most people meet it. GLM-4.7-Flash is free on the API.<br><br>Awkwardly, it has the <b>best no-training clause of anything in this band</b> — international contracts run through a Singapore entity and it commits not to use your content without explicit agreement. It is still disqualified for most procurement, because its Beijing parent was added to the <b>US Commerce Entity List</b> in January 2025. Good terms do not survive an export-control listing.",
+    doc:"https://z.ai/subscribe" },
+  { id:"kimi", vendor:"Moonshot", ladder:"kimi", name:"Kimi Code", short:"Kimi Code",
+    price:15, pay:"seat", band:"cheap", limit:"Cheapest tier is $180 a year. The free Kimi tier does not include Kimi Code. Top tier runs $159/mo on an annual commitment.",
+    note:"K2 is the model that made people take open-weight Chinese coding models seriously.",
+    doc:"https://www.kimi.com/membership/pricing" },
+  { id:"qwen", vendor:"Alibaba", ladder:"qwen", name:"Qwen Coding Plan Pro", short:"Qwen Coding",
+    price:50, pay:"seat", band:"cheap", limit:"6,000 requests per 5 hours, 90,000 a month.",
+    note:"<b>The one genuinely multi-vendor plan in this band</b> — a single $50 fee covering Qwen, GLM, Kimi and MiniMax. Qwen Code's free CLI quota ended in April 2026, so guides recommending it as a free option are stale.<br><br>Its <i>controls</i> are the strongest in this band: SOC 2, an explicit “we will never use your data for model training,” SAML, and Qwen3 published under a clean Apache 2.0. It sits here anyway because the US Department of Defense classifies Alibaba as military-linked and Texas bans it on state devices — a documented procurement blocker regardless of how good the paperwork is.",
+    doc:"https://www.alibabacloud.com/help/en/model-studio/coding-plan" },
+  { id:"minimax", vendor:"MiniMax", ladder:"minimax", name:"MiniMax Plus", short:"MiniMax",
+    price:20, pay:"seat", band:"cheap", limit:"Around 34,000 coding calls a day and 3 concurrent agents. Max $50, Ultra $120.",
+    doc:"https://platform.minimax.io/subscribe/token-plan" },
+
+  // ── Free and self-hosted ─────────────────────────────────────────────
+  { id:"byok", vendor:"Open source", name:"A free agent + any key you already own", short:"free agent + your key",
+    price:0, pay:"free", band:"free",
+    limit:"Aider, Cline, Roo Code, Kilo Code, opencode, Goose and Continue.dev are all free software under Apache-2.0 or MIT. They cost nothing and call whatever key you point them at.",
+    note:"The most under-rated row on this page. These are real agents, not toys — and paired with a free Gemini or Groq key the whole stack costs nothing. Note Continue.dev was acquired by Cursor in September 2026; the open-source code remains, the company does not.",
+    doc:"https://aider.chat" },
+  { id:"ollama-cloud", vendor:"Ollama", name:"Ollama Cloud", short:"Ollama Cloud",
+    price:20, pay:"credit", band:"cheap", limit:"$60 of credits a month on Pro; $100/mo and $500/mo tiers above it.",
+    note:"Same brand as local Ollama, <b>completely different trust posture</b>. This needs an account and runs inference on Ollama's own hardware — so the “nothing leaves my machine” guarantee is now a policy promise instead of an architectural fact. It's a good promise (“we do not use your inputs or outputs to train any AI models”), but it is a promise. It sits one band down from local Ollama for that reason alone.",
+    doc:"https://ollama.com/cloud" },
+  { id:"local", vendor:"Local models", name:"Ollama / LM Studio / llama.cpp", short:"run it yourself",
+    price:0, pay:"free", band:"free",
+    limit:"No subscription, no key, no network. You pay in graphics memory: about 8 GB for a 7B model, and 24 GB is the commonly cited floor for a 32B coding model that is actually useful.", verified:false,
+    note:"The only option here where nobody sees your code. Slower and weaker than the frontier models, and the VRAM figures are from secondary sources — Ollama no longer publishes a table. Ollama also sells hosted tiers from $20 if you want the same tooling without the hardware.",
+    doc:"https://ollama.com/cloud" },
+];
+const S = [
+/* The six vendors everyone has heard of. One box per vendor × entry point — the old
+   map gave Anthropic twelve boxes and Zed none, which made "who offers more" a
+   question about how finely I'd split SKUs rather than about the vendors. */
+
+  // ── Anthropic ─────────────────────────────────────────────────────────
+  { id:"cc-cli", vendor:"Anthropic", name:"Claude Code", col:"cli", band:"ent", how:"claude",
+    what:"The agent in your terminal — reads and edits your repo, runs commands, and can be extended with skills, hooks and MCP servers. The reference implementation of the whole category.",
+    reqs:["claude-pro","claude-max5","claude-max20","claude-team","anthropic-api","bedrock"],
+    note:"A GitHub Copilot seat <b>cannot</b> sign this in. Anthropic's accepted logins are a claude.ai paid plan, the Console, or model capacity you rent from Bedrock/Vertex/Foundry.",
+    doc:"https://code.claude.com/docs/en/authentication" },
+  { id:"cc-ext", vendor:"Anthropic", name:"Claude Code in your editor", col:"ext", band:"ent", how:"VS Code · JetBrains",
+    what:"The same CLI wrapped in the editor, with inline diffs and plan review. The JetBrains plugin still needs the CLI installed separately.",
+    reqs:["claude-pro","claude-max5","claude-max20","claude-team","anthropic-api","bedrock"],
+    doc:"https://code.claude.com/docs/en/vs-code" },
+  { id:"cc-app", vendor:"Anthropic", name:"Claude desktop app & claude.ai", col:"app", band:"ent", how:"Claude.app · claude.ai",
+    what:"Chat, plus a Code tab that runs parallel sessions side by side with visual diff review. Ships the CLI inside it, so this is the no-terminal way in.",
+    reqs:["claude-free","claude-pro","claude-max5","claude-max20","claude-team"],
+    note:"Free gets chat only — the Code tab needs a paid plan.",
+    doc:"https://code.claude.com/docs/en/desktop-quickstart" },
+  { id:"cc-chrome", vendor:"Anthropic", name:"Claude in Chrome", col:"app", band:"ent", how:"Chrome extension",
+    what:"Drives a real browser tab — clicking, filling forms, reading the console and network — so it can debug a running web app instead of just its source.",
+    reqs:["claude-pro","claude-max5","claude-max20","claude-team"], verified:false,
+    note:"Exact plan gating not confirmed against a primary doc.", doc:"https://code.claude.com/docs/en/chrome" },
+  { id:"cc-web", vendor:"Anthropic", name:"Claude Code on web & mobile", col:"cloud", band:"ent", how:"claude.ai/code",
+    what:"Cloud sessions against repos you don't have checked out locally. You can pull one back down to your laptop mid-task.",
+    reqs:["claude-pro","claude-max5","claude-max20","claude-team"],
+    doc:"https://code.claude.com/docs/en/claude-code-on-the-web" },
+  { id:"cc-gh", vendor:"Anthropic", name:"Claude agent on github.com", col:"cloud", band:"ent", how:"assign it an issue",
+    what:"Anthropic's agent running in GitHub's cloud and opening draft pull requests — bought from GitHub, not from Anthropic.",
+    reqs:["gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"], also:"gh-admin",
+    note:"The clearest example on this page of one vendor's seat paying for another vendor's agent: no Anthropic account is involved at all. On Business/Enterprise an admin has to switch it on first.",
+    doc:"https://docs.github.com/en/copilot/concepts/agents/about-third-party-coding-agents" },
+  { id:"cc-auto", vendor:"Anthropic", name:"Claude Agent SDK & CI", col:"auto", band:"ent", how:"claude setup-token",
+    what:"Build your own agent on Claude Code's tools and permission model, or run it in GitHub Actions / GitLab CI for automated review and repo chores.",
+    reqs:["claude-pro","claude-max5","claude-max20","claude-team","anthropic-api","bedrock"],
+    doc:"https://code.claude.com/docs/en/agent-sdk/overview" },
+
+  // ── OpenAI ────────────────────────────────────────────────────────────
+  { id:"cx-cli", vendor:"OpenAI", name:"Codex CLI", col:"cli", band:"ent", how:"codex",
+    what:"OpenAI's terminal agent. Signs in with any ChatGPT plan — including the free one — or with an API key.",
+    reqs:["chatgpt-free","chatgpt-go","chatgpt-plus","chatgpt-pro","chatgpt-business","openai-api"],
+    note:"There is no standalone Codex subscription; it rides on ChatGPT plans. A Copilot seat does nothing for it.",
+    doc:"https://learn.chatgpt.com/docs/codex/cli" },
+  { id:"cx-ext", vendor:"OpenAI", name:"Codex IDE extension", col:"ext", band:"ent", how:"VS Code marketplace",
+    what:"Codex in the editor sidebar, sharing sessions with the CLI and the cloud.",
+    reqs:["chatgpt-free","chatgpt-go","chatgpt-plus","chatgpt-pro","chatgpt-business","openai-api"],
+    doc:"https://learn.chatgpt.com/docs/codex/ide" },
+  { id:"cx-app", vendor:"OpenAI", name:"ChatGPT & Codex desktop app", col:"app", band:"ent", how:"chatgpt.com · desktop download",
+    what:"Chat on every tier, plus a standalone app for running Codex sessions outside an editor and a Chrome sidebar that can act on the page you're looking at.",
+    reqs:["chatgpt-free","chatgpt-go","chatgpt-plus","chatgpt-pro","chatgpt-business"],
+    doc:"https://learn.chatgpt.com/docs/pricing" },
+  { id:"cx-cloud", vendor:"OpenAI", name:"Codex cloud (web + iOS)", col:"cloud", band:"ent", how:"chatgpt.com/codex",
+    what:"Async tasks against your repos, running on OpenAI's machines.",
+    reqs:["chatgpt-plus","chatgpt-pro","chatgpt-business"],
+    note:"The first thing the cheap tiers lose: Free and Go get local surfaces only — no cloud tasks, no code review, no Slack.",
+    doc:"https://learn.chatgpt.com/docs/pricing" },
+  { id:"cx-gh", vendor:"OpenAI", name:"Codex agent on github.com", col:"cloud", band:"ent", how:"assign it an issue",
+    what:"OpenAI's agent running async in GitHub's cloud, billed to your Copilot seat rather than to ChatGPT.",
+    reqs:["gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"], also:"gh-admin",
+    doc:"https://docs.github.com/en/copilot/concepts/agents/about-third-party-coding-agents" },
+  { id:"cx-review", vendor:"OpenAI", name:"Codex code review", col:"review", band:"ent", how:"connect the GitHub app",
+    what:"Automatic review passes on your pull requests, driven by your ChatGPT plan rather than a Copilot seat.",
+    reqs:["chatgpt-plus","chatgpt-pro","chatgpt-business"], doc:"https://learn.chatgpt.com/docs/pricing" },
+  { id:"cx-auto", vendor:"OpenAI", name:"OpenAI API & Codex SDK", col:"auto", band:"ent", how:"OPENAI_API_KEY",
+    what:"Metered access independent of any subscription. This is what most other tools on this page are quietly calling.",
+    reqs:["openai-api"], doc:"https://platform.openai.com/docs/pricing" },
+
+  // ── GitHub Copilot ────────────────────────────────────────────────────
+  { id:"gh-cli", vendor:"GitHub", name:"Copilot CLI", col:"cli", band:"ent", how:"copilot",
+    what:"GitHub's terminal agent — custom agents, subagents, hooks, MCP servers, and hand-off to the cloud agent. Structurally the same feature list as Claude Code.",
+    reqs:["gh-free","gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"],
+    note:"What actually differs between this and its rivals is which models your plan and your admin let it reach, and how fast the credit meter runs.",
+    doc:"https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli" },
+  { id:"gh-ext", vendor:"GitHub", name:"Copilot completions & chat", col:"ext", band:"ent", how:"inline, as you type",
+    what:"The original product: grey-text autocomplete plus an ask-about-this-code sidebar, across VS Code, JetBrains, Neovim and more.",
+    reqs:["gh-free","gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"],
+    note:"The free tier is capped — a couple of thousand completions a month — but it is a genuinely usable starting point with no card.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-agentmode", vendor:"GitHub", name:"Copilot agent mode in VS Code", col:"ext", band:"ent", how:"chat → Agent",
+    what:"Multi-file autonomous edits inside the editor, and the harness that can also run Anthropic's and OpenAI's agents locally against your workspace.",
+    reqs:["gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"],
+    note:"Not available on Copilot Free.", doc:"https://docs.github.com/en/copilot/get-started/plans" },
+  { id:"gh-app", vendor:"GitHub", name:"GitHub Copilot app", col:"app", band:"ent", how:"desktop download · github.com",
+    what:"Agent-native desktop client running parallel sessions across repos, each on its own branch and worktree — plus Copilot everywhere on github.com and mobile.",
+    reqs:["gh-free","gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"],
+    note:"It also runs bring-your-own-key against your own model provider with no Copilot subscription at all.",
+    doc:"https://docs.github.com/en/copilot/concepts/agents/github-copilot-app" },
+  { id:"gh-cloud", vendor:"GitHub", name:"Copilot coding agent", col:"cloud", band:"ent", how:"assign an issue to Copilot",
+    what:"Async agent in GitHub's cloud that picks up an issue and opens a pull request.",
+    reqs:["gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"], also:"gh-admin",
+    note:"On Business and Enterprise an administrator has to enable the policy before anyone can use it — the single most common reason a paid seat appears to do nothing.",
+    doc:"https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent" },
+  { id:"gh-review", vendor:"GitHub", name:"Copilot code review", col:"review", band:"ent", how:"request a review from Copilot",
+    what:"Automatic review comments on your pull requests.",
+    reqs:["gh-pro","gh-proplus","gh-max","gh-business","gh-enterprise"],
+    note:"Free only gets “review selection” inside VS Code, not review on the PR itself.",
+    doc:"https://docs.github.com/en/copilot/get-started/plans" },
+
+  // ── Google ────────────────────────────────────────────────────────────
+  { id:"goog-cli", vendor:"Google", name:"Antigravity CLI", col:"cli", band:"ent", how:"agy",
+    what:"Google's terminal agent. This is what replaced Gemini CLI — and unlike its predecessor it is a closed-source binary.",
+    reqs:["goog-free","goog-plus","goog-pro","goog-ultra","gemini-api"],
+    note:"Gemini CLI stopped serving free, AI Pro and AI Ultra users in June 2026; only Code Assist Standard/Enterprise and paid API keys kept the old open-source one.",
+    doc:"https://antigravity.google/docs/plans/" },
+  { id:"goog-ide", vendor:"Google", name:"Antigravity IDE", col:"ide", band:"ent", how:"antigravity.google",
+    what:"Google's agent-first editor. Its browser subagent drives a real local Chrome under an allow/deny list, so web debugging is built in rather than a separate extension.",
+    reqs:["goog-free","goog-plus","goog-pro","goog-ultra"],
+    note:"Every consumer plan gets the whole feature set — what you buy going up the ladder is quota, not capability.",
+    doc:"https://antigravity.google/docs/plans/" },
+  { id:"goog-ext", vendor:"Google", name:"Antigravity & Code Assist plug-ins", col:"ext", band:"ent", how:"VS Code · JetBrains · Zed",
+    what:"The same agent inside an editor you already use, sharing one login with the CLI. Gemini Code Assist is the org-licensed sibling.",
+    reqs:["goog-free","goog-plus","goog-pro","goog-ultra","gca"],
+    note:"Code Assist stopped being available to individuals in June 2026 — they were pointed at Antigravity instead. It is now a Google Cloud purchase only.",
+    doc:"https://developers.google.com/gemini-code-assist/resources/faqs" },
+  { id:"goog-app", vendor:"Google", name:"Gemini app", col:"app", band:"ent", how:"gemini.google.com",
+    what:"Plain chat on web and mobile. Free, with the paid tiers buying multiples of the same limits.",
+    reqs:["goog-free","goog-plus","goog-pro","goog-ultra"], doc:"https://one.google.com/about/google-ai-plans/" },
+  { id:"goog-cloud", vendor:"Google", name:"Jules", col:"cloud", band:"ent", how:"jules.google",
+    what:"Async cloud agent: clones the repo, plans with Gemini, runs your tests and opens a pull request.",
+    reqs:["goog-free","goog-pro","goog-ultra"],
+    note:"Individual Google accounts only — there is no Workspace or organisation path to Jules and it cannot be bought separately. For a company that is a hard blocker.",
+    doc:"https://jules.google/docs/usage-limits/" },
+  { id:"goog-review", vendor:"Google", name:"Code Assist & Jules on GitHub", col:"review", band:"ent", how:"install the app / label an issue",
+    what:"Automatic pull-request review from Google, plus Jules picking up labelled issues.",
+    reqs:["goog-free","goog-pro","goog-ultra","gca"],
+    note:"The free consumer version of the PR reviewer was withdrawn in mid-2026; only the Google Cloud licensed one survives.",
+    doc:"https://developers.google.com/gemini-code-assist/docs/review-github-code" },
+  { id:"goog-auto", vendor:"Google", name:"Gemini API & Antigravity SDK", col:"auto", band:"ent", how:"AI Studio key",
+    what:"Metered model access plus programmatic agent runs and scheduled tasks.",
+    reqs:["gemini-api"],
+    note:"The free-tier key is cheaper in a way that matters: your prompts are used for product improvement. The paid key adds caching, batch, and no training on your data.",
+    doc:"https://ai.google.dev/gemini-api/docs/pricing" },
+
+  // ── Amazon / AWS ──────────────────────────────────────────────────────
+  { id:"aws-cli", vendor:"Amazon", name:"Kiro CLI", col:"cli", band:"team", how:"kiro-cli",
+    what:"Amazon's terminal agent — what the Amazon Q Developer CLI was rebranded into. The old q entry points still work.",
+    reqs:["kiro-free","kiro-pro","kiro-proplus","kiro-promax","kiro-power"], doc:"https://kiro.dev/faq/" },
+  { id:"aws-ide", vendor:"Amazon", name:"Kiro IDE", col:"ide", band:"team", how:"kiro.dev download",
+    what:"Amazon's agentic editor, a VS Code fork built around spec-driven development. Signs in with GitHub, Google or an AWS Builder ID — no AWS account required.",
+    reqs:["kiro-free","kiro-pro","kiro-proplus","kiro-promax","kiro-power"],
+    note:"The free tier is model-limited rather than feature-limited; the paid ladder buys credits, not capabilities.",
+    doc:"https://kiro.dev/pricing/" },
+  { id:"aws-app", vendor:"Amazon", name:"Kiro Crew & Q in the console", col:"app", band:"team", how:"desktop app · the AWS console",
+    what:"Persistent agents reachable from a desktop app, a web dashboard and chat platforms — plus the older ask-about-your-AWS-account assistant inside the console itself.",
+    reqs:["kiro-free","kiro-pro","kiro-proplus","kiro-promax","kiro-power"], doc:"https://kiro.dev/crew/" },
+  { id:"aws-cloud", vendor:"Amazon", name:"Kiro Web & cloud sessions", col:"cloud", band:"team", how:"app.kiro.dev",
+    what:"Async sessions in the browser, with a mobile preview.",
+    reqs:["kiro-pro","kiro-proplus","kiro-promax","kiro-power"],
+    note:"This is the line where Kiro Free stops — everything cloud-shaped is behind the paid tiers.",
+    doc:"https://kiro.dev/docs/web/" },
+  { id:"aws-review", vendor:"Amazon", name:"Kiro agent on GitHub", col:"review", band:"team", how:"kiro label / /kiro fix",
+    what:"Label an issue and get a pull request back. Rides on top of Kiro's cloud sessions.",
+    reqs:["kiro-pro","kiro-proplus","kiro-promax","kiro-power"], verified:false,
+    note:"The GitHub docs state no tier of their own; the paid gate is inherited from cloud sessions, so treat it as inferred.",
+    doc:"https://kiro.dev/docs/autonomous-agent/github/" },
+  { id:"aws-auto", vendor:"Amazon", name:"Bedrock API & AgentCore", col:"auto", band:"ent", how:"any AWS account",
+    what:"Pay-per-token model capacity in your own AWS account, plus hosted agent sessions that will run Claude Code, Codex, Kiro and Cursor side by side in isolated microVMs.",
+    reqs:["bedrock"],
+    note:"This is the wallet that pays for Anthropic's engine without any Anthropic subscription — Claude Code authenticates straight against it.",
+    doc:"https://aws.amazon.com/bedrock/pricing/" },
+
+  // ── Cursor ────────────────────────────────────────────────────────────
+  { id:"cur-ide", vendor:"Cursor", name:"Cursor editor", col:"ide", band:"ent", how:"cursor.com download",
+    what:"The VS Code fork that made this whole category mainstream — Agent, Plan, Ask and Debug modes plus the Tab autocomplete most people actually stay for.",
+    reqs:["cursor-hobby","cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"],
+    note:"You can point Cursor at your own Anthropic/OpenAI/Google/Bedrock key, but only for chat models — Tab never runs on your key — and Teams/Enterprise still charge a per-token fee on top of your own API bill.",
+    doc:"https://cursor.com/pricing" },
+  { id:"cur-cli", vendor:"Cursor", name:"Cursor CLI", col:"cli", band:"ent", how:"agent",
+    what:"Interactive and headless terminal agent drawing on the same usage pool as the editor.",
+    reqs:["cursor-hobby","cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"], verified:false,
+    note:"The CLI docs state no tier gate at all, so this is inferred from the shared usage pool rather than stated.",
+    doc:"https://cursor.com/docs/cli/overview" },
+  { id:"cur-ext", vendor:"Cursor", name:"Cursor for JetBrains", col:"ext", band:"ent", how:"JetBrains marketplace",
+    what:"Cursor's agent inside IntelliJ and friends, over ACP.",
+    reqs:["cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"],
+    note:"Needs a paid plan — the free tier is editor-only.", doc:"https://cursor.com/docs/integrations/jetbrains" },
+  { id:"cur-app", vendor:"Cursor", name:"Cursor web & mobile", col:"app", band:"ent", how:"cursor.com/agents · App Store",
+    what:"Start and steer agents from a browser or a phone, and hand a running local agent off to the cloud.",
+    reqs:["cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"],
+    note:"Free accounts can sign in and look, but cannot start a run.", doc:"https://cursor.com/docs/cloud-agent/mobile" },
+  { id:"cur-cloud", vendor:"Cursor", name:"Cursor Cloud Agents", col:"cloud", band:"ent", how:"agents tab · REST API",
+    what:"Async agents on Cursor's infrastructure, with webhooks and self-hosted workers on the team tiers. Nearly everything else Cursor sells rides on top of this.",
+    reqs:["cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"],
+    doc:"https://cursor.com/docs/cloud-agent/overview" },
+  { id:"cur-review", vendor:"Cursor", name:"Bugbot", col:"review", band:"ent", how:"install it on a repo",
+    what:"Cursor's agentic pull-request reviewer.",
+    reqs:["cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"], doc:"https://cursor.com/docs/bugbot" },
+  { id:"cur-auto", vendor:"Cursor", name:"Cursor SDK & Automations", col:"auto", band:"ent", how:"CURSOR_API_KEY",
+    what:"TypeScript and Python SDKs, a GitHub Action, and agents triggered by an event or a schedule.",
+    reqs:["cursor-pro","cursor-proplus","cursor-ultra","cursor-teams"], doc:"https://cursor.com/docs/cloud-agent/automations" },
+
+  // ── Editors ───────────────────────────────────────────────────────────
+  { id:"zed-editor", vendor:"Zed", name:"Zed", col:"ide", band:"pers", how:"zed.dev download",
+    what:"A GPU-accelerated editor written in Rust, open source, with the agent built in rather than bolted on. Fast enough that the speed is the pitch.",
+    reqs:["zed-free","zed-pro"], doc:"https://zed.dev/pricing" },
+  { id:"jb-ide", vendor:"JetBrains", name:"JetBrains IDEs + Junie", col:"ide", band:"team", how:"IntelliJ · PyCharm · WebStorm",
+    what:"AI Assistant and the Junie agent inside the IDEs a very large share of professional developers already have open all day.",
+    reqs:["jb-free","jb-pro","jb-ult"],
+    note:"The path of least resistance if you already live in a JetBrains IDE — nothing new to install or learn.",
+    doc:"https://www.jetbrains.com/ai-ides/buy/" },
+  { id:"windsurf", vendor:"Cognition", name:"Windsurf editor", col:"ide", band:"team", how:"windsurf.com download",
+    what:"The agentic editor that popularised Cascade-style multi-step edits. Now sold as part of Devin.",
+    reqs:["devin-free","devin-pro","devin-max"],
+    note:"windsurf.com redirects to devin.ai — Cognition acquired Windsurf and merged the plans. If a guide tells you to compare Windsurf's pricing against Devin's, it predates that.",
+    doc:"https://devin.ai/pricing" },
+  { id:"devin-cloud", vendor:"Cognition", name:"Devin", col:"cloud", band:"ent", how:"app.devin.ai · Slack",
+    what:"The original “AI software engineer” pitch: hand it a ticket, it works in its own environment and comes back with a pull request.",
+    reqs:["devin-pro","devin-max"], doc:"https://devin.ai/pricing" },
+  { id:"replit-ide", vendor:"Replit", name:"Replit Agent", col:"ide", band:"team", how:"replit.com",
+    what:"A browser IDE that writes, runs, and then hosts the thing it built. No local setup at all, which for a beginner removes the step most likely to end the attempt.",
+    reqs:["replit-free","replit-core"], doc:"https://replit.com/pricing" },
+  { id:"warp-cli", vendor:"Warp", name:"Warp", col:"cli", band:"team", how:"warp.dev download",
+    what:"A terminal that is also the agent — it reads your command output, explains failures and fixes them in place.",
+    reqs:["warp-free","warp-build","warp-max"],
+    note:"Reaches an unusually wide model list for the price, including Chinese models like GLM and Kimi alongside Claude, GPT and Gemini.",
+    doc:"https://www.warp.dev/pricing" },
+  { id:"trae-ide", vendor:"ByteDance", name:"Trae", col:"ide", band:"cheap", how:"trae.ai download",
+    what:"ByteDance's agentic editor, priced well below everyone else — $3/mo buys $5 of usage.",
+    reqs:["trae-free","trae-pro"], doc:"https://www.trae.ai/pricing" },
+
+  // ── Agents and reviewers ──────────────────────────────────────────────
+  { id:"amp-cli", vendor:"Amp Frontier", name:"Amp", col:"cli", band:"team", how:"amp",
+    what:"Sourcegraph's agent, in the terminal and in VS Code, from the company that spent a decade on code search.",
+    reqs:["amp-mega","amp-giga"],
+    note:"Can run on an existing ChatGPT or SuperGrok subscription with no extra per-token fee — rare, and worth knowing if you already pay for one.<br><br>Amp <b>spun out of Sourcegraph</b> in December 2025 as its own company. Sourcegraph's own Cody still exists but is enterprise-only now, starting around $16k — Amp is not an upgrade path from it, it's a different vendor.",
+    doc:"https://ampcode.com/pricing" },
+  { id:"augment-ext", vendor:"Augment Code", name:"Augment", col:"ext", band:"team", how:"VS Code · JetBrains",
+    what:"Built around retrieval across a large existing codebase rather than around writing new files.",
+    reqs:["augment"], doc:"https://www.augmentcode.com/pricing" },
+  { id:"tabnine-ext", vendor:"Tabnine", name:"Tabnine", col:"ext", band:"team", how:"VS Code · JetBrains · self-hosted",
+    what:"Completions and agents that can run entirely inside your own infrastructure, with provenance tracking on generated code.",
+    reqs:["tabnine"],
+    note:"The oldest product in this space and the one built for the strictest buyers — SaaS, VPC, on-prem and air-gapped are all still marketed. No free tier at all.<br><br><b>Acquired by Tricentis in July 2026</b>, and its own security page currently 404s, so treat the post-acquisition compliance posture as unverified until the new parent re-attests.",
+    doc:"https://www.tabnine.com/pricing" },
+  { id:"qodo-review", vendor:"Qodo", name:"Qodo Merge", col:"review", band:"team", how:"install on a repo",
+    what:"Pull-request review and test generation, roughly 18 reviews a month on the base credit allowance.",
+    reqs:["qodo"], doc:"https://www.qodo.ai/pricing" },
+  { id:"factory-cli", vendor:"Factory", name:"Factory droids", col:"cli", band:"team", how:"droid",
+    what:"Terminal agents Factory calls droids, with shared cloud machines on the team plan.",
+    reqs:["factory"], doc:"https://factory.ai/pricing" },
+
+  // ── Prompt-to-app ─────────────────────────────────────────────────────
+  { id:"lovable-app", vendor:"Lovable", name:"Lovable", col:"app", band:"team", how:"lovable.dev",
+    what:"Describe an app in a sentence, get a working deployed one. The least code-shaped thing here and the easiest place to start if you don't write code yet.",
+    reqs:["lovable-free","lovable-pro"], doc:"https://lovable.dev/pricing" },
+  { id:"v0-app", vendor:"Vercel", name:"v0", col:"app", band:"ent", how:"v0.app",
+    what:"Vercel's prompt-to-UI tool: generates React and Tailwind components you can paste into a real project.",
+    reqs:["v0-free","v0-plus"], doc:"https://v0.app/pricing" },
+  { id:"bolt-app", vendor:"StackBlitz", name:"Bolt", col:"app", band:"pers", how:"bolt.new",
+    what:"Full-stack apps generated and run entirely in the browser tab.",
+    reqs:["bolt-free","bolt-pro"], doc:"https://bolt.new/pricing" },
+
+  // ── Chat apps and raw model access ────────────────────────────────────
+  { id:"mistral-app", vendor:"Mistral", name:"Le Chat", col:"app", band:"ent", how:"chat.mistral.ai",
+    what:"Mistral's assistant, with Vibe (formerly Mistral Code) for coding work.",
+    reqs:["mistral-free","mistral-pro"], doc:"https://mistral.ai/pricing" },
+  { id:"grok-app", vendor:"xAI", name:"Grok", col:"app", band:"pers", how:"grok.com · X",
+    what:"xAI's assistant. Grok Code is the coding-tuned line, and a SuperGrok subscription also unlocks Cursor's Grok Bot.",
+    reqs:["grok-super"], doc:"https://x.ai/pricing" },
+  { id:"openrouter-api", vendor:"OpenRouter", name:"OpenRouter", col:"auto", band:"pers", how:"OPENROUTER_API_KEY",
+    what:"One API key and one prepaid balance that reaches essentially every model from every vendor, at each provider's own price with no markup.",
+    reqs:["openrouter"],
+    note:"The answer to “I don't want to commit to a vendor yet.” Swap models by changing a string instead of opening another account.",
+    doc:"https://openrouter.ai/docs/faq" },
+  { id:"fast-inference", vendor:"Groq · Together · Fireworks", name:"Fast open-model APIs", col:"auto", band:"team", how:"an API key",
+    what:"Hosted open-weight models — Llama, GPT-OSS, DeepSeek, Qwen, GLM — billed per token and served far faster than the frontier labs.",
+    reqs:["groq","together","fireworks"],
+    note:"Groq's free tier needs no credit card, which makes it the best backstop when another free allowance runs dry.",
+    doc:"https://console.groq.com/docs/billing-faqs" },
+  { id:"cheap-api", vendor:"DeepSeek · Z.ai · Moonshot · MiniMax", name:"Low-cost model APIs", col:"auto", band:"cheap", how:"an API key",
+    what:"Frontier-adjacent models at one to two orders of magnitude less money. They speak the same API shape, so most tools on this page accept them as a drop-in.",
+    reqs:["deepseek","zai-lite","kimi","minimax","qwen"],
+    note:"The reason this band exists. The models are genuinely good and genuinely cheap; the caveat is that your code is processed in China, which is usually fine for a side project and usually disqualifying at work.",
+    doc:"https://api-docs.deepseek.com/quick_start/pricing" },
+  { id:"cheap-harness", vendor:"DeepSeek · Z.ai · Moonshot", name:"A cheap engine behind Claude Code", col:"cli", band:"cheap", how:"point Claude Code at it",
+    what:"DeepSeek, Z.ai and Moonshot all publish Anthropic-compatible endpoints, so the tools built for Claude Code run against their models instead — same harness you already know, a fraction of the bill.",
+    reqs:["zai-lite","deepseek","kimi","minimax"],
+    note:"<b>This is the whole story of this band.</b> None of these labs ships an IDE, a cloud agent or a review bot — they don't need to. They sell the engine and let somebody else's harness drive it, which is why the cheap band looks empty in every column but this one.<br><br>It is also the cheapest genuine upgrade path on the page: keep your tooling, swap the endpoint, pay a tenth as much. Everything in the band's jurisdiction caveat still applies.",
+    doc:"https://z.ai/subscribe" },
+
+  // ── Free and self-hosted ──────────────────────────────────────────────
+  { id:"oss-cli", vendor:"Open source", name:"Aider · opencode · Goose", col:"cli", band:"free", how:"aider · opencode · goose",
+    what:"Mature terminal agents that cost nothing and call whichever model key you point them at. Aider's git-aware editing predates most of this page.",
+    reqs:["byok","local","openrouter","groq","gemini-api","deepseek","anthropic-api","openai-api"],
+    note:"Two currency notes. <b>Goose</b> moved to the Linux Foundation's Agentic AI Foundation in December 2025 — “backed by Block” is dated. <b>Aider</b> is slowing rather than dead: last commit to main was 22 May 2026 and almost nothing has merged since.",
+    doc:"https://aider.chat" },
+  { id:"oss-ext", vendor:"Open source", name:"Cline · Kilo Code", col:"ext", band:"free", how:"VS Code marketplace",
+    what:"Free VS Code agents with the same multi-file editing loop the paid tools sell, running on your own key.",
+    reqs:["byok","local","openrouter","groq","gemini-api","deepseek","anthropic-api","openai-api"],
+    note:"<b>The fork lineage trips people up.</b> Cline → Roo Code (2024) → Kilo Code (2025). <b>Roo Code is archived</b> — the repo was shut down on 15 May 2026 and its own README now points at Cline. Kilo Code is the live continuation of that branch (acquired by Anaconda in July 2026, still MIT), and Cline itself is independently healthy. Continue.dev was on this list until Cursor acquired it in September 2026.<br><br>One catch worth knowing before you assume bring-your-own-key means private: <b>Kilo Code's own policy says prompts are routed through OpenRouter</b> even when you supply your own provider key, so there is a hosted proxy in the path. Cline can run fully offline against Ollama or LM Studio. Both also sell enterprise tiers with SSO and VPC deployment, neither publishes a SOC 2.",
+    doc:"https://cline.bot/pricing" },
+  { id:"local-run", vendor:"Local models", name:"Ollama · LM Studio", col:"auto", band:"free", how:"ollama serve",
+    what:"Runs a model on your own machine and exposes it on localhost, so every tool above can use it with no network and no account.",
+    reqs:["local","ollama-cloud"],
+    note:"The only row here where your code never leaves the building. Around 24 GB of graphics memory is the commonly cited floor for a coding model worth using.<br><br><b>Running open weights locally is a completely different trust posture from calling the same lab's API.</b> DeepSeek, Qwen3, Kimi K2, MiniMax-M2 and GLM all publish weights — Qwen3 under a clean Apache 2.0 — so you can have band-4 prices at band-5 privacy. This is the best cheap-but-not-risky path on the page.<br><br>Two defaults worth knowing: <b>LM Studio</b> sends anonymous usage telemetry — never your content — unless you turn it off in Settings → Privacy. And <b>Ollama Cloud</b> is a separate dot a band below this one, because it runs on Ollama's hardware rather than yours.",
+    doc:"https://ollama.com/cloud" },
+];
+/* ═══ STATE ══════════════════════════════════════════════════════════════ */
+const DEFAULT = { owned: [], mode: "personal", budget: 220 };
+const state = Object.assign({}, DEFAULT, loadHash());
+state.owned = new Set(state.owned || []);
+
+const planById  = (id) => PLANS.find((p) => p.id === id);
+const bandIndex = (id) => BANDS.findIndex((b) => b.id === id);
+const owns      = (id) => state.owned.has(id);
+
+// A band is off-limits when you're at work and it sits past the cutoff. Everything
+// downstream — dimming, counting, the "you just lost N tools" line — reads this.
+const bandBlocked = (bid) => state.mode === "work" && bandIndex(bid) >= WORK_CUTOFF;
+// Over budget is about the SLIDER, not about what you own; you can always still
+// click an unaffordable plan, it just isn't suggested to you.
+const overBudget  = (p) => state.budget < 220 && p.price > state.budget;
+const planMuted   = (p) => bandBlocked(p.band) || overBudget(p);
+
+/* A surface is open if you hold ANY of its reqs — and, where one exists, the extra
+   gate too. `also` is deliberately a single id rather than a second OR-list: the only
+   real cases are "your admin has to switch it on", and a general AND-of-ORs solver
+   would be machinery for one shape of fact. */
+// `owns` is "you clicked it"; `usable` is "and it still counts". They diverge the
+// moment you switch to At work: a plan in a blocked band stays visibly yours — dropping
+// it silently would hide the very trade-off this page is about — but it stops paying
+// for anything, and so does every tool that only lives in a blocked band.
+const usable = (id) => { const p = planById(id); return !!p && state.owned.has(id) && !bandBlocked(p.band); };
+function unlockedBy(s) {
+  if (bandBlocked(s.band)) return [];
+  if (s.also && !usable(s.also)) return [];
+  return s.reqs.filter(usable);
+}
+const isOpen = (s) => unlockedBy(s).length > 0;
+
+/* ═══ GEOMETRY ═══════════════════════════════════════════════════════════
+   One width for both charts so the band rails line up down the page — the shared
+   y-axis is the whole conceit, and it only reads if it's literally the same axis. */
+const W = 1900, RAIL = 268, PLOT_X = RAIL + 26, PLOT_W = W - PLOT_X - 30;
+
+/* Price → x. sqrt, not linear: two thirds of the market sits between $0 and $25,
+   and a linear axis crushes all of it into the left eighth while $200 outliers get
+   the rest of the page. sqrt keeps the crowded end legible without a log scale's
+   "what does $0 even mean" problem — sqrt(0) is honestly 0. */
+const PMAX = 220;
+const px = (p) => PLOT_X + PLOT_W * Math.sqrt(Math.min(p, PMAX) / PMAX);
+const TICKS = [0, 10, 20, 30, 50, 80, 120, 200];
+
+// Dot area tracks how many tools the plan opens, so "expensive but unlocks little"
+// is visible as a small dot far to the right without anyone reading a number.
+const planReach = (p) => S.filter((s) => s.reqs.includes(p.id)).length;
+const rOf = (p) => 4.5 + Math.sqrt(planReach(p)) * 2.1;
+
+/* Beeswarm: within a band, walk plans left-to-right and drop each into the first
+   vertical slot where it doesn't touch a dot already placed. Cheap O(n²) — n is ~50
+   per band at worst and this runs once per redraw.
+   ponytail: naive collision scan; swap for a quadtree if the plan list ever passes ~300. */
+function swarm(plans) {
+  const placed = [];
+  plans.slice().sort((a, b) => a.price - b.price || planReach(b) - planReach(a)).forEach((p) => {
+    const x = px(p.price), r = rOf(p);
+    let row = 0;
+    // rows alternate 0, +1, -1, +2, -2 … so a cluster grows around the lane's centre
+    // instead of hanging off the bottom of it.
+    for (;;) {
+      const y = row === 0 ? 0 : (row % 2 ? Math.ceil(row / 2) : -row / 2) * 21;
+      // Gap is 12, not the 3 that mere non-overlap needs: dots packed to touching leave no
+      // room for anyone's label, and a labelled dot one row down beats a tight row of
+      // anonymous circles. The cheapest place to buy label space is the layout.
+      if (!placed.some((q) => Math.abs(q.y - y) < 19 && Math.abs(q.x - x) < q.r + r + 12)) {
+        placed.push({ p, x, y, r }); break;
+      }
+      row++;
+      if (row > 40) { placed.push({ p, x, y, r }); break; }   // never spin forever
+    }
+  });
+  return placed;
+}
+
+/* Label placement is separate from dot placement, and re-run on every draw, because it
+   depends on what you own and dot positions do not. (Dots must NOT move when you buy
+   something — a chart that reshuffles under the click you just made is unreadable.)
+   Greedy, in priority order: what you own gets first claim on the space, then the
+   plans that unlock the most. Right side preferred, left as a fallback, no label as a
+   last resort — and an unlabelled dot still has its hover title, so nothing is lost. */
+function assignLabels(placed) {
+  const taken = [];
+  placed.slice()
+    .sort((a, b) => (owns(b.p.id) - owns(a.p.id)) || (b.r - a.r))
+    .forEach((d) => {
+      const w = (d.p.short || d.p.name).length * 6.4 + 12;
+      const fits = (dir) => {
+        const x0 = dir > 0 ? d.x + d.r + 4 : d.x - d.r - 4 - w;
+        const x1 = x0 + w;
+        const hitsDot = placed.some((q) => q !== d && Math.abs(q.y - d.y) < 12 &&
+                                           q.x + q.r > x0 && q.x - q.r < x1);
+        const hitsLabel = taken.some((t) => Math.abs(t.y - d.y) < 12 && t.x1 > x0 && t.x0 < x1);
+        return !hitsDot && !hitsLabel && { x0, x1, y: d.y };
+      };
+      const spot = fits(1) || fits(-1);
+      d.side = spot ? (spot.x0 > d.x ? 1 : -1) : 0;
+      // Deliberately NOT forcing a label for owned plans that find no room. Two adjacent
+      // owned dots ($8 and $10) then print their names straight through each other, which
+      // is worse than one dot going unnamed — and unnamed here still means ringed in white,
+      // named in the receipt, named in the drawer, and named on hover.
+      if (spot) taken.push(spot);
+    });
+}
+
+// Lay the swarm out first, then size each band lane to the swarm it actually got.
+// Fixed lane heights were what left the old map half a screen of dead space.
+const SWARM = {}, MKT_LANE = {};
+let _my = 58;
+BANDS.forEach((b) => {
+  const sw = SWARM[b.id] = swarm(PLANS.filter((p) => p.band === b.id));
+  const spread = sw.length ? Math.max(...sw.map((d) => Math.abs(d.y) + d.r)) : 12;
+  const h = Math.max(88, spread * 2 + 30);
+  MKT_LANE[b.id] = { y: _my, h, mid: _my + h / 2 };
+  _my += h + 8;
+});
+const MKT_H = _my + 10;
+
+/* Grid lanes reuse RAIL / PLOT_X / PLOT_W verbatim so band n starts at the same
+   left edge in both charts. Two charts that merely look similar would break the
+   "height means trust, everywhere on this page" promise the header makes. */
+const COL_W = PLOT_W / COLS.length, NODE_H = 50, NODE_GAP = 8, LANE_TOP = 14, LANE_BOT = 12;
+const cellOf = (bid, cid) => S.filter((s) => s.band === bid && s.col === cid);
+
+const GRID_LANE = {}, NODES = new Map();
+let _gy = 56;
+BANDS.forEach((b) => {
+  const rows = Math.max(1, ...COLS.map((c) => cellOf(b.id, c.id).length));
+  // 88 is the rail's own text height (number + name + wrapped description); a lane with
+  // one box in it is shorter than its own label otherwise.
+  const h = Math.max(88, LANE_TOP + rows * (NODE_H + NODE_GAP) - NODE_GAP + LANE_BOT);
+  GRID_LANE[b.id] = { y: _gy, h };
+  COLS.forEach((c, ci) => cellOf(b.id, c.id).forEach((s, i) => {
+    NODES.set(s.id, { x: PLOT_X + ci * COL_W + 5, y: _gy + LANE_TOP + i * (NODE_H + NODE_GAP),
+                      w: COL_W - 14, h: NODE_H });
+  }));
+  _gy += h + 8;
+});
+const GRID_H = _gy + 10;
+
+/* ═══ RENDER ═════════════════════════════════════════════════════════════ */
+const mkt = $("#market"), grid = $("#grid");
+let selected = null;   // {kind:"plan"|"surface", id}
+
+// The band rail is identical in both charts, so it's one function. It also carries
+// the per-chart count, which is the only part that differs.
+function railParts(lane, countFor) {
+  return BANDS.flatMap((b, i) => {
+    const { y, h } = lane[b.id], off = bandBlocked(b.id);
+    return [
+      `<rect x="14" y="${y}" width="${W - 44}" height="${h}" rx="11"
+         fill="var(--panel)" stroke="var(--border)" opacity="${off ? .35 : 1}"/>`,
+      `<rect x="14" y="${y}" width="4" height="${h}" rx="2"
+         fill="${off ? "var(--border)" : "var(--accent)"}" opacity="${off ? .5 : 1 - i * 0.15}"/>`,
+      `<text class="bandnum" x="30" y="${y + 19}" opacity="${off ? .4 : 1}">BAND ${i + 1}${off ? " · BLOCKED AT WORK" : ""}</text>`,
+      // Count rides the top line, right-aligned. It used to sit at the lane's bottom edge,
+      // which collided with the wrapped description in any lane short enough to have both.
+      `<text class="bandnum" x="${RAIL - 14}" y="${y + 19}" text-anchor="end"
+         fill="var(--muted)" opacity="${off ? .4 : 1}">${countFor(b)}</text>`,
+      `<text class="bandname" x="30" y="${y + 38}" opacity="${off ? .4 : 1}">${esc(b.name)}</text>`,
+      labelBox({ x: 28, y: y + 45, w: RAIL - 42, h: h - 52 },
+               `<div style="font:10.5px/1.35 var(--sans);color:var(--faint);opacity:${off ? .5 : 1}">${esc(b.sub)}</div>`),
+    ];
+  });
+}
+
+function drawMarket() {
+  const parts = [];
+
+  // price axis — drawn first so dots sit on top of the gridlines
+  TICKS.forEach((t) => {
+    parts.push(`<line class="gridline" x1="${px(t)}" y1="46" x2="${px(t)}" y2="${MKT_H - 16}"
+                  opacity=".5" stroke-dasharray="2 4"/>`,
+               `<text class="axlab" x="${px(t)}" y="38" text-anchor="middle">${t === 0 ? "free" : "$" + t}</text>`);
+  });
+  // Title sits over the rail, not over the plot: at x=PLOT_X it lands directly above the
+  // "free" tick and the two read as one smudged string.
+  parts.push(`<text class="axtitle" x="14" y="38">DOLLARS PER MONTH →</text>`);
+
+  parts.push(...railParts(MKT_LANE, (b) => {
+    const n = PLANS.filter((p) => p.band === b.id).length;
+    const mine = PLANS.filter((p) => p.band === b.id && owns(p.id)).length;
+    return `${n} plans${mine ? ` · ${mine} yours` : ""}`;
+  }));
+
+  const labels = [];   // painted after every circle, so no dot can cover a name
+  BANDS.forEach((b) => {
+    const lane = MKT_LANE[b.id];
+    assignLabels(SWARM[b.id]);
+    SWARM[b.id].forEach((d) => {
+      const p = d.p, muted = planMuted(p), mine = owns(p.id);
+      const cy = lane.mid + d.y;
+      parts.push(`<g class="plan ${mine ? "owned" : ""}" data-viz-id="${p.id}" data-kind="plan"
+          data-label="${esc(p.vendor + " " + p.name + " — $" + p.price + "/mo")}" data-id="${p.id}">
+        <title>${esc(`${p.vendor} ${p.name} — ${priceLabel(p, true)} · opens ${planReach(p)} tools`)}</title>
+        <circle cx="${d.x}" cy="${cy}" r="${d.r}" fill="${PAY[p.pay].color}"
+          opacity="${muted ? .16 : mine ? 1 : .62}"
+          stroke="${mine ? "var(--text)" : "none"}" stroke-width="${mine ? 2.2 : 0}"/>
+      </g>`);
+      // Only label what you own or what's big enough to matter — labelling 50 dots
+      // turns the swarm into a wall of 10px text and hides the shape it exists to show.
+      // Label anything that fits. The size gate this replaced hid the entire free column —
+      // eleven unlabelled dots at $0, which is the first thing a beginner looks for.
+      if (!muted && d.side)
+        labels.push(`<text class="plan" x="${d.x + d.side * (d.r + 4)}" y="${cy + 3.5}"
+            text-anchor="${d.side > 0 ? "start" : "end"}"
+            fill="${mine ? "var(--text)" : "var(--muted)"}" font-weight="${mine ? 600 : 400}"
+            pointer-events="none">${esc(p.short || p.name)}</text>`);
+    });
+  });
+  parts.push(...labels);
+
+  mkt.setAttribute("viewBox", `0 0 ${W} ${MKT_H}`);
+  mkt.innerHTML = parts.join("");
+}
+
+function drawGrid() {
+  const parts = [arrowMarkers({})];
+  COLS.forEach((c, i) => parts.push(
+    `<text class="colhead" x="${PLOT_X + i * COL_W + 5}" y="24">${esc(c.name.toUpperCase())}</text>`,
+    `<text class="colsub"  x="${PLOT_X + i * COL_W + 5}" y="41">${esc(c.sub)}</text>`));
+
+  parts.push(...railParts(GRID_LANE, (b) => {
+    const all = S.filter((s) => s.band === b.id);
+    return `${all.filter(isOpen).length} of ${all.length} unlocked`;
+  }));
+
+  S.forEach((s) => {
+    const n = NODES.get(s.id), open = isOpen(s), blocked = bandBlocked(s.band);
+    const col = open ? PAY[planById(unlockedBy(s)[0]).pay].color : "var(--border)";
+    const op = blocked ? .18 : open ? 1 : .45;
+    parts.push(`<g class="node ${open ? "" : "locked"}" data-viz-id="${s.id}" data-kind="surface"
+        data-label="${esc(s.name)}" data-id="${s.id}">
+      <title>${esc(s.vendor + " · " + s.name)}</title>
+      <rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="8"
+        fill="${open ? "var(--panel-2)" : "transparent"}" stroke="${col}"
+        stroke-width="${open ? 1.7 : 1}" opacity="${op}"
+        stroke-dasharray="${s.verified === false ? "2 3" : ""}"/>
+      ${labelBox(n, `<div class="n-title">${esc(s.name)}</div><div class="n-how">${esc(s.how)}</div>`, "nodelabel")}
+    </g>`);
+  });
+
+  grid.setAttribute("viewBox", `0 0 ${W} ${GRID_H}`);
+  grid.innerHTML = parts.join("");
+}
+
+/* ═══ READOUTS ═══════════════════════════════════════════════════════════ */
+function receipt() {
+  const mine = [...state.owned].map(planById).filter(Boolean);
+  const spend = mine.filter((p) => !bandBlocked(p.band)).reduce((a, p) => a + p.price, 0);
+  const open = S.filter(isOpen).length;
+  $("#r-spend").textContent = "$" + spend;
+  $("#r-got").textContent = open;
+  $("#r-all").textContent = S.filter((s) => !bandBlocked(s.band)).length;
+
+  const blocked = mine.filter((p) => bandBlocked(p.band));
+  // The honest version of the "at work" story. Most of this market turns out to hold real
+  // certifications, so the count barely moves — what actually goes is the cheap band and
+  // self-hosting. Saying "most of the market disappears" would have been a nicer headline
+  // and a false one, so the copy reports the counts it computes.
+  const survive = PLANS.filter((p) => !bandBlocked(p.band)).length;
+  const cheapestOpen = Math.min(...PLANS.filter((p) => !bandBlocked(p.band) && p.price > 0).map((p) => p.price));
+  $("#s1sub").innerHTML = state.mode === "work"
+    ? `<b>${survive} of ${PLANS.length}</b> plans survive a corporate security review — less of a cull
+       than people expect, because most of this field really does hold SOC 2 and ISO 27001.
+       What you actually lose is the <b>cheap band</b> — the Chinese labs that undercut everyone on
+       price — and the option to <b>run a model on your own machine</b>. The cheapest paid plan still
+       open to you is $${cheapestOpen}.${blocked.length ? ` <b>${blocked.length}</b> plan${blocked.length > 1 ? "s" : ""} you'd picked just stopped counting.` : ""}`
+    : `Every dot is one thing you can actually buy. <b>Left–right is price</b>, <b>up–down is how far
+       you'd trust the vendor</b>, colour is <b>how</b> you pay, and a dot's size is how many tools it
+       opens. Click one to add it to your stack.`;
+
+  $("#s2sub").innerHTML = open
+    ? `Lit boxes are yours. Colour matches the plan that pays for each one, so a box in a colour
+       you didn't expect is a tool you're getting from a subscription you bought for something else.`
+    : `Nothing is unlocked yet — pick a plan above. <b>Every box here is a real thing you can sit
+       down and use</b>; the columns are just where it runs.`;
+}
+
+const legendItem = (color, label, dash) =>
+  `<span class="legend-item"><span class="swatch" style="background:${dash ? "transparent" : color};
+     ${dash ? `border:1px dashed ${color}` : ""}"></span>${label}</span>`;
+$("#legend-pay").innerHTML =
+  Object.entries(PAY).map(([, v]) => legendItem(v.color, v.name)).join("") +
+  legendItem("var(--text)", "in your stack (ringed)") +
+  legendItem("var(--muted)", "unverified gating", true);
+
+/* Verified 2026-09-06. Each of these is a thing a beginner will read somewhere and act on,
+   and each is now false — the failure mode is following a recommendation to a product that
+   merged, retired its free tier, or no longer prices the way the article says. */
+const STALE = [
+  ["Roo Code is archived",
+   "The repository was shut down on 15 May 2026 and its own README now points people at Cline. The lineage runs Cline → Roo Code → Kilo Code; Kilo Code is the live continuation, Cline is independently healthy, Roo Code is a dead end."],
+  ["Windsurf is Devin now",
+   "Cognition bought Windsurf and merged the price ladders — windsurf.com redirects to devin.ai. Before that it was Codeium. Any guide comparing Codeium, Windsurf and Devin as three products is describing one."],
+  ["Cursor belongs to SpaceX",
+   "The $60bn all-stock acquisition closed on 14 August 2026, and xAI became SpaceXAI in February. The products are unchanged and Cursor's certifications are all still live — but the owner is not who the reviews say it is."],
+  ["Devin no longer prices in ACUs",
+   "There is no ACU and no “Core” plan on the live page. Every article quoting $2.25 per ACU describes a scheme that no longer exists."],
+  ["Amp is not Sourcegraph any more",
+   "Amp spun out as its own company in December 2025. Sourcegraph's own Cody still exists but is enterprise-only at roughly $16k and up — Amp is a different vendor, not an upgrade path."],
+  ["Tabnine was acquired by Tricentis",
+   "July 2026. Its own security page currently 404s, so the compliance posture it is famous for should be treated as unverified until the new parent re-attests."],
+  ["Continue.dev was acquired by Cursor",
+   "September 2026, and therefore transitively by SpaceX. The Apache-2.0 code still works; recent commits retire the login flow, which reads like a wind-down."],
+  ["Goose moved to the Linux Foundation",
+   "Block donated the trademark, repos and governance to the Agentic AI Foundation in December 2025. “Backed by Block” is dated framing and the repo has moved."],
+  ["Qwen Code's free CLI quota ended",
+   "It stopped on 15 April 2026. Guides still list it as a free way in; you now need a Coding Plan or a paid key."],
+  ["Gemini CLI was replaced",
+   "Since June 2026 free, AI Pro and AI Ultra users get Antigravity's closed-source binary instead. Only Code Assist and paid API keys kept the open-source CLI."],
+  ["Cody's free and Pro tiers are gone",
+   "Discontinued July 2025. Sourcegraph's pricing page now shows Enterprise only."],
+  ["Mistral Code is called Mistral Vibe",
+   "And it has no standalone price — it rides a Le Chat subscription or your own API key."],
+];
+$("#stale").innerHTML = STALE.map(([h, b]) =>
+  `<div class="card"><h4>${esc(h)}</h4><p>${esc(b)}</p></div>`).join("");
+
+$("#foot").innerHTML =
+  `<b>How to read the height.</b> Band 1 is what a large company's security review clears today —
+   certifications, a no-training-on-your-code contract, SSO and admin controls. Each band down
+   trades one of those away for price or novelty. Band 5 has no vendor at all: open-source tools you
+   point at a key you already own, or a model running on your own machine.
+   <br><b>Dotted border</b> = a gate I could not pin to a primary source; treat as unverified.
+   Prices are monthly, in USD, at the individual rate. This whole area moves fast — check the
+   linked page before you spend anything.`;
+
+/* ═══ DRAWER ═════════════════════════════════════════════════════════════ */
+const src = (u) => `<a href="${u}" target="_blank" rel="noreferrer">${new URL(u).hostname.replace(/^www\./, "")}</a>`;
+// $0 on the axis means "no monthly fee", which for a metered plan is not the same as free.
+const priceLabel = (p, short) => p.price ? `$${p.price}${short ? "/mo" : "/month"}`
+  : p.pay === "token" ? (short ? "per token" : "no monthly fee — billed per token used") : "free";
+
+function drawer() {
+  const d = $("#drawer");
+  if (!selected) {
+    d.innerHTML = `<h3>Click anything for the details</h3>
+      <div class="dr-sub">A dot tells you what it costs, how the billing works, and everything it
+      opens. A box tells you what the tool is, how you launch it, and which plans pay for it.</div>`;
+    return;
+  }
+  if (selected.kind === "plan") {
+    const p = planById(selected.id), opens = S.filter((s) => s.reqs.includes(p.id));
+    d.innerHTML = `<h3 style="color:${PAY[p.pay].color}">${esc(p.vendor)} — ${esc(p.name)}</h3>
+      <div class="dr-sub">${priceLabel(p)} ·
+        ${esc(BANDS[bandIndex(p.band)].name)} ·
+        <b class="${owns(p.id) ? "ok" : "no"}">${owns(p.id) ? "in your stack — click the dot again to drop it" : "not in your stack"}</b></div>
+      <dl class="dr-grid">
+        <dt>How you pay</dt><dd><b>${PAY[p.pay].name}.</b> ${esc(PAY[p.pay].blurb)}</dd>
+        ${p.limit ? `<dt>What you get</dt><dd>${esc(p.limit)}</dd>` : ""}
+        <dt>Opens ${opens.length} tool${opens.length === 1 ? "" : "s"}</dt>
+        <dd>${opens.map((s) => `<span class="${isOpen(s) ? "ok" : ""}">${esc(s.name)}</span>`).join(" · ") || "—"}</dd>
+        ${p.note ? `<dt>Worth knowing</dt><dd>${p.note}</dd>` : ""}
+        <dt>Source</dt><dd>${src(p.doc)}</dd>
+      </dl>`;
+  } else {
+    const s = S.find((x) => x.id === selected.id), hits = unlockedBy(s);
+    d.innerHTML = `<h3>${esc(s.name)}</h3>
+      <div class="dr-sub">${esc(s.vendor)} · ${esc(COLS.find((c) => c.id === s.col).name)} ·
+        <b class="${hits.length ? "ok" : "no"}">${hits.length ? "unlocked by what you own" : "locked"}</b></div>
+      <dl class="dr-grid">
+        <dt>What it is</dt><dd>${s.what}</dd>
+        <dt>How you start it</dt><dd><code>${esc(s.how)}</code></dd>
+        <dt>Paid for by</dt><dd>${s.reqs.map((id) => {
+          const p = planById(id); if (!p) return "";
+          return `<div class="req"><span class="mk ${owns(id) ? "ok" : "no"}">${owns(id) ? "●" : "○"}</span>
+            <span class="${owns(id) ? "" : "no"}">${esc(p.vendor)} ${esc(p.name)} —
+            ${priceLabel(p, true)}</span></div>`;
+        }).join("")}${s.also ? `<div class="req"><span class="mk ${owns(s.also) ? "ok" : "no"}">${owns(s.also) ? "●" : "○"}</span>
+          <span class="${owns(s.also) ? "" : "no"}"><i>and</i> ${esc(planById(s.also).name)}</span></div>` : ""}</dd>
+        ${s.note ? `<dt>Worth knowing</dt><dd>${s.note}</dd>` : ""}
+        <dt>Source</dt><dd>${src(s.doc)}</dd>
+      </dl>`;
+  }
+}
+
+/* ═══ INTERACTION ════════════════════════════════════════════════════════ */
+function redraw() { drawMarket(); drawGrid(); receipt(); drawer(); }
+function persist() { saveHash({ owned: [...state.owned], mode: state.mode, budget: state.budget }); }
+
+// One click on a dot both buys it and explains it. Splitting those into "select, then
+// press Add" is one more step in front of the only thing this page asks you to do.
+mkt.addEventListener("click", (e) => {
+  const g = e.target.closest(".plan[data-id]");
+  if (!g) return;
+  const p = planById(g.dataset.id);
+  if (state.owned.has(p.id)) state.owned.delete(p.id);
+  else {
+    // Ladders are radio, not checkbox: nobody pays for Pro and Max at the same time.
+    if (p.ladder) PLANS.filter((q) => q.ladder === p.ladder).forEach((q) => state.owned.delete(q.id));
+    state.owned.add(p.id);
+  }
+  selected = { kind: "plan", id: p.id };
+  persist(); redraw();
+});
+
+grid.addEventListener("click", (e) => {
+  const g = e.target.closest(".node[data-id]");
+  if (!g) return;
+  selected = selected && selected.id === g.dataset.id ? null : { kind: "surface", id: g.dataset.id };
+  drawer();
+  drawGrid();
+});
+
+$("#mode").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.mode = b.dataset.mode;
+  $$("#mode button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  persist(); redraw();
+});
+
+const budget = $("#budget");
+budget.addEventListener("input", () => {
+  state.budget = +budget.value;
+  $("#budgetval").textContent = state.budget >= 220 ? "any" : "$" + state.budget + "/mo";
+  persist(); drawMarket();
+});
+
+/* Presets. A page about what to buy that requires you to already know what to buy has
+   failed at its one job — and an empty grid of greyed boxes is the exact fault I set out
+   to fix. Each one is a real, defensible starting stack, not a recommendation. */
+const PRESETS = [
+  { label:"everything free", buy:PLANS.filter((p) => p.price === 0 && p.pay === "free" && p.id !== "gh-admin").map((p) => p.id),
+    why:"Every plan that costs nothing and asks for no card. It opens more distinct tools than any $20 stack on this page — because what $20 actually buys is usage, not access. Expect to hit a wall by mid-morning." },
+  { label:"widest $20", buy:["gh-pro", "chatgpt-go"],
+    why:"$18 for two wallets. Copilot Pro is the only $10 subscription reaching four vendors' frontier models; ChatGPT Go adds OpenAI's own ladder. Fewer boxes lit than the free stack, but you can actually work all day." },
+  { label:"one vendor, all in", buy:["claude-pro"],
+    why:"The common solo answer — pick one vendor you like and buy their $20 tier." },
+  { label:"my company pays", buy:["gh-business", "gh-admin"],
+    why:"A Copilot Business seat with the agent policy actually switched on." },
+];
+$("#presets").innerHTML = PRESETS.map((x, i) =>
+  `<button data-preset="${i}" title="${esc(x.why)}">${esc(x.label)}</button>`).join("");
+$("#presets").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  const pre = PRESETS[+b.dataset.preset];
+  state.owned = new Set(pre.buy);
+  selected = null; persist(); redraw();
+  $("#drawer").innerHTML = `<h3>${esc(pre.label)}</h3><div class="dr-sub">${esc(pre.why)}</div>`;
+});
+
+$("#clear").addEventListener("click", () => {
+  state.owned.clear(); selected = null; persist(); redraw();
+});
+
+/* ═══ INIT ═══════════════════════════════════════════════════════════════ */
+$$("#mode button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode)));
+budget.value = state.budget;
+$("#budgetval").textContent = state.budget >= 220 ? "any" : "$" + state.budget + "/mo";
+redraw();
+</script>
+</body>
+</html>

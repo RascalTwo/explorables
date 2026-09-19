@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JWKS distributes keys, not certificates</title>
+<!-- Publish posture — the SOLE source of truth for build.ts. Default "local" = stays
+     on this machine, never published. Change to "public" (open web) or "private"
+     (magic-link sealed) ONLY when you intend to share this viz. -->
+<meta name="viz:uid" content="v-d978265c4879">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="JWKS distributes keys, not certificates">
+<meta name="viz:description" content="A JWK is a bare public key with a name on it — no subject, no issuer, no validity window, no chain. What a JSON Web Key Set actually contains, why the endpoint needs no authentication, and how kid, rotation and caching fit together. Generic: authorization server, client, resource server. Every claim cited to the RFC that makes it.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  /* Zero JavaScript on this page, deliberately. The handoff called out two traps
+     inherited from the network story: deep links that render half-empty, and a
+     shareable artifact that only carries a subset of the content. Both are
+     symptoms of page state living in JS. With no state, section anchors are
+     native browser behaviour and every word is in the scroll — neither trap can
+     occur, and there is nothing to keep in sync. */
+
+  body { max-width: 1180px; margin: 0 auto; padding: 34px 26px 90px }
+
+  .viz-header h1 { max-width: 22ch }
+  .viz-header .sub { max-width: 78ch }
+
+  /* --- section anchors ------------------------------------------------- */
+  section { scroll-margin-top: 18px; margin-top: 54px }
+  section > h2 {
+    font-size: 21px; margin: 0 0 6px; letter-spacing: -.2px;
+    display: flex; align-items: baseline; gap: 11px;
+  }
+  section > h2 .n {
+    font: 600 12px/1 var(--mono); color: var(--faint);
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 5px 7px; flex: none;
+  }
+  section > .lede { color: var(--muted); margin: 0 0 20px 42px; max-width: 84ch }
+  section > .lede strong { color: var(--text) }
+
+  /* The companion diagram set. Prominent, because the reader who wants a picture
+     rather than prose should not have to finish the prose to find out it exists. */
+  .seealso {
+    display: block; margin-top: 18px; padding: 15px 19px; border-radius: 8px;
+    text-decoration: none; border: 1px solid var(--c4);
+    background: color-mix(in srgb, var(--c4) 8%, var(--panel));
+  }
+  .seealso:hover { background: color-mix(in srgb, var(--c4) 16%, var(--panel)) }
+  .seealso .k { display: block; color: var(--text); font-size: 15px; font-weight: 600 }
+  .seealso .d { display: block; margin: 6px 0 0; color: var(--muted); font-size: 13.5px; max-width: 92ch }
+  .seealso .go { display: block; margin-top: 8px; color: var(--c4); font-size: 13px; font-weight: 600 }
+
+  nav.toc {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border);
+  }
+  nav.toc a {
+    font-size: 12.5px; text-decoration: none; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px;
+  }
+  nav.toc a:hover { color: var(--text); border-color: var(--accent) }
+
+  /* --- the thesis ------------------------------------------------------ */
+  .thesis {
+    border: 1px solid var(--accent); border-left-width: 4px; border-radius: 7px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--panel));
+    padding: 17px 21px; margin-top: 22px;
+  }
+  .thesis p { margin: 0; font-size: 16.5px; line-height: 1.55 }
+  .thesis p + p { margin-top: 9px; font-size: 14px; color: var(--muted) }
+
+  /* --- generic prose helpers ------------------------------------------- */
+  .note {
+    border-left: 3px solid var(--border); padding: 3px 0 3px 15px;
+    color: var(--muted); margin: 18px 0 0 42px; max-width: 84ch;
+  }
+  .note.warn { border-left-color: var(--warn) }
+  .note.key  { border-left-color: var(--accent) }
+  .note strong { color: var(--text) }
+  .body-in { margin-left: 42px }
+
+  /* --- "elsewhere" — third-party explainers, per section ------------------
+     Deliberately NOT styled like the RFC citations. An RFC is what makes a
+     claim true; these are other people explaining the same mechanism, and a
+     reader must be able to tell the two apart at a glance. Hence the different
+     rule colour, the "elsewhere" label, and a one-line honest note on what each
+     source is actually good for — including when it is thinner than its
+     reputation suggests. Every URL here was fetched and read before it was
+     added; see check-links.ts. */
+  .elsewhere {
+    border-left: 3px solid var(--c5); padding: 10px 0 10px 15px;
+    margin: 20px 0 0 42px; max-width: 84ch;
+  }
+  .elsewhere > .lbl {
+    display: block; font: 700 9.5px/1 var(--sans); letter-spacing: .12em;
+    text-transform: uppercase; color: var(--c5); margin-bottom: 9px;
+  }
+  .elsewhere a { color: var(--text); font-weight: 600; text-decoration: none;
+                 border-bottom: 1px solid var(--c5) }
+  .elsewhere a:hover { color: var(--c5) }
+  .elsewhere .who { color: var(--faint); font-size: 12px; margin-left: 6px }
+  .elsewhere p { margin: 0 0 11px; color: var(--muted); font-size: 13px; line-height: 1.65 }
+  .elsewhere p:last-child { margin-bottom: 0 }
+  .elsewhere .why { display: block; margin-top: 2px; font-size: 12.5px }
+
+  code, .m { font-family: var(--mono); font-size: .92em }
+  code { color: var(--accent) }
+
+  /* --- §1 the specimen -------------------------------------------------- */
+  .specimen { padding: 16px 20px; overflow-wrap: anywhere }
+  .specimen pre {
+    margin: 0; font: 12.5px/1.75 var(--mono); white-space: pre-wrap;
+    word-break: break-all; color: var(--muted);
+  }
+  .specimen .k  { color: var(--text); font-weight: 600 }
+  .specimen .v  { color: var(--c5) }
+  .specimen .big{ color: var(--c4) }
+  .specimen-cap {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; margin-bottom: 11px; font-size: 12px; color: var(--faint);
+  }
+
+  .members { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px }
+  .member { padding: 13px 15px }
+  .member .chip {
+    display: inline-block; color: var(--c5); font: 600 12px/1 var(--mono);
+    padding: 5px 8px; border-radius: 4px; margin-bottom: 9px;
+    border: 1px solid currentColor;
+  }
+  .member p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55 }
+  .member p strong { color: var(--text) }
+  .member .cite { display: block; margin-top: 9px; font-size: 11.5px; color: var(--faint) }
+  .member.hero { border-color: var(--c4); box-shadow: 0 0 0 1px color-mix(in srgb, var(--c4) 30%, transparent) }
+  .member.hero .chip { color: var(--c4) }
+  .member.sel  { border-color: var(--accent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent) }
+  .member.sel  .chip { color: var(--accent) }
+
+  /* --- §2 the contrast matrix ------------------------------------------ */
+  table.contrast { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13.5px }
+  table.contrast th, table.contrast td {
+    text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.contrast thead th { font-size: 12px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em }
+  table.contrast thead th.x509 { color: var(--warn) }
+  table.contrast thead th.jwk  { color: var(--c4) }
+  table.contrast col.c1 { width: 25% }
+  table.contrast col.c2 { width: 41% }
+  table.contrast col.c3 { width: 34% }
+  table.contrast td.field { color: var(--text); font-weight: 600 }
+  table.contrast td.field .s { display: block; font: 400 11.5px/1.5 var(--mono); color: var(--faint); margin-top: 3px }
+  table.contrast td.what { color: var(--muted) }
+  table.contrast td.absent { color: var(--danger); font-family: var(--mono); font-size: 12.5px }
+  table.contrast tr.present td.absent { color: var(--c4) }
+  table.contrast tr.present { background: color-mix(in srgb, var(--c4) 7%, transparent) }
+  table.contrast tr:last-child td { border-bottom: none }
+
+  .payoff {
+    margin-top: 18px; padding: 15px 19px; border-radius: 7px;
+    border: 1px solid var(--c4);
+    background: color-mix(in srgb, var(--c4) 8%, var(--panel));
+    font-size: 15px; line-height: 1.55;
+  }
+
+  /* --- flow rails (§5 steps, §7 cache) ---------------------------------- */
+  .rail { display: flex; align-items: stretch; gap: 0; margin-top: 16px; flex-wrap: nowrap }
+  .rail .stepbox {
+    flex: 1 1 0; padding: 13px 15px; border: 1px solid var(--border);
+    border-radius: 7px; background: var(--panel); min-width: 0;
+  }
+  .rail .arrow {
+    flex: none; width: 34px; display: flex; align-items: center; justify-content: center;
+    color: var(--faint); font-size: 17px;
+  }
+  .stepbox .t { font-size: 13px; font-weight: 600; margin: 0 0 5px }
+  .stepbox .d { font-size: 12.5px; color: var(--muted); margin: 0; line-height: 1.5 }
+  .stepbox .d code { font-size: 12px }
+  .stepbox.hit  { border-color: var(--good) }
+  .stepbox.miss { border-color: var(--warn) }
+  .stepbox .tag {
+    display: inline-block; font: 600 10px/1 var(--sans); letter-spacing: .06em;
+    text-transform: uppercase; padding: 4px 6px; border-radius: 3px; margin-bottom: 7px;
+    border: 1px solid currentColor;
+  }
+  .stepbox.hit .tag  { color: var(--good) }
+  .stepbox.miss .tag { color: var(--warn) }
+
+  /* Two mutually exclusive outcomes stacked, so the rail's arrow points at the
+     branch rather than threading one outcome into the other. */
+  .rail.branch { align-items: center }   /* boxes size to content; the fork is taller by nature */
+  .fork { flex: 1.7 1 0; display: flex; flex-direction: column; gap: 10px; min-width: 0 }
+  .fork .stepbox { flex: 1 }
+
+  .returnrail {
+    display: flex; align-items: center; gap: 12px; margin: 12px 0 0 0;
+    padding: 11px 15px; border: 1px dashed var(--warn); border-radius: 7px;
+    font-size: 13px; color: var(--muted);
+  }
+  .returnrail .glyph { color: var(--warn); font-size: 19px; flex: none }
+  .returnrail strong { color: var(--text) }
+
+  /* --- §5 the compact JWT ---------------------------------------------- */
+  .jwt { margin-top: 4px }
+  .jwt-line {
+    display: flex; align-items: stretch; font: 12.5px/1.6 var(--mono);
+    word-break: break-all; border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .jwt-seg { padding: 10px 12px; min-width: 0 }
+  .jwt-seg.h { background: color-mix(in srgb, var(--c4) 20%, var(--panel)); color: var(--text); flex: 0 1 auto }
+  .jwt-seg.p { background: color-mix(in srgb, var(--c5) 20%, var(--panel)); color: var(--text); flex: 1 1 auto }
+  .jwt-seg.s { background: color-mix(in srgb, var(--danger) 18%, var(--panel)); color: var(--text); flex: 0 1 auto }
+  .jwt-seg.dot { background: var(--panel-2); color: var(--faint); flex: none; padding: 10px 6px }
+
+  /* The signing-input bracket underlines EXACTLY the segments it covers, because
+     it is a border on the element that wraps them — not a percentage guessed
+     against flex-sized siblings, which cannot stay aligned as content changes. */
+  .jwt-seg.signed {
+    display: flex; flex: 1 1 auto; min-width: 0; padding: 0;
+    box-shadow: inset 0 -3px 0 0 var(--accent);
+  }
+  .bracket { margin-top: 7px; font-size: 12.5px; line-height: 1.6; color: var(--accent) }
+  .bracket .rest { display: block; font: 11.5px/1.6 var(--mono); color: var(--faint) }
+
+  .decoded { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px }
+  .decoded .panel { padding: 14px 16px }
+  .decoded h4 { margin: 0 0 8px; font-size: 12px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em }
+  .decoded h4 .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 7px }
+  .decoded pre { margin: 0; font: 12px/1.65 var(--mono); color: var(--muted); white-space: pre-wrap }
+  .decoded pre .k { color: var(--text) }
+  .decoded pre .v { color: var(--c5) }
+
+  /* --- §6 rotation timeline -------------------------------------------- */
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 6px }
+  .phase { border: 1px solid var(--border); padding: 14px 16px; border-right: none }
+  .phase:last-child { border-right: 1px solid var(--border); border-radius: 0 7px 7px 0 }
+  .phase:first-child { border-radius: 7px 0 0 7px }
+  .phase.overlap { background: color-mix(in srgb, var(--accent) 8%, transparent); border-color: var(--accent) }
+  .phase .when { font-size: 11.5px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 9px }
+  .phase.overlap .when { color: var(--accent) }
+  .keyset {
+    font: 12px/1.6 var(--mono); background: var(--bg); border: 1px solid var(--border);
+    border-radius: 5px; padding: 9px 11px; margin-bottom: 10px;
+  }
+  .keyset .kid { display: block; padding-left: 1.4em; color: var(--c4) }
+  .keyset .kid.old { color: var(--faint) }
+  .keyset .kid.gone { color: var(--faint); text-decoration: line-through }
+  .phase p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.55 }
+
+  /* --- shared SVG figure shell ------------------------------------------ */
+  figure { margin: 6px 0 0 }
+  figure svg { display: block; width: 100%; height: auto; background: var(--panel);
+               border: 1px solid var(--border); border-radius: 8px }
+  figure figcaption { margin-top: 9px; font-size: 12.5px; color: var(--faint); text-align: center }
+  .svg-t  { font: 600 13px var(--sans); fill: var(--text) }
+  .svg-s  { font: 11.5px var(--sans); fill: var(--muted) }
+  .svg-m  { font: 12px var(--mono); fill: var(--c4) }
+  .svg-lbl{ font: 600 10.5px var(--sans); fill: var(--faint); letter-spacing: .08em }
+
+  /* --- sources ---------------------------------------------------------- */
+  table.sources { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px }
+  table.sources th, table.sources td { text-align: left; padding: 9px 13px; border-bottom: 1px solid var(--border); vertical-align: top }
+  table.sources thead th { font-size: 11.5px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em }
+  table.sources td.doc { white-space: nowrap; font-weight: 600 }
+  table.sources td.sec { font-family: var(--mono); font-size: 12px; color: var(--c4); white-space: nowrap }
+  table.sources td.title { font-family: var(--mono); font-size: 12px; color: var(--muted) }
+  table.sources td.use { color: var(--muted) }
+  table.sources a { color: inherit }
+
+  footer.foot { margin-top: 46px; padding-top: 18px; border-top: 1px solid var(--border);
+                font-size: 12px; color: var(--faint); line-height: 1.7 }
+</style>
+</head>
+<body>
+
+<header class="viz-header">
+  <h1>JWKS distributes keys, not certificates</h1>
+  <p class="sub">A JSON Web Key Set is how an authorization server publishes the public half of its
+  signing key so that anyone can check the tokens it mints. It looks like a certificate-distribution
+  problem. It is not one — and every instinct carried over from PKI is one whole concept too heavy.</p>
+</header>
+
+<div class="thesis">
+  <p>A <strong>JWK is a bare public key with a name on it</strong>. No subject. No issuer.
+  No validity window. No CA signature. No chain. Nothing to install, nothing to expire,
+  nothing to store on a dedicated server.</p>
+  <p>Generic throughout: an <em>authorization server</em> that signs, a <em>client</em> that
+  carries a token, a <em>resource server</em> that verifies. No product names, no network zones.
+  Every factual claim below is cited to the RFC section that makes it — titles quoted verbatim.</p>
+</div>
+
+<a class="seealso" href="../jwks-diagrams/">
+  <span class="k">Want the picture instead?</span>
+  <span class="d">The same system drawn five ways — a signet ring and a public noticeboard, the
+  three-actor flow, the byte-level match, a side-by-side against X.509, and rotation on a time
+  axis. Pick the level that matches the room.</span>
+  <span class="go">Open the diagrams →</span>
+</a>
+
+<nav class="toc">
+  <a href="#anatomy">1 · The whole of a JWK</a>
+  <a href="#contrast">2 · What a certificate has that this does not</a>
+  <a href="#public-half">3 · Only the public half is published</a>
+  <a href="#no-auth">4 · Why the endpoint has no authentication</a>
+  <a href="#verify">5 · How a verifier uses it</a>
+  <a href="#rotation">6 · Rotation, and why it is a set</a>
+  <a href="#caching">7 · Caching and the unknown <span class="m">kid</span></a>
+  <a href="#discovery">8 · Discovery is optional</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<!-- ==================================================================== 1 -->
+<section id="anatomy">
+  <h2><span class="n">01</span> A JWK is a JSON object, and this is the whole of one</h2>
+  <p class="lede">Not an excerpt. This is a complete, valid RSA public JWK, copied verbatim from
+  <strong>RFC 7517, Appendix A.1, “Example Public Keys.”</strong> Everything a verifier needs is on
+  screen.</p>
+
+  <div class="panel specimen body-in">
+    <div class="specimen-cap">
+      <span>RFC 7517 · Appendix A.1 · “Example Public Keys” — reproduced verbatim</span>
+      <span>5 members · 1 key · nothing omitted</span>
+    </div>
+<pre>{
+  <span class="k">"kty"</span>: <span class="v">"RSA"</span>,
+  <span class="k">"n"</span>:   <span class="big">"0vx7agoebGcQSuuPiLJXZptN9nndrQmbXEps2aiAFbWhM78LhWx4cbbfAAtVT86zwu1RK7aPFFxuhDR1L6tSoc_BJECPebWKRXjBZCiFV4n3oknjhMstn64tZ_2W-5JsGY4Hc5n9yBXArwl93lqt7_RN5w6Cf0h4QyQ5v-65YGjQR0_FDW2QvzqY368QQMicAtaSqzs8KJZgnYb9c7d0zgdAZHzu6qMQvRL5hajrn1n91CbOpbISD08qNLyrdkt-bFTWhAI4vMQFh6WeZu0fM4lFd2NcRwr3XPksINHaQ-G_xBniIqbw0Ls1jF44-csFCur-kEgU8awapJzKnqDKgw"</span>,
+  <span class="k">"e"</span>:   <span class="big">"AQAB"</span>,
+  <span class="k">"alg"</span>: <span class="v">"RS256"</span>,
+  <span class="k">"kid"</span>: <span class="v">"2011-04-29"</span>
+}</pre>
+  </div>
+
+  <div class="members body-in">
+    <div class="panel member">
+      <span class="chip">kty</span>
+      <p><strong>Key type.</strong> Which family of key this is — here, RSA. It determines which
+      other members are even meaningful.
+      <span class="cite">RFC 7517 §4.1 · “‘kty’ (Key Type) Parameter”</span></p>
+    </div>
+    <div class="panel member hero">
+      <span class="chip">n</span>
+      <p><strong>The modulus. This is the public key.</strong> Those 342 characters are one very
+      large integer, base64url-encoded — “represented as a Base64urlUInt-encoded value.” It is not a
+      pointer to a key, or a wrapper around one. It <em>is</em> the number.
+      <span class="cite">RFC 7518 §6.3.1.1 · “‘n’ (Modulus) Parameter”</span></p>
+    </div>
+    <div class="panel member hero">
+      <span class="chip">e</span>
+      <p><strong>The public exponent.</strong> <code>AQAB</code> decodes to 65537, the near-universal
+      RSA exponent. Together, <code>n</code> and <code>e</code> are the entire public key — nothing
+      else on this page is key material.
+      <span class="cite">RFC 7518 §6.3.1.2 · “‘e’ (Exponent) Parameter”</span></p>
+    </div>
+    <div class="panel member">
+      <span class="chip">alg</span>
+      <p><strong>The algorithm</strong> this key is used with. <code>RS256</code> is RSASSA-PKCS1-v1_5
+      with SHA-256, which requires “a key of size 2048 bits or larger.”
+      <span class="cite">RFC 7518 §3.3 · “Digital Signature with RSASSA-PKCS1-v1_5”</span></p>
+    </div>
+    <div class="panel member sel">
+      <span class="chip">kid</span>
+      <p><strong>The selector — a name, and nothing more.</strong> An opaque label a verifier matches
+      on to pick this key out of the set. Every question about rotation is answered by this one
+      member. Note the value here is a date; it can be any string.
+      <span class="cite">RFC 7517 §4.5 · “‘kid’ (Key ID) Parameter”</span></p>
+    </div>
+    <div class="panel member">
+      <span class="chip">use</span>
+      <p><strong>Signing or encryption.</strong> Commonly seen as <code>"use":"sig"</code>, but absent
+      from the specimen above — it is not required. RFC 8414 makes it mandatory only when one key set
+      carries <em>both</em> signing and encryption keys.
+      <span class="cite">RFC 7517 §4.2 · “‘use’ (Public Key Use) Parameter”</span></p>
+    </div>
+  </div>
+
+  <p class="note key"><strong>A JWK Set is just a wrapper around a list.</strong>
+  <code>{"keys": [ … ]}</code> — “the value of the ‘keys’ parameter is an array of JWK values.”
+  The plural is load-bearing; §6 is why. <span class="m">RFC 7517 §5 “JWK Set Format”, §5.1
+  “‘keys’ Parameter”</span></p>
+</section>
+
+<!-- ==================================================================== 2 -->
+<section id="contrast">
+  <h2><span class="n">02</span> What an X.509 certificate has that a JWK does not</h2>
+  <p class="lede">This is the whole point of the page. A certificate is a public key
+  <strong>plus an assertion about who it belongs to, signed by someone you already trust</strong>.
+  A JWK keeps the key and drops the assertion — so every field that made a certificate a certificate
+  is simply not there.</p>
+
+  <div class="body-in">
+  <table class="contrast">
+    <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+    <thead>
+      <tr>
+        <th class="x509">X.509 certificate field</th>
+        <th>What it asserts</th>
+        <th class="jwk">In a JWK</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field">Subject<span class="s">RFC 5280 §4.1.2.6</span></td>
+        <td class="what">The identity this key belongs to — a distinguished name, a hostname.</td>
+        <td class="absent">— no such member</td>
+      </tr>
+      <tr>
+        <td class="field">Issuer<span class="s">RFC 5280 §4.1.2.4</span></td>
+        <td class="what">The certification authority that vouched for the binding.</td>
+        <td class="absent">— no such member</td>
+      </tr>
+      <tr>
+        <td class="field">Validity<span class="s">RFC 5280 §4.1.2.5</span></td>
+        <td class="what">“The period of time from notBefore through notAfter, inclusive.”</td>
+        <td class="absent">— no such member. A JWK never expires; it is withdrawn from the set.</td>
+      </tr>
+      <tr>
+        <td class="field">Signature<span class="s">RFC 5280 §4.1.2.3</span></td>
+        <td class="what">The CA’s signature over everything above — what makes it verifiable.</td>
+        <td class="absent">— no such member. Nothing signs a JWK.</td>
+      </tr>
+      <tr>
+        <td class="field">Serial Number<span class="s">RFC 5280 §4.1.2.2</span></td>
+        <td class="what">A unique number per CA, the handle used for revocation (CRL, OCSP).</td>
+        <td class="absent">— no such member. No revocation protocol exists.</td>
+      </tr>
+      <tr>
+        <td class="field">Certificate chain<span class="s">RFC 5280 §6 path validation</span></td>
+        <td class="what">The walk from this certificate up to a trust anchor you already hold.</td>
+        <td class="absent">— nothing to walk</td>
+      </tr>
+      <tr class="present">
+        <td class="field">Subject Public Key Info<span class="s">RFC 5280 §4.1.2.7</span></td>
+        <td class="what">The algorithm identifier and the public key bits themselves.</td>
+        <td class="absent"><strong>Present</strong> — this is <code>kty</code>, <code>alg</code>,
+        <code>n</code>, <code>e</code>. This row, and only this row.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="payoff">A JWK is, in effect, <strong>one field of a certificate</strong> — the public key
+  itself — with a name attached so you can ask for it later. Six of the seven rows above are the
+  parts a JWK deliberately does not have. There is no file to install, no expiry to diary, and
+  nothing to store on a dedicated server, because there is no certificate.</p>
+  </div>
+
+  <p class="note warn"><strong>Yes, a JWK <em>may</em> carry a certificate chain — and almost never
+  does.</strong> RFC 7517 defines <code>x5c</code> (§4.7, “‘x5c’ (X.509 Certificate Chain)
+  Parameter”) and <code>x5t</code> (§4.8, “‘x5t’ (X.509 Certificate SHA-1 Thumbprint) Parameter”)
+  for exactly this. Of both the specification says: <em>“Use of this member is OPTIONAL.”</em> They
+  are absent from the specimen in §1, absent from the typical authorization server’s key set, and
+  nothing in the verification path in §5 consults them. Knowing the option exists is not the same
+  as it being implied.</p>
+
+  <p class="note key"><strong>Then where does trust come from?</strong> This is the fair question a
+  PKI reader asks next, and the answer is the honest one: <strong>from the transport and the
+  configuration, not from a signature.</strong> You trust a key set because you fetched it over
+  HTTPS from a URL you deliberately configured — RFC 8414 requires that <code>jwks_uri</code>
+  <em>“MUST use the ‘https’ scheme.”</em> The TLS certificate on that host is doing the PKI work.
+  The key set itself carries no trust of its own and does not need to.</p>
+</section>
+
+<!-- ==================================================================== 3 -->
+<section id="public-half">
+  <h2><span class="n">03</span> Only the public half is ever published</h2>
+  <p class="lede">The private key never leaves the issuer. Publishing the public half is not a
+  concession or a risk to be managed — it is <strong>the entire design</strong>. Anyone may verify;
+  only the issuer may sign.</p>
+
+  <figure class="body-in">
+    <svg viewBox="0 0 1060 260" role="img" aria-label="A keypair inside the authorization server: the private key stays inside the boundary and signs; only the public half crosses out to the JWKS endpoint, where any verifier may fetch it.">
+      <defs>
+        <marker id="ah-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+        </marker>
+        <marker id="ah-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--danger)"/>
+        </marker>
+      </defs>
+
+      <!-- issuer boundary -->
+      <rect x="24" y="24" width="380" height="212" rx="9" fill="none"
+            stroke="var(--border)" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text class="svg-lbl" x="42" y="48">AUTHORIZATION SERVER</text>
+
+      <!-- keypair -->
+      <rect x="52" y="70" width="150" height="66" rx="7" fill="var(--bg)" stroke="var(--danger)" stroke-width="1.5"/>
+      <text class="svg-t" x="127" y="97" text-anchor="middle" fill="var(--danger)">private key</text>
+      <text class="svg-s" x="127" y="117" text-anchor="middle">d, p, q · never leaves</text>
+
+      <rect x="52" y="156" width="150" height="66" rx="7" fill="var(--bg)" stroke="var(--c4)" stroke-width="1.5"/>
+      <text class="svg-t" x="127" y="183" text-anchor="middle" fill="var(--c4)">public half</text>
+      <text class="svg-s" x="127" y="203" text-anchor="middle">n, e</text>
+
+      <!-- The private key's row is deliberately kept clear all the way to the boundary:
+           anything drawn between the box and the X reads as the thing that "never
+           crosses", which is exactly the misreading this figure must not cause. -->
+      <path d="M202,103 L470,103" stroke="var(--danger)" stroke-width="1.5"
+            stroke-dasharray="5 5" opacity=".6"/>
+
+      <!-- public crosses the boundary -->
+      <path d="M202,189 L512,189" stroke="var(--c4)" stroke-width="1.5" marker-end="url(#ah-a)"/>
+      <text class="svg-s" x="357" y="180" text-anchor="middle" fill="var(--c4)">published as a JWK</text>
+
+      <!-- jwks endpoint -->
+      <rect x="512" y="150" width="196" height="78" rx="8" fill="var(--bg)" stroke="var(--c4)" stroke-width="1.5"/>
+      <text class="svg-t" x="610" y="180" text-anchor="middle">JWKS endpoint</text>
+      <text class="svg-m" x="610" y="203" text-anchor="middle" font-size="11.5">GET /oauth2/jwks</text>
+      <text class="svg-s" x="610" y="219" text-anchor="middle">no credentials</text>
+
+      <!-- verifiers -->
+      <path d="M708,189 L806,189" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah-a)"/>
+      <text class="svg-s" x="757" y="180" text-anchor="middle" fill="var(--accent)">anyone</text>
+
+      <rect x="806" y="132" width="216" height="38" rx="6" fill="var(--bg)" stroke="var(--accent)"/>
+      <text class="svg-s" x="914" y="156" text-anchor="middle" fill="var(--text)">resource server</text>
+      <rect x="806" y="178" width="216" height="38" rx="6" fill="var(--bg)" stroke="var(--accent)"/>
+      <text class="svg-s" x="914" y="202" text-anchor="middle" fill="var(--text)">any other verifier</text>
+
+      <!-- the never-crosses marker, sitting ON the boundary -->
+      <line x1="394" y1="88" x2="414" y2="118" stroke="var(--danger)" stroke-width="2.5"/>
+      <line x1="414" y1="88" x2="394" y2="118" stroke="var(--danger)" stroke-width="2.5"/>
+      <text class="svg-t" x="480" y="99" fill="var(--danger)">the private key never crosses</text>
+      <text class="svg-s" x="480" y="118">it signs, and that is all it ever does</text>
+    </svg>
+    <figcaption>The boundary is the only security control that matters here — and it is on the
+    private key, not on the endpoint.</figcaption>
+  </figure>
+
+  <p class="note key"><strong>There is nothing secret on the JWKS endpoint, so there is nothing to
+  protect there.</strong> Every byte it serves is designed to be world-readable. Treating it as
+  sensitive is the second thing PKI intuition gets wrong, and it leads directly to §4.</p>
+</section>
+
+<!-- ==================================================================== 4 -->
+<section id="no-auth">
+  <h2><span class="n">04</span> The endpoint needs no authentication — and cannot sensibly have any</h2>
+  <p class="lede">This is not a relaxation of a control. It is a <strong>structural
+  impossibility</strong>: requiring a token to fetch the key that validates tokens is circular.</p>
+
+  <figure class="body-in">
+    <svg viewBox="0 0 1060 232" role="img" aria-label="A circular dependency: to fetch the key you would need a token; to validate that token you need the key.">
+      <defs>
+        <marker id="ah-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--danger)"/>
+        </marker>
+      </defs>
+
+      <rect x="80" y="82" width="230" height="68" rx="8" fill="var(--bg)" stroke="var(--danger)" stroke-width="1.5"/>
+      <text class="svg-t" x="195" y="112" text-anchor="middle">fetch the key set</text>
+      <text class="svg-s" x="195" y="132" text-anchor="middle">…which would require a token</text>
+
+      <path d="M310,116 L410,116" stroke="var(--danger)" stroke-width="1.5" marker-end="url(#ah-w)"/>
+
+      <rect x="410" y="82" width="230" height="68" rx="8" fill="var(--bg)" stroke="var(--danger)" stroke-width="1.5"/>
+      <text class="svg-t" x="525" y="112" text-anchor="middle">present that token</text>
+      <text class="svg-s" x="525" y="132" text-anchor="middle">…which must be validated</text>
+
+      <path d="M640,116 L740,116" stroke="var(--danger)" stroke-width="1.5" marker-end="url(#ah-w)"/>
+
+      <rect x="740" y="82" width="230" height="68" rx="8" fill="var(--bg)" stroke="var(--danger)" stroke-width="1.5"/>
+      <text class="svg-t" x="855" y="112" text-anchor="middle">validate the signature</text>
+      <text class="svg-s" x="855" y="132" text-anchor="middle">…which requires the key</text>
+
+      <!-- the closing loop -->
+      <path d="M855,150 L855,196 Q855,208 843,208 L207,208 Q195,208 195,196 L195,150"
+            fill="none" stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="7 5" marker-end="url(#ah-w)"/>
+      <text class="svg-t" x="525" y="202" text-anchor="middle" fill="var(--danger)">…which you have not fetched yet</text>
+
+      <text class="svg-lbl" x="80" y="52">THE LOOP THAT NEVER STARTS</text>
+    </svg>
+    <figcaption>There is no first token. Bootstrapping the loop requires exactly the unauthenticated
+    fetch that authenticating the endpoint would forbid.</figcaption>
+  </figure>
+
+  <p class="note"><strong>Empirically, this is how these servers are probed.</strong> The
+  conventional liveness check is a plain fetch with no credentials at all —
+  <code>wget -qO- http://host/oauth2/jwks | grep -q keys</code>. If the endpoint required a token,
+  every health check, every verifier cold start, and every new deployment would deadlock.</p>
+</section>
+
+<!-- ==================================================================== 5 -->
+<section id="verify">
+  <h2><span class="n">05</span> How a verifier actually uses it</h2>
+  <p class="lede">A token in transit is three base64url segments separated by dots. The
+  <code>kid</code> that selects the key lives in the <strong>first</strong> one — readable before
+  anything has been verified, which is exactly what makes key selection possible.</p>
+
+  <div class="body-in jwt">
+    <div class="jwt-line">
+      <span class="jwt-seg signed">
+        <span class="jwt-seg h">eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTEtMDQtMjkifQ</span>
+        <span class="jwt-seg dot">.</span>
+        <span class="jwt-seg p">eyJpc3MiOiJodHRwczovL2F1dGguZXhhbXBsZS5jb20iLCJzdWIiOiJzdmMtcmVwb3J0aW5nIiwiZXhwIjoxNzU0NDkyODAwfQ</span>
+      </span>
+      <span class="jwt-seg dot">.</span>
+      <span class="jwt-seg s">TjkxNmRlM2Y…signature</span>
+    </div>
+    <div class="bracket">
+      └─ the underlined bytes are the <strong>JWS Signing Input</strong> — everything the signature
+      is computed over, and nothing else.
+      <span class="rest">ASCII(BASE64URL(UTF8(JWS Protected Header)) || '.' || BASE64URL(JWS Payload)) · RFC 7515 §2 “Terminology”</span>
+    </div>
+
+    <div class="decoded">
+      <div class="panel">
+        <h4><span class="sw" style="background:var(--c4)"></span>Header — decoded, in the clear</h4>
+<pre>{
+  <span class="k">"alg"</span>: <span class="v">"RS256"</span>,
+  <span class="k">"kid"</span>: <span class="v">"2011-04-29"</span>
+}</pre>
+      </div>
+      <div class="panel">
+        <h4><span class="sw" style="background:var(--c5)"></span>Payload — decoded, in the clear</h4>
+<pre>{
+  <span class="k">"iss"</span>: <span class="v">"https://auth.example.com"</span>,
+  <span class="k">"sub"</span>: <span class="v">"svc-reporting"</span>,
+  <span class="k">"exp"</span>: <span class="v">1754492800</span>
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="rail body-in">
+    <div class="stepbox">
+      <p class="t">1 · Read the <code>kid</code></p>
+      <p class="d">It sits in the header, base64url — an encoding, not a protection. The verifier
+      reads it without having verified anything yet.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stepbox">
+      <p class="t">2 · Select the matching JWK</p>
+      <p class="d">From the cached key set, pick the JWK whose <code>kid</code> equals it. The
+      <code>kid</code> exists so “which of these keys?” has a cheap answer.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stepbox">
+      <p class="t">3 · Verify the signature</p>
+      <p class="d">Recompute over the signing input — the first two segments joined by the dot —
+      using <code>n</code> and <code>e</code> from that JWK.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stepbox">
+      <p class="t">4 · <em>Now</em> read the claims</p>
+      <p class="d">Only after the signature holds do <code>iss</code>, <code>aud</code> and
+      <code>exp</code> mean anything.</p>
+    </div>
+  </div>
+
+  <p class="note warn"><strong>A JWT is signed, not encrypted — anyone holding one can read every
+  claim.</strong> The panels above are not a debugging view; that is what the token <em>is</em>.
+  Base64url is an encoding. RFC 7519 §12, “Privacy Considerations,” is explicit that this is your
+  problem to manage: <em>“A JWT may contain privacy-sensitive information. When this is the case,
+  measures MUST be taken to prevent disclosure of this information to unintended parties. One way to
+  achieve this is to use an encrypted JWT.”</em> Decide what goes in a token accordingly.</p>
+
+  <p class="note warn"><strong>Signature first, then claims.</strong> Until step 3 succeeds,
+  <code>iss</code>, <code>aud</code> and <code>exp</code> are attacker-controlled bytes. A verifier
+  that reads <code>iss</code> to decide <em>which</em> issuer to trust, before checking the
+  signature, has inverted the order and trusts the attacker’s answer.</p>
+
+  <p class="note"><strong>Scope boundary.</strong> This page ends at the signature. <em>Which</em>
+  claims a resource server should then insist on — audience, expiry, scope, issuer matching — is a
+  separate subject and is not key distribution.</p>
+
+  <div class="elsewhere">
+    <span class="lbl">Elsewhere — someone else on this section</span>
+    <p><a href="https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html">JSON Web Token Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+    <span class="why">The attacks this section's ordering exists to prevent, written up by
+    someone other than us: <code>"alg":"none"</code>, and the key-type confusion where a public
+    key is used as a MAC secret. Also argues signatures over MACs, for the same reason §03
+    gives. Short, and it is the standard reference people already cite.</span></p>
+  </div>
+</section>
+
+<!-- ==================================================================== 6 -->
+<section id="rotation">
+  <h2><span class="n">06</span> Rotation, and why it is a <em>set</em></h2>
+  <p class="lede">This is the cleanest answer to “how do you rotate?”, and it is the reason the
+  plural in <strong>JWK <em>Set</em></strong> is load-bearing: for a window, the endpoint publishes
+  <strong>both</strong> keys.</p>
+
+  <div class="body-in timeline">
+    <div class="phase">
+      <div class="when">Before</div>
+      <div class="keyset">{"keys": [<span class="kid">"2011-04-29"</span>]}</div>
+      <p>One key. Every token in circulation carries <code>kid: "2011-04-29"</code>.</p>
+    </div>
+    <div class="phase overlap">
+      <div class="when">Overlap window</div>
+      <div class="keyset">{"keys": [<span class="kid">"2026-08-06",</span><span class="kid old">"2011-04-29"</span>]}</div>
+      <p><strong>Both published.</strong> New tokens are signed with the new key; tokens minted
+      before the switch still name the old <code>kid</code> and still select successfully. No token
+      is ever orphaned.</p>
+    </div>
+    <div class="phase">
+      <div class="when">After the last old token expires</div>
+      <div class="keyset">{"keys": [<span class="kid">"2026-08-06"</span><span class="kid gone">"2011-04-29"</span>]}</div>
+      <p>The old key is dropped from the set. Nothing was revoked and nothing expired — it simply
+      stopped being published.</p>
+    </div>
+  </div>
+
+  <p class="note key"><strong>The overlap only has to outlast the longest-lived token, not the
+  longest-lived client.</strong> Because selection is by <code>kid</code> and not by recency, the
+  window is bounded by token lifetime — typically minutes. Compare the certificate equivalent,
+  where a rollover is coordinated against every relying party’s trust store.</p>
+
+  <p class="note warn"><strong>All of that is <em>planned</em> rotation. An emergency is a different
+  operation.</strong> The overlap window depends on continuing to publish the old key — which is
+  precisely what you cannot do when that key is the thing that leaked. In an incident it has to be
+  withdrawn at once, so there is no overlap, and <em>every</em> legitimate outstanding token dies
+  alongside the attacker’s. What each containment lever actually costs is drawn out in
+  <a href="../token-kill-switch/">Turning it off</a>; what an attacker gains from each secret is in
+  <a href="../token-compromise-map/">What an attacker has to steal</a>.</p>
+</section>
+
+<!-- ==================================================================== 7 -->
+<section id="caching">
+  <h2><span class="n">07</span> Caching, and the behaviour worth knowing</h2>
+  <p class="lede">Verifiers cache the key set — five minutes is a common default. The behaviour that
+  makes rotation painless is what happens on a <code>kid</code> the cache has never seen: an
+  <strong>immediate re-fetch and a re-select inside the same call</strong>. The request that triggers
+  the refresh succeeds. It does not fail first.</p>
+
+  <div class="rail branch body-in">
+    <div class="stepbox">
+      <p class="t">Token arrives</p>
+      <p class="d">Carrying some <code>kid</code>.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="stepbox">
+      <p class="t">Select from cache</p>
+      <p class="d">Run the selector over the cached key set.</p>
+    </div>
+    <div class="arrow">→</div>
+    <!-- The two outcomes are ALTERNATIVES. Chaining them in the rail would draw an
+         arrow from "hit" to "miss", i.e. claim you reach the refresh by way of a
+         successful match — the opposite of the behaviour this section documents. -->
+    <div class="fork">
+      <div class="stepbox hit">
+        <span class="tag">hit</span>
+        <p class="t">Match found</p>
+        <p class="d">Verify and serve. No network call — this is the overwhelmingly common path.</p>
+      </div>
+      <div class="stepbox miss">
+        <span class="tag">unknown kid</span>
+        <p class="t">No match</p>
+        <p class="d">Re-fetch the key set from the URL, then <strong>repeat the select</strong> and
+        serve — all within the same call.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="returnrail body-in">
+    <span class="glyph">↺</span>
+    <span>Read first-party from <strong>nimbus-jose-jwt 9.24.4</strong>,
+    <span class="m">RemoteJWKSet.java:455–510</span>. The library’s own comment at line 464 is
+    <em>“Refresh the JWK set if the sought key ID is not in the cached JWK set,”</em> and the method
+    ends on <em>“Repeat select, return final result.”</em> The caller sees one successful
+    verification, not a failure followed by a retry.</span>
+  </div>
+
+  <p class="note warn"><strong>Do not shorten the cache TTL to chase rotation.</strong> The
+  unknown-<code>kid</code> path above already handles it, on the first request that needs it. A
+  shorter TTL adds constant background traffic to solve a problem that is already solved.</p>
+
+  <p class="note warn"><strong>Do not disable the cache.</strong> That makes the authorization server
+  a synchronous dependency of every single API request — an availability coupling that undoes the
+  entire reason for using self-contained tokens.</p>
+
+  <div class="elsewhere">
+    <span class="lbl">Elsewhere — the same behaviour, from an operator rather than a library</span>
+    <p><a href="https://learn.microsoft.com/en-us/entra/identity-platform/signing-key-rollover">Signing key rollover in the Microsoft identity platform</a><span class="who">· Microsoft Learn</span>
+    <span class="why">Everything above is read out of one library's source. This is a major
+    identity provider publishing the same rules as operational guidance, which is a different
+    and stronger kind of evidence: cache keyed on <code>kid</code>, refresh on a timer,
+    <em>and</em> refresh on the hot path when a token arrives with a <code>kid</code> nobody
+    knows — rate-limited so it cannot be used to hammer the endpoint. It also states §06's
+    point outright — <em>"there's always more than one valid key available"</em>, and
+    applications supporting only a single signing key are <em>"inherently less secure and
+    less reliable."</em></span></p>
+  </div>
+</section>
+
+<!-- ==================================================================== 8 -->
+<section id="discovery">
+  <h2><span class="n">08</span> Discovery is optional</h2>
+  <p class="lede">An authorization server may publish metadata at
+  <code>/.well-known/oauth-authorization-server</code> describing itself, including where its key set
+  lives. This is <strong>a convenience, not a dependency</strong>.</p>
+
+  <div class="body-in">
+    <p class="note key" style="margin-left:0"><strong><code>jwks_uri</code> is an OPTIONAL member.</strong>
+    RFC 8414 §2, “Authorization Server Metadata,” defines it verbatim as:
+    <em>“OPTIONAL. URL of the authorization server’s JWK Set [JWK] document. The referenced document
+    contains the signing key(s) the client uses to validate signatures from the authorization server.
+    This URL MUST use the ‘https’ scheme.”</em></p>
+
+    <p class="note" style="margin-left:0">And the specification contemplates skipping discovery
+    entirely. RFC 8414 §1, “Introduction”: <em>“In some cases, its issuer identifier may be manually
+    configured into the client.”</em> A verifier pointed straight at a key set URI never fetches the
+    metadata document at all — and nothing in §5 or §7 above depends on it.</p>
+  </div>
+</section>
+
+<!-- ================================================================ srcs -->
+<section id="sources">
+  <h2><span class="n">—</span> Sources</h2>
+  <p class="lede">Every section number and section <em>title</em> below was read against the
+  published document before it went on screen. Nothing here is internal; the page cites only
+  standards and one open-source library.</p>
+
+  <div class="body-in">
+  <table class="sources">
+    <thead>
+      <tr><th>Document</th><th>Section</th><th>Verbatim title</th><th>Used for</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="doc"><a href="https://www.rfc-editor.org/rfc/rfc7517">RFC 7517</a></td><td class="sec">§4</td><td class="title">JSON Web Key (JWK) Format</td><td class="use">The members of a JWK</td></tr>
+      <tr><td class="doc">RFC 7517</td><td class="sec">§4.1, §4.2, §4.5</td><td class="title">“kty” / “use” / “kid” … Parameter</td><td class="use">§1 member cards</td></tr>
+      <tr><td class="doc">RFC 7517</td><td class="sec">§4.7, §4.8</td><td class="title">“x5c” (X.509 Certificate Chain) Parameter · “x5t” (X.509 Certificate SHA-1 Thumbprint) Parameter</td><td class="use">The optional-chain caveat in §2 — “Use of this member is OPTIONAL.”</td></tr>
+      <tr><td class="doc">RFC 7517</td><td class="sec">§5, §5.1</td><td class="title">JWK Set Format · “keys” Parameter</td><td class="use">Why it is a set</td></tr>
+      <tr><td class="doc">RFC 7517</td><td class="sec">App. A.1</td><td class="title">Example Public Keys</td><td class="use">The specimen JWK in §1, verbatim</td></tr>
+      <tr><td class="doc"><a href="https://www.rfc-editor.org/rfc/rfc7518">RFC 7518</a></td><td class="sec">§3.3</td><td class="title">Digital Signature with RSASSA-PKCS1-v1_5</td><td class="use">RS256; the 2048-bit minimum</td></tr>
+      <tr><td class="doc">RFC 7518</td><td class="sec">§6.3.1.1, §6.3.1.2</td><td class="title">“n” (Modulus) Parameter · “e” (Exponent) Parameter</td><td class="use">n and e <em>are</em> the public key</td></tr>
+      <tr><td class="doc"><a href="https://www.rfc-editor.org/rfc/rfc7515">RFC 7515</a></td><td class="sec">§2</td><td class="title">Terminology</td><td class="use">The JWS Signing Input formula in §5</td></tr>
+      <tr><td class="doc">RFC 7515</td><td class="sec">§4.1.4</td><td class="title">“kid” (Key ID) Header Parameter</td><td class="use">The kid travels in the token header</td></tr>
+      <tr><td class="doc"><a href="https://www.rfc-editor.org/rfc/rfc7519">RFC 7519</a></td><td class="sec">§12</td><td class="title">Privacy Considerations</td><td class="use">Signed ≠ encrypted; the disclosure warning in §5</td></tr>
+      <tr><td class="doc"><a href="https://www.rfc-editor.org/rfc/rfc8414">RFC 8414</a></td><td class="sec">§1, §2</td><td class="title">Introduction · Authorization Server Metadata</td><td class="use">jwks_uri is OPTIONAL; https required; manual configuration</td></tr>
+      <tr><td class="doc"><a href="https://www.rfc-editor.org/rfc/rfc5280">RFC 5280</a></td><td class="sec">§4.1.2.2–§4.1.2.7</td><td class="title">Serial Number · Signature · Issuer · Validity · Subject · Subject Public Key Info</td><td class="use">The contrast matrix in §2</td></tr>
+      <tr><td class="doc">nimbus-jose-jwt</td><td class="sec">9.24.4</td><td class="title">RemoteJWKSet.java:455–510</td><td class="use">The unknown-kid refresh-and-re-select behaviour in §7</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer class="foot">
+  Generic by design — authorization server, client, resource server. No product names, no network
+  topology, no organisation-specific detail, so this page can be shared as-is.
+  <br>If you leave this page still saying “certificate”, it has failed.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="Podman">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rootless Podman over SSH — Setup Guide</title>
+<meta name="viz:uid" content="v-a4103ee56637">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Rootless Podman over SSH — Setup Guide">
+<meta name="viz:description" content="Personalized, step-by-step guide to running rootless Podman on a remote Linux box over SSH.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3340;
+    --text:#e6edf3; --muted:#8b949e; --faint:#6e7681;
+    --accent:#58a6ff; --good:#3fb950; --good-bg:#0f2417; --good-line:#1f6f37;
+    --warn:#d29922; --warn-bg:#241c0c; --warn-line:#7a5c14;
+    --danger:#f85149; --danger-bg:#2a1213; --danger-line:#8a2c2c;
+    --code:#0a0d12; --kbd:#21262d;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  a{color:var(--accent)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 120px}
+
+  /* ---- hero (not sticky) ---- */
+  .hero{max-width:920px;margin:0 auto;padding:24px 20px 6px}
+  .hero h1{margin:0;font-size:21px;letter-spacing:-.01em}
+  .hero h1 .pod{color:var(--accent)}
+  .hero .tag{color:var(--muted);font-size:14px;margin-top:4px}
+  .vars{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:flex-end}
+  .var{display:flex;flex-direction:column;gap:4px}
+  .var label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .var label .hint{text-transform:none;letter-spacing:0;color:var(--faint);font-size:10.5px}
+  .var input{background:var(--code);border:1px solid var(--line);color:var(--text);
+    border-radius:7px;padding:7px 10px;font:13px var(--mono);min-width:150px;outline:none}
+  .var input:focus{border-color:var(--accent)}
+  .var.edit-flag{align-self:center;color:var(--warn);font-size:12px;padding-bottom:6px}
+  .lead{margin:20px 0 4px;font-size:16px}
+  .lead b{color:#fff}
+
+  /* ---- sticky tab bar ---- */
+  nav.tabs{position:sticky;top:0;z-index:40;background:rgba(13,17,23,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);margin-top:18px}
+  .tabs-inner{max-width:920px;margin:0 auto;padding:0 20px;display:flex;gap:6px;align-items:stretch}
+  .tab{appearance:none;background:none;border:none;border-bottom:2.5px solid transparent;color:var(--muted);
+    cursor:pointer;padding:13px 14px 11px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;
+    transition:.15s;white-space:nowrap}
+  .tab:hover{color:var(--text)}
+  .tab.active{color:var(--text);border-bottom-color:var(--accent)}
+  .tab .tnum{flex:none;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:12px;
+    background:var(--panel2);color:var(--muted)}
+  .tab.active .tnum{background:var(--accent);color:#04121f}
+  .tab .opt{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--warn);
+    background:var(--warn-bg);border:1px solid var(--warn-line);padding:1px 6px;border-radius:10px}
+  .tab .tdone{color:var(--good);font-size:13px;opacity:0;transition:.2s}
+  .tab.complete .tdone{opacity:1}
+  .tabs-prog{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:10px;color:var(--faint);font-size:12px}
+  .tabs-prog .barwrap{width:120px;height:5px;background:var(--panel2);border-radius:3px;overflow:hidden}
+  .tabs-prog .barwrap > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:width .3s}
+
+  /* ---- panels ---- */
+  .taskpanel{display:none;animation:fade .2s ease}
+  .taskpanel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .flavors{display:flex;gap:8px;margin:18px 0 2px;flex-wrap:wrap}
+  .flavor-btn{appearance:none;background:var(--panel2);border:1px solid var(--line);color:var(--muted);cursor:pointer;
+    padding:9px 16px;border-radius:9px;font-size:14px;font-weight:600;transition:.15s}
+  .flavor-btn:hover{color:var(--text);border-color:#3a4453}
+  .flavor-btn.active{background:var(--accent);border-color:var(--accent);color:#04121f}
+  .flavor{display:none}
+  .flavor.active{display:block}
+  .flavor-intro{font-size:14px;color:var(--muted);margin:10px 0 0;padding:11px 14px;background:var(--panel2);
+    border:1px solid var(--line);border-radius:9px}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+  .panel h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .varlist{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+  .varlist code{color:var(--accent);font-family:var(--mono);font-size:13px}
+  .diagram{width:100%;height:auto;display:block}
+  figcaption{color:var(--faint);font-size:12.5px;text-align:center;margin-top:8px}
+
+  .task-head{display:flex;align-items:center;gap:12px;margin:24px 0 2px}
+  .task-head h2{margin:0;font-size:21px;letter-spacing:-.01em}
+  .task-sub{color:var(--muted);font-size:14px;margin:2px 0 0}
+  .optional-badge{font-size:11px;background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-line);
+    padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+
+  /* ---- step cards ---- */
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:16px 0;overflow:hidden}
+  .step-head{display:flex;gap:12px;align-items:flex-start;padding:16px 18px 4px}
+  .check{flex:none;margin-top:1px;width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line);
+    background:var(--code);cursor:pointer;display:grid;place-items:center;color:transparent;font-size:14px;transition:.15s}
+  .check:hover{border-color:var(--good)}
+  .step.done .check{background:var(--good);border-color:var(--good);color:#04140a}
+  .step.done .step-title{color:var(--muted)}
+  .step.done{opacity:.82}
+  .step-title{font-weight:650;font-size:16px}
+  .step-do{color:var(--muted);font-size:13.5px;margin-top:2px}
+  .step-body{padding:6px 18px 18px 52px}
+
+  /* ---- command block ---- */
+  .cmd{position:relative;background:var(--code);border:1px solid var(--line);border-radius:9px;margin:12px 0;
+    display:flex;align-items:stretch}
+  .cmd pre{margin:0;padding:13px 15px;overflow-x:auto;flex:1;font:13.5px/1.55 var(--mono);color:#d7e2ee;
+    white-space:pre-wrap;word-break:break-word}
+  .cmd .tok{color:var(--accent)}
+  .copy{flex:none;border:none;border-left:1px solid var(--line);background:var(--panel2);color:var(--muted);
+    cursor:pointer;padding:0 14px;font-size:12px;border-radius:0 9px 9px 0;transition:.15s}
+  .copy:hover{background:#283142;color:var(--text)}
+  .copy.copied{color:var(--good)}
+  .cmd-note{font-size:12.5px;color:var(--faint);margin:-4px 0 8px;padding-left:2px;line-height:1.6}
+
+  /* ---- callouts ---- */
+  .see,.stop,.note{border-radius:9px;padding:12px 15px;margin:12px 0;font-size:14px}
+  .see{background:var(--good-bg);border:1px solid var(--good-line)}
+  .see .t{color:var(--good);font-weight:650}
+  .stop{background:var(--danger-bg);border:1px solid var(--danger-line)}
+  .stop .t{color:var(--danger);font-weight:650}
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line)}
+  .note .t{color:var(--warn);font-weight:650}
+  .see ul,.stop ul,.note ul{margin:8px 0 0;padding-left:20px}
+  .see li,.stop li,.note li{margin:5px 0}
+  .filepair{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 0;align-items:baseline}
+  .filepair code{color:var(--accent)}
+  kbd{background:var(--kbd);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font:12px var(--mono)}
+  code.inl{background:var(--code);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font:12.5px var(--mono);color:#d7e2ee}
+
+  /* ---- behind-the-scenes drawer ---- */
+  details.bts{margin:12px 0 2px;border:1px dashed var(--line);border-radius:9px;background:var(--panel2)}
+  details.bts > summary{cursor:pointer;padding:10px 14px;font-size:13.5px;color:var(--accent);list-style:none;user-select:none}
+  details.bts > summary::-webkit-details-marker{display:none}
+  details.bts > summary::before{content:"🔍 ";}
+  details.bts[open] > summary{border-bottom:1px dashed var(--line)}
+  details.bts .bts-body{padding:12px 16px;font-size:13.5px;color:#c2ccd6;line-height:1.7}
+  details.bts .bts-body b{color:var(--text)}
+  details.bts .bts-body p{margin:0 0 10px}
+  details.bts .bts-body p:last-child{margin:0}
+
+  .browser{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:6px;
+    padding:3px 10px;font:12.5px var(--mono);color:var(--accent);margin:2px 0}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--good);
+    color:#04140a;font-weight:600;padding:9px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:.25s;font-size:14px;z-index:99}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* ---- handshake sequence ---- */
+  .handshake{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:22px 0 0}
+  .handshake h3{margin:0 0 4px;font-size:17px;color:var(--text)}
+  .handshake .hs-sub{color:var(--muted);font-size:13.5px;margin:0 0 12px}
+  .hs-steps{counter-reset:s;margin:14px 0 0;padding:0;list-style:none}
+  .hs-steps li{counter-increment:s;position:relative;padding:7px 0 7px 38px;font-size:14px;border-top:1px solid var(--line)}
+  .hs-steps li:first-child{border-top:none}
+  .hs-steps li::before{content:counter(s);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:7px;
+    background:var(--accent);color:#04121f;font-weight:700;font-size:12.5px;display:grid;place-items:center}
+  .hs-steps li.win::before{background:var(--good);color:#04140a}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1><span class="pod">▣</span> Rootless Podman over SSH <span style="color:var(--muted);font-weight:400">— setup guide</span></h1>
+  <div class="tag">Run containers on a shared Linux box from your own machine — isolated, passwordless, no local Docker daemon.</div>
+  <div class="vars">
+    <div class="var">
+      <label>Machine name <span class="hint">(the Linux box)</span></label>
+      <input id="v-machine" spellcheck="false" autocomplete="off">
+    </div>
+    <div class="var">
+      <label>Your username <span class="hint">(on that box)</span></label>
+      <input id="v-user" spellcheck="false" autocomplete="off">
+    </div>
+    <div class="var edit-flag">← set these to yours; every command updates live</div>
+  </div>
+  <p class="lead">A shared Linux server becomes <b>your rootless Podman backend</b>: containers run there, you drive them from here. Four tasks below — the first, <b>Passwordless SSH</b>, is mandatory (nothing works until it's done); the rest build on it.</p>
+
+  <div class="panel" style="margin-top:16px">
+    <h3 style="color:var(--accent)">What you're setting up</h3>
+    <p style="margin:0 0 10px">You're turning a <b>shared Linux server</b> into a remote <b>rootless Podman backend</b>. You run <code class="inl">podman</code> and <code class="inl">podman compose</code> from your own machine, but the containers actually build and run <b>on the server</b> — no Docker Desktop, no local daemon, none of the heavy lifting on your laptop.</p>
+    <p style="margin:0 0 14px"><b>Rootless</b> means Podman runs as <em>you</em> on that box: your containers, images, and data are yours alone. Many people share the same hardware yet stay fully isolated — the only thing you share is a range of host ports.</p>
+    <svg class="diagram" viewBox="0 0 760 130" role="img" aria-label="You run podman on your machine; containers run on the shared server over SSH.">
+      <defs><marker id="aho" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#58a6ff"/></marker></defs>
+      <rect x="24" y="30" width="190" height="72" rx="10" fill="#161b22" stroke="#2a3340"/>
+      <foreignObject x="24" y="30" width="190" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="font:13px -apple-system,sans-serif;color:#e6edf3;padding:12px 14px"><div style="font-weight:700">💻 Your machine</div><div style="color:#8b949e;font-size:11.5px;font-family:ui-monospace,monospace;margin-top:5px">podman · podman compose</div></div></foreignObject>
+      <foreignObject x="222" y="40" width="142" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px -apple-system,sans-serif;color:#58a6ff;text-align:center"><b>SSH · your key</b></div></foreignObject>
+      <line x1="214" y1="66" x2="376" y2="66" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#aho)"/>
+      <rect x="384" y="16" width="354" height="100" rx="10" fill="#161b22" stroke="#1f6f37"/>
+      <foreignObject x="384" y="16" width="354" height="100"><div xmlns="http://www.w3.org/1999/xhtml" style="font:13px -apple-system,sans-serif;color:#e6edf3;padding:11px 15px"><div style="font-weight:700">🐧 Shared Linux server <span style="color:#3fb950;font-family:ui-monospace,monospace;font-size:12px" data-inl="{{MACHINE}}">{{MACHINE}}</span></div><div style="color:#8b949e;font-size:11.5px;line-height:1.75;margin-top:5px"><b style="color:#e6edf3">your</b> rootless podman — your containers &amp; images, isolated<br>others → their own, unseen<br><span style="color:#d29922">shared: host ports 8000–9000</span></div></div></foreignObject>
+    </svg>
+    <p style="margin:12px 0 0;color:var(--muted);font-size:13px">The four tabs below get you there: a passwordless SSH key (the foundation), an optional GitHub key, the Podman connection itself, then a multi-container Compose demo.</p>
+  </div>
+</div>
+
+<nav class="tabs">
+  <div class="tabs-inner">
+    <button class="tab active" data-tab="1"><span class="tnum">1</span> Passwordless SSH <span class="tdone">✓</span></button>
+    <button class="tab" data-tab="2"><span class="tnum">2</span> GitHub key <span class="opt">optional</span> <span class="tdone">✓</span></button>
+    <button class="tab" data-tab="3"><span class="tnum">3</span> Podman backend <span class="tdone">✓</span></button>
+    <button class="tab" data-tab="4"><span class="tnum">4</span> Compose <span class="tdone">✓</span></button>
+    <span class="tabs-prog"><span><b id="done-n">0</b>/<span id="total-n">0</span></span><span class="barwrap"><i id="bar"></i></span></span>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ TASK 1 ============ -->
+  <section class="taskpanel active" data-panel="1">
+    <div class="task-head"><h2>1 · Passwordless SSH: your machine → the server</h2></div>
+    <div class="task-sub">Mandatory. The finish line is logging in with <b>no password</b>. If you don't reach it, stop — Podman can't work without it.</div>
+
+    <div class="step" data-step="t1s1">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Generate your key pair</div><div class="step-do">Make a dedicated SSH key just for Podman.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh-keygen -t ed25519 -f ~/.ssh/podman"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span>
+          <ul>
+            <li>Two passphrase prompts — <b>press <kbd>Enter</kbd> twice</b> to leave it blank.</li>
+            <li>Then a fingerprint line and an ASCII "randomart" picture.</li>
+            <li>Two new files in <code class="inl">~/.ssh/</code>:
+              <div class="filepair">
+                <code>podman</code><span>your <b>private</b> key — secret, never share or copy it off the machine</span>
+                <code>podman.pub</code><span>your <b>public</b> key — the <code class="inl">.pub</code> means public; safe to hand out</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p>A keypair is <b>two matched files</b>, created together by that one command:</p>
+          <p>• <code class="inl">~/.ssh/podman</code> — the <b>PRIVATE</b> key. Lives only on your machine. Anyone holding it can log in as you, so it never leaves.<br>
+             • <code class="inl">~/.ssh/podman.pub</code> — the <b>PUBLIC</b> key (that's what <code class="inl">.pub</code> stands for). Harmless to share; this is the one you install on servers.</p>
+          <p>They're mathematically linked: a challenge <em>signed</em> by the private key can only be <em>verified</em> by its matching public key. That one-way link is how a server confirms it's really you <b>without you ever sending a secret</b> — only signatures cross the wire, never the private key.</p>
+          <p>A <b>blank passphrase</b> means the private key file isn't itself encrypted, so nothing has to be typed at connect time — which is exactly what lets Podman and automation run unattended.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t1s2">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Copy the public key to the server</div><div class="step-do">Teach the server to recognize your key.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh-copy-id -i ~/.ssh/podman {{USER}}@{{MACHINE}}"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span>
+          <ul>
+            <li>A one-time prompt for your <b>server password</b> — the last time you'll type it.</li>
+            <li>It finishes with <code class="inl">Number of key(s) added: 1</code>.</li>
+            <li>It also prints a ready-to-run test command — that's the next step.</li>
+          </ul>
+        </div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p>This appends your <b>public</b> key to <code class="inl">~/.ssh/authorized_keys</code> on the server — the server's list of "keys I trust."</p>
+          <p>From now on the server challenges your private key with something only that key can sign, so no password is needed. You typed a password this once <em>only</em> to install the key.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t1s3">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Test key login</div><div class="step-do">Confirm the key works before going further.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh -i ~/.ssh/podman {{USER}}@{{MACHINE}}"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> a shell prompt <b>on the server, with no password asked</b>. Type <code class="inl">exit</code> to come back.</div>
+        <div class="stop"><span class="t">⛔ STOP if</span> it asks for a password or says <code class="inl">Permission denied</code>.
+          <ul>
+            <li>The key isn't being accepted — do not continue.</li>
+            <li>Re-check steps 1–2, confirm the path <code class="inl">~/.ssh/podman</code> is right, and that step 2 ended in <code class="inl">key(s) added: 1</code>.</li>
+          </ul>
+        </div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p><code class="inl">-i</code> = <b>identity</b> = "prove who I am with this specific private key."</p>
+          <p>Without it, ssh only tries default-named keys (<code class="inl">id_ed25519</code>, etc.) and skips your <code class="inl">podman</code> key — a non-default name — falling back to a password. The next step closes that gap permanently.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t1s4">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Add an SSH config entry (the one cool command)</div><div class="step-do">So you never type <code class="inl">-i</code> or your username again.</div></div></div>
+      <div class="step-body">
+        <p style="margin:4px 0 0;font-size:14px">No text editor needed — this one line creates (or appends to) your config file:</p>
+        <div class="cmd"><pre data-tpl="printf 'Host {{MACHINE}}\n  IdentityFile %s/.ssh/podman\n' &quot;$HOME&quot; >> ~/.ssh/config"></pre><button class="copy">Copy</button></div>
+        <div class="cmd-note">Just two lines go in: <code class="inl">Host</code> and <code class="inl">IdentityFile</code> — that's all SSH needs. The <code class="inl">"$HOME"</code> bit is the trick: your shell expands it to your real home path and bakes the <em>absolute</em> path into the file, because SSH config won't expand <code class="inl">~</code> itself. That's why you never type your home path.</div>
+        <div class="see"><span class="t">✓ You'll see</span>
+          <ul>
+            <li>Nothing printed — that's success.</li>
+            <li>Eyeball it: <code class="inl">cat ~/.ssh/config</code> — the <code class="inl">IdentityFile</code> line should show a real absolute path to your key.</li>
+          </ul>
+        </div>
+        <div class="note"><span class="t">ℹ One caveat</span> — no <code class="inl">User</code> line is needed <em>if your username on the server matches your local username</em> (the common case). If they differ, either add a <code class="inl">User {{USER}}</code> line to the block, or always connect as <code class="inl">{{USER}}@{{MACHINE}}</code>.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p><code class="inl">~/.ssh/config</code> is a per-host cheat sheet ssh reads off disk on <b>every</b> connection: "when the target is <code class="inl">{{MACHINE}}</code>, use this key automatically." Plain text, survives reboots, no background process.</p>
+          <p>The shell commands above all use <code class="inl">~</code> (the shell expands it for you). But this config file is read <em>later</em> by programs that <b>don't</b> expand <code class="inl">~</code> — so we write the absolute path in via <code class="inl">"$HOME"</code>.</p>
+          <p>You'll point Podman at the <em>same</em> <code class="inl">~/.ssh/podman</code> again in the <b>Podman backend</b> step — Podman uses its own SSH client that doesn't read this config. Same key, two independent readers.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t1s5">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">The finish line — log in clean</div><div class="step-do">Just the hostname. No <code class="inl">-i</code>, no username, no password.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh {{MACHINE}}"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> you land on the server — <b>nothing typed but the hostname</b>. 🎉 Passwordless SSH done. <code class="inl">exit</code> to return.</div>
+        <div class="stop"><span class="t">⛔ STOP if</span> this still prompts. Everything Podman-related depends on this exact command working clean — fix it here before the Podman backend step.</div>
+      </div>
+    </div>
+
+    <!-- handshake explainer -->
+    <div class="handshake">
+      <h3>🔐 What actually happens when you run <code class="inl" data-inl="ssh {{MACHINE}}">ssh {{MACHINE}}</code></h3>
+      <p class="hs-sub">Public-key auth in five moves — no secret ever crosses the wire, only signatures.</p>
+      <svg class="diagram" viewBox="0 0 860 330" role="img" aria-label="SSH public-key handshake sequence diagram.">
+        <defs>
+          <marker id="ah" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#58a6ff"/></marker>
+          <marker id="ahg" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#3fb950"/></marker>
+        </defs>
+        <!-- actor headers -->
+        <rect x="30" y="12" width="240" height="44" rx="9" fill="#1c2330" stroke="#2a3340"/>
+        <text x="150" y="40" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="14" font-weight="600" fill="#e6edf3">💻 Your machine</text>
+        <rect x="590" y="12" width="240" height="44" rx="9" fill="#1c2330" stroke="#1f6f37"/>
+        <text x="710" y="40" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="14" font-weight="600" fill="#e6edf3">🐧 Server <tspan fill="#3fb950" font-family="ui-monospace,monospace" font-size="13" data-inl="{{MACHINE}}">{{MACHINE}}</tspan></text>
+        <!-- lifelines -->
+        <line x1="150" y1="56" x2="150" y2="318" stroke="#2a3340" stroke-dasharray="4 5"/>
+        <line x1="710" y1="56" x2="710" y2="318" stroke="#2a3340" stroke-dasharray="4 5"/>
+
+        <!-- M1 self left -->
+        <rect x="22" y="66" width="256" height="40" rx="7" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="22" y="66" width="256" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.35 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:40px;display:flex;align-items:center"><span><b style="color:#58a6ff">①</b> reads <code style="font-family:ui-monospace,monospace">~/.ssh/config</code> → matches <code style="font-family:ui-monospace,monospace">Host</code></span></div></foreignObject>
+        <!-- M2 self left -->
+        <rect x="22" y="112" width="256" height="40" rx="7" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="22" y="112" width="256" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.35 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:40px;display:flex;align-items:center"><span><b style="color:#58a6ff">②</b> loads private key <code style="font-family:ui-monospace,monospace">~/.ssh/podman</code></span></div></foreignObject>
+
+        <!-- M3 arrow L->R -->
+        <foreignObject x="232" y="156" width="396" height="30"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px -apple-system,sans-serif;color:#8b949e;text-align:center"><b style="color:#58a6ff">③</b> offers public key + a challenge signed with the private key</div></foreignObject>
+        <line x1="156" y1="190" x2="704" y2="190" stroke="#58a6ff" stroke-width="2" marker-end="url(#ah)"/>
+
+        <!-- M4 self right -->
+        <rect x="568" y="204" width="264" height="48" rx="7" fill="#161b22" stroke="#1f6f37"/>
+        <foreignObject x="568" y="204" width="264" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:48px;display:flex;align-items:center"><span><b style="color:#3fb950">④</b> checks <code style="font-family:ui-monospace,monospace">~/.ssh/authorized_keys</code> &amp; verifies the signature with your public key</span></div></foreignObject>
+
+        <!-- M5 arrow R->L green -->
+        <foreignObject x="232" y="270" width="396" height="30"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px -apple-system,sans-serif;color:#3fb950;text-align:center"><b>⑤</b> signature valid → access granted, no password</div></foreignObject>
+        <line x1="704" y1="304" x2="156" y2="304" stroke="#3fb950" stroke-width="2" marker-end="url(#ahg)"/>
+      </svg>
+
+      <ol class="hs-steps">
+        <li>You run <code class="inl" data-inl="ssh {{MACHINE}}">ssh {{MACHINE}}</code>.</li>
+        <li>ssh opens <code class="inl">~/.ssh/config</code>, finds the <code class="inl" data-inl="Host {{MACHINE}}">Host {{MACHINE}}</code> block, and loads the key it names — your private <code class="inl">~/.ssh/podman</code>.</li>
+        <li>ssh contacts the server, offers the matching <b>public</b> key, and signs the server's random challenge with your <b>private</b> key.</li>
+        <li>The server looks in <code class="inl">~/.ssh/authorized_keys</code> (where <code class="inl">ssh-copy-id</code> put your public key in step 2) and uses that public key to check the signature.</li>
+        <li class="win">Only your private key could have produced that signature, so the server is convinced it's you — and lets you in. No password.</li>
+      </ol>
+
+      <div class="note" style="margin-top:16px"><span class="t">↩ The fallback — why an un-configured host asks for a password</span>
+        <p style="margin:8px 0 0">SSH to a host that's <b>not</b> in your config (no <code class="inl">IdentityFile</code> set)? Then ssh has no specific key to use, so it falls back to its <b>default-named</b> keys — <code class="inl">~/.ssh/id_ed25519</code>, <code class="inl">~/.ssh/id_rsa</code> — plus anything in your agent.</p>
+        <p style="margin:8px 0 0">The server doesn't have <em>any</em> of those public keys in its <code class="inl">authorized_keys</code>, so it can't verify you by key at all. Key auth doesn't error loudly — ssh just quietly drops to the next method and the server <b>asks for your password</b>. That's exactly the password prompt you got before setting up the config + key.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TASK 2 ============ -->
+  <section class="taskpanel" data-panel="2">
+    <div class="task-head"><h2>2 · SSH key: the server → GitHub</h2> <span class="optional-badge">optional</span></div>
+    <div class="task-sub">Only needed if you need to pull content <em>from</em> GitHub on the box — a <code class="inl">git clone</code>, or even just a <code class="inl">curl</code> of a file. Skip if you don't.</div>
+
+    <div class="step" data-step="t2s1">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">SSH into the server</div><div class="step-do">Use the clean login from Passwordless SSH.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh {{MACHINE}}"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> the server prompt. Everything below runs <b>on the server</b>, not your laptop.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="t2s2">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Generate a key on the server</div><div class="step-do">Default location, default name.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh-keygen -t ed25519"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span>
+          <ul>
+            <li>Prompts for location and passphrase — <b>press <kbd>Enter</kbd> through all of them</b>.</li>
+            <li>The key lands at <code class="inl">~/.ssh/id_ed25519</code> in your home dir on the server.</li>
+          </ul>
+        </div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p>This is a <b>separate</b> key from Passwordless SSH, living on the server. Its job is to prove "the server, acting as you" to GitHub.</p>
+          <p>Default name means tools find it automatically — no config entry needed for this one.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t2s3">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Print the public key &amp; add it to GitHub</div><div class="step-do">Paste it into your GitHub account.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="cat ~/.ssh/id_ed25519.pub"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ Then</span> copy the whole <code class="inl">ssh-ed25519 …</code> line and paste it into GitHub → <b>Settings → SSH and GPG keys → New SSH key</b>.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="t2s4">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Test the GitHub connection</div><div class="step-do">Confirm GitHub accepts the key.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="ssh -T git@github.com"></pre><button class="copy">Copy</button></div>
+        <div class="cmd-note">First connect asks you to trust the host — type <code class="inl">yes</code>.</div>
+        <div class="see"><span class="t">✓ You'll see</span> <code class="inl">Hi you! You've successfully authenticated, but GitHub does not provide shell access.</code> That greeting <b>is</b> success — now <code class="inl">git clone git@github.com:org/repo.git</code> works from the server.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p><code class="inl">-T</code> just says "no interactive terminal, I only want the greeting."</p>
+          <p>GitHub matches your offered key against the public key you pasted and confirms identity — the same key-challenge dance as Passwordless SSH, different direction.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t2s5">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Back to your own machine</div><div class="step-do">Everything above ran on the server — get out before the next task.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="exit"></pre><button class="copy">Copy</button></div>
+        <div class="note"><span class="t">↩ Don't skip this</span> — every command in this task ran <b>on the server</b> (you SSH'd in at the top). The <b>Podman backend</b> commands next run on <b>your own machine</b>. If you're still in the server session, <code class="inl">podman system connection add</code> lands on the wrong box. <code class="inl">exit</code> drops you back to your laptop's prompt.</div>
+      </div>
+    </div>
+
+    <!-- handshake explainer -->
+    <div class="handshake">
+      <h3>🔐 What just happened — proving the server to GitHub</h3>
+      <p class="hs-sub">The same key dance as Passwordless SSH, one level out: here the <b>server</b> (acting as you) holds the private key, and <b>GitHub</b> checks it against the key you pasted.</p>
+      <svg class="diagram" viewBox="0 0 860 256" role="img" aria-label="SSH key handshake between the server and GitHub.">
+        <defs>
+          <marker id="ah2" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#58a6ff"/></marker>
+          <marker id="ahg2" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#3fb950"/></marker>
+        </defs>
+        <rect x="30" y="12" width="250" height="44" rx="9" fill="#1c2330" stroke="#2a3340"/>
+        <text x="155" y="40" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="14" font-weight="600" fill="#e6edf3">🐧 Server (as you)</text>
+        <rect x="580" y="12" width="250" height="44" rx="9" fill="#1c2330" stroke="#7a5c14"/>
+        <text x="705" y="40" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="14" font-weight="600" fill="#e6edf3">🐙 GitHub</text>
+        <line x1="155" y1="56" x2="155" y2="244" stroke="#2a3340" stroke-dasharray="4 5"/>
+        <line x1="705" y1="56" x2="705" y2="244" stroke="#2a3340" stroke-dasharray="4 5"/>
+        <rect x="26" y="66" width="258" height="40" rx="7" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="26" y="66" width="258" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.35 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:40px;display:flex;align-items:center"><span><b style="color:#58a6ff">①</b> git clone → sign with <code style="font-family:ui-monospace,monospace">~/.ssh/id_ed25519</code></span></div></foreignObject>
+        <foreignObject x="240" y="116" width="380" height="28"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px -apple-system,sans-serif;color:#8b949e;text-align:center"><b style="color:#58a6ff">②</b> offers public key + the signed challenge</div></foreignObject>
+        <line x1="161" y1="140" x2="699" y2="140" stroke="#58a6ff" stroke-width="2" marker-end="url(#ah2)"/>
+        <rect x="574" y="158" width="262" height="42" rx="7" fill="#161b22" stroke="#7a5c14"/>
+        <foreignObject x="574" y="158" width="262" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.35 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:42px;display:flex;align-items:center"><span><b style="color:#d29922">③</b> matches the key you pasted in Settings, verifies the signature</span></div></foreignObject>
+        <foreignObject x="240" y="208" width="380" height="28"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px -apple-system,sans-serif;color:#3fb950;text-align:center"><b>④</b> verified → clone / fetch proceeds, no password</div></foreignObject>
+        <line x1="699" y1="232" x2="161" y2="232" stroke="#3fb950" stroke-width="2" marker-end="url(#ahg2)"/>
+      </svg>
+      <ol class="hs-steps">
+        <li>On the server you run <code class="inl">git clone git@…</code> (or even just <code class="inl">curl</code> a file over the GitHub API).</li>
+        <li>SSH loads the server's private key <code class="inl">~/.ssh/id_ed25519</code> and signs GitHub's challenge with it.</li>
+        <li>GitHub looks up the matching <b>public</b> key — the one you pasted into Settings earlier — and verifies the signature.</li>
+        <li class="win">It checks out, so GitHub knows it's you and lets the clone/fetch through. No password, no token.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ TASK 3 ============ -->
+  <section class="taskpanel" data-panel="3">
+    <div class="task-head"><h2>3 · Add the server as a rootless Podman backend</h2></div>
+    <div class="task-sub">The payoff. Requires Passwordless SSH finished clean.</div>
+
+    <div class="step" data-step="t3s1">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Add the Podman connection</div><div class="step-do">Point Podman at the box, using the same key — run this <b>on your own machine</b>, not inside an SSH session.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman system connection add {{MACHINE}} {{USER}}@{{MACHINE}} --identity ~/.ssh/podman --default"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> no output = success. Podman now knows a connection named <code class="inl">{{MACHINE}}</code>.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p>This tells <b>Podman's own built-in SSH client</b> how to reach the box — the identity here is for <code class="inl">podman run</code>, <code class="inl">podman ps</code>, etc.</p>
+          <p>It's <em>separate</em> from the <code class="inl">~/.ssh/config</code> in Passwordless SSH (which is for other ssh programs). Yes, you name the same key twice — different SSH clients, neither reads the other's config.</p>
+          <p>The first arg <code class="inl">{{MACHINE}}</code> is just a local nickname; we reuse the hostname out of habit.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t3s3">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Verify the connection</div><div class="step-do">Check all four columns look right.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman system connection list"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> a table. Confirm:
+          <ul>
+            <li><b>Name</b> → <code class="inl">{{MACHINE}}</code></li>
+            <li><b>URI</b> → <code class="inl">ssh://{{USER}}@{{MACHINE}}:22/run/user/&lt;long-id&gt;/podman/podman.sock</code></li>
+            <li><b>Identity</b> → the absolute path to your podman key (your <code class="inl">~</code> already expanded, ending in <code class="inl">/.ssh/podman</code>)</li>
+            <li><b>Default</b> → <code class="inl">true</code></li>
+          </ul>
+        </div>
+        <div class="note"><span class="t">ℹ Only if <code class="inl">Default</code> shows <code class="inl">false</code></span> — the <code class="inl">--default</code> flag is flaky and doesn't always stick. Run this once, then list again:
+          <div class="cmd"><pre data-tpl="podman system connection default {{MACHINE}}"></pre><button class="copy">Copy</button></div>
+        </div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p>That long number in the URI is your <b>user ID</b> on the server — the socket lives under <code class="inl">/run/user/&lt;uid&gt;/</code>, which is per-user.</p>
+          <p>"Rootless" means Podman runs as <em>you</em>, not root: your containers, your home dir, your socket. Podman derived this full path automatically when you added the connection.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t3s4">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Run your first container (on the remote)</div><div class="step-do">Start nginx — it runs over there, not here.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman run -d docker.io/nginxinc/nginx-unprivileged:1.27"></pre><button class="copy">Copy</button></div>
+        <div class="cmd-note">The <code class="inl">docker.io/</code> prefix is required — unlike Docker, rootless Podman won't guess a registry for a short name and will either error or prompt. Spell it out and it just pulls.</div>
+        <div class="see"><span class="t">✓ You'll see</span> Podman pull the image, then print a long container ID. That image and container live in <b>your home dir on {{MACHINE}}</b> — nothing landed on your laptop.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p><code class="inl">-d</code> = detached (runs in the background).</p>
+          <p>The command looked local, but every byte — the image download, the running process — happened on <code class="inl">{{MACHINE}}</code> via your Podman connection. Your laptop just sent instructions.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t3s5">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Prove it's really remote</div><div class="step-do">See the container, then watch localhost fail.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman ps"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> a row: the container ID, image <code class="inl">docker.io/nginxinc/nginx-unprivileged:1.27</code>, status <code class="inl">Up</code>, and port <code class="inl">8080/tcp</code>.</div>
+        <div class="note"><span class="t">Now try</span> <span class="browser">http://localhost:8080</span> in your browser — <b>it won't load.</b> That's the proof: nginx is on <code class="inl">{{MACHINE}}</code>, not your machine, and you haven't exposed its port yet. Next step fixes that.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p><code class="inl">podman ps</code> reached across your SSH connection and listed what's running <em>on the server</em>.</p>
+          <p>The container's port <code class="inl">8080</code> is open inside the server's network, but nothing bridges it to your laptop — so <code class="inl">localhost</code> has nothing to show.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t3s6">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Re-run with a published port</div><div class="step-do">Expose it on the server so you can reach it.</div></div></div>
+      <div class="step-body">
+        <div class="note"><span class="t">↩ First, stop the one you already started</span> — that earlier container is still up (with no published port). Grab its ID from <code class="inl">podman ps</code> and stop it so you don't pile up duplicates: <code class="inl">podman stop &lt;id&gt;</code> (add <code class="inl">podman rm &lt;id&gt;</code> to clear it out, or <code class="inl">podman rm -f &lt;id&gt;</code> for both at once).</div>
+        <div class="cmd"><pre data-tpl="podman run -d -p 8123:8080 docker.io/nginxinc/nginx-unprivileged:1.27"></pre><button class="copy">Copy</button></div>
+        <div class="note"><span class="t">Order matters &amp; pick a free port:</span>
+          <ul>
+            <li><code class="inl">-p</code> must come <b>before</b> the image name, not after.</li>
+            <li>Left number (<code class="inl">8123</code>) = the port opened on <b>{{MACHINE}}</b>. Pick anything in <b>8000–9000</b> — the only range exposed on the box. Coordinate so you don't collide with a coworker.</li>
+            <li>Right number (<code class="inl">8080</code>) = the port nginx listens on <em>inside</em> the container. Leave it.</li>
+          </ul>
+        </div>
+        <div class="see"><span class="t">✓ Then open</span> <span class="browser" data-tpl-browser="http://{{MACHINE}}:8123"></span> — <b>use the machine name, NOT localhost</b> — and you'll see the nginx welcome page. Check <code class="inl">podman ps</code> again or <code class="inl">podman logs &lt;id&gt;</code> and you'll see your visit logged.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p><code class="inl">-p host:container</code> punches a mapping: traffic hitting <code class="inl">{{MACHINE}}:8123</code> gets forwarded into the container's <code class="inl">8080</code>.</p>
+          <p>You browse the <b>server's</b> hostname because that's where the port is now open — your laptop was never in the path.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t3s7">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Diagnostics &amp; the isolation / disk story</div><div class="step-do">See your images, understand what's shared and what isn't.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman image ls"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> only the images <b>you</b> pulled — including the nginx one you just ran.</div>
+        <div class="panel" style="margin:14px 0 0;background:var(--panel2)">
+          <h3 style="color:var(--good)">Shared hardware, isolated software</h3>
+          <p style="margin:0 0 8px">Several people can point their own Podman connections at the same box and never see each other. Your containers, images, and data all live under <b>your</b> home dir (<code class="inl">~/.local/share/containers</code>) on the server. Run <code class="inl">podman image ls</code> and you see <em>yours</em>; your coworker sees <em>theirs</em>.</p>
+          <p style="margin:0 0 8px">The <b>only</b> shared resource is the host port range <code class="inl">8000–9000</code> — so coordinate ports, otherwise you're fully independent.</p>
+          <p style="margin:0;color:var(--warn)">⚠ <b>Disk watch:</b> isolation has a cost — if you and a coworker both pull <code class="inl">nginx-unprivileged</code>, you each store your <em>own</em> copy. Duplicate images add up on the shared drive. Clean up what you're done with: <code class="inl">podman rmi &lt;image&gt;</code>.</p>
+        </div>
+        <details class="bts"><summary>Behind the scenes — cleanup</summary><div class="bts-body">
+          <p>Stop &amp; remove a test container: <code class="inl">podman stop &lt;id&gt;</code> then <code class="inl">podman rm &lt;id&gt;</code> (or <code class="inl">podman rm -f &lt;id&gt;</code> for both at once).</p>
+          <p>Drop an image you no longer need: <code class="inl">podman rmi docker.io/nginxinc/nginx-unprivileged:1.27</code>. All of it operates on <em>your</em> isolated store on the server.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- architecture explainer -->
+    <div class="handshake">
+      <h3>🔐 How it all works — Podman driving the box over SSH</h3>
+      <p class="hs-sub">Every <code class="inl">podman</code> command you ran reached across the same SSH key from Passwordless SSH. Here's the whole path of a <code class="inl">podman run … -p 8123:8080</code>.</p>
+      <svg class="diagram" viewBox="0 0 860 340" role="img" aria-label="Architecture of Podman driving a remote rootless backend over SSH.">
+        <defs>
+          <marker id="ah3" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#58a6ff"/></marker>
+          <marker id="ah3w" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto"><path d="M0,0 L9,5 L0,10 z" fill="#d29922"/></marker>
+        </defs>
+        <rect x="24" y="44" width="256" height="150" rx="11" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="24" y="44" width="256" height="150"><div xmlns="http://www.w3.org/1999/xhtml" style="font:12px -apple-system,sans-serif;color:#e6edf3;padding:12px 14px">
+          <div style="font-weight:700;margin-bottom:8px">💻 Your machine</div>
+          <div style="font-family:ui-monospace,monospace;font-size:11px;color:#8b949e;line-height:1.7">podman run -d<br>&nbsp;&nbsp;-p 8123:8080 nginx…</div>
+          <div style="border-top:1px solid #2a3340;margin:8px 0 0;padding-top:8px;color:#8b949e;font-size:11.5px;line-height:1.6">Podman's own SSH client<br><span style="color:#58a6ff;font-family:ui-monospace,monospace">key: ~/.ssh/podman</span></div>
+        </div></foreignObject>
+        <rect x="470" y="24" width="366" height="226" rx="11" fill="#161b22" stroke="#1f6f37"/>
+        <foreignObject x="470" y="24" width="366" height="226"><div xmlns="http://www.w3.org/1999/xhtml" style="font:12px -apple-system,sans-serif;color:#e6edf3;padding:12px 16px">
+          <div style="font-weight:700;margin-bottom:8px">🐧 Server <span style="color:#3fb950;font-family:ui-monospace,monospace;font-size:12px" data-inl="{{MACHINE}}">{{MACHINE}}</span></div>
+          <div style="color:#8b949e;font-size:11.5px;line-height:1.7">rootless podman socket<br><span style="font-family:ui-monospace,monospace;color:#c2ccd6">/run/user/&lt;uid&gt;/podman/podman.sock</span></div>
+          <div style="border-top:1px solid #2a3340;margin:9px 0 0;padding-top:9px;font-size:11.5px;line-height:1.9">→ <b style="color:#e6edf3">your container</b> &nbsp;<span style="font-family:ui-monospace,monospace;color:#d29922">nginx :8080</span><br>→ your image store <span style="color:#6e7681">(isolated)</span></div>
+        </div></foreignObject>
+        <foreignObject x="286" y="86" width="178" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11px -apple-system,sans-serif;color:#58a6ff;text-align:center;line-height:1.4"><b>SSH · key auth</b><br><span style="color:#8b949e">→ your podman socket</span></div></foreignObject>
+        <line x1="284" y1="128" x2="466" y2="128" stroke="#58a6ff" stroke-width="2.5" marker-end="url(#ah3)"/>
+        <rect x="24" y="252" width="256" height="64" rx="11" fill="#1c2330" stroke="#2a3340"/>
+        <foreignObject x="24" y="252" width="256" height="64"><div xmlns="http://www.w3.org/1999/xhtml" style="font:12px -apple-system,sans-serif;color:#e6edf3;padding:10px 14px">
+          <div style="font-weight:700;margin-bottom:3px">🌐 Your browser</div>
+          <div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#58a6ff" data-inl="http://{{MACHINE}}:8123">http://{{MACHINE}}:8123</div>
+        </div></foreignObject>
+        <foreignObject x="292" y="176" width="174" height="32"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11px -apple-system,sans-serif;color:#d29922;text-align:center;line-height:1.45"><b>HTTP → host :8123</b><br><span style="color:#aeb6c0">forwarded to :8080</span></div></foreignObject>
+        <line x1="284" y1="286" x2="466" y2="212" stroke="#d29922" stroke-width="2.5" marker-end="url(#ah3w)"/>
+      </svg>
+      <ol class="hs-steps">
+        <li><code class="inl">podman run …</code> on your laptop hands the request to Podman's <b>built-in</b> SSH client.</li>
+        <li>It connects to the server with your <code class="inl">~/.ssh/podman</code> key — the exact handshake from <b>Passwordless SSH</b> — and reaches <b>your</b> rootless socket at <code class="inl">/run/user/&lt;uid&gt;/podman/podman.sock</code>.</li>
+        <li>Podman there pulls the image into your isolated store and starts the container <b>as you</b> — rootless, no root anywhere.</li>
+        <li><code class="inl">-p 8123:8080</code> publishes the container's port 8080 out to the server's port 8123.</li>
+        <li class="win">Your browser hits <span data-inl="{{MACHINE}}:8123">{{MACHINE}}:8123</span> — the <b>server</b>, not localhost — and the server forwards it into the container.</li>
+      </ol>
+    </div>
+
+    <p style="text-align:center;color:var(--faint);font-size:13px;margin-top:36px">
+      Passwordless SSH + Podman backend done = you're running rootless containers on shared Linux, fully isolated, no password, no local Docker. 🎉
+    </p>
+  </section>
+
+  <!-- ============ TASK 4 ============ -->
+  <section class="taskpanel" data-panel="4">
+    <div class="task-head"><h2>4 · Deploy a stack with Compose</h2></div>
+    <div class="task-sub">Define your services in one file, bring them up with one command. Pick a flavor below.</div>
+
+    <div class="note"><span class="t">ℹ Why this just works</span> — the <b>Podman backend</b> step made <code class="inl">{{MACHINE}}</code> your <b>default</b> Podman connection, so <code class="inl">podman compose</code> automatically targets the remote. But it also leans on the <b>Passwordless SSH</b> <code class="inl">~/.ssh/config</code> — full story in the explainer at the bottom.</div>
+
+    <div class="flavors">
+      <button class="flavor-btn active" data-flavor="a">🐘 Quick demo · Postgres + Adminer</button>
+      <button class="flavor-btn" data-flavor="b">🗄️ SQL Server database</button>
+    </div>
+
+    <div class="flavor active" data-flavor="a">
+    <p class="flavor-intro">Two containers that show compose's superpower — a database + a web UI that find each other by name, working in your browser in under a minute. Lightweight (~280 MB), all official images.</p>
+
+    <div class="step" data-step="t4s1">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Create the compose file</div><div class="step-do">Two services: a Postgres database + Adminer, a web UI for it.</div></div></div>
+      <div class="step-body">
+        <p style="margin:4px 0 0;font-size:14px">In a new folder on <b>your machine</b>, save this as <code class="inl">compose.yaml</code>:</p>
+        <div class="cmd"><pre>services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: demopass
+  adminer:
+    image: docker.io/library/adminer:4
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - "8200:8080"</pre><button class="copy">Copy</button></div>
+        <div class="cmd-note">Fully-qualified image names (<code class="inl">docker.io/library/…</code>) keep Podman from asking which registry to use. <code class="inl">8200</code> is the host port — pick any free one in <b>8000–9000</b>. Note <code class="inl">db</code> publishes <em>no</em> port: only Adminer is reachable from outside; it talks to the database privately.</div>
+        <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+          <p>The file lives on <b>your</b> machine, but the containers run on <code class="inl">{{MACHINE}}</code>. <code class="inl">podman compose</code> reads the YAML locally and runs everything on your default connection's remote — same split as every other command in the Podman backend step.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t4s2">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Bring it up</div><div class="step-do">One command starts both, on the remote.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman compose up -d"></pre><button class="copy">Copy</button></div>
+        <div class="cmd-note">Run it from the folder that holds <code class="inl">compose.yaml</code>.</div>
+        <div class="see"><span class="t">✓ You'll see</span>
+          <ul>
+            <li>A line about which provider it's using (<code class="inl">docker-compose</code> or <code class="inl">podman-compose</code>).</li>
+            <li>Both images pull <b>on {{MACHINE}}</b>, a network gets created, and <code class="inl">db</code> + <code class="inl">adminer</code> start.</li>
+          </ul>
+        </div>
+        <div class="stop"><span class="t">⛔ If it asks for a password</span> — the engine's ssh isn't using your key. See the troubleshooting note at the bottom of this tab; it traces back to the <b>Passwordless SSH</b> config.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="t4s3">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Confirm both containers</div><div class="step-do">Two containers, one network.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman ps"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> two rows — a <code class="inl">postgres</code> one and an <code class="inl">adminer</code> one — both <code class="inl">Up</code>. Only Adminer shows a published port (<code class="inl">8200-&gt;8080</code>).</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="t4s4">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Open Adminer &amp; prove the two talk</div><div class="step-do">Log into the database by its service name.</div></div></div>
+      <div class="step-body">
+        <p style="margin:4px 0 0;font-size:14px">In your browser, open <span class="browser" data-tpl-browser="http://{{MACHINE}}:8200"></span> and fill the login form:</p>
+        <div class="see"><span class="t">✓ Log in with</span> — every value comes straight from the compose file:
+          <ul>
+            <li><b>System</b> → <code class="inl">PostgreSQL</code> &nbsp;<span style="color:var(--muted)">(switch it from the default MySQL)</span></li>
+            <li><b>Server</b> → <code class="inl">db</code> &nbsp;<span style="color:var(--muted)">(already pre-filled — the service name, not an IP or localhost)</span></li>
+            <li><b>Username</b> → <code class="inl">postgres</code></li>
+            <li><b>Password</b> → <code class="inl">demopass</code></li>
+            <li><b>Database</b> → <code class="inl">postgres</code> &nbsp;<span style="color:var(--muted)">(or leave it blank)</span></li>
+          </ul>
+          You land in the database. <b>That's the whole point of compose:</b> Adminer reached Postgres using the name <code class="inl">db</code>, which only resolves because compose put both containers on one shared network.
+        </div>
+        <details class="bts"><summary>Behind the scenes — where each value comes from</summary><div class="bts-body">
+          <p>Compose created a private network and registered each service under its name. Inside that network, <code class="inl">db</code> resolves to the Postgres container's address — no IPs, no linking, no published port. You only exposed <code class="inl">adminer</code> to the outside; the database stays internal.</p>
+          <p>The Postgres image, given <b>only</b> <code class="inl">POSTGRES_PASSWORD</code>, creates a superuser named <code class="inl">postgres</code> and a database named <code class="inl">postgres</code> by default — that's why both Username and Database are <code class="inl">postgres</code>. The <code class="inl">ADMINER_DEFAULT_SERVER: db</code> line is what pre-fills the Server box so you don't have to remember the service name. The driver, username, and password can't be pre-filled by the official image — that's why you still type those.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="step" data-step="t4opt">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Bonus: reach the database from a desktop SQL client</div><div class="step-do">Optional — publish the DB port and connect a real client, no SSH needed.</div></div></div>
+      <div class="step-body">
+        <p style="margin:4px 0 0;font-size:14px">Adminer proved the containers talk to <em>each other</em>. To connect from a client on <b>your own machine</b> (DBeaver, DataGrip, pgAdmin, <code class="inl">psql</code>, or Azure Data Studio with the Postgres extension), publish the database's port too. Here's the <b>whole file</b> with a <code class="inl">ports</code> line added to <code class="inl">db</code> — replace your <code class="inl">compose.yaml</code> with this:</p>
+        <div class="cmd"><pre>services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: demopass
+    ports:
+      - "8432:5432"
+  adminer:
+    image: docker.io/library/adminer:4
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - "8200:8080"</pre><button class="copy">Copy</button></div>
+        <div class="cmd-note">Re-run <code class="inl">podman compose up -d</code> to apply it. <code class="inl">8432</code> is the host port (any free one in 8000–9000); <code class="inl">5432</code> is Postgres's port inside the container.</div>
+        <div class="see"><span class="t">✓ Point your client at</span>
+          <ul>
+            <li><b>Host</b> → <code class="inl">{{MACHINE}}</code> &nbsp;<span style="color:var(--muted)">(the server itself — reached directly, no SSH)</span></li>
+            <li><b>Port</b> → <code class="inl">8432</code></li>
+            <li><b>Database / User / Password</b> → <code class="inl">postgres</code> / <code class="inl">postgres</code> / <code class="inl">demopass</code></li>
+          </ul>
+          The published port is reachable by <b>any</b> tool — same mechanism as the browser hitting Adminer, just speaking the database's wire protocol instead of HTTP.
+        </div>
+        <div class="note"><span class="t">⚠ Demo only</span> — this opens the database to anyone who can reach <code class="inl">{{MACHINE}}</code> on that port, guarded by a throwaway password. Fine for a quick demo; don't leave it running.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="t4s5">
+      <div class="step-head"><div class="check"></div><div><div class="step-title">Tear it down</div><div class="step-do">Clean up both containers and the network.</div></div></div>
+      <div class="step-body">
+        <div class="cmd"><pre data-tpl="podman compose down"></pre><button class="copy">Copy</button></div>
+        <div class="see"><span class="t">✓ You'll see</span> both containers stop and get removed, and the network deleted — your remote store is back to clean.</div>
+        <div class="note"><span class="t">⚠ This is throwaway</span> — anything you put in the database is gone the moment you <code class="inl">down</code> it, and a fresh <code class="inl">up</code> starts empty. That's fine for a demo; just don't store anything here you need to keep around.</div>
+      </div>
+    </div>
+    </div><!-- /flavor a -->
+
+    <div class="flavor" data-flavor="b">
+    <p class="flavor-intro">A single, bare <b>SQL Server</b> you connect to with SSMS — for a Microsoft SQL shop. No web UI to set up, just the database. Heavier than the quick demo: ~1.5 GB image, wants ~2 GB free RAM on the box, and ~20–30s to start.</p>
+
+      <div class="step" data-step="t4b1">
+        <div class="step-head"><div class="check"></div><div><div class="step-title">Create the compose file</div><div class="step-do">One service: SQL Server 2022.</div></div></div>
+        <div class="step-body">
+          <p style="margin:4px 0 0;font-size:14px">In a new folder on <b>your machine</b>, save this as <code class="inl">compose.yaml</code>:</p>
+          <div class="cmd"><pre>services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "8433:1433"</pre><button class="copy">Copy</button></div>
+          <div class="cmd-note"><code class="inl">ACCEPT_EULA: "Y"</code> accepts Microsoft's licence — required, or the container exits immediately. <code class="inl">MSSQL_SA_PASSWORD</code> must be <b>strong</b>: ≥8 chars with three of upper / lower / digit / symbol (the example qualifies — change it). <code class="inl">8433</code> is the host port (any free one in 8000–9000); <code class="inl">1433</code> is SQL Server's port inside.</div>
+          <details class="bts"><summary>Behind the scenes</summary><div class="bts-body">
+            <p>This image is much heavier than the Postgres demo — ~1.5 GB to pull, and SQL Server wants ~2 GB of RAM free. Fine for a one-off on a quiet box; be considerate on a busy shared one. The database is throwaway — <code class="inl">down</code> wipes it, a fresh <code class="inl">up</code> starts empty.</p>
+          </div></details>
+        </div>
+      </div>
+
+      <div class="step" data-step="t4b2">
+        <div class="step-head"><div class="check"></div><div><div class="step-title">Bring it up</div><div class="step-do">Pull and start SQL Server on the remote.</div></div></div>
+        <div class="step-body">
+          <div class="cmd"><pre data-tpl="podman compose up -d"></pre><button class="copy">Copy</button></div>
+          <div class="cmd-note">Run it from the folder that holds <code class="inl">compose.yaml</code>.</div>
+          <div class="see"><span class="t">✓ You'll see</span> the SQL Server image pull (~1.5 GB, one-time) and the container start on <code class="inl">{{MACHINE}}</code>.</div>
+          <div class="note"><span class="t">⏱ Give it a moment</span> — SQL Server is <b>not</b> ready the instant the command returns; it spends ~20–30s initializing. The next step waits for it.</div>
+        </div>
+      </div>
+
+      <div class="step" data-step="t4b3">
+        <div class="step-head"><div class="check"></div><div><div class="step-title">Wait until it's ready</div><div class="step-do">SSMS can't connect until SQL Server finishes starting.</div></div></div>
+        <div class="step-body">
+          <div class="cmd"><pre data-tpl="podman compose logs mssql"></pre><button class="copy">Copy</button></div>
+          <div class="see"><span class="t">✓ Watch for</span> the line <code class="inl">SQL Server is now ready for client connections</code>. Re-run the command until it shows up — or add <code class="inl">-f</code> to follow the log live, then <kbd>Ctrl</kbd>+<kbd>C</kbd> once you see it.</div>
+        </div>
+      </div>
+
+      <div class="step" data-step="t4b4">
+        <div class="step-head"><div class="check"></div><div><div class="step-title">Connect SQL Server Management Studio 20</div><div class="step-do">From SSMS on your Windows machine — no SSH involved.</div></div></div>
+        <div class="step-body">
+          <p style="margin:4px 0 0;font-size:14px">Open <b>SSMS 20</b> → <b>Connect → Database Engine</b>, and fill the dialog:</p>
+          <div class="see"><span class="t">✓ Connect with</span>
+            <ul>
+              <li><b>Server name</b> → <code class="inl">{{MACHINE}},8433</code> &nbsp;<span style="color:var(--muted)">(a <b>comma</b> before the port, not a colon — SQL Server convention)</span></li>
+              <li><b>Authentication</b> → <code class="inl">SQL Server Authentication</code></li>
+              <li><b>Login</b> → <code class="inl">sa</code></li>
+              <li><b>Password</b> → <code class="inl">YourStrong!Passw0rd</code> &nbsp;<span style="color:var(--muted)">(whatever you set)</span></li>
+            </ul>
+          </div>
+          <div class="note"><span class="t">⚠ Check "Trust server certificate"</span> — SSMS 20 sets <b>Encryption = Mandatory</b> by default, and the container uses a self-signed certificate. Without this box ticked you'll get <code class="inl">The certificate chain was issued by an authority that is not trusted</code>. It's on the same Connect dialog (Options ▸ Connection Security). Then click <b>Connect</b>.</div>
+          <div class="see"><span class="t">✓ You'll see</span> Object Explorer open with the server and its system databases (<code class="inl">master</code>, <code class="inl">tempdb</code>, <code class="inl">model</code>, <code class="inl">msdb</code>). You're connected to a containerized SQL Server running rootless on the shared box.</div>
+        </div>
+      </div>
+
+      <div class="step" data-step="t4b5">
+        <div class="step-head"><div class="check"></div><div><div class="step-title">Run a query to prove it</div><div class="step-do">Confirm it's really SQL Server 2022.</div></div></div>
+        <div class="step-body">
+          <p style="margin:4px 0 0;font-size:14px">Right-click the server → <b>New Query</b>, and run:</p>
+          <div class="cmd"><pre data-tpl="SELECT @@VERSION;"></pre><button class="copy">Copy</button></div>
+          <div class="see"><span class="t">✓ You'll see</span> the <code class="inl">Microsoft SQL Server 2022</code> version banner in the results grid — a container on the shared box, queried straight from SSMS on your desktop.</div>
+        </div>
+      </div>
+
+      <div class="step" data-step="t4b6">
+        <div class="step-head"><div class="check"></div><div><div class="step-title">Tear it down</div><div class="step-do">Stop and remove the container.</div></div></div>
+        <div class="step-body">
+          <div class="cmd"><pre data-tpl="podman compose down"></pre><button class="copy">Copy</button></div>
+          <div class="see"><span class="t">✓ You'll see</span> the container stop and get removed. The database goes with it — a fresh <code class="inl">up</code> starts empty.</div>
+          <div class="note"><span class="t">⚠ This is throwaway</span> — the database doesn't survive a <code class="inl">down</code>. Anything you create is gone when you tear it down; bring it back up and it's blank. Fine for a demo or a scratch SQL Server — just don't keep anything in it you care about.</div>
+        </div>
+      </div>
+    </div><!-- /flavor b -->
+
+    <!-- compose explainer -->
+    <div class="handshake">
+      <h3>🔐 Why compose is special — and why Passwordless SSH's config mattered</h3>
+      <p class="hs-sub"><code class="inl">podman compose</code> doesn't speak compose itself. It hands off to an <b>external engine</b> that makes its <b>own</b> SSH connection — ignoring the identity you set on the Podman connection. Here's the split.</p>
+      <svg class="diagram" viewBox="0 0 860 300" role="img" aria-label="Comparison: podman run uses Podman's own SSH and connection identity; podman compose uses an external engine's own SSH that reads ~/.ssh/config.">
+        <defs>
+          <marker id="ah4" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z" fill="#3fb950"/></marker>
+          <marker id="ah4w" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z" fill="#d29922"/></marker>
+        </defs>
+        <!-- Lane A: podman run -->
+        <rect x="16" y="44" width="150" height="52" rx="9" fill="#161b22" stroke="#1f6f37"/>
+        <foreignObject x="16" y="44" width="150" height="52"><div xmlns="http://www.w3.org/1999/xhtml" style="font:12px ui-monospace,monospace;color:#c2ccd6;padding:0 10px;height:52px;display:flex;align-items:center"><span style="font-family:-apple-system,sans-serif">Podman backend<br><code style="color:#3fb950">podman run / ps</code></span></div></foreignObject>
+        <rect x="206" y="40" width="178" height="60" rx="9" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="206" y="40" width="178" height="60"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.4 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:60px;display:flex;align-items:center"><span>Podman's <b>own</b> Go SSH client</span></div></foreignObject>
+        <rect x="424" y="44" width="184" height="52" rx="9" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="424" y="44" width="184" height="52"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.4 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:52px;display:flex;align-items:center"><span>key from the connection's <code style="font-family:ui-monospace,monospace;color:#3fb950">--identity</code></span></div></foreignObject>
+        <line x1="166" y1="70" x2="202" y2="70" stroke="#3fb950" stroke-width="2" marker-end="url(#ah4)"/>
+        <line x1="384" y1="70" x2="420" y2="70" stroke="#3fb950" stroke-width="2" marker-end="url(#ah4)"/>
+        <line x1="608" y1="70" x2="664" y2="128" stroke="#3fb950" stroke-width="2" marker-end="url(#ah4)"/>
+
+        <!-- Lane B: podman compose -->
+        <rect x="16" y="200" width="150" height="52" rx="9" fill="#161b22" stroke="#7a5c14"/>
+        <foreignObject x="16" y="200" width="150" height="52"><div xmlns="http://www.w3.org/1999/xhtml" style="font:12px ui-monospace,monospace;color:#c2ccd6;padding:0 10px;height:52px;display:flex;align-items:center"><span style="font-family:-apple-system,sans-serif">Compose<br><code style="color:#d29922">podman compose</code></span></div></foreignObject>
+        <rect x="206" y="192" width="178" height="68" rx="9" fill="#161b22" stroke="#2a3340"/>
+        <foreignObject x="206" y="192" width="178" height="68"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11px/1.35 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:68px;display:flex;align-items:center"><span>external engine's <b>own</b> ssh<br><span style="color:#8b949e;font-size:10.5px">docker-compose / podman-compose</span></span></div></foreignObject>
+        <rect x="424" y="200" width="184" height="52" rx="9" fill="#161b22" stroke="#7a5c14"/>
+        <foreignObject x="424" y="200" width="184" height="52"><div xmlns="http://www.w3.org/1999/xhtml" style="font:11.5px/1.4 -apple-system,sans-serif;color:#c2ccd6;padding:0 11px;height:52px;display:flex;align-items:center"><span>key from <code style="font-family:ui-monospace,monospace;color:#d29922">~/.ssh/config</code> only</span></div></foreignObject>
+        <line x1="166" y1="226" x2="202" y2="226" stroke="#d29922" stroke-width="2" marker-end="url(#ah4w)"/>
+        <line x1="384" y1="226" x2="420" y2="226" stroke="#d29922" stroke-width="2" marker-end="url(#ah4w)"/>
+        <line x1="608" y1="226" x2="664" y2="172" stroke="#d29922" stroke-width="2" marker-end="url(#ah4w)"/>
+
+        <!-- server -->
+        <rect x="668" y="112" width="176" height="76" rx="11" fill="#161b22" stroke="#1f6f37"/>
+        <foreignObject x="668" y="112" width="176" height="76"><div xmlns="http://www.w3.org/1999/xhtml" style="font:12px -apple-system,sans-serif;color:#e6edf3;padding:10px 12px;height:76px;display:flex;flex-direction:column;justify-content:center"><div style="font-weight:700">🐧 <span data-inl="{{MACHINE}}">{{MACHINE}}</span></div><div style="color:#8b949e;font-size:11px">rootless podman socket</div></div></foreignObject>
+      </svg>
+      <ol class="hs-steps">
+        <li><code class="inl">podman run</code> uses Podman's built-in SSH and the key you set with <code class="inl">--identity</code> (the <b>Podman backend</b> step).</li>
+        <li><code class="inl">podman compose</code> hands off to an external engine that opens its <b>own</b> SSH connection and never sees that identity — it only reads <code class="inl">~/.ssh/config</code> and default keys.</li>
+        <li class="win">Same server, two different SSH clients, two config sources. <b>That's</b> why the key is named in both places — the connection (<b>Podman backend</b>) <em>and</em> <code class="inl">~/.ssh/config</code> (<b>Passwordless SSH</b>). Two places, one key, by design.</li>
+      </ol>
+
+      <div class="note" style="margin-top:16px"><span class="t">🛠 Troubleshooting — if <code class="inl">podman compose up</code> asks for a password</span>
+        <p style="margin:8px 0 0">The engine's ssh isn't using your key. Re-check the <b>Passwordless SSH</b> step: <code class="inl">~/.ssh/config</code> must have the <code class="inl">IdentityFile</code> line pointing at <code class="inl">~/.ssh/podman</code>. The engine makes its own SSH connection and only reads that config — fix it there and compose connects. This is the exact payoff of that step.</p>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:var(--faint);font-size:13px;margin-top:36px">
+      Containers running rootless on shared Linux, brought up with one command from your laptop. That's the whole point. 🎉
+    </p>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script type="module">
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const DEFAULTS = { machine:"dev-server", user:"you" };
+const inputs = { machine:$("#v-machine"), user:$("#v-user") };
+
+function loadState(){
+  const h = new URLSearchParams(location.hash.slice(1));
+  return {
+    machine: h.get("m") || DEFAULTS.machine,
+    user:    h.get("u") || DEFAULTS.user,
+    tab:     h.get("t") || "1",
+    flavor:  h.get("f") || "a",
+    done:    h.get("done") ? h.get("done").split(",").filter(Boolean) : [],
+  };
+}
+let state = loadState();
+
+function vars(){ return { MACHINE:inputs.machine.value||DEFAULTS.machine,
+                          USER:inputs.user.value||DEFAULTS.user }; }
+function fill(tpl, v){ return tpl.replace(/\{\{(\w+)\}\}/g, (_,k)=> v[k] ?? `{{${k}}}`); }
+
+function renderCmd(pre, v){
+  pre.textContent = fill(pre.getAttribute("data-tpl"), v);
+  const re = new RegExp("(" + [v.MACHINE,v.USER].map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|") + ")","g");
+  pre.innerHTML = pre.textContent.replace(re, m=>`<span class="tok">${m}</span>`);
+}
+
+function render(){
+  const v = vars();
+  $$("[data-tpl]").forEach(p=>renderCmd(p,v));
+  $$("[data-tpl-browser]").forEach(el=>{ el.textContent = fill(el.getAttribute("data-tpl-browser"), v); });
+  $$("[data-inl]").forEach(el=>{ el.textContent = fill(el.getAttribute("data-inl"), v); });
+  save();
+}
+
+function save(){
+  state.machine=inputs.machine.value; state.user=inputs.user.value;
+  const p=new URLSearchParams();
+  p.set("m",state.machine); p.set("u",state.user); p.set("t",state.tab); p.set("f",state.flavor);
+  if(state.done.length) p.set("done", state.done.join(","));
+  history.replaceState(null,"","#"+p.toString());
+}
+
+inputs.machine.value=state.machine; inputs.user.value=state.user;
+Object.values(inputs).forEach(i=>i.addEventListener("input",render));
+
+// tag static text nodes containing {{TOKENS}} so render() refreshes them
+(function tagStatic(){
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  const hits=[];
+  while(walker.nextNode()){ if(/\{\{\w+\}\}/.test(walker.currentNode.nodeValue)) hits.push(walker.currentNode); }
+  hits.forEach(n=>{
+    const el=n.parentElement;
+    if(el && !el.hasAttribute("data-tpl") && !el.hasAttribute("data-inl") && !el.hasAttribute("data-tpl-browser")){
+      el.setAttribute("data-inl", el.textContent);
+    }
+  });
+})();
+
+// ---- tabs ----
+const tabs=$$(".tab"), panels=$$(".taskpanel");
+function setTab(id, scroll){
+  state.tab=id; save();
+  tabs.forEach(t=>t.classList.toggle("active", t.dataset.tab===id));
+  panels.forEach(p=>p.classList.toggle("active", p.dataset.panel===id));
+  if(scroll) $("nav.tabs").scrollIntoView({behavior:"smooth", block:"start"});
+}
+tabs.forEach(t=>t.addEventListener("click",()=>setTab(t.dataset.tab,true)));
+
+// ---- copy ----
+$$(".copy").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const pre=btn.parentElement.querySelector("pre");
+    navigator.clipboard.writeText(pre.textContent).then(()=>{
+      btn.textContent="Copied ✓"; btn.classList.add("copied"); toast();
+      setTimeout(()=>{btn.textContent="Copy";btn.classList.remove("copied");},1400);
+    });
+  });
+});
+let toastT;
+function toast(){ const t=$("#toast"); t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),1100); }
+
+// ---- step completion + per-tab done ----
+const steps=$$(".step");
+const inActiveFlavor = s => { const fl=s.closest(".flavor"); return !fl || fl.classList.contains("active"); };
+function paintDone(){
+  steps.forEach(s=>s.classList.toggle("done", state.done.includes(s.dataset.step)));
+  const act = steps.filter(inActiveFlavor);
+  const doneN = act.filter(s=>state.done.includes(s.dataset.step)).length;
+  $("#done-n").textContent=doneN; $("#total-n").textContent=act.length;
+  $("#bar").style.width=(act.length?100*doneN/act.length:0)+"%";
+  // per-tab complete check (only steps in the active flavor count)
+  tabs.forEach(t=>{
+    const ps=$$(`.taskpanel[data-panel='${t.dataset.tab}'] .step`).filter(inActiveFlavor);
+    const all = ps.length>0 && ps.every(s=>state.done.includes(s.dataset.step));
+    t.classList.toggle("complete", all);
+  });
+}
+function setFlavor(f){
+  state.flavor=f; save();
+  $$(".flavor-btn").forEach(b=>b.classList.toggle("active", b.dataset.flavor===f));
+  $$(".flavor").forEach(p=>p.classList.toggle("active", p.dataset.flavor===f));
+  paintDone();
+}
+$$(".flavor-btn").forEach(b=>b.addEventListener("click",()=>setFlavor(b.dataset.flavor)));
+steps.forEach(s=>{
+  s.querySelector(".check").addEventListener("click",()=>{
+    const id=s.dataset.step;
+    state.done = state.done.includes(id) ? state.done.filter(x=>x!==id) : [...state.done,id];
+    save(); paintDone();
+  });
+});
+
+render();
+setTab(state.tab,false);
+setFlavor(state.flavor);
+paintDone();
+</script>
+</body>
+</html>

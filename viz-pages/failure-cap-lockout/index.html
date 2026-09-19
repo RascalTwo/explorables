@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The failure cap — why the counter hangs off the credential</title>
+<meta name="viz:uid" content="v-03fbc73c4e2c">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="The failure cap — why the counter hangs off the credential">
+<meta name="viz:description" content="A hundred failed attempts from a hundred addresses. Watch two counters: the one keyed on the source never gets past 1, and the one keyed on the credential reaches the cap. Same attack, same traffic, opposite outcomes — which is why rate limiting is not a substitute for a per-credential failure cap. Then what happens at the cap when your design has no disable verb, and why a random identifier is what stops the cap becoming a denial-of-service button. Generic; no product names.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1120px; margin: 0 auto; padding: 28px 26px 90px }
+  h2 { font-size: 19px; margin: 42px 0 6px; display: flex; align-items: baseline; gap: 10px }
+  h2 .n { font: 700 12px/1 var(--mono); color: var(--bg); background: var(--accent);
+          padding: 5px 7px; border-radius: 4px }
+  .lede { color: var(--muted); margin: 0 0 16px; max-width: 78ch; line-height: 1.65 }
+  .lede b { color: var(--text) }
+
+  .modes { display: flex; gap: 9px; flex-wrap: wrap; margin: 0 0 14px }
+  .modes button { font: 600 12px/1 var(--sans); color: var(--muted); background: var(--panel);
+    border: 1px solid var(--border); border-radius: 999px; padding: 9px 15px; cursor: pointer }
+  .modes button.on { color: var(--text); background: var(--panel-2); border-color: var(--accent) }
+
+  figure { margin: 0; border: 1px solid var(--border); border-radius: 10px;
+           background: var(--panel); padding: 6px 4px 2px; overflow: hidden }
+  svg { display: block; width: 100%; height: auto }
+  figcaption { color: var(--muted); font-size: 12.5px; line-height: 1.6; padding: 8px 14px 10px }
+  figcaption b { color: var(--text) }
+
+  .src-lbl { font: 600 11px/1 var(--mono); fill: var(--muted) }
+  .attempt { stroke-width: 1.5; fill: none }
+  .attempt.same { stroke: var(--c3) }
+  .attempt.rot  { stroke: var(--c8, var(--c4)) }
+  .ctr-box { fill: var(--panel-2); stroke: var(--border) }
+  .ctr-box.trip { stroke: var(--danger) }
+  .ctr-box.safe { stroke: var(--good) }
+  .ctr-t { font: 700 12px/1 var(--sans); fill: var(--text) }
+  .ctr-k { font: 500 10.5px/1 var(--mono); fill: var(--faint) }
+  .ctr-n { font: 700 30px/1 var(--mono); fill: var(--text) }
+  .ctr-n.trip { fill: var(--danger) }
+  .ctr-n.safe { fill: var(--good) }
+  .ctr-v { font: 600 10.5px/1 var(--sans) }
+  .ctr-v.trip { fill: var(--danger) }
+  .ctr-v.safe { fill: var(--good) }
+  .cred { fill: var(--panel-2); stroke: var(--accent) }
+  .cred-t { font: 600 11.5px/1 var(--mono); fill: var(--text) }
+  .cred-t.cid { font-size: 14px; fill: var(--accent) }
+  .note-t { font: 500 10.5px/1 var(--sans); fill: var(--faint) }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 6px }
+  .card { border: 1px solid var(--border); border-radius: 8px; background: var(--panel);
+          padding: 15px 16px }
+  .card.std { border-color: var(--good) }
+  .card.ours { border-color: var(--warn) }
+  .card h3 { margin: 0 0 3px; font-size: 14.5px }
+  .card .tag { display: block; font: 700 9px/1 var(--sans); letter-spacing: .11em;
+               text-transform: uppercase; margin-bottom: 8px }
+  .card.std .tag { color: var(--good) }
+  .card.ours .tag { color: var(--warn) }
+  .card p { margin: 0 0 9px; color: var(--muted); font-size: 12.5px; line-height: 1.65 }
+  .card p:last-child { margin-bottom: 0 }
+  .card b { color: var(--text) }
+
+  table.plain { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px }
+  .plain th { text-align: left; font: 600 10.5px/1 var(--sans); letter-spacing: .09em;
+    text-transform: uppercase; color: var(--faint); padding: 0 10px 9px;
+    border-bottom: 1px solid var(--border) }
+  .plain td { padding: 11px 10px; border-bottom: 1px solid var(--border);
+              vertical-align: top; color: var(--muted) }
+  .plain td:first-child { color: var(--text); font-weight: 600; white-space: nowrap }
+  .plain b { color: var(--text) }
+  .src { color: var(--faint); font-size: 11.5px; margin-top: 8px; line-height: 1.6; max-width: 92ch }
+  /* --- family wiring ----------------------------------------------------
+     This page is a member of the client-credentials family, whose spine is
+     ../client-credentials-flow/. Links are relative, so the family only works
+     if it moves as a unit. Styling copied from token-compromise-map so the
+     backlink and footer read identically across the set. */
+  .backlink { margin-top: 13px; font-size: 13px; color: var(--muted) }
+  .backlink a { color: var(--accent) }
+  footer.foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-size: 12.5px; color: var(--faint); line-height: 1.7 }
+  footer.foot a { color: var(--accent) }
+</style>
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>The failure cap — why the counter hangs off the credential</h1>
+  <div class="sub">A hundred guesses from a hundred addresses. Two counters watch the same
+  traffic and disagree completely.</div>
+  <p class="backlink">This is the control that guards the moment drawn in
+  <a href="../client-credentials-flow/">the client credentials flow</a> — the client presenting
+  its secret to the token endpoint. How that secret is made and stored is
+  <a href="../dive-credential-created/">How a credential is created securely</a>; what a stolen
+  one buys an attacker is <a href="../token-compromise-map/">What an attacker has to steal</a>.</p>
+</div>
+
+<h2><span class="n">1</span>Same attack, two counters</h2>
+<p class="lede">An attacker is guessing the secret for one <code>client_id</code>. Switch how they source the
+traffic and watch what each counter does. <b>Both counters see every single attempt</b> — the
+only difference is what they count it against.</p>
+
+<p class="lede" style="margin-bottom:12px"><b>"Consecutive" is scoped to one
+<code>client_id</code>.</b> The counter is a value on that credential's own row: it goes up on a
+failed attempt against <em>that</em> identifier and back to zero the moment one succeeds. Failures
+against a different <code>client_id</code> increment a different counter and never mix — which is
+also why an attacker cannot burn down a caller's counter without knowing which caller to aim at.</p>
+
+<div class="modes" id="modes">
+  <button data-m="0" class="on">Attacker uses one address</button>
+  <button data-m="1">Attacker rotates addresses</button>
+</div>
+
+<figure>
+  <svg id="fig" viewBox="0 0 1080 400" role="img"
+    aria-label="A hundred failed authentication attempts arriving at one credential. Two counters are shown: one keyed on the source address and one keyed on the credential. When the attempts come from one address both counters reach a hundred. When the attempts are spread across a hundred addresses the per-source counter never exceeds one while the per-credential counter still reaches a hundred."></svg>
+  <figcaption id="cap"></figcaption>
+</figure>
+
+<h2><span class="n">2</span>What the standard actually asks for</h2>
+<p class="lede">The requirement is specific about the key, and it is the part most often
+implemented wrongly — as volumetric throttling, which counts something else.</p>
+
+<table class="plain">
+  <thead><tr><th style="width:210px">Control</th><th style="width:210px">Counts</th><th>What it stops, and what it doesn't</th></tr></thead>
+  <tbody>
+    <tr><td>Rate limiting</td><td>requests <b>per source</b>, over time</td>
+      <td>Stops one address flooding you. <b>Does nothing about distributed guessing</b> — an attacker with a hundred addresses never trips it, and a legitimate caller behind a shared egress address can trip it by accident.</td></tr>
+    <tr><td>Failure cap</td><td>consecutive failures <b>per <code>client_id</code></b>, reset on success</td>
+      <td>Stops guessing regardless of where it comes from. Says nothing about volume, so it is not a throttle and does not protect against resource exhaustion.</td></tr>
+  </tbody>
+</table>
+<p class="src">NIST SP 800-63B-4 §3.2.2 <i>Rate Limiting (Throttling)</i> requires limiting
+<b>"consecutive failed authentication attempts using a specific authenticator on a single
+subscriber account to no more than 100 by disabling that authenticator."</b> Progressive delays
+and bot-detection challenges are an additional MAY, layered on top — not a substitute for the cap.</p>
+
+<h2><span class="n">3</span>What happens at the cap</h2>
+<p class="lede"><b>The standard names exactly one verb, and it is <em>disable</em>.</b> Delete is
+not an alternative it offers — delete comes from somewhere else entirely.</p>
+<p class="lede">Two specifications describe how a client gets created and managed over an API.
+<b>RFC 7591</b>, <i>OAuth 2.0 Dynamic Client Registration Protocol</i>, covers registering one.
+<b>RFC 7592</b>, <i>OAuth 2.0 Dynamic Client Registration Management Protocol</i>, covers what you
+may do to it afterwards — read, update, delete. In 7592, delete means <b>deprovisioning a client
+that is finished with</b>, not locking out one that is under attack. Answering the cap with it is a
+<b>substitution</b>, and it is worth saying so in those words: a reviewer who is told the standard
+offered both will check.</p>
+
+<div class="two">
+  <div class="card std">
+    <span class="tag">What the standard says</span>
+    <h3>Disable</h3>
+    <p>The authenticator stops working and <b>the identifier survives</b>. Somebody with authority
+    turns it back on, and the credential that was already distributed keeps working.</p>
+    <p>Recovery is an administrative act. Nothing has to be re-issued, re-collected or
+    re-configured at the caller's end.</p>
+  </div>
+  <div class="card ours">
+    <span class="tag">What RFC 7592 offers instead</span>
+    <h3>Delete</h3>
+    <p>The row goes. There is no disabled state to return from, so <b>hitting the cap is
+    operationally identical to a revocation</b> — a new identifier and a new secret, issued and
+    distributed from scratch.</p>
+    <p>That is a defensible answer. It is <b>not the same answer</b>, and it should be stated as a
+    substitution rather than presented as compliance.</p>
+  </div>
+</div>
+
+<h2><span class="n">4</span>Neither verb is free — so the choice is which one to build</h2>
+<p class="lede">The instinct after §3 is that this is a gap in the design: the standard wanted
+disable, the design only had delete. <b>That framing is wrong in a way worth correcting</b>, because
+delete was not sitting there either. It was written by hand, to the spec's shape, because the
+framework does not provide it. Both verbs cost the same kind of work.</p>
+
+<table class="plain">
+  <thead><tr><th style="width:270px">Where you might expect it</th><th>What it actually gives you</th></tr></thead>
+  <tbody>
+    <tr><td>NIST SP 800-63B-4 §3.2.2</td><td>Names the requirement and one verb: enforce the cap <b>"by disabling that authenticator"</b>. Says nothing about how, because it is not a protocol document.</td></tr>
+    <tr><td>RFC 7591<br><span style="font-weight:400;color:var(--faint)">Dynamic Client Registration</span></td><td>Create. Returns the identifier and secret plus a metadata set — <b>which has no status field</b>.</td></tr>
+    <tr><td>RFC 7592<br><span style="font-weight:400;color:var(--faint)">Dynamic Client Registration <b style="font-weight:600">Management</b> · <i>Experimental</i></span></td><td><b>Read, update, delete.</b> That is the whole surface: no disable, no suspend, and <b>no intermediate state between active and deleted</b>. Note the category — it is <b>Experimental, not Standards Track</b>, and it says outright that <em>"not all authorization servers supporting dynamic client registration will support these management methods."</em> Implementing a subset is what the spec expects, not a shortfall against it.</td></tr>
+    <tr><td>The framework you build on</td><td>Typically <b>create and read, and no further</b> — and often switched off by default, because dynamic registration is a feature most deployments never turn on. <b>Update and delete are commonly absent, and disable is absent everywhere</b>, so the verb you need is yours to write either way.</td></tr>
+  </tbody>
+</table>
+<p class="src">This is not a hole in the specifications. <b>Client lifecycle was never in scope for
+the protocol</b> — whether a client may currently authenticate is a policy decision, the same
+category as which scopes it may request or which grants it is allowed, and none of those are in the
+RFCs either. Off-the-shelf authorization servers all ship an enabled/disabled flag as a product
+feature; that surface belongs to the vendor, not the standard. <b>An organisation that builds its
+own authorization server inherits it.</b></p>
+
+<div class="two" style="margin-top:14px">
+  <div class="card std">
+    <span class="tag">Disable — what it takes</span>
+    <h3>A predicate, not a mechanism</h3>
+    <p>A flag on the client record — which can ride in whatever settings blob the framework already
+    persists, so nothing has to be subclassed — plus a lookup that returns nothing when the flag is
+    set.</p>
+    <p><b>The enforcement is already written.</b> If the lookup yields nothing, the token endpoint
+    behaves exactly as it does for a client that never existed, down a path the framework already
+    ships and already tests. What you are adding is a <em>filter on a query</em>, not an
+    authentication decision.</p>
+  </div>
+  <div class="card ours">
+    <span class="tag">Delete — what it took</span>
+    <h3>A whole verb, by hand</h3>
+    <p>An endpoint, the removal itself, and the authorisation around it — all written to the spec's
+    shape rather than invented, precisely because the framework had nothing to call.</p>
+    <p>Which is the useful comparison: <b>the more destructive verb was the more expensive one to
+    build, and it is already shipped.</b> Adding the reversible one is the smaller job of the two,
+    and it is the one the standard actually asked for.</p>
+    <p>None of this is a library falling short. The management spec is <b>Experimental</b> and its
+    operations are <b>optional by design</b>; dynamic registration itself is a feature most
+    deployments never enable, which is why implementations stop where they do. <b>Low demand for an
+    optional feature is a better explanation than an oversight</b>, and it is the honest one to give
+    a reviewer who asks why this was hand-written.</p>
+  </div>
+</div>
+
+<div class="two" style="margin-top:14px; grid-template-columns:1fr">
+  <div class="card ours">
+    <span class="tag">And the half that is not code at all</span>
+    <h3>Writing the verb is the cheap part</h3>
+    <p>Whichever verb gets built, it creates <b>a state somebody has to notice</b>. If nothing tells
+    the caller, the failure they see is indistinguishable from a wrong secret — and the first thing
+    they will do is retry, which is the traffic that stopped them in the first place.</p>
+    <p>So it needs a reason recorded against the record, a signal to whoever operates the calling
+    system, and a documented way back. <b>Skipping that turns a security control into an
+    unexplained outage</b>, and it is the part no library was ever going to provide.</p>
+    <p>Worth being clear about what either verb buys, too: it stops the caller getting a
+    <em>new</em> token. Tokens already issued are self-contained and keep working until they
+    expire, so containment is bounded by the token lifetime either way.</p>
+  </div>
+</div>
+
+<h2><span class="n">5</span>The cap is a weapon if the identifier is guessable</h2>
+<p class="lede">Anything that disables an account on failed attempts can be pointed at somebody
+else's account. This is the standard objection to lockout, and it has a structural answer.</p>
+
+<table class="plain">
+  <thead><tr><th style="width:230px">If the identifier is…</th><th>Then the cap is…</th></tr></thead>
+  <tbody>
+    <tr><td>Sequential, or derived from a name</td>
+      <td><b>A denial-of-service button.</b> Anyone who can guess or enumerate identifiers can lock out any caller they choose, by failing on purpose. The control meant to protect the account becomes the cheapest way to take it down.</td></tr>
+    <tr><td>A random value with no meaning</td>
+      <td><b>Hard to aim.</b> An attacker cannot target a caller they cannot name, and an identifier they already know usually means they have the secret too — at which point the cap is not the thing standing between them and the data.</td></tr>
+  </tbody>
+</table>
+<p class="src">This is the reason to generate identifiers randomly rather than derive them from
+anything meaningful, and it is worth recording as the rationale — a design that randomises them
+for tidiness gets the protection by accident and can lose it in a refactor that nobody flags.</p>
+
+<div class="elsewhere">
+  <span class="lbl">Elsewhere — both of the above, independently</span>
+  <a href="https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html">Authentication Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+  <span class="why">Reaches §1 and §4 of this page from a different direction and states both
+  plainly: <em>"the counter of failed logins should be associated with the account itself, rather
+  than the source IP address, in order to prevent an attacker from making login attempts from a
+  large number of different IP addresses"</em>, and <em>"care must be taken to prevent it from
+  being used to cause a denial of service by locking out other users' accounts."</em> Its
+  mitigation is a self-service recovery path — worth reading, because a machine-to-machine
+  credential has no such path, and that absence is exactly why §3's delete-versus-disable choice
+  costs more here than it would for a human login.</span>
+</div>
+
+<footer class="foot">
+  Generic throughout — authorization server, client, resource server. No product names, no network
+  topology. The cap of 100 is the figure NIST SP 800-63B-4 §3.2.2 names; substitute your own before
+  quoting it.
+  <br>Part of the client-credentials family:
+  <a href="../client-credentials-flow/">the flow</a> ·
+  <a href="../dive-credential-created/">the credential</a> ·
+  <a href="../token-compromise-map/">what an attacker has to steal</a> ·
+  <a href="../token-kill-switch/">turning it off</a>.
+</footer>
+
+<script type="module">
+  import { $, $$, vizAudit } from "/_kit/viz.js";
+
+  /* Two modes, one attack. The ONLY variable is how many source addresses the
+     hundred attempts are spread across; the credential and the attempt count are
+     identical. That is the entire argument, so nothing else may differ. */
+  const N = 100;
+  const MODES = [
+    { srcs: 1,
+      nm: 'one address',
+      cap: 'From a single address both counters agree, which is exactly why this case is misleading. Rate limiting appears to be doing the job — and it is, against an attacker who has made it easy.' },
+    { srcs: N,
+      nm: 'a hundred addresses',
+      cap: 'Same hundred attempts, same one credential, same secret being guessed. The per-source counter never reaches 2, so a threshold of 5, or 50, or 500 would never fire. <b>The traffic did not change; only the bookkeeping did.</b> This is why a rate limit cannot stand in for the cap.' },
+  ];
+
+  const svg = $("#fig"), cap = $("#cap");
+
+  const draw = (m) => {
+    const { srcs } = MODES[m];
+    const perSource = Math.ceil(N / srcs);
+    const rows = Math.min(srcs, 14);           // at most 14 source rows are drawn
+    const y0 = 62, gap = rows > 1 ? 206 / (rows - 1) : 0;
+
+    const sources = Array.from({ length: rows }, (_, i) => {
+      const y = rows === 1 ? 165 : y0 + i * gap;
+      return `<line class="attempt ${srcs === 1 ? 'same' : 'rot'}" x1="150" y1="${y}" x2="390" y2="165"/>`
+        + `<circle cx="144" cy="${y}" r="3.5" fill="var(--${srcs === 1 ? 'c3' : 'c4'})"/>`;
+    }).join('');
+
+    svg.innerHTML =
+        `<text class="src-lbl" x="144" y="40" text-anchor="middle">${srcs === 1 ? '1 source' : srcs + ' sources'}</text>`
+      + sources
+      + `<text class="note-t" x="144" y="316" text-anchor="middle">${N} attempts either way, all against 9f4c2ae1</text>`
+      + `<rect class="cred" x="382" y="132" width="168" height="68" rx="8"/>`
+      + `<text class="note-t" x="466" y="152" text-anchor="middle">one client_id</text>`
+      + `<text class="cred-t cid" x="466" y="172" text-anchor="middle">9f4c2ae1</text>`
+      + `<text class="note-t" x="466" y="190" text-anchor="middle">wrong secret, every time</text>`
+      // The colour says WAS THE ATTACK CAUGHT, not whether the number went up.
+      // First cut had it the other way round and the per-source counter went
+      // green precisely when it had failed to notice a hundred guesses.
+      + counterAt(596, 26, 'Keyed on the source', 'per address — what a rate limit counts',
+          perSource, srcs === 1,
+          srcs === 1 ? '✓ reaches the cap — caught'
+                     : '✕ no threshold fires — attack missed')
+      + counterAt(596, 212, 'Keyed on the client_id', 'per client_id, reset on success',
+          N, true, '✓ reaches the cap — in both modes');
+
+    cap.innerHTML = MODES[m].cap;
+  };
+
+  // `caught` = did this counter notice the attack. Green means the control did
+  // its job; red means it sat there while a hundred guesses went past.
+  function counterAt(x, y, title, key, n, caught, verdict) {
+    const c = caught ? 'safe' : 'trip';
+    // 30px mono digit is ~18px wide; +12 keeps a real gap rather than
+    // butting the label against the last digit.
+    const numX = x + 18 + String(n).length * 18 + 12;
+    return `<rect class="ctr-box ${c}" x="${x}" y="${y}" width="300" height="158" rx="9"/>`
+      + `<text class="ctr-t" x="${x + 18}" y="${y + 28}">${title}</text>`
+      + `<text class="ctr-k" x="${x + 18}" y="${y + 46}">${key}</text>`
+      + `<text class="ctr-n ${c}" x="${x + 18}" y="${y + 92}">${n}</text>`
+      + `<text class="ctr-k" x="${numX}" y="${y + 92}">consecutive failures</text>`
+      + `<text class="ctr-v ${c}" x="${x + 18}" y="${y + 130}">${verdict}</text>`;
+  }
+
+  $$("#modes button").forEach(b => b.onclick = () => {
+    $$("#modes button").forEach(o => o.classList.toggle("on", o === b));
+    draw(+b.dataset.m);
+  });
+  draw(0);
+  vizAudit(svg);
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="AI">
+<meta name="viz:uid" content="v-41689fdc0901">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browser Automation for AI Agents</title>
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Browser Automation for AI Agents">
+<meta name="viz:description" content="Head-to-head on the ways an AI agent can drive a browser — the Codex Chrome extension, Claude Code's Chrome integration, and model-agnostic Playwright MCP — across what each can do and where each breaks down.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2a313c;
+    --txt:#e6edf3; --dim:#9aa6b2; --faint:#6b7785;
+    --codex:#10a37f; --codexbg:rgba(16,163,127,.12);
+    --claude:#d77757; --claudebg:rgba(215,119,87,.12);
+    --pw:#3b82f6; --pwbg:rgba(59,130,246,.12);
+    --good:#3fb950; --warn:#d29922; --bad:#f85149;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:32px 20px 80px;}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:1.8rem;font-weight:700;letter-spacing:-.02em}
+  .sub{color:var(--dim);margin-top:6px;font-size:.95rem}
+  .meta{color:var(--faint);font-size:.8rem;margin-top:4px}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .card.codex::before{background:var(--codex)} .card.claude::before{background:var(--claude)} .card.pw::before{background:var(--pw)}
+  .card h2{font-size:1.15rem;display:flex;align-items:center;gap:8px}
+  .badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:6px}
+  .b-codex{background:var(--codexbg);color:var(--codex)} .b-claude{background:var(--claudebg);color:var(--claude)} .b-pw{background:var(--pwbg);color:var(--pw)}
+  .tagline{color:var(--dim);font-size:.85rem;margin:8px 0 14px;min-height:2.6em}
+  .card ul{list-style:none;font-size:.84rem}
+  .card li{padding:5px 0 5px 18px;position:relative;color:var(--txt)}
+  .card li::before{position:absolute;left:0;top:5px;font-size:.8rem}
+  li.pro::before{content:"✓";color:var(--good)} li.con::before{content:"✕";color:var(--bad)} li.neu::before{content:"•";color:var(--faint)}
+
+  /* matrix */
+  .section-h{font-size:1.05rem;font-weight:650;margin:38px 0 14px;display:flex;align-items:center;gap:10px}
+  .section-h .hint{font-size:.75rem;color:var(--faint);font-weight:400}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:.83rem;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  th,td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+  thead th{background:var(--panel2);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);position:sticky;top:0}
+  thead th.c-codex{color:var(--codex)} thead th.c-claude{color:var(--claude)} thead th.c-pw{color:var(--pw)}
+  tbody tr:last-child td{border-bottom:none}
+  td.rowlabel{font-weight:600;color:var(--txt);width:165px;background:var(--panel2)}
+  tr:hover td{background:rgba(255,255,255,.025)}
+  tr:hover td.rowlabel{background:var(--panel2)}
+  .pill{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 6px;border-radius:5px;margin-right:5px;vertical-align:middle}
+  .p-good{background:rgba(63,185,80,.16);color:var(--good)} .p-warn{background:rgba(210,153,34,.16);color:var(--warn)} .p-bad{background:rgba(248,81,73,.16);color:var(--bad)} .p-neu{background:rgba(139,148,158,.16);color:var(--dim)}
+  td small{color:var(--faint);display:block;margin-top:2px;font-size:.74rem}
+  .diff-row td:not(.rowlabel){background:rgba(210,153,34,.05)}
+
+  /* decision helper */
+  .helper{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px;margin-top:38px}
+  .helper h3{font-size:1.05rem;margin-bottom:4px}
+  .helper .sub2{color:var(--dim);font-size:.85rem;margin-bottom:18px}
+  .qs{display:flex;flex-direction:column;gap:14px}
+  .q{}
+  .q .qt{font-size:.9rem;font-weight:600;margin-bottom:7px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{background:var(--panel2);border:1px solid var(--border);color:var(--dim);font-size:.82rem;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.12s;user-select:none}
+  .opt:hover{border-color:var(--faint);color:var(--txt)}
+  .opt.sel{background:#fff;color:#0d1117;border-color:#fff;font-weight:600}
+  .result{margin-top:20px;padding:18px;border-radius:12px;background:var(--panel2);border:1px solid var(--border);font-size:.9rem;min-height:60px}
+  .result .winner{font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .scorebar{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .sb{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:9px 12px}
+  .sb .nm{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .sb .track{height:6px;background:#0d1117;border-radius:3px;margin-top:6px;overflow:hidden}
+  .sb .fill{height:100%;border-radius:3px;transition:width .3s}
+  .reset{margin-top:14px;font-size:.78rem;color:var(--faint);cursor:pointer;text-decoration:underline}
+
+  footer{margin-top:46px;color:var(--faint);font-size:.78rem;line-height:1.7;border-top:1px solid var(--border);padding-top:18px}
+  a{color:#58a6ff}
+  @media(max-width:840px){.cards{grid-template-columns:1fr}td.rowlabel{width:auto}table{font-size:.78rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Browser Automation for AI Agents</h1>
+  <div class="sub">Codex Chrome extension &nbsp;·&nbsp; Claude Code Chrome integration &nbsp;·&nbsp; Playwright MCP (model-agnostic)</div>
+  <div class="meta">Snapshot 2026‑05‑12 · sourced from the deep-research report · both vendor tools are beta/days-old — specifics will drift</div>
+
+  <div class="cards">
+    <div class="card codex">
+      <h2><span class="badge b-codex">OpenAI</span> Codex Chrome extension</h2>
+      <div class="tagline">Web Store extension ↔ native-messaging host ↔ Codex app. Drives your <b>real signed-in Chrome</b>. Launched May 7 2026.</div>
+      <ul>
+        <li class="pro">Zero-config: Codex app → Plugins → add Chrome plugin</li>
+        <li class="pro">Bundled with ChatGPT Plus/Pro/Business/Enterprise (temp. Free/Go)</li>
+        <li class="pro">Tab-groups-per-thread; can access browser history (per-request)</li>
+        <li class="con">Locked to ChatGPT / Codex</li>
+        <li class="con">Chrome only — no Edge / Firefox / Brave</li>
+        <li class="con">Broad Chrome permissions (debugger, history, modify site data)</li>
+        <li class="neu">Best if you already live in ChatGPT</li>
+      </ul>
+    </div>
+    <div class="card claude">
+      <h2><span class="badge b-claude">Anthropic</span> Claude Code + Chrome</h2>
+      <div class="tagline">Web Store extension ↔ native-messaging host ↔ Claude Code CLI / VS Code. Drives your <b>real Chrome or Edge</b>. Beta.</div>
+      <ul>
+        <li class="pro">Strongest default guardrails (category blocklist, per-domain JS approval, no autonomous mode)</li>
+        <li class="pro"><code>claude --chrome</code> / <code>/chrome</code>; auto in VS Code</li>
+        <li class="pro">GIF session recording built in</li>
+        <li class="con">Requires a <b>direct</b> Anthropic plan — not via Bedrock / Vertex / Foundry</li>
+        <li class="con">Chrome + Edge only; no Brave/Arc; no WSL</li>
+        <li class="con">2 disclosed extension CVEs in 2026 (ShadowPrompt, ClaudeBleed) — both patched</li>
+        <li class="neu">Best if you already live in Claude Code / VS Code</li>
+      </ul>
+    </div>
+    <div class="card pw">
+      <h2><span class="badge b-pw">Microsoft · OSS</span> Playwright MCP</h2>
+      <div class="tagline">MCP server (stdio / HTTP). Launches its <b>own Playwright browser</b> — isolated by default. Apache‑2.0, free.</div>
+      <ul>
+        <li class="pro">No lock-in — any model, any MCP client; self-hostable, Docker</li>
+        <li class="pro">Chromium + Firefox + WebKit + Chrome channels</li>
+        <li class="pro">Testing-grade: network mocking, tracing, video, assertions</li>
+        <li class="pro">Accessibility-tree first — "no vision models"</li>
+        <li class="con">"<b>Not a security boundary</b>" — guardrails are the client's job</li>
+        <li class="con">~13.7K tokens/request just for tool definitions</li>
+        <li class="neu">Best for portability, self-hosting, web testing, custom agents</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-h">Comparison matrix <span class="hint">⬛ amber-tinted rows = the three options materially diverge</span></div>
+  <table id="matrix"></table>
+
+  <div class="helper">
+    <h3>Which should I pick?</h3>
+    <div class="sub2">Answer what's true for you — the bars update live. (Heuristic, not gospel.)</div>
+    <div class="qs" id="qs"></div>
+    <div class="result" id="result">Pick some answers above…</div>
+    <div class="scorebar" id="scores"></div>
+    <div class="reset" id="reset">reset answers</div>
+  </div>
+
+  <footer>
+    All three share the same core promise — build your app, then test/debug/operate it in a browser without leaving the agent — and the same core risk: <b>prompt injection from page content</b>. The real fork is <i>vendor bridge vs. agnostic server</i>. "Uses your real browser" is convenience <i>and</i> attack surface; Playwright MCP's isolated-by-default browser has the smaller blast radius. Token cost is now a first-class criterion — leaner agnostic peers (<code>browser-use</code> ~89% WebVoyager @ 200–400 tok/page, Vercel <code>agent-browser</code>, Playwright CLI+skills) undercut Playwright MCP's overhead.<br>
+    Full report: <code>~/Documents/Browser_Automation_Agents_Research_20260512/</code> · primary sources: <a href="https://developers.openai.com/codex/app/chrome-extension">Codex docs</a> · <a href="https://code.claude.com/docs/en/chrome">Claude Code Chrome docs</a> · <a href="https://github.com/microsoft/playwright-mcp">playwright-mcp</a>
+  </footer>
+</div>
+
+<script>
+// ---------- matrix data ----------
+// pill: g=good w=warn b=bad n=neutral ; text + optional small note
+const COLS = ["Codex Chrome ext.","Claude Code + Chrome","Playwright MCP"];
+const ROWS = [
+  { label:"Model / vendor lock-in", diff:true,
+    cells:[
+      {p:"b",t:"ChatGPT / Codex only"},
+      {p:"b",t:"Direct Anthropic plan only", s:"not via Bedrock / Vertex / Foundry"},
+      {p:"g",t:"None", s:"any model, any MCP client"} ]},
+  { label:"Where the browser runs", diff:true,
+    cells:[
+      {p:"w",t:"Your real signed-in Chrome"},
+      {p:"w",t:"Your real Chrome / Edge"},
+      {p:"g",t:"Its own Playwright browser", s:"isolated by default; persistent / extension mode optional"} ]},
+  { label:"Browsers supported", diff:true,
+    cells:[
+      {p:"w",t:"Chrome only"},
+      {p:"w",t:"Chrome + Edge", s:"no Brave/Arc, no WSL"},
+      {p:"g",t:"Chromium · Firefox · WebKit · Chrome channels"} ]},
+  { label:"Setup effort",
+    cells:[
+      {p:"g",t:"Low", s:"Plugins menu → add Chrome plugin"},
+      {p:"g",t:"Low", s:"install ext (≥1.0.36) + claude --chrome / /chrome"},
+      {p:"w",t:"Medium", s:"npx @playwright/mcp@latest in MCP config; 50+ flags"} ]},
+  { label:"Cost / token overhead", diff:true,
+    cells:[
+      {p:"g",t:"Bundled w/ ChatGPT plan", s:"temp. Free/Go; 2× usage promo → May 31 2026"},
+      {p:"g",t:"Bundled w/ direct Anthropic plan"},
+      {p:"w",t:"$0 (Apache-2.0)", s:"but ~13.7K tokens/req of tool defs — leaner peers exist"} ]},
+  { label:"Page → model channel",
+    cells:[
+      {p:"n",t:"DOM + screenshots"},
+      {p:"n",t:"DOM + screenshots + computer tool"},
+      {p:"g",t:"Accessibility tree first", s:'"no vision models"; vision opt-in'} ]},
+  { label:"Built-in guardrails", diff:true,
+    cells:[
+      {p:"w",t:"Per-domain approval, history confirmation, blocklist", s:'"treat pages as untrusted"'},
+      {p:"g",t:"Strongest defaults", s:"category blocklist (banks/crypto/adult…), per-domain JS approval, purchase confirmation, no CAPTCHA-solving, no autonomous mode"},
+      {p:"b",t:'"Not a security boundary"', s:"host/origin allowlists & isolated profiles only — category/action gating is the client's job"} ]},
+  { label:"Disclosed 2026 vulns", diff:true,
+    cells:[
+      {p:"g",t:"None found"},
+      {p:"w",t:"ShadowPrompt + ClaudeBleed", s:"both patched"},
+      {p:"g",t:"None tool-specific", s:"general MCP-server caveats apply"} ]},
+  { label:"Testing features", diff:true,
+    cells:[
+      {p:"b",t:"Not surfaced"},
+      {p:"w",t:"Not surfaced", s:"GIF recording yes"},
+      {p:"g",t:"First-class", s:"network mock · tracing · video · assertions"} ]},
+  { label:"Self-host / CI",
+    cells:[
+      {p:"b",t:"No"},
+      {p:"b",t:"No"},
+      {p:"g",t:"Yes", s:"Docker · HTTP/SSE · headless"} ]},
+  { label:"Best at",
+    cells:[
+      {p:"n",t:"\"I live in ChatGPT — operate my logged-in SaaS + test my app\""},
+      {p:"n",t:"\"I live in Claude Code/VS Code — debug→fix loop + authenticated apps, conservative defaults\""},
+      {p:"n",t:"\"Portable, self-hosted, model-agnostic browser tool; rigorous web testing; custom agents\""} ]},
+];
+
+const PILLLBL = {g:"good",w:"ok",b:"weak",n:"—"};
+function pillEl(p){ if(p==="n") return ""; const cls={g:"p-good",w:"p-warn",b:"p-bad",n:"p-neu"}[p]; return `<span class="pill ${cls}">${PILLLBL[p]}</span>`; }
+
+const tbl = document.getElementById("matrix");
+let thead = `<thead><tr><th>Dimension</th><th class="c-codex">Codex Chrome ext.</th><th class="c-claude">Claude Code + Chrome</th><th class="c-pw">Playwright MCP</th></tr></thead>`;
+let tb = "<tbody>";
+for(const r of ROWS){
+  tb += `<tr class="${r.diff?'diff-row':''}"><td class="rowlabel">${r.label}</td>`;
+  for(const c of r.cells){ tb += `<td>${pillEl(c.p)}${c.t}${c.s?`<small>${c.s}</small>`:""}</td>`; }
+  tb += `</tr>`;
+}
+tb += "</tbody>";
+tbl.innerHTML = thead + tb;
+
+// ---------- decision helper ----------
+// each option contributes weighted points per answer. idx: 0=Codex 1=Claude 2=PW
+const QUESTIONS = [
+  { q:"Which agent do you already pay for / use daily?",
+    opts:[
+      {l:"ChatGPT / Codex", w:[3,0,0]},
+      {l:"Claude (direct plan: Pro/Max/Team/Ent)", w:[0,3,0]},
+      {l:"Claude via Bedrock / Vertex / Foundry only", w:[0,-2,2]},
+      {l:"Mix / neither / building a product", w:[0,0,2]} ]},
+  { q:"How much do you care about avoiding vendor lock-in?",
+    opts:[
+      {l:"A lot — must be model/platform agnostic", w:[-2,-2,4]},
+      {l:"Somewhat", w:[0,0,1]},
+      {l:"Don't care", w:[1,1,0]} ]},
+  { q:"Do you need to self-host / run in CI / headless?",
+    opts:[
+      {l:"Yes", w:[-3,-3,4]},
+      {l:"No — interactive dev only", w:[1,1,0]} ]},
+  { q:"How important are testing features (network mocking, tracing, video, assertions)?",
+    opts:[
+      {l:"Core to what I'm doing", w:[-1,-1,3]},
+      {l:"Nice to have", w:[0,0,1]},
+      {l:"Not needed", w:[1,1,0]} ]},
+  { q:"How conservative does the default security posture need to be?",
+    opts:[
+      {l:"Very — regulated / sensitive, want strong defaults out of the box", w:[0,3,-1]},
+      {l:"I'll configure guardrails myself", w:[0,0,2]},
+      {l:"Average", w:[1,1,1]} ]},
+  { q:"Token / context budget of the agent?",
+    opts:[
+      {l:"Tight — minimize tool overhead", w:[1,1,-2], note:"…and consider browser-use / agent-browser / Playwright CLI instead of Playwright MCP"},
+      {l:"Comfortable", w:[0,0,1]} ]},
+  { q:"Do you need to drive your already-logged-in browser session (Gmail, Salesforce, internal SSO)?",
+    opts:[
+      {l:"Yes, that's the whole point", w:[2,2,0], note:"…Playwright MCP can do it too via persistent/extension mode, but it's not the default"},
+      {l:"No / isolated browser is fine or preferred", w:[0,0,2]} ]},
+  { q:"Which engine do you need?",
+    opts:[
+      {l:"Firefox or WebKit/Safari coverage required", w:[-3,-3,3]},
+      {l:"Chromium-family is fine", w:[1,1,0]} ]},
+];
+
+const state = QUESTIONS.map(()=>null);
+const qsEl = document.getElementById("qs");
+QUESTIONS.forEach((Q,qi)=>{
+  const d = document.createElement("div"); d.className="q";
+  let html = `<div class="qt">${qi+1}. ${Q.q}</div><div class="opts">`;
+  Q.opts.forEach((o,oi)=>{ html += `<span class="opt" data-q="${qi}" data-o="${oi}">${o.l}</span>`; });
+  html += `</div>`; d.innerHTML = html; qsEl.appendChild(d);
+});
+
+const META = [
+  {nm:"Codex Chrome ext.", color:"var(--codex)", pick:"Use the Codex Chrome extension — bundled, zero-config via the Plugins menu, built for operating your logged-in SaaS + testing your web app. Keep its allowlist tight; deny browser-history access unless a task needs it."},
+  {nm:"Claude Code + Chrome", color:"var(--claude)", pick:"Use <code>claude --chrome</code> (or <code>/chrome</code>). Strongest default guardrails of the three. Don't enable Chrome \"by default\" unless you need it — it inflates context. On Bedrock/Vertex/Foundry only? You'll need a separate claude.ai account or go agnostic."},
+  {nm:"Playwright MCP", color:"var(--pw)", pick:"Use Playwright MCP. Default to <b>isolated</b> profiles; only use persistent/extension mode when a task truly needs your logged-in state. Set <code>--allowed-hosts</code>/<code>--blocked-origins</code> aggressively, keep file access workspace-scoped — remember it's <b>not a security boundary</b>, so put auth/approval logic in the client."},
+];
+
+function recompute(){
+  const sc=[0,0,0]; const notes=new Set();
+  state.forEach((oi,qi)=>{ if(oi===null) return; const o=QUESTIONS[qi].opts[oi]; o.w.forEach((v,k)=>sc[k]+=v); if(o.note) notes.add(o.note); });
+  const answered = state.filter(x=>x!==null).length;
+  // render bars
+  const min=Math.min(...sc,0), max=Math.max(...sc,1); const span=Math.max(max-min,1);
+  const sb = META.map((m,i)=>{ const pct=Math.round(((sc[i]-min)/span)*100);
+    return `<div class="sb"><div class="nm" style="color:${m.color}">${m.nm}</div><div class="track"><div class="fill" style="width:${pct}%;background:${m.color}"></div></div><div style="font-size:.72rem;color:var(--faint);margin-top:4px">score ${sc[i]>0?'+':''}${sc[i]}</div></div>`;
+  }).join("");
+  document.getElementById("scores").innerHTML = sb;
+  const res = document.getElementById("result");
+  if(answered===0){ res.innerHTML = "Pick some answers above…"; return; }
+  const best = sc.indexOf(Math.max(...sc));
+  const tie = sc.filter(v=>v===sc[best]).length>1;
+  let html = `<div class="winner" style="color:${META[best].color}">→ ${tie?'(close call) ':''}${META[best].nm}</div><div>${META[best].pick}</div>`;
+  if(notes.size) html += `<div style="margin-top:10px;font-size:.82rem;color:var(--dim)">${[...notes].map(n=>'↳ '+n).join("<br>")}</div>`;
+  if(answered<QUESTIONS.length) html += `<div style="margin-top:10px;font-size:.78rem;color:var(--faint)">(${answered}/${QUESTIONS.length} answered — answer the rest to sharpen it)</div>`;
+  res.innerHTML = html;
+}
+qsEl.addEventListener("click",e=>{ const t=e.target.closest(".opt"); if(!t) return;
+  const qi=+t.dataset.q, oi=+t.dataset.o;
+  state[qi] = (state[qi]===oi)?null:oi;
+  [...qsEl.querySelectorAll(`.opt[data-q="${qi}"]`)].forEach(el=>el.classList.toggle("sel", +el.dataset.o===state[qi]));
+  recompute();
+});
+document.getElementById("reset").addEventListener("click",()=>{ state.fill(null); [...qsEl.querySelectorAll(".opt")].forEach(el=>el.classList.remove("sel")); recompute(); });
+recompute();
+</script>
+</body>
+</html>

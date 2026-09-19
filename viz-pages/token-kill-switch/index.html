@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turning it off</title>
+<!-- Publish posture — the SOLE source of truth for build.ts. Default "local" = stays
+     on this machine, never published. Change to "public" (open web) or "private"
+     (magic-link sealed) ONLY when you intend to share this viz. -->
+<meta name="viz:uid" content="v-b2c41a41588f">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Turning it off">
+<meta name="viz:description" content="Self-contained tokens cannot be recalled, so containment is a choice between five levers with very different costs. Each drawn against time from the moment you find out, with its collateral damage shown beside it — and a grid of which lever actually works for which compromise. Token lifetime is the dial that moves every bar.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1240px; margin: 0 auto; padding: 30px 26px 80px }
+  .viz-header h1 { max-width: 26ch }
+  .viz-header .sub { max-width: 90ch }
+  .backlink { margin-top: 13px; font-size: 13px; color: var(--muted) }
+  .backlink a { color: var(--accent) }
+
+  .controls { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin: 24px 0 8px; align-items: start }
+  .universe { display: grid; grid-template-columns: 1fr 1fr; gap: 11px }
+  .uni, .ttl {
+    text-align: left; cursor: pointer; font: inherit; color: var(--muted);
+    background: var(--panel); border: 1px solid var(--border); border-radius: 9px; padding: 12px 15px;
+  }
+  .uni:hover, .ttl:hover { border-color: var(--muted); color: var(--text) }
+  .uni[aria-selected="true"], .ttl[aria-selected="true"] {
+    border-color: var(--accent); color: var(--text);
+    background: color-mix(in srgb, var(--accent) 10%, var(--panel)) }
+  .uni .num { display: block; font: 600 10.5px/1 var(--mono); letter-spacing: .08em; color: var(--faint) }
+  .uni[aria-selected="true"] .num { color: var(--accent) }
+  .uni .nm { display: block; margin: 6px 0 4px; font-size: 14.5px; font-weight: 600 }
+  .uni .as { display: block; font-size: 12px; color: var(--faint); line-height: 1.45 }
+  .ttlwrap .cap { font: 600 10.5px/1 var(--mono); letter-spacing: .08em; color: var(--faint); margin-bottom: 9px }
+  .ttlrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px }
+  .ttl { text-align: center; padding: 10px 4px; font-size: 13px; font-weight: 600 }
+  .ttlwrap .note { margin: 9px 0 0; font-size: 11.5px; color: var(--faint); line-height: 1.45 }
+  .hint { font-size: 12px; color: var(--faint); margin: 14px 0 22px }
+  .hint kbd { font: 11px var(--mono); border: 1px solid var(--border); border-bottom-width: 2px;
+              border-radius: 4px; padding: 2px 5px; color: var(--muted) }
+
+  figure { margin: 0 }
+  figure svg { display: block; width: 100%; height: auto; background: var(--panel);
+               border: 1px solid var(--border); border-radius: 10px }
+  figcaption { margin-top: 10px; font-size: 12.5px; color: var(--faint); max-width: 94ch }
+
+  .grid { stroke: var(--border); stroke-width: 1; fill: none }
+  .axis { stroke: var(--border); stroke-width: 1.5 }
+  .tick { font: 10.5px var(--mono); fill: var(--faint) }
+  .tick.hi { fill: var(--accent) }
+  .axname { font: 600 11px var(--sans); fill: var(--muted); letter-spacing: .08em }
+  .lname { font: 600 13px var(--sans); fill: var(--text) }
+  .lsub  { font: 11px var(--sans); fill: var(--faint) }
+  .bar { transition: width .45s cubic-bezier(.4,0,.2,1), x .45s cubic-bezier(.4,0,.2,1) }
+  .bar.attack { fill: color-mix(in srgb, var(--danger) 78%, transparent) }
+  .bar.coll   { fill: color-mix(in srgb, var(--warn) 62%, transparent) }
+  .bar.ongoing{ fill: color-mix(in srgb, var(--warn) 30%, transparent); stroke: var(--warn); stroke-width: 1 }
+  .blabel { font: 10.5px var(--mono); fill: var(--muted) }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 14px; font-size: 12.5px; color: var(--muted) }
+  .legend b { color: var(--text) }
+  .legend .item { display: flex; align-items: center; gap: 8px }
+  .legend .sw { width: 22px; height: 11px; border-radius: 3px }
+  .legend .sw.attack { background: color-mix(in srgb, var(--danger) 78%, transparent) }
+  .legend .sw.coll { background: color-mix(in srgb, var(--warn) 62%, transparent) }
+
+  h2 { font-size: 19px; margin: 46px 0 6px; letter-spacing: -.2px }
+
+  /* --- lever 4 detail ---------------------------------------------------- */
+  figure.deny { margin: 14px 0 0; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--panel); padding: 8px 6px 4px; overflow: hidden }
+  figure.deny svg { display: block; width: 100%; height: auto }
+  figure.deny figcaption { color: var(--muted); font-size: 12.5px; line-height: 1.6;
+                           padding: 6px 12px 8px }
+  figure.deny figcaption b { color: var(--text) }
+  .dstep { fill: var(--panel-2); stroke: var(--border) }
+  .dstep.local  { stroke: var(--c5) }
+  .dstep.intro  { stroke: var(--warn) }
+  .dnum { font: 700 10px/1 var(--mono); fill: var(--faint) }
+  .dt   { font: 700 12.5px/1 var(--sans); fill: var(--text) }
+  .dd   { font: 400 11px/1.35 var(--sans); fill: var(--muted) }
+  .dedge { stroke: var(--border); stroke-width: 1.5; fill: none }
+  .dedge.local { stroke: var(--c5) }
+  .dedge.intro { stroke: var(--warn) }
+  .dtag { font: 700 9px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase }
+  .dtag.local { fill: var(--c5) }
+  .dtag.intro { fill: var(--warn) }
+  .dnote { font: 500 10px/1 var(--sans); fill: var(--faint) }
+  .dplane { font: 700 9px/1 var(--sans); letter-spacing: .1em; fill: var(--faint) }
+
+  .denywhen { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px }
+  .dw { border: 1px solid var(--border); border-radius: 8px; background: var(--panel);
+        padding: 14px 16px }
+  .dw h4 { margin: 0 0 8px; font-size: 13.5px; color: var(--text) }
+  .dw p { margin: 0 0 10px; color: var(--muted); font-size: 12.5px; line-height: 1.65 }
+  .dw p:last-child { margin-bottom: 0 }
+  .dw b { color: var(--text) }
+  .src-line { margin-top: 14px; padding-left: 13px; border-left: 3px solid var(--border);
+              color: var(--muted); font-size: 12.5px; line-height: 1.7; max-width: 92ch }
+  .src-line b { color: var(--text) }
+  h2 + p.lede { margin: 0 0 18px; color: var(--muted); max-width: 94ch }
+
+  table.works { width: 100%; border-collapse: collapse; font-size: 13px }
+  table.works th, table.works td { padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top }
+  table.works thead th { text-align: center; font-size: 11px; color: var(--faint);
+    text-transform: uppercase; letter-spacing: .05em }
+  table.works thead th:first-child { text-align: left }
+  table.works td { text-align: center }
+  table.works td.lev { text-align: left; color: var(--text); font-weight: 600; width: 26% }
+  table.works td.lev .h { display: block; font: 400 11px/1.5 var(--sans); color: var(--faint); margin-top: 4px }
+  table.works td .v { font-size: 12px; display: block; line-height: 1.45 }
+  table.works td.yes .v { color: var(--good) }
+  table.works td.part .v { color: var(--warn) }
+  table.works td.no .v { color: var(--danger) }
+  table.works td .g { font-weight: 700 }
+  table.works tr:last-child td { border-bottom: none }
+  table.works tr.only td { background: color-mix(in srgb, var(--good) 8%, transparent) }
+
+  .takeaway { margin-top: 22px; padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--accent); border-left-width: 4px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--panel)); font-size: 15px; line-height: 1.55 }
+  .takeaway.warn { border-color: var(--warn); background: color-mix(in srgb, var(--warn) 8%, var(--panel)) }
+  .takeaway strong { color: var(--text) }
+  .takeaway + .takeaway { margin-top: 12px }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px }
+  .split div { border: 1px solid var(--border); border-radius: 8px; padding: 14px 17px }
+  .split .h { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 9px }
+  .split .plan .h { color: var(--good) } .split .emrg .h { color: var(--danger) }
+  .split p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55 }
+  .split strong { color: var(--text) }
+
+  footer.foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-size: 12.5px; color: var(--faint); line-height: 1.7 }
+  footer.foot a { color: var(--accent) }
+</style>
+</head>
+<body>
+
+<header class="viz-header">
+  <h1>Turning it off</h1>
+  <p class="sub">A self-contained token cannot be recalled. Once it is signed and handed over, no
+  message you send will reach the verifier that is about to accept it. So containment is not one
+  action — it is a choice between five levers with <strong>wildly different speeds and wildly
+  different collateral damage</strong>, and the choice has to be made before the incident, not during it.</p>
+  <p class="backlink">Which secret leaked, and what it buys the attacker, is the companion page:
+  <a href="../token-compromise-map/">What an attacker has to steal</a>. The mechanism behind all of
+  it is the <a href="../jwks-explainer/">JWKS explainer</a>. Every lever here is a response; the
+  preventive control on the token endpoint is <a href="../failure-cap-lockout/">The failure cap</a>.</p>
+</header>
+
+<div class="controls">
+  <div class="universe" role="tablist" id="unis"></div>
+  <div class="ttlwrap">
+    <div class="cap">ACCESS TOKEN LIFETIME</div>
+    <div class="ttlrow" role="tablist" id="ttls"></div>
+    <p class="note">The one dial that moves every red bar at once. Watch what happens to
+      “wait it out” when you change it.</p>
+  </div>
+</div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> to switch universe · the URL keeps both settings, so an
+exact scenario can be linked directly</p>
+
+<figure>
+  <div id="chart"></div>
+  <figcaption id="cap"></figcaption>
+</figure>
+
+<div class="legend">
+  <span class="item"><span class="sw attack"></span> <b>Attacker still capable</b> — the window in which their access still works</span>
+  <span class="item"><span class="sw coll"></span> <b>Collateral</b> — legitimate traffic broken by the lever itself</span>
+</div>
+
+<h2>Which lever actually works, for which compromise</h2>
+<p class="lede">Speed is only half the question. A lever that contains fast but does not address the
+thing that leaked is not containment at all — and this is the table that catches it.</p>
+
+<table class="works">
+  <thead><tr>
+    <th>Lever</th><th>Stolen token</th><th>Stolen client secret</th>
+    <th>Stolen signing key</th><th>JWKS host controlled</th>
+  </tr></thead>
+  <tbody id="wrows"></tbody>
+</table>
+
+<h2>Lever 4, in detail — because there are two of it</h2>
+<p class="lede">Every lever above except this one is a single action. <b>Deny-listing is a design
+with two very different implementations</b>, and which one you pick decides whether the issuer
+ends up on the path of every API call. They are frequently described as one thing. They are not.</p>
+
+<figure class="deny">
+  <svg id="denyfig" viewBox="0 0 1120 470" role="img"
+    aria-label="Four steps shared by both implementations — mint and stamp a jti, revoke it, check it, let it expire — drawn once, with the third step splitting into two branches: a local deny-list checked in memory on the resource server, and introspection which calls the issuer on every request."></svg>
+  <figcaption>The first two steps and the last are identical. <b>Only step 3 differs</b> — and it is
+  the one that repeats on every single request.</figcaption>
+</figure>
+
+<div class="denywhen">
+  <div class="dw">
+    <h4>Where the four steps come from</h4>
+    <p><b>RFC 7519 §4.1.7</b> defines <code>jti</code> as a unique identifier whose value
+    <em>"MUST be assigned in a manner that ensures that there is a negligible probability that
+    the same value will be accidentally assigned to a different data object"</em>, and says
+    outright it <em>"can be used to prevent the JWT from being replayed."</em> Use of the claim
+    is <b>OPTIONAL</b> — so if you want this lever, stamping it is step zero.</p>
+    <p><b>RFC 7662</b> defines introspection as <em>"a method for a protected resource to query
+    an OAuth 2.0 authorization server"</em>. A method — not a requirement. It names structured
+    tokens as the alternative that does not need it. <b>Nothing obliges you to introspect.</b></p>
+    <p><b>OWASP</b> reaches the deny-list from the other direction: its JSON Web Token Cheat
+    Sheet treats a <code>jti</code> deny-list, held until the token would have expired anyway,
+    as the standard answer to invalidating a JWT before its own expiry.</p>
+  </div>
+  <div class="dw">
+    <h4>Which one, and when</h4>
+    <p><b>Neither, while the lifetime is short.</b> Rows 1 and 2 of the chart above already
+    contain the attacker within the token's own lifetime, at zero build cost and zero
+    collateral. That is the default and it needs no new component.</p>
+    <p><b>Local deny-list, when that delay is too long.</b> If the gap between deciding to
+    stop someone and their traffic actually stopping has to be seconds rather than a token
+    lifetime, this buys it. The check is an in-memory set lookup on the resource server, so
+    the authorization server stays off the request path and can be down without taking the
+    API with it. The cost is a propagation delay and one small control-plane channel.</p>
+    <p><b>Introspection, when even that is too slow.</b> It removes propagation delay entirely
+    and charges a network call to the issuer on every request, forever. <b>The issuer becomes
+    a hard dependency of every API call</b> — the availability coupling that self-contained
+    tokens exist to avoid.</p>
+  </div>
+</div>
+
+<p class="src-line"><b>The distinction worth keeping:</b> revoking is rare and can tolerate a few
+seconds — that is a <b>control-plane</b> problem. Validating happens on every request and can
+tolerate nothing — that is the <b>data plane</b>. Introspection solves the rare problem by putting
+its mechanism into the common path. A local deny-list keeps them apart.</p>
+
+<div id="notes"></div>
+
+<div class="elsewhere">
+  <span class="lbl">Elsewhere — the same lever, priced differently</span>
+  <a href="https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html">JSON Web Token Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+  <span class="why">Its answer to "how do I turn one off" is <b>lever 4 above</b> — a deny-list
+  keyed on <code>jti</code>, held only until the token would have expired anyway. Worth reading
+  for the framing difference rather than a disagreement: it presents the deny-list as the
+  standard solution to JWT revocation, and this page presents it as the one lever whose
+  collateral never ends, because the issuer is now on the path of every API call. Both are
+  true. Which one governs depends entirely on the token lifetime — the dial at the top of this
+  page.</span>
+</div>
+
+<footer class="foot">
+  Generic throughout — authorization server, client, resource server. No product names, no network
+  topology. <strong>Rotation assumes a five-minute key cache at the verifier</strong> — a common
+  library default. That assumption is doing real work here: it is why rotation contains no faster
+  than waiting at the two shortest lifetimes, and why it pulls ahead only once tokens outlive the
+  cache. Substitute your own number before quoting any rotation row.
+  <br><strong>The times are orders of magnitude, not measurements</strong>: a restart is
+  seconds, a vault rotation with a rollout is minutes, a firewall change is however long your change
+  process takes. Substitute your own numbers before quoting any of them.
+</footer>
+
+<script type="module">
+import { stepper, saveHash, loadHash, $, $$, esc } from "/_kit/viz.js";
+
+const UNIVERSES = [
+  { tag: "UNIVERSE A", nm: "Ephemeral signing key",
+    as: "In memory, never written down. Rotation is a restart.", rotate: 0.3,
+    rotName: "Restart the issuer", rotSub: "the key dies with the process" },
+  { tag: "UNIVERSE B", nm: "Key from a secret manager",
+    as: "Persisted and guarded. Rotation is a procedure someone owns.", rotate: 8,
+    rotName: "Emergency key rotation", rotSub: "write a new key, then roll every instance" },
+];
+const TTLS = [{ m: 1, l: "1 min" }, { m: 5, l: "5 min" }, { m: 15, l: "15 min" }, { m: 60, l: "60 min" }];
+
+/* Assumed JWKS cache lifetime at the verifier, in minutes. Five is a common
+   library default and the page states it rather than hiding it.
+
+   This constant exists because rotation does NOT contain instantly, and drawing
+   it as though it does was wrong. Discarding a key stops the ISSUER using it; a
+   verifier goes on accepting tokens signed with it until either its cached copy
+   expires or the token hits its own `exp`, whichever comes first. So the real
+   containment time is min(CACHE, ttl) — and at a short lifetime that is just the
+   lifetime, which makes rotation no faster than doing nothing.
+
+   Do not "fix" this by shortening CACHE. The cache is an availability buffer as
+   much as a performance one: every expiry forces a fetch, and a fetch that fails
+   with an empty cache fails the request. Rotation is picked up by the
+   unknown-kid refresh path regardless of this number. */
+const CACHE = 5;
+const contain = (ttl) => Math.min(CACHE, ttl);
+
+/* Every duration is in minutes from the moment you find out. `end` may be a
+   number, "ttl" (bounded by token lifetime), "rot" (this universe's rotation
+   time) or "never". Collateral is drawn on the same row, beneath. */
+const LEVERS = (u, ttl) => [
+  { nm: "Wait it out", sub: "no action; rely on expiry",
+    attack: "never", attackNote: "they keep re-authenticating and minting fresh tokens",
+    coll: 0 },
+  { nm: "Deactivate the credential", sub: "stop the client getting new tokens",
+    attack: ttl, attackNote: `no new tokens, but the one they hold works for its full ${ttl} min`,
+    coll: 0 },   // that client going down afterwards is intended, not collateral
+  { nm: "Block it at the edge", sub: "a gateway or firewall rule",
+    attack: 3, attackNote: "as fast as your change process; only covers traffic through the edge",
+    coll: 0 },
+  { nm: "Deny-list + introspect", sub: "check every token against the issuer",
+    attack: 1, attackNote: "near-immediate once it propagates",
+    coll: "ongoing", collNote: "permanent: the issuer is now on the path of every single API call" },
+  { nm: UNIVERSES[u].rotName, sub: UNIVERSES[u].rotSub,
+    // The ACT is fast; the CONTAINMENT is not. Verifiers keep honouring the
+    // discarded key until their cache turns over or the token expires.
+    attack: UNIVERSES[u].rotate + contain(ttl),
+    attackNote: contain(ttl) >= ttl
+      ? `the act takes ${u === 0 ? "seconds" : "minutes"}, but verifiers honour the old key until it turns over — bounded here by the ${ttl} min lifetime, so no faster than waiting`
+      : `the act takes ${u === 0 ? "seconds" : "minutes"}, then up to ${CACHE} min while verifiers still hold the old key — still well inside the ${ttl} min lifetime`,
+    coll: UNIVERSES[u].rotate + contain(ttl),
+    collNote: "every outstanding token dies — but as each verifier notices, not at one instant",
+    total: true },
+];
+
+const WORKS = [
+  { nm: "Wait it out", h: "no action", c: [["part", "◑", "bounded by exp"], ["no", "✗", "they just mint another"], ["no", "✗", "they mint their own"], ["no", "✗", "nothing changes"]] },
+  { nm: "Deactivate the credential", h: "at the issuer", c: [["part", "◑", "stops renewal only"], ["yes", "✓", "cuts off new tokens"], ["no", "✗", "forgery needs no credential"], ["no", "✗", "irrelevant"]] },
+  { nm: "Block it at the edge", h: "gateway / firewall", c: [["part", "◑", "if it comes via the edge"], ["part", "◑", "if it comes via the edge"], ["no", "✗", "forged tokens look normal"], ["part", "◑", "blocks reads of the key set"]] },
+  { nm: "Deny-list + introspect", h: "issuer on every call", c: [["yes", "✓", "the fastest fix here"], ["yes", "✓", "deny per token"], ["part", "◑", "only if you can enumerate them"], ["no", "✗", "the forgery is still valid"]] },
+  // "Stolen client secret → yes, kills it too" was wrong and is now corrected.
+  // Rotating the key invalidates the tokens they are holding; it does nothing to
+  // their ability to present the secret and mint a fresh one, signed with the new
+  // key, moments later. That is what deactivating the credential is for. Killing
+  // the tokens while leaving the credential live is a pause, not containment.
+  { nm: "Rotate the signing key", h: "restart, or vault write", cls: "only",
+    c: [["yes", "✓", "kills it, once verifiers turn over"],
+        ["part", "◑", "kills their current token; they mint a new one with the secret"],
+        ["yes", "✓", "the only lever that works"],
+        ["yes", "✓", "republishes a key they do not hold"]] },
+];
+
+const unis = $("#unis"), ttls = $("#ttls"), chart = $("#chart"), cap = $("#cap"),
+      wrows = $("#wrows"), notes = $("#notes");
+
+unis.innerHTML = UNIVERSES.map((u, i) =>
+  `<button class="uni" role="tab" id="uni-${i}" aria-selected="false">
+     <span class="num">${u.tag}</span><span class="nm">${esc(u.nm)}</span><span class="as">${esc(u.as)}</span>
+   </button>`).join("");
+ttls.innerHTML = TTLS.map((t, i) =>
+  `<button class="ttl" role="tab" id="ttl-${i}" aria-selected="false">${t.l}</button>`).join("");
+
+const X0 = 300, X1 = 1130, ROW0 = 92, RH = 74;
+
+function draw(u, ti) {
+  const ttl = TTLS[ti].m;
+  const levers = LEVERS(u, ttl);
+  const finite = levers.map(l => l.attack).filter(v => typeof v === "number");
+  const span = Math.max(ttl * 1.6, Math.max(...finite) * 1.4, 3);   // fits the lifetime AND every lever
+  const sx = (m) => X0 + Math.min(m / span, 1) * (X1 - X0);
+  const H = ROW0 + levers.length * RH + 66;
+
+  /* At the shortest lifetimes the expiry mark sits almost on the origin, and the
+     two labels run together as one string. The origin tick is the expendable one. */
+  const ticks = [0, ttl, span].filter((v, i, a) => a.indexOf(v) === i)
+                              .filter(t => t !== 0 || (ttl / span) * (X1 - X0) > 74);
+  const bar = (m, y, cls, h) => {
+    if (m === "ongoing") return `<rect class="bar ongoing" x="${sx(0)}" y="${y}" width="${X1 - sx(0)}" height="${h}" rx="4"/>`;
+    if (m === "never")   return `<rect class="bar ${cls}" x="${sx(0)}" y="${y}" width="${X1 - sx(0)}" height="${h}" rx="4"/>`;
+    const w = sx(m) - sx(0);
+    return w < 1.5 ? "" : `<rect class="bar ${cls}" x="${sx(0)}" y="${y}" width="${w}" height="${h}" rx="4"/>`;
+  };
+  /* Once a bar is past halfway there is no room to its right, so the note goes
+     inside it, right-aligned. Clamping the start x only moved the overflow. */
+  const HALF = X0 + (X1 - X0) * 0.5;
+  const note = (m, y, t) => {
+    if (!t) return "";
+    const inside = m === "never" || m === "ongoing" || sx(m) > HALF;
+    const x = inside ? (m === "never" || m === "ongoing" ? X1 : sx(m)) - 10 : sx(m) + 10;
+    return `<text class="blabel" x="${x}" y="${y}"${inside ? ' text-anchor="end"' : ""}>${esc(t)}</text>`;
+  };
+
+  chart.innerHTML = `<svg viewBox="0 0 1180 ${H}" role="img" aria-label="Five containment levers drawn against time from the moment a compromise is found. Each shows how long the attacker stays capable, and how much legitimate traffic the lever itself breaks. Rotating the signing key contains fastest and breaks the most.">
+    ${ticks.map(t => `<line class="grid" x1="${sx(t)}" y1="${ROW0 - 26}" x2="${sx(t)}" y2="${ROW0 + levers.length * RH - 14}"/>`).join("")}
+    <line class="grid" x1="${sx(ttl)}" y1="${ROW0 - 26}" x2="${sx(ttl)}" y2="${ROW0 + levers.length * RH - 14}" stroke="var(--accent)"/>
+    ${ticks.map(t => `<text class="tick ${t === ttl ? "hi" : ""}" x="${sx(t)}" y="${ROW0 - 34}" text-anchor="${t === 0 ? "start" : t === span ? "end" : "middle"}">${t === ttl ? `token expiry · ${t} min` : t === span ? `${Math.round(t)} min` : "0"}</text>`).join("")}
+
+    ${levers.map((l, i) => {
+      const y = ROW0 + i * RH;
+      return `<text class="lname" x="24" y="${y + 16}">${esc(l.nm)}</text>
+        <text class="lsub" x="24" y="${y + 33}">${esc(l.sub)}</text>
+        ${bar(l.attack, y, "attack", 20)}
+        ${note(l.attack, y + 15, l.attackNote)}
+        ${l.coll ? bar(l.coll, y + 26, "coll", 14) + note(l.coll, y + 37, l.collNote) : ""}`;
+    }).join("")}
+
+    <line class="axis" x1="${X0}" y1="${ROW0 + levers.length * RH - 14}" x2="${X1}" y2="${ROW0 + levers.length * RH - 14}"/>
+    <text class="axname" x="${X0}" y="${ROW0 + levers.length * RH + 14}">TIME FROM THE MOMENT YOU FIND OUT &#8594;</text>
+  </svg>`;
+
+  cap.textContent = u === 0
+    ? `With an ephemeral key, the fastest and most complete lever is a restart — seconds, no tooling, no runbook. Everything else is slower or narrower. The price is the amber bar beside it: every outstanding token, for every client, dies at that same instant.`
+    : `With a persisted key, rotation is a procedure — a write plus a rollout — so containment takes minutes rather than seconds. It still breaks every outstanding token, and it is still the only lever that answers a stolen signing key.`;
+
+  $$(".uni").forEach((b, i) => b.setAttribute("aria-selected", String(i === u)));
+  $$(".ttl").forEach((b, i) => b.setAttribute("aria-selected", String(i === ti)));
+
+  wrows.innerHTML = WORKS.map(w => {
+    const nm = w.nm === "Rotate the signing key" ? UNIVERSES[u].rotName : w.nm;
+    return `<tr class="${w.cls ?? ""}">
+      <td class="lev">${esc(nm)}<span class="h">${esc(w.h)}</span></td>
+      ${w.c.map(([k, g, t]) => `<td class="${k}"><span class="v"><span class="g">${g}</span> ${esc(t)}</span></td>`).join("")}
+    </tr>`;
+  }).join("");
+
+  notes.innerHTML = `
+    <div class="takeaway"><strong>Only one lever answers a stolen signing key, and it is the one with
+      the worst collateral.</strong> Deactivating a credential does nothing to a forger — they never
+      needed a credential. Deny-listing does nothing either, because you cannot enumerate tokens you
+      never issued. Rotation is the whole answer — but <em>how fast you can rotate</em> is not the
+      number that matters. Rotating is quick; <strong>being believed takes longer</strong>, because
+      every verifier goes on honouring its cached copy of the key you just discarded. The number to
+      know about your own deployment is how long that cache lives.</div>
+
+    <div class="takeaway warn"><strong>Token lifetime is the dial that moves everything else.</strong>
+      At ${ttl} minutes, “wait it out” and “deactivate the credential” both leave the attacker working
+      for up to ${ttl} minutes. Halve the lifetime and you halve every red bar on this page without
+      building anything. It is the cheapest control here and the only one that is already paid for.
+      ${ttl <= 1 ? `<br><br><strong>At one minute, look at what just happened:</strong> blocking at the
+      edge, and rotating a persisted key, both take <em>longer than the token lives</em>. Below a
+      certain lifetime most of your levers stop being containment at all — expiry beats them — and the
+      only ones still worth pulling are those that stop the attacker <em>renewing</em>.` : ""}</div>
+
+    <h2>Planned rotation and emergency rotation are not the same operation</h2>
+    <p class="lede">This is the part that gets missed, and it quietly contradicts the tidy rotation
+    story people take away from the key-distribution diagrams.</p>
+    <div class="split">
+      <div class="plan"><div class="h">Planned rotation — has an overlap</div>
+        <p>Publish the new key <strong>alongside</strong> the old one, let tokens signed under the old
+        key drain naturally, then withdraw it. Nothing breaks, nobody notices, and this is the
+        behaviour the key set is plural for.</p></div>
+      <div class="emrg"><div class="h">Emergency rotation — cannot have one</div>
+        <p>If the old key is compromised you <strong>cannot keep publishing it</strong> — that is the
+        entire point of the exercise. So the overlap window is unavailable exactly when you most want
+        it, and <strong>every legitimate outstanding token dies with the attacker's</strong>. Plan for
+        the re-authentication storm; it is not optional.</p></div>
+    </div>
+
+    <div class="takeaway"><strong>Every one of these levers is a decision made before the incident.</strong>
+      Whether you can deny-list, whether there is an edge to block at, whether anyone is allowed to
+      restart the issuer at 3am, and how long a token lives — all of it is settled in advance. During
+      an incident you are only choosing among the levers you already built.</div>`;
+}
+
+let ti = Math.min(Math.max(loadHash().ttl ?? 0, 0), TTLS.length - 1);   // default: 1 min — the family's stated lifetime
+const step = stepper({ n: UNIVERSES.length, hashKey: "universe", onStep: (u) => draw(u, ti) });
+$$(".uni").forEach((b, i) => b.addEventListener("click", () => { step.go(i); draw(i, ti); }));
+$$(".ttl").forEach((b, i) => b.addEventListener("click", () => {
+  ti = i; saveHash({ ...loadHash(), ttl: i }); draw(step.current, ti);
+}));
+
+/* --- lever 4 detail figure ---------------------------------------------
+   Static: it does not react to the universe or the TTL, because the mechanism
+   does not change with either. What changes with the TTL is whether you would
+   BOTHER, and that argument is prose beside the figure rather than a fourth
+   interactive control on a page that already has two. */
+{
+  const box = (x, y, w, h, cls, num, title, desc) => {
+    const lines = desc.split("|");
+    return `<rect class="dstep ${cls}" x="${x}" y="${y}" width="${w}" height="${h}" rx="7"/>`
+      + (num ? `<text class="dnum" x="${x + 12}" y="${y + 20}">${num}</text>` : "")
+      + `<text class="dt" x="${x + (num ? 30 : 12)}" y="${y + 21}">${title}</text>`
+      + lines.map((l, i) =>
+          `<text class="dd" x="${x + 12}" y="${y + 41 + i * 15}">${l}</text>`).join("");
+  };
+  const arrow = (x1, y1, x2, y2, cls = "") =>
+    `<path class="dedge ${cls}" d="M${x1},${y1} H${x2}" marker-end="url(#dar)"/>`;
+
+  document.getElementById("denyfig").innerHTML =
+    `<defs><marker id="dar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6"
+       markerHeight="6" orient="auto-start-reverse">
+       <path d="M0,0 L10,5 L0,10 z" fill="var(--border)"/></marker></defs>`
+
+    // shared step 1 and 2
+    + `<text class="dplane" x="24" y="26">SHARED BY BOTH — HAPPENS ONCE PER TOKEN</text>`
+    + box(24, 40, 236, 92, "", "1", "Mint and stamp",
+        "The issuer puts a unique|<tspan font-family='var(--mono)'>jti</tspan> in the claims. It is|signed, so nobody can alter it.")
+    + arrow(266, 86, 296)
+    + box(302, 40, 236, 92, "", "2", "Revoke",
+        "Somebody — or an alert —|says this one token is done.|The <tspan font-family='var(--mono)'>jti</tspan> goes on a list.")
+
+    // the split
+    + `<text class="dplane" x="24" y="180">STEP 3 — THE ONLY DIFFERENCE, AND IT REPEATS ON EVERY REQUEST</text>`
+    + `<path class="dedge" d="M420,132 V162 H180 V196" marker-end="url(#dar)"/>`
+    + `<path class="dedge" d="M420,132 V162 H660 V196" marker-end="url(#dar)"/>`
+
+    + `<text class="dtag local" x="24" y="212">Option A · local deny-list</text>`
+    + box(24, 222, 380, 104, "local", "3a", "Check in memory",
+        "The list is pushed to the resource server out of band.|The check is a set lookup — no network call, no|database. The issuer can be down and the API serves.|<tspan fill='var(--muted)'>Cost: a propagation delay, and one small update channel.</tspan>")
+
+    + `<text class="dtag intro" x="504" y="212">Option B · introspection</text>`
+    + box(504, 222, 380, 104, "intro", "3b", "Ask the issuer",
+        "The resource server calls the authorization server|about every token it sees. No delay at all.|<tspan fill='var(--warn)'>Cost: the issuer is now on the path of every request,</tspan>|<tspan fill='var(--warn)'>and its outage is your outage.</tspan>")
+
+    + `<text class="dnote" x="906" y="252">Both read the same</text>`
+    + `<text class="dnote" x="906" y="266" font-family="var(--mono)">jti</text>`
+    + `<text class="dnote" x="906" y="284">claim. Only the</text>`
+    + `<text class="dnote" x="906" y="298">lookup differs.</text>`
+
+    // shared step 4
+    + `<text class="dplane" x="24" y="366">SHARED BY BOTH — THE LIST BOUNDS ITSELF</text>`
+    + box(24, 380, 860, 72, "", "4", "Expire",
+        "An entry only has to outlive the token it names. Once <tspan font-family='var(--mono)'>exp</tspan> passes the token is dead anyway, so the entry is dropped.|At a short lifetime the list holds only what was revoked in the last minute — bounded storage, not an append-only ledger.");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RFPs in. Cited records out.</title>
+<!-- Publish posture. PUBLIC: this page is served from gh-pages, which is public even
+     though the repo is private, so anyone with the URL sees it. That is deliberate — the
+     corpus is public procurement documents and nothing here names a client. Listed, so it
+     appears in the lobby index. -->
+<meta name="viz:uid" content="v-aacec2d78350">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="RFPs in. Cited records out.">
+<meta name="viz:description" content="Ten public RFPs — 764 pages, 280,385 words — become ten structured records, and every value traces back to the rectangle on the page it came from. A zooming walkthrough of one document, then all ten.">
+<!-- No viz:scaffold: this was a --deck and is no longer one. Absent means plain page,
+     which is what a scroll-driven zooming canvas is. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- The kit, FIRST — the :root below overrides its tokens, which is the documented
+     re-theme, not a fork. deck.css is deliberately NOT linked any more: this page has
+     no fixed 16:9 canvas and no slides. -->
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+:root{
+  --navy-0:#081428; --navy-1:#0a1a35; --navy-2:#0d2247; --navy-3:#123059;
+  --ink:#eef4ff; --muted:#9ab0cf; --faint:#5f7699;
+  --accent:#37d9a0; --accent-dim:#1f9e77;
+  --t-teal:#4bad9e; --t-blue:#3f8fd4; --t-green:#57b85b; --t-lime:#9bcf3f;
+  --t-red:#d0453a; --t-amber:#e6902e; --t-violet:#9d7bd8;
+  --good:#57b85b; --warn:#e6902e; --danger:#d0453a;
+  --paper:#f7f5f0; --mark:#d0453a;
+  --panel:rgba(12,28,56,.82); --panel-brd:rgba(120,160,230,.24);
+  --sans:'Lato','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{font-family:var(--sans);background:#050d1c;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ── the camera ────────────────────────────────────────────────────────────────
+   #cam is a fixed window onto #world. #world is one enormous absolutely-positioned
+   canvas that is never re-laid-out — only transformed. #scrollrail is an empty tall
+   element whose only job is to give the document a scroll range for the camera to
+   read. Nothing scrolls visually; scrolling IS the camera dolly.
+
+   `clip`, NOT `hidden`, and that one word is load-bearing. `overflow:hidden` makes #cam
+   a scroll container — invisibly, since it has no scrollbars, but a real one the browser
+   is entitled to scroll. Every keyframe id is also the id of a real element inside
+   #world, so opening the page at `#cost` made Chrome do its own fragment handling and
+   scroll that element into view INSIDE the camera: #cam ended up at scrollLeft 2759,
+   scrollTop 5192 and stayed there. The story's scroll position, the step counter and the
+   transform were all correct and the picture was 5,000px off screen — a blank page on
+   every deep link into a scene far down the canvas. Focusing one of the source links in
+   the world would have done the same thing. `overflow:clip` clips identically and is not
+   scrollable, so there is nothing to scroll wrong. */
+#cam{position:fixed;inset:0;overflow:clip;z-index:1;
+  background:
+    radial-gradient(1400px 900px at 68% 22%, rgba(55,217,160,.07), transparent 62%),
+    linear-gradient(160deg,#0a1a35,#081428 55%,#050d1c)}
+/* No will-change here, and it is worth knowing why, because it looks like the obvious
+   thing to add. will-change:transform gives #world a cached raster that Chrome has to
+   redo whenever the scale changes — and the scale changes on every scroll frame, over a
+   layer tens of thousands of units across. A fast flick outran the re-raster, so bands
+   of the picture arrived a frame or two late: sheets half-drawn, chunks of a scene
+   simply missing mid-flight. Without it Chrome just paints each frame at the scale it
+   is actually being shown at, which is both correct and, here, faster. Confirmed by
+   toggling it live in the console against the flicker. (#hud does have it, and should:
+   that layer is one screen big and static between beats — the case will-change is for.) */
+#world{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
+#scrollrail{position:relative;z-index:0;pointer-events:none}
+
+/* Everything placed in the world is absolutely positioned in world units. */
+.node{position:absolute}
+
+/* ── paper ─────────────────────────────────────────────────────────────────── */
+.sheet{background:var(--paper);box-shadow:0 0 0 1px rgba(0,0,0,.35), 0 60px 160px rgba(0,0,0,.55);
+  overflow:hidden}
+.sheet img{display:block;width:100%;height:100%;object-fit:cover}
+.sheet.dim img{filter:saturate(.15) brightness(.82)}
+
+/* A located citation, drawn from real PDF coordinates. */
+.mark{position:absolute;border:0 solid var(--mark);background:rgba(208,69,58,.14);
+  opacity:0;transition:opacity .45s ease}
+.mark.on{opacity:1}
+.mark.solid{background:rgba(208,69,58,.20)}
+
+/* The callout that names what a red box turned into. */
+.callout{position:absolute;opacity:0;transition:opacity .4s ease;pointer-events:none}
+.callout.on{opacity:1}
+.callout .k{font-family:var(--mono);color:var(--accent);letter-spacing:.04em}
+.callout .v{color:var(--ink);font-weight:700}
+.callout .rule{background:var(--accent);height:2px;opacity:.75}
+
+/* ── page grids (a whole document as one sprite sheet) ─────────────────────────
+   ONE <img> of the sprite, plus one transparent overlay per page. The previous
+   version gave every page its own giant CSS background — 22 copies of a 16000px
+   raster (275 copies of a 19600px one for Providence), each re-rasterised on every
+   camera scale change. Chrome painted them blank for the whole fly-in and locked up
+   outright when a `filter:` landed on all of them at once. An <img> is one raster;
+   an overlay that only ever changes colour composites and never repaints. Nothing
+   here uses `filter` or `opacity` on a page-sized box for that reason. */
+.gridwrap{position:absolute;isolation:isolate}
+.gridsheet{position:absolute;left:0;top:0;display:block}
+/* Default is nearly opaque, not merely dimmed: at close-up altitude the pages either
+   side of the hero are the backdrop the answer panel is read against. */
+.cell{position:absolute;background:rgba(5,12,26,.9);
+  transition:background-color .45s ease, box-shadow .45s ease}
+.cell.seen{background:rgba(6,14,30,.16)}
+.cell.hit{background:transparent;z-index:2;
+  box-shadow:0 0 0 var(--hit-ring,6px) var(--accent),
+             0 0 var(--hit-glow,60px) rgba(55,217,160,.55)}
+/* Once the cited pages are called out, everything else recedes — 38 rings among 275
+   equally-lit pages is not a finding anyone can see from the back of a room. */
+.spotlight .cell:not(.hit){background:rgba(4,10,22,.88)}
+/* Grid-altitude citation boxes: the same red as the close-up, drawn heavy enough to
+   survive being 180px wide on screen. */
+.cell .mark{border-width:0;background:rgba(208,69,58,.62);border-radius:2%}
+
+/* A stack of paper seen edge-on. One slab per few pages, so a 275-page book and a
+   2-page addendum are told apart at a glance instead of by reading a caption. */
+.slab{position:absolute;background:#dcd8cf;box-shadow:0 0 0 1px rgba(0,0,0,.22)}
+
+/* ── generic world-space chrome ────────────────────────────────────────────── */
+.wbox{position:absolute;border:2px solid var(--panel-brd);border-radius:14px;
+  background:rgba(12,28,56,.42)}
+.wlabel{position:absolute;font-family:var(--mono);color:var(--muted);
+  letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.wbig{position:absolute;font-weight:900;color:var(--ink);line-height:.95;
+  letter-spacing:-.02em}
+.station{position:absolute;border-radius:18px;border:2px solid var(--panel-brd);
+  background:rgba(10,26,53,.72);display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;padding:0 3%}
+.station.human{border-color:rgba(230,144,46,.45);background:rgba(48,30,10,.5)}
+.station.ai{border-color:rgba(55,217,160,.42);background:rgba(8,44,36,.5)}
+.station .t{font-weight:900;color:var(--ink)}
+.station .d{color:var(--muted);font-weight:400}
+.station .n{font-family:var(--mono);font-weight:600}
+
+/* ── HUD (screen space — always crisp, never scaled) ───────────────────────── */
+/* Promoted to its own layer, and deliberately free of backdrop-filter (see .narr).
+   The HUD is static between beats; on its own layer it is rastered once and composited,
+   instead of being re-rendered against a world layer that re-rasters every frame. */
+#hud{position:fixed;inset:0;z-index:5;pointer-events:none;will-change:transform}
+/* The first two altitudes fill the frame with white paper, against which the topbar
+   vanishes. A scrim costs nothing at every other altitude. */
+#hud::before{content:"";position:absolute;left:0;right:0;top:0;height:172px;
+  background:linear-gradient(180deg,rgba(5,13,28,.94) 34%,rgba(5,13,28,0));pointer-events:none}
+/* The narration used to be a full-width lower third, 132px tall. Almost every scene
+   filled a tenth of it — the eyebrow and the headline are the whole caption, and the
+   prose column was nearly always empty — so it was 178px of reserved height buying
+   two lines of type. It is the topbar now: same two sentences, top left, where there
+   was already a static title nobody needed. The canvas gets the height back. */
+@keyframes narrIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+/* progress rail — a scrubber, so a self-server can see shape and jump.
+   One dot per BEAT, not per scene: the whole point is that you can see there are ten
+   things coming before you scroll past nine of them. A scene's first beat is a wide
+   bar, its remaining beats are small dots, so the rail reads as chapters-and-pages. */
+/* Bounded to the same band the camera frames into (TOP_RESERVE 104 / bottom 34 in
+   viz.js safeArea) rather than centred on the raw viewport. `top:50%` + translateY(-50%)
+   ignored the ~85px this rule's own note reserves for #nav/#beatcount: the marks are
+   ~400px tall, so the centred top landed at (H-400)/2 and slid UNDER the nav on any
+   viewport below ~570px, painting chapter dashes over "01/25" and the › button.
+   `safe center` keeps it centred when it fits and falls back to the top of the band
+   when it does not, so overflow goes downward into empty space instead of upward into
+   the furniture. Keep the two numbers in step with safeArea(). */
+#rail{position:absolute;right:22px;top:104px;bottom:34px;
+  display:flex;flex-direction:column;gap:4px;pointer-events:auto;align-items:center;
+  justify-content:safe center}
+#rail button{width:7px;height:7px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(154,176,207,.28);transition:background .2s,transform .2s}
+#rail button.head{width:16px;height:5px;border-radius:3px;
+  background:rgba(154,176,207,.42);margin-top:6px}
+#rail button:first-child{margin-top:0}
+/* Only the CURRENT scene shows its beats; apply() sets .show. All 67 buttons are still
+   in the DOM — hiding is the whole mechanism, so data-j, the click handler and the
+   children↔stops index correspondence are untouched.
+   Why it has to hide rather than shrink: 67 marks stack 827px tall, and the rail is
+   centred with the top ~85px reserved for #nav/#beatcount, so it needs a ~1000px
+   viewport. No laptop has one. Nor can spacing recover it — the marks ALONE are 419px
+   (25 heads x 5 + 42 dots x 7) against a 512px budget at 682px tall, so even zero gap
+   overflows. display:none drops the hidden ones out of the flex flow and takes their
+   gaps with them: 25 chapter bars plus the open chapter's pages, ~420px worst case. */
+#rail button:not(.head):not(.show){display:none}
+#rail button:hover{transform:scale(1.6);background:var(--muted)}
+#rail button.act{background:var(--accent);transform:scale(1.5)}
+#rail button.head.act{transform:scale(1.25)}
+#rail button.actin{background:var(--accent);opacity:.4}
+
+/* The caption, and the only text on screen that isn't in the world. Left-anchored and
+   width-capped so it never runs under the nav; the height it reserves is what
+   safeArea() subtracts, so keep the two in step. */
+#topbar{position:absolute;left:38px;top:24px;width:min(62vw,900px)}
+#topbar .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+#topbar h2{font-size:25px;line-height:1.14;font-weight:900;letter-spacing:-.01em}
+#topbar .src{display:block;margin-top:7px;font-size:10.5px;color:var(--faint);line-height:1.4}
+#topbar .src a{color:var(--faint)}
+#topbar.swap{animation:narrIn .42s ease both}
+
+/* Scene counter between the arrows, beats on the line below it — the two numbers a
+   self-server needs and the presenter ignores. */
+#stepcount{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.08em;
+  align-self:center;min-width:52px;text-align:center;font-weight:600}
+#stepcount i{font-style:normal;color:var(--faint)}
+#beatcount{position:absolute;right:22px;top:62px;font-family:var(--mono);font-size:10.5px;
+  color:var(--faint);letter-spacing:.1em;text-align:right}
+
+/* Next / previous, for driving this from a trackpad instead of the keyboard. Top right,
+   where the key legend used to be: out of the narration's way, and clear of the rail,
+   which is vertically centred. Deliberately quiet — it is a control for the presenter,
+   not a thing the audience should be reading. */
+#nav{position:absolute;right:22px;top:26px;display:flex;gap:7px;pointer-events:auto}
+#nav button{width:31px;height:31px;padding:0;line-height:1;cursor:pointer;
+  font-family:var(--sans);font-size:19px;
+  border:1px solid var(--panel-brd);border-radius:9px;background:rgba(12,28,56,.93);
+  color:var(--muted);
+  transition:color .18s,border-color .18s,opacity .18s}
+#nav button:hover:not(:disabled){color:var(--ink);border-color:var(--accent)}
+#nav button:disabled{opacity:.22;cursor:default}
+#nav button#cog{font-size:15px}
+/* An appendix is pinned: off the scroll rail, reachable only from the index. The rail's
+   own marks stop meaning anything while you are in one, so they go dim and dead, and ↩ is
+   the way out. Free look STAYS — it is scroll-independent (see setFree), and a chart you
+   have deliberately opened is the likeliest thing on the whole canvas to want a closer
+   look at. Escape backs out of free look first, then out of the pin. */
+#nav button#unpin{display:none;font-size:15px}
+body.pinned #nav button#unpin{display:block;color:var(--accent);border-color:var(--accent)}
+body.pinned #rail{opacity:.2;pointer-events:none}
+#settings{position:absolute;right:22px;top:64px;z-index:6;width:250px;padding:12px 13px;
+  border:1px solid var(--panel-brd);border-radius:11px;background:rgba(12,28,56,.97);
+  box-shadow:0 18px 60px rgba(0,0,0,.5);pointer-events:auto}
+#settings[hidden]{display:none}
+#settings label{display:grid;grid-template-columns:auto 1fr;gap:0 9px;align-items:center;
+  padding:7px 2px;cursor:pointer;font-size:12.5px;color:var(--ink)}
+#settings label+label{border-top:1px solid var(--panel-brd)}
+#settings label span{grid-column:2;font-size:10.5px;color:var(--faint);line-height:1.35}
+#settings input{accent-color:var(--accent);width:14px;height:14px;cursor:pointer}
+
+/* The reading-rate slider is gone. It was a control for a number nobody wanted to
+   argue with; every reading time on the page is now the measured average, 238 wpm. */
+
+/* The embedded surfaces are world objects now (see viz.js). Only the "it isn't running"
+   card is styled here, because it is the one part of them this page draws itself. */
+.dead{position:absolute;inset:0;display:grid;place-items:center;background:#0a1526;
+  text-align:center;padding:30px;font-size:26px;color:var(--faint);line-height:1.7}
+.dead code{font-family:var(--mono);color:var(--muted);display:block;margin:14px 0}
+
+/* ── free look: the script hands the camera to the mouse ───────────────────────── */
+#freebadge{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  display:none;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);background:rgba(12,28,56,.93);
+  border:1px solid var(--panel-brd);border-radius:9px;padding:9px 16px;pointer-events:none}
+#freebadge b{color:var(--accent)}
+body.freelook #freebadge{display:block}
+body.freelook #topbar,body.freelook #beatcount,body.freelook #rail{display:none}
+body.freelook #cam{cursor:grab}
+body.dragging #cam{cursor:grabbing}
+/* A drag over an embedded frame has to pan the canvas, not scroll the frame. */
+body.freelook #world{pointer-events:none}
+#nav button.act{background:#12312a;border-color:var(--accent);color:var(--accent)}
+
+@media (prefers-reduced-motion: reduce){
+  .mark,.callout,.cell{transition:none}
+  .narr.swap{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div id="cam"><div id="world"><!-- built by viz.js --></div></div>
+
+<div id="hud">
+  <div id="topbar"></div>
+  <div id="rail"></div>
+  <div id="nav">
+    <button id="pan" title="Free look — drag the whole canvas (P), or pinch/⌘-scroll anywhere to zoom" aria-label="Free look">✥</button>
+    <button id="unpin" title="Back to the appendix (Esc)" aria-label="Back to the appendix">&#8617;</button>
+    <button id="prev" title="Previous beat (←)" aria-label="Previous beat">‹</button>
+    <span id="stepcount"></span>
+    <button id="next" title="Next beat (→ or space)" aria-label="Next beat">›</button>
+    <button id="cog" title="Settings" aria-label="Settings" aria-expanded="false">⚙</button>
+  </div>
+  <!-- Both settings need a reload: the live panes are built once at construction, and
+       REDUCED is read into closures at module scope. A toggle that lied about applying
+       instantly would be worse than one that visibly reloads. -->
+  <div id="settings" hidden>
+    <label><input type="checkbox" id="setMotion"> Reduce motion<span>camera flights become cuts</span></label>
+    <label><input type="checkbox" id="setRig"> Live embeds<span>iframes instead of screenshots</span></label>
+  </div>
+  <div id="beatcount"></div>
+  <div id="freebadge">Free look &nbsp;·&nbsp; drag to pan &nbsp;·&nbsp; scroll or pinch to zoom
+    &nbsp;·&nbsp; <b>P</b> or <b>Esc</b> to return</div>
+</div>
+
+<div id="scrollrail"></div>
+
+<!-- "./viz.js", not "viz.js": the publish bundler only recognises a DOTTED relative
+     module src. A bare one is silently left as an external reference to a file the
+     single-file export does not carry, i.e. a blank published page. -->
+<script type="module" src="./viz.js"></script>
+</body>
+</html>

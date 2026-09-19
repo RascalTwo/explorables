@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PingOne Self-Service API Credential Flow</title>
+<meta name="viz:uid" content="v-9e4961826702">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="PingOne Self-Service API Credential Flow">
+<meta name="viz:description" content="How an API consumer self-provisions API credentials, mints an access token, and calls a protected API — using Dynamic Client Registration against the PingOne Management API.">
+<meta name="viz:tag" content="PingOne">
+<meta name="viz:tag" content="API">
+<style>
+  :root {
+    --setup: #94a3b8; --setup-bg: #1b2130;
+    --prov: #34d399;  --prov-bg: #112a22;
+    --mint: #60a5fa;  --mint-bg: #122036;
+    --call: #a78bfa;  --call-bg: #1d1a34;
+    --ink: #e6e9ef; --muted: #8b93a7; --line: #2a3142;
+    --bg: #0b0e14; --surface: #131722; --surface2: #1b2130;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.45;
+  }
+  header {
+    padding: 18px 28px 14px;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  header h1 { margin: 0; font-size: 19px; }
+  header p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; font-size: 12px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 11px; height: 11px; border-radius: 3px; }
+
+  .controls {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 10px 28px; background: var(--surface); border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 10;
+  }
+  button {
+    font: inherit; font-size: 13px; padding: 6px 13px; border-radius: 7px;
+    border: 1px solid var(--line); background: var(--surface2); color: var(--ink);
+    cursor: pointer; transition: background .12s, border-color .12s;
+  }
+  button:hover { background: #252d3f; }
+  button.primary { background: var(--mint); color: #07101f; border-color: var(--mint); }
+  button.primary:hover { background: #82bdfb; }
+  button:disabled { opacity: .4; cursor: default; }
+  .controls .steplabel { font-size: 12px; color: var(--muted); margin-left: 4px; }
+  .controls .spacer { flex: 1; }
+
+  .layout { display: flex; align-items: flex-start; gap: 0; }
+  .diagram-wrap { flex: 1; min-width: 0; overflow-x: auto; padding: 20px 24px 48px; }
+  svg { display: block; }
+
+  .panel {
+    width: 388px; flex-shrink: 0; align-self: stretch;
+    border-left: 1px solid var(--line); background: var(--surface);
+    padding: 22px 24px; position: sticky; top: 49px;
+    max-height: calc(100vh - 49px); overflow-y: auto;
+  }
+  .panel .tag {
+    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; padding: 3px 9px; border-radius: 20px; color: #fff;
+  }
+  .panel h2 { font-size: 16px; margin: 12px 0 8px; }
+  .panel .desc { font-size: 13.5px; color: #c7cde0; }
+  .panel .ref {
+    margin-top: 14px; font-size: 11.5px; color: var(--muted);
+    border-top: 1px dashed var(--line); padding-top: 10px;
+  }
+  .panel .ref code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--surface2); padding: 1px 5px; border-radius: 4px; font-size: 11px;
+    color: #cdd4e4;
+  }
+  .panel pre {
+    margin: 10px 0 0; padding: 11px 13px; border-radius: 8px;
+    background: #0f172a; color: #a7f3d0; font-size: 11.5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    overflow-x: auto; line-height: 1.5;
+  }
+  .panel .hint { font-size: 12.5px; color: var(--muted); }
+  .panel ul { padding-left: 18px; margin: 8px 0; font-size: 13px; color: #c7cde0; }
+  .panel li { margin: 5px 0; }
+
+  /* SVG interactive bits */
+  .stepg { cursor: pointer; }
+  .stepg .hit { fill: transparent; }
+  .stepg:hover .msglabel { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PingOne &mdash; Self-Service API Credential Obtainment Flow</h1>
+  <p>How an API consumer provisions API credentials, mints an access token, and calls a protected API &mdash; using Dynamic Client Registration against the PingOne Management API.</p>
+  <div class="legend">
+    <span class="chip"><span class="dot" style="background:var(--setup)"></span>One-time setup (Terraform)</span>
+    <span class="chip"><span class="dot" style="background:var(--prov)"></span>Phase 1 &mdash; Provision credentials</span>
+    <span class="chip"><span class="dot" style="background:var(--mint)"></span>Phase 2 &mdash; Mint access token</span>
+    <span class="chip"><span class="dot" style="background:var(--call)"></span>Phase 3 &mdash; Call the API</span>
+  </div>
+</header>
+
+<div class="controls">
+  <button id="btnPlay" class="primary">&#9654;&nbsp; Play walkthrough</button>
+  <button id="btnPrev">&#9664; Prev</button>
+  <button id="btnNext">Next &#9654;</button>
+  <button id="btnAll">&#9638; Show all (static)</button>
+  <span class="steplabel" id="stepLabel">Static view &mdash; all 15 steps visible. Click any step for detail.</span>
+  <span class="spacer"></span>
+</div>
+
+<div class="layout">
+  <div class="diagram-wrap"><div id="diagram"></div></div>
+  <aside class="panel" id="panel"></aside>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Actors (swimlane columns)
+// ---------------------------------------------------------------------------
+const COLS = [
+  { l1: "API Consumer",   l2: "",                sub: "curl · Postman · service" },
+  { l1: "Custom Frontend", l2: "Credentials UI",  sub: "signed-in user" },
+  { l1: "Custom Backend", l2: "Credential API",   sub: "broker" },
+  { l1: "PingOne",        l2: "Management API",   sub: "api.pingone.com" },
+  { l1: "PingOne Auth",   l2: "/as/token + JWKS", sub: "auth.pingone.com" },
+  { l1: "Custom API",     l2: "",                sub: "protected endpoints" },
+];
+
+const PHASE = {
+  setup: { name: "One-time setup — Terraform provisions a privileged worker app", color: "var(--setup)", raw: "#94a3b8" },
+  prov:  { name: "Phase 1 — Provision credentials  (Dynamic Client Registration)", color: "var(--prov)", raw: "#34d399" },
+  mint:  { name: "Phase 2 — Mint an access token  (client_credentials grant)", color: "var(--mint)", raw: "#60a5fa" },
+  call:  { name: "Phase 3 — Call the protected API", color: "var(--call)", raw: "#a78bfa" },
+};
+
+// ---------------------------------------------------------------------------
+// Steps. kind: msg (solid arrow), return (dashed arrow), self (loop)
+// ---------------------------------------------------------------------------
+const STEPS = [
+  { phase:"setup", n:null, kind:"msg",    from:2, to:3,
+    label:'Terraform creates a privileged WORKER app + assigns Environment Admin role',
+    title:"One-time setup — the privileged worker app",
+    desc:"Before any user ever asks for credentials, Terraform provisions a PingOne WORKER application and assigns it the Environment Admin role. This is the identity the backend uses to act on users’ behalf against the Management API — the Dynamic Client Registration pattern." },
+
+  { phase:"setup", n:null, kind:"return", from:3, to:2,
+    label:"worker client_id / secret → backend config",
+    title:"The backend holds the worker credentials",
+    desc:"PingOne issues the worker app a client_id and secret. These are injected into the backend. Every Management API call in Phase 1 is authenticated as this worker — the end user never sees it." },
+
+  { phase:"prov", n:1, kind:"msg", from:0, to:1,
+    label:'Click “Generate API Credentials”',
+    title:"API consumer requests credentials",
+    desc:"A signed-in user opens the API credentials panel in the frontend and clicks Generate. They are already authenticated to PingOne, so the frontend is holding a valid user access token (JWT)." },
+
+  { phase:"prov", n:2, kind:"msg", from:1, to:2,
+    label:"POST /api/credentials  ·  Authorization: Bearer <user JWT>",
+    title:"Frontend calls the backend credential endpoint",
+    desc:"The frontend POSTs to the backend with the logged-in user’s JWT as a bearer token. There is no request body — the identity to provision for comes entirely from the verified token.",
+    payload:"POST /api/credentials\nAuthorization: Bearer eyJhbGciOiJSUzI1Ni..." },
+
+  { phase:"prov", n:3, kind:"self", from:2, to:2,
+    label:"Decode JWT → userId (sub) + orgId (org claim)",
+    title:"Backend derives identity from the token",
+    desc:"The backend reads the subject (userId) and the “org” claim (orgId) from the verified JWT. These drive the naming and the baked-in attributes of everything created next, so each user gets a fully isolated set of PingOne objects." },
+
+  { phase:"prov", n:4, kind:"msg", from:2, to:3,
+    label:'Create custom RESOURCE  "api-client-{userId}"  (audience = same name)',
+    title:"Create the per-user resource",
+    desc:"The backend creates a custom PingOne Resource named api-client-{userId} whose audience equals that name. The audience is the contract every downstream API checks — it scopes a minted token to exactly this one user." },
+
+  { phase:"prov", n:5, kind:"msg", from:2, to:3,
+    label:'Add SCOPE  "api.access"  to the resource',
+    title:"Add the api.access scope",
+    desc:"A single scope, api.access, is created on the resource. The client_credentials token minted in Phase 2 will carry this scope." },
+
+  { phase:"prov", n:6, kind:"msg", from:2, to:3,
+    label:"Add static ATTRIBUTES  org_id + user_id   ← enriches the token",
+    title:"Bake org_id + user_id into every token",
+    desc:"Two static custom attributes — org_id and user_id — are attached to the resource. PingOne stamps them into every access token issued for it. This is the token-enrichment step: downstream APIs read org_id / user_id straight from the verified JWT, with no database lookup." },
+
+  { phase:"prov", n:7, kind:"msg", from:2, to:3,
+    label:"Create OIDC WEB_APP  (grant = client_credentials)",
+    title:"Create the client application",
+    desc:"An OIDC application is created with only the client_credentials grant and CLIENT_SECRET_POST auth. It has no interactive login — this application IS the API credential the API consumer will authenticate as." },
+
+  { phase:"prov", n:8, kind:"msg", from:2, to:3,
+    label:"Fetch client secret  +  GRANT resource & scope → app",
+    title:"Retrieve the secret & wire resource to app",
+    desc:"The backend reads the app’s generated client secret, then creates a grant linking the resource (and its api.access scope) to the app. The grant is what permits this app to actually request a token for that audience." },
+
+  { phase:"prov", n:9, kind:"return", from:2, to:0,
+    label:"200  →  { client_id, client_secret, token_endpoint, scope }",
+    title:"Credentials returned to the API consumer",
+    desc:"The backend returns client_id, client_secret, the PingOne token endpoint, and scope. The frontend shows them once — the secret is never retrievable again. Revoking deletes the app + resource; re-provisioning issues a fresh pair.",
+    payload:'{\n  "client_id": "a1b2c3d4-e5f6-...",\n  "client_secret": "Xy9~rZ...keep-it-safe",\n  "token_endpoint":\n    "https://auth.pingone.com/{envId}/as/token",\n  "scope": "api.access"\n}' },
+
+  { phase:"mint", n:10, kind:"msg", from:0, to:4,
+    label:"POST /as/token  ·  grant_type=client_credentials  + client_id / secret / scope",
+    title:"API consumer mints an access token",
+    desc:"Using the saved credentials, the API consumer calls the PingOne token endpoint directly with the client_credentials grant. This runs server-side or via curl — PingOne blocks the cross-origin client_credentials request from a browser, which the frontend surfaces as an expected CORS message plus a copy-paste curl command.",
+    payload:'curl -X POST "$TOKEN_ENDPOINT" \\\n  -d grant_type=client_credentials \\\n  -d client_id=$CLIENT_ID \\\n  -d client_secret=$CLIENT_SECRET \\\n  -d scope=api.access' },
+
+  { phase:"mint", n:11, kind:"return", from:4, to:0,
+    label:"access_token (JWT) + expires_in   —  re-mint on expiry, NO refresh token",
+    title:"PingOne returns the access token",
+    desc:"PingOne returns a signed JWT plus expires_in. Its aud is api-client-{userId}, and it carries the org_id / user_id attributes baked in during Phase 1. The client_credentials grant issues no refresh token — when the token expires the API consumer simply repeats step 10 to mint a fresh one.",
+    payload:'// decoded JWT payload\n{\n  "iss": "https://auth.pingone.com/{envId}/as",\n  "aud": ["api-client-7f3a9b2c"],\n  "scope": "api.access",\n  "org_id": "acme-corp",      // baked in\n  "user_id": "7f3a9b2c-...",  // baked in\n  "exp": 1747832400\n}' },
+
+  { phase:"call", n:12, kind:"msg", from:0, to:5,
+    label:"GET /api/resource  ·  Authorization: Bearer <access_token>",
+    title:"API consumer calls the protected API",
+    desc:"The API consumer sends an ordinary API request to the API, presenting the minted token as a bearer credential — exactly like any OAuth2-protected API." },
+
+  { phase:"call", n:13, kind:"msg", from:5, to:4,
+    label:"Fetch JWKS — verify signature, issuer & expiry",
+    title:"The API verifies the token against PingOne",
+    desc:"The API resolves the PingOne issuer, fetches its JWKS, and validates the JWT signature, issuer, and expiry. PingOne is the source of truth — there is no shared secret between the API and whoever minted the token." },
+
+  { phase:"call", n:14, kind:"self", from:5, to:5,
+    label:'Validate audience — accept any aud starting with "api-client-"',
+    title:"Prefix-based audience validation",
+    desc:"Rather than one shared static audience, the validator accepts ANY audience beginning with api-client-. That is why every user’s uniquely-named resource is accepted across all protected endpoints with zero per-user configuration." },
+
+  { phase:"call", n:15, kind:"return", from:5, to:0,
+    label:"200 OK  —  response served   🎩",
+    title:"Request served — Bob’s your uncle",
+    desc:"Signature and audience check out, so the API serves the request. It trusts org_id / user_id straight from the verified token. The API consumer now has a self-service, revocable API credential — with zero manual PingOne admin work." },
+];
+
+// ---------------------------------------------------------------------------
+// Geometry
+// ---------------------------------------------------------------------------
+const W = 1150, BOX_W = 152, BOX_H = 66, HEAD_Y = 14;
+const cx = i => 122 + i * 181;
+const ROW_H = 58, PHASE_H = 30, PHASE_GAP = 16, GROUP_GAP = 16;
+
+// layout pass: assign each step a row baseline + collect phase bands
+let cursor = HEAD_Y + BOX_H + 26;
+const bands = [];
+let curPhase = null, bandStart = 0;
+STEPS.forEach((s, i) => {
+  if (s.phase !== curPhase) {
+    if (curPhase) cursor += GROUP_GAP;
+    curPhase = s.phase;
+    const hdrY = cursor;
+    cursor += PHASE_H + PHASE_GAP;
+    bands.push({ phase: s.phase, hdrY, firstStep: i });
+  }
+  s._rowTop = cursor;
+  s._y = cursor + 34;
+  cursor += ROW_H;
+});
+const SVG_H = cursor + 24;
+
+// arc bracket around the Management API calls (steps n4..n8)
+const dcrFirst = STEPS.find(s => s.n === 4);
+const dcrLast  = STEPS.find(s => s.n === 8);
+
+function wrap(text, max) {
+  if (text.length <= max) return [text];
+  let mid = text.length / 2, best = -1;
+  for (let i = 0; i < text.length; i++)
+    if (text[i] === " " && (best < 0 || Math.abs(i - mid) < Math.abs(best - mid))) best = i;
+  return best < 0 ? [text] : [text.slice(0, best), text.slice(best + 1)];
+}
+
+// ---------------------------------------------------------------------------
+// SVG construction
+// ---------------------------------------------------------------------------
+function buildSVG() {
+  let defs = "";
+  for (const [k, p] of Object.entries(PHASE))
+    defs += `<marker id="ah-${k}" markerWidth="9" markerHeight="9" refX="7.5" refY="3.4"
+      orient="auto"><path d="M0,0 L8,3.4 L0,6.8 Z" fill="${p.raw}"/></marker>`;
+
+  let s = `<svg viewBox="0 0 ${W} ${SVG_H}" width="${W}" height="${SVG_H}"
+    xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Roboto,sans-serif">
+    <defs>${defs}</defs>`;
+
+  // lifelines — drawn FIRST so the dashed verticals sit truly in the background,
+  // behind the phase bands, header text, arrows and labels (never on top of them).
+  for (let i = 0; i < COLS.length; i++)
+    s += `<line x1="${cx(i)}" y1="${HEAD_Y + BOX_H}" x2="${cx(i)}" y2="${SVG_H - 14}"
+      stroke="#39435a" stroke-width="1.5" stroke-dasharray="3 4"/>`;
+
+  // phase bands (full-width tinted strips behind each group)
+  bands.forEach((b, bi) => {
+    const p = PHASE[b.phase];
+    const next = bands[bi + 1];
+    const lastStep = next ? STEPS[next.firstStep - 1] : STEPS[STEPS.length - 1];
+    const top = b.hdrY - 7;
+    const bot = lastStep._rowTop + ROW_H - 4;
+    s += `<rect x="14" y="${top}" width="${W - 28}" height="${bot - top}" rx="12"
+      fill="${p.raw}" opacity="0.14"/>`;
+    s += `<rect x="14" y="${b.hdrY}" width="${W - 28}" height="${PHASE_H}" rx="9"
+      fill="${p.raw}"/>`;
+    // dark ink on the light header pill — white text washed out against the light
+    // phase colors (esp. the slate setup band); near-black gives strong contrast.
+    s += `<text x="30" y="${b.hdrY + 20}" font-size="13" font-weight="700"
+      fill="#0b1220">${esc(p.name)}</text>`;
+  });
+
+  // activation bars (where an actor is "busy")
+  const actBackend = activationSpan(2, 1, 9);  // frontend->backend .. return to consumer
+  const actGw     = activationSpan(5, 12, 15);
+  s += actBar(2, actBackend, "#34d399");
+  s += actBar(5, actGw, "#a78bfa");
+  // Management API activation during steps 4..8
+  s += actBar(3, [dcrFirst._y - 16, dcrLast._y + 14], "#94a3b8");
+
+  // DCR bracket
+  const bx1 = cx(3) + 14, by1 = dcrFirst._y - 24, by2 = dcrLast._y + 16;
+  s += `<path d="M ${bx1} ${by1} h 16 v ${by2 - by1} h -16" fill="none"
+    stroke="#34d399" stroke-width="1.6"/>`;
+  s += `<text x="${bx1 + 22}" y="${(by1 + by2) / 2 - 4}" font-size="10.5"
+    fill="#34d399" font-weight="600">Dynamic Client</text>`;
+  s += `<text x="${bx1 + 22}" y="${(by1 + by2) / 2 + 9}" font-size="10.5"
+    fill="#34d399" font-weight="600">Registration</text>`;
+
+  // actor header boxes
+  for (let i = 0; i < COLS.length; i++) {
+    const x = cx(i) - BOX_W / 2;
+    s += `<rect x="${x}" y="${HEAD_Y}" width="${BOX_W}" height="${BOX_H}" rx="10"
+      fill="#1b2130" stroke="#39435a" stroke-width="1.5"/>`;
+    s += `<text x="${cx(i)}" y="${HEAD_Y + 24}" text-anchor="middle" font-size="12.5"
+      font-weight="700" fill="#e6e9ef">${esc(COLS[i].l1)}</text>`;
+    s += `<text x="${cx(i)}" y="${HEAD_Y + 39}" text-anchor="middle" font-size="11"
+      fill="#aab2c5">${esc(COLS[i].l2)}</text>`;
+    s += `<text x="${cx(i)}" y="${HEAD_Y + 55}" text-anchor="middle" font-size="9.5"
+      fill="#94a3b8">${esc(COLS[i].sub)}</text>`;
+  }
+
+  // messages
+  STEPS.forEach((st, idx) => s += renderStep(st, idx));
+
+  s += `</svg>`;
+  return s;
+}
+
+function activationSpan(col, firstN, lastN) {
+  const a = STEPS.find(s => s.n === firstN) || STEPS.find(s => s.from === col || s.to === col);
+  const b = STEPS.find(s => s.n === lastN);
+  return [a._y - 18, b._y + 12];
+}
+function actBar(col, [y1, y2], color) {
+  return `<rect x="${cx(col) - 5}" y="${y1}" width="10" height="${y2 - y1}" rx="3"
+    fill="${color}" opacity="0.16"/>`;
+}
+
+function renderStep(st, idx) {
+  const p = PHASE[st.phase];
+  const y = st._y;
+  const dashed = st.kind === "return" ? ` stroke-dasharray="6 4"` : "";
+  let g = `<g class="stepg" data-idx="${idx}">`;
+
+  // number badge — always sits on the originating lifeline
+  const badgeX = cx(st.from);
+  if (st.n != null) {
+    g += `<circle cx="${badgeX}" cy="${y}" r="11" fill="${p.raw}"/>`;
+    g += `<text x="${badgeX}" y="${y + 3.6}" text-anchor="middle" font-size="11"
+      font-weight="700" fill="#fff">${st.n}</text>`;
+  } else {
+    g += `<rect x="${badgeX - 30}" y="${y - 9}" width="60" height="18" rx="9"
+      fill="${p.raw}"/><text x="${badgeX}" y="${y + 3.4}" text-anchor="middle"
+      font-size="9" font-weight="700" fill="#fff">SETUP</text>`;
+  }
+
+  if (st.kind === "self") {
+    // loop to the left of the actor; label centered above the loop
+    const x = cx(st.from), lw = 58, lh = 22;
+    g += `<path d="M ${x} ${y - lh/2} h -${lw} v ${lh} h ${lw}" fill="none"
+      stroke="${p.raw}" stroke-width="2" marker-end="url(#ah-${st.phase})"/>`;
+    const lines = wrap(st.label, 34);
+    lines.forEach((ln, li) =>
+      g += `<text class="msglabel" x="${x - lw/2}" y="${y - lh/2 - 8 - (lines.length-1-li)*12}"
+        text-anchor="middle" font-size="10" fill="#aab2c5">${esc(ln)}</text>`);
+  } else {
+    const x1 = cx(st.from), x2 = cx(st.to);
+    const dir = x2 > x1 ? 1 : -1;
+    const sx = x1 + dir * (st.n != null ? 13 : 32);
+    const ex = x2 - dir * 2;
+    g += `<line x1="${sx}" y1="${y}" x2="${ex}" y2="${y}" stroke="${p.raw}"
+      stroke-width="2.2"${dashed} marker-end="url(#ah-${st.phase})"/>`;
+    // label centered above the arrow
+    const mid = (sx + ex) / 2;
+    const span = Math.abs(ex - sx);
+    const lines = wrap(st.label, span > 360 ? 90 : 46);
+    lines.forEach((ln, li) =>
+      g += `<text class="msglabel" x="${mid}" y="${y - 8 - (lines.length-1-li)*12.5}"
+        text-anchor="middle" font-size="10.5" fill="#aab2c5">${esc(ln)}</text>`);
+  }
+
+  // wide invisible hit area for easy clicking
+  g += `<rect class="hit" x="14" y="${st._rowTop}" width="${W - 28}" height="${ROW_H}"/>`;
+  g += `</g>`;
+  return g;
+}
+
+function esc(t) {
+  return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// ---------------------------------------------------------------------------
+// State + interaction
+// ---------------------------------------------------------------------------
+let focus = -1;          // focused step index, -1 = none
+let animate = false;     // true = dim steps beyond `focus`
+let playing = false, timer = null;
+
+const diagram = document.getElementById("diagram");
+const panel = document.getElementById("panel");
+const stepLabel = document.getElementById("stepLabel");
+const btnPlay = document.getElementById("btnPlay");
+
+function mount() {
+  diagram.innerHTML = buildSVG();
+  diagram.querySelectorAll(".stepg").forEach(g =>
+    g.addEventListener("click", () => { stop(); setFocus(+g.dataset.idx); }));
+  applyVisual();
+  renderPanel();
+}
+
+function applyVisual() {
+  const groups = diagram.querySelectorAll(".stepg");
+  groups.forEach(g => {
+    const i = +g.dataset.idx;
+    let op = 1;
+    if (animate && i > focus) op = 0.09;          // not yet revealed
+    g.style.opacity = op;
+    g.style.transition = "opacity .35s";
+    // highlight the focused step
+    const hl = (i === focus);
+    g.querySelectorAll("text.msglabel").forEach(t => {
+      t.setAttribute("font-weight", hl ? "700" : "400");
+      t.setAttribute("fill", hl ? "#ffffff" : "#aab2c5");
+    });
+    g.querySelectorAll("line, path").forEach(el => {
+      if (el.getAttribute("marker-end"))
+        el.setAttribute("stroke-width", hl ? "3.4" : (g.querySelector("line")===el?"2.2":"2"));
+    });
+  });
+}
+
+function setFocus(i) {
+  focus = i;
+  applyVisual();
+  renderPanel();
+  if (i >= 0) {
+    const total = STEPS.length;
+    const s = STEPS[i];
+    stepLabel.textContent = (s.n != null ? `Step ${s.n} of 15` : "One-time setup")
+      + " — " + s.title;
+    // scroll the focused row into view
+    const row = diagram.querySelector(`.stepg[data-idx="${i}"] .hit`);
+    if (row) row.scrollIntoView({ block: "center", behavior: "smooth" });
+  } else {
+    stepLabel.textContent = "Static view — all 15 steps visible. Click any step for detail.";
+  }
+}
+
+function renderPanel() {
+  if (focus < 0) {
+    panel.innerHTML = `
+      <span class="tag" style="background:#475569">Overview</span>
+      <h2>The self-service credential flow</h2>
+      <p class="desc">An API consumer obtains working API credentials with no PingOne admin
+      involvement. The backend brokers it all through the PingOne Management API
+      using a privileged worker identity provisioned once by Terraform.</p>
+      <ul>
+        <li><b style="color:var(--prov)">Phase 1</b> &mdash; the backend creates a per-user
+        PingOne resource, scope, attributes, OIDC app and grant, and hands back a
+        client_id / secret.</li>
+        <li><b style="color:var(--mint)">Phase 2</b> &mdash; the API consumer exchanges those
+        for a short-lived access-token JWT via the client_credentials grant.
+        <i>No refresh token</i> &mdash; just re-mint on expiry.</li>
+        <li><b style="color:var(--call)">Phase 3</b> &mdash; the token is presented to the
+        API, which validates it against PingOne (signature + audience prefix).</li>
+      </ul>
+      <p class="hint">&#9654; <b>Play walkthrough</b> animates the sequence step by step.
+      Or click any arrow in the diagram, or use Prev / Next, to inspect a single step.</p>
+      <p class="hint">The static diagram always stays fully visible &mdash; animation only
+      dims un-reached steps, it never removes them.</p>`;
+    return;
+  }
+  const s = STEPS[focus];
+  const p = PHASE[s.phase];
+  panel.innerHTML = `
+    <span class="tag" style="background:${p.raw}">
+      ${s.n != null ? "Step " + s.n : "One-time setup"}</span>
+    <h2>${esc(s.title)}</h2>
+    <p class="desc">${esc(s.desc)}</p>
+    ${s.payload ? `<pre>${esc(s.payload)}</pre>` : ""}`;
+}
+
+// --- controls ---
+function stop() { playing = false; clearInterval(timer); btnPlay.innerHTML = "&#9654;&nbsp; Play walkthrough"; }
+
+function play() {
+  if (playing) { stop(); return; }
+  playing = true; animate = true;
+  btnPlay.innerHTML = "&#10073;&#10073;&nbsp; Pause";
+  if (focus >= STEPS.length - 1) focus = -1;   // restart if at end
+  timer = setInterval(() => {
+    if (focus >= STEPS.length - 1) { stop(); return; }
+    setFocus(focus + 1);
+  }, 1500);
+  setFocus(focus + 1);
+}
+
+btnPlay.addEventListener("click", play);
+document.getElementById("btnNext").addEventListener("click", () => {
+  stop(); setFocus(Math.min(focus + 1, STEPS.length - 1));
+});
+document.getElementById("btnPrev").addEventListener("click", () => {
+  stop(); if (focus > 0) setFocus(focus - 1); else setFocus(-1);
+});
+document.getElementById("btnAll").addEventListener("click", () => {
+  stop(); animate = false; setFocus(-1);
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") { stop(); setFocus(Math.min(focus + 1, STEPS.length - 1)); }
+  if (e.key === "ArrowLeft")  { stop(); setFocus(focus > 0 ? focus - 1 : -1); }
+});
+
+mount();
+</script>
+</body>
+</html>

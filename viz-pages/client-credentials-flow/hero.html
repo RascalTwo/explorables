@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>client-credentials-flow — hero card</title>
+
+<!-- The OG / hero card for client-credentials-flow — the one LISTED page of an
+     eight-page family, so this card is the front door for all of them.
+
+     `bun verify.ts <url> --og` renders THIS file (not the live viz) and clips the
+     screenshot to the .og-card element below → og.auto.png, which is what unfurls
+     when the viz URL is pasted into Slack/Discord/Teams/WebEx.
+
+     Keep the .og-card class (verify.ts clips to it) and keep anything that must
+     survive inside the centre ~1080×565 — link cards get centre-cropped. -->
+
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<link rel="stylesheet" href="/_kit/viz-og.css">
+<style>
+  html, body { margin: 0; background: #05060a; }
+  /* the flow's own vocabulary, so the card and the page agree */
+  .lane-tag { font-family: var(--sans); font-size: 9px; letter-spacing: .12em;
+              text-transform: uppercase; fill: var(--faint) }
+  .hop { font-family: var(--mono); font-size: 10px; fill: var(--muted) }
+  .boxname { font-family: var(--sans); font-size: 11.5px; font-weight: 650; fill: var(--text) }
+</style>
+</head>
+<body>
+
+<div class="og-card">
+  <div class="frame"></div>
+
+  <div class="left">
+    <div class="eyebrow"><span class="dot"></span>client credentials</div>
+
+    <h1 class="title">OAuth with<br><span class="hl">nobody logged in.</span></h1>
+
+    <div class="essence">
+      One service getting a token from another — <span class="hl">no user, no
+      redirect, no consent screen</span>.
+    </div>
+
+    <div class="sub">
+      The flow end to end, then three dives into the cryptography under it. Every
+      value shown is real: the token verifies, the forgeries don't.
+    </div>
+
+    <div class="chips">
+      <span class="chip"><span class="tk"></span>RFC 6749 §4.4</span>
+      <span class="chip"><span class="tk"></span>8 linked pages</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="panel">
+      <div class="panel-cap">
+        <span class="t">Two hops, two frequencies</span>
+        <span class="s">generic actors</span>
+      </div>
+
+      <svg class="graph" viewBox="0 0 392 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ah-accent" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+          <marker id="ah-good" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--good)"/>
+          </marker>
+        </defs>
+
+        <!-- Lane tags sit on the RIGHT: left-aligned they ran straight through
+             the dashed carry-down arrow at x=56. -->
+        <!-- phase 1: per token -->
+        <text class="lane-tag" x="388" y="12" text-anchor="end">Once per token</text>
+        <rect x="4" y="20" width="104" height="42" rx="7"
+              fill="var(--panel-2)" stroke="var(--border)"/>
+        <text class="boxname" x="56" y="46" text-anchor="middle">Client</text>
+
+        <text class="hop" x="176" y="34" text-anchor="middle">client_secret</text>
+        <line x1="114" y1="41" x2="232" y2="41" stroke="var(--accent)"
+              stroke-width="2" marker-end="url(#ah-accent)"/>
+        <text class="hop" x="176" y="58" text-anchor="middle" fill="var(--good)">access_token</text>
+
+        <rect x="240" y="20" width="148" height="42" rx="7"
+              fill="color-mix(in srgb, var(--accent) 12%, transparent)"
+              stroke="var(--accent)"/>
+        <text class="boxname" x="314" y="46" text-anchor="middle">Authorization server</text>
+
+        <!-- the token is carried down into the next phase -->
+        <line x1="56" y1="62" x2="56" y2="126" stroke="var(--good)"
+              stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ah-good)"/>
+
+        <!-- phase 2: per request -->
+        <text class="lane-tag" x="388" y="104" text-anchor="end">Every request after that</text>
+        <rect x="4" y="132" width="104" height="42" rx="7"
+              fill="var(--panel-2)" stroke="var(--border)"/>
+        <text class="boxname" x="56" y="158" text-anchor="middle">Client</text>
+
+        <text class="hop" x="176" y="146" text-anchor="middle">Bearer …</text>
+        <line x1="114" y1="153" x2="232" y2="153" stroke="var(--accent)"
+              stroke-width="2" marker-end="url(#ah-accent)"/>
+
+        <rect x="240" y="132" width="148" height="42" rx="7"
+              fill="color-mix(in srgb, var(--good) 12%, transparent)"
+              stroke="var(--good)"/>
+        <text class="boxname" x="314" y="158" text-anchor="middle">Resource server</text>
+      </svg>
+
+      <div class="foot">
+        <div class="stat accent">
+          <div class="n">0</div>
+          <div class="l">humans</div>
+          <div class="d">no login, no consent</div>
+        </div>
+        <div class="stat good">
+          <div class="n">0</div>
+          <div class="l">refresh tokens</div>
+          <div class="d">RFC 6749 §4.4.3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The client credentials flow — end to end</title>
+<meta name="viz:uid" content="v-a7dc302f092e">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="The client credentials flow — end to end">
+<meta name="viz:description" content="One service getting a token from another, with no human anywhere in it. Five moments — register, request, issue, present, verify — and three deep dives into the cryptography behind them.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<link rel="stylesheet" href="/_kit/exchange.css">
+<style>
+  /* ---- the spine's own vocabulary --------------------------------------
+     Three kinds of line appear in the panels and they must never blur:
+     .src  = the specification's words, cited          (what the RFC says)
+     .ours = our own inference or deployment choice    (what we decided)
+     .dive = a doorway to the page that draws the cryptography in detail */
+  .src { margin-top:8px; padding-top:7px; border-top:1px solid #22314e;
+         color:#7a8699; font-size:9.5px; line-height:1.45 }
+  .src b { color:#93a4c0; font-weight:700 }
+  .ours { margin-top:7px; padding-left:8px; border-left:1px dashed var(--warn);
+          color:#d9a95c; font-size:9.5px; line-height:1.45 }
+  .ours b { color:var(--warn); text-transform:uppercase; letter-spacing:.04em }
+
+  /* A dive link is the whole reason this page stays readable: the detail is
+     one click away instead of on the page. Make it obviously a door. */
+  /* font-family is restated because a dive link also appears inside `.mono`
+     panels, where it would otherwise inherit the monospace of a code listing. */
+  /* Loudened 2026-08-07. These were a tinted box that read as another note, and
+     a reader could step through all ten beats without registering that three
+     whole pages sit behind them. A doorway has to look like a doorway: a real
+     border, a call to action that says what happens on click, and a one-shot
+     attention pulse when it first appears. */
+  .dive { display:block; margin-top:11px; padding:11px 12px 12px; border-radius:8px;
+          background:#16233f; border:1.5px solid var(--accent); color:#a9cdff;
+          font-family:var(--sans); text-decoration:none; font-size:11px;
+          line-height:1.45; box-shadow:0 0 0 3px rgba(88,166,255,.10);
+          transition:background .18s ease, box-shadow .18s ease, transform .12s ease }
+  .dive:hover { background:#1e3057; box-shadow:0 0 0 4px rgba(88,166,255,.22);
+                color:#dcebff; transform:translateY(-1px) }
+  .dive b { display:block; color:#eaf3ff; font-size:12.5px; margin-bottom:3px }
+  .dive::after {
+    content:'Open the deep dive →'; display:inline-block; margin-top:8px;
+    font-size:9.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--bg); background:var(--accent); padding:4px 8px; border-radius:4px }
+  @keyframes divepulse {
+    0%,100% { box-shadow:0 0 0 3px rgba(88,166,255,.10) }
+    50%     { box-shadow:0 0 0 7px rgba(88,166,255,.28) }
+  }
+  .dive { animation:divepulse 1.6s ease-in-out 2 }
+  @media (prefers-reduced-motion: reduce) { .dive { animation:none } }
+
+  /* The closing panel — the family index. Ten beats end on "the API served it",
+     which is a fine ending for the mechanism and a dead end for the reader.
+     It is FULL WIDTH and sits below everything else on the canvas: at its old
+     x:1010 y:1185 it drew straight over p-verify, whose content-driven body
+     reaches y=1272. MEASURED, not guessed — see docs/DESIGN.md. Any change to
+     p-verify's body must re-check that number.
+     Deliberately NOT more .dive buttons: the inline doorways already shout, and
+     eight of them would be a wall. These are quiet index tiles. */
+  #p-next .body { font-size:10.5px }
+  .famgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:3px }
+  .famlbl { display:block; font-size:8.5px; font-weight:700; letter-spacing:.12em;
+            text-transform:uppercase; color:var(--c5); margin-bottom:6px }
+  .fam { display:block; margin-bottom:6px; padding:7px 9px; border-radius:6px;
+         background:#101a2e; border:1px solid #24334f; color:#a9cdff;
+         font-family:var(--sans); text-decoration:none; font-size:9.5px; line-height:1.45;
+         transition:background .15s ease, border-color .15s ease }
+  .fam:hover { background:#182741; border-color:var(--accent) }
+  .fam b { display:block; color:#eaf3ff; font-size:11px; margin-bottom:2px; font-weight:700 }
+  .fam span { color:#8fa3c0 }
+  .fam:hover span { color:#c6d8ef }
+  .plainlink { color:var(--accent); text-decoration:none; border-bottom:1px solid #3a5288 }
+  .plainlink:hover { border-bottom-color:var(--accent) }
+
+  /* Third-party explainers. Teal rule, distinct from .src (grey, the spec's own
+     words) and .ours (amber dashed, our inference) — three kinds of evidence,
+     three looks, so a reviewer never reads a blog as a standard. */
+  .elsewhere { margin-top:9px; padding:7px 0 1px 9px; border-left:2px solid var(--c5) }
+  .elsewhere .lbl { display:block; font-size:8.5px; font-weight:700; letter-spacing:.12em;
+                    text-transform:uppercase; color:var(--c5); margin-bottom:4px }
+  .elsewhere a { color:#cfe4ff; font-weight:700; font-size:10.5px; text-decoration:none;
+                 border-bottom:1px solid var(--c5) }
+  .elsewhere a:hover { color:var(--c5) }
+  .elsewhere .who { color:#6d7b8f; font-size:9px; margin-left:5px }
+  .elsewhere .why { display:block; margin-top:4px; color:#93a4c0; font-size:9.5px; line-height:1.5 }
+
+  .panelbox .body { font-size:10.5px; line-height:1.5 }
+  .note { color:#c6d4e8; font-size:10.5px; line-height:1.55 }
+  .note b { color:#fff }
+  .note code, .body code { font-family:ui-monospace,Menlo,monospace;
+                           font-size:9.5px; color:#7fd7ff }
+
+  /* citations panel — same treatment as the sibling protocol walkthroughs */
+  .panelbox.refs { border-color:#3b4a6b; background:#0c1524 }
+  .ref { color:#7fd7ff; font-size:9.5px; line-height:1.45; margin-top:4px }
+  .ref b { color:#a9e2ff; font-weight:700 }
+  .ref:first-child { margin-top:0 }
+  .refn { color:#8ea6c4; font-size:9px; line-height:1.4; margin-top:7px;
+          padding-top:6px; border-top:1px solid #22314e }
+
+  /* An empty panel is scaffolding the reader should not see. One rule per id:
+     a single `:has()` selector latches in Chrome and stops re-evaluating when
+     the engine rewrites `.body`. (Same trick as mtls-protocol-walkthrough.) */
+  #p-nouser,#p-cred,#p-req,#p-res,#p-call,#p-verify { transition:opacity .35s ease }
+  #p-nouser:has(.body:empty), #p-cred:has(.body:empty), #p-req:has(.body:empty),
+  #p-res:has(.body:empty), #p-call:has(.body:empty),
+  #p-verify:has(.body:empty) { opacity:0 }
+</style>
+</head>
+<body>
+<!-- Content lives entirely in content.js; this file only bolts it to the shared
+     engine. Never edit anything under /_kit/ to change this page —
+     eight variants share it. -->
+<script type="module">
+  import { mount } from '/_kit/exchange.js';
+  import content from './content.js';
+  mount(content);
+</script>
+</body>
+</html>

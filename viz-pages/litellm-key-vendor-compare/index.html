@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="LiteLLM">
+  <meta name="viz:tag" content="Ansible">
+  <meta name="viz:tag" content="Terraform">
+  <meta name="viz:tag" content="Kubernetes">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Key-Vendor: Ansible vs Terraform vs Kubernetes — side-by-side</title>
+<meta name="viz:title" content="Key-Vendor: Ansible vs Terraform vs Kubernetes — side-by-side">
+<meta name="viz:description" content="Three ways to vend one scoped LiteLLM key, side by side — spec-based one-shot Ansible and Terraform engines versus an always-on Kubernetes operator that never stops reconciling.">
+<meta name="viz:uid" content="v-7b3650562d14">
+<meta name="viz:posture" content="local">
+<meta name="viz:listed" content="unlisted">
+<link rel="stylesheet" href="/_kit/viz-kit.css" />
+<style>
+  body { max-width: 1480px; margin: 0 auto; padding: 20px 24px 64px; }
+  .badges { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+  .badge { font: 12px var(--mono); padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); }
+  .badge.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 45%, transparent); }
+  .badge.bad { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 45%, transparent); }
+
+  .scenbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 12px; }
+  button.act { background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 13px; font: 13px var(--sans); cursor: pointer; transition: .12s; }
+  button.act:hover:not(:disabled) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--panel-2)); }
+  button.act:disabled { opacity: .4; cursor: not-allowed; }
+  button.act.primary { border-color: color-mix(in srgb, var(--good) 55%, transparent); }
+  button.act.diverge { border-color: color-mix(in srgb, var(--danger) 55%, transparent); }
+  button.act .k { font: 12px var(--mono); color: var(--accent); }
+
+  .diff { margin: 0 0 16px; }
+  .diff .row { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0; align-items: stretch; }
+  .diff .cell { padding: 12px 14px; border: 1px solid var(--border); font-size: 13.5px; line-height: 1.45; }
+  .diff .cell.l { border-radius: 8px 0 0 8px; }
+  .diff .cell.r { border-radius: 0 8px 8px 0; }
+  .diff .vs { display: grid; place-items: center; font: 700 12px var(--mono); color: var(--muted); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .diff.diverge .cell { border-color: color-mix(in srgb, var(--danger) 55%, transparent); background: color-mix(in srgb, var(--danger) 9%, transparent); }
+  .diff.diverge .vs { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 55%, transparent); }
+  .diff .eng { font: 11px var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 3px; }
+  .diff .dtitle { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+
+  .dtable { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13px; }
+  .dtable th, .dtable td { padding: 8px 11px; border: 1px solid var(--border); text-align: left; vertical-align: top; line-height: 1.4; }
+  .dtable th { font: 11px var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .dtable th.ans { border-top: 2px solid #bd0000; } .dtable th.tf { border-top: 2px solid #7B42BC; }
+  .dtable td.cond { font: 12.5px var(--mono); color: var(--text); }
+  .dtable code { font: 12px var(--mono); color: var(--accent); }
+  .dtable tr.diverge td { background: color-mix(in srgb, var(--danger) 7%, transparent); }
+  .dtable .na { color: var(--muted); }
+  h2.cap { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+  .col-h { display: flex; align-items: center; gap: 9px; margin: 0 0 4px; }
+  .col-h .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .col-h.ans .dot { background: #bd0000; } .col-h.tf .dot { background: #7B42BC; }
+  .col-h h3 { margin: 0; font-size: 15px; }
+  .col-h .tagline { font-size: 12px; color: var(--muted); }
+
+  pre.term { background: #010409; border: 1px solid var(--border); border-radius: 8px; padding: 11px;
+    height: 188px; overflow: auto; font: 11px/1.5 var(--mono); color: #9fdcff; margin: 10px 0 0; white-space: pre-wrap; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font: 12.5px var(--mono); margin-top: 6px; }
+  .kv .key { color: var(--muted); } .kv .val { color: var(--text); word-break: break-all; }
+  .substate { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .substate .mini h4 { margin: 0 0 4px; font: 600 11px var(--mono); color: var(--muted); }
+  .flash { animation: fl 1.3s ease-out; border-radius: 3px; }
+  @keyframes fl { 0% { background: color-mix(in srgb, var(--good) 70%, transparent); } 100% { background: transparent; } }
+  .pill { font: 11px var(--mono); padding: 1px 7px; border-radius: 10px; border: 1px solid var(--border); }
+  .pill.yes { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 50%, transparent); }
+  .pill.no { color: var(--good); border-color: color-mix(in srgb, var(--good) 50%, transparent); }
+  .pill.absent { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 50%, transparent); }
+
+  .statebox { margin-top: 12px; padding: 11px 13px; border-radius: 8px; font-size: 12.5px; }
+  .statebox.none { border: 1px dashed color-mix(in srgb, var(--good) 50%, transparent); color: var(--good); }
+  .statebox.has { border: 1px solid var(--danger); background: color-mix(in srgb, var(--danger) 10%, transparent); }
+  .statebox .lbl { font: 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); display: block; margin-bottom: 5px; }
+  .statebox code { font: 12px var(--mono); color: var(--danger); word-break: break-all; }
+
+  svg .node rect { fill: var(--panel-2); stroke: var(--border); }
+  svg .node.active rect { stroke: var(--accent); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 60%, transparent)); }
+  svg .node.state rect { stroke: var(--danger); stroke-dasharray: 4 3; }
+  svg .node .t { fill: var(--text); font: 600 12px var(--sans); }
+  svg .node .s { fill: var(--muted); font: 10px var(--mono); }
+  svg path.edge { stroke: var(--border); stroke-width: 2; fill: none; }
+  svg path.edge.active { stroke: var(--accent); stroke-dasharray: 7 5; animation: dash 1s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -24; } }
+  .legend2 { font: 10.5px var(--mono); color: var(--muted); margin-top: 6px; }
+
+  /* ---- mode tabs (Compare | Quickstart) ---- */
+  .modetabs { display: flex; gap: 8px; margin: 14px 0 4px; border-bottom: 1px solid var(--border); }
+  .modetab { background: none; border: none; border-bottom: 2px solid transparent; color: var(--muted);
+    font: 600 14px var(--sans); padding: 8px 14px 10px; cursor: pointer; margin-bottom: -1px; transition: .12s; }
+  .modetab:hover { color: var(--text); }
+  .modetab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+  /* ---- quickstart ---- */
+  .uni-pills { display: flex; gap: 10px; margin: 18px 0 6px; flex-wrap: wrap; }
+  .uni-pill { display: flex; align-items: center; gap: 9px; background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 15px; cursor: pointer; transition: .12s; color: var(--text); font: 600 14px var(--sans); }
+  .uni-pill:hover { border-color: var(--accent); }
+  .uni-pill.active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, var(--panel-2)); }
+  .uni-pill .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .uni-pill .tl { font: 11px var(--mono); color: var(--muted); font-weight: 400; }
+
+  .ask { margin: 8px 0 14px; padding: 13px 16px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--panel-2); font-size: 14.5px; line-height: 1.5; }
+  .ask b { color: var(--accent); }
+
+  svg.qsflow .node rect { fill: var(--panel-2); stroke: var(--border); }
+  svg.qsflow .node.lit rect { stroke: var(--accent); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 55%, transparent)); }
+  svg.qsflow .node .t { fill: var(--text); font: 600 12.5px var(--sans); }
+  svg.qsflow .node .s { fill: var(--muted); font: 10px var(--mono); }
+  svg.qsflow path.edge { stroke: var(--border); stroke-width: 2; fill: none; }
+  svg.qsflow path.edge.lit { stroke: var(--accent); stroke-dasharray: 7 5; animation: dash 1s linear infinite; }
+
+  .steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+  .step { border: 1px solid var(--border); border-radius: 11px; padding: 14px 16px; background: var(--panel); }
+  .step.lit { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); }
+  .step > h3 { margin: 0 0 4px; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+  .step .num { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); font: 700 13px var(--mono); flex: none; }
+  .step .lead { color: var(--muted); font-size: 13px; margin: 0 0 10px 34px; line-height: 1.5; }
+  .step .body { margin-left: 34px; }
+
+  .code { position: relative; background: #010409; border: 1px solid var(--border); border-radius: 8px; }
+  .code pre { margin: 0; padding: 12px 13px; overflow: auto; font: 11.5px/1.55 var(--mono); color: #c9d6e8; white-space: pre; }
+  .code .fname { font: 10.5px var(--mono); color: var(--muted); padding: 7px 12px 0; display: block; }
+  .code .cp { position: absolute; top: 7px; right: 7px; background: var(--panel-2); border: 1px solid var(--border);
+    color: var(--muted); font: 11px var(--sans); padding: 3px 9px; border-radius: 6px; cursor: pointer; }
+  .code .cp:hover { color: var(--text); border-color: var(--accent); }
+  .cmd { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .cmd code { background: #010409; border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px;
+    font: 12.5px var(--mono); color: #9fdcff; }
+  .cmd .ann { font-size: 12px; color: var(--muted); }
+  button.try { background: color-mix(in srgb, var(--good) 16%, var(--panel-2)); color: var(--good);
+    border: 1px solid color-mix(in srgb, var(--good) 50%, transparent); border-radius: 8px; padding: 9px 15px;
+    font: 600 13px var(--sans); cursor: pointer; transition: .12s; }
+  button.try:hover:not(:disabled) { background: color-mix(in srgb, var(--good) 26%, var(--panel-2)); }
+  button.try:disabled { opacity: .45; cursor: not-allowed; }
+  button.try.use { color: #9fc0ff; border-color: #34507e; background: color-mix(in srgb, #6ea8fe 14%, var(--panel-2)); }
+  button.try.use:hover:not(:disabled) { background: color-mix(in srgb, #6ea8fe 24%, var(--panel-2)); }
+
+  pre.out { background: #010409; border: 1px solid var(--border); border-radius: 8px; padding: 11px;
+    max-height: 220px; overflow: auto; font: 11px/1.5 var(--mono); color: #9fdcff; margin: 11px 0 0; white-space: pre-wrap; }
+  .resultcard { margin-top: 11px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px;
+    font: 12.5px var(--mono); border: 1px solid var(--border); border-radius: 8px; padding: 11px 13px; }
+  .resultcard .k { color: var(--muted); } .resultcard .v { color: var(--text); word-break: break-all; }
+  .resultcard.empty { display: block; color: var(--muted); font: 12.5px var(--sans); font-style: italic; }
+  .answer { margin-top: 11px; border: 1px solid #2f6f55; border-radius: 8px; padding: 10px 13px; background: rgba(46,111,85,.08); }
+  .answer .al { font: 9.5px var(--mono); letter-spacing: 1px; color: #6fcf9e; margin-bottom: 4px; }
+  .answer .at { font-size: 13.5px; color: #d7f5e6; line-height: 1.5; min-height: 18px; }
+  .answer .prov { font-size: 11.5px; color: #8fb89e; margin-top: 7px; }
+  .uniq { margin-top: 16px; border-top: 1px dashed var(--border); padding-top: 12px; font-size: 13px; line-height: 1.55; color: var(--muted); }
+  .uniq b { color: var(--text); }
+  .offline-note { color: var(--warn); font-size: 12px; margin-top: 8px; }
+
+  /* ===== Operator tab — styles from the former standalone page, scoped to #mode-operator
+     so nothing collides with the compare/quickstart CSS above. (dash → opdash to avoid
+     clashing with the compare page's own @keyframes dash.) ===== */
+  #mode-operator .wrap { max-width: 1500px; margin: 0 auto; padding: 2px 0 20px; }
+  #mode-operator .grid { display: grid; grid-template-columns: 1fr 0.72fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 1100px) { #mode-operator .grid { grid-template-columns: 1fr; } }
+  #mode-operator .engine { border: 1px solid var(--line, #2a2f3a); border-radius: 12px; padding: 14px; background: var(--panel, #161a22); position: relative; }
+  #mode-operator .engine.ansible { box-shadow: inset 0 2px 0 0 var(--c1); }
+  #mode-operator .engine.java { box-shadow: inset 0 2px 0 0 var(--c3); }
+  #mode-operator .ehead { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  #mode-operator .ehead h2 { margin: 0; font-size: 16px; letter-spacing: .2px; }
+  #mode-operator .ehead .ns { font-size: 11px; color: var(--muted, #8a93a6); font-family: ui-monospace, monospace; }
+  #mode-operator .pulse { width: 10px; height: 10px; border-radius: 50%; background: #334; margin-left: auto; transition: background .15s; }
+  #mode-operator .pulse.beat { background: var(--good, #46d39a); box-shadow: 0 0 10px var(--good, #46d39a); }
+
+  #mode-operator .card { border: 1px solid var(--line, #262b35); border-radius: 9px; padding: 9px 11px; margin-bottom: 9px; background: #11141b; }
+  #mode-operator .card h3 { margin: 0 0 7px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .9px; color: var(--muted, #8a93a6); display: flex; align-items: center; gap: 6px; }
+  #mode-operator .row { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; padding: 1.5px 0; }
+  #mode-operator .row .k { color: var(--muted, #8a93a6); }
+  #mode-operator .row .v { font-family: ui-monospace, monospace; text-align: right; word-break: break-all; }
+  #mode-operator .absent { color: var(--muted, #6b7280); font-style: italic; font-size: 12px; }
+  #mode-operator .mono { font-family: ui-monospace, monospace; }
+
+  #mode-operator .drift .v.budget { color: var(--danger, #ff6b6b); font-weight: 700; }
+  #mode-operator .drift { animation: pulseRed 1.1s ease-in-out infinite; border-color: var(--danger, #ff6b6b) !important; }
+  @keyframes pulseRed { 0%,100% { box-shadow: 0 0 0 0 rgba(255,107,107,0); } 50% { box-shadow: 0 0 0 3px rgba(255,107,107,.18); } }
+  #mode-operator .healed { animation: flashGreen 1.6s ease-out 1; }
+  @keyframes flashGreen { 0% { box-shadow: 0 0 0 3px rgba(70,211,154,.5); border-color: var(--good); } 100% { box-shadow: none; } }
+  #mode-operator .badge { font-size: 9.5px; padding: 1px 6px; border-radius: 999px; font-weight: 700; letter-spacing: .4px; }
+  #mode-operator .badge.warn { background: rgba(255,107,107,.16); color: #ff8e8e; }
+  #mode-operator .badge.ok { background: rgba(70,211,154,.16); color: #7df0c0; }
+  #mode-operator .badge.blk { background: rgba(255,193,90,.16); color: #ffce7a; }
+
+  #mode-operator .acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  #mode-operator button { font: inherit; font-size: 11.5px; padding: 5px 9px; border-radius: 7px; border: 1px solid var(--line, #313844); cursor: pointer; color: #dfe5ee; background: #1b2230; transition: .12s; }
+  #mode-operator button:hover:not(:disabled) { border-color: var(--accent, #6ea8fe); background: #232c3d; }
+  #mode-operator button:disabled { opacity: .4; cursor: not-allowed; }
+  #mode-operator button.danger:hover:not(:disabled) { border-color: var(--danger, #ff6b6b); }
+  #mode-operator button.warn:hover:not(:disabled) { border-color: #ffb454; }
+  #mode-operator button.on { border-color: var(--good, #46d39a); color: #7df0c0; }
+
+  #mode-operator .center h2 { font-size: 14px; margin: 2px 0 12px; }
+  #mode-operator .cap { border: 1px solid var(--line, #262b35); border-radius: 9px; padding: 10px 11px; margin-bottom: 9px; background: #11141b; transition: .3s; }
+  #mode-operator .cap.lit { border-color: var(--accent, #6ea8fe); box-shadow: 0 0 0 1px var(--accent, #6ea8fe), 0 0 16px rgba(110,168,254,.12); }
+  #mode-operator .cap .t { font-size: 12.5px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 7px; }
+  #mode-operator .cap .d { font-size: 11.5px; color: var(--muted, #97a0b2); line-height: 1.45; }
+  #mode-operator .ico { width: 15px; height: 15px; flex: none; }
+  #mode-operator .contrast-note { font-size: 11px; color: var(--muted, #7e8798); margin-top: 12px; line-height: 1.5; border-top: 1px dashed var(--line,#2a2f3a); padding-top: 10px; }
+  #mode-operator .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #1c2433; border: 1px solid var(--accent,#6ea8fe); color: #e6ecf6; padding: 8px 14px; border-radius: 9px; font-size: 12.5px; opacity: 0; transition: opacity .25s; pointer-events: none; z-index: 9; }
+  #mode-operator .toast.show { opacity: 1; }
+  #mode-operator .pf { font-size: 11.5px; margin: 4px 0 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+  #mode-operator .consumer { border-color: #2f3a4d; background: #0f1622; }
+  #mode-operator .consumer h3 { color: #9fc0ff; }
+  #mode-operator .flow-mini { display: flex; align-items: center; gap: 6px; margin: 4px 0 9px; flex-wrap: wrap; }
+  #mode-operator .node { font-size: 11px; padding: 3px 8px; border-radius: 7px; border: 1px solid var(--line,#2a3343); background: #161d2a; font-family: ui-monospace, monospace; }
+  #mode-operator .node.pod { color: #cdd7e6; } #mode-operator .node.gw { color: #9fc0ff; border-color: #34507e; } #mode-operator .node.brain { border-color: #2f6f55; }
+  #mode-operator .arrow { font-size: 10.5px; color: var(--muted,#7e8798); font-family: ui-monospace, monospace; }
+  #mode-operator .arrow.flowing { color: var(--accent,#6ea8fe); animation: opdash 0.8s linear infinite; }
+  @keyframes opdash { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+  #mode-operator .csteps { display: flex; flex-direction: column; gap: 4px; margin-bottom: 9px; }
+  #mode-operator .cstep { font-size: 11.5px; line-height: 1.45; }
+  #mode-operator .cstep .n { display: inline-block; width: 15px; height: 15px; line-height: 15px; text-align: center; border-radius: 50%; background: #243049; color: #9fc0ff; font-size: 9.5px; margin-right: 5px; }
+  #mode-operator .cstep .lbl { color: #cdd7e6; font-weight: 600; }
+  #mode-operator .cstep.dim, #mode-operator .dim { color: var(--muted,#7e8798); }
+  #mode-operator .cstep.bad { color: var(--danger,#ff6b6b); }
+  #mode-operator .cstep.run { color: #9fc0ff; }
+  #mode-operator .answer-box { border: 1px solid #2f6f55; border-radius: 8px; padding: 8px 10px; margin: 7px 0; background: rgba(46,111,85,.08); }
+  #mode-operator .answer-box .al { font-size: 9px; letter-spacing: 1px; color: #6fcf9e; margin-bottom: 3px; }
+  #mode-operator .answer-box .atext { font-size: 13px; color: #d7f5e6; min-height: 17px; }
+  #mode-operator .answer-box .atext::after { content: "▋"; color: #6fcf9e; animation: blink 1s step-end infinite; }
+  #mode-operator .answer-box.done .atext::after { content: ""; }
+  @keyframes blink { 50% { opacity: 0; } }
+  #mode-operator .prov { font-size: 11px; color: #8fb89e; margin-top: 4px; }
+  #mode-operator .consumer button { margin-top: 2px; border-color: #34507e; }
+  #mode-operator .consumer button:hover:not(:disabled) { border-color: var(--accent,#6ea8fe); background: #1c2740; }
+  #mode-operator .pf .chk { display: flex; align-items: center; gap: 5px; }
+  #mode-operator .dot { width: 8px; height: 8px; border-radius: 50%; }
+  #mode-operator .dot.g { background: var(--good, #46d39a); } #mode-operator .dot.r { background: var(--danger, #ff6b6b); }
+
+  #mode-operator .anatomy { border: 1px solid var(--line, #2a2f3a); border-radius: 12px; padding: 13px 16px 11px; margin-bottom: 16px; background: var(--panel, #161a22); }
+  #mode-operator .anatomy h2 { margin: 0 0 1px; font-size: 15px; }
+  #mode-operator .anatomy .cap { font-size: 11.5px; color: var(--muted, #8a93a6); line-height: 1.5; margin: 7px 2px 0; border: none; background: none; padding: 0; border-radius: 0; }
+  #mode-operator .anatomy svg { width: 100%; height: auto; display: block; }
+  #mode-operator .anatomy .bx { fill: #11141b; stroke: var(--line, #2a3343); stroke-width: 1.5; }
+  #mode-operator .anatomy .bx.cluster { fill: rgba(110,168,254,.045); stroke: #34507e; stroke-dasharray: 4 3; }
+  #mode-operator .anatomy .bx.ns { fill: rgba(110,168,254,.05); stroke: #3a4660; }
+  #mode-operator .anatomy .bx.host { fill: rgba(70,211,154,.045); stroke: #2f6f55; stroke-dasharray: 4 3; }
+  #mode-operator .anatomy .bx.op { stroke: var(--accent, #6ea8fe); }
+  #mode-operator .anatomy .bx.cr { stroke: #c08457; }
+  #mode-operator .anatomy .bx.secret { stroke: var(--warn, #ffc15a); }
+  #mode-operator .anatomy .bx.pod { stroke: #9fc0ff; }
+  #mode-operator .anatomy .bx.key { fill: rgba(70,211,154,.08); stroke: var(--good, #46d39a); }
+  #mode-operator .anatomy .lbl { font: 600 12.5px ui-sans-serif, system-ui; fill: #e3e8f0; }
+  #mode-operator .anatomy .zone { font: 700 10.5px ui-monospace, monospace; fill: var(--muted, #8a93a6); letter-spacing: .5px; }
+  #mode-operator .anatomy .row { font: 11.5px ui-monospace, monospace; fill: #aeb6c4; display: revert; justify-content: revert; padding: 0; }
+  #mode-operator .anatomy .tag { font: 10.5px ui-monospace, monospace; fill: var(--muted, #7e8798); }
+  #mode-operator .anatomy .edge { stroke: #5a6678; stroke-width: 1.6; fill: none; marker-end: url(#mh); }
+  #mode-operator .anatomy .edge.reach { stroke: var(--accent, #6ea8fe); stroke-dasharray: 5 3; marker-end: url(#mh-a); }
+  #mode-operator .anatomy .edge.own { stroke: var(--warn, #ffc15a); marker-end: url(#mh-w); }
+  #mode-operator .anatomy .elbl { font: 10.5px ui-sans-serif, system-ui; fill: #9aa3b4; }
+  #mode-operator .anatomy .elbl.acc { fill: #8fb6f0; }
+  #mode-operator .anatomy.drift .bx.key { stroke: var(--danger, #ff6b6b); }
+  #mode-operator .anatomy.drift .edge.reach { stroke: var(--danger, #ff6b6b); }
+</style>
+</head>
+<body>
+  <header class="viz-header">
+    <h1>Key-Vendor Machine — Ansible vs Terraform vs Kubernetes operator</h1>
+    <div class="sub">Three ways to vend one scoped LiteLLM key: two spec-based, one-shot engines — <b>Ansible</b> and <b>Terraform</b>, side by side — and an always-on <b>Kubernetes operator</b> that never stops reconciling. Pick a scenario and watch each converge.</div>
+    <div class="badges" id="badges"></div>
+  </header>
+
+  <div class="modetabs">
+    <button class="modetab active" data-mode="compare">⚖️ Spec-based — Ansible vs Terraform</button>
+    <button class="modetab" data-mode="operator">♾️ Controller-based — Ansible vs Java operator</button>
+    <button class="modetab" data-mode="quickstart">🚀 Quickstart — "I need a key"</button>
+  </div>
+
+  <div id="mode-compare">
+  <div class="scenbar" id="scenbar">
+    <button class="act primary" data-s="create"><span class="k">reset → run</span> · Create from clean slate</button>
+    <button class="act" data-s="norun"><span class="k">re-run</span> · Idempotent no-op</button>
+    <button class="act" data-s="update"><span class="k">budget</span> · Update budget (in-place)</button>
+    <button class="act" data-s="rotate"><span class="k">version+1</span> · Rotate</button>
+    <button class="act diverge" data-s="remove"><span class="k">rm spec</span> · Remove spec ⚠</button>
+    <button class="act" data-s="restore"><span class="k">restore</span> · Restore spec</button>
+    <button class="act diverge" data-s="block"><span class="k">blocked=true</span> · Soft-disable (TF)</button>
+    <button class="act diverge" data-s="drift"><span class="k">out-of-band</span> · Drift ⚠</button>
+  </div>
+
+  <section class="panel diff" id="diff">
+    <div class="dtitle" id="difftitle">The contrast — pick a scenario above</div>
+    <div class="row">
+      <div class="cell l"><span class="eng">Ansible reconciler</span><span id="diff-ans">Stateless converge loop — “the system is the state”. Actual state re-read from <code>/key/list</code> every run; the secret never lands in a state file.</span></div>
+      <div class="vs" id="diff-vs">VS</div>
+      <div class="cell r"><span class="eng">Terraform</span><span id="diff-tf">Desired in HCL, actual cached in <code>terraform.tfstate</code> — and the minted secret lands there in plaintext. Removal means <code>destroy</code>, not disable.</span></div>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <!-- ANSIBLE COLUMN -->
+    <section class="panel">
+      <div class="col-h ans"><span class="dot"></span><h3>Ansible reconciler</h3><span class="tagline">no state file</span></div>
+      <svg id="flow-ans" viewBox="0 0 480 210" style="width:100%;height:auto;"></svg>
+      <div class="legend2">desired = <b>keys/*.yml</b> · actual = live <b>/key/list</b> (tag <b>ansible-key-vendor</b>) · <b>no tfstate</b></div>
+      <pre class="term" id="term-ans">(idle)</pre>
+      <div class="substate">
+        <div class="mini"><h4>📄 spec</h4><div class="kv" id="ans-spec"></div></div>
+        <div class="mini"><h4>🔑 LiteLLM</h4><div class="kv" id="ans-llm"></div></div>
+      </div>
+      <div class="mini" style="margin-top:12px;"><h4>🗄 SecretVault</h4><div class="kv" id="ans-vault"></div></div>
+      <div class="statebox none"><span class="lbl">state file</span>No <code style="color:var(--good)">tfstate</code> — actual state is re-read from <code style="color:var(--good)">/key/list</code>. The secret lives only in LiteLLM + the SecretVault row.</div>
+    </section>
+
+    <!-- TERRAFORM COLUMN -->
+    <section class="panel">
+      <div class="col-h tf"><span class="dot"></span><h3>Terraform</h3><span class="tagline">desired in HCL · actual in tfstate</span></div>
+      <svg id="flow-tf" viewBox="0 0 480 210" style="width:100%;height:auto;"></svg>
+      <div class="legend2">desired = <b>keys/*.yml</b> → <b>tfstate</b> · actual = refresh vs state · id = <b>sha256(key)</b> · tag <b>terraform-key-vendor</b></div>
+      <pre class="term" id="term-tf">(idle)</pre>
+      <div class="substate">
+        <div class="mini"><h4>📄 spec</h4><div class="kv" id="tf-spec"></div></div>
+        <div class="mini"><h4>🔑 LiteLLM</h4><div class="kv" id="tf-llm"></div></div>
+      </div>
+      <div class="mini" style="margin-top:12px;"><h4>🗄 SecretVault</h4><div class="kv" id="tf-vault"></div></div>
+      <div class="statebox" id="tfstate-box"></div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:16px;">
+    <h2 class="cap">Reconcile decision table — same condition, two engines</h2>
+    <table class="dtable">
+      <tr><th>Condition</th><th class="ans">Ansible reconciler</th><th class="tf">Terraform</th></tr>
+      <tr><td class="cond">alias not found</td><td><b>GENERATE</b> — <code>POST /key/generate</code></td><td>create <code>litellm_key</code> — secret also lands in <code>tfstate</code> in plaintext ⚠</td></tr>
+      <tr><td class="cond">attrs differ, <i>same</i> version</td><td><b>UPDATE</b> — <code>POST /key/update</code> (token stable)</td><td>in-place update (<code>~</code>) — id/token stable</td></tr>
+      <tr><td class="cond"><b>key_version</b> bumped</td><td><b>ROTATE</b> — delete + generate (new token)</td><td>destroy + create (new token)</td></tr>
+      <tr><td class="cond">managed key, <i>no</i> spec</td><td><b>SOFT-PRUNE</b> — <code>{blocked:true}</code>, recoverable</td><td><b>HARD DESTROY</b> — <code>/key/delete</code>, gone</td></tr>
+      <tr class="diverge"><td class="cond">soft-disable a key</td><td class="na">n/a — disables only via prune (remove the spec)</td><td>in-place <code>{blocked:true}</code> — key retained</td></tr>
+      <tr class="diverge"><td class="cond">out-of-band drift</td><td>re-reads live state — overwrites on next sync</td><td><code>terraform plan</code> shows diff; apply to converge</td></tr>
+      <tr><td class="cond">desired == actual</td><td colspan="2"><b>NO-OP</b> — zero API calls. Safe to run any number of times (idempotency).</td></tr>
+    </table>
+  </section>
+  </div><!-- /mode-compare -->
+
+  <div id="mode-quickstart" hidden>
+    <div class="uni-pills" id="uni-pills"></div>
+    <div class="ask" id="qs-ask"></div>
+    <svg class="qsflow" id="qs-flow" viewBox="0 0 980 132" style="width:100%;height:auto;"></svg>
+    <div class="steps" id="qs-steps"></div>
+    <div class="uniq" id="qs-uniq"></div>
+  </div>
+
+  <div id="mode-operator" hidden>
+    <!-- The operator viz inlined natively (was an iframe). Its CSS is scoped under
+         #mode-operator below; its JS is a separate module; its backend is reused via
+         the /op-* routes in api.ts. One page, one visualization. -->
+    <div class="wrap">
+      <div class="viz-header">
+        <h1>LiteLLMKey Operator — the always-on key vendor</h1>
+        <div class="sub">A <span class="mono">LiteLLMKey</span> CR in etcd, reconciled continuously by <b>two operators</b> (Ansible &amp; Java) against the <b>same live gateway</b>. Same contract as the one-shot <span class="mono">keys-sync</span> / <span class="mono">tf-apply</span> engines — promoted to a self-healing controller. <b>Drive it live.</b></div>
+      </div>
+      <div class="pf" id="pf"></div>
+
+      <section class="anatomy" id="anatomy">
+        <h2>🗺️ Anatomy of one LiteLLMKey — where everything lives</h2>
+        <svg viewBox="0 0 1140 472" role="img" aria-label="Topology of the LiteLLMKey operator: cluster, namespace, CR, Secret, pods, and the gateway outside the cluster.">
+          <defs>
+            <marker id="mh" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5a6678"/></marker>
+            <marker id="mh-a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#6ea8fe"/></marker>
+            <marker id="mh-w" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#ffc15a"/></marker>
+          </defs>
+
+          <rect class="bx cluster" x="16" y="34" width="744" height="420" rx="12"/>
+          <text class="zone" x="30" y="54">☸ KUBERNETES CLUSTER · kind-keyvendor</text>
+
+          <rect class="bx ns" x="34" y="68" width="708" height="368" rx="10"/>
+          <text class="zone" x="48" y="89">NAMESPACE: keyvendor-ansible</text>
+          <text class="tag" x="300" y="89">(keyvendor-java is identical)</text>
+
+          <rect class="bx op" x="60" y="110" width="258" height="64" rx="9"/>
+          <text class="lbl" x="74" y="136">🧠 operator pod</text>
+          <text class="tag" x="74" y="156">the reconcile loop — never stops</text>
+
+          <rect class="bx cr" x="60" y="214" width="262" height="170" rx="9"/>
+          <text class="zone" x="74" y="236">LiteLLMKey · CR (in etcd)</text>
+          <text class="row" x="74" y="260">spec — you author:</text>
+          <text class="row" x="86" y="278">alias · version · budget · models</text>
+          <text class="row" x="74" y="306">status — operator writes back:</text>
+          <text class="row" x="86" y="324">observedVersion · tokenHash</text>
+          <text class="tag" id="map-cr-ver" x="74" y="352">keyVersion: 1</text>
+          <text class="tag" x="74" y="370">↑ this is the DESIRED state</text>
+
+          <rect class="bx secret" x="362" y="214" width="350" height="94" rx="9"/>
+          <text class="zone" x="376" y="236">K8s Secret · namespaced</text>
+          <text class="row" id="map-secret-name" x="376" y="260">litellmkey-email-classification-service</text>
+          <text class="row" x="376" y="280">secret_value: sk-… (the real key)</text>
+          <text class="tag" x="376" y="299">pods mount THIS — not the CR</text>
+
+          <rect class="bx pod" x="362" y="348" width="350" height="56" rx="9"/>
+          <text class="lbl" x="376" y="372">📦 consumer pod · your app</text>
+          <text class="tag" x="376" y="391">env LLM_KEY ← secretKeyRef</text>
+
+          <rect class="bx host" x="792" y="118" width="332" height="244" rx="12"/>
+          <text class="zone" x="806" y="138">HOST · OUTSIDE THE CLUSTER</text>
+          <rect class="bx" x="808" y="150" width="300" height="196" rx="10"/>
+          <text class="zone" x="822" y="172">🚅 LiteLLM gateway :4000</text>
+          <rect class="bx key" x="824" y="188" width="268" height="142" rx="9"/>
+          <text class="lbl" x="838" y="212">🔑 live key</text>
+          <text class="tag" x="838" y="231">the ACTUAL credential</text>
+          <text class="row" id="map-live" x="838" y="258">sk-…  ·  v1</text>
+          <text class="tag" x="838" y="282">minted + held here,</text>
+          <text class="tag" x="838" y="299">never stored in Kubernetes</text>
+          <text class="tag" x="838" y="320">↑ this is the ACTUAL state</text>
+
+          <path class="edge" d="M167,174 V214"/>
+          <text class="elbl" x="174" y="200">reconciles</text>
+
+          <path class="edge reach" d="M318,140 C470,142 580,256 824,256"/>
+          <text class="elbl acc" x="372" y="124">mints · updates → POST /key/generate · /key/update</text>
+
+          <path class="edge own" d="M322,258 H362"/>
+          <text class="elbl" text-anchor="middle" x="342" y="251">owns</text>
+
+          <path class="edge" d="M537,308 V348"/>
+          <text class="elbl" x="547" y="332">mounted as $LLM_KEY</text>
+
+          <path class="edge reach" d="M712,376 C772,376 772,272 808,260"/>
+          <text class="elbl acc" x="376" y="424">calls /v1/chat/completions with $LLM_KEY</text>
+        </svg>
+        <div class="cap">Boxes inside boxes = <b>lives inside</b>. <b style="color:#c08457">CR</b> the desired-state object you author · <b style="color:var(--warn,#ffc15a)">Secret</b> where the real key lands for pods to mount · <b style="color:var(--good,#46d39a)">gateway key</b> the actual credential, held <b>outside</b> the cluster. The operator's one job: keep the gateway key matching the CR — forever.</div>
+      </section>
+
+      <div class="grid">
+        <div class="engine ansible" id="eng-ansible">
+          <div class="ehead"><h2>Ansible Operator</h2><span class="ns">ns&nbsp;keyvendor-ansible</span><span class="pulse" id="pulse-ansible"></span></div>
+          <div id="body-ansible"></div>
+          <div id="consume-ansible"></div>
+          <div class="acts" id="acts-ansible"></div>
+        </div>
+
+        <div class="center">
+          <h2>What only an <em>always-on</em> operator does</h2>
+          <div class="cap" id="cap-reconcile"><div class="t">🔁 Continuous reconcile</div><div class="d">Event-driven + a ~30s resync. The desired state is a native object; the loop never stops — unlike a one-shot <span class="mono">apply</span>.</div></div>
+          <div class="cap" id="cap-heal"><div class="t">🩹 Self-healing drift</div><div class="d"><b>Tamper</b> a key out-of-band → the next resync reverts it automatically. No human, no re-run.</div></div>
+          <div class="cap" id="cap-rotate"><div class="t">⏱️ Autonomous rotation</div><div class="d"><b>Auto-rotate</b> sets <span class="mono">rotationIntervalSeconds</span>; the token rotates on a clock with <em>no spec change</em>. Terraform/cron can't.</div></div>
+          <div class="cap" id="cap-final"><div class="t">🗑️ Finalizer delete-choice</div><div class="d"><b>Del soft</b> = block &amp; retain (restore reactivates the SAME token); <b>Del hard</b> = gone. Terraform only hard-destroys.</div></div>
+          <div class="contrast-note">Both engines share one CRD &amp; one contract — only the reconcile “brain” differs (Ansible role vs Java/JOSDK). The same key per engine stays live at once via distinct aliases.</div>
+        </div>
+
+        <div class="engine java" id="eng-java">
+          <div class="ehead"><h2>Java / Quarkus Operator</h2><span class="ns">ns&nbsp;keyvendor-java</span><span class="pulse" id="pulse-java"></span></div>
+          <div id="body-java"></div>
+          <div id="consume-java"></div>
+          <div class="acts" id="acts-java"></div>
+        </div>
+      </div>
+    </div>
+    <div class="toast" id="toast"></div>
+  </div>
+
+<script type="module">
+import { arrowMarkers, connect } from "/_kit/viz.js";
+import { iconGroup } from "./icons.js";
+
+// ---- per-column pipeline diagrams --------------------------------------
+const ANS = {
+  spec:  { x: 12,  y: 78,  w: 132, h: 54, t: "keys/*.yml", s: "git · desired", icon: "git" },
+  eng:   { x: 174, y: 72,  w: 132, h: 66, t: "reconcile", s: "converge loop", icon: "ansible" },
+  llm:   { x: 336, y: 22,  w: 132, h: 54, t: "LiteLLM", s: "/key/*", icon: "🚅" },
+  vault: { x: 336, y: 134, w: 132, h: 54, t: "SecretVault", s: "MySQL", icon: "mysql" },
+};
+const ANS_E = [["spec","eng"],["eng","llm"],["eng","vault"]];
+const TF = {
+  spec:  { x: 12,  y: 70,  w: 132, h: 54, t: "keys/*.yml", s: "git · desired", icon: "git" },
+  eng:   { x: 174, y: 64,  w: 132, h: 60, t: "terraform", s: "plan / apply", icon: "terraform" },
+  llm:   { x: 336, y: 18,  w: 132, h: 50, t: "LiteLLM", s: "/key/*", icon: "🚅" },
+  vault: { x: 336, y: 150, w: 132, h: 50, t: "SecretVault", s: "MySQL", icon: "mysql" },
+  state: { x: 174, y: 150, w: 132, h: 50, t: "tfstate", s: "sk- in plaintext", state: true },
+};
+const TF_E = [["spec","eng"],["eng","llm"],["eng","vault"],["eng","state"]];
+
+function drawFlow(svgId, N, EDGES) {
+  const node = (id) => {
+    const n = N[id];
+    const iy = n.y + n.h / 2 - 12;
+    const icon = n.state ? `<text x="${n.x + 14}" y="${n.y + n.h / 2 + 7}" font-size="18">🗒️</text>`
+      : n.icon === "🚅" ? `<text x="${n.x + 13}" y="${n.y + n.h / 2 + 9}" font-size="23">🚅</text>`
+      : iconGroup(n.icon, n.x + 14, iy, 24);
+    const tx = n.x + 48;
+    return `<g class="node ${n.state ? "state" : ""}" id="${svgId}-${id}"><rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="9"/>
+      ${icon}
+      <text class="t" x="${tx}" y="${n.y + n.h / 2 - 2}">${n.t}</text>
+      <text class="s" x="${tx}" y="${n.y + n.h / 2 + 14}">${n.s}</text></g>`;
+  };
+  const edge = ([a, b], i) => `<path class="edge" id="${svgId}-e${i}" d="${connect(N[a], N[b])}" marker-end="url(#ah)"/>`;
+  document.getElementById(svgId).innerHTML =
+    arrowMarkers() + EDGES.map(edge).join("") + Object.keys(N).map(node).join("");
+}
+function pipeActive(svgId, N, EDGES, on) {
+  ["eng","llm","vault","state"].forEach(id => { if (N[id]) document.getElementById(`${svgId}-${id}`)?.classList.toggle("active", on); });
+  EDGES.forEach((_, i) => document.getElementById(`${svgId}-e${i}`)?.classList.toggle("active", on));
+}
+drawFlow("flow-ans", ANS, ANS_E);
+drawFlow("flow-tf", TF, TF_E);
+
+// ---- the contrast table, per scenario ----------------------------------
+const DIFF = {
+  create:  { t: "Create from a clean slate", d: false,
+    a: "<b>GENERATE</b> — alias not found → <code>/key/generate</code>. Secret written to the SecretVault row.",
+    f: "<b>GENERATE</b> — <code>litellm_key</code> created. Secret written to SecretVault <i>and</i> into <code>terraform.tfstate</code> in plaintext." },
+  norun:   { t: "Re-run with no spec change (idempotency)", d: false,
+    a: "<b>NO-OP</b> — re-reads live <code>/key/list</code>, makes zero API calls.",
+    f: "<b>NO-OP</b> — refresh compares reality to <code>tfstate</code>: <code>0 to change</code>." },
+  update:  { t: "Change the budget", d: false,
+    a: "<b>UPDATE</b> in place — <code>/key/update</code>, token stays the same. Update ≠ rotation.",
+    f: "<b>UPDATE</b> in place (<code>~</code>) — id/token stable. Phase 0: no field on this provider is force-new." },
+  rotate:  { t: "Bump key_version (rotation)", d: false,
+    a: "delete + generate → <b>new token</b>. No grace window (Enterprise-only).",
+    f: "<b>REPLACE</b> (<code>-/+</code>) via <code>terraform_data</code> + <code>replace_triggered_by</code> → new token. No grace either." },
+  remove:  { t: "Remove the spec from git", d: true,
+    a: "<b>SOFT-PRUNE</b> → <code>blocked:true</code>. The key is <b>recoverable</b> — restore the spec to reactivate.",
+    f: "<b>HARD DESTROY</b> → <code>/key/delete</code>. The key is <b>gone</b>. Terraform has no soft-disable; removal = destroy." },
+  restore: { t: "Restore the spec", d: true,
+    a: "Reactivate in place — <code>blocked:false</code>, <b>same token</b>.",
+    f: "Re-create from scratch — a <b>brand-new token</b> (the old one was destroyed)." },
+  block:   { t: "Soft-disable the Terraform way (blocked=true)", d: true,
+    a: "n/a — the reconciler only disables via the prune step (remove the spec).",
+    f: "<b>in-place</b> update, key <b>retained</b> but blocked. Shows removal ≠ disable: model it as an attribute." },
+  drift:   { t: "Out-of-band change (drift)", d: true,
+    a: "Re-reads live state every run, so it simply <b>overwrites</b> the drift on the next sync.",
+    f: "<code>plan</code> sees state ≠ reality and wants to <b>revert</b> it (budget 999 → 5). Out-of-band delete → wants to re-create." },
+};
+function setDiff(key) {
+  const el = document.getElementById("diff"), d = DIFF[key];
+  el.classList.toggle("diverge", !!d?.d);
+  document.getElementById("difftitle").textContent = d ? d.t : "The contrast";
+  if (d) { document.getElementById("diff-ans").innerHTML = d.a; document.getElementById("diff-tf").innerHTML = d.f; }
+  document.getElementById("diff-vs").textContent = d?.d ? "≠" : "VS";
+}
+
+// ---- state rendering ----------------------------------------------------
+let prev = {};
+function kv(rows) { return rows.map(([k, v, id]) => `<span class="key">${k}</span><span class="val" data-f="${id}">${v}</span>`).join(""); }
+function pill(v) { return v ? `<span class="pill yes">true</span>` : `<span class="pill no">false</span>`; }
+function renderEngine(e, st) {
+  const s = st.spec || {}, l = st.litellm || {}, v = st.vault || {};
+  document.getElementById(`${e}-spec`).innerHTML = s.missing
+    ? kv([["status", `<span class="pill absent">removed</span>`, `${e}_sp_x`]])
+    : kv([["version", s.key_version, `${e}_sp_v`], ["budget", "$" + s.max_budget, `${e}_sp_b`], ["blocked", pill(s.blocked), `${e}_sp_k`], ["models", s.models, `${e}_sp_m`]]);
+  document.getElementById(`${e}-llm`).innerHTML = l?.error
+    ? kv([["⚠", "unreachable", `${e}_l_x`]])
+    : !l || !l.tokenHash
+    ? kv([["status", `<span class="pill absent">no key</span>`, `${e}_l_x`]])
+    : kv([["token", l.tokenHash + "…", `${e}_l_t`], ["version", l.version, `${e}_l_v`], ["budget", "$" + l.budget, `${e}_l_b`], ["blocked", pill(l.blocked), `${e}_l_k`]]);
+  document.getElementById(`${e}-vault`).innerHTML = v?.error
+    ? kv([["⚠", "unreachable", `${e}_v_x`]])
+    : !v || !v.key_alias
+    ? kv([["status", `<span class="pill absent">no row</span>`, `${e}_v_x`]])
+    : kv([["secret", v.secretPrefix + ` (${v.secretLen} chars)`, `${e}_v_s`], ["version", v.key_version, `${e}_v_v`], ["updated", v.updated_at, `${e}_v_u`]]);
+}
+function renderTfState(ts) {
+  const box = document.getElementById("tfstate-box");
+  if (!ts || !ts.exists) { box.className = "statebox none"; box.innerHTML = `<span class="lbl">state file</span>No <code>terraform.tfstate</code> yet — run a scenario.`; return; }
+  if (ts.hasSecret) {
+    box.className = "statebox has";
+    box.innerHTML = `<span class="lbl">⚠ secret in terraform.tfstate (${ts.bytes} bytes)</span><code>${ts.line}</code><div style="color:var(--muted);margin-top:6px;font-size:11.5px;"><code>sensitive=true</code> only redacts CLI output — the value is in the file. Mitigation lives at the backend (encrypted remote state), not the attribute.</div>`;
+  } else {
+    box.className = "statebox none"; box.innerHTML = `<span class="lbl">state file</span><code>tfstate</code> exists but holds no key secret right now.`;
+  }
+}
+function render(state, flash) {
+  renderEngine("ans", state.ansible || {});
+  renderEngine("tf", state.terraform || {});
+  renderTfState(state.tfstate);
+  if (flash) document.querySelectorAll("[data-f]").forEach(el => { const id = el.dataset.f; if (prev[id] !== undefined && prev[id] !== el.innerHTML) el.classList.add("flash"); });
+  prev = {}; document.querySelectorAll("[data-f]").forEach(el => prev[el.dataset.f] = el.innerHTML);
+}
+
+// ---- run plumbing -------------------------------------------------------
+const termA = document.getElementById("term-ans"), termT = document.getElementById("term-tf");
+const setBtns = (d) => document.querySelectorAll("#scenbar button").forEach(b => b.disabled = d);
+const getJSON = async (u) => (await fetch(u)).json();
+function append(term, line) { term.textContent += line + "\n"; term.scrollTop = term.scrollHeight; }
+
+function runEngine(engine) {
+  const term = engine === "ansible" ? termA : termT;
+  const svg = engine === "ansible" ? "flow-ans" : "flow-tf";
+  const N = engine === "ansible" ? ANS : TF, E = engine === "ansible" ? ANS_E : TF_E;
+  return new Promise((resolve) => {
+    term.textContent = ""; pipeActive(svg, N, E, true);
+    const es = new EventSource(engine === "ansible" ? "api/run-ansible" : "api/run-terraform");
+    es.addEventListener("line", (ev) => append(term, JSON.parse(ev.data).line));
+    es.addEventListener("done", (ev) => { const { action, state } = JSON.parse(ev.data); es.close(); pipeActive(svg, N, E, false); render(state, true); resolve(action); });
+    es.onerror = () => { es.close(); pipeActive(svg, N, E, false); append(term, "[stream error]"); resolve("ERROR"); };
+  });
+}
+
+const SCEN = {
+  create:  { diff: "create",  before: () => getJSON("api/reset"), run: ["ansible", "terraform"] },
+  norun:   { diff: "norun",   before: () => getJSON("api/state"), run: ["ansible", "terraform"] },
+  update:  { diff: "update",  before: async () => { await getJSON("api/mutate?engine=ansible&op=budget"); return getJSON("api/mutate?engine=terraform&op=budget"); }, run: ["ansible", "terraform"] },
+  rotate:  { diff: "rotate",  before: async () => { await getJSON("api/mutate?engine=ansible&op=version"); return getJSON("api/mutate?engine=terraform&op=version"); }, run: ["ansible", "terraform"] },
+  remove:  { diff: "remove",  before: async () => { await getJSON("api/mutate?engine=ansible&op=remove"); return getJSON("api/mutate?engine=terraform&op=remove"); }, run: ["ansible", "terraform"] },
+  restore: { diff: "restore", before: async () => { await getJSON("api/mutate?engine=ansible&op=restore"); return getJSON("api/mutate?engine=terraform&op=restore"); }, run: ["ansible", "terraform"] },
+  block:   { diff: "block",   before: () => getJSON("api/mutate?engine=terraform&op=block"), run: ["terraform"], note: { ansible: "n/a — Ansible disables via the prune step (remove the spec)." } },
+  drift:   { diff: "drift",   before: async () => { await getJSON("api/drift?engine=ansible"); return getJSON("api/drift?engine=terraform"); }, run: [], special: "drift" },
+};
+
+async function runScenario(key) {
+  const sc = SCEN[key]; setDiff(sc.diff);
+  termA.textContent = sc.note?.ansible || "(idle)"; termT.textContent = sc.note?.terraform || "(idle)";
+  render(await sc.before(), true);
+  if (sc.special === "drift") {
+    append(termA, "drift injected on the live key (budget → 999).\nthe reconciler re-reads live state every run — next sync just overwrites it.");
+    append(termT, "drift injected on the live key (budget → 999).\nrunning `terraform plan` …");
+    const { summary } = await getJSON("api/tf-plan");
+    append(termT, summary + "\n→ state ≠ reality: plan wants to revert the out-of-band change.");
+    return;
+  }
+  await Promise.all(sc.run.map(runEngine));
+}
+
+document.getElementById("scenbar").addEventListener("click", async (e) => {
+  const btn = e.target.closest("button[data-s]"); if (!btn) return;
+  setBtns(true); try { await runScenario(btn.dataset.s); } finally { setBtns(false); }
+});
+
+// ---- boot ---------------------------------------------------------------
+(async () => {
+  const pf = await getJSON("api/preflight").catch(() => ({ checks: [] }));
+  document.getElementById("badges").innerHTML = (pf.checks || []).map(c => `<span class="badge ${c.ok ? "ok" : "bad"}">${c.ok ? "●" : "○"} ${c.name}</span>`).join("");
+  render(await getJSON("api/state"), false);
+})();
+</script>
+
+<script type="module">
+// ===== Quickstart tab — the individual developer's-eye view, per universe =====
+import { arrowMarkers, connect } from "/_kit/viz.js";
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+const U = {
+  ansible: {
+    tl: "stateless reconcile", dot: "#bd0000",
+    ask: 'Your app <b>classify-service</b> needs to call the LLM gateway, so it needs a scoped LiteLLM key (a budget + a model allowlist, owned + audited). In the <b>Ansible</b> universe, here is the <em>entire</em> ask of you:',
+    flow: { spec: ["keys/*.yml", "git · desired"], eng: ["reconcile", "make keys-sync"], store: ["SecretVault", "MySQL row"], app: ["your app", "reads the secret"] },
+    authFile: "ansible/keys/classify-service-prod.yml",
+    authLead: "Drop one YAML file in the keys folder and open a PR. A lint gate (keys-lint.sh — the CODEOWNERS stand-in) rejects any spec missing owner/team, so an unowned key never merges.",
+    authCode: `key_alias:       classify-service-prod   # unique identity (LiteLLM enforces)
+team_id:         your-team
+owner:           you@example.com          # required — ownership / audit
+app:             classify-service
+environment:     prod
+key_version:     1                        # bump this to rotate
+models:          [nemo-guarded]           # the allowlist
+max_budget:      5
+budget_duration: 30d
+tpm_limit:       200000
+rpm_limit:       60`,
+    cmd: "make keys-sync", cmdAnn: "lints, then converges every spec → LiteLLM + SecretVault (idempotent)",
+    result: ["Key minted in LiteLLM via <code>/key/generate</code>", "Secret written to a <b>SecretVault</b> (MySQL) row your app reads", "<b>No state file</b> — actual state re-read from <code>/key/list</code> every run"],
+    consumeFile: "your app (bash)",
+    consumeLead: "Your app fetches the secret from SecretVault (or an injected env var) and calls the gateway with it. When the key rotates, nothing app-side changes — it just re-reads.",
+    consumeCode: `# your app reads its key from SecretVault (or an injected env var)
+LLM_KEY=$(vault-get classify-service-prod)
+
+curl -s "$GATEWAY/v1/chat/completions" \\
+  -H "Authorization: Bearer $LLM_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{"model":"nemo-guarded","messages":[{"role":"user","content":"Classify this email…"}]}'`,
+    uniq: 'Stateless converge loop — <em>"the system is the state."</em> There is no tfstate to secure; the secret lives only in LiteLLM + the SecretVault row. Remove the spec and the key <b>soft-disables</b> (recoverable), it is not destroyed.',
+  },
+  terraform: {
+    tl: "desired in HCL · actual in tfstate", dot: "#7B42BC",
+    ask: 'Same app, same need: a scoped LiteLLM key for <b>classify-service</b>. In the <b>Terraform</b> universe the ask of you is <em>almost identical</em> — same YAML schema, a different folder and engine:',
+    flow: { spec: ["keys/*.yml", "→ tfstate"], eng: ["terraform", "make tf-apply"], store: ["SecretVault + tfstate", "secret in plaintext ⚠"], app: ["your app", "reads the secret"] },
+    authFile: "terraform/keys/classify-service-tf.yml",
+    authLead: "The exact same key spec — only the folder differs. The gate here is server-side: terraform validate + variable validation + a plan you review before apply.",
+    authCode: `key_alias:       classify-service-tf-prod   # same schema as Ansible
+team_id:         your-team
+owner:           you@example.com             # required — ownership / audit
+app:             classify-service
+environment:     prod
+key_version:     1                           # bump to rotate (destroy + create)
+models:          [nemo-guarded]
+max_budget:      5
+budget_duration: 30d
+tpm_limit:       200000
+rpm_limit:       60`,
+    cmd: "make tf-apply", cmdAnn: "fmt + validate + plan, then converges terraform/keys/*.yml → LiteLLM + SecretVault",
+    result: ["Key minted in LiteLLM (the <code>litellm_key</code> resource)", "Secret in SecretVault <b>and</b> in <code>terraform.tfstate</code> — in plaintext ⚠", "Removal means <code>destroy</code> — there is no soft-disable"],
+    consumeFile: "your app (bash)",
+    consumeLead: "Identical to the Ansible universe app-side — the consumer never knows which engine vended the key. It reads the secret and calls the gateway.",
+    consumeCode: `# your app reads its key from SecretVault (or an injected env var)
+LLM_KEY=$(vault-get classify-service-tf-prod)
+
+curl -s "$GATEWAY/v1/chat/completions" \\
+  -H "Authorization: Bearer $LLM_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{"model":"nemo-guarded","messages":[{"role":"user","content":"Classify this email…"}]}'`,
+    uniq: 'The <b>state file is the trade-off.</b> You get plan/preview and a dependency graph for free — but the minted secret lands in <code>terraform.tfstate</code> in plaintext, so the mitigation is encrypted remote state, and removing a key hard-destroys it.',
+  },
+  k8s: {
+    tl: "always-on operator", dot: "#326CE5",
+    ask: 'Same app, same need — but now the gateway lives in Kubernetes. In the <b>Kubernetes</b> universe you author a native object and an <b>always-on operator</b> does the rest, forever:',
+    flow: { spec: ["LiteLLMKey CR", "etcd object"], eng: ["operator", "reconcile loop"], store: ["K8s Secret", "namespaced"], app: ["your pod", "mounts the Secret"] },
+    authFile: "classify-service.yaml  (kubectl)",
+    authLead: "You write a LiteLLMKey custom resource. The CRD's required: list is the gate — the API server rejects an unowned key at apply time, for every client, with no webhook.",
+    authCode: `apiVersion: keyvendor.local/v1alpha1
+kind: LiteLLMKey
+metadata:
+  name: classify-service
+  namespace: keyvendor-ansible
+spec:
+  keyAlias: classify-service-aop-prod
+  owner: you@example.com        # required — server-side gate (CRD)
+  teamId: your-team
+  app: classify-service
+  environment: prod
+  keyVersion: 1                 # bump to rotate
+  models: [nemo-guarded]
+  maxBudget: 5
+  deletePolicy: softDisable     # what 'kubectl delete' does`,
+    cmd: "kubectl apply -f classify-service.yaml", cmdAnn: "the operator reconciles the CR → mints the key → writes the Secret, and never stops",
+    result: ["Operator reconciles the CR → mints the key in LiteLLM", "Secret materialized as a <b>namespaced K8s Secret</b> your pod mounts", "<b>Always-on</b>: self-heals out-of-band drift, can auto-rotate on a clock"],
+    consumeFile: "your pod (env mount)",
+    consumeLead: "Your pod mounts the operator-managed Secret as an env var via secretKeyRef — no app code touches the secret directly. The key is just there in the environment.",
+    consumeCode: `# your pod mounts the operator-managed Secret as an env var
+env:
+  - name: LLM_KEY
+    valueFrom:
+      secretKeyRef:
+        name: litellmkey-classify-service
+        key: secret_value
+
+# then, inside the pod:
+curl -s "$GW/v1/chat/completions" \\
+  -H "Authorization: Bearer $LLM_KEY" \\
+  -d '{"model":"nemo-guarded","messages":[{"role":"user","content":"Classify this email…"}]}'`,
+    uniq: '<b>Always-on, not one-shot.</b> One apply and the operator never stops reconciling — tamper a key out-of-band and it self-heals on the next resync, with no human and no re-run; set rotationIntervalSeconds and the token rotates on a clock with <em>no spec change</em>. A one-shot apply (Terraform / Ansible-cron) cannot do that.',
+  },
+};
+
+// ---- the flow pipeline (geometry once; only labels vary per universe) ----
+const GEO = {
+  you:   { x: 8,   y: 43, w: 116, h: 46 },
+  spec:  { x: 168, y: 43, w: 150, h: 46 },
+  eng:   { x: 362, y: 43, w: 150, h: 46 },
+  llm:   { x: 556, y: 8,  w: 168, h: 46 },
+  store: { x: 556, y: 78, w: 168, h: 46 },
+  app:   { x: 772, y: 43, w: 200, h: 46 },
+};
+const EDGES = [["you","spec"],["spec","eng"],["eng","llm"],["eng","store"],["llm","app"],["store","app"]];
+const nodeSVG = (id, t, s) => {
+  const n = GEO[id];
+  return `<g class="node" id="qn-${id}"><rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="9"/>
+    <text class="t" x="${n.x + 12}" y="${n.y + n.h / 2 - 2}">${esc(t)}</text>
+    <text class="s" x="${n.x + 12}" y="${n.y + n.h / 2 + 14}">${esc(s)}</text></g>`;
+};
+function drawFlow(u) {
+  const L = { you: ["You", "author + PR"], spec: u.flow.spec, eng: u.flow.eng, llm: ["LiteLLM", "virtual key"], store: u.flow.store, app: u.flow.app };
+  $("#qs-flow").innerHTML = arrowMarkers()
+    + EDGES.map(([a, b]) => `<path class="edge" d="${connect(GEO[a], GEO[b])}" marker-end="url(#ah-accent)"/>`).join("")
+    + Object.keys(GEO).map(id => nodeSVG(id, L[id][0], L[id][1])).join("");
+}
+function lightFlow(on) {
+  Object.keys(GEO).forEach(id => $("#qn-" + id)?.classList.toggle("lit", on));
+  document.querySelectorAll("#qs-flow path.edge").forEach(e => e.classList.toggle("lit", on));
+}
+
+// ---- step cards ----
+const codeBlock = (fname, code) =>
+  `<div class="code"><span class="fname">${esc(fname)}</span><button class="cp">copy</button><pre>${esc(code)}</pre></div>`;
+function stepsHTML(u) {
+  return `
+  <div class="step"><h3><span class="num">1</span> Author the spec</h3>
+    <p class="lead">${u.authLead}</p>
+    <div class="body">${codeBlock(u.authFile, u.authCode)}</div></div>
+
+  <div class="step"><h3><span class="num">2</span> Run one command</h3>
+    <p class="lead">That is the whole interface — one command (or CI runs it for you on merge).</p>
+    <div class="body"><div class="cmd"><code>$ ${esc(u.cmd)}</code><span class="ann">${u.cmdAnn}</span>
+      <button class="try" data-act="run">▶ Try it (runs for real)</button></div>
+      <pre class="out" hidden></pre></div></div>
+
+  <div class="step"><h3><span class="num">3</span> What you get back</h3>
+    <p class="lead">Where your key ends up — and who holds the secret.</p>
+    <div class="body"><ul style="margin:0;padding-left:18px;line-height:1.75;font-size:13.5px;">${u.result.map(r => `<li>${r}</li>`).join("")}</ul>
+      <div class="resultcard empty" id="qs-result">run “Try it” above to mint the key and see it live →</div></div></div>
+
+  <div class="step"><h3><span class="num">4</span> Use the key in your app</h3>
+    <p class="lead">${u.consumeLead}</p>
+    <div class="body">${codeBlock(u.consumeFile, u.consumeCode)}
+      <div style="margin-top:11px;"><button class="try use" data-act="use">📥 Use the key (real call to the gateway)</button></div>
+      <div class="answer" hidden><div class="al">MODEL ANSWER — via the vended key</div><div class="at"></div><div class="prov"></div></div></div></div>`;
+}
+
+// ---- live runs ----
+function fillResult(key, data) {
+  const el = $("#qs-result");
+  if (!data) return;
+  let rows;
+  if (key === "k8s") {
+    rows = data.reconciled
+      ? [["Secret", data.secretRef || "—"], ["token (sha256)", data.tokenHash || "—"], ["keyVersion", data.keyVersion ?? "—"], ["secret_value", data.secretPrefix || "—"]]
+      : [["status", "CR applied — operator not reconciling (deploy it: make op-deploy)"]];
+  } else {
+    const st = (data.state || {})[key] || {}, l = st.litellm || {}, v = st.vault || {};
+    rows = [["LiteLLM token", l.tokenHash ? l.tokenHash + "…" : "—"], ["key_version", l.version ?? "—"], ["budget", "$" + (l.budget ?? "—")],
+      ["SecretVault secret", v.secretPrefix ? `${v.secretPrefix} (${v.secretLen} chars)` : "—"]];
+    if (key === "terraform") rows.push(["in tfstate", (data.state.tfstate || {}).hasSecret ? "⚠ yes — plaintext" : "no"]);
+  }
+  el.className = "resultcard";
+  el.innerHTML = rows.map(([k, v]) => `<span class="k">${k}</span><span class="v">${esc(String(v))}</span>`).join("");
+}
+function runSSE(key, out, done) {
+  out.hidden = false; out.textContent = ""; lightFlow(true);
+  const es = new EventSource("api/run-" + key);
+  es.addEventListener("line", ev => { out.textContent += JSON.parse(ev.data).line + "\n"; out.scrollTop = out.scrollHeight; });
+  es.addEventListener("done", ev => { es.close(); lightFlow(false); done(JSON.parse(ev.data)); });
+  es.onerror = () => { es.close(); lightFlow(false); out.textContent += "\n[stream error]"; done(null); };
+}
+async function runK8s(out, done) {
+  out.hidden = false; out.textContent = "$ kubectl apply -f classify-service.yaml\n…applying + waiting for the operator to reconcile…\n"; lightFlow(true);
+  try {
+    const j = await (await fetch("api/qs-k8s")).json();
+    lightFlow(false);
+    if (j.offline) { out.textContent += "\n[kind cluster offline] start it:  make op-cluster-up && make op-deploy && make op-apply"; return done(null); }
+    out.textContent = "$ kubectl apply -f classify-service.yaml\n" + (j.applyOut || []).join("\n") + "\n"
+      + (j.reconciled ? "✓ operator reconciled → namespaced Secret materialized" : "… operator not reconciling yet (is it deployed?  make op-deploy)");
+    done(j);
+  } catch (e) { lightFlow(false); out.textContent += "\n[error] " + e; done(null); }
+}
+async function useKey(key, ansEl, btn) {
+  ansEl.hidden = false; btn.disabled = true; const old = btn.textContent; btn.textContent = "⏳ calling…";
+  ansEl.querySelector(".at").textContent = "…"; ansEl.querySelector(".prov").innerHTML = "";
+  try {
+    const j = await (await fetch("api/qs-consume?engine=" + key)).json();
+    if (!j.ok) ansEl.querySelector(".at").textContent = "✗ " + j.msg;
+    else {
+      ansEl.querySelector(".at").textContent = j.answer;
+      ansEl.querySelector(".prov").innerHTML = j.registered
+        ? `✓ key <code>${esc(j.keyPrefix)}</code> (${j.keyLen} chars) is a registered LiteLLM identity — alias <code>${esc(j.registered.alias)}</code>, owner <code>${esc(j.registered.owner)}</code>`
+        : "";
+    }
+  } catch (e) { ansEl.querySelector(".at").textContent = "✗ " + e; }
+  btn.disabled = false; btn.textContent = old;
+}
+
+// ---- render + wire ----
+let CLUSTER_OK = true, current = "ansible";
+function renderUniverse(key) {
+  current = key;
+  document.querySelectorAll(".uni-pill").forEach(p => p.classList.toggle("active", p.dataset.u === key));
+  const u = U[key];
+  $("#qs-ask").innerHTML = u.ask + (key === "k8s" && !CLUSTER_OK ? `<div class="offline-note">⚠ kind cluster is offline — “Try it” will show how to start it. The walkthrough is still accurate.</div>` : "");
+  drawFlow(u);
+  $("#qs-steps").innerHTML = stepsHTML(u);
+  $("#qs-uniq").innerHTML = "<b>What's unique here — </b>" + u.uniq;
+  const steps = $("#qs-steps");
+  steps.querySelector('[data-act="run"]').onclick = ev => {
+    ev.target.disabled = true;
+    const out = steps.querySelector("pre.out");
+    const done = d => { ev.target.disabled = false; fillResult(key, d); };
+    key === "k8s" ? runK8s(out, done) : runSSE(key, out, done);
+  };
+  steps.querySelector('[data-act="use"]').onclick = ev => useKey(key, steps.querySelector(".answer"), ev.target);
+}
+
+document.querySelectorAll(".modetab").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".modetab").forEach(x => x.classList.toggle("active", x === b));
+  $("#mode-compare").hidden = b.dataset.mode !== "compare";
+  $("#mode-quickstart").hidden = b.dataset.mode !== "quickstart";
+  $("#mode-operator").hidden = b.dataset.mode !== "operator";
+  // Start the operator's live polling on first open (it hits the kind cluster) — same
+  // lazy intent the iframe had, now in-page.
+  if (b.dataset.mode === "operator") window.__startOperator?.();
+});
+$("#uni-pills").innerHTML = Object.entries(U).map(([id, u]) =>
+  `<button class="uni-pill" data-u="${id}"><span class="dot" style="background:${u.dot}"></span>${id === "k8s" ? "Kubernetes" : id[0].toUpperCase() + id.slice(1)} <span class="tl">${u.tl}</span></button>`).join("");
+document.querySelectorAll(".uni-pill").forEach(p => p.onclick = () => renderUniverse(p.dataset.u));
+document.addEventListener("click", e => {
+  const cp = e.target.closest(".cp"); if (!cp) return;
+  navigator.clipboard.writeText(cp.parentElement.querySelector("pre").textContent)
+    .then(() => { cp.textContent = "copied!"; setTimeout(() => cp.textContent = "copy", 1200); });
+});
+fetch("api/qs-preflight").then(r => r.json()).then(p => {
+  CLUSTER_OK = (p.checks.find(c => /cluster/.test(c.name)) || {}).ok ?? false;
+  if (current === "k8s") renderUniverse("k8s");
+}).catch(() => {});
+renderUniverse("ansible");
+</script>
+
+<script type="module">
+// ===== Operator tab — logic from the former standalone page. Own module scope, so
+// its $ / esc / etc. don't collide with the scripts above. Backend lives at /op-*.
+// Polling is gated behind window.__startOperator (fired when the tab is first opened)
+// so the cluster isn't hit until you look. =====
+const $ = (s, r=document) => r.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const prevDrift = { ansible: false, java: false };
+const ENGINES = ["ansible", "java"];
+
+function toast(msg, bad=false) {
+  const t = $("#toast"); t.textContent = msg; t.style.borderColor = bad ? "var(--danger)" : "var(--accent)";
+  t.classList.add("show"); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove("show"), 2600);
+}
+async function act(path, label) {
+  try {
+    const r = await fetch(`api/op-${path}`, { method: "POST" });
+    const j = await r.json();
+    toast(`${label}: ${j.msg || (j.ok ? "ok" : "failed")}`, !j.ok);
+  } catch (e) { toast(`${label}: ${e}`, true); }
+  setTimeout(poll, 400);
+}
+
+function row(k, v, cls="") { return `<div class="row"><span class="k">${k}</span><span class="v ${cls}">${v}</span></div>`; }
+function specCard(s) {
+  if (!s) return `<div class="card"><h3>LiteLLMKey CR · spec</h3><div class="absent">no CR — apply to create</div></div>`;
+  return `<div class="card"><h3>LiteLLMKey CR · spec (etcd)</h3>
+    ${row("keyAlias", esc(s.keyAlias))}${row("keyVersion", s.keyVersion)}${row("maxBudget", "$"+s.maxBudget)}
+    ${row("models", esc((s.models||[]).join(",")))}${row("deletePolicy", esc(s.deletePolicy||"softDisable"))}
+    ${row("blocked", s.blocked ? "true":"false")}${row("rotationIntervalSeconds", s.rotationIntervalSeconds ?? "—")}</div>`;
+}
+function liveCard(l, drift) {
+  if (!l) return `<div class="card"><h3>Live LiteLLM key</h3><div class="absent">no live key</div></div>`;
+  const badge = drift ? `<span class="badge warn">DRIFT</span>` : (l.blocked ? `<span class="badge blk">BLOCKED</span>` : `<span class="badge ok">IN SYNC</span>`);
+  return `<div class="card ${drift?"drift":""}"><h3>Live LiteLLM key ${badge}</h3>
+    ${row("key_version", l.keyVersion)}${row("max_budget", "$"+l.maxBudget, "budget")}
+    ${row("blocked", l.blocked ? "true":"false")}${row("environment", esc(l.env))}
+    ${row("tpm / rpm", `${l.tpm ?? "—"} / ${l.rpm ?? "—"}`)}</div>`;
+}
+function secretCard(s) {
+  if (!s) return `<div class="card"><h3>Namespaced Secret</h3><div class="absent">no Secret</div></div>`;
+  return `<div class="card"><h3>Namespaced K8s Secret</h3>
+    ${row("name", esc(s.name))}${row("secret_value", esc(s.valuePrefix||"—"))}
+    ${row("ownerRefs", s.ownerRefs + (s.ownerRefs===0 ? " (none — finalizer-managed)" : ""))}</div>`;
+}
+function statusCard(st) {
+  if (!st) return `<div class="card"><h3>CR · status</h3><div class="absent">—</div></div>`;
+  const lr = st.lastRotated ? new Date(parseInt(st.lastRotated,10)*1000).toLocaleTimeString() : "—";
+  return `<div class="card"><h3>CR · status (operator-written)</h3>
+    ${row("observedKeyVersion", esc(st.observedKeyVersion))}${row("tokenHash", esc((st.tokenHash||"").slice(0,16)+"…"))}
+    ${row("secretRef", esc(st.secretRef||"—"))}${row("lastRotated", lr)}</div>`;
+}
+function buttons(e, st) {
+  const auto = st.spec && st.spec.rotationIntervalSeconds;
+  return [
+    `<button onclick="A('apply?engine=${e}','Apply')">Apply / Re-apply</button>`,
+    `<button onclick="A('budget?engine=${e}&value=10','Budget→$10')">Budget $10</button>`,
+    `<button onclick="A('rotate?engine=${e}','Rotate')">Rotate (v+1)</button>`,
+    `<button class="warn" onclick="A('tamper?engine=${e}','Tamper')">Tamper budget</button>`,
+    `<button class="${auto?"on":""}" onclick="A('autorotate?engine=${e}&on=${auto?0:1}','Auto-rotate ${auto?"off":"on"}')">Auto-rotate ${auto?"ON":"off"}</button>`,
+    `<button onclick="A('delete?engine=${e}&policy=softDisable','Del soft')">Del soft</button>`,
+    `<button class="danger" onclick="A('delete?engine=${e}&policy=hardDelete','Del hard')">Del hard</button>`,
+  ].join("");
+}
+
+function render(state) {
+  const pf = state.preflight;
+  $("#pf").innerHTML = pf.checks.map(c => `<span class="chk"><span class="dot ${c.ok?"g":"r"}"></span>${esc(c.name)}</span>`).join("");
+  let anyHeal = false, anyAuto = false, anyFinal = false;
+  for (const e of ENGINES) {
+    const s = state.engines[e];
+    $(`#body-${e}`).innerHTML = specCard(s.spec) + liveCard(s.live, s.drift) + secretCard(s.secret) + statusCard(s.status);
+    $(`#acts-${e}`).innerHTML = buttons(e, s);
+    if (prevDrift[e] && !s.drift && s.live) { const c = $(`#body-${e} .card:nth-child(2)`); if (c) { c.classList.add("healed"); setTimeout(()=>c.classList.remove("healed"), 1700); } toast(`${e}: drift HEALED by reconciler`); }
+    prevDrift[e] = s.drift;
+    if (s.drift) anyHeal = true;
+    if (s.spec && s.spec.rotationIntervalSeconds) anyAuto = true;
+    if (s.status && s.status.tokenHash) anyFinal = true;
+    const p = $(`#pulse-${e}`); if (s.crPresent) { p.classList.add("beat"); setTimeout(()=>p.classList.remove("beat"), 350); }
+  }
+  const a = state.engines.ansible, setT = (id, v) => { const el = $("#" + id); if (el) el.textContent = v; };
+  if (a.spec) setT("map-cr-ver", `keyVersion: ${a.spec.keyVersion}`);
+  if (a.secret) setT("map-secret-name", a.secret.name);
+  setT("map-live", a.live ? `${a.secret?.valuePrefix || "sk-…"}  ·  v${a.live.keyVersion}` : "— no live key (apply the CR)");
+  $("#anatomy")?.classList.toggle("drift", !!a.drift);
+
+  $("#cap-reconcile").classList.toggle("lit", state.engines.ansible.crPresent || state.engines.java.crPresent);
+  $("#cap-heal").classList.toggle("lit", anyHeal);
+  $("#cap-rotate").classList.toggle("lit", anyAuto);
+  $("#cap-final").classList.toggle("lit", anyFinal);
+}
+
+window.A = act;
+
+function consumerShell(e) {
+  return `<div class="card consumer">
+    <h3>📥 a consumer app uses this key</h3>
+    <div class="flow-mini">
+      <span class="node pod">app pod</span><span class="arrow">— LLM_KEY →</span>
+      <span class="node gw">LiteLLM</span><span class="arrow">— answer →</span><span class="node brain">🧠</span>
+    </div>
+    <div class="csteps"><div class="cstep dim">click below: a pod mounts this Secret as <span class="mono">$LLM_KEY</span> and calls the gateway with it</div></div>
+    <button onclick="USE('${e}')">▶ Use the key (call LiteLLM from a pod)</button>
+  </div>`;
+}
+function cstep(n, lbl, detail) { return `<div class="cstep"><span class="n">${n}</span><span class="lbl">${lbl}</span> — ${detail}</div>`; }
+function typewriter(el, text, i = 0) {
+  if (!el) return;
+  el.textContent = text.slice(0, i);
+  if (i < text.length) setTimeout(() => typewriter(el, text, i + 1), 16);
+  else el.parentElement.classList.add("done");
+}
+async function USE(e) {
+  const card = document.querySelector(`#consume-${e} .consumer`);
+  const steps = card.querySelector(".csteps"), btn = card.querySelector("button");
+  btn.disabled = true; btn.textContent = "⏳ calling…";
+  card.querySelectorAll(".arrow").forEach(a => a.classList.add("flowing"));
+  steps.innerHTML = `<div class="cstep run">⏳ ensuring the consumer pod, mounting the Secret, then POST /v1/chat/completions…</div>`;
+  try {
+    const j = await (await fetch(`api/op-consume?engine=${e}`, { method: "POST" })).json();
+    if (!j.ok) { steps.innerHTML = `<div class="cstep bad">✗ ${esc(j.msg || "failed")}</div>`; }
+    else {
+      steps.innerHTML =
+        cstep("1", "pod sees the key", `<span class="mono">LLM_KEY=${esc(j.envPreview)}</span> <span class="dim">(len ${j.length} — from the Secret, not the pod spec)</span>`) +
+        cstep("2", "pod → POST /v1/chat/completions", `<span class="mono">model: ${esc(j.model)}</span>`) +
+        `<div class="answer-box"><div class="al">MODEL ANSWER (from inside the pod, using the vended key)</div><div class="atext" id="atext-${e}"></div></div>` +
+        (j.registered ? `<div class="prov">✓ genuinely <b>registered</b> key — alias <span class="mono">${esc(j.registered.alias)}</span>, owner <span class="mono">${esc(j.registered.owner)}</span>${j.bogus404 ? ` · a bogus key → <span class="mono">404</span>` : ""}</div>` : "");
+      typewriter(document.getElementById(`atext-${e}`), j.answer);
+    }
+  } catch (err) { steps.innerHTML = `<div class="cstep bad">✗ ${esc(err)}</div>`; }
+  card.querySelectorAll(".arrow").forEach(a => a.classList.remove("flowing"));
+  btn.disabled = false; btn.textContent = "▶ Use the key again";
+}
+window.USE = USE;
+for (const e of ENGINES) document.querySelector(`#consume-${e}`).innerHTML = consumerShell(e);
+
+async function poll() {
+  try { const r = await fetch("api/op-state"); render(await r.json()); } catch (e) { /* gateway/cluster down */ }
+}
+let __opStarted = false;
+window.__startOperator = () => { if (__opStarted) return; __opStarted = true; poll(); setInterval(poll, 2500); };
+</script>
+</body>
+</html>

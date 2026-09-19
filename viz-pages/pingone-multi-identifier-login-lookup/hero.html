@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --saas: #58a6ff;
+    --match: #56d364;
+    --accent: #d29922;
+    --miss: #f85149;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(88,166,255,0.11), transparent 58%),
+      radial-gradient(950px 560px at 108% 8%, rgba(86,211,100,0.07), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  .left { width: 620px; padding: 64px 20px 64px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--saas); background: rgba(88,166,255,0.10);
+    border: 1px solid rgba(88,166,255,0.22);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 32px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--saas); box-shadow: 0 0 10px var(--saas); }
+
+  .title { font-size: 88px; line-height: 0.92; font-weight: 800; letter-spacing: -0.045em; }
+  .title .hl { color: var(--match); }
+
+  .essence { margin-top: 30px; font-size: 29px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; max-width: 505px; }
+  .essence .hl { color: var(--saas); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 480px; }
+  .sub code { font-family: var(--mono); font-size: 0.88em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 11px; border-radius: 8px; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--accent); box-shadow: 0 0 6px rgba(210,153,34,0.55); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 60px 56px 8px; position: relative; z-index: 2; }
+  .panel {
+    width: 412px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.04em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 12px; color: var(--fg-faint); }
+  svg.graph { width: 100%; display: block; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>PingOne &middot; identity resolution</div>
+
+      <div class="title">Any of them.<br><span class="hl">One account.</span></div>
+
+      <div class="essence">
+        Four identifiers, one identity &mdash; resolved in <span class="hl">a single query</span>, no loop.
+      </div>
+
+      <div class="sub">
+        A SCIM <code>eq</code> on a multi-valued attribute matches <em>any</em> element server-side &mdash; so DaVinci asks once instead of looping the aliases.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>alternateLoginIds[]</span>
+        <span class="chip"><span class="tk"></span>multiValued &middot; unique</span>
+        <span class="chip"><span class="tk"></span>one SCIM eq</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">4 in &rarr; 1 out</span>
+          <span class="s">1 SCIM call</span>
+        </div>
+
+        <svg class="graph" viewBox="0 0 372 336" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .m    { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11.5px; dominant-baseline: middle; }
+              .lab  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #5b6378; dominant-baseline: middle; letter-spacing: 0.05em; }
+              .flow { stroke: #2f6b3d; stroke-width: 1.6; fill: none; }
+            </style>
+            <marker id="agr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+              <path d="M0,1 L9,5 L0,9 z" fill="#56d364"/>
+            </marker>
+          </defs>
+
+          <text class="lab" x="2" y="6">WHAT THE USER TYPES</text>
+
+          <!-- 4 identifier pills -->
+          <g>
+            <rect x="0" y="18" width="150" height="30" rx="8" fill="#0a0c11" stroke="#58a6ff" stroke-opacity="0.55"/>
+            <text class="m" x="12" y="34" fill="#79c0ff">jdoe</text>
+            <text class="lab" x="52" y="34.5">primary</text>
+          </g>
+          <g>
+            <rect x="0" y="56" width="150" height="30" rx="8" fill="#0a0c11" stroke="#232838"/>
+            <text class="m" x="12" y="72" fill="#d29922">j.doe@bank-a.com</text>
+          </g>
+          <g>
+            <rect x="0" y="94" width="150" height="30" rx="8" fill="#0a0c11" stroke="#232838"/>
+            <text class="m" x="12" y="110" fill="#d29922">doe123</text>
+          </g>
+          <g>
+            <rect x="0" y="132" width="150" height="30" rx="8" fill="#0a0c11" stroke="#232838"/>
+            <text class="m" x="12" y="148" fill="#d29922">80055512</text>
+            <text class="lab" x="82" y="148.5">member #</text>
+          </g>
+
+          <!-- convergence curves -->
+          <path class="flow" d="M150,33  C182,33  190,90 216,90"/>
+          <path class="flow" d="M150,71  C182,71  192,90 216,90"/>
+          <path class="flow" d="M150,109 C182,109 192,90 216,90"/>
+          <path class="flow" d="M150,147 C182,147 190,90 216,90"/>
+
+          <!-- the one query -->
+          <rect x="216" y="60" width="156" height="60" rx="12" fill="#0a0c11" stroke="#58a6ff"/>
+          <text class="m" x="294" y="82" fill="#58a6ff" text-anchor="middle" style="font-size:13px;font-weight:700">SCIM eq</text>
+          <text class="lab" x="294" y="102" text-anchor="middle">ONE FILTER &middot; NO LOOP</text>
+
+          <!-- down into the account -->
+          <path d="M294,120 L294,170" stroke="#56d364" stroke-width="1.8" marker-end="url(#agr)"/>
+          <text class="lab" x="304" y="146" fill="#56d364">1 RESULT</text>
+
+          <!-- resolved account -->
+          <rect x="0" y="182" width="372" height="130" rx="11" fill="#0a0c11" stroke="#56d364" stroke-opacity="0.7"/>
+          <text class="m" x="16" y="204" fill="#e6e8ee" style="font-size:13px;font-weight:700">PingOne account</text>
+          <text class="lab" x="16" y="222">ONE IDENTITY &middot; ONE UUID</text>
+          <line x1="16" y1="236" x2="356" y2="236" stroke="#232838"/>
+
+          <text class="lab" x="16" y="252">USERNAME</text>
+          <text class="m" x="16" y="270" fill="#79c0ff">jdoe</text>
+
+          <text class="lab" x="176" y="252">ALTERNATELOGINIDS[]</text>
+          <text class="m" x="176" y="270" fill="#d29922">j.doe@bank-a.com</text>
+          <text class="m" x="176" y="288" fill="#d29922">doe123</text>
+          <text class="m" x="176" y="306" fill="#d29922">80055512</text>
+
+          <!-- the miss, as a footnote outside the account -->
+          <text class="lab" x="2" y="328" fill="#f85149">hacker99 &rarr; 0 results &middot; login rejected</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

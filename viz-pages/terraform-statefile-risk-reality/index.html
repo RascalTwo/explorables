@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terraform state file — exposure risk assessment</title>
+<meta name="viz:uid" content="v-fca2304c2ec1">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Terraform state file — exposure risk assessment">
+<meta name="viz:description" content="A sober assessment for Information Security of what the worst-case exposure of the PingOne Terraform state file actually puts at risk — and why it is bounded.">
+<style>
+  :root{
+    --paper:#eef1f6; --card:#ffffff; --card2:#f6f8fb;
+    --ink:#141a26; --ink-soft:#4b5468; --ink-faint:#7b8498;
+    --line:#dbe1ea; --line-soft:#e7ebf2;
+    --accent:#0c8f63; --accent-ink:#0a6b4b; --accent-wash:#e0f2ea;
+    --stop:#c8402f; --stop-ink:#a5321f; --stop-wash:#fbe6e2;
+    --caution:#b9791a; --caution-wash:#f6ecd8;
+    --blue:#2b62cf; --blue-ink:#234f9e; --blue-wash:#e5edfb;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --maxw:1320px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0b0f18; --card:#131926; --card2:#0f141f;
+      --ink:#e9edf5; --ink-soft:#9aa4b8; --ink-faint:#6b7488;
+      --line:#232c3d; --line-soft:#1b2230;
+      --accent:#25c78e; --accent-ink:#7fe6c2; --accent-wash:#11291f;
+      --stop:#f0655a; --stop-ink:#f7938a; --stop-wash:#2c1512;
+      --caution:#e6ac47; --caution-wash:#2a2110;
+      --blue:#5f8ff2; --blue-ink:#a8c4f7; --blue-wash:#111c31;
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#eef1f6; --card:#ffffff; --card2:#f6f8fb;
+    --ink:#141a26; --ink-soft:#4b5468; --ink-faint:#7b8498;
+    --line:#dbe1ea; --line-soft:#e7ebf2;
+    --accent:#0c8f63; --accent-ink:#0a6b4b; --accent-wash:#e0f2ea;
+    --stop:#c8402f; --stop-ink:#a5321f; --stop-wash:#fbe6e2;
+    --caution:#b9791a; --caution-wash:#f6ecd8;
+    --blue:#2b62cf; --blue-ink:#234f9e; --blue-wash:#e5edfb;
+  }
+  :root[data-theme="dark"]{
+    --paper:#0b0f18; --card:#131926; --card2:#0f141f;
+    --ink:#e9edf5; --ink-soft:#9aa4b8; --ink-faint:#6b7488;
+    --line:#232c3d; --line-soft:#1b2230;
+    --accent:#25c78e; --accent-ink:#7fe6c2; --accent-wash:#11291f;
+    --stop:#f0655a; --stop-ink:#f7938a; --stop-wash:#2c1512;
+    --caution:#e6ac47; --caution-wash:#2a2110;
+    --blue:#5f8ff2; --blue-ink:#a8c4f7; --blue-wash:#111c31;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;margin:0;font-size:16px;letter-spacing:-.005em}
+  .page{max-width:var(--maxw);margin:0 auto;padding:30px 30px 60px}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  h1,h2,h3{text-wrap:balance;line-height:1.14;margin:0}
+  p{margin:0}
+  strong{font-weight:670}
+  a{color:var(--blue-ink);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--blue) 40%,transparent)}
+  a:hover{border-bottom-color:var(--blue)}
+  a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:24px;margin-bottom:28px}
+  h1{font-size:clamp(26px,3.9vw,38px);font-weight:730;margin-top:16px;letter-spacing:-.02em}
+  .dek{font-size:clamp(15.5px,1.9vw,18px);color:var(--ink-soft);margin-top:16px;max-width:64ch}
+
+  .bluf{background:var(--accent-wash);border:1px solid var(--accent);border-radius:12px;padding:18px 20px;margin-top:22px}
+  .bluf .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--accent-ink);font-weight:600;margin-bottom:6px}
+  .bluf p{font-size:16px;color:var(--ink)}.bluf b{color:var(--accent-ink)}
+
+  section{margin-top:38px}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--blue-ink);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .kicker::before{content:"";width:22px;height:2px;background:var(--blue)}
+  h2{font-size:clamp(20px,2.5vw,25px);font-weight:700;letter-spacing:-.015em}
+  .lede{color:var(--ink-soft);margin-top:9px;max-width:66ch}
+
+  /* assumptions strip */
+  .assume{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+  @media(max-width:680px){.assume{grid-template-columns:1fr}}
+  .assume .a{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+  .assume .a .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--caution);font-weight:600;margin-bottom:5px}
+  .assume .a p{font-size:13.5px;color:var(--ink-soft)}
+
+  .diff{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:18px}
+  .diff .row{display:flex;gap:12px;padding:15px 18px;align-items:flex-start;border-bottom:1px solid var(--line-soft)}
+  .diff .row:last-child{border-bottom:0}
+  .diff .row.in{background:var(--caution-wash)}
+  .diff .row.out{background:var(--accent-wash)}
+  .diff .sign{font-family:var(--mono);font-weight:800;font-size:16px;flex:0 0 auto;width:16px;line-height:1.35}
+  .diff .in .sign{color:var(--caution)}
+  .diff .out .sign{color:var(--accent-ink)}
+  .diff .txt{font-size:15px;color:var(--ink)}
+  .diff .txt .h{font-weight:680;display:block;margin-bottom:2px}
+  .diff .txt .h .mono{font-size:13px;color:var(--ink-soft);font-weight:500}
+  .diff .txt .sub{color:var(--ink-soft);font-size:14px}
+
+  .walk{margin-top:18px;display:flex;flex-direction:column}
+  .step{display:flex;gap:16px;padding:0 0 20px;position:relative}
+  .step:last-child{padding-bottom:0}
+  .step .rail{flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
+  .step .n{width:32px;height:32px;border-radius:50%;background:var(--card);border:2px solid var(--blue);
+    color:var(--blue-ink);font-family:var(--mono);font-weight:700;font-size:14px;display:flex;
+    align-items:center;justify-content:center;z-index:1}
+  .step .line{width:2px;flex:1;background:var(--line);margin:2px 0}
+  .step:last-child .line{display:none}
+  .step.dead .n{border-color:var(--stop);color:var(--stop-ink);background:var(--stop-wash)}
+  .step .body{padding-top:3px}
+  .step .body h3{font-size:16px;font-weight:680;margin-bottom:4px}
+  .step .body p{font-size:14.5px;color:var(--ink-soft)}
+  .step .body .verdict{font-family:var(--mono);font-size:12px;letter-spacing:.03em;text-transform:uppercase;
+    font-weight:600;margin-top:5px;display:inline-block}
+  .step.dead .verdict{color:var(--stop-ink)}.step .verdict.ok{color:var(--accent-ink)}
+
+  .chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px}
+  @media(max-width:680px){.chips{grid-template-columns:1fr}}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 16px}
+  .chip .ic{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+  .chip.no .ic{color:var(--accent-ink)}.chip.yes .ic{color:var(--caution)}
+  .chip p{font-size:14px;color:var(--ink-soft)}.chip p b{color:var(--ink)}
+
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  @media(max-width:680px){.vs{grid-template-columns:1fr}}
+  .vs .col{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--card)}
+  .vs .col.good{border-left:3px solid var(--accent)}.vs .col.bad{border-left:3px solid var(--stop)}
+  .vs .col h3{font-size:15px;font-weight:680;margin-bottom:8px}.vs .col p{font-size:14.5px;color:var(--ink-soft)}
+
+  .guards{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:680px){.guards{grid-template-columns:1fr}}
+  .guards li{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 16px;font-size:14.5px}
+  .guards li b{display:block;font-weight:680;margin-bottom:3px;color:var(--ink)}.guards li span{color:var(--ink-soft)}
+
+  .band{border-radius:14px;padding:24px 26px;margin-top:22px;background:var(--ink)}
+  @media (prefers-color-scheme:dark){.band{background:#1b2333;border:1px solid var(--line)}}
+  :root[data-theme="dark"] .band{background:#1b2333;border:1px solid var(--line)}
+  :root[data-theme="light"] .band{background:#141a26;border:none}
+  .band .kicker{color:#9cc0ff}.band .kicker::before{background:#5f8ff2}
+  .band h2{color:#fff}.band p{color:#c7cede;margin-top:10px;max-width:66ch}
+
+  .quote{border-left:3px solid var(--blue);padding:4px 0 4px 18px;margin-top:18px;font-size:16px;font-style:italic;color:var(--ink)}
+  .quote .who{display:block;font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+    color:var(--ink-faint);margin-top:8px;text-transform:uppercase}
+
+  .foot{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;
+    color:var(--ink-faint);font-family:var(--mono);line-height:1.7}
+  .foot b{color:var(--ink-soft);font-weight:600}
+
+  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  @media(max-width:760px){.mgrid{grid-template-columns:1fr}}
+  .mcard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:11px;padding:16px 17px}
+  .mcard .mnum{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--accent-ink);
+    background:var(--accent-wash);border-radius:6px;width:24px;height:24px;display:flex;
+    align-items:center;justify-content:center;margin-bottom:9px}
+  .mcard h3{font-size:15px;font-weight:680;margin-bottom:6px}
+  .mcard p{font-size:14px;color:var(--ink-soft)}
+
+  /* per-secret exploitation matrix */
+  .tablewrap{overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:12px}
+  .smatrix{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
+  .smatrix th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:600;padding:12px 12px 9px;
+    border-bottom:1px solid var(--line);background:var(--card2)}
+  .smatrix td{padding:11px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;
+    color:var(--ink-soft);line-height:1.45}
+  .smatrix tr:last-child td{border-bottom:0}
+  .smatrix td.sec{color:var(--ink);font-weight:640;width:180px}
+  .smatrix td b{color:var(--ink)}
+  .smatrix .sev{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.04em;
+    text-transform:uppercase;font-weight:700;padding:2px 6px;border-radius:4px;margin-bottom:6px;white-space:nowrap}
+  .smatrix .sev.cat{background:var(--stop);color:#fff}
+  .smatrix .sev.hi{background:var(--caution-wash);color:var(--caution)}
+  .smatrix .sev.me{background:var(--blue-wash);color:var(--blue-ink)}
+  .smatrix .sev.lo{background:var(--line-soft);color:var(--ink-faint)}
+  .smatrix .rno{color:var(--stop-ink);font-weight:600}
+  .smatrix .ryes{color:var(--accent-ink);font-weight:600}
+  /* two hard truths */
+  .htruths{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+  @media(max-width:680px){.htruths{grid-template-columns:1fr}}
+  .htruth{background:var(--stop-wash);border:1px solid var(--stop);border-left:3px solid var(--stop);
+    border-radius:11px;padding:15px 16px;font-size:14px;color:var(--ink)}
+  .htruth b{color:var(--stop-ink);display:block;margin-bottom:4px}
+
+  @media print{
+    body{background:#fff;color:#000;font-size:11.5pt}.page{max-width:100%;padding:0}
+    .diff,.chip,.vs .col,.guards li,.step,.band,.bluf,.assume .a{break-inside:avoid}
+    .band{background:#f2f4f8 !important;border:1px solid #ccc}.band h2{color:#000}.band p{color:#333}.band .kicker{color:#234f9e}
+    section{margin-top:22px}a{color:#234f9e}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1>What an exposed Terraform state file actually puts at risk.</h1>
+    <p class="dek">A sober assessment of the worst-case exposure of the PingOne Terraform state file — assuming the state file is obtained by an attacker, across all environments, with best practices ignored. The aim is to replace an unbounded fear with a bounded, evidence-based picture of what an attacker could and could not do.</p>
+    <div class="bluf">
+      <div class="lbl">Assessment summary</div>
+      <p>Straight answer, no hand-waving: with the PingOne Terraform provider today, <b>real secrets land in the state file in plaintext</b> (there's no write-only support), and <b>some of them are catastrophic if leaked</b> — a worker-app admin secret is full IdP takeover; an imported signing key forges any user's token; a Twilio token reads OTP bodies. And <b>rotating in PingOne doesn't save most of them</b> — the dangerous ones are owned by external systems (Twilio, the CA, your mail relay, AD), and the damage is instant, so a rotation window barely helps. So the honest control isn't "rotate it" — it's <b>keep the dangerous ones out of Terraform entirely.</b> Almost every catastrophic secret is an <em>input</em> we supply, so it belongs in the vault, never in state. The few PingOne <em>forces</em> into state (worker/app secrets, the gateway JWT) are exactly the ones PingOne-rotation <em>does</em> instantly kill. Do that discipline and it's bounded; skip it and it's a crown-jewel breach. This brief shows every secret, what it actually does, and where the line is.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="kicker">Assumptions — deliberately pessimistic</div>
+    <h2>We assess the worst case, not the expected case.</h2>
+    <div class="assume">
+      <div class="a"><div class="t">Assume</div><p>The attacker has obtained the <strong>full state file</strong> for <strong>all four environments</strong>, including production.</p></div>
+      <div class="a"><div class="t">Assume</div><p>Secrets were managed in Terraform — which, with this provider, means they're written to state (there's no write-only option).</p></div>
+      <div class="a"><div class="t">Assess</div><p>Given that, <strong>what can the attacker actually do</strong> — and where does it stop?</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">What the artifact is</div>
+    <h2>A configuration inventory — that, with this provider, also holds credentials.</h2>
+    <p class="lede">Terraform's state is a JSON record of what it manages: resource IDs, names, and settings — a current picture of the configuration. It's <em>meant</em> to hold configuration, not secrets. But the PingOne provider has <strong>no write-only or ephemeral support</strong> (verified against v1.20.0), so any secret you manage in Terraform is written to state in plaintext. <span class="mono">Sensitive: true</span> only masks it in CLI output — the value is still in the file.</p>
+  </section>
+
+  <section>
+    <div class="kicker">Contents — the honest worst case</div>
+    <h2>Yes, secrets land in state. Here's the list — not a reassurance.</h2>
+    <p class="lede">First, the framing: this is a <strong>maximalist "use every PingOne feature" deployment</strong> — deliberately worse than what we're actually building. Even then, it would put <strong>~20–30 distinct secrets</strong> into state, in plaintext:</p>
+    <div class="diff">
+      <div class="row in"><span class="sign">+</span><span class="txt">
+        <span class="h">Application &amp; worker secrets</span>
+        <span class="sub">Every OIDC / worker-app client secret (<span class="mono">pingone_application_secret</span>) and custom OAuth resource secret.</span></span></div>
+      <div class="row in"><span class="sign">+</span><span class="txt">
+        <span class="h">Directory &amp; network credentials</span>
+        <span class="sub">The LDAP <span class="mono">bind_password</span>, gateway service-account password, RADIUS shared secrets, and the PingOne-issued gateway credential.</span></span></div>
+      <div class="row in"><span class="sign">+</span><span class="txt">
+        <span class="h">Every external-IdP secret</span>
+        <span class="sub">Google, Microsoft, Facebook, LinkedIn, Apple, and generic-OIDC client secrets and signing keys — one per configured provider.</span></span></div>
+      <div class="row in"><span class="sign">+</span><span class="txt">
+        <span class="h">Messaging &amp; crypto material</span>
+        <span class="sub">SMTP password / OAuth token, SMS &amp; voice provider tokens, MFA push keys (APNS <span class="mono">.p8</span>, FCM JSON), imported PKCS#12 key material, custom-domain TLS private keys, the reCAPTCHA secret, and any initial user passwords set through Terraform.</span></span></div>
+      <div class="row out"><span class="sign">−</span><span class="txt">
+        <span class="h">The one that matters most is <em>not</em> here</span>
+        <span class="sub">The admin / API credential Terraform uses to authenticate to PingOne is passed to the provider at run time — <strong>never written to state</strong>. So a stolen state file cannot be used to reconfigure or take over your tenant.</span></span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Full nightmare mode — what each leaked secret actually does</div>
+    <h2>Not all "rotatable and scoped." Some are catastrophic. Here is every one.</h2>
+    <p class="lede">Worst case: no mitigations, a valid credential in hand. Sorted most-dangerous first.</p>
+    <div class="tablewrap">
+      <table class="smatrix">
+        <thead><tr><th>Secret</th><th>What an attacker does</th><th>Real impact</th><th>Does PingOne rotation kill it?</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="sec"><span class="sev cat">Catastrophic</span><br>Worker-app client secret <span class="mono">(admin role)</span></td>
+            <td><span class="mono">client_credentials</span> grant → an <b>admin API token in seconds</b>, no user interaction.</td>
+            <td><b>Full IdP takeover:</b> dump the whole directory, <b>reset or bypass MFA</b> on any account, rewrite sign-on policies, read other apps' secrets.</td>
+            <td><span class="ryes">Yes</span> — PingOne-owned. But damage is <b>instant</b>, so the window barely helps. Only as bad as the role bound to the app — audit it.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev cat">Catastrophic*</span><br>Imported signing key <span class="mono">(pingone_key)</span></td>
+            <td>Decrypt the PKCS#12 and <b>forge signed OIDC / SAML tokens offline.</b></td>
+            <td><b>Impersonate any user</b> to any relying party. <b>*Only if a signing key was <em>imported</em></b> — PingOne-<em>generated</em> signing keys are <b>not in state</b>, so this is impossible for them.</td>
+            <td><span class="rno">No</span> — you can't revoke a private key; you must repudiate trust at every relying party.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev cat">Catastrophic</span><br>Twilio / SMS auth token</td>
+            <td>Master credential for the Twilio account — <b>send messages and read delivered message bodies.</b></td>
+            <td><b>Read OTP codes → standing SMS-MFA bypass;</b> plus toll fraud.</td>
+            <td><span class="rno">No</span> — Twilio owns it. PingOne rotation does nothing; rotate at Twilio.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev hi">High</span><br>Custom-domain TLS private key</td>
+            <td>With a MITM / DNS-hijack position, present a <b>warning-free clone</b> of the login page.</td>
+            <td>Harvest every member credential at the real domain. Needs a traffic-redirection position.</td>
+            <td><span class="rno">No</span> — the CA owns validity. Must <b>revoke the certificate</b> (reissue alone doesn't help).</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev hi">High</span><br>SMTP password</td>
+            <td>Authenticate to the relay and <b>send mail as the organization's notification sender.</b></td>
+            <td><b>DKIM / SPF / DMARC-aligned phishing</b> (fake reset emails) — indistinguishable from real bank mail.</td>
+            <td><span class="rno">No</span> — the mail relay owns it. Rotate there.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev hi">High</span><br>RADIUS shared secret</td>
+            <td>With an on-path position, <b>forge a valid Access-Accept</b> and decrypt captured passwords.</td>
+            <td>Bypass RADIUS-fronted auth / MFA (e.g. VPN). Needs on-path packet position.</td>
+            <td><span class="rno">No</span> — shared; both ends (PingOne + the NAS) must be re-keyed together.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev me">Medium</span><br>User-facing app client secret</td>
+            <td>Impersonate that specific OIDC client at the token endpoint.</td>
+            <td>Limited — real takeover also needs a captured auth code (redirect-URI allowlist + PKCE bind it).</td>
+            <td><span class="ryes">Yes</span> — PingOne-owned.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev me">Medium</span><br>External-IdP client secrets</td>
+            <td>Impersonate the PingOne↔IdP integration to Google / Microsoft / etc.</td>
+            <td>Token theft in the social-login flow — needs a captured auth code; bounded by redirect-URI allowlisting.</td>
+            <td><span class="rno">No</span> — the external IdP owns it. Rotate at Google / Entra / Apple.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev me">Medium</span><br>APNS / FCM push keys</td>
+            <td>Send push notifications to app users (FCM topics reach everyone — no device tokens needed).</td>
+            <td>Spoofed "approve your login?" phishing + spam. <b>Not</b> a forged MFA approval on a well-built app — the danger is push <em>plus a stolen password.</em></td>
+            <td><span class="rno">No</span> — Apple / Google own them. Revoke the key / kill the service account.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev me">Medium</span><br>LDAP bind password</td>
+            <td>On-network, bind read-only to AD.</td>
+            <td>Enumerate users, <b>map privileged groups for targeting,</b> and a lockout-bounded password-spray oracle. Read-only — no writes.</td>
+            <td><span class="rno">No</span> — AD owns it; reset the account in AD. Needs internal network reachability + AD lockout applies.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev me">Medium</span><br>Gateway credential JWT</td>
+            <td>Authenticate to PingOne <em>as the gateway.</em></td>
+            <td>⚠️ Blast radius under-documented — flagged for live testing; could interfere with delegated-auth flows.</td>
+            <td><span class="ryes">Yes</span> — PingOne-owned and revocable.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev lo">Low</span><br>Initial user password</td>
+            <td>Log in as that account, if it hasn't been force-changed.</td>
+            <td>Single-account takeover — worse only if a privileged / service account was seeded and never rotated.</td>
+            <td><span class="ryes">Yes</span> — PingOne-owned.</td>
+          </tr>
+          <tr>
+            <td class="sec"><span class="sev lo">Low</span><br>reCAPTCHA secret key</td>
+            <td>Server-side verification only.</td>
+            <td><b>Does not bypass the CAPTCHA</b> — it verifies tokens, it doesn't mint them. Minor.</td>
+            <td><span class="rno">No</span> — Google owns it (minor).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="htruths">
+      <div class="htruth"><b>Rotating in PingOne doesn't help for most of them.</b> The dangerous ones are owned by external systems — Twilio, the CA, your mail relay, the external IdPs, and AD. Rotating in PingOne only updates PingOne's copy; the real credential stays live until rotated <em>at the source.</em></div>
+      <div class="htruth"><b>For the instant-damage secrets, a rotation window barely helps.</b> Forge / send / read / mint happen in seconds — rotate every 24 hours and an attacker holding the secret for 23h 59m still has more than enough time. Aggressive rotation is not a substitute for keeping them out.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Mitigations — how we shrink that list to near-nothing</div>
+    <h2>The dangerous ones don't need to be in Terraform at all.</h2>
+    <div class="mgrid">
+      <div class="mcard">
+        <div class="mnum">1</div>
+        <h3>Keep the crown jewels out — the real fix</h3>
+        <p>Nearly every <em>catastrophic</em> secret is an <strong>input we supply</strong> — the Twilio token, the TLS key, SMTP, external-IdP secrets, the LDAP bind password. None need to be in Terraform: keep them in the <strong>Secret Vault / HSM</strong>, referenced out-of-band. That removes every externally-owned, rotation-resistant secret from state at once.</p>
+      </div>
+      <div class="mcard">
+        <div class="mnum">2</div>
+        <h3>The few PingOne forces in → instant rotation</h3>
+        <p>Only a handful <em>must</em> be in state, because <strong>PingOne generates them</strong> — worker / app secrets and the gateway JWT. Those are exactly the ones a <strong>PingOne-side rotation instantly kills.</strong> Rotate every deployment — ~5 minutes automated (≈15 with CAB); a leaked copy is dead the moment we rotate.</p>
+      </div>
+      <div class="mcard">
+        <div class="mnum">3</div>
+        <h3>Don't lean on rotation alone</h3>
+        <p>For the externally-owned secrets, rotating in PingOne <strong>doesn't</strong> help — they must be rotated at the source. And for instant-damage secrets, a 24-hour window is 24 hours of exposure. So the discipline is <strong>keep them out (mitigation 1)</strong>, not "rotate faster."</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Attack path — worst case, traced to its end</div>
+    <h2>An attacker holds the entire state file — secrets included. Where does it actually lead?</h2>
+    <p class="lede">Now strip away every mitigation above — assume we did <em>none</em> of it, and all ~20–30 secrets are sitting in the file an attacker just stole. This is the ceiling:</p>
+    <div class="walk">
+      <div class="step"><div class="rail"><div class="n">1</div><div class="line"></div></div>
+        <div class="body"><h3>They read everything — the config and the secrets in it.</h3>
+          <p>The full map of the estate, plus the couple-dozen credentials listed above.</p>
+          <span class="verdict">They hold config + a set of credentials. Here is why that is still contained.</span></div></div>
+      <div class="step dead"><div class="rail"><div class="n">2</div><div class="line"></div></div>
+        <div class="body"><h3>They try to take over the tenant — and cannot.</h3>
+          <p>The admin credential Terraform authenticates with is <strong>not</strong> in state, so they cannot reconfigure or seize PingOne wholesale. The worst they hold are individual, scoped secrets.</p>
+          <span class="verdict">No tenant takeover.</span></div></div>
+      <div class="step dead"><div class="rail"><div class="n">3</div><div class="line"></div></div>
+        <div class="body"><h3>They try the leaked LDAP bind password — and hit a wall.</h3>
+          <p>It authenticates to the <em>on-prem</em> directory, not to PingOne (the gateway uses a separate, revocable credential), and that directory isn't reachable from the internet — useless without a foothold inside the corporate network.</p>
+          <p><strong>And if they force their way on-network anyway?</strong> The account follows least privilege: it is <strong>read-only, scoped to the user subtree</strong>. The ceiling is <em>reading</em> the user list and the handful of attributes it's permitted (name, email, group membership) — pure reconnaissance. They <strong>cannot modify anything</strong>, <strong>cannot read passwords</strong> (the directory never returns password material over LDAP — not even to admins), cannot leave that OU, and cannot reach PingOne.</p>
+          <span class="verdict">Ceiling: read-only recon of the user directory — and only for an attacker already inside the network.</span></div></div>
+      <div class="step dead"><div class="rail"><div class="n">4</div><div class="line"></div></div>
+        <div class="body"><h3>The individual secrets? Each has its own blast radius — the matrix above is the full accounting.</h3>
+          <p>They range from catastrophic (a worker-app admin secret, an imported signing key, the Twilio token) to trivial (reCAPTCHA). But the catastrophic ones are all <strong>input secrets we keep out of state</strong>; the ones we can't keep out (PingOne-generated) are exactly the ones an instant PingOne rotation kills.</p>
+          <span class="verdict">Bounded — <em>if</em> the crown jewels are kept out of state.</span></div></div>
+      <div class="step"><div class="rail"><div class="n">5</div></div>
+        <div class="body"><h3>And none of this happens unless they first beat the controls.</h3>
+          <p>Getting the state file at all means defeating what makes it a top-tier secret — encryption, access logging, privileged-only access — plus, for anything live, the vault and a pipeline identity. Clear all of that and the organization is already lost, state file or not.</p>
+          <span class="verdict ok">The state file was never the soft spot.</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Blast radius, even in the worst case</div>
+    <h2>Bounded to the protected application — not the organization.</h2>
+    <div class="chips">
+      <div class="chip yes"><div class="ic">◐ Worst case yields</div><p><b>Reconnaissance</b> of the protected application's authentication configuration and, only if built without controls, a credential that other measures already neutralize.</p></div>
+      <div class="chip no"><div class="ic">✓ Does not reach</div><p><b>Downstream business data.</b> PingOne is scoped to that application's authentication; the state file is a configuration map, not a data path.</p></div>
+      <div class="chip no"><div class="ic">✓ Does not cause</div><p>An <b>operational outage.</b> Reading a configuration inventory does not alter or stop the running service.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Comparative exposure</div>
+    <h2>Handled correctly, the state file is <em>less</em> exposed than the current manual process.</h2>
+    <div class="vs">
+      <div class="col good"><h3>Terraform state</h3>
+        <p>The secrets sit in <strong>one controlled place</strong> — encrypted at rest, access-logged, reachable only by the pipeline identity, and <strong>rotatable in bulk</strong>. You know exactly what is where, and can rotate all of it on demand.</p></div>
+      <div class="col bad"><h3>Manual configuration (ClickOps)</h3>
+        <p>The same secrets are <strong>hand-carried by a person</strong> through the console — pasted who-knows-where, with no gate, no record of what went where, and no clean way to rotate. Nothing to encrypt, nothing to audit.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Controls applied — defense in depth</div>
+    <h2>The state file is treated as sensitive regardless of its contents.</h2>
+    <ul class="guards">
+      <li><b>Isolated backend, its own credentials</b><span>A dedicated store only the pipeline identity can reach — demonstrated on GitLab.</span></li>
+      <li><b>Encrypted at rest, every access logged</b><span>On Azure Blob: AES-256 encryption that can't be disabled; keyless Entra-only access (no storage key to steal); and with diagnostic logging on, every read / write / delete recorded with the calling identity, operation, and timestamp. Versioning, soft-delete, and WORM immutability protect the history.</span></li>
+      <li><b>Commit-bound production changes</b><span>Production changes only via a CAB-approved ServiceNow record bound to the exact commit, by an authorized person.</span></li>
+      <li><b>Access only through the privileged identity</b><span>Properly configured, the state is reachable only through the backend's own privileged (super-admin) identity — a leaked pipeline token, stale credential, or random attacker gets nothing.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="band">
+      <div class="kicker">Conclusion</div>
+      <h2>Keep the crown jewels out — then it's a hardened, rotatable secret store.</h2>
+      <p>The honest finding: some of these secrets are <strong>catastrophic</strong>, and rotation alone won't save most of them. But almost every catastrophic one is an <em>input we control</em> — so the discipline is simple and decisive: <strong>keep the dangerous secrets in the vault / HSM, never in Terraform;</strong> the few PingOne forces into state are exactly the ones a PingOne-side rotation instantly kills; and the state file itself is encrypted, access-logged, and reachable only by the privileged identity. Do that, and the residual exposure is bounded to the protected application with no tenant takeover. Skip it, and it's a crown-jewel breach — which is precisely why it is not optional.</p>
+    </div>
+  </section>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:title" content="Prioritizing requests on a busy GPU — three ways LiteLLM can do it">
+<meta name="viz:description" content="One saturated on-prem lane, chat vs batch. Why LiteLLM's two built-in priority paths fall short (forgeable / flaky) and the ~35-line key-based gate that doesn't.">
+<meta name="viz:uid" content="v-33bb1e11751c">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<title>LiteLLM request priority — three ways</title>
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1180px; margin: 0 auto; padding: 28px 22px 80px; }
+  .scenario { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin: 14px 0 22px; font-size: 14px; line-height: 1.6; color: var(--text); }
+  .scenario b { color: var(--accent); }
+  .scenario .chat-em { color: var(--good); font-weight: 600; }
+  .scenario .batch-em { color: var(--muted); font-weight: 600; }
+
+  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+  button.run { background: var(--accent); color: #06121f; border: none; border-radius: 8px; padding: 9px 18px; font: inherit; font-weight: 700; cursor: pointer; }
+  button.run:hover { filter: brightness(1.1); }
+  button.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; font: inherit; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  .legend2 { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-left: auto; flex-wrap: wrap; }
+  .legend2 .k { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .lane { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px 16px 18px; display: flex; flex-direction: column; }
+  .lane.bad { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); }
+  .lane.good { border-color: color-mix(in srgb, var(--good) 50%, var(--border)); }
+  .lane h3 { margin: 0 0 2px; font-size: 15px; }
+  .lane .ep { font-family: var(--mono); font-size: 11.5px; color: var(--c4); margin-bottom: 10px; }
+  .lane .how { font-size: 12.5px; color: var(--muted); line-height: 1.5; min-height: 54px; }
+  .lane .how b { color: var(--text); }
+
+  /* flow mini diagram */
+  .flowrow { display: flex; align-items: center; gap: 6px; margin: 12px 0 6px; font-size: 11px; }
+  .flowrow .box { border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; color: var(--text); background: #0d1422; white-space: nowrap; }
+  .flowrow .arr { color: var(--muted); }
+  .flowrow .tag { font-family: var(--mono); font-size: 10px; padding: 1px 5px; border-radius: 4px; }
+  .tag.body { background: color-mix(in srgb, var(--danger) 25%, transparent); color: var(--danger); }
+  .tag.key { background: color-mix(in srgb, var(--good) 22%, transparent); color: var(--good); }
+
+  /* the lane track */
+  .track { margin-top: 12px; }
+  .tlabel { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 9px 0 5px; }
+  .slot { height: 40px; border: 1px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; background: repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(255,255,255,.015) 7px, rgba(255,255,255,.015) 14px); }
+  .slot .cap { position: absolute; top: -8px; left: 8px; font-size: 9.5px; background: var(--panel); padding: 0 5px; color: var(--muted); }
+  .queue, .served { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-content: flex-start; }
+  .served { gap: 6px; }
+
+  .chip { font-size: 11px; padding: 4px 9px; border-radius: 14px; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 5px; background: #0d1422; color: var(--text); transition: transform .25s, opacity .25s; }
+  .chip .pin { font-size: 9px; opacity: .7; }
+  .chip.batch { border-color: color-mix(in srgb, var(--muted) 50%, var(--border)); }
+  .chip.chat  { border-color: var(--good); color: var(--good); box-shadow: 0 0 0 1px color-mix(in srgb,var(--good) 30%, transparent) inset; }
+  .chip.cheat { border-color: var(--danger); color: var(--danger); }
+  .chip.blocker { border-color: var(--c4); color: var(--c4); }
+  .chip.inslot { transform: scale(1.06); }
+  .chip .rank { font-family: var(--mono); font-size: 10px; background: rgba(255,255,255,.08); border-radius: 8px; padding: 0 5px; }
+  .chip.served-chat .rank { background: var(--good); color: #06121f; }
+  .chip.served-cheat .rank { background: var(--danger); color: #fff; }
+
+  .verdict { margin-top: 14px; font-size: 12.5px; font-weight: 600; padding: 8px 10px; border-radius: 8px; line-height: 1.45; }
+  .verdict.bad { background: color-mix(in srgb, var(--danger) 14%, transparent); color: var(--danger); }
+  .verdict.good { background: color-mix(in srgb, var(--good) 14%, transparent); color: var(--good); }
+  .verdict.idle { background: rgba(255,255,255,.04); color: var(--muted); font-weight: 500; }
+
+  h2.sec { font-size: 15px; margin: 34px 0 12px; color: var(--text); }
+  table.cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.cmp th, table.cmp td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  table.cmp thead th { color: var(--muted); font-weight: 600; font-size: 12px; }
+  table.cmp td.opt { color: var(--text); font-weight: 600; }
+  table.cmp .yes { color: var(--good); font-weight: 700; }
+  table.cmp .no  { color: var(--danger); font-weight: 700; }
+  table.cmp .meh { color: var(--warn); font-weight: 700; }
+  table.cmp .na  { color: var(--muted); }
+  table.cmp col.cC, table.cmp th.cC, table.cmp td.cC { background: color-mix(in srgb, var(--good) 7%, transparent); }
+
+  .evidence { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  .ev { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 13px 15px; }
+  .ev .num { font-family: var(--mono); font-size: 20px; font-weight: 700; }
+  .ev.a .num { color: var(--danger); } .ev.b .num { color: var(--danger); } .ev.c .num { color: var(--good); }
+  .ev .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.45; }
+  .ev .meas { font-size: 10.5px; color: var(--c4); margin-top: 7px; font-family: var(--mono); }
+
+  .punch { margin-top: 30px; background: linear-gradient(180deg, color-mix(in srgb,var(--good) 9%, var(--panel)), var(--panel)); border: 1px solid color-mix(in srgb,var(--good) 35%, var(--border)); border-radius: 12px; padding: 18px 20px; font-size: 14px; line-height: 1.65; }
+  .punch b { color: var(--good); }
+  .foot { margin-top: 22px; font-size: 11px; color: var(--muted); font-family: var(--mono); }
+</style>
+</head>
+<body>
+  <div class="viz-header">
+    <h1>Prioritizing requests on a busy GPU</h1>
+    <div class="sub">Three ways LiteLLM can order requests under load — two built-in paths that fall short, and the ~35-line key-based gate we built. Measured on a live LiteLLM&nbsp;1.85 + Ollama stack.</div>
+  </div>
+
+  <div class="scenario">
+    One on-prem GPU lane, only <b>one request in service at a time</b>. Two kinds of traffic share it: a live
+    <span class="chat-em">chat</span> request that must be fast, and a nightly <span class="batch-em">RAGFlow / batch</span>
+    job that can wait. When the lane is saturated, chat must be served ahead of batch — <b>and a batch job must not be able to cheat the line.</b>
+    Press play: the <i>same</i> five requests drain through each policy.
+  </div>
+
+  <div class="controls">
+    <button class="run" id="drop">▶ Drop 5 requests</button>
+    <button class="ghost" id="reset">Reset</button>
+    <div class="legend2">
+      <span class="k"><span class="dot" style="background:var(--c4)"></span>blocker (in service)</span>
+      <span class="k"><span class="dot" style="background:var(--muted)"></span>batch · key 100</span>
+      <span class="k"><span class="dot" style="background:var(--good)"></span>chat · key 0</span>
+      <span class="k"><span class="dot" style="background:var(--danger)"></span>cheat · batch key, body&nbsp;0</span>
+    </div>
+  </div>
+
+  <div class="lanes" id="lanes"></div>
+
+  <h2 class="sec">Side by side</h2>
+  <table class="cmp">
+    <colgroup><col><col><col><col class="cC"></colgroup>
+    <thead><tr>
+      <th>&nbsp;</th>
+      <th>A · /v1 + body priority</th>
+      <th>B · /queue scheduler <span style="font-weight:400;color:var(--warn)">[beta]</span></th>
+      <th class="cC">C · key gate (ours)</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="opt">Orders by priority?</td>     <td class="no">No — FIFO</td>        <td class="meh">Yes-ish</td>            <td class="cC yes">Yes</td></tr>
+      <tr><td class="opt">Priority comes from</td>      <td class="na">the body (ignored)</td><td class="no">the caller's body</td>  <td class="cC yes">the API key</td></tr>
+      <tr><td class="opt">Un-cheatable?</td>            <td class="na">—</td>                <td class="no">No — caller forges it</td><td class="cC yes">Yes</td></tr>
+      <tr><td class="opt">Deterministic?</td>           <td class="na">—</td>                <td class="no">No — rpm windows</td>    <td class="cC yes">Yes</td></tr>
+      <tr><td class="opt">Needs /queue or rpm?</td>     <td class="yes">No</td>              <td class="no">Yes — both</td>          <td class="cC yes">No</td></tr>
+      <tr><td class="opt">Extra infra</td>              <td class="na">none</td>             <td class="na">rpm cooldown state</td> <td class="cC na">none (in-process)</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec">What we measured (live)</h2>
+  <div class="evidence">
+    <div class="ev a"><div class="num">FIFO</div><div class="lbl"><b>A.</b> With <code>max_parallel_requests:1</code>, requests drained in arrival order — <code>priority</code> in the body did nothing.</div><div class="meas">/v1 never calls the scheduler</div></div>
+    <div class="ev b"><div class="num">#3–#4</div><div class="lbl"><b>B.</b> On <code>/queue</code> + <code>rpm:1</code>, the first run ordered cleanly, but reruns scrambled chat to #3/#4 — and a body <code>priority:0</code> "cheat" jumped the line.</div><div class="meas">forgeable + per-minute window</div></div>
+    <div class="ev c"><div class="num">6 / 6</div><div class="lbl"><b>C.</b> The key gate: chat (key priority 0) beat the cheat (batch key forging <code>priority:0</code>) every run — even when the cheat was submitted first.</div><div class="meas">priority bound to the key</div></div>
+  </div>
+
+  <div class="punch">
+    LiteLLM's built-ins read priority from the <b>caller</b> (forgeable) or need <b>rpm windows</b> (flaky). Moving the
+    decision onto the <b>key</b> — enforced at the gateway, ignoring whatever the body claims — is what makes it both
+    un-cheatable and deterministic. It's the rare case where ~35 lines of our own code beats the platform feature, because
+    the platform feature is structurally wrong for <i>"priority the caller can't forge."</i>
+  </div>
+
+  <div class="foot">scenario: 1 blocker (batch, in service) + 2 batch + 1 chat + 1 cheat → one slot. drain order is computed per policy, exactly as observed on the stack.</div>
+
+<script type="module">
+import { $ } from "/_kit/viz.js";
+
+// The five requests. submit order = array order; blocker is already in the slot.
+// keyPri = priority on the API key; bodyPri = priority the caller put in the request body.
+const REQS = [
+  { id: "blocker", label: "blocker",  cls: "blocker", keyPri: 100, bodyPri: null },
+  { id: "batch1",  label: "batch ①",  cls: "batch",   keyPri: 100, bodyPri: null },
+  { id: "batch2",  label: "batch ②",  cls: "batch",   keyPri: 100, bodyPri: null },
+  { id: "chat",    label: "chat",     cls: "chat",    keyPri: 0,   bodyPri: null },
+  { id: "cheat",   label: "cheat",    cls: "cheat",   keyPri: 100, bodyPri: 0   },
+];
+const eff = (p) => (p == null ? 100 : p); // a missing priority is treated as low (100)
+
+// Drain order per policy. Index 0 is the in-flight blocker (always first). The rest
+// queue and are ordered by the policy's priority source; arrival index breaks ties.
+function order(policy) {
+  const inflight = REQS[0];
+  const queued = REQS.slice(1).map((r, i) => ({ r, i }));
+  let keyFn;
+  if (policy === "A") keyFn = ({ i }) => i;                       // FIFO — ignores priority
+  if (policy === "B") keyFn = ({ r, i }) => [eff(r.bodyPri), i];  // body priority (forgeable)
+  if (policy === "C") keyFn = ({ r, i }) => [r.keyPri, i];        // key priority (enforced)
+  const cmp = (a, b) => { const ka = keyFn(a), kb = keyFn(b);
+    if (Array.isArray(ka)) return ka[0] - kb[0] || ka[1] - kb[1];
+    return ka - kb; };
+  return [inflight, ...queued.sort(cmp).map((x) => x.r)];
+}
+
+const LANES = [
+  { id: "A", cls: "bad",  title: "A · /v1 + priority in the body", ep: "POST /v1/chat/completions",
+    how: `You pass <b>{"priority": 0}</b> to the normal endpoint. But <b>/v1 never invokes the scheduler</b> — a concurrency cap just serializes by arrival. Priority is ignored.`,
+    flow: [["box","caller"],["arr","→"],["box","LiteLLM /v1"],["arr","→"],["box","model"]],
+    verdictIdle: "✗ does not order by priority" },
+  { id: "B", cls: "bad",  title: "B · /queue + built-in scheduler", ep: "POST /queue/chat/completions",
+    how: `The real <b>[beta]</b> feature: a priority heap, drained only under rpm cooldown. But priority is read from the <span style="color:var(--danger)">caller's body</span> — so a batch job sets <b>priority:0</b> and jumps the line.`,
+    flow: [["box","caller"],["tag body","body: priority"],["arr","→"],["box","/queue heap"],["arr","→"],["box","model"]],
+    verdictIdle: "✗ cheatable · ✗ rpm-flaky" },
+  { id: "C", cls: "good", title: "C · in-process key gate (ours)", ep: "POST /v1/chat/completions",
+    how: `A ~35-line hook. A priority semaphore admits the lowest <b>key</b> priority when a slot frees. The body is <span style="color:var(--good)">ignored</span> — a forged <b>priority:0</b> is stamped back to the key's 100.`,
+    flow: [["box","key"],["tag key","key: priority"],["arr","→"],["box","gate /v1"],["arr","→"],["box","model"]],
+    verdictIdle: "✓ orders by priority · un-cheatable" },
+];
+
+const lanesEl = $("#lanes");
+function flowHTML(flow) {
+  return `<div class="flowrow">` + flow.map(([t, txt]) =>
+    t === "arr" ? `<span class="arr">${txt}</span>`
+    : t.startsWith("tag") ? `<span class="tag ${t.split(" ")[1]}">${txt}</span>`
+    : `<span class="box">${txt}</span>`).join("") + `</div>`;
+}
+function render() {
+  lanesEl.innerHTML = LANES.map((L) => `
+    <div class="lane ${L.cls}" data-lane="${L.id}">
+      <h3>${L.title}</h3>
+      <div class="ep">${L.ep}</div>
+      <div class="how">${L.how}</div>
+      ${flowHTML(L.flow)}
+      <div class="track">
+        <div class="slot"><span class="cap">in service · 1 slot</span><span data-slot></span></div>
+        <div class="tlabel">waiting</div>
+        <div class="queue" data-queue></div>
+        <div class="tlabel">served · in order</div>
+        <div class="served" data-served></div>
+      </div>
+      <div class="verdict idle" data-verdict>${L.verdictIdle}</div>
+    </div>`).join("");
+}
+render();
+
+const chipHTML = (r, extra = "") => `<span class="chip ${r.cls} ${extra}" data-viz-id="${r.id}" data-label="${r.label}">${r.label}${r.bodyPri != null ? `<span class="pin">body:${r.bodyPri}</span>` : ""}</span>`;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+let running = false;
+async function drop() {
+  if (running) return; running = true;
+  $("#drop").disabled = true;
+  // seed every lane: blocker in slot, the other four waiting (in submit order)
+  for (const L of LANES) {
+    const lane = lanesEl.querySelector(`[data-lane="${L.id}"]`);
+    lane.querySelector("[data-slot]").innerHTML = "";
+    lane.querySelector("[data-served]").innerHTML = "";
+    lane.querySelector("[data-queue]").innerHTML = REQS.slice(1).map((r) => chipHTML(r)).join("");
+    const v = lane.querySelector("[data-verdict]"); v.className = "verdict idle"; v.textContent = "running…";
+  }
+  await sleep(350);
+  // animate all three lanes in parallel
+  await Promise.all(LANES.map((L) => runLane(L)));
+  running = false; $("#drop").disabled = false;
+}
+
+async function runLane(L) {
+  const lane = lanesEl.querySelector(`[data-lane="${L.id}"]`);
+  const slot = lane.querySelector("[data-slot]");
+  const queue = lane.querySelector("[data-queue]");
+  const served = lane.querySelector("[data-served]");
+  const seq = order(L.id);
+  for (let i = 0; i < seq.length; i++) {
+    const r = seq[i];
+    // pull from queue (if present) into the slot
+    queue.querySelector(`[data-viz-id="${r.id}"]`)?.remove();
+    slot.innerHTML = chipHTML(r, "inslot");
+    await sleep(560);
+    // move to served with its finishing rank
+    slot.innerHTML = "";
+    const extra = r.cls === "chat" ? "served-chat" : r.cls === "cheat" ? "served-cheat" : "";
+    served.insertAdjacentHTML("beforeend", `<span class="chip ${r.cls} ${extra}"><span class="rank">#${i + 1}</span>${r.label}</span>`);
+    await sleep(120);
+  }
+  // verdict per lane, computed from where chat & cheat landed
+  const chatRank = seq.findIndex((r) => r.id === "chat") + 1;
+  const cheatRank = seq.findIndex((r) => r.id === "cheat") + 1;
+  const v = lane.querySelector("[data-verdict]");
+  if (L.id === "A") { v.className = "verdict bad"; v.innerHTML = `✗ FIFO — priority ignored. chat waited its turn (#${chatRank}).`; }
+  if (L.id === "B") { v.className = "verdict bad"; v.innerHTML = `✗ the cheat forged priority 0 and jumped to #${cheatRank}; chat finished #${chatRank} (last). Forgeable.`; }
+  if (L.id === "C") { v.className = "verdict good"; v.innerHTML = `✓ chat jumped to #${chatRank}; the cheat's forged 0 was stamped to 100 → #${cheatRank}. Un-cheatable.`; }
+}
+
+$("#drop").addEventListener("click", drop);
+$("#reset").addEventListener("click", () => { if (running) return; render(); });
+</script>
+</body>
+</html>

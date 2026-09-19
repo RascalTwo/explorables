@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>maven-vs-gradle — hero card</title>
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<link rel="stylesheet" href="/_kit/viz-og.css">
+<style>
+  /* Same two brand tokens the viz overrides, so the card and the page agree. */
+  :root { --mvn: #bc8cff; --grd: #4ec9b0; --accent: #4ec9b0; }
+  html, body { margin: 0; background: #05060a; }
+  /* Only what differs from the kit card: the title runs two lines here, not one,
+     so 88px overflows the 630px frame. */
+  .og-card .title { font-size: 62px; }
+  .og-card .title .hl, .essence .hl { color: var(--grd); }
+  .essence { font-size: 25px; }
+  .hl.m { color: var(--mvn); }
+  .hl.g { color: var(--grd); }
+</style>
+</head>
+<body>
+
+<div class="og-card">
+  <div class="frame"></div>
+
+  <div class="left">
+    <div class="eyebrow"><span class="dot"></span>JVM build tools · August 2026</div>
+
+    <h1 class="title">Tabs versus spaces.<br><span class="hl">Until it isn&rsquo;t.</span></h1>
+
+    <div class="essence">
+      For most JVM projects this really is a taste call. There are exactly <span class="hl">four
+      constraints</span> that turn it into a real decision &mdash; two forcing each way.
+    </div>
+
+    <div class="sub">
+      Twelve dimensions on one axis, re-weighted live by what you are building &mdash; and the single
+      architectural property that generates every entry on both pro/con lists.
+    </div>
+
+    <div class="chips">
+      <span class="chip"><span class="tk"></span>Maven 3.9.16 · 4.0.0-rc-6</span>
+      <span class="chip"><span class="tk"></span>Gradle 9.7</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="panel">
+      <div class="panel-cap">
+        <span class="t">The verdict moves</span>
+        <span class="s">same scores, different weights</span>
+      </div>
+
+      <!-- Four contexts, four needle positions on the same Maven↔Gradle axis.
+           x is the weighted aggregate; the label is the project shape that produced it. -->
+      <svg class="graph" viewBox="0 0 392 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rail" x1="0" x2="1">
+            <stop offset="0"   stop-color="var(--mvn)"/>
+            <stop offset="0.5" stop-color="var(--border)"/>
+            <stop offset="1"   stop-color="var(--grd)"/>
+          </linearGradient>
+        </defs>
+
+        <text x="10"  y="16" font-size="10" font-weight="700" fill="var(--mvn)"
+              letter-spacing="0.1em">◀ MAVEN</text>
+        <text x="382" y="16" text-anchor="end" font-size="10" font-weight="700"
+              fill="var(--grd)" letter-spacing="0.1em">GRADLE ▶</text>
+
+        <!-- rail: x = 20 → 372 spans −100 → +100, so x(s) = 196 + s·1.76 -->
+        <rect x="20" y="28" width="352" height="8" rx="4" fill="url(#rail)" opacity="0.8"/>
+        <line x1="196" y1="24" x2="196" y2="40" stroke="var(--faint)" stroke-width="1"/>
+
+        <g font-size="10.5" fill="var(--muted)">
+          <!-- legacy Java 8 estate · −40 -->
+          <path d="M 119 56 L 133 56 L 126 66 Z" fill="var(--mvn)"/>
+          <line x1="126" y1="40" x2="126" y2="56" stroke="var(--mvn)" stroke-width="1.6" opacity="0.5"/>
+          <text x="141" y="65" fill="var(--mvn)" font-weight="700">−40</text>
+          <text x="169" y="65">legacy Java 8 estate</text>
+
+          <!-- open-source library · −23 -->
+          <path d="M 148 88 L 162 88 L 155 98 Z" fill="var(--mvn)"/>
+          <line x1="155" y1="40" x2="155" y2="88" stroke="var(--mvn)" stroke-width="1.6" opacity="0.5"/>
+          <text x="170" y="97" fill="var(--mvn)" font-weight="700">−23</text>
+          <text x="198" y="97">open-source library</text>
+
+          <!-- enterprise monorepo · +35 -->
+          <path d="M 251 120 L 265 120 L 258 130 Z" fill="var(--grd)"/>
+          <line x1="258" y1="40" x2="258" y2="120" stroke="var(--grd)" stroke-width="1.6" opacity="0.5"/>
+          <text x="163" y="129" text-anchor="end">enterprise monorepo</text>
+          <text x="171" y="129" fill="var(--grd)" font-weight="700">+35</text>
+
+          <!-- polyglot / multiplatform · +41 -->
+          <path d="M 262 152 L 276 152 L 269 162 Z" fill="var(--grd)"/>
+          <line x1="269" y1="40" x2="269" y2="152" stroke="var(--grd)" stroke-width="1.6" opacity="0.5"/>
+          <text x="163" y="161" text-anchor="end">polyglot / multiplatform</text>
+          <text x="171" y="161" fill="var(--grd)" font-weight="700">+41</text>
+        </g>
+
+        <text x="196" y="188" text-anchor="middle" font-size="9.5" fill="var(--faint)">
+          identical scores · only the weighting changed
+        </text>
+      </svg>
+
+      <div class="foot">
+        <div class="stat"><div class="n" style="color:var(--mvn)">67%</div>
+          <div class="l">use Maven</div><div class="d">JetBrains, 2025</div></div>
+        <div class="stat"><div class="n" style="color:var(--grd)">2–10×</div>
+          <div class="l">clean-build claim</div><div class="d">Gradle's own benchmark</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

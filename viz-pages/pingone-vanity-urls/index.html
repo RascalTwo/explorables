@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PingOne Vanity URLs — Explainer</title>
+<meta name="viz:uid" content="v-15b842f55cc5">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="PingOne Vanity URLs (Custom Domains)">
+<meta name="viz:description" content="What they are, what moves under your domain vs. stays on Ping, and how they're set up across PingOne, DNS, a CA, and Terraform.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; }
+  .viz-header { padding-top: 32px; }
+  section { margin-top: 48px; }
+  h2 { font-size: 20px; margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+  h2 .n { font-size: 13px; color: var(--bg); background: var(--accent); width: 24px; height: 24px;
+          border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+  h2 + .lede { color: var(--muted); margin: 0 0 18px; font-size: 14px; }
+  p { line-height: 1.6; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* browser chrome mock */
+  .browser { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .browser .bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #1c2230; border-bottom: 1px solid var(--border); }
+  .browser .dot { width: 11px; height: 11px; border-radius: 50%; background: #3a4150; }
+  .browser .url { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+                  padding: 6px 12px; font-family: var(--mono); font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .browser .url .lock { color: var(--good); }
+  .browser .url .van { color: var(--good); font-weight: 700; }
+  .browser .url .path { color: var(--muted); }
+  .browser .body { padding: 18px; color: var(--muted); font-size: 13px; }
+  .swap { display: inline-block; cursor: pointer; border: 1px dashed var(--border); border-radius: 6px;
+          padding: 2px 8px; font-size: 12px; color: var(--accent); margin-left: 8px; user-select: none; }
+
+  /* split columns */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
+  .col { border: 1px solid var(--border); border-radius: 10px; padding: 16px; background: var(--panel); }
+  .col.moves { border-color: color-mix(in srgb, var(--good) 45%, var(--border)); }
+  .col.stays { border-color: color-mix(in srgb, var(--warn) 45%, var(--border)); }
+  .col h3 { margin: 0 0 4px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+  .col .host { font-family: var(--mono); font-size: 12px; margin-bottom: 12px; }
+  .col.moves .host { color: var(--good); }
+  .col.stays .host { color: var(--warn); }
+  .item { padding: 9px 11px; border-radius: 7px; background: var(--panel-2); margin-bottom: 7px; font-size: 13px; }
+  .item b { display: block; font-size: 13.5px; margin-bottom: 1px; }
+  .item span { color: var(--muted); font-size: 12px; }
+
+  /* anatomy */
+  .anatomy { font-family: var(--mono); font-size: clamp(13px, 2.4vw, 19px); background: var(--panel);
+             border: 1px solid var(--border); border-radius: 10px; padding: 22px 18px; text-align: center; letter-spacing: .3px; }
+  .anatomy .seg { position: relative; padding-bottom: 26px; white-space: nowrap; }
+  .anatomy .tag { position: absolute; top: 100%; left: 50%; transform: translate(-50%, 2px);
+                  font-family: var(--sans); font-size: 10.5px; letter-spacing: 0; white-space: nowrap; }
+  .a-van { color: var(--good); font-weight: 700; }
+  .a-env { color: var(--c4); }
+  .a-path { color: var(--accent); }
+  .anatomy .tag { color: var(--muted); }
+
+  /* handshake */
+  .stage { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 820px) { .stage { grid-template-columns: 1fr; } }
+  #handshake { width: 100%; height: auto; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; }
+  .steps { list-style: none; padding: 0; margin: 0; }
+  .steps li { border: 1px solid var(--border); border-left: 3px solid var(--border); border-radius: 8px;
+              padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: all .12s; background: var(--panel); }
+  .steps li:hover { border-left-color: var(--accent); background: var(--panel-2); }
+  .steps li.active { border-left-color: var(--accent); background: var(--panel-2); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .steps li .st { font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .steps li .st .num { background: var(--accent); color: var(--bg); width: 20px; height: 20px; border-radius: 5px;
+                       font-size: 12px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; flex: none; }
+  .steps li .sd { color: var(--muted); font-size: 12px; margin: 5px 0 0 28px; line-height: 1.5; }
+  .steps li .who { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-left: 28px; }
+
+  /* code */
+  pre { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+        overflow-x: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.55; }
+  .k { color: var(--c4); } .s { color: var(--good); } .c { color: var(--muted); } .a { color: var(--accent); }
+
+  /* services table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  td b { color: var(--text); }
+  td .who2 { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+
+  /* takeaways */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .tk { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: var(--panel); }
+  .tk .icon { font-size: 18px; } .tk b { display: block; margin: 6px 0 4px; font-size: 14px; }
+  .tk span { color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+  .warn-badge { color: var(--warn); font-weight: 700; }
+  .callout { border: 1px solid color-mix(in srgb, var(--warn) 40%, var(--border)); background: color-mix(in srgb, var(--warn) 8%, var(--panel));
+             border-radius: 10px; padding: 12px 14px; font-size: 13px; margin-top: 14px; }
+  .src { color: var(--muted); font-size: 12px; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 16px; line-height: 1.9; }
+  .src a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+  <div class="viz-header">
+    <h1>PingOne Vanity URLs <span style="color:var(--muted);font-weight:400;font-size:18px;">(“Custom Domains”)</span></h1>
+    <div class="sub">Your brand on the login screen instead of <span style="font-family:var(--mono)">pingone.com</span> — what moves, what stays, and how it’s wired up.</div>
+  </div>
+
+  <!-- 1. WHAT & WHY -->
+  <section>
+    <h2><span class="n">1</span> What it is &amp; why anyone cares</h2>
+    <p class="lede">A vanity URL routes <b>your own domain</b> to PingOne’s hosted auth screens, so users never see “pingone” in the address bar.</p>
+    <div class="browser">
+      <div class="bar">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="url">
+          <span class="lock">🔒</span>
+          <span id="urlText"><span class="van">auth.example.com</span><span class="path">/&lt;envID&gt;/as/authorize</span></span>
+        </div>
+        <span class="swap" id="swapBtn">▸ show default</span>
+      </div>
+      <div class="body">Users land on <i>your</i> branded sign-in page — same PingOne service underneath, different name on the door.</div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="col"><b>🛡️ Brand &amp; anti-phishing</b><br><span style="color:var(--muted);font-size:13px">Users authenticate against a domain they recognize — not a third-party vendor host.</span></div>
+      <div class="col"><b>🍪 First-party cookies</b><br><span style="color:var(--muted);font-size:13px">Session cookies set on <i>your</i> domain — matters for SSO behavior &amp; browser tracking-prevention.</span></div>
+      <div class="col"><b>✨ Seamless experience</b><br><span style="color:var(--muted);font-size:13px">Login / registration / MFA / self-service screens feel like part of your own site.</span></div>
+      <div class="col"><b>✅ Allow-listing</b><br><span style="color:var(--muted);font-size:13px">Easier for corporate IT / email filters to trust a first-party domain than a vendor one.</span></div>
+    </div>
+  </section>
+
+  <!-- 2. ANATOMY -->
+  <section>
+    <h2><span class="n">2</span> What it looks like</h2>
+    <p class="lede">Almost always a subdomain you own — <span style="font-family:var(--mono)">auth.</span> / <span style="font-family:var(--mono)">login.</span> / <span style="font-family:var(--mono)">id.</span> / <span style="font-family:var(--mono)">sso.</span> — fronting the PingOne auth path.</p>
+    <div class="anatomy">
+      <span class="seg"><span class="a-van">auth.example.com</span><span class="tag">your vanity host</span></span><span class="a-path">/</span><span class="seg"><span class="a-env">&lt;environmentID&gt;</span><span class="tag">PingOne env</span></span><span class="a-path">/</span><span class="seg"><span class="a-path">as/authorize</span><span class="tag">auth endpoint · unchanged</span></span>
+    </div>
+    <div class="callout"><span class="warn-badge">⚠ One custom domain per environment.</span> dev / test / prod are separate PingOne environments → separate domains (e.g. <span style="font-family:var(--mono)">login.dev.acme.com</span> vs <span style="font-family:var(--mono)">login.acme.com</span>). Wildcard &amp; SAN certs are supported.</div>
+  </section>
+
+  <!-- 3. THE SPLIT -->
+  <section>
+    <h2><span class="n">3</span> What moves under your domain vs. what stays on Ping</h2>
+    <p class="lede">The crux. The vanity domain covers the <b>end-user auth edge only</b> — not the admin or config planes.</p>
+    <div class="split">
+      <div class="col moves">
+        <h3>✅ Moves under your domain</h3>
+        <div class="host">https://auth.example.com/…</div>
+        <div class="item"><b>Authorization &amp; token endpoints</b><span>/as/authorize, /as/token — the OIDC / OAuth flow URLs</span></div>
+        <div class="item"><b>Hosted login / registration / MFA / password reset</b><span>including DaVinci flows rendered through PingOne</span></div>
+        <div class="item"><b>Self-service “MyAccount”</b><span>/myaccount end-user portal</span></div>
+        <div class="item"><b>Branding assets on those screens</b><span>logos / CSS served as part of the flow</span></div>
+      </div>
+      <div class="col stays">
+        <h3>⛔ Stays on Ping’s domains</h3>
+        <div class="host">*.pingone.com / *.pingidentity.com</div>
+        <div class="item"><b>PingOne Admin Console</b><span>explicitly NOT supported on custom domains — admins keep the Ping console URL</span></div>
+        <div class="item"><b>Management API</b><span>api.pingone.com — the config/control plane Terraform &amp; your backend call</span></div>
+        <div class="item"><b>Regional auth base</b><span>anything you haven’t explicitly fronted with the vanity host</span></div>
+      </div>
+    </div>
+    <div class="callout">Mental model: the vanity domain is the <b>end-user authentication edge</b>, <i>not</i> the config / management plane. If it’s a screen a customer sees, it can move; if it’s an admin or an API, it doesn’t.</div>
+  </section>
+
+  <!-- 4. HANDSHAKE -->
+  <section>
+    <h2><span class="n">4</span> How it’s set up — a 3-party handshake</h2>
+    <p class="lede">PingOne fronts custom domains through Cloudflare (post-2025-03-17). Setup is a handshake between PingOne, your DNS, and a certificate authority. <b>Click a step</b> to trace it.</p>
+    <div class="stage">
+      <svg id="handshake" viewBox="0 0 620 440" role="img" aria-label="Setup handshake diagram"></svg>
+      <ol class="steps" id="steps"></ol>
+    </div>
+  </section>
+
+  <!-- 5. OTHER SERVICES -->
+  <section>
+    <h2><span class="n">5</span> What you touch in <i>other</i> services</h2>
+    <p class="lede">Beyond PingOne, a vanity URL reaches into three systems.</p>
+    <table>
+      <thead><tr><th style="width:22%">Service</th><th>What you do there</th></tr></thead>
+      <tbody>
+        <tr><td><b>Your DNS provider</b><br><span class="who2">Route53 / Cloudflare / Azure DNS</span></td>
+            <td>Add the <b>CNAME</b> (<span style="font-family:var(--mono)">auth.example.com → canonicalName</span>) + any <b>TXT</b> verification record. <span class="warn-badge">⚠</span> With a reverse proxy / WAF in front, Cloudflare can’t be your authoritative nameserver.</td></tr>
+        <tr><td><b>Certificate Authority / PKI</b><br><span class="who2">DigiCert / Let’s Encrypt / internal CA</span></td>
+            <td>Issue the cert for <span style="font-family:var(--mono)">auth.example.com</span>; hand PingOne the <b>key + cert + intermediate chain</b> (PEM, RSA-2048 / ECDSA-256 min, no self-signed). <span class="warn-badge">Renewal is the #1 footgun</span> — expired cert = broken login.</td></tr>
+        <tr><td><b>Your relying apps / OIDC clients</b></td>
+            <td>Update issuer / authority, <span style="font-family:var(--mono)">authorization_endpoint</span>, <span style="font-family:var(--mono)">token_endpoint</span>, redirect &amp; logout URIs to the vanity host so tokens are issued &amp; validated against the new domain.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. TERRAFORM -->
+  <section>
+    <h2><span class="n">6</span> Via Terraform (PingOne provider)</h2>
+    <p class="lede">Two resources, split so DNS slots in between: create the domain → CNAME the computed <span style="font-family:var(--mono)">canonical_name</span> → upload the cert.</p>
+    <pre><span class="c"># 1 — create the domain; exposes the computed canonical_name for your CNAME</span>
+<span class="k">resource</span> <span class="s">"pingone_custom_domain"</span> <span class="s">"auth"</span> {
+  <span class="a">environment_id</span> = var.environment_id
+  <span class="a">domain_name</span>    = <span class="s">"auth.example.com"</span>
+}
+
+<span class="c"># 2 — feed pingone_custom_domain.auth.canonical_name into your DNS CNAME here</span>
+<span class="c">#     (aws_route53_record / cloudflare_record / azurerm_dns_cname_record)</span>
+
+<span class="c"># 3 — upload the cert once DNS resolves (chain + cert + private key, all PEM)</span>
+<span class="k">resource</span> <span class="s">"pingone_custom_domain_ssl"</span> <span class="s">"auth"</span> {
+  <span class="a">environment_id</span>                     = var.environment_id
+  <span class="a">custom_domain_id</span>                   = pingone_custom_domain.auth.id
+  <span class="a">certificate_pem_file</span>               = file(<span class="s">"cert.pem"</span>)
+  <span class="a">intermediate_certificates_pem_file</span> = file(<span class="s">"chain.pem"</span>)
+  <span class="a">private_key_pem_file</span>               = file(<span class="s">"key.pem"</span>)
+}</pre>
+    <div class="callout"><span class="warn-badge">⚠ Confirm exact argument names</span> on the provider registry before pasting into prod HCL — the <i>shape</i> (two resources, <span style="font-family:var(--mono)">canonical_name</span> computed, cert as three PEMs) is solid; the precise attribute spellings are worth a 30-second check.</div>
+  </section>
+
+  <!-- 7. TAKEAWAYS -->
+  <section>
+    <h2><span class="n">7</span> Five things to have ready for the room</h2>
+    <div class="cards">
+      <div class="tk"><div class="icon">🎯</div><b>Auth edge only</b><span>Login / flows / self-service — not the admin console, not the management API.</span></div>
+      <div class="tk"><div class="icon">🔢</div><b>One per environment</b><span>You need a domain-per-env naming plan up front.</span></div>
+      <div class="tk"><div class="icon">🤝</div><b>Three-party handshake</b><span>PingOne (domain) ↔ DNS (CNAME/TXT) ↔ CA (cert).</span></div>
+      <div class="tk"><div class="icon">⏰</div><b>Cert renewal = the risk</b><span>Decide who owns it and whether it’s automated.</span></div>
+      <div class="tk"><div class="icon">☁️</div><b>Cloudflare-fronted now</b><span>Post-Mar 2025 — constrains WAF / reverse-proxy / nameserver setups.</span></div>
+    </div>
+  </section>
+
+  <div class="src">
+    <b>Sources</b> (Ping official docs, primary):<br>
+    <a href="https://docs.pingidentity.com/pingone/settings/p1_set_up_custom_domain.html">Setting up a custom domain</a> ·
+    <a href="https://docs.pingidentity.com/pingone/settings/p1_domains.html">Domains (default vs custom)</a> ·
+    <a href="https://docs.pingidentity.com/pingone/settings/p1_adding_cname_to_dns_configuration.html">Adding the CNAME to DNS</a> ·
+    <a href="https://docs.pingidentity.com/pingone/settings/p1_generate_csr_for_custom_domain.html">Generating a CSR</a> ·
+    <a href="https://developer.pingidentity.com/pingone-api/platform/custom-domains.html">Custom Domains — Platform API</a> ·
+    <a href="https://registry.terraform.io/providers/pingidentity/pingone/latest/docs/resources/custom_domain">pingone_custom_domain — Terraform</a>
+  </div>
+
+<script type="module">
+import { arrowMarkers, connect, side, labelBox, saveHash, loadHash } from "/_kit/viz.js";
+
+/* --- URL swap toggle --- */
+const urlText = document.getElementById('urlText'), swapBtn = document.getElementById('swapBtn');
+let vanity = true;
+swapBtn.onclick = () => {
+  vanity = !vanity;
+  urlText.innerHTML = vanity
+    ? '<span class="van">auth.example.com</span><span class="path">/&lt;envID&gt;/as/authorize</span>'
+    : '<span style="color:var(--muted)">auth.pingone.com</span><span class="path">/&lt;envID&gt;/as/authorize</span>';
+  swapBtn.textContent = vanity ? '▸ show default' : '▸ show vanity';
+};
+
+/* --- handshake diagram --- */
+const nodes = {
+  ping: { x: 200, y: 30,  w: 220, h: 76, label: 'PingOne',  sub: 'Settings › Domains / TF', color: 'var(--accent)' },
+  dns:  { x: 30,  y: 300, w: 220, h: 76, label: 'Your DNS', sub: 'Route53 / Cloudflare',    color: 'var(--c5)' },
+  ca:   { x: 370, y: 300, w: 220, h: 76, label: 'Cert Authority', sub: 'DigiCert / LE / internal', color: 'var(--c4)' },
+};
+// each step: from → to, an svg color, and the label anchor
+const steps = [
+  { n:1, who:'PingOne', st:'Create the custom domain', from:'ping', to:'ping',
+    sd:'In Settings › Domains (or Terraform). PingOne returns a canonicalName like 1234-abcd.edge1.pingone.com.', color:'var(--accent)' },
+  { n:2, who:'You → DNS', st:'Add the CNAME', from:'ping', to:'dns',
+    sd:'Point auth.example.com → that canonicalName in your DNS. Add a TXT record too if the domain isn’t publicly reachable yet.', color:'var(--c5)' },
+  { n:3, who:'PingOne ↔ DNS', st:'Verify domain control', from:'dns', to:'ping',
+    sd:'PingOne checks the CNAME/TXT. DNS propagation up to 24h; Cloudflare activation ~10 min.', color:'var(--good)' },
+  { n:4, who:'CA → PingOne', st:'Issue + import the TLS cert', from:'ca', to:'ping',
+    sd:'Get a cert for auth.example.com from your CA; import key + cert + intermediate chain (PEM). No self-signed.', color:'var(--c4)' },
+  { n:5, who:'Ongoing', st:'Renew before expiry', from:'ca', to:'ca',
+    sd:'Certs expire — an expired cert breaks login. Own the renewal; automate it if you can.', color:'var(--warn)' },
+];
+
+const svg = document.getElementById('handshake');
+const colorId = { 'var(--accent)':'ah-accent','var(--good)':'ah-good','var(--warn)':'ah-warn','var(--c4)':'ah-accent','var(--c5)':'ah-accent' };
+
+function node(id) {
+  const n = nodes[id];
+  return `<g>
+    <rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="12" fill="var(--panel-2)" stroke="${n.color}" stroke-width="1.5"/>
+    <text x="${n.x+n.w/2}" y="${n.y+32}" text-anchor="middle" fill="var(--text)" font-size="16" font-weight="700" font-family="var(--sans)">${n.label}</text>
+    <text x="${n.x+n.w/2}" y="${n.y+54}" text-anchor="middle" fill="var(--muted)" font-size="11.5" font-family="var(--mono)">${n.sub}</text>
+  </g>`;
+}
+
+function edgePath(s) {
+  const a = nodes[s.from], b = nodes[s.to];
+  if (s.from === s.to) { // self loop
+    const cx = a.x + a.w/2;
+    if (a.label === 'PingOne') return `M ${cx-30} ${a.y} C ${cx-70} ${a.y-46}, ${cx+70} ${a.y-46}, ${cx+30} ${a.y}`;
+    return `M ${a.x+a.w} ${a.y+a.h/2} C ${a.x+a.w+56} ${a.y+8}, ${a.x+a.w+56} ${a.y+a.h-8}, ${a.x+a.w} ${a.y+a.h/2-1}`;
+  }
+  return connect(a, b);
+}
+
+function render(active) {
+  let e = `<defs>${arrowMarkers()}</defs>`;
+  // edges first
+  steps.forEach(s => {
+    const on = active === s.n;
+    e += `<path d="${edgePath(s)}" fill="none" stroke="${s.color}"
+            stroke-width="${on?3.5:1.8}" opacity="${active&&!on?0.18:0.9}"
+            marker-end="url(#${colorId[s.color]})" ${on?'class="flow"':''}/>`;
+  });
+  // number badges at path midpoints
+  steps.forEach(s => {
+    const a = nodes[s.from], b = nodes[s.to];
+    let mx, my;
+    if (s.from === s.to) { mx = a.x + a.w/2 + (a.label==='PingOne'?0:a.w/2+40); my = a.label==='PingOne'? a.y-40 : a.y+a.h/2; }
+    else { mx = (a.x+a.w/2 + b.x+b.w/2)/2; my = (a.y+a.h/2 + b.y+b.h/2)/2; }
+    const on = active === s.n;
+    e += `<g style="cursor:pointer" data-badge="${s.n}">
+      <circle cx="${mx}" cy="${my}" r="${on?15:12}" fill="${s.color}" stroke="var(--bg)" stroke-width="2"/>
+      <text x="${mx}" y="${my+4}" text-anchor="middle" fill="var(--bg)" font-size="13" font-weight="700" font-family="var(--sans)">${s.n}</text>
+    </g>`;
+  });
+  e += node('ping') + node('dns') + node('ca');
+  svg.innerHTML = e;
+  svg.querySelectorAll('[data-badge]').forEach(g =>
+    g.onclick = () => select(+g.dataset.badge));
+}
+
+const list = document.getElementById('steps');
+list.innerHTML = steps.map(s => `<li data-step="${s.n}">
+  <div class="st"><span class="num">${s.n}</span>${s.st}</div>
+  <div class="who">${s.who}</div>
+  <div class="sd">${s.sd}</div></li>`).join('');
+
+function select(n) {
+  render(n);
+  list.querySelectorAll('li').forEach(li => li.classList.toggle('active', +li.dataset.step === n));
+  saveHash({ step: n });
+}
+list.querySelectorAll('li').forEach(li => li.onclick = () => select(+li.dataset.step));
+
+const initial = loadHash().step || null;
+render(initial);
+if (initial) list.querySelector(`li[data-step="${initial}"]`)?.classList.add('active');
+</script>
+</body>
+</html>

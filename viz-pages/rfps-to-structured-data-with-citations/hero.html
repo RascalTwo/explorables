@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>rfps-to-structured-data-with-citations — hero card</title>
+
+<!-- The OG / hero card for rfps-to-structured-data-with-citations.
+
+     `bun verify.ts <url> --og` renders THIS file (not the live viz) and clips the
+     screenshot to the .og-card element below → og.auto.png, which is what unfurls
+     when the viz URL is pasted into Slack/Discord/Teams/WebEx.
+
+     Two rules:
+       1. Keep the element with class="og-card". verify.ts clips to it; without it
+          you get a blind top-left 1200×630 crop and an error.
+       2. Keep anything that MUST survive inside the centre ~1080×565 — link cards
+          get centre-cropped. Add class="show-safe" to .og-card to see the guide,
+          and remove it before you shoot (it renders into the shot).
+
+     Every number here is read off the same story-data.json the viz reads, and is
+     restated below next to its source key so a stale card is a diff, not a mystery.
+     What is deliberately NOT here is a wall-clock runtime: the viz refuses to claim
+     one (its own clock is captioned "conversion time measured on the parallel path"),
+     so the cost figure carries the "what it took" side instead. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<link rel="stylesheet" href="/_kit/viz-og.css">
+<style>
+  /* The same re-theme index.html does, expressed in the tokens viz-og.css reads.
+     Keep the hexes in step with index.html's :root — that is what makes the card
+     and the page look like the same artefact. */
+  :root {
+    --bg:#081428; --panel:#0c1c38; --panel-2:#123059; --border:#24406b;
+    --text:#eef4ff; --muted:#9ab0cf; --faint:#5f7699;
+    --accent:#37d9a0; --good:#57b85b; --warn:#e6902e; --danger:#d0453a;
+    --sans:'Lato','Segoe UI',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  /* Only what differs from the kit defaults, and all of it is one problem: fitting
+     the title. .left leaves ~530px of text width, and the kit's 88px is tuned for
+     about 13 characters against it — "Cited records out." is eighteen, so at the
+     default it wraps and the column busts its 542px budget.
+     Watch out for HOW it fails: .left is a fixed 630 with justify-content:center and
+     overflow visible, so excess content spills off BOTH ends silently. The browser
+     looks fine, and scrollHeight still reads 630 — it is not a usable detector here.
+     verify.ts --og is (it reports og-card-overflow), so trust that over what you see.
+     72px is the largest size that still holds two lines, found by sweeping sizes and
+     counting rendered lines. Measured at it: 470px of the 542px budget. Re-measure on
+     any retitle; a single extra wrapped line costs ~67px. */
+  .og-card > .left { padding-top: 44px; padding-bottom: 44px; }
+  .og-card .title { font-size: 72px; }
+  .chips { margin-top: 22px; }
+  .legend { margin-top: 12px; font-family: var(--mono); font-size: 11px; }
+</style>
+</head>
+<body>
+
+<!-- Figures here are re-pasted by hand from story-data.json: this card is static HTML for
+     the link unfurl and cannot read the JSON. "120 extracted values" is
+     corpus.citations.claims.filled.
+
+     Three things are deliberately NOT on this card.
+
+     "125 of 155 fields" was a chip until 2026-09-07 and should not come back. It reads as
+     a 30-field miss and is nothing of the kind: estimatedValue alone is null in 8 of 10
+     documents because public RFPs do not publish a budget, and three of the ten are
+     addenda, which amend an RFP rather than restate it. A null is the document's property,
+     not the pipeline's — and refusing to guess is what this page argues FOR. A bare ratio
+     invites the opposite reading and a card has no room for the explanation.
+
+     A citation ratio, at either grain. Claim level is 120 of 120 and quote level is 251 of
+     252; both are real and both live in the page itself, at station 7 and in the ledger.
+     On the card the essence line already makes the claim, and a number under it only
+     invited arithmetic.
+
+     A sub-line at all. There was one until 2026-09-07 and it went through two drafts: the
+     first restated the essence directly above it in smaller type, the second spent three
+     lines on evidence nobody had asked for yet. The card's job is to make someone open the
+     page, and it does that in the title and the essence. -->
+<div class="og-card">
+  <div class="frame"></div>
+
+  <div class="left">
+    <!-- Not a restatement of the title: the badge said "RFPs → structured data" directly
+         above a headline reading "RFPs in. Cited records out.", which spent the card's
+         smallest slot on its largest claim. Status is the one thing nothing else here
+         carries — the corpus, citations, cost and reading time are all covered below. -->
+    <div class="eyebrow"><span class="dot"></span>Working prototype</div>
+
+    <!-- Hand-broken, not left to wrap: see the .title override above. -->
+    <h1 class="title">RFPs in.<br><span class="hl">Cited records out.</span></h1>
+
+    <div class="essence">
+      Real public RFPs, 764 pages of them. Every extracted value points back at
+      <span class="hl2">the sentence it came from</span>.
+    </div>
+
+    <div class="chips">
+      <span class="chip"><span class="tk"></span>10 documents</span>
+      <span class="chip"><span class="tk"></span>280,385 words</span>
+      <span class="chip"><span class="tk"></span>120 extracted values</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="panel">
+      <div class="panel-cap">
+        <span class="t">One 275-page RFP</span>
+        <span class="s">35 pages carry an answer</span>
+      </div>
+
+      <!-- Every page of providence-public-works, in reading order: 25 across, 11 down.
+           Position IS the page number, so the shape of the finding is the point — the
+           answers cluster at the front matter and again in the specs at the back, and
+           the ~150 pages in between are ones nobody needed to read. Built by script
+           rather than 275 typed rects; the only authored data is the cited-page list,
+           copied from story-data.json `monster.citedPages`. -->
+      <svg id="grid" class="graph" viewBox="0 0 362.4 196.5"
+           xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="All 275 pages of one RFP; the 35 pages carrying a cited answer are highlighted."></svg>
+
+      <div class="legend">
+        <span class="legend-item"><span class="swatch"></span>cited</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--panel-2)"></span>the other 240</span>
+      </div>
+
+      <div class="foot">
+        <div class="stat warn">
+          <div class="n">20 hrs</div>
+          <div class="l">to read</div>
+          <div class="d">all ten, once, at 238 wpm</div>
+        </div>
+        <div class="stat good">
+          <div class="n">$37.94</div>
+          <div class="l">to extract</div>
+          <div class="d">all ten, with citations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // story-data.json → monster.citedPages (keys). 35 of 275. Regenerate with build-assets.py
+  // and re-paste; this card is static HTML for the unfurl, so it cannot read the JSON itself.
+  const CITED = new Set([1,2,4,10,14,15,16,24,25,26,29,40,47,50,59,98,100,105,107,137,159,175,177,178,184,185,195,217,218,223,224,225,226,230,233]);
+  const PAGES = 275, COLS = 25, W = 12, H = 15.5, GAP = 2.6;
+  document.getElementById("grid").innerHTML =
+    Array.from({ length: PAGES }, (_, i) => {
+      const hit = CITED.has(i + 1);
+      return `<rect x="${(i % COLS) * (W + GAP)}" y="${Math.floor(i / COLS) * (H + GAP)}"
+        width="${W}" height="${H}" rx="1.2"
+        fill="${hit ? "var(--accent)" : "var(--panel-2)"}"
+        ${hit ? 'stroke="var(--accent)" stroke-width="1.6" stroke-opacity=".35"' : ""}
+        opacity="${hit ? 1 : .55}"/>`;
+    }).join("");
+</script>
+
+</body>
+</html>

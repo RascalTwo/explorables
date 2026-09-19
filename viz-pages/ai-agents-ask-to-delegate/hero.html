@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>From Asking to Delegating — hero card</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#141a23; --panel2:#0f141d; --border:#27313f; --text:#e6edf3; --muted:#8b97a6;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+    --op:#58a6ff; --co:#3fb950; --cons:#d29922; --appr:#bc8cff; --obs:#f85149;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#05070a}
+  body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  /* the card IS the 1200×630 OG surface — screenshot this element */
+  .card{ width:1200px; height:630px; padding:34px 38px; color:var(--text); position:relative; overflow:hidden;
+    background:
+      radial-gradient(820px 320px at 8% -14%, color-mix(in srgb,var(--op) 13%,transparent), transparent),
+      radial-gradient(820px 420px at 114% 120%, color-mix(in srgb,var(--obs) 12%,transparent), transparent),
+      var(--bg); }
+
+  .hd{ display:flex; align-items:flex-start; justify-content:space-between; }
+  .kick{ font:700 11px var(--mono); letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+  h1{ font-size:40px; line-height:1.0; letter-spacing:-.025em; margin:6px 0 0; font-weight:800; }
+  h1 .arrow{ color:var(--muted); font-weight:400; }
+  .meta{ text-align:right; font-size:13px; color:var(--muted); line-height:1.3; padding-top:6px; }
+  .meta b{ color:var(--text); }
+  .tagline{ font-size:14.5px; color:#b6c2d0; margin-top:8px; }
+  .tagline b{ color:var(--text); font-weight:600; }
+
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px; }
+  .p{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:12px 13px; height:208px;
+    display:flex; flex-direction:column; }
+  .pt{ font-size:13.5px; font-weight:750; display:flex; align-items:center; gap:8px; }
+  .pn{ font:700 10px var(--mono); color:var(--muted); background:var(--panel2); border:1px solid var(--border);
+    border-radius:5px; padding:2px 5px; }
+  .pv{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:6px; min-height:0; }
+  .pc{ font-size:11px; color:var(--muted); line-height:1.34; }
+
+  /* 01 spectrum */
+  .specbar{ height:9px; border-radius:999px;
+    background:linear-gradient(90deg,var(--op),var(--co) 28%,var(--cons) 52%,var(--appr) 76%,var(--obs)); }
+  .chips{ display:flex; flex-wrap:wrap; gap:5px; }
+  .chips span{ font-size:10px; font-weight:600; color:var(--c);
+    border:1px solid color-mix(in srgb,var(--c) 50%,var(--border)); border-radius:5px; padding:2px 6px; }
+
+  /* 02 ladder */
+  .ladder{ display:flex; flex-direction:column; gap:4px; }
+  .lr{ font-size:11px; font-weight:600; color:#cdd7e2; border-left:4px solid var(--c);
+    background:color-mix(in srgb,var(--c) 10%,transparent); padding:3px 8px; border-radius:0 5px 5px 0; }
+  .lr em{ color:var(--muted); font-style:normal; font-size:10px; }
+
+  /* 03 matrix mini */
+  .mini{ display:grid; grid-template-columns:repeat(5,1fr); gap:2px; }
+  .mc{ height:8px; border-radius:2px; background:var(--c); }
+  .minihd{ display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-bottom:3px; }
+  .minihd span{ height:3px; border-radius:2px; background:var(--c); }
+
+  /* 04 who builds */
+  .wb{ display:flex; flex-direction:column; gap:4px; }
+  .wband{ font-size:11px; font-weight:600; border-radius:6px; padding:6px 9px; }
+  .wband.good{ color:var(--co); background:color-mix(in srgb,var(--co) 12%,transparent);
+    border:1px solid color-mix(in srgb,var(--co) 40%,var(--border)); }
+  .wband.dim{ color:var(--muted); background:var(--panel2); border:1px solid var(--border); }
+  .creep{ text-align:center; font-size:10px; color:var(--cons); letter-spacing:.02em; }
+
+  /* 06 players */
+  .players{ display:flex; flex-direction:column; gap:6px; }
+  .pl{ display:flex; align-items:center; gap:8px; font-size:11.5px; font-weight:600; color:#cdd7e2; }
+  .pl .d{ width:9px; height:9px; border-radius:50%; background:var(--c); flex:none; }
+  .pl em{ color:var(--muted); font-style:normal; font-size:10px; margin-left:auto; }
+
+  .foot{ position:absolute; left:38px; right:38px; bottom:13px; display:flex; align-items:center;
+    font:600 11.5px var(--mono); color:var(--muted); }
+  .foot .sp{ margin:0 8px; opacity:.5; }
+  .foot b{ color:var(--text); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="hd">
+      <div>
+        <div class="kick">AI agents · in plain language</div>
+        <h1>What Is an AI Agent?</h1>
+      </div>
+      <div class="meta">an explorable<br>in <b>6 scenes</b></div>
+    </div>
+    <div class="tagline">AI is sliding from a thing you <b>ask</b> to a thing you <b>delegate to</b> — and here's the whole map.</div>
+
+    <div class="grid">
+      <!-- 01 -->
+      <div class="p">
+        <div class="pt"><span class="pn">01</span> Chatbot or agent?</div>
+        <div class="pv">
+          <div class="specbar"></div>
+          <div class="chips">
+            <span style="--c:var(--op)">Chatbot</span><span style="--c:var(--co)">Assistant</span><span style="--c:var(--cons)">Agent</span><span style="--c:var(--appr)">Orchestrator</span><span style="--c:var(--obs)">Autonomous</span>
+          </div>
+        </div>
+        <div class="pc">A slide, not a switch: “just talks” → “goes and does.”</div>
+      </div>
+
+      <!-- 02 -->
+      <div class="p">
+        <div class="pt"><span class="pn">02</span> How far on its own?</div>
+        <div class="pv">
+          <div class="ladder">
+            <div class="lr" style="--c:var(--op)">Operator <em>· you hold the wheel</em></div>
+            <div class="lr" style="--c:var(--co)">Collaborator <em>· trade turns</em></div>
+            <div class="lr" style="--c:var(--cons)">Consultant <em>· it does, reports</em></div>
+            <div class="lr" style="--c:var(--appr)">Approver <em>· you sign off</em></div>
+            <div class="lr" style="--c:var(--obs)">Observer <em>· you just watch</em></div>
+          </div>
+        </div>
+        <div class="pc">Five rungs of autonomy — you drive → AI drives.</div>
+      </div>
+
+      <!-- 03 -->
+      <div class="p">
+        <div class="pt"><span class="pn">03</span> Fold it into your work</div>
+        <div class="pv">
+          <div class="minihd" id="mh"></div>
+          <div class="mini" id="m"></div>
+        </div>
+        <div class="pc">Every step, coloured by the rung where AI takes it over.</div>
+      </div>
+
+      <!-- 04 -->
+      <div class="p">
+        <div class="pt"><span class="pn">04</span> Not just engineers</div>
+        <div class="pv">
+          <div class="wb">
+            <div class="wband good">✓ describe · connect · schedule · share</div>
+            <div class="creep">▼ the line slides toward everyone</div>
+            <div class="wband dim">✗ build the parts · host · custom code</div>
+          </div>
+        </div>
+        <div class="pc">Anyone can build one now — no code required.</div>
+      </div>
+
+      <!-- 05 -->
+      <div class="p">
+        <div class="pt"><span class="pn">05</span> Build once, share</div>
+        <div class="pv" style="align-items:center">
+          <svg viewBox="0 0 230 118" width="100%" height="118">
+            <circle cx="115" cy="59" r="52" fill="none" stroke="var(--appr)" stroke-width="1.3" stroke-dasharray="3 4" opacity=".8"/>
+            <circle cx="115" cy="59" r="35" fill="none" stroke="var(--cons)" stroke-width="1.3" stroke-dasharray="3 4" opacity=".85"/>
+            <circle cx="115" cy="59" r="19" fill="none" stroke="var(--co)" stroke-width="1.4" stroke-dasharray="3 4"/>
+            <g stroke="var(--co)" stroke-width="1" opacity=".55">
+              <line x1="115" y1="59" x2="167" y2="34"/><line x1="115" y1="59" x2="63" y2="34"/>
+              <line x1="115" y1="59" x2="167" y2="84"/><line x1="115" y1="59" x2="63" y2="84"/>
+            </g>
+            <g fill="var(--co)"><circle cx="167" cy="34" r="3"/><circle cx="63" cy="34" r="3"/><circle cx="167" cy="84" r="3"/><circle cx="63" cy="84" r="3"/></g>
+            <circle cx="115" cy="59" r="13" fill="var(--panel2)" stroke="var(--op)" stroke-width="1.6"/>
+            <text x="115" y="62" text-anchor="middle" fill="var(--text)" font-size="8" font-weight="700">once</text>
+            <text x="115" y="14" text-anchor="middle" fill="var(--appr)" font-size="8.5" font-weight="700">world</text>
+          </svg>
+        </div>
+        <div class="pc">One capability → team, org, the world (the “USB for AI”).</div>
+      </div>
+
+      <!-- 06 -->
+      <div class="p">
+        <div class="pt"><span class="pn">06</span> Who's shipping it</div>
+        <div class="pv">
+          <div class="players">
+            <div class="pl"><span class="d" style="--c:#10a37f"></span>OpenAI <em>GPTs · AgentKit</em></div>
+            <div class="pl"><span class="d" style="--c:var(--op)"></span>Microsoft <em>Copilot · Studio</em></div>
+            <div class="pl"><span class="d" style="--c:var(--cons)"></span>Google <em>Gems · Opal</em></div>
+            <div class="pl"><span class="d" style="--c:var(--appr)"></span>Anthropic <em>Projects · Agent SDK</em></div>
+          </div>
+        </div>
+        <div class="pc">Every major player ships a no-code <i>and</i> a builder lane.</div>
+      </div>
+    </div>
+
+    <div class="foot">Chatbot → agent <span class="sp">·</span> the autonomy ladder <span class="sp">·</span> fold it into your process <span class="sp">·</span> anyone can build <span class="sp">·</span> build once, share <span class="sp">·</span> the players</div>
+  </div>
+
+<script type="module">
+  // Act-03 mini heat-map: 10 stages × 5 rungs, cell colour = the rung where that step is handed off
+  const COL = ["var(--op)","var(--co)","var(--cons)","var(--appr)","var(--obs)"];
+  const STAGES = 10, FUSE = [3,4], GATE = 9;
+  const era = (rIdx,i)=>{
+    const loop = i>=FUSE[0]&&i<=FUSE[1], gate = i===GATE;
+    if(rIdx===0) return 0; if(rIdx===1) return 1;
+    if(rIdx===2) return loop?2:1;
+    if(rIdx===3) return loop?2:(gate?1:3);
+    return loop?2:(gate?4:3);
+  };
+  document.getElementById("mh").innerHTML = COL.map(c=>`<span style="--c:${c}"></span>`).join("");
+  let cells = "";
+  for(let i=0;i<STAGES;i++) for(let r=0;r<5;r++) cells += `<div class="mc" style="--c:${COL[era(r,i)]}"></div>`;
+  document.getElementById("m").innerHTML = cells;
+</script>
+</body>
+</html>

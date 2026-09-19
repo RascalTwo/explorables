@@ -1,0 +1,1265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="Podman">
+  <meta name="viz:tag" content="Containers">
+  <meta name="viz:tag" content="Docker">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docker Compose → Podman: the honest road to Pods</title>
+<meta name="viz:uid" content="v-2a4004e4ed06">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Docker Compose → Podman: the honest road to Pods">
+<meta name="viz:description" content="Eight services, one laptop. Feel the eight-terminal pain, let Docker Compose rescue you, learn why teams still leave Docker, and land on Podman's native answer: pods, kube play, and Quadlet. With full copy-able config files.">
+<meta name="description" content="An honest, sourced walkthrough from a multi-service app to Docker Compose to Podman pods, with full config files for comparison.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3340;
+    --text:#e6edf3; --muted:#8b949e; --faint:#6e7681;
+    --accent:#58a6ff; --good:#3fb950; --good-bg:#0f2417; --good-line:#1f6f37;
+    --warn:#d29922; --warn-bg:#241c0c; --warn-line:#7a5c14;
+    --danger:#f85149; --danger-bg:#2a1213; --danger-line:#8a2c2c;
+    --purple:#bc8cff; --purple-bg:#1d1530; --purple-line:#4b3a73;
+    --code:#0a0d12; --kbd:#21262d;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  a{color:var(--accent)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px 140px}
+
+  /* hero */
+  .hero{max-width:1180px;margin:0 auto;padding:34px 28px 8px}
+  .eyebrow{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .hero h1{margin:8px 0 0;font-size:30px;line-height:1.15;letter-spacing:-.02em}
+  .hero h1 .d{color:var(--accent)} .hero h1 .p{color:var(--purple)}
+  .hero .tag{color:var(--muted);font-size:16px;margin-top:12px;max-width:780px}
+  .hero .tag b{color:var(--text)}
+
+  /* sticky journey nav */
+  nav.tabs{position:sticky;top:0;z-index:40;background:rgba(13,17,23,.93);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);margin-top:22px}
+  .tabs-inner{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;gap:2px;align-items:stretch;overflow-x:auto}
+  .tab{appearance:none;background:none;border:none;border-bottom:2.5px solid transparent;color:var(--muted);
+    cursor:pointer;padding:12px 12px 10px;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:8px;
+    transition:.15s;white-space:nowrap}
+  .tab:hover{color:var(--text)}
+  .tab.active{color:var(--text)}
+  .tab .tnum{flex:none;width:21px;height:21px;border-radius:6px;display:grid;place-items:center;font-size:11.5px;
+    background:var(--panel2);color:var(--muted);font-family:var(--mono)}
+  .tab.active.c-blue{border-bottom-color:var(--accent)} .tab.active.c-blue .tnum{background:var(--accent);color:#04121f}
+  .tab.active.c-good{border-bottom-color:var(--good)} .tab.active.c-good .tnum{background:var(--good);color:#04121f}
+  .tab.active.c-danger{border-bottom-color:var(--danger)} .tab.active.c-danger .tnum{background:var(--danger);color:#1a0606}
+  .tab.active.c-purple{border-bottom-color:var(--purple)} .tab.active.c-purple .tnum{background:var(--purple);color:#150a26}
+
+  section.act{padding-top:30px;scroll-margin-top:54px}
+  .act-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+  .act-kicker{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .c-blue .act-kicker,.k-blue{color:var(--accent)} .c-good .act-kicker,.k-good{color:var(--good)}
+  .c-danger .act-kicker,.k-danger{color:var(--danger)} .c-purple .act-kicker,.k-purple{color:var(--purple)}
+  h2{font-size:23px;margin:6px 0 4px;letter-spacing:-.01em}
+  h3{font-size:16px;margin:26px 0 8px}
+  p{margin:10px 0}
+  .lead{font-size:16.5px;color:#cdd6e0}
+  .muted{color:var(--muted)} .faint{color:var(--faint)}
+  code{font:13px var(--mono);background:var(--kbd);border-radius:4px;padding:1.5px 5px;color:#d2dae4}
+  b{color:#fff}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}
+  .panel.tight{padding:14px 16px}
+  .figwrap{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 8px 4px;margin:18px 0;overflow-x:auto}
+  .figcap{color:var(--muted);font-size:13px;padding:2px 12px 12px;text-align:center}
+  svg{display:block;margin:0 auto;max-width:100%}
+  svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  svg text.m{font-family:var(--mono)}
+
+  /* callouts */
+  .call{border-left:3px solid var(--line);border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;background:var(--panel2)}
+  .call.good{border-color:var(--good);background:var(--good-bg)}
+  .call.warn{border-color:var(--warn);background:var(--warn-bg)}
+  .call.bad{border-color:var(--danger);background:var(--danger-bg)}
+  .call.info{border-color:var(--accent)}
+  .call.pur{border-color:var(--purple);background:var(--purple-bg)}
+  .call h4{margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:7px}
+  .call p{margin:4px 0;font-size:14.5px}
+
+  /* reasons grid (act 2) */
+  .reasons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+  @media(max-width:680px){.reasons{grid-template-columns:1fr}}
+  .rcard{border:1px solid var(--line);border-radius:10px;padding:12px 15px;background:var(--panel2)}
+  .rcard.big{border-color:var(--warn-line);background:var(--warn-bg)}
+  .rcard h4{margin:0 0 5px;font-size:14px}
+  .rcard p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.55}
+  .rcard p b{color:var(--text)}
+
+  /* pro/con grid */
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+  @media(max-width:680px){.pc{grid-template-columns:1fr}}
+  .pccol{border:1px solid var(--line);border-radius:10px;padding:4px 16px 14px}
+  .pccol.pros{border-color:var(--good-line);background:linear-gradient(180deg,var(--good-bg),transparent 60%)}
+  .pccol.cons{border-color:var(--danger-line);background:linear-gradient(180deg,var(--danger-bg),transparent 60%)}
+  .pccol h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px}
+  .pros h4{color:var(--good)} .cons h4{color:var(--danger)}
+  .pcli{list-style:none;padding:0;margin:0}
+  .pcli li{position:relative;padding:7px 0 7px 24px;font-size:14.5px;border-top:1px solid var(--line)}
+  .pcli li:first-child{border-top:none}
+  .pcli li::before{position:absolute;left:0;top:7px;font-weight:700}
+  .pros .pcli li::before{content:"✓";color:var(--good)}
+  .cons .pcli li::before{content:"✕";color:var(--danger)}
+  .pcli li b{display:block;margin-bottom:1px}
+  .pcli li span{color:var(--muted);font-size:13.5px}
+
+  /* side-by-side split (act 3 path A | path B) */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;align-items:stretch}
+  .split.top{align-items:start}
+  @media(max-width:760px){.split{grid-template-columns:1fr}}
+  .splitcol{border:1px solid var(--line);border-radius:12px;padding:2px 18px 16px;background:var(--panel);display:flex;flex-direction:column;min-width:0}
+  .splitcol.a{border-color:var(--danger-line)}
+  .splitcol.b{border-color:var(--purple-line)}
+  .splitcol.g{border-color:var(--good-line)}
+  .splitcol h3{margin-top:16px}
+  .splitcol p{font-size:14.5px}
+
+  /* terminal pain */
+  .terms{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:16px 0}
+  @media(max-width:680px){.terms{grid-template-columns:repeat(2,1fr)}}
+  .term{background:var(--code);border:1px solid var(--line);border-radius:7px;overflow:hidden;font-family:var(--mono);font-size:10.5px;opacity:0;transform:translateY(6px);transition:.4s}
+  .term.in{opacity:1;transform:none}
+  .term .bar{background:#161b22;padding:4px 8px;display:flex;gap:5px;align-items:center;border-bottom:1px solid var(--line)}
+  .term .bar i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .term .bar .t{color:var(--faint);font-size:9.5px;margin-left:4px}
+  .term .body{padding:7px 8px;min-height:46px;color:#9fb3c8;line-height:1.5}
+  .term .body .pr{color:var(--good)} .term .body .fl{color:var(--accent)}
+  .term .body .cur{color:var(--danger)}
+
+  /* code block mock */
+  .codeblk{background:var(--code);border:1px solid var(--line);border-radius:10px;margin:16px 0;overflow:hidden}
+  .codeblk .cb-bar{background:#11161d;border-bottom:1px solid var(--line);padding:7px 14px;font:12px var(--mono);color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+  .codeblk pre{margin:0;padding:14px 16px;overflow:auto;font:12.5px/1.6 var(--mono);color:#c9d4e0}
+  .codeblk.scroll pre{max-height:300px}
+  .codeblk pre::-webkit-scrollbar{width:9px;height:9px}
+  .codeblk pre::-webkit-scrollbar-thumb{background:#2a3340;border-radius:6px}
+  .codeblk pre::-webkit-scrollbar-thumb:hover{background:#3a4658}
+  .codeblk pre::-webkit-scrollbar-track{background:transparent}
+  .codeblk .k{color:var(--purple)} .codeblk .s{color:var(--good)} .codeblk .c{color:var(--faint)}
+  .codeblk .n{color:var(--accent)}
+
+  .pill{display:inline-block;font:600 11px var(--mono);padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--muted);vertical-align:middle}
+  .pill.blue{color:var(--accent);border-color:var(--accent)} .pill.pur{color:var(--purple);border-color:var(--purple-line)}
+  .pill.red{color:var(--danger);border-color:var(--danger-line)} .pill.grn{color:var(--good);border-color:var(--good-line)}
+
+  hr.sep{border:none;border-top:1px solid var(--line);margin:38px 0}
+
+  /* sources */
+  .sources{margin-top:30px;font-size:13px}
+  .sources summary{cursor:pointer;color:var(--muted);font-weight:600}
+  .sources li{margin:6px 0;color:var(--muted)}
+  .src-tier{font-family:var(--mono);font-size:11px}
+
+  .tldr{display:grid;grid-template-columns:108px 1fr;gap:0;margin:14px 0}
+  .tldr .step{font:700 12px var(--mono);letter-spacing:.05em;color:var(--faint);
+    padding:12px 22px 12px 4px;border-top:1px solid var(--line);border-right:2px solid var(--line);
+    text-align:right;display:flex;align-items:center;justify-content:flex-end}
+  .tldr .what{padding:12px 0 12px 22px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5}
+  .tldr .what b{color:#fff}
+  .arrow-em{color:var(--purple);font-weight:700}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">A field guide: from a pile of services to one clean command</div>
+  <h1>You've got <span class="d">eight services</span> to run locally.<br>Don't open eight terminals. → <span class="p">Podman</span>.</h1>
+  <p class="tag">Feel the eight-terminal pain, let <b>Docker Compose</b> rescue you, find out why teams still leave Docker, and land on Podman's native answer: <b>pods</b>. One real 8-service app rides shotgun the whole way — with the <b>full config files</b> to copy and compare.</p>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner" id="tabs">
+    <button class="tab c-blue active" data-go="act1"><span class="tnum">1</span> The setup</button>
+    <button class="tab c-good" data-go="act2"><span class="tnum">2</span> Why leave Docker?</button>
+    <button class="tab c-danger" data-go="act3"><span class="tnum">3</span> The catch</button>
+    <button class="tab c-purple" data-go="act4"><span class="tnum">4</span> Pods, natively</button>
+    <button class="tab c-purple" data-go="act5"><span class="tnum">5</span> Welcome to Podman</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===================== ACT 1 ===================== -->
+<section class="act c-blue" id="act1">
+  <div class="act-head"><span class="act-kicker">Act 1 · the app, and the pain</span></div>
+  <h2>Meet <b>Snapvault</b> — then try to run it by hand</h2>
+  <p class="lead">Two containers isn't interesting — you'd open two terminals and move on. The interesting case is a <b>graph of services that have to come up together, find each other, and share state</b>. So meet Snapvault, a small photo-backup SaaS: eight services, realistic, not insane.</p>
+
+  <div class="figwrap" id="topowrap"></div>
+  <div class="figcap">Snapvault topology — eight services, the dependencies between them, and the two networks.</div>
+
+  <div class="panel tight">
+  <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+    <thead><tr style="text-align:left;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em">
+      <th style="padding:6px 8px">Service</th><th style="padding:6px 8px">Image</th><th style="padding:6px 8px">Job</th><th style="padding:6px 8px">Needs</th></tr></thead>
+    <tbody id="svctbl"></tbody>
+  </table>
+  </div>
+
+  <h3>Step 1: run it locally, by hand. Welcome to your eight terminals.</h3>
+  <p>There's no orchestrator yet, so <b>you</b> are the orchestrator. Eight <code>run</code> invocations, in dependency order, each with the right <code>--network</code>, <code>-e</code>, <code>-v</code>, and <code>--health</code> flags — every single time you sit down to work:</p>
+
+  <div class="terms" id="terms"></div>
+  <p class="muted" style="font-size:13.5px">…and that's the <i>happy</i> path. Forget <code>--network backend</code> on one and <code>api</code> can't resolve <code>postgres</code>. Start a <code>worker</code> before <code>minio</code> is healthy and it crash-loops. Tear-down is eight <code>rm</code>s in reverse. Here's the whole dance as one script — scroll it and feel the ache:</p>
+
+  <div class="codeblk scroll">
+    <div class="cb-bar"><span>run-snapvault-by-hand.sh <span class="faint">(the full thing — what you do without an orchestrator)</span></span><span>↕ scroll</span></div>
+<pre><span class="c">#!/usr/bin/env bash</span>
+<span class="c"># What `docker compose up` does for you — done the hard way, by hand.</span>
+<span class="k">set</span> -euo pipefail
+
+<span class="c"># networks + volumes first (compose makes these implicitly)</span>
+docker network create frontend
+docker network create backend
+docker volume create pgdata
+docker volume create redisdata
+docker volume create blobs
+
+<span class="c"># ---- data tier: must be up AND healthy before anything depends on it ----</span>
+docker run -d --name postgres --network backend \
+  -e POSTGRES_USER=snap -e POSTGRES_PASSWORD=<span class="s">"$POSTGRES_PASSWORD"</span> \
+  -e POSTGRES_DB=snapvault -v pgdata:/var/lib/postgresql/data \
+  --health-cmd <span class="s">'pg_isready -U snap -d snapvault'</span> --health-interval 10s \
+  postgres:16
+
+docker run -d --name redis --network backend \
+  -v redisdata:/data redis:7 redis-server --save 60 1 --maxmemory 256mb
+
+docker run -d --name minio --network backend \
+  -e MINIO_ROOT_USER=<span class="s">"$MINIO_ROOT_USER"</span> -e MINIO_ROOT_PASSWORD=<span class="s">"$MINIO_ROOT_PASSWORD"</span> \
+  -v blobs:/data quay.io/minio/minio server /data --console-address :9001
+
+<span class="c"># ...now WAIT for health, by hand, by polling. compose did this with one line.</span>
+echo <span class="s">"waiting for postgres..."</span>
+until [ <span class="s">"$(docker inspect -f '{{.State.Health.Status}}' postgres)"</span> = healthy ]; do sleep 1; done
+
+<span class="c"># ---- app tier ----</span>
+docker run -d --name api --network backend \
+  -e DATABASE_URL=<span class="s">"postgres://snap:$POSTGRES_PASSWORD@postgres:5432/snapvault"</span> \
+  -e REDIS_URL=redis://redis:6379/0 -e S3_ENDPOINT=http://minio:9000 \
+  -e S3_BUCKET=photos -e JWT_SECRET=<span class="s">"$JWT_SECRET"</span> \
+  ghcr.io/acme/snapvault-api:1.4
+docker network connect frontend api   <span class="c"># api lives on BOTH networks</span>
+
+<span class="c"># three workers — by hand, one at a time, because "replicas: 3" isn't a thing here</span>
+for i in 1 2 3; do
+  docker run -d --name <span class="s">"worker$i"</span> --network backend \
+    -e REDIS_URL=redis://redis:6379/0 -e S3_ENDPOINT=http://minio:9000 \
+    ghcr.io/acme/snapvault-worker:1.4 celery -A snapvault.worker worker
+done
+
+docker run -d --name scheduler --network backend \
+  -e REDIS_URL=redis://redis:6379/0 \
+  ghcr.io/acme/snapvault-worker:1.4 celery -A snapvault.worker beat
+
+docker run -d --name web --network frontend \
+  -e NEXT_PUBLIC_API_URL=https://snapvault.local/api \
+  ghcr.io/acme/snapvault-web:1.4
+
+docker run -d --name nginx --network frontend -p 443:443 -p 80:80 \
+  -v ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+  -v ./nginx/certs:/etc/nginx/certs:ro nginx:1.27
+docker network connect backend nginx
+
+<span class="c"># Teardown? Reverse ALL of it, every time:</span>
+<span class="c">#   docker rm -f nginx web scheduler worker3 worker2 worker1 api minio redis postgres</span>
+<span class="c">#   docker network rm frontend backend  # (volumes too, if you want a clean slate)</span></pre>
+  </div>
+
+  <div class="call bad">
+    <h4>😮‍💨 Doesn't that suck?</h4>
+    <p>That's a pile of fragile, ordered, copy-pasted ceremony to start <i>one</i> app on <i>one</i> laptop — and you re-run it every morning. <b>This</b> — not "I have two containers" — is the hole that needs filling.</p>
+  </div>
+
+  <h3>Enter Docker Compose</h3>
+  <p>Docker Compose is a tool for <b>defining and running multi-container applications</b>. You describe the entire stack — every service with its image and env, the networks, the volumes, and the <b>dependency edges between them</b> — in one declarative YAML file. Then a single command, <code>docker compose up</code>, reads that graph and creates and starts the whole thing at once (<code>docker compose down</code> tears it all back out).</p>
+  <p>Here's the <b>full file</b> for Snapvault — the same eight services from the diagram, the entire thing, scroll through it:</p>
+
+  <div class="codeblk scroll">
+    <div class="cb-bar"><span>docker-compose.yml <span class="faint">(the whole file)</span></span><span>8 services · 2 networks · 3 volumes · ↕ scroll</span></div>
+<pre><span class="c"># docker-compose.yml — Snapvault. Bring it ALL up with: docker compose up -d</span>
+<span class="k">services</span>:
+
+  <span class="c"># ---- edge ----</span>
+  nginx:
+    image: nginx:1.27
+    restart: unless-stopped
+    ports:
+      - <span class="s">"443:443"</span>
+      - <span class="s">"80:80"</span>
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      web:  { condition: service_started }
+      api:  { condition: service_healthy }
+    networks: [frontend]
+
+  <span class="c"># ---- app ----</span>
+  web:
+    image: ghcr.io/acme/snapvault-web:1.4
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://snapvault.local/api
+    depends_on:
+      api: { condition: service_healthy }
+    networks: [frontend]
+
+  api:
+    image: ghcr.io/acme/snapvault-api:1.4
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://snap:${POSTGRES_PASSWORD}@postgres:5432/snapvault
+      REDIS_URL:    redis://redis:6379/0
+      S3_ENDPOINT:  http://minio:9000     <span class="c"># &#8592; found by service NAME, not IP</span>
+      S3_BUCKET:    photos
+      S3_ACCESS_KEY: ${MINIO_ROOT_USER}
+      S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      JWT_SECRET:   ${JWT_SECRET}
+    healthcheck:
+      test: [<span class="s">"CMD"</span>, <span class="s">"curl"</span>, <span class="s">"-f"</span>, <span class="s">"http://localhost:8080/healthz"</span>]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    depends_on:                            <span class="c"># &#8592; the edges, enforced</span>
+      postgres: { condition: service_healthy }
+      redis:    { condition: service_started }
+      minio:    { condition: service_healthy }
+    networks: [frontend, backend]
+
+  worker:
+    image: ghcr.io/acme/snapvault-worker:1.4
+    restart: unless-stopped
+    command: [<span class="s">"celery"</span>, <span class="s">"-A"</span>, <span class="s">"snapvault.worker"</span>, <span class="s">"worker"</span>, <span class="s">"--concurrency=4"</span>]
+    environment:
+      DATABASE_URL: postgres://snap:${POSTGRES_PASSWORD}@postgres:5432/snapvault
+      REDIS_URL:    redis://redis:6379/0
+      S3_ENDPOINT:  http://minio:9000
+      S3_ACCESS_KEY: ${MINIO_ROOT_USER}
+      S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+    deploy:
+      replicas: 3                          <span class="c"># &#8592; three workers, one line</span>
+    depends_on:
+      redis: { condition: service_started }
+      minio: { condition: service_healthy }
+    networks: [backend]
+
+  scheduler:
+    image: ghcr.io/acme/snapvault-worker:1.4
+    restart: unless-stopped
+    command: [<span class="s">"celery"</span>, <span class="s">"-A"</span>, <span class="s">"snapvault.worker"</span>, <span class="s">"beat"</span>]
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      redis: { condition: service_started }
+    networks: [backend]
+
+  <span class="c"># ---- data ----</span>
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: snap
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: snapvault
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [<span class="s">"CMD-SHELL"</span>, <span class="s">"pg_isready -U snap -d snapvault"</span>]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks: [backend]
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    command: [<span class="s">"redis-server"</span>, <span class="s">"--save"</span>, <span class="s">"60"</span>, <span class="s">"1"</span>, <span class="s">"--maxmemory"</span>, <span class="s">"256mb"</span>]
+    volumes:
+      - redisdata:/data
+    networks: [backend]
+
+  minio:
+    image: quay.io/minio/minio:latest
+    restart: unless-stopped
+    command: [<span class="s">"server"</span>, <span class="s">"/data"</span>, <span class="s">"--console-address"</span>, <span class="s">":9001"</span>]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - blobs:/data
+    healthcheck:
+      test: [<span class="s">"CMD"</span>, <span class="s">"mc"</span>, <span class="s">"ready"</span>, <span class="s">"local"</span>]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks: [backend]
+
+<span class="k">volumes</span>:
+  pgdata:
+  redisdata:
+  blobs:
+
+<span class="k">networks</span>:
+  frontend:
+  backend:</pre>
+  </div>
+
+  <h3>What Compose buys you here</h3>
+  <p>Look back at the by-hand script, then at the file: everything the eight-terminal slog did manually is now <b>declared once</b>. The dependency edges (<code>depends_on … service_healthy</code>), name-based discovery (<code>postgres:5432</code> instead of an IP), shared named volumes, scaling (<code>replicas: 3</code>), and a single <code>up</code>/<code>down</code> for the whole graph.</p>
+
+  <div class="call info">
+    <h4>🎯 The bar to clear</h4>
+    <p>Hold this list — anything that wants to replace Compose has to handle all of it: <b>the dependency edges</b>, <b>name-based service discovery</b>, <b>shared volumes</b>, <b>scaling a service</b>, and <b>one-command up/down</b>. We'll grade every option against it.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ===================== ACT 2 ===================== -->
+<section class="act c-good" id="act2">
+  <div class="act-head"><span class="act-kicker">Act 2 · why leave a good thing</span></div>
+  <h2>You love Compose. So why would anyone walk away from Docker?</h2>
+  <p class="lead">Compose just saved your afternoon — fair to ask why you'd change anything. The catch is that the reasons teams leave usually aren't about Compose the <i>file</i>. They're about Docker the <i>platform</i> underneath it.</p>
+
+  <div class="reasons">
+    <div class="rcard big">
+      <h4>💸 Licensing — the big one</h4>
+      <p><b>Docker Desktop</b> needs a paid subscription for organizations with <b>more than 250 employees OR more than $10M/yr revenue</b> (in force since 2022). The Compose file format and Docker Engine are open source — but Desktop is what most devs actually install, so it's what triggers a procurement conversation. For a lot of shops, this is THE reason, full stop.</p>
+    </div>
+    <div class="rcard">
+      <h4>🛡️ One big root daemon</h4>
+      <p>Docker centers on <code>dockerd</code> — a long-running, usually-root background daemon; your containers are its children. One process to own, one root attack surface, one thing whose crash takes the whole host's containers with it.</p>
+    </div>
+    <div class="rcard">
+      <h4>🔓 Rootless by default</h4>
+      <p>Security-locked clients (banks, gov, healthcare) want containers running as an <b>unprivileged user with no daemon at all</b>. That posture is exactly where Podman starts.</p>
+    </div>
+    <div class="rcard">
+      <h4>☸️ Kubernetes-shaped</h4>
+      <p>If you're heading toward Kubernetes anyway, a tool that speaks <b>pods and Kube YAML natively</b> (the rest of this guide) beats one that only speaks its own format.</p>
+    </div>
+  </div>
+
+  <div class="call info">
+    <h4>🐧 Enter Podman</h4>
+    <p>Podman is a drop-in container engine that's <b>fully open source (Apache-2.0)</b>, <b>daemonless</b> (containers are plain child processes — no background root service), and <b>rootless-first</b>. The CLI mirrors Docker's so closely that <code>alias docker=podman</code> carries most of your muscle memory over. No licensing question, no daemon.</p>
+  </div>
+
+  <h3>First, the good news: almost everything carries over</h3>
+  <p>Here's the reassurance that makes a switch survivable: <b>your images, your Dockerfiles, and your registries don't change at all.</b> Containers and images aren't a Docker invention or a Podman invention — they're a shared <b>open standard</b>, the <b>OCI (Open Container Initiative)</b>, started in 2015 under the Linux Foundation (Docker donated the original runtime, <code>runc</code>, and the image format). A "Docker image" <i>is</i> an OCI image; Podman builds, pulls, and runs the very same artifacts from the very same registries. An OCI-compliant image runs on any OCI-compliant runtime.</p>
+
+  <div class="figwrap" id="ociwrap"></div>
+  <div class="figcap">Build once, run with either; push to any registry, pull with either. The container/image foundation is <b>identical and portable</b> — only the orchestration layer on top is tool-specific.</div>
+
+  <div class="call good">
+    <h4>🧩 …so what actually differs? Just composition.</h4>
+    <p>The single place the tools diverge is the layer for <b>defining and running multi-container apps</b>. Docker coined <b>Compose</b>; Podman offers a thin wrapper over it <i>plus</i> its own native answer (pods, borrowed from Kubernetes). <b>That one layer is the entire subject of this guide</b> — everything beneath it just carries over untouched. So, naturally, the first move is to look for compose on Podman…</p>
+  </div>
+
+  <h3>"It's Podman now. So… <code>podman compose</code>, right?"</h3>
+  <p>Reasonable instinct. Podman ships a <code>compose</code> subcommand, and a separate <code>podman-compose</code> tool exists too. Point either at your existing <code>docker-compose.yml</code> and a lot of the time… it just comes up. Let's be fair and bank the real wins first:</p>
+
+  <div class="pccol pros" style="background:linear-gradient(180deg,var(--good-bg),transparent 70%)">
+    <h4>Why reaching for a compose tool is genuinely smart</h4>
+    <ul class="pcli">
+      <li><b>Your YAML survives</b><span>The same <code>docker-compose.yml</code> from Act 1 — no rewrite to learn a new format on day one.</span></li>
+      <li><b>The whole mental model transfers</b><span><code>up</code>, <code>down</code>, <code>logs</code>, <code>ps</code>, services, depends_on, named volumes — every concept you know maps over.</span></li>
+      <li><b>Rootless &amp; daemonless underneath</b><span>You inherit Podman's actual selling points: no root daemon, containers as plain child processes.</span></li>
+      <li><b>Fastest possible migration</b><span>The lowest-effort way to get a Compose stack onto Podman <i>today</i>.</span></li>
+    </ul>
+  </div>
+
+  <div class="call good">
+    <h4>✅ Honest verdict so far</h4>
+    <p>For dev loops and simple stacks, a compose tool on Podman is a <b>legitimately good answer</b>. If that's all you need, you might stop here and be happy. The trouble only starts when you ask <i>what is actually running when I type that command</i> — which is Act 3.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ===================== ACT 3 ===================== -->
+<section class="act c-danger" id="act3">
+  <div class="act-head"><span class="act-kicker">Act 3 · read the label</span></div>
+  <h2>The catch: "<code>podman compose</code>" is two different things, and neither is native</h2>
+  <p class="lead">If something feels off, that's the right read. There is no single first-party Podman Compose <i>engine</i>. There are <b>two separate tools</b> wearing similar names, and the headline one is — in Podman's own words — <b>a thin wrapper</b>.</p>
+
+  <div class="figwrap" id="wrapwrap"></div>
+  <div class="figcap"><code>podman compose</code> (the command) is just a wrapper — it delegates to one of two external providers depending on what's installed. Neither is a native Podman compose engine.</div>
+
+  <p>First, get the names straight, because they look identical and aren't. <code>podman compose</code> (with a <b>space</b>) is the command you type, and <b>it implements nothing</b> — it hands your file to a <b>provider</b>. There are exactly two, and the command picks whichever is installed:</p>
+
+  <div class="split">
+    <div class="splitcol a">
+      <h3>Path A · provider <code>docker-compose</code> <span class="pill red">the default</span></h3>
+      <p>If <code>docker-compose</code> is on the box, the wrapper hands your file straight to it — docker-compose <b>"takes precedence."</b> It's the <i>real</i> Compose engine, so you get full fidelity; it drives Podman through Podman's Docker-compatible API <b>socket</b>. So in the common case, <code>podman compose</code> literally <b>"calls docker-compose under the hood."</b> The catch: you're now running <b>Podman in a Docker costume</b> — a daemon socket, the very thing Podman was meant to get away from.</p>
+      <div class="call bad" style="margin-top:auto">
+        <h4>📎 podman-compose man page</h4>
+        <p style="font-style:italic">"podman compose is a thin wrapper around an external compose provider… The default compose providers are <code>docker-compose</code> and <code>podman-compose</code>. <b>If installed, docker-compose takes precedence.</b>"</p>
+      </div>
+    </div>
+    <div class="splitcol b">
+      <h3>Path B · provider <code>podman-compose</code> <span class="pill pur">the python one</span></h3>
+      <p>No docker-compose installed? The wrapper falls back to <code>podman-compose</code> — a <b>separate community Python tool</b>. Mind the hyphen: <code>podman-compose</code> (the package) ≠ <code>podman compose</code> (the command). It does <i>not</i> call docker-compose. It parses your file and <b>emits <code>podman</code> CLI commands directly</b> — no socket, no Docker binary, genuinely daemonless. Cleaner in spirit, but Red Hat's caveat stands:</p>
+      <div class="call warn" style="margin-top:auto">
+        <h4>⚠️ The honest limitation</h4>
+        <p style="font-style:italic">"Podman Compose is not perfect because it <b>implements a subset of the functionality of Docker Compose</b>."</p>
+      </div>
+    </div>
+  </div>
+
+  <p>So that's the whole picture: one path <b>calls docker-compose</b> (full fidelity, but a Docker socket in disguise), the other is a <b>Python tool that runs podman commands</b> (daemonless, but only a subset of Compose). Either way, <b>the <code>podman compose</code> command itself orchestrates nothing</b> — it's a launcher for someone else's engine. <span class="muted">(You can also invoke either provider directly — <code>docker-compose</code> against the podman socket, or <code>podman-compose</code> straight — the wrapper is just convenience.)</span></p>
+
+  <div class="pc">
+    <div class="pccol pros">
+      <h4>What the compose route gets right</h4>
+      <ul class="pcli">
+        <li><b>Reuses your file &amp; muscle memory</b><span>Covered in Act 2 — real and valuable.</span></li>
+        <li><b>Path B is genuinely daemonless</b><span>The Python tool → straight to <code>podman</code> CLI, no socket.</span></li>
+        <li><b>Path A gives full fidelity</b><span>By delegating to the real engine, you get real Compose behavior.</span></li>
+      </ul>
+    </div>
+    <div class="pccol cons">
+      <h4>Why it's a detour, not the destination</h4>
+      <ul class="pcli">
+        <li><b>Not native / not first-party</b><span>The subcommand is a launcher; the engine is something else (docker-compose or a community port).</span></li>
+        <li><b>Behavior depends on what's installed</b><span>Same command, different engine, different results across machines. Fragile to reason about.</span></li>
+        <li><b>Subset gaps (Path B)</b><span>A Compose feature subset — corners of your YAML may silently misbehave.</span></li>
+        <li><b>Docker-costume (Compose v2 path)</b><span>Re-introduces a daemon socket — undoing a key reason you moved to Podman.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="call info">
+    <h4>🧭 So what <i>is</i> the native answer?</h4>
+    <p>Podman's own maintainers don't point at any of these for the long term. They point at the thing Podman borrowed straight from Kubernetes — the unit your containers were always secretly grouped into. <b>Pods.</b> →</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ===================== ACT 4 ===================== -->
+<section class="act c-purple" id="act4">
+  <div class="act-head"><span class="act-kicker">Act 4 · the native primitive</span></div>
+  <h2>Pods: the Kubernetes idea baked into Podman (it's in the name)</h2>
+  <p class="lead">You heard right — Podman's native grouping is the <b>pod</b>, lifted from Kubernetes. A pod is "a container of containers": a set of containers that share a namespace, a network, and a lifecycle, started and stopped as one unit. This is the part Podman does <b>itself</b>, no wrapper, no second tool.</p>
+
+  <h3>The one diagram that explains pods: shared loopback vs. bridge DNS</h3>
+  <p>The deepest difference from Compose is <b>how containers find each other</b>, and it's worth seeing side by side.</p>
+
+  <div class="figwrap" id="netwrap"></div>
+  <div class="figcap">Compose: each service is its own network endpoint, found by <b>DNS name</b> over a bridge. Pod: every container shares <b>one</b> network namespace via a hidden <b>infra container</b>, so they reach each other on <b>127.0.0.1</b> — like processes on one host.</div>
+
+  <div class="call info">
+    <h4>🧭 The distinction in one line</h4>
+    <p>In <b>Compose, each service has its own IP</b> (and any service can sit on, say, <code>:8080</code> because it owns its address). In a <b>pod, it's one shared IP and one shared port space</b> — containers are split apart by <b>port</b>, not by address, just like processes on a single host. That's the whole essence of it.</p>
+  </div>
+
+  <div class="call pur">
+    <h4>🔌 The infra container (the "pause" container)</h4>
+    <p>Every pod quietly runs one tiny extra container — the <b>infra container</b>. It holds the shared network namespace open so the real containers can join it and come/go without tearing networking down — the boilerplate glue. That's <i>why</i> they all see the same <code>127.0.0.1</code> and the same port space.</p>
+  </div>
+
+  <p>So inside a pod, your API reaches Postgres at <code>127.0.0.1:5432</code>, not <code>postgres:5432</code>. That's a real config change from your Compose file — and it leads straight to the one gotcha worth flagging:</p>
+
+  <div class="call warn">
+    <h4>⚠️ One port space → port collisions inside the pod</h4>
+    <p>Because every container in a pod shares the same network namespace, they share <b>one set of ports</b>. Two containers that both default to <code>:8080</code> can't coexist in the same pod — the second fails to bind. Usually a non-event (most of Snapvault's ports differ), but if you happen to pack two <code>:8080</code> services together, it'll yell at you. Re-map a port or split them into separate pods.</p>
+  </div>
+
+  <h3>How you actually drive pods: Kubernetes YAML, not docker-compose.yml</h3>
+  <p>Raw <code>podman pod create</code> + N × <code>podman run --pod</code> works but is just the manual pain again. The native, declarative way is to speak <b>Kubernetes</b>:</p>
+  <div class="codeblk">
+    <div class="cb-bar"><span>the native pod workflow</span><span>no compose engine involved</span></div>
+<pre><span class="c"># Already have it running by hand? Export it to a Kube YAML:</span>
+$ podman <span class="n">kube generate</span> snapvault-data -f snapvault.yaml
+
+<span class="c"># Bring the whole thing up from that YAML — Podman orchestrates it itself:</span>
+$ podman <span class="n">kube play</span> snapvault.yaml
+
+<span class="c"># Tear it all down:</span>
+$ podman <span class="n">kube play</span> --down snapvault.yaml</pre>
+  </div>
+  <p class="muted" style="font-size:13.5px">(<code>kube play</code> / <code>kube generate</code> are the current names; you'll also see the older <code>play kube</code> / <code>generate kube</code> spelling in tutorials — same commands.)</p>
+
+  <h3>The actual Kube YAML — put it next to the compose file</h3>
+  <p>This is the artifact you'd generate or hand-write. As you scroll, watch the lesson the diagram set up: the data tier is <b>one pod</b> whose containers talk over <code>127.0.0.1</code> — but the API (a <i>separate</i> Deployment) reaches that pod by <b>Service name</b> again. Cross-pod, you're back to DNS, not localhost.</p>
+
+  <div class="codeblk scroll">
+    <div class="cb-bar"><span>snapvault.yaml <span class="faint">(podman kube play snapvault.yaml)</span></span><span>real Kubernetes YAML · ↕ scroll</span></div>
+<pre><span class="c"># snapvault.yaml — the WHOLE app. Run with: podman kube play snapvault.yaml</span>
+<span class="c"># Data tier = ONE pod (containers share 127.0.0.1). App tier = Deployments</span>
+<span class="c"># that reach the data tier by Service NAME (cross-pod = DNS, not localhost).</span>
+
+<span class="c"># ===== persistent volumes =====</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: PersistentVolumeClaim
+metadata: { name: pgdata }
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 10Gi } }
+<span class="c">---</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: PersistentVolumeClaim
+metadata: { name: redisdata }
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+<span class="c">---</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: PersistentVolumeClaim
+metadata: { name: blobs }
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 50Gi } }
+<span class="c">---</span>
+<span class="c"># ===== data tier: ONE pod, everything inside talks over 127.0.0.1 =====</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: Pod
+metadata:
+  name: snapvault-data
+  labels: { app: snapvault, tier: data }
+spec:
+  containers:
+    - name: postgres
+      image: docker.io/library/postgres:16
+      ports: [ { containerPort: 5432 } ]
+      env:
+        - { name: POSTGRES_USER, value: snap }
+        - { name: POSTGRES_DB, value: snapvault }
+        - { name: POSTGRES_PASSWORD, value: changeme }
+      volumeMounts:
+        - { name: pgdata, mountPath: /var/lib/postgresql/data }
+    - name: redis
+      image: docker.io/library/redis:7
+      ports: [ { containerPort: 6379 } ]
+      args: [<span class="s">"redis-server"</span>, <span class="s">"--save"</span>, <span class="s">"60"</span>, <span class="s">"1"</span>, <span class="s">"--maxmemory"</span>, <span class="s">"256mb"</span>]
+      volumeMounts:
+        - { name: redisdata, mountPath: /data }
+    - name: minio
+      image: quay.io/minio/minio:latest
+      ports: [ { containerPort: 9000 }, { containerPort: 9001 } ]
+      args: [<span class="s">"server"</span>, <span class="s">"/data"</span>, <span class="s">"--console-address"</span>, <span class="s">":9001"</span>]
+      env:
+        - { name: MINIO_ROOT_USER, value: admin }
+        - { name: MINIO_ROOT_PASSWORD, value: changeme123 }
+      volumeMounts:
+        - { name: blobs, mountPath: /data }
+  volumes:
+    - { name: pgdata,    persistentVolumeClaim: { claimName: pgdata } }
+    - { name: redisdata, persistentVolumeClaim: { claimName: redisdata } }
+    - { name: blobs,     persistentVolumeClaim: { claimName: blobs } }
+<span class="c">---</span>
+<span class="c"># A Service so the app tier can find the data tier by NAME (cross-pod = DNS).</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: Service
+metadata: { name: snapvault-data }
+spec:
+  selector: { app: snapvault, tier: data }
+  ports:
+    - { name: pg,    port: 5432 }
+    - { name: redis, port: 6379 }
+    - { name: s3,    port: 9000 }
+<span class="c">---</span>
+<span class="c"># ===== app tier: Deployments, wired to the data tier by SERVICE NAME =====</span>
+<span class="k">apiVersion</span>: apps/v1
+<span class="k">kind</span>: Deployment
+metadata: { name: snapvault-api }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: snapvault, svc: api } }
+  template:
+    metadata: { labels: { app: snapvault, svc: api } }
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/acme/snapvault-api:1.4
+          ports: [ { containerPort: 8080 } ]
+          env:
+            <span class="c"># &#8592; across pods you use the SERVICE NAME, not 127.0.0.1</span>
+            - { name: DATABASE_URL, value: <span class="s">"postgres://snap:changeme@snapvault-data:5432/snapvault"</span> }
+            - { name: REDIS_URL,    value: <span class="s">"redis://snapvault-data:6379/0"</span> }
+            - { name: S3_ENDPOINT,  value: <span class="s">"http://snapvault-data:9000"</span> }
+            - { name: S3_BUCKET,    value: photos }
+            - { name: JWT_SECRET,   value: changeme-jwt }
+          livenessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+            initialDelaySeconds: 5
+<span class="c">---</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: Service
+metadata: { name: snapvault-api }
+spec:
+  selector: { app: snapvault, svc: api }
+  ports: [ { port: 8080 } ]
+<span class="c">---</span>
+<span class="k">apiVersion</span>: apps/v1
+<span class="k">kind</span>: Deployment
+metadata: { name: snapvault-worker }
+spec:
+  replicas: 3                          <span class="c"># &#8592; compose's deploy.replicas: 3</span>
+  selector: { matchLabels: { app: snapvault, svc: worker } }
+  template:
+    metadata: { labels: { app: snapvault, svc: worker } }
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/acme/snapvault-worker:1.4
+          args: [<span class="s">"celery"</span>, <span class="s">"-A"</span>, <span class="s">"snapvault.worker"</span>, <span class="s">"worker"</span>, <span class="s">"--concurrency=4"</span>]
+          env:
+            - { name: REDIS_URL,   value: <span class="s">"redis://snapvault-data:6379/0"</span> }
+            - { name: S3_ENDPOINT, value: <span class="s">"http://snapvault-data:9000"</span> }
+<span class="c">---</span>
+<span class="k">apiVersion</span>: apps/v1
+<span class="k">kind</span>: Deployment
+metadata: { name: snapvault-scheduler }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: snapvault, svc: scheduler } }
+  template:
+    metadata: { labels: { app: snapvault, svc: scheduler } }
+    spec:
+      containers:
+        - name: scheduler
+          image: ghcr.io/acme/snapvault-worker:1.4
+          args: [<span class="s">"celery"</span>, <span class="s">"-A"</span>, <span class="s">"snapvault.worker"</span>, <span class="s">"beat"</span>]
+          env:
+            - { name: REDIS_URL, value: <span class="s">"redis://snapvault-data:6379/0"</span> }
+<span class="c">---</span>
+<span class="k">apiVersion</span>: apps/v1
+<span class="k">kind</span>: Deployment
+metadata: { name: snapvault-web }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: snapvault, svc: web } }
+  template:
+    metadata: { labels: { app: snapvault, svc: web } }
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/acme/snapvault-web:1.4
+          ports: [ { containerPort: 3000 } ]
+          env:
+            - { name: NEXT_PUBLIC_API_URL, value: <span class="s">"https://snapvault.local/api"</span> }
+<span class="c">---</span>
+<span class="k">apiVersion</span>: v1
+<span class="k">kind</span>: Service
+metadata: { name: snapvault-web }
+spec:
+  selector: { app: snapvault, svc: web }
+  ports: [ { port: 3000 } ]
+<span class="c">---</span>
+<span class="c"># nginx is the front door — it publishes 80/443 to the host.</span>
+<span class="k">apiVersion</span>: apps/v1
+<span class="k">kind</span>: Deployment
+metadata: { name: snapvault-nginx }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: snapvault, svc: nginx } }
+  template:
+    metadata: { labels: { app: snapvault, svc: nginx } }
+    spec:
+      containers:
+        - name: nginx
+          image: docker.io/library/nginx:1.27
+          ports:
+            - { containerPort: 80,  hostPort: 80 }
+            - { containerPort: 443, hostPort: 443 }
+          volumeMounts:
+            - { name: nginx-conf, mountPath: /etc/nginx/nginx.conf, subPath: nginx.conf, readOnly: true }
+      volumes:
+        - name: nginx-conf
+          hostPath: { path: ./nginx/nginx.conf, type: File }
+<span class="c"># That's all eight services — same stack as the compose file, in K8s' language.</span></pre>
+  </div>
+
+  <p>The big upside: that <b>same YAML runs on a real Kubernetes cluster.</b> You're no longer writing a Compose file that only Compose understands — you're writing the actual lingua franca of orchestration, and testing it locally for free.</p>
+
+  <div class="pc">
+    <div class="pccol pros">
+      <h4>Pods — the wins</h4>
+      <ul class="pcli">
+        <li><b>Actually native</b><span>First-party Podman. No wrapper, no second tool, no Docker binary.</span></li>
+        <li><b>Kubernetes-shaped</b><span>The YAML is real K8s — the same file graduates to a cluster.</span></li>
+        <li><b>One-unit lifecycle</b><span>Start/stop/inspect the whole pod at once; tight, low-latency localhost between containers.</span></li>
+        <li><b>Daemonless &amp; rootless</b><span>Full Podman benefits intact.</span></li>
+      </ul>
+    </div>
+    <div class="pccol cons">
+      <h4>Pods — the sharp edges</h4>
+      <ul class="pcli">
+        <li><b>Shared port space</b><span>Port collisions inside a pod; you re-plan ports vs. Compose.</span></li>
+        <li><b>Discovery by localhost, not name</b><span><code>postgres:5432</code> → <code>127.0.0.1:5432</code> within a pod (and back to Service names across pods).</span></li>
+        <li><b>No <code>depends_on</code> / no <code>build</code></b><span>Kube YAML has no Compose-style ordering or image-build step — you build images separately and handle startup readiness yourself.</span></li>
+        <li><b>New file format to learn</b><span>Kube YAML ≠ Compose YAML. Real, transferable, but a learning tax.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="call warn">
+    <h4>🤔 Honest gap</h4>
+    <p>One giant pod is rarely the right shape for eight services — you don't want all of them sharing one port space and one failure domain. As in Kubernetes, you'd use <b>several</b> pods (data in one, app tier in others). Which raises the obvious question: who keeps all those pods running, restarts them, brings them up at boot? That's the last step.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ===================== ACT 5 ===================== -->
+<section class="act c-purple" id="act5">
+  <div class="act-head"><span class="act-kicker">Act 5 · the destination</span></div>
+  <h2>Welcome to Podman world: <code>kube play</code> + <b>Quadlet</b></h2>
+  <p class="lead">The piece that makes pods a real Compose replacement on a single box isn't another compose clone — it's letting <b>systemd</b> be the orchestrator. Podman's <b>Quadlet</b> (since Podman 4.4) lets you describe containers, pods, networks and volumes as little declarative unit files, and systemd runs them: starts them at boot, restarts on failure, manages dependencies.</p>
+
+  <p>So how do you actually deploy this — keep the pod alive, restart it, bring it up at boot? Quadlet gives you <b>two shapes</b>, and they're <b>not a coin flip</b>: which you pick is a bet on <b>where this app is headed.</b></p>
+
+  <div class="call pur">
+    <h4>🔱 The fork is about destination, not taste</h4>
+    <p><b>The <code>.kube</code> file → stay in the Kubernetes lane.</b> The YAML is portable to a real cluster; systemd just supervises it. Pick it if this box might not be the final home, or you already think in pods / Deployments / Services.</p>
+    <p style="margin-top:8px"><b>Native units → declare this node IS the destination</b> and let <b>systemd be the orchestrator a cluster would otherwise be.</b> You drop Kubernetes YAML entirely. Pick it if there's no cluster in your future and you want per-service systemd control.</p>
+  </div>
+
+  <div class="split top">
+    <div class="splitcol b">
+      <h3>Way 1 — the <code>.kube</code> file <span class="pill pur">portable</span></h3>
+      <p><b>Stay Kubernetes-aligned.</b> One small unit that points systemd at the <code>snapvault.yaml</code> from Act 4 and lets <code>kube play</code> bring the whole pod up. You keep thinking in Kubernetes objects, so <b>the same YAML still graduates to a real cluster later.</b></p>
+      <div class="codeblk">
+        <div class="cb-bar"><span>snapvault.kube</span><span>~/.config/containers/systemd/</span></div>
+<pre><span class="c"># A Quadlet file. It LOOKS like a systemd unit, with Podman-only sections.</span>
+<span class="k">[Unit]</span>
+Description=Snapvault stack
+After=network-online.target
+
+<span class="k">[Kube]</span>
+Yaml=snapvault.yaml          <span class="c"># &#8592; your pod(s) from Act 4</span>
+
+<span class="k">[Service]</span>
+Restart=always               <span class="c"># systemd keeps it alive</span>
+
+<span class="k">[Install]</span>
+WantedBy=default.target</pre>
+      </div>
+      <div class="call info" style="margin:14px 0">
+        <h4>🤔 Wait — is a <code>.kube</code> file a systemd unit?</h4>
+        <p>Almost — this trips everyone up. <b>Quadlet is a systemd <i>generator</i>.</b> You author this friendly file; on <code>systemctl daemon-reload</code>, Podman's Quadlet generator <b>compiles it into a real <code>.service</code> unit</b> and systemd runs <i>that</i> — you never hand-write the gnarly <code>ExecStart=podman …</code> line. (Same trick for the <code>.container</code> / <code>.pod</code> / <code>.volume</code> files on the right.)</p>
+      </div>
+      <p style="margin-bottom:0"><b>Whole footprint: two files</b> — this plus the <code>snapvault.yaml</code> from Act 4. Then <code>systemctl --user start snapvault.service</code> and the stack is up. If you already wrote the YAML, you're adding exactly one file.</p>
+    </div>
+    <div class="splitcol g">
+      <h3>Way 2 — native units <span class="pill grn">this-node-is-it</span></h3>
+      <p><b>The off-ramp to plain systemd.</b> <b>No Kube YAML at all</b>: each container, the pod, and each volume is its own little unit. In exchange you get per-service control — independent restarts (<code>systemctl restart api</code> bounces only the API), <code>After=</code>/<code>Requires=</code> ordering (the <code>depends_on</code> raw pods lacked), per-unit limits, and per-service logs. For Snapvault that's <b>one <code>.pod</code> + three <code>.volume</code>s + eight <code>.container</code>s = 12 files</b>:</p>
+      <div class="codeblk scroll">
+        <div class="cb-bar"><span>the complete native Quadlet set <span class="faint">(12 files)</span></span><span>↕ scroll</span></div>
+<pre><span class="c"># Drop ALL of these in ~/.config/containers/systemd/, then:</span>
+<span class="c">#   systemctl --user daemon-reload && systemctl --user start snapvault-pod.service</span>
+<span class="c"># One pod, so every container talks over 127.0.0.1 (the Act 4 lesson).</span>
+
+<span class="c"># ========== snapvault.pod ==========</span>
+<span class="k">[Pod]</span>
+PublishPort=80:80
+PublishPort=443:443
+<span class="c"># the pod owns the network; the containers below just join it</span>
+
+<span class="c"># ========== pgdata.volume ==========</span>
+<span class="k">[Volume]</span>
+<span class="c"># (an empty [Volume] section just creates a named volume)</span>
+
+<span class="c"># ========== redisdata.volume ==========</span>
+<span class="k">[Volume]</span>
+
+<span class="c"># ========== blobs.volume ==========</span>
+<span class="k">[Volume]</span>
+
+<span class="c"># ========== postgres.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — postgres
+<span class="k">[Container]</span>
+Image=docker.io/library/postgres:16
+Pod=snapvault.pod
+Environment=POSTGRES_USER=snap POSTGRES_PASSWORD=changeme POSTGRES_DB=snapvault
+Volume=pgdata.volume:/var/lib/postgresql/data
+HealthCmd=pg_isready -U snap -d snapvault
+<span class="k">[Install]</span>
+WantedBy=default.target
+
+<span class="c"># ========== redis.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — redis
+<span class="k">[Container]</span>
+Image=docker.io/library/redis:7
+Pod=snapvault.pod
+Volume=redisdata.volume:/data
+Exec=redis-server --save 60 1 --maxmemory 256mb
+<span class="k">[Install]</span>
+WantedBy=default.target
+
+<span class="c"># ========== minio.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — minio
+<span class="k">[Container]</span>
+Image=quay.io/minio/minio:latest
+Pod=snapvault.pod
+Environment=MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=changeme123
+Volume=blobs.volume:/data
+Exec=server /data --console-address :9001
+<span class="k">[Install]</span>
+WantedBy=default.target
+
+<span class="c"># ========== api.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — api
+Requires=postgres.service redis.service minio.service   <span class="c"># &#8592; depends_on, finally</span>
+After=postgres.service redis.service minio.service
+<span class="k">[Container]</span>
+Image=ghcr.io/acme/snapvault-api:1.4
+Pod=snapvault.pod
+<span class="c"># same pod → reach the data tier on localhost</span>
+Environment=DATABASE_URL=postgres://snap:changeme@127.0.0.1:5432/snapvault
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+Environment=S3_ENDPOINT=http://127.0.0.1:9000
+Environment=S3_BUCKET=photos JWT_SECRET=changeme-jwt
+<span class="k">[Install]</span>
+WantedBy=default.target
+
+<span class="c"># ========== worker.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — worker
+After=redis.service minio.service
+<span class="k">[Container]</span>
+Image=ghcr.io/acme/snapvault-worker:1.4
+Pod=snapvault.pod
+Environment=REDIS_URL=redis://127.0.0.1:6379/0 S3_ENDPOINT=http://127.0.0.1:9000
+Exec=celery -A snapvault.worker worker --concurrency=4
+<span class="k">[Install]</span>
+WantedBy=default.target
+<span class="c"># Want 3 workers? Use a systemd template (worker@.container) and enable</span>
+<span class="c"># worker@1 worker@2 worker@3 — or use Way 1's `replicas: 3`. (Quadlet has no</span>
+<span class="c"># one-line replica count; this is a real edge vs. compose/Kube Deployments.)</span>
+
+<span class="c"># ========== scheduler.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — scheduler
+After=redis.service
+<span class="k">[Container]</span>
+Image=ghcr.io/acme/snapvault-worker:1.4
+Pod=snapvault.pod
+Environment=REDIS_URL=redis://127.0.0.1:6379/0
+Exec=celery -A snapvault.worker beat
+<span class="k">[Install]</span>
+WantedBy=default.target
+
+<span class="c"># ========== web.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — web
+After=api.service
+<span class="k">[Container]</span>
+Image=ghcr.io/acme/snapvault-web:1.4
+Pod=snapvault.pod
+Environment=NEXT_PUBLIC_API_URL=https://snapvault.local/api
+<span class="k">[Install]</span>
+WantedBy=default.target
+
+<span class="c"># ========== nginx.container ==========</span>
+<span class="k">[Unit]</span>
+Description=Snapvault — nginx (front door)
+After=web.service api.service
+<span class="k">[Container]</span>
+Image=docker.io/library/nginx:1.27
+Pod=snapvault.pod
+Volume=%h/snapvault/nginx.conf:/etc/nginx/nginx.conf:ro,Z
+<span class="k">[Install]</span>
+WantedBy=default.target</pre>
+      </div>
+      <p class="muted" style="font-size:13px;margin-top:12px">Notice the <b>networks vanished</b>: one pod = one shared netns, so the pod <i>is</i> the network and containers wire to each other on <code>127.0.0.1</code>. (Want the isolation back? Split into several pods.) And <code>After=</code>/<code>Requires=</code> on <code>api.container</code> is the dependency ordering raw <code>kube play</code> couldn't express.</p>
+      <div class="call info" style="margin-bottom:0">
+        <h4>🚪 So — is this just an "escape hatch"?</h4>
+        <p>Half-right. It's <i>not</i> a fringe hack — native <code>.container</code> units are the <b>idiomatic</b> Quadlet way (Red Hat's replacement for the deprecated <code>podman generate systemd</code>). But the <i>direction</i> is right: here they're the <b>off-ramp</b> that keeps your whole stack running <b>without ever committing to Kubernetes YAML</b>, systemd playing the orchestrator a cluster otherwise would. Not a last resort — the deliberate "I'm not going to Kubernetes" fork. If a cluster <i>is</i> coming, take Way 1.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="call good">
+    <h4>💻 …and this is for local dev too, not just servers</h4>
+    <p>Drop these in <code>~/.config/containers/systemd/</code> and they run <b>rootless, as your user</b> (<code>systemctl --user</code>) — no root, no cluster, no production anything. That's the developer payoff: Compose's "one command and my whole stack is up and stays up," but native to Podman. (On a server you'd enable it at boot; on your laptop you just <code>start</code> it when you sit down.)</p>
+  </div>
+
+  <h3>The whole journey on one card</h3>
+  <div class="panel">
+    <div class="tldr">
+      <div class="step">START</div><div class="what"><b>Snapvault, by hand</b> — eight ordered <code>docker run</code>s, every morning. It sucks.</div>
+      <div class="step">RESCUE</div><div class="what"><b>Docker Compose</b> — one file, one <code>up</code>, the whole 8-service graph. You love it.</div>
+      <div class="step">LEAVE</div><div class="what">But you move off Docker: <b class="k-warn">Docker Desktop licensing</b> (&gt;250 emp / $10M rev), the root daemon, a want for rootless / K8s-native. → <b class="k-good">Podman</b>.</div>
+      <div class="step">TRY</div><div class="what"><b><code>podman compose</code></b> — feels like home, reuses your YAML. <span class="muted">But it's a <b class="k-danger">thin wrapper</b> that shells out to docker-compose, or the community Python <code>podman-compose</code> (a feature <b class="k-danger">subset</b>). Not native.</span></div>
+      <div class="step"><span class="arrow-em">↓</span></div><div class="what">Useful detour for dev. Not the long-term home. Podman's maintainers point elsewhere…</div>
+      <div class="step">NATIVE</div><div class="what"><b class="k-purple">Pods</b> — the Kubernetes primitive built into Podman. Shared loopback via an infra container, driven by <b>real Kube YAML</b> (<code>kube play</code>). Portable to clusters. <span class="muted">Cost: shared port space, localhost discovery, no depends_on/build.</span></div>
+      <div class="step">SHIP</div><div class="what"><b class="k-purple">Quadlet + systemd</b> — systemd becomes the orchestrator: auto-restart, boot-start, dependencies. Works rootless on your laptop too. <span class="muted">The actual single-node Compose replacement.</span></div>
+      <div class="step">🎉</div><div class="what"><b>Welcome to Podman world.</b> Daemonless, rootless, Kubernetes-native — and honestly a nicer place than the Compose you started in.</div>
+    </div>
+  </div>
+
+  <div class="call good">
+    <h4>✅ TL;DR you can repeat to your team</h4>
+    <p><b>"Podman has no real first-party Compose — <code>podman compose</code> is a wrapper around docker-compose or a community Python port. The native answer is pods + Kube YAML (<code>kube play</code>), and Quadlet lets systemd run them as managed services — rootless, even on a laptop. That's the road, and the destination is nicer than the detour."</b></p>
+  </div>
+
+  <details class="sources panel">
+    <summary>Sources &amp; evidence (click to expand)</summary>
+    <ul style="margin:12px 0 0">
+      <li><span class="src-tier">primary</span> — <a href="https://docs.podman.io/en/latest/markdown/podman-compose.1.html" target="_blank">Podman docs · <code>podman-compose(1)</code></a> — "thin wrapper around an external compose provider"; docker-compose precedence; <code>PODMAN_COMPOSE_PROVIDER</code>.</li>
+      <li><span class="src-tier">primary</span> — <a href="https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html" target="_blank">Podman docs · <code>podman-systemd.unit(5)</code> (Quadlet)</a> — <code>.container</code>/<code>.pod</code>/<code>.kube</code>/<code>.network</code>/<code>.volume</code> unit types, generated into <code>.service</code> units.</li>
+      <li><span class="src-tier">primary</span> — <a href="https://docs.docker.com/subscription/desktop-license/" target="_blank">Docker docs · Docker Desktop license agreement</a> — paid subscription required above 250 employees or $10M revenue.</li>
+      <li><span class="src-tier">primary</span> — <a href="https://opencontainers.org/about/overview/" target="_blank">opencontainers.org · About the OCI</a> — open standard since 2015 (Linux Foundation); Image / Runtime / Distribution specs; <code>runc</code> donated by Docker, used by Podman.</li>
+      <li><span class="src-tier">🟡 secondary</span> — <a href="https://www.redhat.com/en/blog/podman-compose-docker-compose" target="_blank">Red Hat blog · "Podman Compose or Docker Compose?"</a> — "implements a subset of the functionality of Docker Compose"; maintainers prioritizing <code>kube generate</code>/<code>kube play</code>.</li>
+      <li><span class="src-tier">🟡 secondary</span> — <a href="https://www.redhat.com/en/blog/compose-podman-pods" target="_blank">Red Hat blog · "Moving from docker-compose to Podman pods"</a> — pod = "container of containers", shared loopback, infra container, no depends_on/build counterpart.</li>
+      <li><span class="src-tier">🟡 secondary</span> — <a href="https://github.com/containers/podman-compose" target="_blank">github.com/containers/podman-compose</a> — the Python tool that translates compose files to <code>podman</code> CLI commands.</li>
+      <li><span class="src-tier">🟡 secondary</span> — <a href="https://www.redhat.com/en/blog/quadlet-podman" target="_blank">Red Hat blog · "Make systemd better for Podman with Quadlet"</a> — systemd-managed declarative units.</li>
+    </ul>
+    <p class="faint" style="margin-top:10px;font-size:12px">Snapvault is a fictional example app; image tags and commands are illustrative — check your Podman version's man pages for exact flags. Verified June 2026.</p>
+  </details>
+</section>
+
+</div>
+
+<script type="module">
+  import { arrowMarkers } from "/_kit/viz.js";
+
+  /* ---------------- service data ---------------- */
+  const svcs = [
+    ["nginx","nginx:1.27","TLS + reverse proxy, the front door","web, api"],
+    ["web","snapvault-web:1.4","Next.js UI","api"],
+    ["api","snapvault-api:1.4","REST API, auth, uploads","postgres, redis, minio"],
+    ["worker ×3","snapvault-worker:1.4","Thumbnails / transcode jobs","redis, minio"],
+    ["scheduler","snapvault-worker:1.4","Cron beat (cleanup, digests)","redis"],
+    ["postgres","postgres:16","Users, albums, metadata","—"],
+    ["redis","redis:7","Cache + job queue","—"],
+    ["minio","minio:latest","S3-compatible photo blob store","—"],
+  ];
+  document.getElementById('svctbl').innerHTML = svcs.map(([s,i,j,n])=>`<tr style="border-top:1px solid var(--line)">
+    <td style="padding:6px 8px"><b style="color:#fff">${s}</b></td>
+    <td style="padding:6px 8px"><code style="font-size:11.5px">${i}</code></td>
+    <td style="padding:6px 8px;color:#cdd6e0">${j}</td>
+    <td style="padding:6px 8px;color:var(--muted)">${n}</td></tr>`).join('');
+
+  /* ---------------- ACT 1: topology ---------------- */
+  (function topo(){
+    const W=900,H=400;
+    const N = {
+      internet:{x:24,  y:178,w:92, h:48, t:"🌐 Internet", c:"faint"},
+      nginx:   {x:160, y:178,w:108,h:54, t:"nginx", s:"reverse proxy", c:"blue"},
+      web:     {x:330, y:88, w:108,h:54, t:"web", s:"Next.js UI", c:"blue"},
+      api:     {x:330, y:268,w:108,h:54, t:"api", s:"REST API", c:"blue"},
+      worker:  {x:520, y:178,w:118,h:54, t:"worker ×3", s:"jobs", c:"good"},
+      sched:   {x:520, y:288,w:118,h:50, t:"scheduler", s:"cron beat", c:"good"},
+      postgres:{x:712, y:64, w:120,h:54, t:"postgres", s:"metadata DB", c:"warn"},
+      redis:   {x:712, y:178,w:120,h:54, t:"redis", s:"cache + queue", c:"warn"},
+      minio:   {x:712, y:288,w:120,h:54, t:"minio", s:"blob store", c:"warn"},
+    };
+    const col={blue:["#1b2a3f","var(--accent)"],good:["#10241a","var(--good)"],warn:["#241c0c","var(--warn)"],faint:["#161b22","var(--faint)"]};
+    const edges = [
+      ["internet","nginx"],["nginx","web"],["nginx","api"],
+      ["web","api"],
+      ["api","postgres"],["api","redis"],["api","minio"],
+      ["worker","redis"],["worker","minio"],
+      ["sched","redis"],
+    ];
+    const cx=n=>n.x+n.w/2, cy=n=>n.y+n.h/2;
+    function edgePath(a,b){
+      let x1,y1,x2,y2;
+      if(b.x >= a.x+a.w){ x1=a.x+a.w; y1=cy(a); x2=b.x; y2=cy(b); }
+      else if(a.x >= b.x+b.w){ x1=a.x; y1=cy(a); x2=b.x+b.w; y2=cy(b); }
+      else { x1=cx(a); y1=(b.y>a.y)?a.y+a.h:a.y; x2=cx(b); y2=(b.y>a.y)?b.y:b.y+b.h; }
+      const mx=(x1+x2)/2,my=(y1+y2)/2;
+      return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+    }
+    let svg=`<svg viewBox="0 0 ${W} ${H}" width="${W}">${arrowMarkers()}`;
+    svg+=`<rect x="300" y="36" width="560" height="330" rx="14" fill="none" stroke="var(--line)" stroke-dasharray="5 5"/>`;
+    svg+=`<text class="m" x="850" y="54" text-anchor="end" font-size="11" fill="var(--faint)">network: backend</text>`;
+    svg+=`<rect x="148" y="54" width="312" height="290" rx="14" fill="none" stroke="#24405e" stroke-dasharray="5 5"/>`;
+    svg+=`<text class="m" x="158" y="72" font-size="11" fill="#3d6695">network: frontend</text>`;
+    for(const [a,b] of edges){
+      svg+=`<path d="${edgePath(N[a],N[b])}" fill="none" stroke="#3a4658" stroke-width="1.6" marker-end="url(#ah-muted)"/>`;
+    }
+    for(const k in N){
+      const n=N[k]; const [bg,br]=col[n.c];
+      svg+=`<g><rect data-viz-id="topo-${k}" data-label="${n.t}" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="9" fill="${bg}" stroke="${br}" stroke-width="1.5"/>`;
+      svg+=`<text x="${cx(n)}" y="${cy(n)+(n.s?-3:4)}" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">${n.t}</text>`;
+      if(n.s) svg+=`<text class="m" x="${cx(n)}" y="${cy(n)+13}" text-anchor="middle" font-size="10" fill="var(--muted)">${n.s}</text>`;
+      svg+=`</g>`;
+    }
+    svg+=`</svg>`;
+    document.getElementById('topowrap').innerHTML=svg;
+  })();
+
+  /* ---------------- ACT 1: terminal pain ---------------- */
+  (function terms(){
+    const cmds = [
+      ["postgres","docker run -d --name postgres \\","--network backend -e POSTGRES_… \\","-v pgdata:/var/lib/… postgres:16"],
+      ["redis","docker run -d --name redis \\","--network backend \\","redis:7"],
+      ["minio","docker run -d --name minio \\","--network backend -e MINIO_… \\","-v blobs:/data minio server /data"],
+      ["api","# wait for pg health… then:","docker run -d --name api --network \\","backend -e DATABASE_URL=… api:1.4"],
+      ["worker 1","docker run -d --name worker1 \\","--network backend worker:1.4","# now repeat this ×3 by hand…"],
+      ["worker 2","docker run -d --name worker2 \\","--network backend worker:1.4","&nbsp;"],
+      ["scheduler","docker run -d --name sched \\","--network backend worker:1.4","beat"],
+      ["nginx","docker run -d --name nginx -p 443:443 \\","--network frontend --network backend \\","-v ./nginx.conf:… nginx:1.27"],
+    ];
+    const wrap=document.getElementById('terms');
+    wrap.innerHTML = cmds.map(([t,...lines],i)=>`
+      <div class="term" data-viz-id="term-${t}" data-label="${t}">
+        <div class="bar"><i style="background:#f85149"></i><i style="background:#d29922"></i><i style="background:#3fb950"></i><span class="t">${t} — terminal ${i+1}</span></div>
+        <div class="body"><span class="pr">$</span> ${lines.map(l=>l.replace('--network','<span class="fl">--network</span>')).join('<br>')}<span class="cur">▍</span></div>
+      </div>`).join('');
+    const obs=new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){
+        [...wrap.children].forEach((c,i)=>setTimeout(()=>c.classList.add('in'), i*90));
+        obs.disconnect();
+      }});
+    },{threshold:.15});
+    obs.observe(wrap);
+  })();
+
+  /* ---------------- ACT 3: podman-compose command → 2 providers ---------------- */
+  (function wrapdiag(){
+    const W=1000,H=290;
+    let svg=`<svg viewBox="0 0 ${W} ${H}" width="${W}">${arrowMarkers()}`;
+    const box=(x,y,w,h,fill,stroke,id)=>`<rect data-viz-id="${id}" x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>`;
+    const lbl=(x,y,t,s,sub)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${s}" font-weight="700" fill="#fff">${t}</text>`+(sub?`<text class="m" x="${x}" y="${y+16}" text-anchor="middle" font-size="11" fill="var(--muted)">${sub}</text>`:'');
+    const A=(x1,y1,x2,y2,c)=>`<path d="M${x1},${y1} C${(x1+x2)/2},${y1} ${(x1+x2)/2},${y2} ${x2},${y2}" fill="none" stroke="${c}" stroke-width="2" marker-end="url(#ah-muted)"/>`;
+
+    // the command (left)
+    svg+=box(34,104,200,84,"#1c2330","#c9d4e0","wd-cmd");
+    svg+=`<text x="134" y="138" text-anchor="middle" font-size="16.5" font-weight="800" fill="#fff">podman compose</text>`;
+    svg+=`<text class="m" x="134" y="159" text-anchor="middle" font-size="11" fill="var(--muted)">the command you type (a space)</text>`;
+    svg+=`<text class="m" x="134" y="175" text-anchor="middle" font-size="10.5" fill="var(--faint)">implements nothing — delegates →</text>`;
+
+    // PATH A lane (top)
+    svg+=`<text class="m" x="300" y="42" font-size="11" fill="var(--danger)" font-weight="700">PATH A · provider used if installed (default)</text>`;
+    svg+=box(300,54,232,66,"#2a1213","var(--danger)","wd-dc");
+    svg+=lbl(416,86,"docker-compose","14.5","the real Compose engine");
+    svg+=box(742,54,212,66,"#1c2330","var(--danger-line)","wd-sock");
+    svg+=lbl(848,86,"Podman","14.5","via Docker API socket");
+
+    // PATH B lane (bottom)
+    svg+=`<text class="m" x="300" y="180" font-size="11" fill="var(--purple)" font-weight="700">PATH B · fallback — the hyphenated python tool</text>`;
+    svg+=box(300,192,232,66,"#1d1530","var(--purple)","wd-py");
+    svg+=lbl(416,224,"podman-compose","14.5","separate Python package");
+    svg+=box(742,192,212,66,"#10241a","var(--good-line)","wd-cli");
+    svg+=lbl(848,224,"podman CLI","14.5","commands, directly");
+
+    // arrows: command → providers
+    svg+=A(234,134,300,87,"var(--danger)");
+    svg+=A(234,162,300,225,"var(--purple)");
+    // providers → engine
+    svg+=A(532,87,742,87,"#3a4658");
+    svg+=A(532,225,742,225,"#3a4658");
+    svg+=`</svg>`;
+    document.getElementById('wrapwrap').innerHTML=svg;
+  })();
+
+  /* ---------------- ACT 4: networking compare ---------------- */
+  (function netdiag(){
+    const W=900,H=320;
+    let svg=`<svg viewBox="0 0 ${W} ${H}" width="${W}">${arrowMarkers()}`;
+    // LEFT: compose bridge + DNS
+    svg+=`<text x="225" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent)">Compose — bridge + DNS</text>`;
+    svg+=`<rect x="28" y="40" width="394" height="262" rx="14" fill="#0e1722" stroke="#24405e"/>`;
+    svg+=`<text class="m" x="225" y="290" text-anchor="middle" font-size="11" fill="#3d6695">bridge network · each service = its own IP</text>`;
+    svg+=`<line x1="56" y1="200" x2="394" y2="200" stroke="#24405e" stroke-width="2"/>`;
+    svg+=`<text class="m" x="62" y="216" font-size="10" fill="#3d6695">docker0-style bridge</text>`;
+    const svcBox=(x,y,t,sub,c)=>`<rect data-viz-id="net-${t}" x="${x}" y="${y}" width="120" height="46" rx="8" fill="#161b22" stroke="${c}" stroke-width="1.4"/>`+
+      `<text x="${x+60}" y="${y+21}" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">${t}</text>`+
+      `<text class="m" x="${x+60}" y="${y+36}" text-anchor="middle" font-size="9.5" fill="var(--muted)">${sub}</text>`;
+    svg+=svcBox(56,66,"api","wants postgres:5432","var(--accent)");
+    svg+=svcBox(248,56,"postgres",":5432","var(--warn)");
+    svg+=svcBox(248,136,"redis",":6379","var(--warn)");
+    svg+=svcBox(248,216,"minio",":9000","var(--warn)");
+    const dns=(y)=>`<path d="M176,89 C214,89 214,${y} 248,${y}" fill="none" stroke="#3a4658" stroke-width="1.4" marker-end="url(#ah-muted)"/>`;
+    svg+=dns(79)+dns(159)+dns(239);
+    svg+=`<text class="m" x="200" y="50" font-size="9.5" fill="var(--accent)">found by DNS name →</text>`;
+
+    // RIGHT: pod shared loopback
+    svg+=`<text x="680" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--purple)">Pod — one shared loopback</text>`;
+    svg+=`<rect x="480" y="40" width="392" height="262" rx="14" fill="#150e22" stroke="var(--purple-line)"/>`;
+    svg+=`<rect data-viz-id="net-infra" x="500" y="234" width="352" height="50" rx="9" fill="#1d1530" stroke="var(--purple)" stroke-dasharray="4 4"/>`;
+    svg+=`<text x="676" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="var(--purple)">infra container (holds the shared netns)</text>`;
+    svg+=`<text class="m" x="676" y="271" text-anchor="middle" font-size="10" fill="#a98cd0">every container joins it → all see 127.0.0.1</text>`;
+    svg+=`<line x1="510" y1="205" x2="842" y2="205" stroke="var(--purple)" stroke-width="2"/>`;
+    svg+=`<text class="m" x="516" y="200" font-size="10" fill="#a98cd0">127.0.0.1 (lo) — ONE port space</text>`;
+    const podBox=(x,t,sub,c)=>{const y=76;return `<rect data-viz-id="net-pod-${t}" x="${x}" y="${y}" width="98" height="46" rx="8" fill="#161b22" stroke="${c}" stroke-width="1.4"/>`+
+      `<text x="${x+49}" y="${y+21}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">${t}</text>`+
+      `<text class="m" x="${x+49}" y="${y+36}" text-anchor="middle" font-size="9" fill="var(--muted)">${sub}</text>`+
+      `<line x1="${x+49}" y1="${y+46}" x2="${x+49}" y2="205" stroke="#4b3a73" stroke-width="1.4"/>`;};
+    svg+=podBox(508,"api","→127.0.0.1","var(--accent)");
+    svg+=podBox(625,"postgres",":5432","var(--warn)");
+    svg+=podBox(742,"redis",":6379","var(--warn)");
+    svg+=`</svg>`;
+    document.getElementById('netwrap').innerHTML=svg;
+  })();
+
+  /* ---------------- ACT 2: OCI shared-foundation stack ---------------- */
+  (function ociStack(){
+    const W=1000,H=362;
+    let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}">`;
+    const box=(x,y,w,h,fill,stroke,id,sw)=>`<rect data-viz-id="${id}" x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${fill}" stroke="${stroke}" stroke-width="${sw||1.5}"/>`;
+
+    // ---- tool-specific pillars (top) ----
+    s+=box(180,52,270,94,"#13243a","var(--accent)","oci-docker");
+    s+=`<text class="m" x="200" y="74" font-size="11" font-weight="700" fill="var(--accent)">DOCKER</text>`;
+    s+=`<text x="315" y="103" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">Docker Compose</text>`;
+    s+=`<text class="m" x="315" y="124" text-anchor="middle" font-size="10.5" fill="var(--muted)">the compose format Docker coined</text>`;
+
+    s+=box(550,52,320,94,"#1d1530","var(--purple)","oci-podman");
+    s+=`<text class="m" x="570" y="74" font-size="11" font-weight="700" fill="var(--purple)">PODMAN</text>`;
+    s+=`<text x="710" y="100" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">podman compose · pods · Quadlet</text>`;
+    s+=`<text class="m" x="710" y="124" text-anchor="middle" font-size="10.5" fill="var(--muted)">a thin wrapper + native pods / Quadlet</text>`;
+
+    // divider + labels
+    s+=`<text class="m" x="500" y="172" text-anchor="middle" font-size="11.5" fill="var(--faint)">▲ tool-specific — the ONLY layer that differs</text>`;
+    s+=`<line x1="30" y1="186" x2="970" y2="186" stroke="var(--line)" stroke-dasharray="6 5"/>`;
+    s+=`<text class="m" x="500" y="205" text-anchor="middle" font-size="11.5" fill="var(--good)">▼ shared open standard — identical &amp; portable</text>`;
+
+    // connectors (both pillars rest on the foundation)
+    s+=`<line x1="315" y1="146" x2="315" y2="218" stroke="#2a3340" stroke-width="1.4"/>`;
+    s+=`<line x1="710" y1="146" x2="710" y2="218" stroke="#2a3340" stroke-width="1.4"/>`;
+
+    // ---- shared OCI foundation (bottom) ----
+    s+=box(30,216,940,134,"#0f2417","var(--good-line)","oci-foundation",1.8);
+    s+=`<text x="48" y="240" font-size="15" font-weight="800" fill="var(--good)">OCI — Open Container Initiative</text>`;
+    s+=`<text class="m" x="48" y="257" font-size="10.5" fill="var(--muted)">open standard since 2015 · Linux Foundation · Docker donated runc + the image format</text>`;
+    const comp=(x,t,a,b)=>box(x,270,288,68,"#0a1c12","var(--good-line)","oci-"+t.replace(/\W/g,''),1.2)
+      +`<text x="${x+16}" y="294" font-size="12.5" font-weight="700" fill="#fff">${t}</text>`
+      +`<text class="m" x="${x+16}" y="312" font-size="10" fill="var(--muted)">${a}</text>`
+      +`<text class="m" x="${x+16}" y="327" font-size="10" fill="#5fcf86">${b}</text>`;
+    s+=comp(48,"Image Spec","the image format","a Docker image IS an OCI image");
+    s+=comp(356,"Runtime Spec","runc / crun","unpacks &amp; runs the container");
+    s+=comp(664,"Distribution Spec","registries · push / pull","Docker Hub · ghcr.io · quay.io");
+    s+=`</svg>`;
+    document.getElementById('ociwrap').innerHTML=s;
+  })();
+
+  /* ---------------- nav: scrollspy ---------------- */
+  const tabs=[...document.querySelectorAll('.tab')];
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    document.getElementById(t.dataset.go).scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+  const acts=tabs.map(t=>document.getElementById(t.dataset.go));
+  const spy=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      const id=e.target.id;
+      tabs.forEach(t=>t.classList.toggle('active', t.dataset.go===id));
+    }});
+  },{rootMargin:"-45% 0px -50% 0px"});
+  acts.forEach(a=>spy.observe(a));
+</script>
+</body>
+</html>

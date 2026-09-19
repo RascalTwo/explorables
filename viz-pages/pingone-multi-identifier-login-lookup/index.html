@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PingOne Multi-Identifier Login Lookup</title>
+<meta name="viz:uid" content="v-1041f6303443">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="PingOne Multi-Identifier Login Lookup">
+<meta name="viz:description" content="Many usernames, one account: how multi-identifier login resolves any of a user's identifiers to their single primary account (Claim 2 of the DaVinci verification).">
+<meta name="viz:tag" content="PingOne">
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --ink: #e6edf3; --muted: #8b949e;
+    --line: #30363d; --match: #3fb950; --miss: #f85149; --accent: #d29922;
+    --saas: #58a6ff; --code: #79c0ff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  header { padding: 22px 32px 6px; }
+  h1 { margin: 0 0 4px; font-size: 19px; font-weight: 650; }
+  .sub { color: var(--muted); font-size: 13px; max-width: 980px; }
+  .banner {
+    margin: 10px 32px; padding: 8px 14px; border-radius: 6px; font-size: 12.5px;
+    background: #2d2410; border: 1px solid var(--accent); color: #e3b341;
+  }
+  .layout { display: flex; gap: 18px; padding: 6px 32px 40px; align-items: flex-start; flex-wrap: wrap; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px;
+  }
+  .col-input { width: 320px; }
+  .col-diagram { flex: 1; min-width: 520px; }
+
+  .lbl { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
+  .login-box {
+    border: 1px solid var(--line); border-radius: 8px; padding: 14px;
+    background: #0d1117; margin-bottom: 14px;
+  }
+  .login-box .field-lbl { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  #typed {
+    width: 100%; background: #161b22; border: 1px solid var(--line); color: var(--ink);
+    padding: 8px 10px; border-radius: 6px; font: 13px ui-monospace, Menlo, monospace;
+  }
+  #typed:focus { outline: none; border-color: var(--saas); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip {
+    font: 11.5px ui-monospace, Menlo, monospace; cursor: pointer;
+    background: #161b22; border: 1px solid var(--line); color: var(--ink);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .chip:hover { border-color: var(--saas); }
+  .chip.bad { border-style: dashed; color: var(--miss); }
+
+  .scim {
+    font: 12px ui-monospace, Menlo, monospace; background: #0d1117;
+    border: 1px solid var(--line); border-radius: 6px; padding: 10px;
+    white-space: pre-wrap; word-break: break-all; line-height: 1.7;
+  }
+  .scim .kw { color: #ff7b72; }
+  .scim .attr { color: var(--code); }
+  .scim .val { color: var(--accent); }
+
+  .verdict { margin-top: 10px; font-size: 13px; font-weight: 600; }
+  .verdict.match { color: var(--match); }
+  .verdict.miss { color: var(--miss); }
+
+  svg { display: block; }
+  text { fill: var(--ink); font-family: inherit; }
+  .ttl { font-size: 12.5px; font-weight: 650; }
+  .sm  { font-size: 11px; fill: var(--muted); }
+  .mono { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; }
+  .note { color: var(--muted); font-size: 12px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>PingOne Multi-Identifier Login Lookup — many usernames, one account</h1>
+  <div class="sub">Claim 2 of the DaVinci verification. A user has one primary <code>username</code> plus an array of alternate identifiers on a multi-valued custom attribute. Whichever one they type into the login box, a single SCIM <code>eq</code> query resolves it to the same account — no loop required, because <code>eq</code> on a multi-valued attribute matches <em>any</em> element server-side.</div>
+</header>
+
+<div class="banner"><b>Requires</b> usernames to be unique across the entire system — which they currently are.</div>
+
+<div class="layout">
+  <!-- ============ INPUT PANEL ============ -->
+  <div class="card col-input">
+    <div class="lbl">LOGIN SCREEN</div>
+    <div class="login-box">
+      <div class="field-lbl">Username</div>
+      <input id="typed" type="text" autocomplete="off" spellcheck="false" value="doe123" />
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="lbl">DAVINCI ISSUES THIS SCIM QUERY</div>
+    <div class="scim" id="scim"></div>
+
+    <div class="verdict" id="verdict"></div>
+    <div class="note">Try the dashed red chip — an identifier that belongs to nobody — to see a miss.</div>
+  </div>
+
+  <!-- ============ DIAGRAM PANEL ============ -->
+  <div class="card col-diagram">
+    <div class="lbl">RESOLUTION — N IDENTIFIERS CONVERGE ON 1 ACCOUNT</div>
+    <svg id="diagram" viewBox="0 0 760 420" role="img" aria-label="Identifier resolution diagram">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+        </marker>
+        <marker id="arM" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#3fb950"/>
+        </marker>
+      </defs>
+
+      <!-- identifier rows (left) -->
+      <text class="sm" x="20" y="30">what the user might type</text>
+      <g id="idRows"></g>
+
+      <!-- SCIM filter node (middle) -->
+      <rect x="300" y="150" width="150" height="120" rx="10" fill="#0d1117" stroke="#58a6ff"/>
+      <text class="ttl" x="375" y="178" text-anchor="middle" fill="#58a6ff">SCIM eq query</text>
+      <text class="sm" x="375" y="198" text-anchor="middle">PingOne /users</text>
+      <text class="sm" x="375" y="214" text-anchor="middle">?filter=…</text>
+      <text class="sm" x="375" y="238" text-anchor="middle">matches primary</text>
+      <text class="sm" x="375" y="252" text-anchor="middle">OR any array element</text>
+
+      <!-- resolved account (right) -->
+      <rect x="560" y="120" width="184" height="180" rx="10" fill="#0d1117" stroke="#30363d" id="acctBox"/>
+      <text class="ttl" x="572" y="146">PingOne account</text>
+      <text class="sm" x="572" y="166">one identity · UUID</text>
+      <line x1="572" y1="176" x2="732" y2="176" stroke="#30363d"/>
+      <text class="sm" x="572" y="196">username (primary)</text>
+      <text class="mono" x="572" y="212" fill="#79c0ff">jdoe</text>
+      <text class="sm" x="572" y="236">alternateLoginIds[]</text>
+      <text class="mono" x="572" y="252" fill="#d29922">j.doe@example.com</text>
+      <text class="mono" x="572" y="268" fill="#d29922">doe123</text>
+      <text class="mono" x="572" y="284" fill="#d29922">80055512</text>
+
+      <!-- packet -->
+      <circle id="pkt" r="6" fill="#d29922" opacity="0"/>
+    </svg>
+    <div class="note">The custom attribute is declared <span class="mono">multiValued = true</span>, <span class="mono">unique = true</span> — uniqueness stops two users from claiming the same alias. The native login screen only ever checks <span class="mono">username</span>; the alternate-id match is what the DaVinci flow adds on top.</div>
+  </div>
+</div>
+
+<script>
+  // ---- model: the one user's identifiers ----
+  const PRIMARY = "jdoe";
+  const ALTS = ["j.doe@example.com", "doe123", "80055512"];
+  const ALL_OWNED = [PRIMARY, ...ALTS];
+  const CHIPS = [
+    { v: "jdoe", label: "jdoe (primary)" },
+    { v: "j.doe@example.com", label: "j.doe@example.com" },
+    { v: "doe123", label: "doe123" },
+    { v: "80055512", label: "80055512 (member #)" },
+    { v: "hacker99", label: "hacker99 (nobody's)", bad: true },
+  ];
+
+  const typed = document.getElementById("typed");
+  const scimEl = document.getElementById("scim");
+  const verdictEl = document.getElementById("verdict");
+  const chipsEl = document.getElementById("chips");
+  const idRows = document.getElementById("idRows");
+  const pkt = document.getElementById("pkt");
+  const acctBox = document.getElementById("acctBox");
+
+  // build chips
+  CHIPS.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip" + (c.bad ? " bad" : "");
+    b.textContent = c.label;
+    b.addEventListener("click", () => { typed.value = c.v; render(); });
+    chipsEl.appendChild(b);
+  });
+
+  // build the left identifier rows in SVG
+  const rowYs = {};
+  CHIPS.forEach((c, i) => {
+    const y = 56 + i * 56;
+    rowYs[c.v] = y + 19;
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.dataset.v = c.v;
+    g.innerHTML =
+      `<rect x="20" y="${y}" width="240" height="38" rx="8" fill="#161b22" stroke="${c.bad ? '#f85149' : '#30363d'}" ${c.bad ? 'stroke-dasharray="4 3"' : ''}/>` +
+      `<text class="mono" x="34" y="${y + 23}" fill="${c.bad ? '#f85149' : '#e6edf3'}">${c.v}</text>`;
+    idRows.appendChild(g);
+    // edge from row to SCIM node
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", `M260,${y + 19} C282,${y + 19} 282,210 300,210`);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#30363d");
+    path.setAttribute("stroke-width", "1.5");
+    path.setAttribute("marker-end", "url(#ar)");
+    path.dataset.edgeFor = c.v;
+    idRows.appendChild(path);
+  });
+  // edge SCIM -> account
+  const outEdge = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  outEdge.setAttribute("d", "M450,210 H560");
+  outEdge.setAttribute("fill", "none");
+  outEdge.setAttribute("stroke", "#30363d");
+  outEdge.setAttribute("stroke-width", "2");
+  outEdge.setAttribute("marker-end", "url(#ar)");
+  idRows.appendChild(outEdge);
+
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+  let animToken = 0;
+  function render() {
+    const val = typed.value.trim();
+    const hit = ALL_OWNED.includes(val) && val.length > 0;
+
+    // SCIM string
+    scimEl.innerHTML =
+      `<span class="kw">GET</span> /environments/{env}/users\n  ?filter=` +
+      `<span class="attr">username</span> <span class="kw">eq</span> <span class="val">"${esc(val)}"</span>\n` +
+      `         <span class="kw">or</span> <span class="attr">alternateLoginIds</span> <span class="kw">eq</span> <span class="val">"${esc(val)}"</span>`;
+
+    // verdict
+    if (!val) {
+      verdictEl.className = "verdict";
+      verdictEl.textContent = "Type or pick an identifier…";
+    } else if (hit) {
+      verdictEl.className = "verdict match";
+      verdictEl.textContent = `✓ Resolved → 1 account (jdoe). Matched on ${val === PRIMARY ? "primary username" : "alternateLoginIds[]"}.`;
+    } else {
+      verdictEl.className = "verdict miss";
+      verdictEl.textContent = "✗ No match — 0 results. Login rejected.";
+    }
+
+    // highlight rows + edges
+    [...idRows.querySelectorAll("g[data-v]")].forEach(g => {
+      const rect = g.querySelector("rect");
+      const on = g.dataset.v === val;
+      rect.setAttribute("stroke", on ? (hit ? "#3fb950" : "#f85149") : (g.dataset.v === "hacker99" ? "#f85149" : "#30363d"));
+      rect.setAttribute("stroke-width", on ? "2.5" : "1.5");
+    });
+    [...idRows.querySelectorAll("path[data-edge-for]")].forEach(p => {
+      const on = p.dataset.edgeFor === val;
+      p.setAttribute("stroke", on ? (hit ? "#3fb950" : "#f85149") : "#30363d");
+      p.setAttribute("stroke-width", on ? "2.5" : "1.5");
+      p.setAttribute("marker-end", on && hit ? "url(#arM)" : "url(#ar)");
+    });
+    acctBox.setAttribute("stroke", hit ? "#3fb950" : "#30363d");
+    outEdge.setAttribute("stroke", hit ? "#3fb950" : "#30363d");
+    outEdge.setAttribute("marker-end", hit ? "url(#arM)" : "url(#ar)");
+
+    animate(val, hit);
+  }
+
+  function animate(val, hit) {
+    const token = ++animToken;
+    const startY = rowYs[val];
+    if (startY == null) { pkt.setAttribute("opacity", "0"); return; }
+
+    // leg 1: row -> SCIM node, leg 2 (only on hit): SCIM -> account
+    const legs = [
+      { x0: 260, y0: startY, x1: 375, y1: 210 },
+    ];
+    if (hit) legs.push({ x0: 450, y0: 210, x1: 652, y1: 210 });
+
+    pkt.setAttribute("fill", hit ? "#3fb950" : "#f85149");
+    let li = 0;
+    function runLeg() {
+      if (token !== animToken) return;
+      const leg = legs[li];
+      const start = performance.now(), ms = 600;
+      function frame(now) {
+        if (token !== animToken) return;
+        const t = Math.min(1, (now - start) / ms);
+        pkt.setAttribute("cx", leg.x0 + (leg.x1 - leg.x0) * t);
+        pkt.setAttribute("cy", leg.y0 + (leg.y1 - leg.y0) * t);
+        pkt.setAttribute("opacity", "1");
+        if (t < 1) requestAnimationFrame(frame);
+        else if (++li < legs.length) runLeg();
+        else if (!hit) pkt.setAttribute("opacity", "0");
+      }
+      requestAnimationFrame(frame);
+    }
+    runLeg();
+  }
+
+  typed.addEventListener("input", render);
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viz:uid" content="v-b83ba4eab241">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compose → Kubernetes → Helm</title>
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Compose → Kubernetes → Helm">
+<meta name="viz:description" content="The same app carried from Docker Compose to Kubernetes to Helm — what each layer adds, what it costs, and why you'd climb the next rung.">
+<meta name="viz:tag" content="Kubernetes">
+<meta name="viz:tag" content="Helm">
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#11182e; --panel:#151d36; --panel2:#1b2647;
+    --ink:#e8edff; --muted:#93a0c6; --line:#27325a;
+    --docker:#2496ed; --k8s:#5b8def; --helm:#2bb3a3;
+    --pod:#7aa2ff; --svc:#46c79a; --ing:#e0a23b; --cfg:#b07ce8; --sec:#e0617a;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0a0e1c,#0b1020 40%);color:var(--ink);
+        font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--k8s)}
+  code,pre{font-family:var(--mono)}
+
+  /* layout */
+  .wrap{display:grid;grid-template-columns:210px 1fr;max-width:1320px;margin:0 auto;gap:0}
+  nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 14px;border-right:1px solid var(--line)}
+  nav .brand{font-weight:700;font-size:14px;letter-spacing:.3px;margin-bottom:22px;color:var(--muted)}
+  nav a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:7px 10px;border-radius:8px;
+        border-left:2px solid transparent;transition:.15s}
+  nav a:hover{color:var(--ink);background:var(--panel)}
+  nav a.active{color:var(--ink);background:var(--panel);border-left-color:var(--k8s)}
+  main{padding:64px 56px 140px;min-width:0}
+  section{margin:0 0 130px;scroll-margin-top:30px}
+  section:last-child{margin-bottom:60px}
+
+  h1{font-size:42px;line-height:1.15;margin:0 0 14px;letter-spacing:-.5px}
+  h1 .grad{background:linear-gradient(90deg,var(--docker),var(--k8s),var(--helm));
+            -webkit-background-clip:text;background-clip:text;color:transparent}
+  h2{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--k8s);margin:0 0 10px}
+  h3{font-size:24px;margin:0 0 10px;letter-spacing:-.2px}
+  p{color:#cdd6f4;max-width:70ch}
+  .lead{font-size:19px;color:#cdd6f4;max-width:66ch}
+  .muted{color:var(--muted)}
+  .tag{display:inline-block;font:600 11px/1 var(--mono);padding:5px 9px;border-radius:999px;
+       border:1px solid var(--line);color:var(--muted);margin-right:6px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .grid2.tight{gap:14px}
+
+  pre.code{background:#0a0f20;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+       overflow:auto;font-size:12.5px;line-height:1.65;margin:0}
+  .filelabel{font:600 11px/1 var(--mono);color:var(--muted);letter-spacing:.5px;
+        padding:7px 12px;background:#0a0f20;border:1px solid var(--line);border-bottom:none;
+        border-radius:10px 10px 0 0;display:inline-block;position:relative;top:1px}
+  pre.code.attached{border-radius:0 10px 10px 10px}
+  .kw{color:#7fb2ff}.str{color:#9be6a0}.num{color:#e0a23b}.com{color:#5b6688}.key{color:#c9b6f0}
+  .hl{color:#ffd479;background:rgba(255,212,121,.10);border-radius:3px;padding:0 2px}
+
+  .callout{border-left:3px solid var(--k8s);background:var(--panel2);
+       padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;color:#cdd6f4}
+  .callout b{color:#fff}
+  .pill{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--mono);
+       padding:6px 10px;border-radius:8px}
+  .p-docker{background:rgba(36,150,237,.16);color:#7fc0ff}
+  .p-k8s{background:rgba(91,141,239,.16);color:#9bb6ff}
+  .p-helm{background:rgba(43,179,163,.16);color:#6fded0}
+
+  /* mapping */
+  .map{display:grid;grid-template-columns:1fr 56px 1fr;gap:0;align-items:stretch}
+  .map .col{display:flex;flex-direction:column;gap:10px}
+  .map .row{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+       padding:11px 14px;font:13px/1.4 var(--mono)}
+  .map .row .t{font-size:11px;color:var(--muted);font-family:var(--sans);margin-bottom:3px}
+  .map .row.h{outline:2px solid var(--k8s);outline-offset:-1px}
+  .map .arrows{display:flex;flex-direction:column;justify-content:space-around;align-items:center}
+  .map .arrows span{color:var(--muted);font-size:18px}
+  .obj-pod{border-left:3px solid var(--pod)} .obj-svc{border-left:3px solid var(--svc)}
+  .obj-ing{border-left:3px solid var(--ing)} .obj-cfg{border-left:3px solid var(--cfg)}
+  .obj-sec{border-left:3px solid var(--sec)} .obj-dep{border-left:3px solid var(--k8s)}
+
+  /* topology */
+  .topo-wrap{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start}
+  .topo{background:radial-gradient(120% 120% at 50% 0%,#0e1530,#090d1c);
+       border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  svg{display:block;width:100%;height:auto}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .legend .li{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+  .legend .sw{width:12px;height:12px;border-radius:3px}
+  .inspect{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+       padding:18px 20px;min-height:260px;position:sticky;top:24px}
+  .inspect h4{margin:0 0 4px;font-size:17px}
+  .inspect .kind{font:600 11px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .inspect .body{font-size:14px;color:#cdd6f4;margin-top:12px}
+  .inspect .analog{margin-top:14px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  .inspect .analog b{color:#fff}
+  .node-hit{cursor:pointer}
+  .ctrls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+  button.btn{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+       border-radius:9px;padding:9px 15px;font:600 13px var(--sans);cursor:pointer;transition:.15s}
+  button.btn:hover{border-color:var(--k8s);background:#22305a}
+  button.btn.on{background:var(--k8s);border-color:var(--k8s);color:#06122c}
+
+  /* helm machine */
+  .helm{display:grid;grid-template-columns:300px 1fr 1fr;gap:16px;align-items:start}
+  .helm .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .helm .ph{padding:11px 16px;border-bottom:1px solid var(--line);font:600 12px var(--sans);
+       color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .helm .pb{padding:14px 16px}
+  .ctrl{margin-bottom:18px}
+  .ctrl label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px;font-weight:600}
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{flex:1;background:transparent;color:var(--muted);border:none;padding:9px 0;
+       font:600 13px var(--sans);cursor:pointer}
+  .seg button.on{background:var(--helm);color:#04201d}
+  input[type=range]{width:100%;accent-color:var(--helm)}
+  .rngval{font:700 14px var(--mono);color:var(--helm)}
+  .toggle{display:flex;align-items:center;justify-content:space-between;
+       background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:10px 13px}
+  .toggle .sw{width:42px;height:24px;border-radius:999px;background:#2a3458;position:relative;
+       cursor:pointer;transition:.18s;flex:none}
+  .toggle .sw::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;
+       background:#fff;top:3px;left:3px;transition:.18s}
+  .toggle.on .sw{background:var(--helm)} .toggle.on .sw::after{left:21px}
+  pre.tpl,pre.out{background:#0a0f20;margin:0;padding:14px 16px;font-size:12px;line-height:1.6;
+       overflow:auto;max-height:520px}
+  .v{color:#ffd479;background:rgba(255,212,121,.12);border-radius:3px;padding:0 3px}
+  .ctl{color:#7fdcff;background:rgba(127,220,255,.10);border-radius:3px;padding:0 3px}
+  pre.out{transition:background .3s}
+  pre.out.flash{background:#10243a}
+  .filetabs{display:flex;gap:4px;flex-wrap:wrap}
+  .filetabs button{background:transparent;border:1px solid var(--line);color:var(--muted);
+       border-radius:7px 7px 0 0;padding:6px 11px;font:600 11px var(--mono);cursor:pointer}
+  .filetabs button.on{background:#0a0f20;color:var(--ink);border-bottom-color:#0a0f20}
+  .tree{font:12px/1.9 var(--mono);color:var(--muted)}
+  .tree b{color:var(--ink)} .tree .c{color:#5b6688}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px}
+  hr.s{border:none;border-top:1px solid var(--line);margin:34px 0}
+  .big-arrow{text-align:center;color:var(--muted);font-size:30px;margin:26px 0;letter-spacing:8px}
+  @media (max-width:1100px){
+    .wrap{grid-template-columns:1fr} nav{display:none} main{padding:40px 24px 100px}
+    .helm{grid-template-columns:1fr} .topo-wrap{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="brand">COMPOSE → K8S → HELM</div>
+    <a href="#intro" class="navlink">The leap</a>
+    <a href="#anchor" class="navlink">1 · What you know</a>
+    <a href="#mapping" class="navlink">2 · The mapping</a>
+    <a href="#topology" class="navlink">3 · The topology</a>
+    <a href="#explosion" class="navlink">4 · The YAML sprawl</a>
+    <a href="#why-helm" class="navlink">5 · Why Helm</a>
+    <a href="#helm" class="navlink">6 · Helm, live</a>
+    <a href="#recap" class="navlink">Recap</a>
+  </nav>
+
+  <main>
+    <!-- INTRO -->
+    <section id="intro">
+      <h2>The mental model</h2>
+      <h1>You already run containers.<br><span class="grad">Now run them on a fleet that heals itself.</span></h1>
+      <p class="lead">Docker Compose answers <i>"run these containers together on <b>this one machine</b>."</i>
+      Kubernetes answers <i>"keep these containers running, the right number of them, reachable, across <b>a cluster of machines</b> — and put them back when something dies."</i></p>
+      <div class="callout">
+        <b>The single biggest shift:</b> Compose is <i>imperative-ish</i> — you bring it up, you bring it down.
+        Kubernetes is <b>declarative + reconciling</b>. You submit the desired state ("I want 3 replicas of this image, reachable on port 80"),
+        and a control loop continuously makes reality match it. Kill a container and it comes back — not because you restarted it, but because reality drifted from the spec.
+      </div>
+      <div class="grid2 tight" style="margin-top:8px">
+        <div class="card"><span class="pill p-docker">docker compose up</span>
+          <p style="margin:12px 0 0">One YAML file. One host. <code>services</code>, networks, volumes. You own the box.</p></div>
+        <div class="card"><span class="pill p-k8s">kubectl apply -f</span>
+          <p style="margin:12px 0 0">Many typed objects. A scheduler places them on nodes. A controller keeps them alive. You own the <i>intent</i>.</p></div>
+      </div>
+    </section>
+
+    <!-- ANCHOR -->
+    <section id="anchor">
+      <h2>1 · The thing you already know</h2>
+      <h3>A familiar 3-service compose file</h3>
+      <p>A frontend, an API, and a Postgres database. Hold this picture — every Kubernetes concept below maps back to a line in here.</p>
+      <span class="filelabel">docker-compose.yml</span>
+      <pre class="code attached" id="composeCode"></pre>
+      <div class="callout" style="margin-top:18px">
+        Everything Compose bundles into one file — <b>which image, how many, what port, what config, what's exposed to the world</b> —
+        Kubernetes splits into <b>separate, individually-managed objects</b>. That split is the whole lesson. Next section maps it line by line.
+      </div>
+    </section>
+
+    <!-- MAPPING -->
+    <section id="mapping">
+      <h2>2 · The mapping</h2>
+      <h3>Every Compose idea becomes a Kubernetes object</h3>
+      <p>Same app, re-expressed. Hover a Compose concept on the left to see which Kubernetes object absorbs it.</p>
+      <div class="map" id="mapGrid">
+        <div class="col" id="mapLeft"></div>
+        <div class="arrows" id="mapArrows"></div>
+        <div class="col" id="mapRight"></div>
+      </div>
+      <div class="callout" style="margin-top:20px">
+        <b>The mental rule:</b> a <code>service:</code> in Compose is never <i>one</i> thing in Kubernetes.
+        It fans out into a <b>Deployment</b> (how many, which image, self-healing),
+        a <b>Service</b> (a stable in-cluster address that load-balances across the copies),
+        and — if it faces the internet — an <b>Ingress</b> (host/path routing + TLS).
+        Config and secrets are lifted <i>out</i> of the workload into <b>ConfigMap</b>/<b>Secret</b> so the same image runs unchanged in every environment.
+      </div>
+    </section>
+
+    <!-- TOPOLOGY -->
+    <section id="topology">
+      <h2>3 · The topology</h2>
+      <h3>How the objects actually relate at runtime</h3>
+      <p>This is the same app, alive in a cluster. Click any object to inspect it. Then hit <b>Send a request</b> to watch a browser hit travel
+      Internet → Ingress → Service → one healthy Pod — and <b>Kill a Pod</b> to watch the Deployment reconcile.</p>
+
+      <div class="ctrls">
+        <button class="btn" id="btnTraffic">▶ Send a request</button>
+        <button class="btn" id="btnKill">✕ Kill a Pod</button>
+        <button class="btn" id="btnScale">＋ Scale to 4 replicas</button>
+        <button class="btn" id="btnReset">↺ Reset</button>
+      </div>
+
+      <div class="topo-wrap" style="margin-top:16px">
+        <div class="topo">
+          <svg id="topoSvg" viewBox="0 0 760 540" role="img" aria-label="Kubernetes topology"></svg>
+        </div>
+        <div class="inspect" id="inspect">
+          <div class="kind">Inspector</div>
+          <h4>Click any object</h4>
+          <div class="body">Each colored box is a real Kubernetes object you'd write YAML for. The dashed groupings (Node, Cluster) are physical/logical boundaries the scheduler manages — you don't usually write YAML for those.</div>
+          <div class="analog"><b>Tip:</b> the arrows are "manages" / "routes to" relationships, not network wiring you configure by hand. Kubernetes wires them from labels.</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="li"><span class="sw" style="background:var(--ing)"></span>Ingress — L7 router (host/path → Service)</div>
+        <div class="li"><span class="sw" style="background:var(--svc)"></span>Service — stable virtual IP, load-balances Pods</div>
+        <div class="li"><span class="sw" style="background:var(--k8s)"></span>Deployment / ReplicaSet — desired replica count</div>
+        <div class="li"><span class="sw" style="background:var(--pod)"></span>Pod — 1+ containers, the unit that runs</div>
+        <div class="li"><span class="sw" style="background:var(--cfg)"></span>ConfigMap — non-secret config</div>
+        <div class="li"><span class="sw" style="background:var(--sec)"></span>Secret — credentials, base64 at rest</div>
+      </div>
+    </section>
+
+    <!-- EXPLOSION -->
+    <section id="explosion">
+      <h2>4 · The YAML sprawl</h2>
+      <h3>One compose file → a pile of manifests</h3>
+      <p>That single <code>docker-compose.yml</code> becomes <b>roughly a dozen</b> Kubernetes manifests once you account for every service's Deployment, Service, config, secrets, and the Ingress. This is real and it's the pain Helm exists to solve.</p>
+      <div class="grid2" style="align-items:start">
+        <div>
+          <span class="filelabel">before — 1 file</span>
+          <pre class="code attached"><span class="com"># docker-compose.yml</span>
+<span class="key">services:</span>
+  web:   <span class="com"># …</span>
+  api:   <span class="com"># …</span>
+  db:    <span class="com"># …</span>
+
+<span class="com"># 1 file. ~30 lines.
+# `docker compose up` and done.</span></pre>
+        </div>
+        <div>
+          <span class="filelabel">after — raw kubernetes</span>
+          <pre class="code attached"><span class="com"># k8s/</span>
+web-deployment.yaml      <span class="com"># 40+ lines</span>
+web-service.yaml
+api-deployment.yaml
+api-service.yaml
+api-configmap.yaml
+api-secret.yaml
+db-statefulset.yaml
+db-service.yaml
+db-pvc.yaml
+ingress.yaml
+<span class="com"># …same values copy-pasted across files</span></pre>
+        </div>
+      </div>
+      <div class="callout">
+        Now multiply by environments. <b>dev</b> wants 1 replica and a <code>*.dev</code> host;
+        <b>prod</b> wants 4 replicas, real TLS, bigger memory limits. With raw YAML you either keep
+        <b>3 near-identical copies of every file</b> or hand-edit before each deploy. Both rot. Enter Helm.
+      </div>
+    </section>
+
+    <!-- WHY HELM -->
+    <section id="why-helm">
+      <h2>5 · Why Helm</h2>
+      <h3>Helm is "docker-compose-meets-templating", for Kubernetes</h3>
+      <p>Helm packages that pile of manifests into one versioned, parameterised unit called a <b>chart</b>.
+      Think of it as: <b>the manifests become templates</b>, the per-environment differences move into <b>one <code>values.yaml</code></b>,
+      and <code>helm install</code> renders templates + values into final manifests and applies them — like <code>docker compose up</code>, but for a templated bundle.</p>
+
+      <div class="grid2 tight">
+        <div class="card">
+          <div class="kind muted" style="font:600 11px/1 var(--mono);letter-spacing:1px">ANALOGY</div>
+          <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px">
+            <tr><td style="padding:6px 0;color:var(--muted)">Docker image</td><td style="text-align:right">reusable artifact</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">→ Helm chart</td><td style="text-align:right;color:var(--helm)">reusable app package</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">docker run -e VAR=…</td><td style="text-align:right">params at runtime</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">→ helm install -f values</td><td style="text-align:right;color:var(--helm)">params at deploy</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">Docker Hub</td><td style="text-align:right">image registry</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">→ chart repo / OCI</td><td style="text-align:right;color:var(--helm)">chart registry</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="kind muted" style="font:600 11px/1 var(--mono);letter-spacing:1px">CHART ANATOMY</div>
+          <div class="tree" style="margin-top:10px">
+<b>myapp/</b><br>
+├── <b>Chart.yaml</b>      <span class="c"># name + version of the chart</span><br>
+├── <b>values.yaml</b>     <span class="c"># default knobs (replicas, image, host…)</span><br>
+├── <b>templates/</b><br>
+│   ├── deployment.yaml <span class="c"># manifest w/ {{ }} holes</span><br>
+│   ├── service.yaml<br>
+│   └── ingress.yaml<br>
+└── charts/         <span class="c"># sub-charts (e.g. postgres dep)</span>
+          </div>
+          <div class="hint">A chart is just this directory, tarred. <code>helm install web ./myapp -f prod.yaml</code> renders it and applies the result to the cluster.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HELM LIVE -->
+    <section id="helm">
+      <h2>6 · Helm, live</h2>
+      <h3>Turn the knobs. Watch the manifests render.</h3>
+      <p>Left = the inputs you control (<code>values.yaml</code> + env override). Middle = the chart <b>template</b> (notice the <span class="v">{{ .Values… }}</span> holes and <span class="ctl">{{ if }}</span> logic). Right = the <b>rendered manifest</b> Helm hands to the cluster. Change anything on the left and the right re-renders instantly — that's exactly what <code>helm template</code> does.</p>
+
+      <div class="helm">
+        <div class="panel">
+          <div class="ph">Inputs</div>
+          <div class="pb">
+            <div class="ctrl">
+              <label>Environment (values override)</label>
+              <div class="seg" id="envSeg">
+                <button data-env="dev" class="on">dev</button>
+                <button data-env="staging">staging</button>
+                <button data-env="prod">prod</button>
+              </div>
+              <div class="hint">Picks <code>values-&lt;env&gt;.yaml</code>, layered over base <code>values.yaml</code>.</div>
+            </div>
+            <div class="ctrl">
+              <label>replicaCount — <span class="rngval" id="repVal">1</span></label>
+              <input type="range" id="repRange" min="1" max="6" value="1">
+            </div>
+            <div class="ctrl">
+              <label>image.tag</label>
+              <div class="seg" id="tagSeg">
+                <button data-tag="1.0.0" class="on">1.0.0</button>
+                <button data-tag="1.4.2">1.4.2</button>
+                <button data-tag="latest">latest</button>
+              </div>
+            </div>
+            <div class="ctrl">
+              <div class="toggle on" id="ingToggle">
+                <div><div style="font-weight:600;font-size:13px">ingress.enabled</div>
+                  <div class="hint" style="margin:2px 0 0">Expose to the internet?</div></div>
+                <div class="sw"></div>
+              </div>
+            </div>
+            <div class="ctrl" style="margin-bottom:0">
+              <label>Effective values (merged)</label>
+              <pre class="tpl" id="valsView" style="max-height:180px"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="ph">
+            <span>templates/</span>
+            <div class="filetabs" id="tplTabs">
+              <button data-f="deployment" class="on">deployment.yaml</button>
+              <button data-f="service">service.yaml</button>
+              <button data-f="ingress">ingress.yaml</button>
+            </div>
+          </div>
+          <pre class="tpl" id="tplView"></pre>
+        </div>
+
+        <div class="panel">
+          <div class="ph">
+            <span>rendered → <code style="color:var(--helm)">kubectl apply</code></span>
+            <span class="hint" id="renderNote" style="margin:0">helm template</span>
+          </div>
+          <pre class="out" id="outView"></pre>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:20px">
+        Try it: drag <b>replicaCount</b> and watch <code>spec.replicas</code> change. Switch to <b>prod</b> — replicas, image tag,
+        and the ingress host all move at once from <i>one</i> override file. Toggle <b>ingress.enabled</b> off and the entire
+        <code>ingress.yaml</code> output vanishes — that's the <span class="ctl">{{- if }}</span> guard doing its job.
+        <b>One chart, every environment, no copy-paste.</b>
+      </div>
+    </section>
+
+    <section id="recap">
+      <h2>Recap</h2>
+      <h3>The whole arc in five sentences</h3>
+      <ol style="max-width:72ch;color:#cdd6f4;font-size:16px;line-height:1.9">
+        <li><b>Compose</b> runs containers together on one host; you manage the process.</li>
+        <li><b>Kubernetes</b> runs them across a cluster and <i>reconciles</i> reality to a declared spec — so things self-heal.</li>
+        <li>One Compose service explodes into typed objects: <b>Deployment</b> (how many / which image), <b>Service</b> (stable address + load-balancing), <b>Ingress</b> (internet routing), <b>ConfigMap/Secret</b> (config out of the image).</li>
+        <li>Raw manifests duplicate across environments and rot.</li>
+        <li><b>Helm</b> templates those manifests + one <code>values.yaml</code> into a versioned, installable package — <code>docker compose up</code> energy, cluster-scale.</li>
+      </ol>
+    </section>
+  </main>
+</div>
+
+<script type="module">
+/* ============================ data: the anchor compose file ============================ */
+const compose = [
+  ['com','# docker-compose.yml'],
+  ['key','services:'],
+  ['plain','  '],['key','web:'],
+  ['plain','    '],['key','image: '],['str','myco/web:1.0.0'],
+  ['plain','    '],['key','ports: '],['str','["80:8080"]'],['hl',''],
+  ['plain','    '],['key','depends_on: '],['plain','[api]'],
+  ['plain','  '],['key','api:'],
+  ['plain','    '],['key','image: '],['str','myco/api:1.0.0'],
+  ['plain','    '],['key','deploy:'],
+  ['plain','      '],['key','replicas: '],['num','3'],
+  ['plain','    '],['key','restart: '],['plain','always'],
+  ['plain','    '],['key','environment:'],
+  ['plain','      '],['plain','LOG_LEVEL: '],['str','info'],
+  ['plain','      '],['plain','DB_PASSWORD: '],['str','${DB_PASSWORD}'],
+  ['plain','  '],['key','db:'],
+  ['plain','    '],['key','image: '],['str','postgres:16'],
+  ['plain','    '],['key','volumes: '],['str','["pgdata:/var/lib/postgresql/data"]'],
+];
+// render compose with simple line grouping
+(function(){
+  const lines = [
+    [['com','# docker-compose.yml']],
+    [['key','services:']],
+    [['plain','  '],['key','web:']],
+    [['plain','    '],['key','image: '],['str','myco/web:1.0.0']],
+    [['plain','    '],['key','ports: '],['hl','["80:8080"]'],['com','   # exposed to users']],
+    [['plain','    '],['key','depends_on: '],['plain','[api]']],
+    [['plain','  '],['key','api:']],
+    [['plain','    '],['key','image: '],['str','myco/api:1.0.0']],
+    [['plain','    '],['key','deploy:']],
+    [['plain','      '],['key','replicas: '],['num','3'],['com','        # how many copies']],
+    [['plain','    '],['key','restart: '],['plain','always'],['com','     # keep it alive']],
+    [['plain','    '],['key','environment:']],
+    [['plain','      '],['plain','LOG_LEVEL: '],['str','info']],
+    [['plain','      '],['plain','DB_PASSWORD: '],['str','${DB_PASSWORD}'],['com','  # a secret']],
+    [['plain','  '],['key','db:']],
+    [['plain','    '],['key','image: '],['str','postgres:16']],
+    [['plain','    '],['key','volumes: '],['str','[pgdata:/var/lib/postgresql/data]'],['com'," # state"]],
+  ];
+  document.getElementById('composeCode').innerHTML = lines.map(l =>
+    l.map(([c,t])=>`<span class="${c==='plain'?'':c}">${esc(t)}</span>`).join('')
+  ).join('\n');
+})();
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ============================ mapping rows ============================ */
+const mapData = [
+  { l:'image: myco/api:1.0.0', lt:'which container to run',
+    r:'Deployment → spec.template.spec.containers[].image', rt:'Deployment', cls:'obj-dep' },
+  { l:'deploy.replicas: 3', lt:'how many copies',
+    r:'Deployment → spec.replicas (ReplicaSet keeps the count)', rt:'Deployment / ReplicaSet', cls:'obj-dep' },
+  { l:'restart: always', lt:'keep it alive',
+    r:'(built in) controller reconciles dead Pods automatically', rt:'Controller loop', cls:'obj-dep' },
+  { l:'(running container)', lt:'the unit that executes',
+    r:'Pod — 1+ containers sharing network/volumes', rt:'Pod', cls:'obj-pod' },
+  { l:'ports: ["80:8080"]', lt:'reach it by a stable name',
+    r:'Service — stable virtual IP, load-balances across Pods', rt:'Service', cls:'obj-svc' },
+  { l:'(facing the internet)', lt:'expose to users + host/TLS',
+    r:'Ingress — L7 host/path routing into a Service', rt:'Ingress', cls:'obj-ing' },
+  { l:'environment: LOG_LEVEL', lt:'non-secret config',
+    r:'ConfigMap — injected as env vars or files', rt:'ConfigMap', cls:'obj-cfg' },
+  { l:'DB_PASSWORD: ${…}', lt:'credentials',
+    r:'Secret — same idea, separate object, base64 at rest', rt:'Secret', cls:'obj-sec' },
+  { l:'volumes: pgdata:/…', lt:'durable state',
+    r:'PersistentVolumeClaim — storage that outlives the Pod', rt:'PVC', cls:'obj-pod' },
+];
+const ml=document.getElementById('mapLeft'), mr=document.getElementById('mapRight'), ma=document.getElementById('mapArrows');
+mapData.forEach((d,i)=>{
+  ml.insertAdjacentHTML('beforeend',
+    `<div class="row" data-i="${i}"><div class="t">${d.lt}</div>${esc(d.l)}</div>`);
+  mr.insertAdjacentHTML('beforeend',
+    `<div class="row ${d.cls}" data-i="${i}"><div class="t">${d.rt}</div>${esc(d.r)}</div>`);
+  ma.insertAdjacentHTML('beforeend',`<span data-i="${i}">→</span>`);
+});
+document.querySelectorAll('#mapGrid .row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    const i=el.dataset.i;
+    document.querySelectorAll(`#mapGrid .row`).forEach(r=>r.classList.toggle('h',r.dataset.i===i));
+    document.querySelectorAll('#mapArrows span').forEach(s=>s.style.color = s.dataset.i===i?'#fff':'');
+  });
+});
+
+/* ============================ topology SVG ============================ */
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('topoSvg');
+const COL={pod:'#7aa2ff',svc:'#46c79a',ing:'#e0a23b',cfg:'#b07ce8',sec:'#e0617a',k8s:'#5b8def'};
+function el(tag,attrs={},txt){const e=document.createElementNS(NS,tag);
+  for(const k in attrs)e.setAttribute(k,attrs[k]); if(txt!=null)e.textContent=txt; return e;}
+function box(x,y,w,h,color,label,sub,kind,fill){
+  const g=el('g',{class:'node-hit',transform:`translate(${x},${y})`});
+  g.appendChild(el('rect',{width:w,height:h,rx:9,fill:fill||'#141d38',
+     stroke:color,'stroke-width':1.6}));
+  g.appendChild(el('rect',{width:5,height:h,rx:2,fill:color}));
+  const t=el('text',{x:14,y:h/2-3,fill:'#e8edff','font-size':13,'font-weight':600});t.textContent=label;g.appendChild(t);
+  if(sub){const s=el('text',{x:14,y:h/2+14,fill:'#93a0c6','font-size':10.5});s.textContent=sub;g.appendChild(s);}
+  g._kind=kind; return g;
+}
+function dashedRegion(x,y,w,h,label){
+  const g=el('g',{});
+  g.appendChild(el('rect',{x,y,width:w,height:h,rx:12,fill:'none',
+     stroke:'#34406b','stroke-dasharray':'5 5','stroke-width':1.4}));
+  const t=el('text',{x:x+12,y:y+18,fill:'#5e6c98','font-size':11,'font-weight':700,'letter-spacing':'1.5'});
+  t.textContent=label;g.appendChild(t);return g;
+}
+function line(x1,y1,x2,y2,color){
+  return el('line',{x1,y1,x2,y2,stroke:color||'#3b4774','stroke-width':1.6,'marker-end':'url(#arr)'});
+}
+// defs
+const defs=el('defs');
+defs.innerHTML=`<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+  <path d="M0,0 L7,3 L0,6 Z" fill="#4a5a8f"/></marker>`;
+svg.appendChild(defs);
+
+let state={replicas:3, killedIdx:null};
+function drawTopo(){
+  [...svg.querySelectorAll('g,line,.region,text.world')].forEach(n=>n.remove());
+  svg.appendChild(defs);
+
+  // outer cluster region
+  svg.appendChild(dashedRegion(150,70,594,452,'KUBERNETES CLUSTER'));
+  svg.appendChild(dashedRegion(168,250,560,256,'NODE  (a worker machine)'));
+
+  // internet / user
+  const user=box(20,30,108,46,'#9fb0d8','🌐 Internet','browser request','internet','#0e1430');
+  user.querySelector('rect:nth-child(1)').setAttribute('stroke','#5e6c98');
+  svg.appendChild(user);
+
+  // ingress
+  const ing=box(250,96,210,52,COL.ing,'Ingress','host/path → Service · TLS','ingress');
+  svg.appendChild(ing);
+  // service
+  const svc=box(250,178,210,52,COL.svc,'Service: api','stable VIP · load-balances','service');
+  svg.appendChild(svc);
+  // deployment wrapper
+  svg.appendChild(box(196,272,300,30,COL.k8s,'Deployment: api  →  ReplicaSet','desired replicas = '+state.replicas,'deployment'));
+
+  // pods
+  const podY=320, n=state.replicas, totalW=520, startX=210;
+  const pods=[];
+  for(let i=0;i<n;i++){
+    const gap=Math.min(120,(totalW)/Math.max(n,1));
+    const px=startX + i*(gap+6);
+    const dead = state.killedIdx===i;
+    const g=box(px,podY,108,70, dead?'#e0617a':COL.pod,
+        dead?'Pod ✕':'Pod','api container',dead?'pod-dead':'pod', dead?'#2a1622':'#141d38');
+    if(dead) g.style.opacity=.45;
+    g.dataset.idx=i;
+    // container chip inside
+    g.appendChild(el('rect',{x:14,y:44,width:80,height:18,rx:4,
+       fill:'none',stroke:dead?'#e0617a':'#3b4774','stroke-dasharray':dead?'3 3':'0'}));
+    const ct=el('text',{x:18,y:57,fill:'#93a0c6','font-size':9});ct.textContent=dead?'restarting…':'myco/api:1.0.0';g.appendChild(ct);
+    svg.appendChild(g); pods.push({g,px,dead});
+  }
+
+  // configmap + secret
+  const cfg=box(520,178,200,40,COL.cfg,'ConfigMap','LOG_LEVEL=info','configmap');
+  const sec=box(520,228,200,40,COL.sec,'Secret','DB_PASSWORD ••••','secret');
+  svg.appendChild(cfg); svg.appendChild(sec);
+
+  // arrows
+  svg.appendChild(line(128,53,250,118));            // internet -> ingress
+  svg.appendChild(line(355,148,355,178));            // ingress -> service
+  svg.appendChild(line(355,230,355,272));            // service -> deployment
+  pods.forEach(p=>{ if(!p.dead) svg.appendChild(line(346,302,p.px+54,podY,'#3b4774')); });
+  // config/secret feed pods
+  svg.appendChild(el('path',{d:`M520,205 C470,235 ${pods[0]?pods[0].px+54:300},300 ${pods[0]?pods[0].px+54:300},320`,
+     fill:'none',stroke:COL.cfg,'stroke-dasharray':'3 4','stroke-width':1.3,opacity:.6}));
+  svg.appendChild(el('path',{d:`M520,250 C470,275 ${pods[0]?pods[0].px+54:300},305 ${pods[0]?pods[0].px+54:300},322`,
+     fill:'none',stroke:COL.sec,'stroke-dasharray':'3 4','stroke-width':1.3,opacity:.6}));
+
+  bindInspect();
+}
+
+const INFO={
+  internet:{k:'External traffic',h:'The user / browser',
+    b:'Outside the cluster entirely. Kubernetes has no object for "the internet" — traffic just arrives at the cluster edge and the Ingress controller is the first thing that handles it.',
+    a:'Compose analog: <b>whoever curls <code>localhost:80</code></b>.'},
+  ingress:{k:'Ingress',h:'L7 HTTP router',
+    b:'Routes by hostname and path (e.g. <code>api.myco.com/*</code> → the api Service) and terminates TLS. One Ingress can fan many hostnames into many Services. Needs an ingress controller (nginx, Traefik) running in the cluster to actually do the work.',
+    a:'Compose analog: the <b><code>ports:</code> "80:…"</b> publish line + whatever reverse proxy you bolted on. Compose has no real equivalent for host/path routing — this is new.'},
+  service:{k:'Service',h:'Stable address + load balancer',
+    b:'Pods are cattle: they get new IPs when they restart. A Service is a <b>fixed virtual IP and DNS name</b> (<code>api.default.svc</code>) that always points at the <i>currently healthy</i> Pods, spreading traffic across them. It finds its Pods by <b>label selector</b>, not by hardcoded IPs.',
+    a:'Compose analog: <b>the service name on the Compose network</b> — <code>http://api:8080</code> just worked. A K8s Service is that, made explicit and load-balanced.'},
+  deployment:{k:'Deployment → ReplicaSet',h:'Desired-state controller',
+    b:'You declare "I want N replicas of image X". The Deployment creates a ReplicaSet, which creates Pods and <b>continuously reconciles</b>: a Pod dies → a new one is created; you change the image → it rolls out new Pods and retires old ones with zero downtime.',
+    a:'Compose analog: <b><code>deploy.replicas</code> + <code>restart: always</code></b> — but with rolling updates, rollbacks, and self-healing built in.'},
+  pod:{k:'Pod',h:'The atomic run unit',
+    b:'One (or a few tightly-coupled) containers that share a network namespace and storage. <b>Pods are disposable</b> — you almost never create them directly; a Deployment makes and replaces them. This is the closest thing to "a running container" from Compose.',
+    a:'Compose analog: <b>one running container of a service</b>. The difference: a Pod is meant to be thrown away and remade, not nursed.'},
+  'pod-dead':{k:'Pod (terminating)',h:'A Pod that just died',
+    b:'It crashed or was killed. Notice the Deployment hasn\'t given up — the ReplicaSet immediately schedules a replacement to restore the declared count. You did nothing; the control loop did. Hit Reset to see it healed.',
+    a:'Compose analog: the moment <code>restart: always</code> kicks in — except Kubernetes also reschedules onto a different machine if this node is gone.'},
+  configmap:{k:'ConfigMap',h:'Non-secret configuration',
+    b:'Key/value config lifted out of the image so the <b>same image</b> runs in dev/staging/prod with different settings. Injected into Pods as environment variables or mounted files.',
+    a:'Compose analog: the non-secret half of <b><code>environment:</code></b> / an <code>env_file</code>.'},
+  secret:{k:'Secret',h:'Credentials, separated',
+    b:'Mechanically almost identical to a ConfigMap, but a distinct object so access can be restricted (RBAC) and it\'s base64-encoded at rest (encrypt it for real with KMS/sealed-secrets). Keeps passwords out of your image and out of Git.',
+    a:'Compose analog: <b><code>${DB_PASSWORD}</code></b> from your <code>.env</code> — now a first-class, access-controlled object.'},
+};
+function bindInspect(){
+  svg.querySelectorAll('.node-hit').forEach(g=>{
+    g.addEventListener('click',()=>{
+      const i=INFO[g._kind]; if(!i)return;
+      document.querySelectorAll('.node-hit rect:first-child').forEach(r=>r.setAttribute('stroke-width','1.6'));
+      g.querySelector('rect:first-child').setAttribute('stroke-width','3');
+      document.getElementById('inspect').innerHTML=
+        `<div class="kind">${i.k}</div><h4>${i.h}</h4>
+         <div class="body">${i.b}</div><div class="analog">${i.a}</div>`;
+    });
+  });
+}
+drawTopo();
+
+/* traffic animation */
+function sendRequest(){
+  const path=[[74,53],[355,118],[355,204]];
+  const alive=[...svg.querySelectorAll('.node-hit')].filter(g=>g.dataset.idx!=null && !g.querySelector('text').textContent.includes('✕'));
+  const target=alive[Math.floor(Math.random()*alive.length)];
+  if(target){const m=target.getAttribute('transform').match(/translate\(([\d.]+),([\d.]+)\)/);
+    path.push([+m[1]+54,+m[2]]);}
+  const dot=el('circle',{r:7,fill:'#ffd479',filter:'url(#g)'});
+  if(!svg.querySelector('#g')){const f=el('filter',{id:'g'});
+    f.innerHTML='<feGaussianBlur stdDeviation="2.5"/><feComponentTransfer><feFuncA type="linear" slope="2"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>';
+    defs.appendChild(f);}
+  svg.appendChild(dot);
+  let seg=0,t=0;
+  const tick=()=>{
+    if(seg>=path.length-1){dot.remove();return;}
+    const[a,b]=[path[seg],path[seg+1]];
+    const x=a[0]+(b[0]-a[0])*t, y=a[1]+(b[1]-a[1])*t;
+    dot.setAttribute('cx',x);dot.setAttribute('cy',y);
+    t+=0.045; if(t>=1){t=0;seg++;}
+    requestAnimationFrame(tick);
+  };
+  tick();
+}
+document.getElementById('btnTraffic').onclick=()=>{sendRequest();setTimeout(sendRequest,260);setTimeout(sendRequest,520);};
+document.getElementById('btnKill').onclick=()=>{
+  state.killedIdx=Math.floor(Math.random()*state.replicas); drawTopo();
+  setTimeout(()=>{state.killedIdx=null;drawTopo();},2600); // self-heal
+};
+document.getElementById('btnScale').onclick=()=>{state.replicas=state.replicas===4?3:4;drawTopo();
+  document.getElementById('btnScale').textContent = state.replicas===4?'－ Scale to 3 replicas':'＋ Scale to 4 replicas';};
+document.getElementById('btnReset').onclick=()=>{state={replicas:3,killedIdx:null};drawTopo();
+  document.getElementById('btnScale').textContent='＋ Scale to 4 replicas';};
+
+/* ============================ Helm live renderer ============================ */
+import yaml from 'https://esm.sh/js-yaml@4.1.0';
+
+const baseValues = `replicaCount: 1
+image:
+  repository: myco/api
+  tag: 1.0.0
+service:
+  port: 80
+ingress:
+  enabled: true
+  host: api.local
+resources:
+  memory: 256Mi`;
+
+const envOverrides = {
+  dev:     `# values-dev.yaml  (override)\nreplicaCount: 1\ningress:\n  host: api.dev.myco.com`,
+  staging: `# values-staging.yaml\nreplicaCount: 2\nimage:\n  tag: 1.4.2\ningress:\n  host: api.staging.myco.com\nresources:\n  memory: 512Mi`,
+  prod:    `# values-prod.yaml\nreplicaCount: 4\nimage:\n  tag: 1.4.2\ningress:\n  host: api.myco.com\nresources:\n  memory: 1Gi`,
+};
+
+const templates = {
+deployment:
+`apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: { app: {{ .Release.Name }}-api }
+  template:
+    metadata:
+      labels: { app: {{ .Release.Name }}-api }
+    spec:
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: {{ .Values.resources.memory }}`,
+service:
+`apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  selector: { app: {{ .Release.Name }}-api }
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080`,
+ingress:
+`{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-api
+                port: { number: {{ .Values.service.port }} }
+{{- else }}
+# ingress.enabled=false → Helm renders nothing.
+# The Ingress object simply never exists in the cluster.
+{{- end }}`
+};
+
+const ui={env:'dev',replicas:1,tag:'1.0.0',ingress:true,file:'deployment'};
+
+/* tiny Go-template-ish renderer: handles {{ .X }}, {{- if X }}…{{- else }}…{{- end }} */
+function deepMerge(a,b){const o=structuredClone(a);
+  for(const k in b){o[k]=(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))?deepMerge(o[k]||{},b[k]):b[k];}
+  return o;}
+function resolve(path,ctx){
+  path=path.trim();
+  if(path.startsWith('.Release.Name')) return ctx.Release.Name;
+  if(path.startsWith('.Values.')){
+    return path.slice(8).split('.').reduce((o,k)=>o==null?o:o[k],ctx.Values);
+  }
+  return '';
+}
+function renderTpl(tpl,ctx){
+  // normalize whitespace-control markers: treat {{- as {{ and trim the preceding newline/indent
+  let s=tpl;
+  // process blocks via regex-driven recursive scan
+  function block(str){
+    let out='', i=0;
+    const re=/\{\{-?\s*(if|else|end)?\s*([^}]*?)\s*-?\}\}/g;
+    let m, last=0, stack=[];
+    // simple linear pass with if/else/end
+    let tokens=[]; let idx=0;
+    while((m=re.exec(str))){
+      tokens.push({type:'text',v:str.slice(idx,m.index),raw:m[0],pre:m.index});
+      const trimL=m[0].startsWith('{{-'), trimR=m[0].endsWith('-}}');
+      tokens.push({type:'tag',kw:m[1]||'expr',expr:m[2],trimL,trimR});
+      idx=re.lastIndex;
+    }
+    tokens.push({type:'text',v:str.slice(idx)});
+    // build with conditional skipping
+    let res=''; let skip=[false];
+    for(let t=0;t<tokens.length;t++){
+      const tk=tokens[t];
+      if(tk.type==='text'){
+        let v=tk.v;
+        if(tokens[t+1]&&tokens[t+1].trimL) v=v.replace(/[ \t]*\n?$/,'');
+        if(tokens[t-1]&&tokens[t-1].trimR) v=v.replace(/^\n?[ \t]*/,'');
+        if(!skip.includes(true)) res+=v;
+      } else if(tk.kw==='if'){
+        const val=resolve(tk.expr.replace(/^if\s*/,''),ctx);
+        skip.push(skip.includes(true)?true:!truthy(val));
+      } else if(tk.kw==='else'){
+        const top=skip.pop(); const parentSkip=skip.includes(true);
+        skip.push(parentSkip?true:!top===false?true:false);
+        // recompute: else inverts current branch, respecting parent
+        skip[skip.length-1]=parentSkip?true:!(top);
+      } else if(tk.kw==='end'){
+        skip.pop();
+      } else { // expr
+        if(!skip.includes(true)) res+=String(resolve(tk.expr,ctx));
+      }
+    }
+    return res;
+  }
+  return block(s).replace(/\n{3,}/g,'\n\n').replace(/^\n+/,'');
+}
+function truthy(v){return !(v===false||v==null||v===''||v===0);}
+
+function mergedValues(){
+  const base=yaml.load(baseValues);
+  const ov=yaml.load(envOverrides[ui.env].split('\n').filter(l=>!l.trim().startsWith('#')).join('\n'))||{};
+  let v=deepMerge(base,ov);
+  // live UI controls win last
+  v.replicaCount=ui.replicas; v.image.tag=ui.tag; v.ingress.enabled=ui.ingress;
+  return v;
+}
+function highlightTpl(t){
+  return esc(t)
+   .replace(/(\{\{-?\s*(?:if|else|end)[^}]*?-?\}\})/g,'<span class="ctl">$1</span>')
+   .replace(/(\{\{-?\s*\.[^}]*?-?\}\})/g,'<span class="v">$1</span>');
+}
+function highlightOut(t){
+  return esc(t)
+   .replace(/^(\s*[\w.\/-]+:)/gm,'<span style="color:#7fb2ff">$1</span>')
+   .replace(/(kind: \w+)/g,'<span style="color:#ffd479">$1</span>');
+}
+
+const outView=document.getElementById('outView');
+function refresh(){
+  const V=mergedValues();
+  const ctx={Release:{Name:'web'},Chart:{Name:'myapp'},Values:V};
+  document.getElementById('tplView').innerHTML=highlightTpl(templates[ui.file]);
+  let rendered=renderTpl(templates[ui.file],ctx).trim();
+  outView.innerHTML=highlightOut(rendered);
+  document.getElementById('valsView').innerHTML=esc(yaml.dump(V,{indent:2}).trim());
+  document.getElementById('repVal').textContent=ui.replicas;
+  // flash render panel
+  outView.classList.add('flash'); setTimeout(()=>outView.classList.remove('flash'),300);
+  document.getElementById('renderNote').textContent =
+    (ui.file==='ingress'&&!ui.ingress)?'rendered: (nothing — guarded out)':'helm template';
+}
+
+/* wire controls */
+document.querySelectorAll('#envSeg button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#envSeg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); ui.env=b.dataset.env;
+  // env override also moves replicas + tag so the demo feels real
+  const ov=yaml.load(envOverrides[ui.env].split('\n').filter(l=>!l.trim().startsWith('#')).join('\n'))||{};
+  if(ov.replicaCount){ui.replicas=ov.replicaCount;document.getElementById('repRange').value=ui.replicas;}
+  if(ov.image&&ov.image.tag){ui.tag=ov.image.tag;
+    document.querySelectorAll('#tagSeg button').forEach(x=>x.classList.toggle('on',x.dataset.tag===ui.tag));}
+  refresh();
+});
+document.getElementById('repRange').oninput=e=>{ui.replicas=+e.target.value;refresh();};
+document.querySelectorAll('#tagSeg button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tagSeg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');ui.tag=b.dataset.tag;refresh();});
+document.getElementById('ingToggle').onclick=function(){
+  ui.ingress=!ui.ingress; this.classList.toggle('on',ui.ingress); refresh();};
+document.querySelectorAll('#tplTabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tplTabs button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');ui.file=b.dataset.f;refresh();});
+refresh();
+
+/* nav scroll-spy */
+const links=[...document.querySelectorAll('.navlink')];
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));}});
+},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

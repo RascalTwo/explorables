@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How an access token is verified</title>
+<meta name="viz:uid" content="v-1fdef350903f">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:description" content="Dive C of the client credentials flow: header, key selection, signature, claims — in that order — with four real tokens you can run through the gates and watch fail.">
+<meta name="viz:title" content="How an access token is verified">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  /* The signature checks on this page are REAL. The public key below is the
+     actual RSA-2048 public half of the keypair that signed the token on the
+     token-creation dive, and the gate runs `crypto.subtle.verify` in the
+     reader's own browser. Nothing here is a scripted "and then it fails". */
+  body { max-width:1180px; margin:0 auto; padding:26px 26px 90px }
+  section { margin-top:34px }
+  h2 { font-size:17px; margin:0 0 4px; letter-spacing:-.2px }
+  h2 .n { color:var(--faint); font-variant-numeric:tabular-nums; margin-right:9px }
+  .lede { color:var(--muted); font-size:13.5px; line-height:1.6; margin:0 0 16px; max-width:78ch }
+  .lede b, p b { color:var(--text) }
+  code { font-family:var(--mono); font-size:.92em; color:#7fd7ff }
+
+  .c-head { color:var(--c4) } .c-pay { color:var(--c5) } .c-sig { color:var(--good) }
+  .sw { display:inline-block; width:9px; height:9px; border-radius:2px;
+        background:currentColor; margin-right:7px; vertical-align:middle }
+
+  /* ---- the token picker -------------------------------------------------- */
+  .picker { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px }
+  .pick { text-align:left; border:1px solid var(--border); border-radius:9px; padding:11px 13px;
+          background:var(--panel); color:var(--text); cursor:pointer; font-family:var(--sans);
+          transition:border-color .2s ease, background .2s ease }
+  .pick:hover { border-color:var(--muted) }
+  .pick.on { border-color:var(--accent); background:#141d31; box-shadow:0 0 0 1px var(--accent) }
+  .pick .pt { font-size:13px; font-weight:650 }
+  .pick .pd { color:var(--muted); font-size:11.5px; line-height:1.5; margin-top:5px }
+
+  /* ---- the gate pipeline -------------------------------------------------
+     The spatial claim: trust is a value that stays at zero for the first two
+     gates no matter what the token says about itself, and only the signature
+     gate can raise it. Everything else is consequence. */
+  .pipe { display:grid; grid-template-columns:repeat(5,1fr); gap:9px }
+  .gate { border:1px solid var(--border); border-radius:10px; padding:12px 13px;
+          background:var(--panel); position:relative; transition:all .25s ease }
+  .gate .gn { font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint) }
+  .gate .gt { font-size:13px; font-weight:650; margin-top:5px; line-height:1.3 }
+  .gate .gd { color:var(--muted); font-size:11.5px; line-height:1.5; margin-top:6px; min-height:52px }
+  .gate .gv { margin-top:9px; font-size:11px; font-weight:700; letter-spacing:.05em;
+              text-transform:uppercase; min-height:15px }
+  .gate.pass { border-color:var(--good) } .gate.pass .gv { color:var(--good) }
+  .gate.fail { border-color:var(--danger); background:#2a1315 } .gate.fail .gv { color:var(--danger) }
+  .gate.skip { opacity:.4 } .gate.skip .gv { color:var(--faint) }
+
+  /* the trust rail runs under the gates and is the whole argument of the page */
+  .rail { display:grid; grid-template-columns:repeat(5,1fr); gap:9px; margin-top:9px }
+  .rr { border-radius:6px; padding:7px 10px; font-size:11px; line-height:1.4;
+        border:1px dashed var(--border); color:var(--faint) }
+  .rr.none { border-color:#5c2a2a; background:#1d1113; color:#e5928c }
+  .rr.trusted { border-color:#2f6b52; background:#0d2015; color:#8fd6ae }
+  .rr b { display:block; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+          margin-bottom:2px }
+
+  .verdict { margin-top:14px; border-radius:10px; padding:14px 16px; font-size:13.5px;
+             line-height:1.6; border:1px solid var(--border); background:var(--panel) }
+  .verdict.ok { border-color:var(--good); background:#0d2015; color:#c6e8d1 }
+  .verdict.no { border-color:var(--danger); background:#2a1315; color:#f3c7c3 }
+  .verdict b { display:block; font-size:15px; margin-bottom:4px }
+  .verdict.ok b { color:var(--good) } .verdict.no b { color:var(--danger) }
+  /* block, not inline-block: as an inline it ran on from the end of the reason
+     sentence and the two overlapped. */
+  .verdict .live { display:block; margin-top:10px; font-family:var(--mono);
+                   font-size:11px; color:var(--faint); border-top:1px solid var(--border);
+                   padding-top:9px }
+
+  .tok { font-family:var(--mono); font-size:11.5px; line-height:1.7; word-break:break-all;
+         background:#0a1220; border:1px solid var(--border); border-radius:10px;
+         padding:14px 16px; margin-bottom:14px }
+  .tok .dot { color:var(--text); font-weight:700 }
+  .tok .edited { background:#2a1315; box-shadow:0 0 0 1px var(--danger); border-radius:3px }
+
+  .callout { border-left:3px solid var(--warn); background:#1e1808; border-radius:0 8px 8px 0;
+             padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.6; color:#e8d9b4 }
+  .callout b { color:var(--warn) } .callout i { color:#fff; font-style:italic }
+  .callout.danger { border-color:var(--danger); background:#2a1315; color:#f3c7c3 }
+  .callout.danger b { color:var(--danger) }
+  .callout.good { border-color:var(--good); background:#0d2015; color:#c6e8d1 }
+  .callout.good b { color:var(--good) }
+
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:14px }
+  .box { border:1px solid var(--border); border-radius:10px; background:var(--panel);
+         padding:14px 16px }
+  .box h4 { margin:0 0 9px; font-size:12px; letter-spacing:.1em; text-transform:uppercase }
+  .box.trap h4 { color:var(--danger) }
+  .box p { margin:0; color:var(--muted); font-size:12.5px; line-height:1.6 }
+  .box p + p { margin-top:9px }
+  .box p b { color:var(--text) }
+  .box pre { margin:9px 0 0; font-family:var(--mono); font-size:11px; line-height:1.6;
+             color:var(--muted); background:#0a1220; border:1px solid var(--border);
+             border-radius:6px; padding:9px 11px; white-space:pre-wrap; word-break:break-all }
+
+  .refs { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+  .ref { border:1px solid var(--border); border-radius:9px; padding:12px 14px;
+         background:var(--panel); font-size:12.5px; line-height:1.6; color:var(--muted) }
+  .ref b { color:#a9e2ff } .ref i { color:var(--text); font-style:normal }
+  .ours { border-left:3px solid var(--warn) }
+  .ours b { color:var(--warn); text-transform:uppercase; letter-spacing:.04em; font-size:11px }
+
+  .nav { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+  .nav a { display:inline-block; padding:9px 14px; border-radius:8px;
+           background:#151f3a; border:1px solid #3a5288; color:#9fc6ff;
+           text-decoration:none; font-size:13px }
+  .nav a:hover { background:#1d2c50; border-color:var(--accent); color:#cfe4ff }
+  .nav a.home { background:transparent; border-color:var(--border); color:var(--muted) }
+
+  /* ======================================================================
+     THE HERO FIGURE — the gates as a physical checkpoint.
+     The token is a thing that travels; each gate is a barrier that lifts or
+     slams. The big lamp on the left is the argument: it stays RED through
+     the first two barriers no matter what the token says about itself, and
+     only the signature barrier can turn it green.
+     ====================================================================== */
+  .hero { margin:22px 0 0; border:1px solid var(--border); border-radius:14px;
+          background:linear-gradient(180deg,#0c1424,#0a1120); overflow:hidden }
+  .hero-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+              padding:14px 18px; border-bottom:1px solid var(--border) }
+  .hero-bar h2 { margin:0; font-size:15px }
+  .hero-bar .spacer { flex:1 }
+  .hero:focus { outline:none; box-shadow:0 0 0 1px var(--accent) }
+  .hero-bar button { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+                     padding:8px 14px; font-size:13px; font-weight:650; cursor:pointer;
+                     font-family:var(--sans) }
+
+  .hnarr { display:flex; gap:13px; align-items:center;
+           padding:12px 18px; border-bottom:1px solid var(--border) }
+  .hstepno { background:var(--accent); color:#04121f; font-weight:800; border-radius:7px;
+             padding:5px 9px; font-size:14px; line-height:1.05; text-align:center;
+             flex:none; min-width:34px }
+  .hstepno small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .hnarr .t { font-size:14.5px; font-weight:600; color:var(--text); line-height:1.45 }
+  .htrack { display:flex; gap:3px; padding:11px 18px 0 }
+  .htrack .tick { height:5px; flex:1; background:#1e2a41; border-radius:3px; cursor:pointer }
+  .htrack .tick:hover { background:#3b5286 }
+  .htrack .tick.done { background:#2c4a72 }
+  .htrack .tick.now { background:var(--accent) }
+
+  .hpicks { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:13px 18px }
+  .hpicks .plabel { font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+                    color:var(--faint); margin-right:2px }
+  .hpicks button { background:transparent; color:var(--muted); border:1px solid var(--border);
+                   border-radius:7px; padding:6px 12px; font-size:12.5px; cursor:pointer;
+                   font-family:var(--sans) }
+  .hpicks button:hover { color:var(--text); border-color:var(--muted) }
+  .hpicks button.sel { background:var(--accent); border-color:var(--accent); color:#04121f;
+                       font-weight:650 }
+  .hpicks button.trap { margin-left:auto; border-color:#5c2a2a; color:#e5928c }
+  .hpicks button.trap.sel { background:var(--danger); border-color:var(--danger); color:#1a0b0c }
+
+  .early { opacity:0; transition:opacity .35s ease }
+  .early.on { opacity:1 }
+  .hero-bar button:hover { filter:brightness(1.12) }
+  .hero-bar button.ghost { background:transparent; color:var(--muted);
+                           border:1px solid var(--border) }
+  .hero-bar button.ghost.sel { color:#04121f; background:var(--accent); border-color:var(--accent) }
+  .hero-bar button.ghost:hover { color:var(--text); border-color:var(--muted); filter:none }
+  .hero-bar button.ghost.sel:hover { color:#04121f }
+  .hero svg { display:block; width:100%; height:auto }
+
+  .hero .lbl { font-family:var(--sans); font-size:10.5px; letter-spacing:.09em;
+               text-transform:uppercase; fill:var(--faint) }
+  .hero .cap { font-family:var(--sans); font-size:12px; fill:var(--muted) }
+  .hero .gtxt { font-family:var(--sans); font-size:12.5px; font-weight:650; fill:var(--text) }
+
+  /* A barrier is an arm that rotates up out of the way, or stays down. */
+  /* A portcullis, not a boom arm. The first draft used a swinging arm pivoted at
+     the top of a post — which put the bar ABOVE the belt, so a closed gate did
+     not visually block the lane it was supposed to be blocking. A shutter that
+     drops through the belt and lifts clear of it cannot be misread. */
+  .shutter { transition:transform .45s cubic-bezier(.3,1.5,.5,1) }
+  .barrier.pass .shutter { transform:translateY(-96px) }
+  .barrier .lintel { fill:#243352 }
+  .barrier.idle .shutterbar { fill:#4a5f92 }
+  .barrier.pass .shutterbar { fill:var(--good) }
+  .barrier.fail .shutterbar { fill:var(--danger) }
+  .barrier.fail .lintel { fill:#5c2a2a }
+
+  /* The travelling token. Position is a CSS transform set from JS (so it
+     transitions); the slam lives on an inner group so the two transforms
+     never fight over the same element. */
+  #cPkt { transition:transform .85s cubic-bezier(.4,0,.2,1) }
+  .pkt.slam { animation:slam .45s ease-out }
+  @keyframes slam { 0% { transform:translateX(0) } 35% { transform:translateX(-13px) }
+                    60% { transform:translateX(5px) } 100% { transform:translateX(0) } }
+  .pkt.dead .pktbody { fill:#3a1a1c; stroke:var(--danger) }
+  .pkt.dead .pkttxt { fill:#ff9a92 }
+
+  /* The lamp. This is the point of the whole figure. */
+  .lamp { transition:all .4s ease }
+  .lamp .glass { fill:#2a1315; stroke:var(--danger); stroke-width:3 }
+  .lamp.green .glass { fill:#0d2015; stroke:var(--good) }
+  .lamp .word { font-family:var(--sans); font-size:15px; font-weight:800; fill:var(--danger) }
+  .lamp.green .word { fill:var(--good) }
+  .lamp .glyph { font-family:var(--sans); font-size:52px; font-weight:800; fill:var(--danger) }
+  .lamp.green .glyph { fill:var(--good) }
+  .lamp .sub2 { font-family:var(--sans); font-size:11.5px; fill:#ff9a92 }
+  .lamp.green .sub2 { fill:#8fd6ae }
+
+  .fade { opacity:0; transition:opacity .4s ease }
+  .fade.on { opacity:1 }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shutter, #cPkt, .lamp, .fade { transition:none }
+    .pkt.slam { animation:none }
+  }
+</style>
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>How an access token is verified</h1>
+  <div class="sub">Dive C of <a href="../client-credentials-flow/" style="color:var(--accent)">the client credentials flow</a> — what the resource server does with the string in the <code>Authorization</code> header. The order is not a detail; the order <i>is</i> the content.</div>
+</div>
+
+<div class="hero" tabindex="0">
+  <div class="hero-bar">
+    <h2>Watch a token try to get in</h2>
+    <div class="spacer"></div>
+    <button class="ghost" id="hRestart">⟲ Restart</button>
+    <button class="ghost" id="hPrev">‹ Step</button>
+    <button id="hPlay">▶ Play</button>
+    <button class="ghost" id="hNext">Step ›</button>
+  </div>
+  <div class="hnarr">
+    <div class="hstepno" id="hNo">1<small>of 7</small></div>
+    <div class="t" id="hStatus"></div>
+  </div>
+  <div class="htrack" id="hTrack"></div>
+  <div class="hpicks">
+    <span class="plabel">Send</span>
+    <button class="sel" data-run="good">A genuine token</button>
+    <button data-run="edited">One with the payload edited</button>
+    <button data-run="none">One claiming <code>alg: none</code></button>
+    <button data-run="hs">One switched to HS256</button>
+    <button class="trap" id="hEarly">☠ …and read it before checking</button>
+  </div>
+  <svg viewBox="0 0 1300 424" role="img"
+       aria-label="A token travels along a belt through five barriers. A large lamp on the left shows TRUST, red until the signature barrier lifts.">
+
+    <defs>
+      <marker id="ar-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--danger)"/>
+      </marker>
+    </defs>
+
+    <!-- ============ the lamp: the argument of the whole page ============ -->
+    <g class="lamp" id="cLamp" data-viz-id="hero-lamp" data-label="trust lamp">
+      <rect x="20" y="46" width="212" height="256" rx="13" fill="#0d1420" stroke="#243352"/>
+      <text class="lbl" x="126" y="74" text-anchor="middle">Do we trust it yet?</text>
+      <circle class="glass" cx="126" cy="146" r="52"/>
+      <text class="glyph" id="cLampGlyph" x="126" y="167" text-anchor="middle">✕</text>
+      <text class="word" id="cLampWord" x="126" y="238" text-anchor="middle">NO</text>
+      <text class="sub2" id="cLampSub" x="126" y="264" text-anchor="middle">just bytes a stranger sent</text>
+    </g>
+
+    <!-- ============ the belt ============ -->
+    <path d="M250 330 L1290 330" stroke="#243352" stroke-width="3"/>
+    <path d="M250 338 L1290 338" stroke="#1a2438" stroke-width="6" stroke-dasharray="14 10"/>
+
+    <!-- ============ the five barriers ============ -->
+    <g id="cGates"></g>
+
+    <!-- ============ trap one, drawn ============
+         Reading the payload before the signature clears. The branch rides along
+         with the token, because the point is that it happens at the FIRST gate —
+         while the lamp is still red and the bytes are still a stranger's. -->
+    <g class="early" id="cEarly">
+      <rect x="-46" y="120" width="332" height="72" rx="10"
+            fill="#2a1315" stroke="var(--danger)" stroke-width="1.5"/>
+      <text x="120" y="146" text-anchor="middle" fill="#ff9a92"
+            style="font-family:var(--sans);font-size:12.5px;font-weight:700">log the caller · look up the tenant · route it</text>
+      <text x="120" y="168" text-anchor="middle" fill="#e5928c"
+            style="font-family:var(--sans);font-size:11.5px">all of it on values nobody has checked yet</text>
+      <text x="120" y="184" text-anchor="middle" fill="var(--danger)"
+            style="font-family:var(--sans);font-size:11px;font-weight:700">…and it already ran</text>
+      <path d="M120 282 L120 198" stroke="var(--danger)" stroke-width="2.5"
+            stroke-dasharray="7 5" marker-end="url(#ar-bad)"/>
+    </g>
+
+    <!-- ============ the token ============ -->
+    <g id="cPkt">
+      <g class="pkt" id="cPktInner">
+        <rect class="pktbody" x="0" y="286" width="140" height="38" rx="9"
+              fill="#152036" stroke="var(--accent)" stroke-width="2"/>
+        <text class="pkttxt" x="70" y="311" text-anchor="middle" fill="#9fc6ff"
+              style="font-family:var(--mono);font-size:13px;font-weight:700">the token</text>
+      </g>
+    </g>
+
+    <!-- ============ the outcome ============ -->
+    <!-- y=414, clear of the gate caption row at 380 — at 392 the two collided -->
+    <text class="cap" id="cOutcome" x="770" y="414" text-anchor="middle"
+          style="font-size:14px;font-weight:700">&nbsp;</text>
+  </svg>
+</div>
+
+<section id="gates">
+  <h2><span class="n">1</span>Five gates, and one of them is load-bearing</h2>
+  <p class="lede">Pick a token and watch it go through. <b>The signature checks below are real</b> — the page holds the actual RSA public key that signed the genuine token and runs <code>crypto.subtle.verify</code> in your browser. The forgeries fail because they are genuinely invalid, not because a script says so.</p>
+
+  <div class="picker" id="picker"></div>
+  <div class="tok" id="tokView"></div>
+
+  <div class="pipe" id="pipe"></div>
+  <div class="rail" id="rail"></div>
+  <div class="verdict" id="verdict"></div>
+</section>
+
+<section id="trap1">
+  <h2><span class="n">2</span>Trap one — trusting a claim before the signature</h2>
+  <p class="lede">Until gate 3 returns true, the payload is not data. It is <b>an attacker's suggestion</b>, base64-encoded. Anyone can produce a string whose payload says whatever they like; that costs nothing and requires no key.</p>
+
+  <div class="cols">
+    <div class="box trap">
+      <h4>What the mistake looks like</h4>
+      <p>Decoding the payload early — to log the caller, to pick a tenant, to route the request, to fetch a record — and then verifying afterwards. Or verifying in a filter that some paths do not run through.</p>
+      <pre>const claims = decode(token);      <span style="color:var(--danger)">// ← attacker-controlled</span>
+log.info("caller", claims.sub);
+const tenant = load(claims.tenant); <span style="color:var(--danger)">// ← already too late</span>
+verify(token);</pre>
+    </div>
+    <div class="box">
+      <h4>Why it bites even when the check is there</h4>
+      <p>The damage happens <b>before</b> the rejection. A database lookup on an unverified identifier, a log line poisoned with attacker-chosen text, a cache keyed by a forged tenant — all executed, all on input that was about to be thrown away.</p>
+      <p>RFC 7519 §7.2 puts the signature at <b>step 7</b> of ten and does not even extract the claims set until <b>step 10</b>. That ordering is the specification's answer to this.</p>
+    </div>
+  </div>
+</section>
+
+<section id="trap2">
+  <h2><span class="n">3</span>Trap two — letting the token choose its own algorithm</h2>
+  <p class="lede">The header is unprotected. It says <code>alg</code>, and a verifier that simply does what it says is asking the attacker how to check the attacker's own work.</p>
+
+  <div class="cols">
+    <div class="box trap">
+      <h4><code>alg: none</code></h4>
+      <p>The header claims the token is unsigned, and a library that honours it "validates" a token with <b>no signature at all</b>. RFC 8725 §2.1: <i>"The algorithm can be changed to 'none' by an attacker, and some libraries would trust this value and 'validate' the JWT without checking any signature."</i></p>
+      <p>RFC 9068 §2.1 closes it for access tokens outright: they <b>MUST NOT</b> use <code>none</code>.</p>
+    </div>
+    <div class="box trap">
+      <h4>RS256 → HS256 confusion</h4>
+      <p>Subtler and more dangerous. Change <code>alg</code> to <code>HS256</code> and sign with the <b>public</b> key as the HMAC secret. A verifier that picks its algorithm from the header hands the public key to an HMAC function — and the public key is, by design, something the attacker already has.</p>
+      <p>RFC 8725 §2.1 describes exactly this: <i>"some libraries would try to validate the signature using HMAC-SHA256 and using the RSA public key as the HMAC shared secret."</i></p>
+    </div>
+  </div>
+
+  <div class="callout good">
+    <b>The fix is one line, and it is a configuration, not a check.</b> The verifier declares which algorithms it accepts, before it ever looks at a token — RFC 8725 §3.1: <i>"Libraries MUST enable the caller to specify a supported set of algorithms and MUST NOT use any other algorithms when performing cryptographic operations."</i> The <code>alg</code> in the header is then only useful for confirming what you already decided.
+  </div>
+</section>
+
+<section id="nodb">
+  <h2><span class="n">4</span>None of that touched a database</h2>
+  <p class="lede">This is what explains most of the confusion about tokens, in both directions.</p>
+
+  <div class="cols">
+    <div class="box">
+      <h4>Why it is fast</h4>
+      <p>Verification is arithmetic over bytes that arrived in the request, plus a public key the server already had. No lookup, no network call, no shared session store. A resource server can accept traffic from an authorization server it has never contacted, and scale horizontally without any coordination.</p>
+    </div>
+    <div class="box">
+      <h4>Why revocation does not work the way people expect</h4>
+      <p>Nothing is consulted, so there is nothing to change. <b>Deleting the client, disabling it, or rotating its secret does not stop a token that was already issued.</b> Those actions stop the <i>next</i> token from being minted. The one in flight keeps working until <code>exp</code>.</p>
+      <p>That is the trade, and it is why the lifetime is short: <b>expiry is the revocation mechanism.</b></p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>If that window is unacceptable, the answer is not a database lookup on every request</b> — that gives back the property the design was bought for. It is either a shorter lifetime, or introspection for the few endpoints that genuinely need immediate revocation, chosen deliberately and priced. Rotating the signing key is the blunt version: it invalidates every outstanding token at once.
+  </div>
+</section>
+
+<section id="refs">
+  <h2><span class="n">5</span>Where this comes from</h2>
+  <div class="refs">
+    <div class="ref"><b>RFC 7519 §7.2</b> · <i>Validating a JWT</i> — ten steps. The JWS signature is validated at step 7; the JWT Claims Set is not extracted until step 10. Read first-party 2026-08-06.</div>
+    <div class="ref"><b>RFC 8725</b> (BCP 225) · <i>JSON Web Token Best Current Practices</i> — §2.1 Weak Signatures and Insufficient Signature Validation, §3.1 Perform Algorithm Verification, §3.2 Use Appropriate Algorithms.</div>
+    <div class="ref"><b>RFC 9068 §4</b> · <i>Validating JWT Access Tokens</i> — verify <code>typ</code> is <code>at+jwt</code>; the issuer "MUST exactly match the value of the <code>iss</code> claim"; the <code>aud</code> claim must contain an identifier this resource server expects; "reject any JWT where <code>alg</code> is <code>none</code>"; current time "MUST be before the time represented by the <code>exp</code> claim".</div>
+    <div class="ref"><b>RFC 6750 §2.1</b> · <i>Authorization Request Header Field</i> — how the token arrives: <code>Authorization: Bearer &lt;token&gt;</code>.</div>
+    <div class="ref ours"><b>ours, not a spec</b><br>The clock-skew allowance at gate 4 is a deployment choice. No RFC sets a number; RFC 7519 §4.1.4 only permits "some small leeway, usually no more than a few minutes, to account for clock skew."</div>
+    <div class="ref ours"><b>ours, not a spec</b><br>The forged tokens on this page were generated locally to demonstrate two documented attack shapes against a throwaway keypair. They are illustrations of RFC 8725 §2.1, not a finding about any system.</div>
+  </div>
+
+  <div class="elsewhere">
+    <span class="lbl">Elsewhere — the same two traps, as a checklist</span>
+    <a href="https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html">JSON Web Token Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+    <span class="why">Both traps on this page, written up by someone with no stake in our
+    design: <code>"alg":"none"</code>, and the key-type confusion where an RSA public key is
+    handed to a verifier as an HMAC secret. Useful <em>because</em> it is a checklist rather
+    than a walkthrough — if a reviewer only remembers two rules about JWT verification, these
+    are the two everybody independently lands on.</span>
+  </div>
+
+  <div class="nav">
+    <a href="../client-credentials-flow/" class="home">← Back to the flow</a>
+    <a href="../dive-token-created/" class="home">← Previous dive · the token</a>
+    <a href="../jwks-explainer/">Where the key at gate 2 comes from →</a>
+  </div>
+</section>
+
+<script type="module">
+  import { $, esc, stepper, saveHash, loadHash } from "/_kit/viz.js";
+
+  // ---- the real key and the real tokens ----------------------------------
+  // RSA-2048 public half of the keypair used on the token-creation dive.
+  // Generated 2026-08-06 with node:crypto, thrown away after; it protects
+  // nothing. The two forgeries were built against it to demonstrate the two
+  // attack shapes RFC 8725 §2.1 names.
+  const JWK = {"kty":"RSA","n":"ifXnCvEGccxOeVJaPbUqohzCz6pyOzYFUVTBL_MjpvO4olI4VIM7m3XElbEwcfoxl8dSal6xFJZ3AZpOF_mGM86ILP2uZRu2NVPAh7X4zhy9K4b5K8TGERmxk_hXcfJEaIP9PTLXk0Jos9bMPpzZYxhiXNKXcRIRldZ5h_1CU1gn6W6p1c75KCbj6FEIxIohQsaijHA26Il1hheNdyD17eISLFuGaW4i5DGAF_dlJVCpGTvDMyK5zQZc8uRgYL-YN5cYkj0u45a9wfRCKgAhwCjMYL0VtaUMUHhUQxrlr3AdiLpm58y6XFBnqVV71nHHjH6RL7DCELxdVev9IJe5Iw","e":"AQAB","alg":"RS256","use":"sig","kid":"k8EVLdKF9gZPMw_u"};
+
+  const H       = "eyJhbGciOiJSUzI1NiIsInR5cCI6ImF0K2p3dCIsImtpZCI6Ims4RVZMZEtGOWdaUE13X3UifQ";
+  const P       = "eyJpc3MiOiJodHRwczovL2FzLmV4YW1wbGUuY29tIiwic3ViIjoiOWY0YzJhZTEiLCJjbGllbnRfaWQiOiI5ZjRjMmFlMSIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwiZXhwIjoxNzg2MDQ2NDYwLCJpYXQiOjE3ODYwNDY0MDAsImp0aSI6ImU4NGJjZTRkLTIyNWQtNGY4MC1iYzRlLWE1MTgxNmVkMWQ5OSIsInNjb3BlIjoicmVwb3J0czpyZWFkIn0";
+  const S       = "ffTp6QlrXOKdMpCejFzsG-9LMG_lleDP1zBO6yH2RlUO4IqozZCZYdPC4SPOCriS7Y40aanpcywKr8nBnD6JgKlOLWGtYtG_cX9cG0mUppfevp_evRfCSTKEPf0Ve-WSMDbyU-WHDUm3yMDS82syKa4CgR8s_VTt5tUuFKDBxXFlFSFFW1GtobUzZBBz3tI9oF40tG2mXGDcDgay_btJNCZ_6n_t6ZlzCugEUN6JyGPKZoVJw1LjmQCMmDtvs8rhCRTmmymcxxwkjASFpPapLR0renldedv2a8BLa2IaCHL_Au3_rWFL2QZgVNgEG3hxiJgQmxh5vtq27n5VMtg0Sw";
+  const P_EDIT  = "eyJpc3MiOiJodHRwczovL2FzLmV4YW1wbGUuY29tIiwic3ViIjoiOWY0YzJhZTEiLCJjbGllbnRfaWQiOiI5ZjRjMmFlMSIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwiZXhwIjoxNzg2MTMyODYwLCJpYXQiOjE3ODYwNDY0MDAsImp0aSI6ImU4NGJjZTRkLTIyNWQtNGY4MC1iYzRlLWE1MTgxNmVkMWQ5OSIsInNjb3BlIjoicmVwb3J0czpyZWFkIn0";
+  const H_NONE  = "eyJhbGciOiJub25lIiwidHlwIjoiYXQrand0Iiwia2lkIjoiazhFVkxkS0Y5Z1pQTXdfdSJ9";
+  const H_HS    = "eyJhbGciOiJIUzI1NiIsInR5cCI6ImF0K2p3dCIsImtpZCI6Ims4RVZMZEtGOWdaUE13X3UifQ";
+  const S_HS    = "EMoRMCDRZEzAh4_U6Uz2zuODEU70Nbc4HHj7eiyN21Q";
+
+  // What this verifier accepts, decided here and not read from any token.
+  const ACCEPTED_ALGS = ["RS256"];
+  const EXPECTED_ISS  = "https://as.example.com";
+  const EXPECTED_AUD  = "https://api.example.com";
+  const SKEW_SECONDS  = 60;
+  // The token was minted for a fixed instant, so "now" is pinned to inside its
+  // window. Otherwise every run would fail gate 4 on age and bury the point.
+  const NOW = 1786046430;
+
+  const b64u = s => atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4));
+  const j = s => { try { return JSON.parse(b64u(s)); } catch { return null; } };
+  const clip = (s, n) => s.length > n ? s.slice(0, n) + "…" : s;
+
+  const TOKENS = [
+    { id:"good", t:"Genuine", d:"Signed by the authorization server, inside its lifetime.",
+      h:H, p:P, s:S, edit:null },
+    { id:"edited", t:"Payload edited", d:"Expiry pushed a day into the future. Signature untouched.",
+      h:H, p:P_EDIT, s:S, edit:"p" },
+    { id:"none", t:"alg: none", d:"Header rewritten to claim no signature. Signature removed.",
+      h:H_NONE, p:P_EDIT, s:"", edit:"h" },
+    { id:"hs", t:"RS256 → HS256", d:"HMAC'd with the public key as the shared secret.",
+      h:H_HS, p:P_EDIT, s:S_HS, edit:"h" },
+  ];
+
+  let key = null;
+  try {
+    key = await crypto.subtle.importKey("jwk", JWK,
+      { name:"RSASSA-PKCS1-v1_5", hash:"SHA-256" }, false, ["verify"]);
+  } catch (e) {
+    console.warn("public key import failed; gate 3 will report unavailable", e);
+  }
+
+  // ---- the gates ---------------------------------------------------------
+  // Each returns {state, note, verdict?}. `state` drives the colour; the rail
+  // below reads only whether gate 3 has passed yet.
+  async function runGates(tk) {
+    const header = j(tk.h);
+    const out = [];
+
+    // 1 — read the header. Unprotected, and read for routing only.
+    out.push(header
+      ? { state:"pass", v:"read", note:`<code>alg</code>: ${esc(String(header.alg))} · <code>kid</code>: ${esc(String(header.kid))}` }
+      : { state:"fail", v:"malformed", note:"not decodable as JSON" });
+    if (!header) return { gates:out, failedAt:0, reason:"The token is not a JWT." };
+
+    // 2 — pin the algorithm, THEN select the key. Pinning first is the whole
+    //     defence; doing it here rather than at gate 3 is deliberate.
+    if (!ACCEPTED_ALGS.includes(header.alg)) {
+      out.push({ state:"fail", v:"rejected",
+        note:`this verifier accepts <b>${ACCEPTED_ALGS.join(", ")}</b> only — <code>${esc(String(header.alg))}</code> is not on the list` });
+      out.push({ state:"skip", v:"not reached", note:"never runs" });
+      out.push({ state:"skip", v:"not reached", note:"never runs" });
+      out.push({ state:"skip", v:"not reached", note:"never runs" });
+      return { gates:out, failedAt:1,
+        reason: header.alg === "none"
+          ? "Rejected before any cryptography happened. The token asked to be trusted without a signature; the verifier does not offer that option."
+          : "Rejected before any cryptography happened. The token asked to be checked with HMAC, using a key everybody has. The verifier was never willing to use HMAC at all — which is why this attack needs a verifier that takes its instructions from the token." };
+    }
+    out.push({ state:"pass", v:"selected",
+      note:`key <code>${esc(String(header.kid))}</code> found in the key set` });
+
+    // 3 — the load-bearing one. Real RSASSA-PKCS1-v1_5 / SHA-256 verification.
+    const si = tk.h + "." + tk.p;
+    let ok = false;
+    if (key && tk.s) {
+      const sigBytes = Uint8Array.from(b64u(tk.s), c => c.charCodeAt(0));
+      ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key,
+        sigBytes, new TextEncoder().encode(si));
+    }
+    out.push(ok
+      ? { state:"pass", v:"valid", note:"the bytes received are the bytes that were signed" }
+      : { state:"fail", v:"invalid", note:"crypto.subtle.verify returned <b>false</b>" });
+    if (!ok) {
+      out.push({ state:"skip", v:"not reached", note:"never runs" });
+      out.push({ state:"skip", v:"not reached", note:"never runs" });
+      return { gates:out, failedAt:2,
+        reason:"The payload was changed, so it no longer matches the signature — and the attacker cannot produce a new one without the private key. Note that the verifier never had to know <i>what</i> was edited." };
+    }
+
+    // 4 — only now are the claims facts rather than suggestions.
+    const c = j(tk.p);
+    const fails = [];
+    if (c.iss !== EXPECTED_ISS) fails.push("<code>iss</code>");
+    if (![].concat(c.aud).includes(EXPECTED_AUD)) fails.push("<code>aud</code>");
+    if (NOW >= c.exp + SKEW_SECONDS) fails.push("<code>exp</code>");
+    if (c.nbf && NOW < c.nbf - SKEW_SECONDS) fails.push("<code>nbf</code>");
+    out.push(fails.length
+      ? { state:"fail", v:"rejected", note:`failed: ${fails.join(", ")}` }
+      : { state:"pass", v:"accepted",
+          note:`<code>iss</code> ✓ &nbsp;<code>aud</code> ✓ &nbsp;<code>exp</code> ✓ (${c.exp - NOW}s left)` });
+    if (fails.length) {
+      out.push({ state:"skip", v:"not reached", note:"never runs" });
+      return { gates:out, failedAt:3, reason:"Authentic, and still not acceptable — a valid signature says who wrote it, not that it was meant for this API or that it is still current." };
+    }
+
+    // 5 — serve.
+    out.push({ state:"pass", v:"served",
+      note:`caller <b>${esc(String(c.client_id))}</b>, scope <b>${esc(String(c.scope))}</b>` });
+    return { gates:out, failedAt:-1,
+      reason:"Five gates, no database, no network call. Everything needed was in the request and in a public key the server already held." };
+  }
+
+  // ---- rendering ---------------------------------------------------------
+  const GATE_META = [
+    ["Gate 1", "Read the header", "Unprotected and readable by anyone. Used to find out which key and which algorithm are being claimed — never to decide anything."],
+    ["Gate 2", "Pin the algorithm, pick the key", "The verifier's own list of acceptable algorithms is applied here, before any key is used. Then <code>kid</code> selects from the key set."],
+    ["Gate 3", "Verify the signature", "RSASSA-PKCS1-v1_5 with SHA-256 over <code>header.payload</code>, using the public key. This is the only gate that creates trust."],
+    ["Gate 4", "Validate the claims", "Now that they are known to be authentic: issuer, audience, expiry — with a small allowance for clock skew."],
+    ["Gate 5", "Serve", "Authorize against the scope and answer the request."],
+  ];
+
+  $("#picker").innerHTML = TOKENS.map(t =>
+    `<button class="pick" data-id="${t.id}" data-viz-id="pick-${t.id}" data-label="${t.t}">
+       <div class="pt">${t.t}</div><div class="pd">${t.d}</div></button>`).join("");
+
+  async function show(id) {
+    const tk = TOKENS.find(t => t.id === id) || TOKENS[0];
+    [...$("#picker").children].forEach(b => b.classList.toggle("on", b.dataset.id === tk.id));
+    saveHash({ token: tk.id });
+
+    const mark = (txt, on) => on ? `<span class="edited">${txt}</span>` : txt;
+    $("#tokView").innerHTML =
+      `<span class="c-head">${mark(clip(tk.h, 74), tk.edit === "h")}</span><span class="dot">.</span>` +
+      `<span class="c-pay">${mark(clip(tk.p, 96), tk.edit === "p")}</span><span class="dot">.</span>` +
+      `<span class="c-sig">${tk.s ? clip(tk.s, 74) : "<i style='color:var(--faint)'>(empty)</i>"}</span>` +
+      `<div style="margin-top:10px;font-family:var(--sans);font-size:11.5px;color:var(--faint)">` +
+      `<span class="sw c-head"></span>header &nbsp;<span class="sw c-pay"></span>payload &nbsp;` +
+      `<span class="sw c-sig"></span>signature` +
+      (tk.edit ? ` &nbsp;·&nbsp; <span style="color:var(--danger)">the boxed part was altered</span>` : "") +
+      `</div>`;
+
+    const { gates, failedAt, reason } = await runGates(tk);
+    $("#pipe").innerHTML = gates.map((g, i) =>
+      `<div class="gate ${g.state}" data-viz-id="gate-${i + 1}" data-label="${GATE_META[i][1]}">
+         <div class="gn">${GATE_META[i][0]}</div>
+         <div class="gt">${GATE_META[i][1]}</div>
+         <div class="gd">${g.note || GATE_META[i][2]}</div>
+         <div class="gv">${g.v}</div>
+       </div>`).join("");
+
+    // The rail is the argument: nothing before gate 3 is trustworthy, whatever
+    // the gates above happened to report.
+    const trusted = gates[2] && gates[2].state === "pass";
+    $("#rail").innerHTML = [0, 1, 2, 3, 4].map(i => {
+      const after = i >= 2 && trusted;
+      return `<div class="rr ${after ? "trusted" : (gates[i] && gates[i].state === "skip" ? "" : "none")}">` +
+        `<b>Trust</b>${after ? "authentic — the issuer really wrote this"
+                             : (gates[i] && gates[i].state === "skip" ? "—" : "none — attacker-controlled bytes")}</div>`;
+    }).join("");
+
+    const ok = failedAt === -1;
+    $("#verdict").className = "verdict " + (ok ? "ok" : "no");
+    $("#verdict").innerHTML =
+      `<b>${ok ? "200 — request served" : "401 — rejected at gate " + (failedAt + 1)}</b>${reason}` +
+      `<div class="live">verified live in this browser · crypto.subtle.verify("RSASSA-PKCS1-v1_5", …) → ` +
+      `${gates[2] ? (gates[2].state === "pass" ? "true" : gates[2].state === "skip" ? "not called" : "false") : "not called"}</div>`;
+  }
+
+  // ---- 0. the hero checkpoint -------------------------------------------
+  // Driven by runGates() — the same function, and therefore the same real
+  // signature check, that powers the section below. The animation never decides
+  // an outcome; it only shows the one the crypto produced.
+  const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const POSTS = [440, 600, 760, 920, 1080];
+  const GATE_SHORT = ["Read the header", "Pin the algorithm", "Check the signature",
+                      "Check the claims", "Serve"];
+  const GATE_SUB = ["what does it claim?", "and pick the key", "the only one that matters",
+                    "issuer, audience, expiry", "answer the request"];
+  const START_X = 250;
+  const stopBefore = i => POSTS[i] - 152;      // park with the nose just short of it
+  let cPick = "good";
+
+  $("#cGates").innerHTML = POSTS.map((x, i) =>
+    `<g class="barrier idle" id="cG${i}" data-viz-id="hero-gate-${i + 1}" data-label="${GATE_SHORT[i]}">
+       <rect class="lintel" x="${x - 30}" y="226" width="60" height="20" rx="5"/>
+       <g class="shutter"><rect class="shutterbar" x="${x - 8}" y="250" width="16" height="94" rx="5"/></g>
+       <text class="gtxt" x="${x - 76}" y="364" text-anchor="middle">${i + 1}. ${GATE_SHORT[i]}</text>
+       <text class="cap" x="${x - 76}" y="380" text-anchor="middle">${GATE_SUB[i]}</text>
+     </g>`).join("");
+
+  const setLamp = (green, word, sub) => {
+    $("#cLamp").classList.toggle("green", green);
+    $("#cLampGlyph").textContent = green ? "✓" : "✕";
+    $("#cLampWord").textContent = word;
+    $("#cLampSub").textContent = sub;
+  };
+  // The token shape is drawn at x=0, so the translate IS its left edge. (First
+  // draft subtracted START_X and every stop landed 250 units short.)
+  const movePkt = x => {
+    $("#cPkt").style.transform = `translateX(${x}px)`;
+    $("#cEarly").style.transform = `translateX(${x}px)`;
+  };
+
+  // Seven steps: arrival, the five gates, the verdict. `gatesFor` memoises per
+  // token because runGates() is async — it does the real signature check — while
+  // the step renderer has to be synchronous.
+  const NARR = [
+    `A request turns up carrying a token. Right now we know <b>nothing</b> about it — it is a string a stranger sent us.`,
+    `Read the header. It tells us which algorithm and which key it would like us to use. We read it. We do not believe it.`,
+    `Apply <b>our own</b> list of acceptable algorithms — decided long before this token existed — then pick the key by <code>kid</code>.`,
+    `Check the signature. <b>This is the only step in the whole sequence that can create trust.</b>`,
+    `Only now are the claims worth reading: the right issuer, <i>this</i> audience, not expired.`,
+    `Serve the request.`,
+    `Done.`,
+  ];
+  const gateCache = new Map();
+  const gatesFor = async tk => {
+    if (!gateCache.has(tk.id)) gateCache.set(tk.id, await runGates(tk));
+    return gateCache.get(tk.id);
+  };
+  let cResult = null, earlyRead = false;
+
+  function renderHeroC(i) {
+    $("#hNo").innerHTML = (i + 1) + "<small>of " + NARR.length + "</small>";
+    [...$("#hTrack").children].forEach((t, k) =>
+      t.className = "tick" + (k < i ? " done" : k === i ? " now" : ""));
+    if (!cResult) return;
+    const { gates, failedAt } = cResult;
+    const lastGate = failedAt >= 0 ? failedAt : POSTS.length - 1;
+    const g = Math.min(i - 1, lastGate);      // gate the picture is at; -1 = arrival
+
+    POSTS.forEach((_, k) => {
+      const st = k > g ? "idle"
+               : gates[k] && gates[k].state === "fail" ? "fail"
+               : gates[k] && gates[k].state === "pass" ? "pass" : "idle";
+      $("#cG" + k).className.baseVal = "barrier " + st;
+    });
+
+    const stopped = failedAt >= 0 && g >= failedAt;
+    const through = failedAt < 0 && i >= POSTS.length + 1;
+    movePkt(i <= 0 ? START_X : through ? 1120 : stopBefore(g));
+    $("#cPktInner").classList.toggle("dead", stopped);
+    $("#cPktInner").classList.remove("slam");
+    if (stopped && i - 1 === failedAt && !REDUCED) {
+      void $("#cPkt").getBoundingClientRect().width;   // force reflow to re-fire
+      $("#cPktInner").classList.add("slam");
+    }
+
+    // Gate 3 (index 2) is the only thing in the figure that can turn the lamp.
+    const trusted = g >= 2 && gates[2] && gates[2].state === "pass";
+    setLamp(trusted, trusted ? "YES" : "NO",
+      trusted ? "the issuer really did write this"
+        : stopped ? "and it never will"
+        : earlyRead && i >= 1 ? "…and we used it anyway"
+        : "just bytes a stranger sent");
+
+    // Trap one exists only in the window before the signature clears.
+    const trapShowing = earlyRead && i >= 1 && !trusted;
+    $("#cEarly").classList.toggle("on", trapShowing);
+
+    const t = $("#cOutcome");
+    if (stopped) {
+      t.setAttribute("fill", "var(--danger)");
+      t.textContent = `Stopped at barrier ${failedAt + 1}. It never reached the others.`;
+    } else if (through) {
+      t.setAttribute("fill", "var(--good)");
+      t.textContent = "Served. No database was opened at any point.";
+    } else { t.textContent = " "; }
+
+    let line = NARR[Math.min(i, NARR.length - 1)];
+    if ((stopped && i - 1 >= failedAt) || through || i >= NARR.length - 1) line = cResult.reason;
+    if (trapShowing) line += ` <b style="color:var(--danger)">And we already decoded the payload and acted on it — before any of this ran.</b>`;
+    $("#hStatus").innerHTML = line;
+  }
+
+  $("#hTrack").innerHTML = NARR.map(() => `<div class="tick"></div>`).join("");
+  let playing = false;
+  const setPlayLabel = () => { $("#hPlay").textContent = playing ? "❚❚ Pause" : "▶ Play"; };
+
+  const HERO = stepper({
+    n: NARR.length, hashKey: "hero", autoplayMs: 2600,
+    target: document.querySelector(".hero"),
+    onStep: i => {
+      renderHeroC(i);
+      if (i >= NARR.length - 1 && playing) { playing = false; setPlayLabel(); }
+    },
+  });
+  HERO.pause();                                // stepper autostarts when given autoplayMs
+  setPlayLabel();
+
+  async function pickToken(id) {
+    cPick = id;
+    cResult = await gatesFor(TOKENS.find(t => t.id === id));
+    [...document.querySelectorAll(".hpicks button[data-run]")]
+      .forEach(x => x.classList.toggle("sel", x.dataset.run === id));
+    playing = false; setPlayLabel();
+    HERO.go(0); renderHeroC(0);
+  }
+
+  $("#hPlay").onclick = () => {
+    if (playing) { HERO.pause(); playing = false; }
+    else {
+      if (HERO.current >= NARR.length - 1) HERO.go(0);
+      HERO.play(); playing = true;
+    }
+    setPlayLabel();
+  };
+  $("#hNext").onclick = () => { playing = false; setPlayLabel(); HERO.next(); };
+  $("#hPrev").onclick = () => { playing = false; setPlayLabel(); HERO.prev(); };
+  $("#hRestart").onclick = () => { playing = false; setPlayLabel(); HERO.go(0); renderHeroC(0); };
+  [...$("#hTrack").children].forEach((t, k) => {
+    t.onclick = () => { playing = false; setPlayLabel(); HERO.go(k); };
+  });
+  document.querySelector(".hpicks").addEventListener("click", e => {
+    const b = e.target.closest("button[data-run]");
+    if (b) pickToken(b.dataset.run);
+  });
+  $("#hEarly").onclick = () => {
+    earlyRead = !earlyRead;
+    $("#hEarly").classList.toggle("sel", earlyRead);
+    renderHeroC(HERO.current);
+  };
+  await pickToken("good");
+
+  $("#picker").addEventListener("click", e => {
+    const b = e.target.closest(".pick");
+    if (b) show(b.dataset.id);
+  });
+  await show((loadHash() || {}).token || "good");
+</script>
+</body>
+</html>

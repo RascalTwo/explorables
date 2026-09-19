@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="AI">
+<meta name="viz:uid" content="v-2ba3e5ad7cc7">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Risk Coverage Map</title>
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="AI Risk Coverage Map">
+<meta name="viz:description" content="Three industry AI-risk frameworks deduplicated into a single risk set, each mapped to the control that owns it — so coverage, overlap, and gaps are visible at a glance.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { margin: 0; padding: 22px 26px 60px; }
+  .wrap { max-width: 1560px; margin: 0 auto; }
+
+  .viz-header h1 { margin-bottom: 4px; }
+  .viz-header .sub { max-width: 980px; }
+
+  /* funnel stat strip */
+  .funnel { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin:16px 0 6px; }
+  .chip {
+    display:inline-flex; flex-direction:column; gap:1px;
+    background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:8px 13px; line-height:1.15;
+  }
+  .chip b { font-size:19px; color:var(--text); }
+  .chip span { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .chip.lead b { color:var(--accent); }
+  .chip.good b { color:var(--good); }
+  .chip.warn b { color:var(--warn); }
+  .arrowsep { color:var(--muted); font-size:20px; padding:0 2px; }
+
+  .toolbar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:14px 0 6px; }
+  .btn {
+    font:inherit; font-size:12.5px; color:var(--text); cursor:pointer;
+    background:var(--panel-2); border:1px solid var(--border); border-radius:8px; padding:6px 12px;
+    transition:.15s;
+  }
+  .btn:hover { border-color:var(--accent); }
+  .btn.active { background:var(--accent); color:#04101f; border-color:var(--accent); font-weight:600; }
+  .legend { margin-left:auto; gap:14px; }
+  .legend .legend-item { font-size:12px; color:var(--muted); }
+  .swatch.full { width:22px; height:0; border-top:3px solid var(--text); border-radius:0; }
+  .swatch.partial { width:22px; height:0; border-top:3px dashed var(--text); border-radius:0; }
+
+  .stage { position:relative; }
+  svg { width:100%; height:auto; display:block; }
+
+  /* edges */
+  .edge { fill:none; stroke-width:2; opacity:.14; transition:opacity .18s, stroke-width .18s; }
+  .edge.partial { stroke-dasharray:6 5; }
+  svg.focusing .edge { opacity:.04; }
+  svg.focusing .edge.on { opacity:.95; stroke-width:3.2; }
+  svg.beacon-on .edge.gr { opacity:.85; stroke-width:3; }
+  svg.beacon-on.focusing .edge.gr:not(.on) { opacity:.05; }
+
+  /* node groups */
+  .node rect.box { transition:opacity .18s, stroke .18s; }
+  .node .label { font-family:var(--sans); color:var(--text); }
+  .node.dim { opacity:.22; }
+  svg:not(.focusing) .node.dim { opacity:1; }
+
+  .colhead { fill:var(--muted); font:600 13px var(--sans); letter-spacing:.05em; text-transform:uppercase; }
+  .famband { fill:var(--text); opacity:.7; font:600 11px var(--sans); letter-spacing:.06em; text-transform:uppercase; }
+
+  /* node inner html */
+  .nbody { box-sizing:border-box; height:100%; display:flex; flex-direction:column; justify-content:center;
+           padding:6px 11px; overflow:hidden; cursor:default; }
+  .fw .nbody b, .bk .nbody b { font-size:14px; }
+  .fw .nbody .s, .bk .nbody .s { font-size:11px; color:var(--muted); margin-top:2px; }
+  .rk .nbody { padding:5px 10px 5px 30px; }
+  .rk .nbody b { font-size:12.5px; font-weight:600; line-height:1.18; }
+  .rk .num { position:absolute; left:8px; top:50%; transform:translateY(-50%);
+             font:700 12px var(--mono); color:var(--bg); background:var(--accent);
+             width:19px; height:19px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .provtags { margin-top:3px; display:flex; gap:4px; flex-wrap:wrap; }
+  .pt { font:600 9px var(--mono); padding:1px 5px; border-radius:5px; letter-spacing:.02em; }
+  .pt.O { background:rgba(210,153,34,.18); color:#e3b341; }
+  .pt.n600 { background:rgba(57,197,187,.16); color:#56d4ca; }
+  .pt.n100 { background:rgba(163,113,247,.18); color:#bc8cff; }
+  .gapbadge { position:absolute; right:8px; top:50%; transform:translateY(-50%);
+              font:700 9px var(--sans); color:var(--warn); border:1px solid var(--warn);
+              border-radius:5px; padding:2px 5px; line-height:1; text-align:center; max-width:74px; }
+  .bk .cnt { font:600 11px var(--mono); color:var(--muted); margin-top:3px; }
+  .beaconlabel { fill:var(--accent); font:700 11px var(--sans); letter-spacing:.08em; }
+
+  .footnote { color:var(--muted); font-size:12px; margin-top:14px; line-height:1.5; }
+  .footnote b { color:var(--text); }
+  kbd { font:inherit; font-size:11px; background:var(--panel-2); border:1px solid var(--border); border-radius:4px; padding:1px 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="viz-header">
+    <h1>AI Risk Coverage Map</h1>
+    <div class="sub">Three industry frameworks &rarr; one deduplicated risk set &rarr; the controls that own each one.
+      <strong style="color:var(--accent)">Guardrails</strong> is the runtime beacon; every other risk has an owner too.
+      Hover any node to trace its connections.</div>
+    <div class="sub" style="margin-top:8px; font-size:13.5px">This map is framework-generic. For how the <strong style="color:var(--accent)">Guardrails</strong> control is actually implemented on our NVIDIA NeMo stack, see the specific deep dives:
+      <a href="../why-nemo-guardrails/" style="color:var(--accent); font-weight:600">Why NeMo Guardrails &rarr;</a> &middot;
+      <a href="/Desktop/Desktop/Code/PoC-Crud-App/ai-pods-pocs/full-stack-ai-poc/viz-pages/guardrails-bakeoff-explainer/" style="color:var(--accent); font-weight:600">Packaging bake-off &rarr;</a></div>
+  </div>
+
+  <div class="funnel">
+    <span class="chip"><b>10</b><span>OWASP LLM</span></span>
+    <span class="arrowsep">+</span>
+    <span class="chip"><b>12</b><span>NIST 600-1</span></span>
+    <span class="arrowsep">+</span>
+    <span class="chip"><b>4</b><span>NIST 100-2</span></span>
+    <span class="arrowsep">=</span>
+    <span class="chip"><b>26</b><span>source items</span></span>
+    <span class="arrowsep">&rarr; dedup &rarr;</span>
+    <span class="chip lead"><b>15</b><span>distinct risks</span></span>
+    <span class="arrowsep">&rarr; owned by &rarr;</span>
+    <span class="chip good"><b>6</b><span>control buckets</span></span>
+    <span class="chip"><b>+1</b><span>assurance layer</span></span>
+    <span class="arrowsep">&middot;</span>
+    <span class="chip warn"><b>13 / 15</b><span>have a ✅ owner</span></span>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn active" id="btn-beacon">🛡️ Spotlight Guardrails</button>
+    <button class="btn" id="btn-gaps">⚠ Show open risks</button>
+    <button class="btn" id="btn-clear">Show everything</button>
+    <div class="legend">
+      <span class="legend-item"><span class="swatch full"></span> primary owner (✅)</span>
+      <span class="legend-item"><span class="swatch partial"></span> supporting (◐)</span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <svg id="map" class="beacon-on"></svg>
+  </div>
+
+  <div class="footnote">
+    <b>How to read it.</b> Left = the three published frameworks. Center = your 15 consolidated risks, grouped into the four families from the doc, each tagged with where it came from
+    (<span class="pt O" style="display:inline">O</span> OWASP · <span class="pt n600" style="display:inline">600</span> NIST 600-1 · <span class="pt n100" style="display:inline">100</span> NIST 100-2).
+    Right = the mitigation buckets that own them. Solid line = <b>primary owner</b>, dashed = <b>supporting / defense-in-depth</b>.
+    <b>Evaluation</b> isn't a bucket — it's the assurance layer (NIST RMF <i>Measure</i>) that verifies every control, so it spans the base.
+    Two risks — <b>#8 Misinformation/confabulation</b> and <b>#11 Harmful bias</b> — currently have only supporting controls and <b>no primary owner</b> (flagged in amber).
+  </div>
+</div>
+
+<script type="module">
+import { $ } from "/_kit/viz.js";
+
+/* ---------------- data ---------------- */
+const FRAMEWORKS = [
+  { id:'n100', label:'NIST AI 100-2', sub:'4 adversarial attack classes', tag:'n100' },
+  { id:'owasp', label:'OWASP LLM Top 10', sub:'10 app-risk items', tag:'O' },
+  { id:'n600', label:'NIST AI 600-1', sub:'12 GenAI harm categories', tag:'n600' },
+];
+
+const FAMS = {
+  sec:    { label:'Security & adversarial' },
+  truth:  { label:'Truth & quality' },
+  content:{ label:'Content & societal harms' },
+  ops:    { label:'Operational & sustainability' },
+};
+
+const RISKS = [
+  { id:1,  fam:'sec',     name:'Prompt injection & adversarial inputs',  src:['owasp','n600','n100'] },
+  { id:2,  fam:'sec',     name:'Data & model poisoning',                 src:['owasp','n600','n100'] },
+  { id:3,  fam:'sec',     name:'Sensitive info disclosure & privacy',    src:['owasp','n600','n100'] },
+  { id:4,  fam:'sec',     name:'Supply chain & component integrity',     src:['owasp','n600'] },
+  { id:5,  fam:'sec',     name:'Improper output handling',               src:['owasp'] },
+  { id:6,  fam:'sec',     name:'Excessive agency',                       src:['owasp'] },
+  { id:7,  fam:'sec',     name:'Vector & embedding (RAG) weaknesses',     src:['owasp'] },
+  { id:8,  fam:'truth',   name:'Misinformation & confabulation',         src:['owasp','n600'] },
+  { id:9,  fam:'truth',   name:'Information integrity',                   src:['n600'] },
+  { id:10, fam:'content', name:'Harmful / toxic content generation',     src:['n600'] },
+  { id:11, fam:'content', name:'Harmful bias & homogenization',          src:['n600'] },
+  { id:12, fam:'content', name:'Human–AI configuration',                 src:['n600'] },
+  { id:13, fam:'content', name:'Intellectual property',                  src:['n600'] },
+  { id:14, fam:'ops',     name:'Unbounded consumption',                  src:['owasp'] },
+  { id:15, fam:'ops',     name:'Environmental impact',                   src:['n600'] },
+];
+
+const BUCKETS = [
+  { id:'guardrails', label:'🛡️ Guardrails',           sub:'runtime input/output enforcement', beacon:true },
+  { id:'arch',       label:'🏗️ Architecture & access', sub:'least privilege · isolation · HITL' },
+  { id:'supply',     label:'🔗 Supply chain & provenance', sub:'vetting · SBOM · signing · CVE' },
+  { id:'data',       label:'🔐 Data governance & privacy', sub:'minimization · DLP · lineage' },
+  { id:'gateway',    label:'📊 AI gateway & ops',       sub:'rate · cost · quotas (LiteLLM)' },
+  { id:'gov',        label:'🏛️ Governance & human factors', sub:'the "responsible AI" program' },
+];
+
+// risk -> bucket coverage. s: 'full' (✅ primary) | 'partial' (◐ supporting)
+const COVER = [
+  [1,'guardrails','full'], [1,'arch','full'],
+  [2,'supply','full'],     [2,'data','partial'],
+  [3,'guardrails','full'], [3,'data','full'],
+  [4,'supply','full'],
+  [5,'arch','full'],       [5,'guardrails','partial'],
+  [6,'arch','full'],
+  [7,'arch','full'],
+  [8,'guardrails','partial'],
+  [9,'gov','full'],        [9,'guardrails','partial'],
+  [10,'guardrails','full'],
+  [11,'data','partial'],
+  [12,'gov','full'],
+  [13,'gov','full'],       [13,'guardrails','partial'],
+  [14,'gateway','full'],
+  [15,'gateway','full'],
+].map(([r,b,s]) => ({ r, b, s }));
+
+const GAP_RISKS = RISKS.filter(r => !COVER.some(c => c.r === r.id && c.s === 'full')).map(r => r.id);
+
+/* colors */
+const css = getComputedStyle(document.documentElement);
+const V = n => css.getPropertyValue(n).trim();
+const FW_COLOR = { owasp:'#e3b341', n600:'#39c5bb', n100:'#bc8cff' };
+const BK_COLOR = { guardrails:V('--accent'), arch:V('--good'), supply:'#e3b341', data:'#39c5bb', gateway:'#bc8cff', gov:V('--danger') };
+
+/* ---------------- geometry ---------------- */
+const W = 1560;
+const COLX = { fw:40, fwW:226, rk:606, rkW:346, bk:1224, bkW:296 };
+const TOP = 150, riskH = 50, gap = 11, famGap = 22;
+
+// lay out risks top->bottom with family gaps
+let y = TOP, prevFam = null;
+for (const r of RISKS) {
+  if (prevFam && r.fam !== prevFam) y += famGap;
+  r.y = y; r.h = riskH; r.cy = y + riskH / 2;
+  y += riskH + gap;
+  prevFam = r.fam;
+}
+const riskBottom = y - gap;
+
+// place a column of nodes near desired centers, clamped to avoid overlap
+function layoutCol(items, nodeH, minY, maxY) {
+  items.sort((a, b) => a.want - b.want);
+  const minGap = nodeH + 16;
+  for (let i = 0; i < items.length; i++) {
+    items[i].cy = items[i].want;
+    if (i > 0) items[i].cy = Math.max(items[i].cy, items[i - 1].cy + minGap);
+  }
+  // shift up if overflowing bottom
+  const over = items[items.length - 1].cy - (maxY - nodeH / 2);
+  if (over > 0) for (const it of items) it.cy -= over;
+  for (const it of items) {
+    it.cy = Math.max(it.cy, minY + nodeH / 2);
+    it.y = it.cy - nodeH / 2; it.h = nodeH;
+  }
+}
+
+const centroid = ids => ids.reduce((s, id) => s + RISKS.find(r => r.id === id).cy, 0) / ids.length;
+
+const fwH = 76;
+FRAMEWORKS.forEach(f => f.want = centroid(RISKS.filter(r => r.src.includes(f.id)).map(r => r.id)));
+layoutCol(FRAMEWORKS, fwH, TOP, riskBottom);
+
+const bkH = 72;
+BUCKETS.forEach(b => {
+  const ids = COVER.filter(c => c.b === b.id).map(c => c.r);
+  b.want = ids.length ? centroid(ids) : (TOP + riskBottom) / 2;
+});
+layoutCol(BUCKETS, bkH, TOP, riskBottom);
+
+const evalY = riskBottom + 40, evalH = 60;
+const H = evalY + evalH + 30;
+
+/* ---------------- render ---------------- */
+const svg = $('#map');
+svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+const bezier = (x1, y1, x2, y2) => {
+  const dx = Math.max(60, (x2 - x1) * 0.42);
+  return `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`;
+};
+
+let s = '';
+
+// column headers
+s += `<text class="colhead" x="${COLX.fw}" y="${TOP - 36}">Industry frameworks</text>`;
+s += `<text class="colhead" x="${COLX.rk}" y="${TOP - 36}">15 consolidated risks</text>`;
+s += `<text class="colhead" x="${COLX.bk}" y="${TOP - 36}">Mitigation buckets</text>`;
+
+// family side-labels (rotated, left of risk column)
+const famSeen = {};
+for (const r of RISKS) if (!famSeen[r.fam]) { famSeen[r.fam] = r; }
+for (const fam in famSeen) {
+  const members = RISKS.filter(r => r.fam === fam);
+  const midY = (members[0].y + members[members.length - 1].y + members[members.length - 1].h) / 2;
+  s += `<text class="famband" transform="translate(${COLX.rk - 12},${midY}) rotate(-90)" text-anchor="middle">${FAMS[fam].label}</text>`;
+}
+
+// --- edges: framework -> risk (provenance) ---
+let edges = '';
+for (const r of RISKS) {
+  for (const fid of r.src) {
+    const f = FRAMEWORKS.find(x => x.id === fid);
+    edges += `<path class="edge src f-${fid} r-${r.id}" data-f="${fid}" data-r="${r.id}"
+      d="${bezier(COLX.fw + COLX.fwW, f.cy, COLX.rk, r.cy)}" stroke="${FW_COLOR[fid]}"/>`;
+  }
+}
+// --- edges: risk -> bucket (coverage) ---
+for (const c of COVER) {
+  const r = RISKS.find(x => x.id === c.r);
+  const b = BUCKETS.find(x => x.id === c.b);
+  const cls = `edge cover b-${c.b} r-${c.r} ${c.s === 'partial' ? 'partial' : ''} ${c.b === 'guardrails' ? 'gr' : ''}`;
+  edges += `<path class="${cls}" data-b="${c.b}" data-r="${c.r}" data-s="${c.s}"
+    d="${bezier(COLX.rk + COLX.rkW, r.cy, COLX.bk, b.cy)}" stroke="${BK_COLOR[c.b]}"/>`;
+}
+s += `<g id="edges">${edges}</g>`;
+
+// helper to emit a node group with a foreignObject body
+function nodeGroup({ cls, x, w, node, color, html, accent }) {
+  return `<g class="node ${cls}" data-id="${node.id}">
+    <rect class="box" x="${x}" y="${node.y}" width="${w}" height="${node.h}" rx="11"
+      fill="var(--panel)" stroke="${color}" stroke-width="${accent ? 2.4 : 1.4}"/>
+    <foreignObject x="${x}" y="${node.y}" width="${w}" height="${node.h}">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="nbody">${html}</div>
+    </foreignObject>
+  </g>`;
+}
+
+// framework nodes
+let nodes = '';
+for (const f of FRAMEWORKS) {
+  nodes += nodeGroup({
+    cls: 'fw', x: COLX.fw, w: COLX.fwW, node: f, color: FW_COLOR[f.id],
+    html: `<b style="color:${FW_COLOR[f.id]}">${f.label}</b><div class="s">${f.sub}</div>`,
+  });
+}
+
+// risk nodes
+const tagLabel = { owasp:'O', n600:'600', n100:'100' };
+for (const r of RISKS) {
+  const isGap = GAP_RISKS.includes(r.id);
+  const tags = r.src.map(sid => `<span class="pt ${sid === 'owasp' ? 'O' : sid}">${tagLabel[sid]}</span>`).join('');
+  const famColor = { sec:V('--danger'), truth:V('--accent'), content:'#bc8cff', ops:'#39c5bb' }[r.fam];
+  const html =
+    `<div class="num" style="background:${famColor}">${r.id}</div>` +
+    `<b>${r.name}</b><div class="provtags">${tags}</div>` +
+    (isGap ? `<div class="gapbadge">no primary</div>` : '');
+  nodes += `<g class="node rk" data-id="${r.id}">
+    <rect class="box" x="${COLX.rk}" y="${r.y}" width="${COLX.rkW}" height="${r.h}" rx="10"
+      fill="var(--panel)" stroke="${isGap ? V('--warn') : 'var(--border)'}" stroke-width="${isGap ? 1.8 : 1.2}"
+      ${isGap ? 'stroke-dasharray="6 4"' : ''}/>
+    <foreignObject x="${COLX.rk}" y="${r.y}" width="${COLX.rkW}" height="${r.h}">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="nbody" style="position:relative">${html}</div>
+    </foreignObject>
+  </g>`;
+}
+
+// bucket nodes
+for (const b of BUCKETS) {
+  const nFull = COVER.filter(c => c.b === b.id && c.s === 'full').length;
+  const nPart = COVER.filter(c => c.b === b.id && c.s === 'partial').length;
+  const cnt = `<span class="cnt">${nFull} primary${nPart ? ` · ${nPart} supporting` : ''}</span>`;
+  nodes += nodeGroup({
+    cls: 'bk' + (b.beacon ? ' beacon' : ''), x: COLX.bk, w: COLX.bkW, node: b,
+    color: BK_COLOR[b.id], accent: b.beacon,
+    html: `<b style="color:${BK_COLOR[b.id]}">${b.label}</b><div class="s">${b.sub}</div>${cnt}`,
+  });
+}
+
+// beacon glow ring behind guardrails
+const gr = BUCKETS.find(b => b.id === 'guardrails');
+const beacon =
+  `<rect x="${COLX.bk - 6}" y="${gr.y - 6}" width="${COLX.bkW + 12}" height="${gr.h + 12}" rx="14"
+     fill="none" stroke="${V('--accent')}" stroke-width="2" opacity="0">
+     <animate attributeName="opacity" values="0.55;0.05;0.55" dur="2.6s" repeatCount="indefinite"/>
+     <animate attributeName="stroke-width" values="2;7;2" dur="2.6s" repeatCount="indefinite"/>
+   </rect>
+   <text class="beaconlabel" x="${COLX.bk + COLX.bkW / 2}" y="${gr.y - 12}" text-anchor="middle">THE BEACON</text>`;
+
+// evaluation foundation bar spanning the full width
+const evalX = COLX.fw, evalRight = COLX.bk + COLX.bkW;
+const evalBar = `<rect x="${evalX}" y="${evalY}" width="${evalRight - evalX}" height="${evalH}" rx="12"
+    fill="var(--panel-2)" stroke="${V('--good')}" stroke-width="1.4" stroke-dasharray="2 4"/>
+  <foreignObject x="${evalX}" y="${evalY}" width="${evalRight - evalX}" height="${evalH}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="nbody" style="text-align:center;align-items:center">
+      <b style="color:var(--good);font-size:14px">🧪 Evaluation — the assurance layer</b>
+      <div class="s" style="font-size:11.5px">Doesn't reduce risk; <b style="color:var(--text)">verifies the controls work</b> &amp; catches regressions. Cuts across all six buckets — NIST RMF <i>Measure</i>.</div>
+    </div>
+  </foreignObject>`;
+
+s += `<g id="beacon">${beacon}</g><g id="nodes">${nodes}</g><g id="evalbar">${evalBar}</g>`;
+svg.innerHTML = s;
+
+/* ---------------- interactivity ---------------- */
+const allEdges = [...svg.querySelectorAll('.edge')];
+const allNodes = [...svg.querySelectorAll('.node')];
+
+function clearFocus() {
+  svg.classList.remove('focusing');
+  allEdges.forEach(e => e.classList.remove('on'));
+  allNodes.forEach(n => n.classList.remove('dim'));
+}
+
+function focusRisk(id) {
+  svg.classList.add('focusing');
+  const partners = new Set();
+  allEdges.forEach(e => {
+    const on = +e.dataset.r === id;
+    e.classList.toggle('on', on);
+    if (on) { if (e.dataset.f) partners.add('fw:' + e.dataset.f); if (e.dataset.b) partners.add('bk:' + e.dataset.b); }
+  });
+  allNodes.forEach(n => {
+    const keep = (n.classList.contains('rk') && +n.dataset.id === id)
+      || (n.classList.contains('fw') && partners.has('fw:' + n.dataset.id))
+      || (n.classList.contains('bk') && partners.has('bk:' + n.dataset.id));
+    n.classList.toggle('dim', !keep);
+  });
+}
+
+function focusFramework(fid) {
+  svg.classList.add('focusing');
+  const risks = new Set();
+  allEdges.forEach(e => {
+    const on = e.dataset.f === fid;
+    e.classList.toggle('on', on);
+    if (on) risks.add(+e.dataset.r);
+  });
+  allNodes.forEach(n => {
+    const keep = (n.classList.contains('fw') && n.dataset.id === fid)
+      || (n.classList.contains('rk') && risks.has(+n.dataset.id));
+    n.classList.toggle('dim', !keep);
+  });
+}
+
+function focusBucket(bid) {
+  svg.classList.add('focusing');
+  const risks = new Set();
+  allEdges.forEach(e => {
+    const on = e.dataset.b === bid;
+    e.classList.toggle('on', on);
+    if (on) risks.add(+e.dataset.r);
+  });
+  allNodes.forEach(n => {
+    const keep = (n.classList.contains('bk') && n.dataset.id === bid)
+      || (n.classList.contains('rk') && risks.has(+n.dataset.id));
+    n.classList.toggle('dim', !keep);
+  });
+}
+
+// wire hovers
+svg.querySelectorAll('.node.rk').forEach(n =>
+  n.addEventListener('mouseenter', () => focusRisk(+n.dataset.id)));
+svg.querySelectorAll('.node.fw').forEach(n =>
+  n.addEventListener('mouseenter', () => focusFramework(n.dataset.id)));
+svg.querySelectorAll('.node.bk').forEach(n =>
+  n.addEventListener('mouseenter', () => focusBucket(n.dataset.id)));
+svg.querySelectorAll('.node').forEach(n =>
+  n.addEventListener('mouseleave', restoreDefault));
+
+/* default / toolbar modes */
+const btnBeacon = $('#btn-beacon'), btnGaps = $('#btn-gaps'), btnClear = $('#btn-clear');
+let mode = 'beacon';
+
+function setMode(m) {
+  mode = m;
+  [btnBeacon, btnGaps, btnClear].forEach(b => b.classList.remove('active'));
+  ({ beacon: btnBeacon, gaps: btnGaps, clear: btnClear })[m].classList.add('active');
+  restoreDefault();
+}
+
+function restoreDefault() {
+  clearFocus();
+  if (mode === 'beacon') {
+    svg.classList.add('beacon-on');
+  } else {
+    svg.classList.remove('beacon-on');
+  }
+  if (mode === 'gaps') {
+    svg.classList.add('focusing');
+    GAP_RISKS.forEach(id => {
+      allEdges.forEach(e => { if (+e.dataset.r === id) e.classList.add('on'); });
+    });
+    allNodes.forEach(n => {
+      const keep = (n.classList.contains('rk') && GAP_RISKS.includes(+n.dataset.id))
+        || (n.classList.contains('bk') && [...allEdges].some(e => e.classList.contains('on') && e.dataset.b === n.dataset.id));
+      n.classList.toggle('dim', !keep);
+    });
+  }
+}
+
+btnBeacon.onclick = () => setMode('beacon');
+btnGaps.onclick = () => setMode('gaps');
+btnClear.onclick = () => setMode('clear');
+
+restoreDefault();
+</script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Infrastructure as Code?</title>
+<meta name="viz:uid" content="v-5a9208907e64">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Why Infrastructure as Code?">
+<meta name="viz:description" content="A plain-English, no-jargon tour of Infrastructure as Code and where Terraform fits — framed like moving money: nothing happens without a procedure, a second set of eyes, and a record that survives the next exam.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root { --maxw: 1180px; }
+  body { margin: 0; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 22px 26px 80px; }
+
+  /* ---- header ---- */
+  .top { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+  .top h1 { font-size: 30px; margin:0 0 4px; letter-spacing:-0.02em; }
+  .top h1 .tf { color: var(--c4); }
+  .top .sub { color: var(--muted); font-size:14.5px; max-width:640px; line-height:1.5; }
+  .audience { font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:5px 12px; white-space:nowrap; }
+
+  /* ---- stepper ---- */
+  .stepper { display:flex; gap:6px; margin:22px 0 18px; flex-wrap:wrap; }
+  .step { flex:1 1 0; min-width:120px; cursor:pointer; border:1px solid var(--border); background:var(--panel);
+          border-radius:10px; padding:9px 11px; transition:.18s; position:relative; overflow:hidden; }
+  .step:hover { border-color:#45506b; }
+  .step .n { font-family:var(--mono); font-size:11px; color:var(--muted); }
+  .step .t { font-size:12.5px; margin-top:2px; line-height:1.25; color:var(--text); }
+  .step.active { border-color:var(--accent); background:#11203a; }
+  .step.active .n { color:var(--accent); }
+  .step.done .n::after { content:" ✓"; color:var(--good); }
+  .step .bar { position:absolute; left:0; bottom:0; height:3px; width:0; background:var(--accent); transition:width .3s; }
+  .step.active .bar { width:100%; }
+
+  /* ---- stage ---- */
+  .stage { display:grid; grid-template-columns: 1.25fr 1fr; gap:22px; align-items:stretch; }
+  @media (max-width: 900px){ .stage { grid-template-columns:1fr; } }
+  .canvas { background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:14px;
+            display:flex; align-items:center; justify-content:center; min-height:430px; }
+  .canvas svg { width:100%; height:auto; max-height:520px; display:block; }
+  .narr { display:flex; flex-direction:column; }
+  .kicker { font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .narr h2 { font-size:22px; margin:6px 0 12px; letter-spacing:-0.01em; line-height:1.2; }
+  .narr p { margin:0 0 13px; line-height:1.62; font-size:15px; color:#cdd6e0; }
+  .narr p b { color:var(--text); }
+  .narr ul { margin:0 0 13px; padding-left:18px; }
+  .narr li { line-height:1.55; font-size:14.5px; margin-bottom:6px; color:#cdd6e0; }
+
+  .analogy { margin-top:auto; border:1px solid var(--border); border-left:3px solid var(--c3);
+             background:linear-gradient(180deg,#1c1a12,#161b22); border-radius:10px; padding:13px 15px; }
+  .analogy .lab { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--c3); font-family:var(--mono); display:flex; align-items:center; gap:7px; }
+  .analogy p { margin:7px 0 0; font-size:14px; line-height:1.55; color:#e4d9bf; }
+  .analogy p b { color:#fff3d6; }
+  .analogy.risk { border-left-color:var(--danger); background:linear-gradient(180deg,#1f1413,#161b22); }
+  .analogy.risk .lab { color:var(--danger); }
+  .analogy.risk p { color:#f1d3cf; }
+  .analogy.risk p b { color:#ffdcd6; }
+
+  /* ---- footer nav ---- */
+  .nav { display:flex; align-items:center; justify-content:space-between; margin-top:20px; }
+  .nav .count { font-family:var(--mono); font-size:12.5px; color:var(--muted); }
+  button.bn { font:inherit; font-size:14px; cursor:pointer; border:1px solid var(--border); background:var(--panel-2);
+              color:var(--text); border-radius:9px; padding:9px 18px; transition:.15s; }
+  button.bn:hover:not(:disabled){ border-color:var(--accent); color:var(--accent); }
+  button.bn:disabled { opacity:.35; cursor:not-allowed; }
+  button.bn.primary { background:var(--accent); color:#04101f; border-color:var(--accent); font-weight:600; }
+  button.bn.primary:hover { filter:brightness(1.1); color:#04101f; }
+  .hint { text-align:center; font-size:11.5px; color:var(--muted); margin-top:10px; font-family:var(--mono); }
+
+  /* svg helpers */
+  .lbl { font:600 13px var(--sans); fill:var(--text); }
+  .lbl-sm { font:500 11px var(--sans); fill:var(--muted); }
+  .lbl-mono { font:11px var(--mono); fill:var(--muted); }
+  .fade-in { animation: fin .45s both; }
+  @keyframes fin { from{opacity:0;} to{opacity:1;} }
+  .pulse { animation: pl 2s ease-in-out infinite; transform-origin:center; }
+  @keyframes pl { 0%,100%{opacity:.55;} 50%{opacity:1;} }
+  .dash { stroke-dasharray:6 6; animation: dashmove 1s linear infinite; }
+  @keyframes dashmove { to { stroke-dashoffset:-12; } }
+
+  /* interactive reconcile buttons */
+  .tf-controls { display:flex; gap:9px; justify-content:center; margin-top:6px; flex-wrap:wrap; }
+  .tf-controls button { font:inherit; font-size:13px; cursor:pointer; border:1px solid var(--border);
+        background:var(--panel-2); color:var(--text); border-radius:8px; padding:7px 14px; transition:.15s; }
+  .tf-controls button:hover:not(:disabled){ border-color:var(--c4); color:#c9a3ff; }
+  .tf-controls button:disabled{ opacity:.4; cursor:not-allowed; }
+  .tf-controls button.go { background:var(--c4); border-color:var(--c4); color:#150a24; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Why Infrastructure as Code? <span class="tf">…and where Terraform fits.</span></h1>
+      <div class="sub">A plain-English tour — no jargon required. Think of it the way you'd think about moving money: nothing happens without a procedure, a second set of eyes, and a record that survives the next exam.</div>
+    </div>
+  </div>
+
+  <div class="stepper" id="stepper"></div>
+
+  <div class="stage">
+    <div class="canvas"><svg id="art" viewBox="0 0 560 460" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <div class="narr" id="narr"></div>
+  </div>
+
+  <div class="nav">
+    <button class="bn" id="back">← Back</button>
+    <div class="count" id="count"></div>
+    <button class="bn primary" id="next">Next →</button>
+  </div>
+  <div class="hint">← / → arrow keys to move · click a step above to jump</div>
+</div>
+
+<script type="module">
+import { arrowMarkers, saveHash, loadHash } from "/_kit/viz.js";
+
+/* ---------- tiny SVG helpers ---------- */
+const NS = "http://www.w3.org/2000/svg";
+const A = arrowMarkers(); // defs string
+
+// server "box" glyph
+function server(x, y, w, h, color, label, dim){
+  return `<g class="${dim?'':'srv'}" opacity="${dim?0.4:1}">
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="var(--panel-2)" stroke="${color}" stroke-width="2"/>
+    <rect x="${x+9}" y="${y+11}" width="${w-18}" height="4" rx="2" fill="${color}" opacity=".8"/>
+    <rect x="${x+9}" y="${y+21}" width="${w-30}" height="4" rx="2" fill="${color}" opacity=".5"/>
+    <circle cx="${x+w-15}" cy="${y+h-13}" r="3.5" fill="${color}"/>
+    ${label?`<text x="${x+w/2}" y="${y+h+16}" text-anchor="middle" class="lbl-sm">${label}</text>`:''}
+  </g>`;
+}
+// a little person
+function person(cx, cy, color="#8b949e"){
+  return `<g><circle cx="${cx}" cy="${cy}" r="11" fill="${color}"/>
+    <path d="M ${cx-16} ${cy+34} q 16 -26 32 0 Z" fill="${color}"/></g>`;
+}
+// bank building glyph
+function bank(x, y, s, color="var(--c1)"){
+  return `<g transform="translate(${x},${y})">
+    <polygon points="${s/2},0 ${s},${s*0.28} 0,${s*0.28}" fill="${color}" opacity=".9"/>
+    <rect x="0" y="${s*0.28}" width="${s}" height="6" fill="${color}"/>
+    ${[0.12,0.34,0.56,0.78].map(p=>`<rect x="${s*p}" y="${s*0.34}" width="${s*0.1}" height="${s*0.5}" fill="${color}" opacity=".75"/>`).join('')}
+    <rect x="0" y="${s*0.84}" width="${s}" height="7" fill="${color}"/>
+    <text x="${s/2}" y="${s*0.22}" text-anchor="middle" font-size="${s*0.12}" font-weight="700" fill="#04101f">$</text>
+  </g>`;
+}
+
+/* ---------- chapters ---------- */
+const chapters = [
+{
+  short: "What is it?",
+  kicker: "Start here",
+  title: "Every app runs on “infrastructure”",
+  art: () => `
+    ${A}
+    <text x="280" y="34" text-anchor="middle" class="lbl" font-size="15">What customers see…</text>
+    <g transform="translate(228,50)">
+      <rect width="104" height="70" rx="12" fill="var(--panel-2)" stroke="var(--accent)" stroke-width="2"/>
+      <rect x="14" y="14" width="76" height="8" rx="4" fill="var(--accent)"/>
+      <rect x="14" y="30" width="55" height="6" rx="3" fill="#3a4a63"/>
+      <rect x="14" y="44" width="66" height="6" rx="3" fill="#3a4a63"/>
+      <text x="52" y="92" text-anchor="middle" class="lbl-sm">the banking app</text>
+    </g>
+    <path d="M 280 150 L 280 188" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah-accent)" class="dash"/>
+    <text x="300" y="172" class="lbl-mono">…rests on all of this</text>
+    <g transform="translate(60,205)">
+      ${server(0,0,120,64,'var(--c2)','servers')}
+      ${server(160,0,120,64,'var(--c5)','networks')}
+      <g transform="translate(330,0)">
+        <path d="M0 10 a30 10 0 0 0 60 0 v44 a30 10 0 0 1 -60 0 Z" fill="var(--panel-2)" stroke="var(--c3)" stroke-width="2"/>
+        <ellipse cx="30" cy="10" rx="30" ry="10" fill="var(--panel-2)" stroke="var(--c3)" stroke-width="2"/>
+        <text x="30" y="80" text-anchor="middle" class="lbl-sm">databases</text>
+      </g>
+    </g>
+    <text x="280" y="330" text-anchor="middle" class="lbl-mono">the plumbing behind the website &amp; member portal</text>
+    <line x1="90" y1="356" x2="470" y2="356" stroke="var(--border)" stroke-dasharray="3 4"/>
+    <text x="280" y="388" text-anchor="middle" class="lbl-sm" fill="#cdd6e0">every advance, wire &amp; ledger entry rides on top of it</text>
+  `,
+  body: `
+    <p><b>Infrastructure</b> is all the behind-the-scenes machinery that makes software work: the
+    computers (servers), the connections between them (networks), and the places data is stored
+    (databases). Customers never see it — but nothing runs without it.</p>
+    <p>Twenty years ago this meant physical machines a company bought and kept humming in a locked room.
+    Today it mostly does <b>not</b> — and that shift turns out to be the whole key to this story. So
+    before we go further, let's fix the definition.</p>`,
+  analogy: `When a member requests an <b>advance</b>, all they see is a confirmation. Behind it: the rate
+    is priced, collateral is checked, a <b>wire</b> goes out, the ledger is posted, the trade settles.
+    Infrastructure is that back office — invisible when it works, and the only thing anyone talks about
+    when it doesn't.`
+},
+{
+  short: "Not the server room",
+  kicker: "Clearing up a myth",
+  title: "“Infrastructure” isn’t the server room anymore",
+  art: () => `
+    ${A}
+    <line x1="280" y1="44" x2="280" y2="346" stroke="var(--border)" stroke-dasharray="4 5"/>
+
+    <text x="140" y="32" text-anchor="middle" class="lbl" fill="var(--muted)">THEN — you owned the hardware</text>
+    <g transform="translate(95,58)">
+      <rect width="90" height="118" rx="6" fill="var(--panel-2)" stroke="var(--muted)" stroke-width="2"/>
+      ${[0,1,2,3,4].map(i=>`<rect x="10" y="${11+i*21}" width="70" height="13" rx="2" fill="#0a0e14" stroke="#3a4250"/>
+        <circle cx="72" cy="${17.5+i*21}" r="2.5" fill="var(--warn)"/>`).join('')}
+    </g>
+    <text x="206" y="120" font-size="22">🔒</text>
+    ${['💵 you buy the boxes','🔧 rack it, power it, cool it','🌙 you fix it at 2am','💸 you pay even when idle'].map((t,i)=>
+      `<text x="34" y="${214+i*27}" class="lbl-sm" fill="#cdd6e0" font-size="12">${t}</text>`).join('')}
+
+    <text x="420" y="32" text-anchor="middle" class="lbl" fill="var(--accent)">NOW — software-defined &amp; rented</text>
+    <g transform="translate(300,50)">
+      <rect width="236" height="150" rx="14" fill="#0e1726" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="118" y="22" text-anchor="middle" class="lbl-sm" fill="var(--accent)">☁ the cloud — summon what you need</text>
+      ${[['🖥️','virtual server'],['🌐','network'],['🗄️','database'],['📦','storage'],['⚖️','load balancer'],['🔑','permissions']].map((r,i)=>{
+        const col=i%3,row=Math.floor(i/3),x=14+col*73,y=36+row*54;
+        return `<g transform="translate(${x},${y})"><rect width="66" height="46" rx="7" fill="var(--panel-2)" stroke="var(--border)"/>
+          <text x="33" y="24" text-anchor="middle" font-size="16">${r[0]}</text>
+          <text x="33" y="39" text-anchor="middle" font-size="9" fill="var(--muted)">${r[1]}</text></g>`;}).join('')}
+    </g>
+    ${['🖱️ created by a request, not a screwdriver','⏱️ billed by the minute','📈 scales up &amp; down on demand','🧰 the provider maintains it'].map((t,i)=>
+      `<text x="304" y="${228+i*27}" class="lbl-sm" fill="#cdd6e0" font-size="12">${t}</text>`).join('')}
+
+    <line x1="40" y1="350" x2="520" y2="350" stroke="var(--border)"/>
+    <foreignObject x="36" y="362" width="488" height="86">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font:13.5px var(--sans);color:#e6edf3;text-align:center;line-height:1.5">
+        The big shift: every piece is now <b style="color:#58a6ff">defined in software</b> — a setting you fill
+        in, not a box you bolt to a rack.
+        <span style="color:#8b949e">That's the very reason you can write it all down in a file →
+        <b style="color:#3fb950">Infrastructure as Code</b>.</span>
+      </div>
+    </foreignObject>
+  `,
+  body: `
+    <p>When most people hear <b>infrastructure</b>, they still picture a locked room full of humming
+    machines the company <b>bought, owns, and babysits</b>. That was true for decades. In a modern cloud
+    world, it mostly isn't.</p>
+    <p>Today, infrastructure is <b>whatever you create and configure at a cloud provider</b> — and most of
+    it isn't a "computer" at all: virtual servers, yes, but also networks, databases, storage, load
+    balancers, web addresses, even <b>who's allowed to touch what</b>. You never buy or physically touch
+    any of it.</p>
+    <p>And here's the part that changes everything: each of those pieces is <b>summoned with a request and
+    defined by settings</b> — software, not hardware. You rent it by the minute, scale it up for the
+    month-end run and back down after, and the provider handles the wiring, power, and 2am repairs.</p>`,
+  analogy: `Think of it like <b>liquidity</b>. The old way is warehousing everything yourself — holding far
+    more than you'll ever need, just in case, and paying to carry it idle. The cloud is the <b>advances</b>
+    model for computing: you <b>draw exactly the capacity you need, when you need it</b>, scale up for the
+    month-end run, pay only for what you use, and pay it back down after. The same instinct your members
+    already trust — don't warehouse what you can draw on demand.`
+},
+{
+  short: "The old way",
+  kicker: "How it used to work",
+  title: "Building it by hand, from memory",
+  art: () => `
+    ${A}
+    <text x="280" y="30" text-anchor="middle" class="lbl">One person, clicking buttons…</text>
+    ${person(120, 120, 'var(--warn)')}
+    <text x="120" y="185" text-anchor="middle" class="lbl-sm">the engineer</text>
+    <g transform="translate(185,92)">
+      <rect width="120" height="78" rx="9" fill="#0a0e14" stroke="var(--warn)" stroke-width="2"/>
+      <text x="12" y="24" class="lbl-mono" fill="var(--warn)">&gt; click…</text>
+      <text x="12" y="44" class="lbl-mono" fill="var(--warn)">&gt; click…</text>
+      <text x="12" y="64" class="lbl-mono" fill="var(--warn)">&gt; click…</text>
+    </g>
+    <path d="M 305 131 L 350 131" stroke="var(--warn)" stroke-width="2" marker-end="url(#ah-warn)"/>
+    <text x="430" y="120" text-anchor="middle" class="lbl-sm">…sets up each machine</text>
+    <text x="430" y="138" text-anchor="middle" class="lbl-sm">one at a time</text>
+    <text x="280" y="240" text-anchor="middle" class="lbl-mono">…and each one comes out a little different</text>
+    ${server(70,265,110,62,'var(--c2)','“works for me”')}
+    ${server(225,265,110,62,'var(--c3)','slightly off')}
+    ${server(380,265,110,62,'var(--c6)','who knows?')}
+    <text x="280" y="372" text-anchor="middle" class="lbl-sm" fill="var(--warn)">no written record · no two exactly alike</text>
+  `,
+  body: `
+    <p>For a long time, setting up infrastructure meant a skilled person logging in and <b>clicking
+    through screens by hand</b> — create a server here, flip a setting there, type in some values they
+    remembered from last time.</p>
+    <p>It works… until you need a <b>second</b> one. Then a third. Each is built from memory, so each is
+    subtly different. Nothing is written down. The only "documentation" is in one person's head — and
+    sometimes a sticky note.</p>`,
+  analogy: `Imagine booking every <b>advance</b> — rate, term, collateral, the <b>wire</b> out — from
+    memory, with no written procedure and no second set of eyes. It works right up until two clerks book
+    the same deal two different ways, a payment leaves wrong, and <b>nobody can say which way was
+    correct</b>.`
+},
+{
+  short: "What goes wrong",
+  kicker: "The pain",
+  title: "Why the hand-built way bites you",
+  art: () => `
+    ${A}
+    <g transform="translate(40,40)">
+      <rect width="220" height="115" rx="11" fill="var(--panel-2)" stroke="var(--danger)" stroke-width="1.5"/>
+      <text x="16" y="30" class="lbl" fill="var(--danger)">🔑 The “bus factor”</text>
+      ${person(45,70,'var(--danger)')}
+      <text x="110" y="68" class="lbl-sm">only one person</text>
+      <text x="110" y="86" class="lbl-sm">knows how it works.</text>
+      <text x="110" y="104" class="lbl-sm">they go on vacation…</text>
+    </g>
+    <g transform="translate(300,40)">
+      <rect width="220" height="115" rx="11" fill="var(--panel-2)" stroke="var(--c3)" stroke-width="1.5"/>
+      <text x="16" y="30" class="lbl" fill="var(--c3)">❄️ “Snowflakes”</text>
+      ${server(18,46,52,46,'var(--c2)','')}
+      ${server(84,46,52,46,'var(--c3)','')}
+      ${server(150,46,52,46,'var(--c6)','')}
+      <text x="110" y="108" text-anchor="middle" class="lbl-sm">every server unique &amp; fragile</text>
+    </g>
+    <g transform="translate(40,180)">
+      <rect width="220" height="115" rx="11" fill="var(--panel-2)" stroke="var(--warn)" stroke-width="1.5"/>
+      <text x="16" y="30" class="lbl" fill="var(--warn)">🐌 Slow to recover</text>
+      <text x="16" y="56" class="lbl-sm">if it breaks at 2am,</text>
+      <text x="16" y="76" class="lbl-sm">rebuilding by hand</text>
+      <text x="16" y="96" class="lbl-sm">takes hours… or days.</text>
+    </g>
+    <g transform="translate(300,180)">
+      <rect width="220" height="115" rx="11" fill="var(--panel-2)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="16" y="30" class="lbl" fill="var(--accent)">📋 No audit trail</text>
+      <text x="16" y="56" class="lbl-sm">who changed what?</text>
+      <text x="16" y="76" class="lbl-sm">when? why? …</text>
+      <text x="16" y="96" class="lbl-sm">nobody can say.</text>
+    </g>
+    <text x="280" y="328" text-anchor="middle" class="lbl-mono">four problems an examiner would not love</text>
+  `,
+  body: `
+    <p>Hand-building feels fine on day one. The trouble shows up later:</p>
+    <ul>
+      <li><b>The bus factor</b> — knowledge lives in one head. If that person leaves, so does the
+      "how."</li>
+      <li><b>Snowflakes</b> — every server is a unique, fragile one-off. A fix that works on one may
+      break another.</li>
+      <li><b>Slow recovery</b> — when something fails, you're rebuilding from memory under pressure.</li>
+      <li><b>No audit trail</b> — no record of who changed what, when, or why.</li>
+    </ul>`,
+  analogyLabel: "⚠️ Risk &amp; controls lens",
+  analogyRisk: true,
+  analogy: `In a risk-averse, examined institution, the <b>unanswerable</b> question is the dangerous one:
+    who changed the collateral rules? who approved this payment path? when — and on whose sign-off?
+    "We're not sure" isn't just awkward; it's an <b>audit finding</b>, a regulator follow-up, and a
+    risk-committee escalation, all from the same shrug.`
+},
+{
+  short: "The fix: IaC",
+  kicker: "The big idea",
+  title: "Write it down. Let the computer build it.",
+  art: () => `
+    ${A}
+    <g transform="translate(30,120)" class="pulse">
+      <rect width="150" height="200" rx="10" fill="#0a0e14" stroke="var(--good)" stroke-width="2"/>
+      <text x="18" y="34" class="lbl" fill="var(--good)">📄 the blueprint</text>
+      <text x="18" y="64" class="lbl-mono" fill="#7ee0a0">2 servers</text>
+      <text x="18" y="86" class="lbl-mono" fill="#7ee0a0">1 database</text>
+      <text x="18" y="108" class="lbl-mono" fill="#7ee0a0">locked-down</text>
+      <text x="18" y="130" class="lbl-mono" fill="#7ee0a0">network</text>
+      <text x="18" y="162" class="lbl-sm">a plain text file</text>
+      <text x="18" y="180" class="lbl-sm">anyone can read</text>
+    </g>
+    <g transform="translate(212,188)">
+      <rect width="92" height="64" rx="10" fill="var(--c4)" opacity=".18" stroke="var(--c4)" stroke-width="2"/>
+      <text x="46" y="32" text-anchor="middle" font-size="26">⚙️</text>
+      <text x="46" y="52" text-anchor="middle" class="lbl-sm" fill="#c9a3ff">the tool</text>
+    </g>
+    <path d="M 182 220 L 210 220" stroke="var(--good)" stroke-width="2.5" marker-end="url(#ah-good)"/>
+    <path d="M 306 220 L 338 220" stroke="var(--c4)" stroke-width="2.5" marker-end="url(#ah)" class="dash"/>
+    <text x="380" y="120" text-anchor="middle" class="lbl">…builds these — identical, every time</text>
+    ${server(345,150,90,52,'var(--good)','copy A')}
+    ${server(345,222,90,52,'var(--good)','copy B')}
+    ${server(345,294,90,52,'var(--good)','copy C')}
+    <text x="280" y="392" text-anchor="middle" class="lbl-mono">change the file → re-run → reality updates to match</text>
+  `,
+  body: `
+    <p><b>Infrastructure as Code</b> (IaC) flips the whole thing around. Instead of clicking buttons,
+    you <b>write down exactly what you want</b> in a plain text file: "two servers, one database, this
+    network, locked down this way."</p>
+    <p>Then a tool reads that file and <b>builds it for you — identically, every time.</b> Need ten copies?
+    Same file. Need to rebuild after a disaster? Re-run the file. Want to change something? Edit the file
+    and run it again. <b>The file is the single source of truth.</b></p>`,
+  analogy: `Now you have an <b>architectural blueprint</b> for the branch. Hand it to any contractor and
+    you get the same building — vault in the same place, alarm wired the same way. Burned down? Rebuild
+    from the same blueprint. The know-how lives in the document, not in one person's memory.`
+},
+{
+  short: "Why devs love it",
+  kicker: "The payoff",
+  title: "…and why auditors love it too",
+  art: () => `
+    <text x="280" y="32" text-anchor="middle" class="lbl">The file lives in a versioned “ledger”</text>
+    <g transform="translate(60,55)">
+      ${[
+        ['v4','Today','Tess R.','added backup database','approved ✓','var(--good)'],
+        ['v3','Mar 2','Sam P.','opened port for payments','approved ✓','var(--good)'],
+        ['v2','Feb 18','Tess R.','doubled server capacity','approved ✓','var(--good)'],
+        ['v1','Jan 9','Sam P.','initial member-portal setup','approved ✓','var(--good)'],
+      ].map((r,i)=>{
+        const y=i*64;
+        return `<g transform="translate(0,${y})">
+          <rect width="440" height="54" rx="9" fill="var(--panel-2)" stroke="var(--border)"/>
+          <rect width="5" height="54" rx="2" fill="${r[5]}"/>
+          <text x="18" y="22" class="lbl-mono" fill="var(--accent)">${r[0]}</text>
+          <text x="18" y="42" class="lbl-sm">${r[1]}</text>
+          <text x="92" y="22" class="lbl" font-size="12.5">${r[3]}</text>
+          <text x="92" y="42" class="lbl-sm">by ${r[2]}</text>
+          <text x="430" y="33" text-anchor="end" class="lbl-sm" fill="var(--good)">${r[4]}</text>
+        </g>`;
+      }).join('')}
+    </g>
+    <text x="280" y="332" text-anchor="middle" class="lbl-mono">every change: who · what · when · who approved it</text>
+  `,
+  body: `
+    <p>Because the setup is now just a <b>file</b>, you get superpowers that come free with any document:</p>
+    <ul>
+      <li><b>A full history</b> — every change is timestamped: who, what, when, and why.</li>
+      <li><b>Review &amp; approval</b> — a second person checks the change <i>before</i> it goes live, like
+      a maker-checker control.</li>
+      <li><b>Repeatable &amp; fast</b> — stand up a new environment in minutes, not weeks.</li>
+      <li><b>Disaster recovery</b> — rebuild everything from the file if a data center goes dark.</li>
+    </ul>`,
+  analogyLabel: "⚠️ Risk &amp; controls lens",
+  analogyRisk: true,
+  analogy: `This is <b>dual control for your infrastructure</b>. Nothing goes live without a second
+    reviewer's sign-off; every change is a dated, attributed ledger entry; and you can reconstruct the
+    exact state on any past date. The same maker-checker discipline you already enforce on moving money —
+    now turning an exam from a scramble into a <b>printout</b>.`
+},
+{
+  short: "Where Terraform fits",
+  kicker: "The specific tool",
+  title: "Terraform: the blueprint language",
+  art: () => `
+    ${A}
+    <text x="280" y="30" text-anchor="middle" class="lbl">You describe the destination…</text>
+    <g transform="translate(40,55)">
+      <rect width="170" height="120" rx="10" fill="#0a0e14" stroke="var(--c4)" stroke-width="2"/>
+      <text x="16" y="28" class="lbl-mono" fill="#c9a3ff">resource "server" {</text>
+      <text x="28" y="50" class="lbl-mono" fill="#7ee0a0">count = 2</text>
+      <text x="28" y="70" class="lbl-mono" fill="#7ee0a0">size  = "medium"</text>
+      <text x="28" y="90" class="lbl-mono" fill="#7ee0a0">region= "us-east"</text>
+      <text x="16" y="110" class="lbl-mono" fill="#c9a3ff">}</text>
+    </g>
+    <g transform="translate(245,88)">
+      <rect width="70" height="54" rx="9" fill="var(--c4)" opacity=".2" stroke="var(--c4)" stroke-width="2"/>
+      <text x="35" y="34" text-anchor="middle" font-size="22">🛠️</text>
+    </g>
+    <text x="280" y="160" text-anchor="middle" class="lbl-sm" fill="#c9a3ff">Terraform</text>
+    <path d="M 212 115 L 243 115" stroke="var(--c4)" stroke-width="2" marker-end="url(#ah)"/>
+    <path d="M 317 115 L 348 115" stroke="var(--c4)" stroke-width="2" marker-end="url(#ah)"/>
+    <text x="455" y="48" text-anchor="middle" class="lbl">…it talks to any cloud</text>
+    ${['Amazon','Microsoft','Google'].map((c,i)=>`
+      <g transform="translate(390,68)">
+        <rect y="${i*40}" width="130" height="32" rx="7" fill="var(--panel-2)" stroke="var(--c5)" stroke-width="1.5"/>
+        <text x="65" y="${i*40+21}" text-anchor="middle" class="lbl-sm" fill="var(--c5)">☁ ${c} cloud</text>
+      </g>`).join('')}
+    <line x1="40" y1="205" x2="520" y2="205" stroke="var(--border)" stroke-dasharray="3 4"/>
+    <text x="280" y="234" text-anchor="middle" class="lbl">The magic trick: it reconciles, like balancing books</text>
+    <g transform="translate(60,250)">
+      <rect width="130" height="60" rx="9" fill="var(--panel-2)" stroke="var(--warn)" stroke-width="1.5"/>
+      <text x="65" y="26" text-anchor="middle" class="lbl-sm" fill="var(--warn)">what exists now</text>
+      <text x="65" y="46" text-anchor="middle" class="lbl-mono">1 server</text>
+    </g>
+    <g transform="translate(370,250)">
+      <rect width="130" height="60" rx="9" fill="var(--panel-2)" stroke="var(--good)" stroke-width="1.5"/>
+      <text x="65" y="26" text-anchor="middle" class="lbl-sm" fill="var(--good)">what you asked for</text>
+      <text x="65" y="46" text-anchor="middle" class="lbl-mono">2 servers</text>
+    </g>
+    <path d="M 192 280 L 368 280" stroke="var(--c4)" stroke-width="2" marker-end="url(#ah)" class="dash"/>
+    <text x="280" y="272" text-anchor="middle" class="lbl-mono" fill="#c9a3ff">finds the gap</text>
+    <text x="280" y="300" text-anchor="middle" class="lbl-sm">→ adds exactly 1 server. nothing more.</text>
+    <text x="280" y="345" text-anchor="middle" class="lbl-mono">try it yourself on the next step →</text>
+  `,
+  body: `
+    <p><b>Terraform</b> is the most popular tool for writing these blueprints. It's made by a company
+    called HashiCorp, and it has become something close to an industry standard.</p>
+    <p>Two things make it special. First, <b>one language for every cloud</b> — the same blueprint style
+    works whether you rent from Amazon, Microsoft, or Google. Second, you don't write step-by-step
+    instructions; you just <b>describe the end result you want</b>, and Terraform figures out the steps.</p>
+    <p>Before it changes anything, Terraform <b>compares what exists today against what you asked for</b>,
+    shows you the difference, and only then makes the minimum changes to close the gap.</p>
+    <p style="font-size:13.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
+      🔀 Wondering <i>why Terraform</i> — and not Ansible, or another IaC tool? →
+      <a href="../ansible-vs-terraform/" style="color:var(--accent);font-weight:600;text-decoration:none">Terraform vs. Ansible: what each is actually built for ↗</a>
+    </p>`,
+  analogy: `That compare-then-fix step is <b>reconciliation</b> — end-of-day settlement for your systems.
+    Terraform lays your blueprint next to what actually exists, flags <b>every</b> discrepancy, and posts
+    only the adjusting entries needed to make them match. Nothing moves that you didn't see on the
+    exception report first — no surprises, no blind changes.`
+},
+{
+  short: "Try it",
+  kicker: "Hands-on",
+  title: "Plan, then apply — watch it reconcile",
+  interactive: true,
+  body: `
+    <p>This is the everyday Terraform rhythm, in two clicks:</p>
+    <ul>
+      <li><b>Plan</b> — Terraform compares your blueprint to what really exists and shows you a preview:
+      <i>"I will add 1 server and 1 database. I will not touch anything else."</i> Nothing has changed yet.</li>
+      <li><b>Apply</b> — only after a human reads and approves the plan does Terraform actually make the
+      change — doing the minimum to match the blueprint.</li>
+    </ul>
+    <p>Press the buttons and watch reality move to match the blueprint. Notice the <b>preview-before-change</b>
+    safety step — that's the part that makes it trustworthy.</p>`,
+  analogyLabel: "⚠️ Risk &amp; controls lens",
+  analogyRisk: true,
+  analogy: `<b>Plan = the exception report. Apply = releasing the batch.</b> You'd never let a system move
+    money on its own — a reviewer reads the report and authorizes it first. Terraform enforces the same
+    <b>four-eyes</b> control on infrastructure: preview, sign off, then — and only then — change anything.`
+}
+];
+
+/* ---------- render ---------- */
+const artEl = document.getElementById('art');
+const narrEl = document.getElementById('narr');
+const stepperEl = document.getElementById('stepper');
+const countEl = document.getElementById('count');
+const backB = document.getElementById('back');
+const nextB = document.getElementById('next');
+let i = loadHash().c ?? 0;
+if (i < 0 || i >= chapters.length) i = 0;
+
+function buildStepper(){
+  stepperEl.innerHTML = chapters.map((c,n)=>`
+    <div class="step" data-n="${n}">
+      <div class="n">${String(n+1).padStart(2,'0')}</div>
+      <div class="t">${c.short}</div>
+      <div class="bar"></div>
+    </div>`).join('');
+  stepperEl.querySelectorAll('.step').forEach(s=>
+    s.addEventListener('click',()=>go(+s.dataset.n)));
+}
+
+function render(){
+  const c = chapters[i];
+  // stepper state
+  stepperEl.querySelectorAll('.step').forEach((s,n)=>{
+    s.classList.toggle('active', n===i);
+    s.classList.toggle('done', n<i);
+  });
+  // narrative
+  narrEl.innerHTML = `
+    <div class="kicker">${c.kicker}</div>
+    <h2>${c.title}</h2>
+    ${c.body}
+    <div class="analogy${c.analogyRisk ? ' risk' : ''}">
+      <div class="lab">${c.analogyLabel || '🏦 Banking analogy'}</div>
+      <p>${c.analogy}</p>
+    </div>`;
+  // art
+  if (c.interactive){ renderInteractive(); }
+  else {
+    artEl.classList.remove('fade-in'); void artEl.offsetWidth; artEl.classList.add('fade-in');
+    artEl.innerHTML = c.art();
+  }
+  countEl.textContent = `${i+1} / ${chapters.length}`;
+  backB.disabled = i===0;
+  nextB.textContent = i===chapters.length-1 ? 'Start over ↺' : 'Next →';
+  saveHash({c:i});
+}
+function go(n){ i = Math.max(0, Math.min(chapters.length-1, n)); render(); }
+backB.onclick = ()=>go(i-1);
+nextB.onclick = ()=> i===chapters.length-1 ? go(0) : go(i+1);
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') go(i+1);
+  if(e.key==='ArrowLeft') go(i-1);
+});
+
+/* ---------- interactive reconcile (last chapter) ---------- */
+function renderInteractive(){
+  artEl.classList.remove('fade-in'); void artEl.offsetWidth; artEl.classList.add('fade-in');
+  // state machine: 0 = idle, 1 = planned, 2 = applied
+  let st = 0;
+  function draw(){
+    const have = st<2 ? 1 : 2;
+    const haveDb = st<2 ? 0 : 1;
+    const planning = st===1;
+    artEl.innerHTML = `
+      ${A}
+      <text x="280" y="30" text-anchor="middle" class="lbl">📄 Blueprint asks for: 2 servers + 1 database</text>
+
+      <text x="135" y="64" text-anchor="middle" class="lbl-sm" fill="var(--warn)">REALITY (what exists)</text>
+      <g transform="translate(40,78)">
+        <rect width="190" height="250" rx="11" fill="var(--panel)" stroke="var(--border)"/>
+        ${server(40,20,110,52,'var(--c2)','server 1')}
+        ${have>=2 ? server(40,90,110,52,'var(--good)','server 2 ✓') :
+          `<g opacity="${planning?1:.25}"><rect x="40" y="90" width="110" height="52" rx="7" fill="none"
+             stroke="${planning?'var(--c4)':'#30363d'}" stroke-width="2" stroke-dasharray="6 5" class="${planning?'dash':''}"/>
+           <text x="95" y="120" text-anchor="middle" class="lbl-sm" fill="${planning?'#c9a3ff':'var(--muted)'}">${planning?'+ to add':'missing'}</text></g>`}
+        ${haveDb>=1 ?
+          `<g transform="translate(60,168)"><path d="M0 8 a35 9 0 0 0 70 0 v34 a35 9 0 0 1 -70 0 Z" fill="var(--panel-2)" stroke="var(--good)" stroke-width="2"/>
+            <ellipse cx="35" cy="8" rx="35" ry="9" fill="var(--panel-2)" stroke="var(--good)" stroke-width="2"/>
+            <text x="35" y="32" text-anchor="middle" class="lbl-sm" fill="var(--good)">database ✓</text></g>` :
+          `<g transform="translate(60,168)" opacity="${planning?1:.25}"><path d="M0 8 a35 9 0 0 0 70 0 v34 a35 9 0 0 1 -70 0 Z" fill="none"
+             stroke="${planning?'var(--c4)':'#30363d'}" stroke-width="2" stroke-dasharray="6 5" class="${planning?'dash':''}"/>
+            <ellipse cx="35" cy="8" rx="35" ry="9" fill="none" stroke="${planning?'var(--c4)':'#30363d'}" stroke-width="2" stroke-dasharray="6 5"/>
+            <text x="35" y="32" text-anchor="middle" class="lbl-sm" fill="${planning?'#c9a3ff':'var(--muted)'}">${planning?'+ to add':'missing'}</text></g>`}
+      </g>
+
+      <g transform="translate(250,150)">
+        <text x="30" y="0" text-anchor="middle" font-size="26">${st===0?'🤔':st===1?'📋':'✅'}</text>
+      </g>
+
+      <g transform="translate(330,90)">
+        <rect width="200" height="226" rx="11" fill="#0a0e14" stroke="${st===1?'var(--c4)':st===2?'var(--good)':'var(--border)'}" stroke-width="2"/>
+        <text x="16" y="28" class="lbl-mono" fill="${st===1?'#c9a3ff':st===2?'var(--good)':'var(--muted)'}">
+          ${st===0?'$ terraform plan' : st===1?'terraform plan ✎' : 'terraform apply ✓'}</text>
+        ${st===0 ? `<text x="16" y="60" class="lbl-sm">Press “Plan” to see</text>
+                    <text x="16" y="80" class="lbl-sm">what Terraform would do.</text>
+                    <text x="16" y="118" class="lbl-sm" fill="var(--muted)">Nothing changes until</text>
+                    <text x="16" y="138" class="lbl-sm" fill="var(--muted)">you approve.</text>` : ''}
+        ${st===1 ? `<text x="16" y="58" class="lbl-mono" fill="#7ee0a0">+ add server 2</text>
+                    <text x="16" y="80" class="lbl-mono" fill="#7ee0a0">+ add database</text>
+                    <text x="16" y="102" class="lbl-mono" fill="var(--muted)">~ change 0</text>
+                    <text x="16" y="124" class="lbl-mono" fill="var(--muted)">- destroy 0</text>
+                    <line x1="16" y1="142" x2="184" y2="142" stroke="var(--border)"/>
+                    <text x="16" y="166" class="lbl-sm" fill="var(--c3)">Plan: 2 to add.</text>
+                    <text x="16" y="188" class="lbl-sm" fill="var(--c3)">A human reviews this</text>
+                    <text x="16" y="206" class="lbl-sm" fill="var(--c3)">before anything runs.</text>` : ''}
+        ${st===2 ? `<text x="16" y="60" class="lbl-mono" fill="var(--good)">✓ server 2 created</text>
+                    <text x="16" y="84" class="lbl-mono" fill="var(--good)">✓ database created</text>
+                    <line x1="16" y1="104" x2="184" y2="104" stroke="var(--border)"/>
+                    <text x="16" y="130" class="lbl-sm" fill="var(--good)">Reality now matches</text>
+                    <text x="16" y="150" class="lbl-sm" fill="var(--good)">the blueprint. 🎉</text>
+                    <text x="16" y="186" class="lbl-sm" fill="var(--muted)">Run again? It does</text>
+                    <text x="16" y="206" class="lbl-sm" fill="var(--muted)">nothing — already matched.</text>` : ''}
+      </g>
+
+      <foreignObject x="40" y="350" width="490" height="60">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="tf-controls">
+          <button id="btn-plan"  ${st!==0?'disabled':''} class="${st===0?'go':''}">▶ terraform plan</button>
+          <button id="btn-apply" ${st!==1?'disabled':''} class="${st===1?'go':''}">✓ terraform apply</button>
+          <button id="btn-reset" ${st===0?'disabled':''}>↺ reset</button>
+        </div>
+      </foreignObject>
+    `;
+    const p=document.getElementById('btn-plan'), a=document.getElementById('btn-apply'), r=document.getElementById('btn-reset');
+    if(p) p.onclick=()=>{ st=1; draw(); };
+    if(a) a.onclick=()=>{ st=2; draw(); };
+    if(r) r.onclick=()=>{ st=0; draw(); };
+  }
+  draw();
+}
+
+buildStepper();
+render();
+</script>
+</body>
+</html>

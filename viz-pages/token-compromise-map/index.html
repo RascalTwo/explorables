@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What an attacker has to steal</title>
+<!-- Publish posture — the SOLE source of truth for build.ts. Default "local" = stays
+     on this machine, never published. Change to "public" (open web) or "private"
+     (magic-link sealed) ONLY when you intend to share this viz. -->
+<meta name="viz:uid" content="v-6d0d52941256">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="What an attacker has to steal">
+<meta name="viz:description" content="Every secret in a client-credentials + JWKS design, mapped by how hard it is to obtain against what it buys the attacker — and what changes when the signing key lives in memory versus in a secret manager. In-memory is the chosen design; the secret-manager view is kept as the contrast that shows what persisting would buy and what it would cost. Flipping between the two moves the signing key across the map and grows a new node. Generic; no product names.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  body { max-width: 1240px; margin: 0 auto; padding: 30px 26px 80px }
+  .viz-header h1 { max-width: 26ch }
+  .viz-header .sub { max-width: 90ch }
+  .backlink { margin-top: 13px; font-size: 13px; color: var(--muted) }
+  .backlink a { color: var(--accent) }
+
+  /* --- universe switch -------------------------------------------------- */
+  .universe { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin: 24px 0 8px }
+  .uni {
+    text-align: left; cursor: pointer; font: inherit; color: var(--muted);
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 9px; padding: 13px 16px;
+  }
+  .uni:hover { border-color: var(--muted); color: var(--text) }
+  .uni[aria-selected="true"] { border-color: var(--accent); color: var(--text);
+    background: color-mix(in srgb, var(--accent) 10%, var(--panel)) }
+  .uni .num { display: block; font: 600 10.5px/1 var(--mono); letter-spacing: .08em; color: var(--faint) }
+  .uni[aria-selected="true"] .num { color: var(--accent) }
+  .uni .nm { display: block; margin: 7px 0 5px; font-size: 15px; font-weight: 600 }
+  .uni .as { display: block; font-size: 12.5px; color: var(--faint); line-height: 1.45 }
+  .hint { font-size: 12px; color: var(--faint); margin: 0 0 22px }
+  .hint kbd { font: 11px var(--mono); border: 1px solid var(--border); border-bottom-width: 2px;
+              border-radius: 4px; padding: 2px 5px; color: var(--muted) }
+
+  /* --- the map ---------------------------------------------------------- */
+  figure { margin: 0 }
+  figure svg { display: block; width: 100%; height: auto; background: var(--panel);
+               border: 1px solid var(--border); border-radius: 10px }
+  figcaption { margin-top: 10px; font-size: 12.5px; color: var(--faint); max-width: 92ch }
+
+  /* Solid hairlines, one shade off the surface. Never dashed — a dashed grid
+     reads as "threshold" or "projection" when it is only a guide. */
+  .grid { stroke: var(--border); stroke-width: 1; fill: none }
+  .axis { stroke: var(--border); stroke-width: 1.5 }
+  .axname { font: 600 11px var(--sans); fill: var(--muted); letter-spacing: .08em }
+  .bandname { font: 10.5px var(--mono); fill: var(--faint) }
+  .bandname.strong { font: 600 11.5px var(--mono); fill: var(--muted); letter-spacing: .08em }
+
+  /* A node moves rather than being redrawn, so the universe switch reads as a
+     change to ONE system, not two unrelated pictures. */
+  .node { transition: transform .55s cubic-bezier(.4,0,.2,1), opacity .35s ease }
+  .node rect.body { fill: var(--bg); stroke-width: 1.8 }
+  .node.detect-good rect.body { stroke: var(--good) }
+  .node.detect-part rect.body { stroke: var(--warn) }
+  .node.detect-none rect.body { stroke: var(--danger) }
+  .node.absent { opacity: 0; pointer-events: none }
+  /* The glow marks the node that MOVES between universes, so it must follow that
+     node's own state — a red halo on a green outline reads as a contradiction. */
+  .node.moved.detect-none rect.body { filter: drop-shadow(0 0 9px color-mix(in srgb, var(--danger) 55%, transparent)) }
+  .node.moved.detect-good rect.body { filter: drop-shadow(0 0 9px color-mix(in srgb, var(--good) 55%, transparent)) }
+  .vsvg-label { font: 12px/1.3 var(--sans); flex-direction: column; gap: 3px;
+                align-items: flex-start; text-align: left; padding: 9px 12px }
+  .vsvg-label .t { font-weight: 600; font-size: 12.5px; color: var(--text) }
+  .vsvg-label .d { font-size: 11px; color: var(--muted); line-height: 1.35 }
+  .vsvg-label .sig { font: 600 10px var(--sans); letter-spacing: .05em; text-transform: uppercase }
+  .sig.good { color: var(--good) } .sig.part { color: var(--warn) } .sig.none { color: var(--danger) }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-size: 12.5px; color: var(--muted) }
+  .legend b { color: var(--text); font-weight: 600 }
+  .legend .item { display: flex; align-items: center; gap: 8px }
+  .legend .sw { width: 13px; height: 13px; border-radius: 3px; border: 2px solid }
+  .legend .sw.good { border-color: var(--good) }
+  .legend .sw.part { border-color: var(--warn) }
+  .legend .sw.none { border-color: var(--danger) }
+
+  /* --- the grid of answers --------------------------------------------- */
+  h2 { font-size: 19px; margin: 44px 0 6px; letter-spacing: -.2px }
+  h2 + p.lede { margin: 0 0 18px; color: var(--muted); max-width: 92ch }
+  table.answers { width: 100%; border-collapse: collapse; font-size: 13px }
+  table.answers th, table.answers td { text-align: left; padding: 12px 13px;
+    border-bottom: 1px solid var(--border); vertical-align: top }
+  table.answers thead th { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: .05em }
+  table.answers col.c0 { width: 19% } table.answers col.c1 { width: 22% }
+  table.answers col.c2 { width: 21% } table.answers col.c3 { width: 19% }
+  table.answers col.c4 { width: 19% }
+  table.answers td.what { color: var(--text); font-weight: 600 }
+  table.answers td.what .h { display: block; font: 400 11px/1.5 var(--sans); color: var(--faint); margin-top: 4px }
+  table.answers td { color: var(--muted); line-height: 1.5 }
+  table.answers tr.worst { background: color-mix(in srgb, var(--danger) 8%, transparent) }
+  table.answers tr.newrow { background: color-mix(in srgb, var(--c4) 8%, transparent) }
+  table.answers tr:last-child td { border-bottom: none }
+  .flag { display: inline-block; font: 600 9.5px/1 var(--sans); letter-spacing: .06em;
+          text-transform: uppercase; border: 1px solid currentColor; border-radius: 3px;
+          padding: 3px 5px; margin-left: 6px; vertical-align: 1px }
+  .flag.d { color: var(--danger) } .flag.n { color: var(--c4) }
+
+  .takeaway { margin-top: 22px; padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--accent); border-left-width: 4px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--panel)); font-size: 15px; line-height: 1.55 }
+  .takeaway strong { color: var(--text) }
+  .takeaway + .takeaway { margin-top: 12px }
+
+  .trade { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px }
+  .trade div { border: 1px solid var(--border); border-radius: 8px; padding: 14px 17px }
+  .trade .h { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 9px }
+  .trade .a .h { color: var(--c5) } .trade .b .h { color: var(--c4) }
+  .trade p { margin: 0 0 8px; font-size: 13px; color: var(--muted); line-height: 1.55 }
+  .trade p:last-child { margin-bottom: 0 }
+  .trade strong { color: var(--text) }
+
+  footer.foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-size: 12.5px; color: var(--faint); line-height: 1.7 }
+  footer.foot a { color: var(--accent) }
+</style>
+</head>
+<body>
+
+<header class="viz-header">
+  <h1>What an attacker has to steal</h1>
+  <p class="sub">Every secret in a client-credentials plus JWKS design, placed by <strong>how hard it
+  is to get hold of</strong> against <strong>what it buys whoever gets it</strong>. The outline colour
+  says whether you would find out. Two of these are catastrophic, and only one of them is the one
+  people expect.</p>
+  <p class="backlink">Mechanism, and every RFC citation, lives in the
+  <a href="../jwks-explainer/">JWKS explainer</a> and its
+  <a href="../jwks-diagrams/">diagram set</a>. What you actually <em>do</em> when one of these leaks
+  is the companion page: <a href="../token-kill-switch/">Turning it off</a>. What stops someone
+  simply <em>guessing</em> the client secret in the first place is
+  <a href="../failure-cap-lockout/">The failure cap</a>.</p>
+</header>
+
+<div class="universe" role="tablist" id="unis"></div>
+<p class="hint"><kbd>←</kbd> <kbd>→</kbd> to switch · the URL updates, so either can be
+linked directly · watch the <strong>signing key</strong> move when you switch ·
+<strong>the first is the chosen design</strong>; the second is here to show what the choice cost</p>
+
+<figure>
+  <div id="map"></div>
+  <figcaption id="cap"></figcaption>
+</figure>
+
+<div class="legend">
+  <span><b>Would you find out?</b></span>
+  <span class="item"><span class="sw good"></span> ✓ Yes — there is a log that answers it</span>
+  <span class="item"><span class="sw part"></span> ◑ Maybe — only from indirect signals</span>
+  <span class="item"><span class="sw none"></span> ✗ No — nothing records it</span>
+</div>
+
+<h2>The same map, written out</h2>
+<p class="lede">Four questions per row. The first two are properties of the protocol and are true
+anywhere; the last two are where your deployment has to supply the answer.</p>
+
+<table class="answers">
+  <colgroup><col class="c0"><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+  <thead><tr>
+    <th>If this leaks…</th><th>what they can do</th><th>what bounds it</th>
+    <th>how you would know</th><th>how you turn it off</th>
+  </tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<div id="notes"></div>
+
+<div class="elsewhere">
+  <span class="lbl">Elsewhere — what this page is, in the discipline's own words</span>
+  <a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html">Threat Modeling Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+  <span class="why">This map answers two of the four questions that cheat sheet is built
+  around — <em>what can go wrong</em>, and how to rank it — and it ranks the same way, on
+  likelihood against impact. Worth reading for the two questions this page deliberately does
+  <b>not</b> answer: <em>what are we working on</em> (that is a topology diagram, not this)
+  and <em>what are we going to do about it</em> (that is the companion
+  <a href="../token-kill-switch/">Turning it off</a>). It also names STRIDE, which is the
+  structured sweep to run if you want confidence this map has no holes.</span>
+</div>
+
+<footer class="foot">
+  Generic throughout — authorization server, client, resource server. No product names, no network
+  topology. <strong>Positions on the map are judgement, not measurement</strong>: the axes are
+  ordered bands, not scales, and nothing here is a score.
+  <br>Where each secret physically sits in a given deployment is a topology question and belongs to
+  that deployment's own network diagram, not to this page.
+</footer>
+
+<script type="module">
+import { labelBox, stepper, $, $$, esc } from "/_kit/viz.js";
+
+/* Two universes, one system. The ONLY thing that differs is where the signing
+   key lives — everything else on this page is identical, which is the point:
+   that one choice moves the worst node on the map and adds a new one.
+
+   These are no longer presented as an open pick. A is the chosen design; B is
+   kept as the contrast that shows what persisting would buy and what it would
+   cost, because "there is no key at rest" only reads as an answer next to the
+   alternative it is an answer to. */
+const UNIVERSES = [
+  {
+    tag: "CHOSEN", nm: "Ephemeral signing key",
+    as: "Generated in memory at start-up and never written down. No copy exists at rest — not on disk, not in a vault, not in a backup. Rotation is a restart.",
+    cap: "With no key at rest there is nothing to read, so the signing key sits at the far right: an attacker must reach into the memory of a live process. Two costs, both accepted deliberately: if they ever do get in, nothing on earth records it — and the design requires a SINGLE INSTANCE. Two instances each generate their own keypair, and a token minted by one fails against the other's key set.",
+  },
+  {
+    tag: "THE ALTERNATIVE", nm: "Key from a secret manager",
+    as: "Generated once, stored in a vault or secret manager, read at start-up. It persists, it is backed up, and something guards it.",
+    cap: "Persisting the key moves it left — it is now a thing with an address, readable by anyone the vault permits. What it buys is real: more than one instance can mint, and theft leaves a record. What it costs is a new worst node — whatever credential can read the vault — plus a rotation procedure and a custody question that the chosen design does not have to answer.",
+  },
+];
+
+/* Node geometry. Position is (universe → {x,y}); a node absent from a universe
+   fades rather than vanishing, so the switch reads as one continuous system. */
+const W = 230, H = 88;
+const NODES = [
+  { id: "token", t: "An access token", d: "in a header, a log, a crash dump",
+    detect: "none", sig: "✗ looks legitimate",
+    pos: [[220, 400], [220, 400]] },
+  { id: "secret", t: "The client secret", d: "the caller's own copy",
+    detect: "part", sig: "◑ new source, odd rate",
+    pos: [[570, 300], [570, 300]] },
+  { id: "store", t: "The credential store", d: "a table of bcrypt rows",
+    detect: "part", sig: "◑ database access logs",
+    pos: [[900, 400], [900, 400]] },
+  { id: "jwks", t: "Control of the JWKS host", d: "publish your own key; verifiers accept it",
+    detect: "part", sig: "◑ config drift, TLS change",
+    pos: [[900, 182], [900, 182]] },
+  { id: "key", t: "The signing key", d: "mint any token, any audience",
+    detect: ["none", "good"], sig: ["✗ nothing records it", "✓ vault read log"],
+    pos: [[900, 78], [570, 78]], moves: true },
+  { id: "vault", t: "Whatever reads the vault", d: "the key to the key",
+    detect: "good", sig: "✓ vault audit log",
+    pos: [[570, 182], [570, 182]], only: 1 },
+];
+
+/* Row content. A cell may be a single string (same in both universes) or a
+   two-element array (A, B). */
+const ROWS = [
+  { id: "key", what: "The signing key", hint: "the issuer's private RSA key",
+    cls: "worst", flag: '<span class="flag d">worst case</span>',
+    can: "Mint a valid token for <strong>any</strong> client, audience, scope and lifetime. Every verifier accepts it, because it is genuinely signed.",
+    bound: "Nothing. Audience and scope are claims <em>they</em> now control. The only real bound is how long the key stays published.",
+    know: ["<strong>You would not.</strong> The key is only ever in memory, so there is no read to log and no artifact to diff. Forged tokens are indistinguishable from real ones.",
+           "<strong>The vault read is logged.</strong> “Who read the signing key, and when” is an answerable question — which is the single strongest argument for this universe."],
+    off: ["Restart. The key dies with the process and the key set changes on the spot.",
+          "Emergency rotation — write a new key, withdraw the old one immediately."] },
+  { id: "vault", what: "Whatever can read the vault", hint: "a role, a machine token, a CI runner",
+    cls: "newrow", flag: '<span class="flag n">exists only in universe B</span>', only: 1,
+    can: "Read the signing key, and therefore everything in the row above. Persisting the key creates this row; it did not exist before.",
+    bound: "Vault ACLs, short-lived credentials, and whether the read path is separated from the deploy path.",
+    know: "Vault audit logs — provided somebody actually reads them, and provided a legitimate start-up read looks different from an illegitimate one.",
+    off: "Revoke the role or token, then rotate the signing key anyway, because you must assume it was read." },
+  { id: "jwks", what: "Control of the JWKS host", hint: "the server, or its TLS private key",
+    can: "Publish an attacker's own public key. Verifiers fetch it, trust it, and accept tokens the attacker signed — <strong>without ever touching your signing key</strong>.",
+    bound: "TLS itself, and the fact that verifiers cache — a poisoned key set only reaches verifiers that refetch while you hold the host.",
+    know: "Indirectly: certificate transparency, configuration drift, an unexpected <span class=\"m\">kid</span> appearing in the published set.",
+    off: "Restore the host and the key set. Outstanding forged tokens still verify until their <span class=\"m\">exp</span>, so treat it as a key compromise too." },
+  { id: "secret", what: "The client secret", hint: "the calling service's credential",
+    can: "Request tokens as that client, for as long as the credential stays active. Not a forgery — a genuine impersonation.",
+    bound: "That client's scopes and audience. This is exactly what scope is for, and the only row where it does real containment work.",
+    know: "Indirect signals only: issuance from a new source, an unusual token-request rate, use outside a normal window.",
+    off: "Deactivate the credential at the issuer. New tokens stop at once; tokens already issued live until they expire." },
+  { id: "token", what: "One access token", hint: "in a log, a proxy, a crash dump",
+    can: "Everything that one token's claims allow, until it expires. Bearer means exactly that — holding it is the whole qualification.",
+    bound: "<span class=\"m\">exp</span>, <span class=\"m\">aud</span> and scope, all baked in at issue. Short lifetimes are the containment.",
+    know: "Generally not. A valid token used from an unexpected place still verifies perfectly — unless it is sender-constrained.",
+    off: "Wait for <span class=\"m\">exp</span>, or introspect on every request and deny-list it. There is no third option." },
+  { id: "store", what: "The credential store", hint: "the table of bcrypt rows",
+    can: "Very little, immediately. These are bcrypt hashes, not secrets — each one has to be cracked, at the cost the work factor sets.",
+    bound: "The bcrypt work factor, and the fact that the secrets are high-entropy random strings rather than passwords people chose.",
+    know: "Database access logs, if the read looks different from normal application traffic.",
+    off: "Rotate every client secret. Painful and slow, but the exposure grows only as fast as cracking does." },
+];
+
+const cell = (v, u) => Array.isArray(v) ? v[u] : v;
+
+const unis = $("#unis"), map = $("#map"), rows = $("#rows"), cap = $("#cap"), notes = $("#notes");
+
+unis.innerHTML = UNIVERSES.map((u, i) =>
+  `<button class="uni" role="tab" id="uni-${i}" aria-selected="false">
+     <span class="num">${u.tag}</span><span class="nm">${esc(u.nm)}</span><span class="as">${esc(u.as)}</span>
+   </button>`).join("");
+
+/* Bands are ordered guides, not scales — so they are drawn as plain solid
+   hairlines and labelled in words. No numbers, because there are none. */
+const PX = [200, 510, 820, 1150], PY = [70, 280, 400, 500];
+/* Band captions are TWO short lines, not one long one: a single sentence per band
+   is wider than the band, and the three then overprint each other. */
+const XB = [["EXPOSED", "places you do not fully control"],
+            ["GUARDED", "something must be compromised"],
+            ["DEEP", "a live process, or a server you own"]];
+const YB = ["TOTAL", "BROAD", "NARROW"];
+
+const midX = i => (PX[i] + PX[i + 1]) / 2, midY = i => (PY[i] + PY[i + 1]) / 2;
+/* Rotated text is anchored MIDDLE about the band's own centre. Anchoring at an
+   edge is what previously stacked all three labels on the same point. */
+const vtext = (x, y, t, cls) =>
+  `<text class="${cls}" x="${x}" y="${y}" text-anchor="middle" transform="rotate(-90 ${x} ${y})">${t}</text>`;
+
+map.innerHTML = `<svg viewBox="0 0 1180 620" role="img" aria-label="A map of the secrets in a client-credentials and JWKS design. The horizontal axis is how hard a secret is to obtain, from exposed to deep. The vertical axis is what obtaining it buys an attacker, from narrow to total. The signing key and control of the JWKS host both sit in the top band; an access token sits at the bottom left.">
+  ${PX.slice(1, 3).map(x => `<line class="grid" x1="${x}" y1="${PY[0]}" x2="${x}" y2="${PY[3]}"/>`).join("")}
+  ${PY.slice(1, 3).map(y => `<line class="grid" x1="${PX[0]}" y1="${y}" x2="${PX[3]}" y2="${y}"/>`).join("")}
+  <line class="axis" x1="${PX[0]}" y1="${PY[3]}" x2="${PX[3]}" y2="${PY[3]}"/>
+  <line class="axis" x1="${PX[0]}" y1="${PY[0]}" x2="${PX[0]}" y2="${PY[3]}"/>
+
+  ${XB.map((b, i) => `<text class="bandname strong" x="${midX(i)}" y="${PY[3] + 26}" text-anchor="middle">${b[0]}</text>
+     <text class="bandname" x="${midX(i)}" y="${PY[3] + 43}" text-anchor="middle">${b[1]}</text>`).join("")}
+  ${YB.map((t, i) => vtext(PX[0] - 20, midY(i), t, "bandname strong")).join("")}
+
+  <text class="axname" x="${PX[0]}" y="${PY[3] + 72}">HOW HARD IT IS TO GET HOLD OF &#8594;</text>
+  ${vtext(36, midY(1), "WHAT IT BUYS THEM &#8594;", "axname")}
+
+  ${NODES.map(n => `<g class="node" id="n-${n.id}" style="transform: translate(${n.pos[0][0]}px, ${n.pos[0][1]}px)">
+      <rect class="body" x="0" y="0" width="${W}" height="${H}" rx="8"/>
+      ${labelBox({ x: 0, y: 0, w: W, h: H }, "", "")}
+    </g>`).join("")}
+</svg>`;
+
+const paint = (u) => {
+  $$(".uni").forEach((b, i) => b.setAttribute("aria-selected", String(i === u)));
+  cap.textContent = UNIVERSES[u].cap;
+
+  for (const n of NODES) {
+    const g = $("#n-" + n.id);
+    const [x, y] = n.pos[u];
+    g.style.transform = `translate(${x}px, ${y}px)`;
+    const det = cell(n.detect, u), sig = cell(n.sig, u);
+    g.setAttribute("class",
+      `node detect-${det}${n.only !== undefined && n.only !== u ? " absent" : ""}${n.moves ? " moved" : ""}`);
+    g.querySelector(".vsvg-label").innerHTML =
+      `<span class="t">${esc(n.t)}</span><span class="d">${esc(n.d)}</span>` +
+      `<span class="sig ${det === "none" ? "none" : det === "part" ? "part" : "good"}">${esc(sig)}</span>`;
+  }
+
+  rows.innerHTML = ROWS.filter(r => r.only === undefined || r.only === u).map(r =>
+    `<tr class="${r.cls ?? ""}">
+       <td class="what">${r.what}${r.flag ?? ""}<span class="h">${r.hint}</span></td>
+       <td>${cell(r.can, u)}</td><td>${cell(r.bound, u)}</td>
+       <td>${cell(r.know, u)}</td><td>${cell(r.off, u)}</td>
+     </tr>`).join("");
+
+  notes.innerHTML = `
+    <div class="takeaway"><strong>Two rows reach “total”, and only one of them is the signing key.</strong>
+      Whoever controls the JWKS host can publish their own public key and have every verifier accept
+      tokens they signed — <em>without ever obtaining your private key</em>. Key custody is only half
+      the problem; the integrity of the published key set is the other half, and it is the half nobody
+      draws.</div>
+    <div class="takeaway"><strong>Only one row is genuinely contained by scope.</strong> A stolen
+      client secret is bounded by that client's scopes and audience — which is exactly what they are
+      for. A forged token is not bounded by anything, because the attacker writes the claims. Scope is
+      a real control in one row of six; treating it as a general defence overstates it.</div>
+    <div class="trade">
+      <div class="a"><div class="h">Universe A · ephemeral · what it buys you</div>
+        <p><strong>There is no artifact to steal.</strong> No file, no vault path, no backup, no disk
+        image, no snapshot in a decommissioned environment. The attack requires reaching into the
+        memory of a running process, which is a much smaller set of people.</p>
+        <p><strong>The kill switch is free.</strong> A restart is a complete key rotation, needs no
+        tooling, no runbook and no key-management story at all.</p></div>
+      <div class="b"><div class="h">Universe A · ephemeral · what it costs you</div>
+        <p><strong>You would never know.</strong> There is no read to audit. A compromise of this key
+        is silent, permanent until restart, and undetectable — the worst combination on the page.</p>
+        <p><strong>Every restart is a hard cutover.</strong> No overlap window: the old key leaves the
+        set the moment the process dies, so every outstanding token stops verifying at once. And with
+        more than one instance, each holds a <em>different</em> key — a token signed by one can fail
+        at a verifier that fetched the key set from another.</p></div>
+    </div>
+    <div class="trade">
+      <div class="b"><div class="h">Universe B · managed · what it buys you</div>
+        <p><strong>The worst secret becomes auditable.</strong> “Who read the signing key” goes from
+        an unanswerable question to a log line. Given that this is the one compromise with no other
+        detection story, that is not a small win.</p>
+        <p><strong>Rotation becomes a decision rather than an accident</strong>, with a real overlap
+        window — and every instance signs with the same key, so restarts and deploys stop breaking
+        outstanding tokens.</p></div>
+      <div class="a"><div class="h">Universe B · managed · what it costs you</div>
+        <p><strong>The key now has an address.</strong> It exists at rest, in backups, and in
+        whatever read it last. Its security is now the vault's ACLs, and it moved left on the map.</p>
+        <p><strong>You inherit a new row.</strong> Whatever credential reads the vault is now itself
+        a path to total compromise, and it has to be governed, rotated and watched like the key it
+        protects.</p></div>
+    </div>`;
+};
+
+const step = stepper({ n: UNIVERSES.length, hashKey: "universe", onStep: paint });
+$$(".uni").forEach((b, i) => b.addEventListener("click", () => { step.go(i); paint(i); }));
+</script>
+
+</body>
+</html>

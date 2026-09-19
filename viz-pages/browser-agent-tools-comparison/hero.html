@@ -1,0 +1,120 @@
+<div class="og-card">
+  <style>
+    .og-card{
+      width:1200px;height:630px;overflow:hidden;position:relative;
+      background:#0d1117;color:#e6edf3;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      --codex:#10a37f;--claude:#d77757;--pw:#3b82f6;
+      --panel:#161b22;--panel2:#1c2330;--border:#2a313c;
+      --dim:#9aa6b2;--faint:#6b7785;
+      --mono:ui-monospace,SFMono-Regular,Menlo,"Cascadia Code",Consolas,monospace;
+    }
+    /* ambient field */
+    .og-card .grid{position:absolute;inset:0;
+      background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);
+      background-size:34px 34px;-webkit-mask-image:radial-gradient(120% 90% at 78% 8%,#000 0%,transparent 72%);mask-image:radial-gradient(120% 90% at 78% 8%,#000 0%,transparent 72%);}
+    .og-card .glow{position:absolute;width:820px;height:520px;top:-190px;right:-120px;border-radius:50%;
+      background:radial-gradient(closest-side,rgba(59,130,246,.16),rgba(16,163,127,.07) 55%,transparent 72%);filter:blur(6px);}
+    .og-card .content{position:absolute;inset:0;padding:48px 60px 46px;display:flex;flex-direction:column;}
+
+    /* header */
+    .og-card .eyebrow{display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--faint);}
+    .og-card .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--claude);box-shadow:0 0 0 4px rgba(215,119,87,.14);}
+    .og-card .eyebrow .snap{color:var(--dim);font-weight:600;letter-spacing:.09em;}
+    .og-card h1{margin:16px 0 0;font-size:57px;line-height:1.02;font-weight:800;letter-spacing:-.025em;color:#f4f8fb;}
+    .og-card h1 .b{color:var(--pw);}
+    .og-card .essence{margin-top:14px;font-size:19px;line-height:1.5;color:var(--dim);max-width:720px;font-weight:450;}
+    .og-card .essence b{color:#e6edf3;font-weight:650;}
+
+    /* browser window */
+    .og-card .win{margin-top:auto;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+      box-shadow:0 26px 60px -24px rgba(0,0,0,.75),0 2px 0 0 rgba(255,255,255,.02) inset;}
+    .og-card .chrome{display:flex;align-items:center;gap:14px;height:46px;padding:0 16px;background:var(--panel2);border-bottom:1px solid var(--border);}
+    .og-card .lights{display:flex;gap:8px;}
+    .og-card .lights i{width:12px;height:12px;border-radius:50%;display:block;}
+    .og-card .lights .l1{background:var(--codex);} .og-card .lights .l2{background:var(--claude);} .og-card .lights .l3{background:var(--pw);}
+    .og-card .url{flex:1;display:flex;align-items:center;gap:9px;height:28px;padding:0 13px;background:#0d1117;border:1px solid var(--border);border-radius:8px;
+      font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:.01em;}
+    .og-card .url svg{flex:0 0 auto;}
+    .og-card .url .grey{color:var(--faint);}
+    .og-card .url .cur{margin-left:auto;color:var(--faint);font-size:11px;letter-spacing:.12em;text-transform:uppercase;}
+
+    .og-card .panes{display:grid;grid-template-columns:repeat(3,1fr);}
+    .og-card .pane{padding:20px 22px 22px;position:relative;border-right:1px solid var(--border);}
+    .og-card .pane:last-child{border-right:none;}
+    .og-card .pane::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;}
+    .og-card .pane.c::before{background:var(--codex);} .og-card .pane.a::before{background:var(--claude);} .og-card .pane.p::before{background:var(--pw);}
+    .og-card .pane.c{background:linear-gradient(180deg,rgba(16,163,127,.07),transparent 60%);}
+    .og-card .pane.a{background:linear-gradient(180deg,rgba(215,119,87,.07),transparent 60%);}
+    .og-card .pane.p{background:linear-gradient(180deg,rgba(59,130,246,.08),transparent 60%);}
+
+    .og-card .ptop{display:flex;align-items:center;gap:11px;}
+    .og-card .ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:1px solid;}
+    .og-card .pane.c .ico{color:var(--codex);border-color:rgba(16,163,127,.4);background:rgba(16,163,127,.1);}
+    .og-card .pane.a .ico{color:var(--claude);border-color:rgba(215,119,87,.4);background:rgba(215,119,87,.1);}
+    .og-card .pane.p .ico{color:var(--pw);border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1);}
+    .og-card .vendor{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;}
+    .og-card .pane.c .vendor{color:var(--codex);} .og-card .pane.a .vendor{color:var(--claude);} .og-card .pane.p .vendor{color:var(--pw);}
+    .og-card .name{font-size:18px;font-weight:750;color:#f4f8fb;letter-spacing:-.01em;margin-top:1px;}
+
+    .og-card .runs{margin-top:15px;font-size:13.5px;line-height:1.42;color:var(--dim);}
+    .og-card .runs b{color:#e6edf3;font-weight:650;}
+    .og-card .chip{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:5px 11px;border-radius:7px;font-size:11.5px;font-weight:650;letter-spacing:.01em;border:1px solid var(--border);background:#0d1117;}
+    .og-card .chip .sq{width:7px;height:7px;border-radius:2px;}
+    .og-card .pane.c .chip .sq{background:var(--codex);} .og-card .pane.a .chip .sq{background:var(--claude);} .og-card .pane.p .chip .sq{background:var(--pw);}
+    .og-card .chip span{color:var(--dim);}
+  </style>
+
+  <div class="grid"></div>
+  <div class="glow"></div>
+
+  <div class="content">
+    <div class="eyebrow">
+      <span class="dot"></span>Technical Explainer
+      <span class="snap">· Head-to-head · Snapshot 2026</span>
+    </div>
+
+    <h1>Browser Automation<br>for <span class="b">AI Agents</span></h1>
+    <div class="essence">Three ways an agent can drive a browser — <b>what each can do, and where each breaks.</b></div>
+
+    <div class="win">
+      <div class="chrome">
+        <div class="lights"><i class="l1"></i><i class="l2"></i><i class="l3"></i></div>
+        <div class="url">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          agent://drive-the-browser<span class="grey">/three-ways</span>
+          <span class="cur">Compare</span>
+        </div>
+      </div>
+
+      <div class="panes">
+        <div class="pane c">
+          <div class="ptop">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M13.5 3a1.8 1.8 0 0 0-3 0v.4a1.6 1.6 0 0 1-2.5 1.3l-.3-.2a1.8 1.8 0 1 0-2.1 2.9l.3.2a1.6 1.6 0 0 1-.4 2.8H4.9a1.8 1.8 0 1 0 0 3.6h.4a1.6 1.6 0 0 1 1.1 2.7l-.2.2a1.8 1.8 0 1 0 2.5 2.6h.1a1.6 1.6 0 0 1 2.7 1.1v.3a1.8 1.8 0 0 0 3.6 0v-.4a1.6 1.6 0 0 1 2.8-1.1"/></svg></div>
+            <div><div class="vendor">OpenAI</div><div class="name">Codex Chrome</div></div>
+          </div>
+          <div class="runs">Drives your <b>real signed-in Chrome</b> — bundled, zero-config.</div>
+          <div class="chip"><span class="sq"></span><span>Your real Chrome</span></div>
+        </div>
+
+        <div class="pane a">
+          <div class="ptop">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg></div>
+            <div><div class="vendor">Anthropic</div><div class="name">Claude Code</div></div>
+          </div>
+          <div class="runs">Drives your <b>real Chrome / Edge</b> — strongest guardrails.</div>
+          <div class="chip"><span class="sq"></span><span>Chrome + Edge</span></div>
+        </div>
+
+        <div class="pane p">
+          <div class="ptop">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="13" rx="2"/><path d="M3.5 8h17"/><circle cx="6.3" cy="6" r=".7" fill="currentColor" stroke="none"/><path d="M9 21h6M12 17v4"/></svg></div>
+            <div><div class="vendor">Microsoft · OSS</div><div class="name">Playwright MCP</div></div>
+          </div>
+          <div class="runs">Launches its <b>own isolated browser</b> — model-agnostic.</div>
+          <div class="chip"><span class="sq"></span><span>Isolated browser</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
