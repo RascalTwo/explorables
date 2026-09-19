@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a credential is created securely</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="How a credential is created securely">
+<meta name="viz:description" content="Dive A of the client credentials flow: generate, hash, show once, store, present, verify — a real bcrypt string pulled apart to show where the salt actually lives.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  /* Every value on this page is REAL — generated with a CSPRNG and hashed with a
+     real bcrypt implementation on 2026-08-06. The anatomy below is sliced from
+     that one string at runtime rather than transcribed, so the labels cannot
+     drift out of alignment with the characters they point at. */
+  body { max-width:1180px; margin:0 auto; padding:26px 26px 90px }
+  section { margin-top:34px }
+  h2 { font-size:17px; margin:0 0 4px; letter-spacing:-.2px }
+  h2 .n { color:var(--faint); font-variant-numeric:tabular-nums; margin-right:9px }
+  .lede { color:var(--muted); font-size:13.5px; line-height:1.6; margin:0 0 16px;
+          max-width:78ch }
+  .lede b, p b { color:var(--text) }
+  code { font-family:var(--mono); font-size:.92em; color:#7fd7ff }
+
+  /* ---- the custody track ------------------------------------------------
+     The spatial claim of this page: the plaintext secret exists in exactly one
+     place at a time, and in only one of these places is it ever readable. */
+  .track { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin:18px 0 14px }
+  .place { border:1px solid var(--border); border-radius:9px; padding:10px 11px;
+           background:var(--panel); position:relative; transition:all .3s ease }
+  .place .pn { font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+               color:var(--faint) }
+  .place .pv { font-family:var(--mono); font-size:10.5px; margin-top:7px;
+               color:var(--muted); line-height:1.45; word-break:break-all;
+               min-height:44px }
+  .place.now { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) }
+  .place.now .pn { color:var(--accent) }
+  /* cleartext present = the danger state, and it must look like one */
+  .place.clear { border-color:var(--danger); background:#2a1315 }
+  .place.clear .pv { color:#ffb4ae }
+  .place.clear .pn { color:var(--danger) }
+  .place.hashed .pv { color:var(--good) }
+  .place.gone .pv { color:var(--faint); font-style:italic }
+
+  .beat { display:flex; gap:16px; align-items:flex-start; border:1px solid var(--border);
+          border-radius:10px; padding:14px 16px; background:var(--panel) }
+  .beat .no { background:var(--accent); color:#04121f; font-weight:800; border-radius:8px;
+              min-width:40px; text-align:center; padding:7px 4px; font-size:15px;
+              line-height:1.1; flex:none }
+  .beat .no small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .beat .bt { font-size:15px; font-weight:600 }
+  .beat .bd { color:var(--muted); font-size:13px; line-height:1.6; margin-top:4px }
+  .hint { color:var(--faint); font-size:11.5px; margin-top:10px }
+  .hint kbd { font-family:var(--mono); border:1px solid var(--border); border-radius:4px;
+              padding:0 5px; color:var(--muted) }
+
+  /* ---- the anatomy ------------------------------------------------------
+     A monospace grid is the honest medium for this: the reader can count the
+     characters and check the claim. SVG would put the alignment in my hands. */
+  .anat { background:#0a1220; border:1px solid var(--border); border-radius:10px;
+          padding:20px 18px 14px; overflow-x:auto }
+  .hashline { font-family:var(--mono); font-size:17px; letter-spacing:.5px;
+              white-space:nowrap; display:flex }
+  /* Segments carry a colour and an underline bracket only. The labels live in
+     the keyed rows below: `$2b$` is four characters wide and "algorithm" is
+     nine, so a centred label under the segment cannot fit and would collide
+     with its neighbour — which is exactly what it did on the first draft. */
+  .seg { position:relative; padding-bottom:14px }
+  .seg .bar { position:absolute; left:0; right:0; bottom:2px; height:7px;
+              border:1px solid; border-top:0; border-radius:0 0 4px 4px }
+  .s-ver  { color:var(--c4) }   .s-ver  .bar { border-color:var(--c4) }
+  .s-cost { color:var(--warn) } .s-cost .bar { border-color:var(--warn) }
+  .s-salt { color:var(--c5) }   .s-salt .bar { border-color:var(--c5) }
+  .s-dig  { color:var(--good) } .s-dig  .bar { border-color:var(--good) }
+  .s-sep  { color:var(--faint) }
+
+  .anat-rows { display:grid; grid-template-columns:auto auto 1fr; gap:9px 14px;
+               align-items:baseline; margin-top:20px; padding-top:16px;
+               border-top:1px solid var(--border); font-size:12.5px }
+  .anat-rows .r-name { font-weight:650; white-space:nowrap }
+  .anat-rows .r-name::before { content:''; display:inline-block; width:9px; height:9px;
+              border-radius:2px; background:currentColor; margin-right:8px }
+  .anat-rows .r-size { font-family:var(--mono); color:var(--faint); white-space:nowrap;
+                       font-size:11.5px }
+  .anat-rows .r-what { color:var(--muted); line-height:1.55 }
+  .anat-rows .r-what b { color:var(--text) }
+
+  .callout { border-left:3px solid var(--warn); background:#1e1808; border-radius:0 8px 8px 0;
+             padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.6;
+             color:#e8d9b4 }
+  .callout b { color:var(--warn) }
+  .callout.good { border-color:var(--good); background:#0d2015; color:#c6e8d1 }
+  .callout.good b { color:var(--good) }
+
+  /* ---- three hashes of one secret --------------------------------------- */
+  .hashes { font-family:var(--mono); font-size:12.5px; line-height:2.1;
+            background:#0a1220; border:1px solid var(--border); border-radius:10px;
+            padding:16px 18px; overflow-x:auto; white-space:nowrap }
+  .hashes .same { color:var(--muted) }
+  .hashes .diff { color:var(--danger); background:#2a1315; border-radius:3px }
+  .hashes .lbl { color:var(--faint); font-family:var(--sans); font-size:10.5px;
+                 display:inline-block; width:88px }
+
+  /* ---- the verify sequence ---------------------------------------------- */
+  .seq { display:grid; grid-template-columns:repeat(4,1fr); gap:12px }
+  .step-card { border:1px solid var(--border); border-radius:9px; padding:13px 14px;
+               background:var(--panel) }
+  .step-card .sc-n { font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+                     color:var(--accent) }
+  .step-card .sc-t { font-size:13.5px; font-weight:600; margin-top:6px }
+  .step-card .sc-d { color:var(--muted); font-size:12px; line-height:1.55; margin-top:6px }
+  .step-card .sc-d code { font-size:11px }
+
+  /* ---- the work factor, measured ---------------------------------------- */
+  .bars { display:grid; grid-template-columns:auto 1fr auto; gap:7px 12px;
+          align-items:center; font-size:12.5px }
+  .bars .bl { font-family:var(--mono); color:var(--muted); white-space:nowrap }
+  .bars .bb { height:15px; border-radius:4px; background:var(--c4); min-width:2px }
+  .bars .bv { font-family:var(--mono); color:var(--text); font-variant-numeric:tabular-nums;
+              white-space:nowrap }
+
+  /* ---- sourcing --------------------------------------------------------- */
+  .refs { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+  .ref { border:1px solid var(--border); border-radius:9px; padding:12px 14px;
+         background:var(--panel); font-size:12.5px; line-height:1.6; color:var(--muted) }
+  .ref b { color:#a9e2ff } .ref i { color:var(--text); font-style:normal }
+  .ours { border-left:3px solid var(--warn) }
+  .ours b { color:var(--warn); text-transform:uppercase; letter-spacing:.04em; font-size:11px }
+
+  .nav { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+  .nav a { display:inline-block; padding:9px 14px; border-radius:8px;
+           background:#151f3a; border:1px solid #3a5288; color:#9fc6ff;
+           text-decoration:none; font-size:13px }
+  .nav a:hover { background:#1d2c50; border-color:var(--accent); color:#cfe4ff }
+  .nav a.home { background:transparent; border-color:var(--border); color:var(--muted) }
+
+  /* ======================================================================
+     THE HERO FIGURE — the whole page in one moving picture.
+     Everything below it is the detail layer for people who want it. The
+     figure has to work with the sound off and the words unread: a secret
+     goes in, a machine chews on it, a different string comes out every
+     time, and nothing ever comes back the other way.
+     ====================================================================== */
+  .hero { margin:22px 0 0; border:1px solid var(--border); border-radius:14px;
+          background:linear-gradient(180deg,#0c1424,#0a1120); overflow:hidden }
+  .hero-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+              padding:14px 18px; border-bottom:1px solid var(--border) }
+  .hero-bar h2 { margin:0; font-size:15px }
+  .hero-bar .spacer { flex:1 }
+  .hero:focus { outline:none; box-shadow:0 0 0 1px var(--accent) }
+  .hero-bar button { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+                     padding:8px 15px; font-size:13px; font-weight:650; cursor:pointer;
+                     font-family:var(--sans) }
+
+  /* Step controls, deliberately the same idiom as the protocol walkthroughs:
+     restart / back / play / forward, a visible count, and a clickable track.
+     The figure does NOT advance on its own unless you press play — the whole
+     point is being able to stop and read the line. */
+  .hnarr { display:flex; gap:13px; align-items:center;
+           padding:12px 18px; border-bottom:1px solid var(--border) }
+  .hstepno { background:var(--accent); color:#04121f; font-weight:800; border-radius:7px;
+             padding:5px 9px; font-size:14px; line-height:1.05; text-align:center;
+             flex:none; min-width:34px }
+  .hstepno small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .hnarr .t { font-size:14.5px; font-weight:600; color:var(--text); line-height:1.45 }
+  .htrack { display:flex; gap:3px; padding:11px 18px 13px }
+  .htrack .tick { height:5px; flex:1; background:#1e2a41; border-radius:3px; cursor:pointer }
+  .htrack .tick:hover { background:#3b5286 }
+  .htrack .tick.done { background:#2c4a72 }
+  .htrack .tick.now { background:var(--accent) }
+  .hero-bar button:hover { filter:brightness(1.12) }
+  .hero-bar button.ghost { background:transparent; color:var(--muted);
+                           border:1px solid var(--border) }
+  .hero-bar button.ghost:hover { color:var(--text); border-color:var(--muted); filter:none }
+  .hero svg { display:block; width:100%; height:auto }
+
+  /* Parts start hidden and are revealed by phase class on the <svg>. Driving
+     everything from one class keeps the timeline in one place instead of
+     scattered across a dozen element handles. */
+  .fade { opacity:0; transition:opacity .45s ease }
+  .on .fade, .fade.on { opacity:1 }
+  .hero .lbl { font-family:var(--sans); font-size:11px; letter-spacing:.09em;
+               text-transform:uppercase; fill:var(--faint) }
+  .hero .big { font-family:var(--mono); font-size:15px; fill:var(--text) }
+  .hero .cap { font-family:var(--sans); font-size:12.5px; fill:var(--muted) }
+  .hero .cap b { fill:var(--text) }
+
+  .flowline { fill:none; stroke:#33456a; stroke-width:2.5 }
+  .flowline.live { stroke:var(--accent); stroke-dasharray:9 7;
+                   animation:march .7s linear infinite }
+  @keyframes march { to { stroke-dashoffset:-16 } }
+
+  .drum { transform-box:fill-box; transform-origin:center }
+  .spinning .drum { animation:spin 1.1s linear infinite }
+  @keyframes spin { to { transform:rotate(360deg) } }
+
+  .saltbead { opacity:0 }
+  .dropping .saltbead { animation:drop 1s ease-in forwards }
+  @keyframes drop { 0% { opacity:1; transform:translateY(0) }
+                    85% { opacity:1 } 100% { opacity:0; transform:translateY(74px) } }
+
+  .noway { opacity:0; transition:opacity .4s ease }
+  .noway.on { opacity:1 }
+  .noway.on .backline { animation:recoil 1.1s ease-in-out }
+  @keyframes recoil { 0%,100% { transform:translateX(0) } 45% { transform:translateX(26px) } }
+
+  /* The output string, as HTML inside the SVG so the salt run can be coloured
+     per character without hand-measuring text advances. */
+  .outstr { font-family:var(--mono); font-size:13px; line-height:1.5;
+            color:var(--muted); word-break:break-all; letter-spacing:.3px }
+  .outstr .sv { color:var(--c4) } .outstr .sc { color:var(--warn) }
+  .outstr .ss { color:var(--c5); background:#10262b; border-radius:2px }
+  .outstr .sd { color:var(--good) }
+  .outstr .pending { color:#1c2740 }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flowline.live, .drum, .saltbead, .backline { animation:none !important }
+    .saltbead { opacity:0 }
+    .fade { transition:none }
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="How a credential is created securely">
+<meta property="og:description" content="Dive A of the client credentials flow: generate, hash, show once, store, present, verify — a real bcrypt string pulled apart to show where the salt actually lives.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/dive-credential-created/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/dive-credential-created/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>How a credential is created securely</h1>
+  <div class="sub">Dive A of <a href="../client-credentials-flow/" style="color:var(--accent)">the client credentials flow</a> — the moment a <code>client_secret</code> comes into existence, and everything that happens to it afterwards.</div>
+</div>
+
+<div class="hero" tabindex="0">
+  <div class="hero-bar">
+    <h2>The whole page, in one machine</h2>
+    <div class="spacer"></div>
+    <button class="ghost" id="hRestart">⟲ Again, new salt</button>
+    <button class="ghost" id="hPrev">‹ Step</button>
+    <button id="hPlay">▶ Play</button>
+    <button class="ghost" id="hNext">Step ›</button>
+  </div>
+  <div class="hnarr">
+    <div class="hstepno" id="hNo">1<small>of 8</small></div>
+    <div class="t" id="hStatus"></div>
+  </div>
+  <div class="htrack" id="hTrack"></div>
+  <svg viewBox="0 0 1120 430" role="img"
+       aria-label="A secret and a random salt go into a bcrypt machine; a 60-character string comes out; nothing comes back the other way.">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="#33456a"/>
+      </marker>
+      <marker id="ar-hot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+      </marker>
+      <marker id="ar-no" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--danger)"/>
+      </marker>
+      <marker id="ar-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--good)"/>
+      </marker>
+    </defs>
+
+    <!-- ---- the secret going in ---- -->
+    <g data-viz-id="hero-in" data-label="the secret">
+      <rect x="28" y="150" width="230" height="118" rx="11"
+            fill="#2a1315" stroke="var(--danger)" stroke-width="1.5"/>
+      <text class="lbl" id="hInLbl" x="44" y="176" fill="#ff9a92">The secret</text>
+      <foreignObject x="42" y="186" width="204" height="70">
+        <div class="outstr" style="color:#ffb4ae;font-size:12px">40zAU4KlBhlYbiWf-JasKEs9Xji4zBqZ6_RUd8BJonA</div>
+      </foreignObject>
+    </g>
+    <text class="cap" x="143" y="296" text-anchor="middle">256 random bits</text>
+
+    <!-- ---- the salt hopper ---- -->
+    <g class="fade" id="hHopper" data-viz-id="hero-salt" data-label="salt hopper">
+      <rect x="446" y="22" width="168" height="62" rx="10"
+            fill="#10262b" stroke="var(--c5)" stroke-width="1.5"/>
+      <text class="lbl" id="hSaltLbl" x="530" y="46" text-anchor="middle" fill="#7fd7e8">A fresh salt</text>
+      <text class="big" id="hSaltVal" x="530" y="68" text-anchor="middle" fill="var(--c5)"
+            style="font-size:13px">128 random bits</text>
+    </g>
+    <path id="hDrop" class="flowline" d="M530 88 L530 152" marker-end="url(#ar)"/>
+    <circle class="saltbead" cx="530" cy="92" r="7" fill="var(--c5)"/>
+
+    <!-- ---- the machine ---- -->
+    <path id="hLine1" class="flowline" d="M262 209 L424 209" marker-end="url(#ar)"/>
+    <g data-viz-id="hero-machine" data-label="bcrypt">
+      <rect x="430" y="140" width="200" height="140" rx="13"
+            fill="#141b2e" stroke="#3a4a72" stroke-width="1.5"/>
+      <g class="drum">
+        <circle cx="530" cy="206" r="46" fill="none" stroke="#4a5f92" stroke-width="3"/>
+        <path d="M530 160 L530 252 M484 206 L576 206 M497 173 L563 239 M563 173 L497 239"
+              stroke="#3a4a72" stroke-width="2"/>
+      </g>
+    </g>
+    <!-- the machine's name lives in the caption, not floating above the box —
+         up there the salt arrow ran straight through it -->
+    <text class="cap" x="530" y="300" text-anchor="middle"><tspan fill="var(--text)" font-weight="700">bcrypt</tspan> · <tspan fill="var(--warn)">cost 10</tspan> — one-way, on purpose</text>
+    <text class="big" id="hRounds" x="530" y="322" text-anchor="middle"
+          style="font-size:13px;fill:var(--warn)">0 of 1,024 rounds</text>
+
+    <!-- ---- what comes out ---- -->
+    <path id="hLine2" class="flowline" d="M634 209 L694 209" marker-end="url(#ar)"/>
+    <g data-viz-id="hero-out" data-label="what gets stored">
+      <rect x="700" y="140" width="392" height="140" rx="11"
+            fill="#0a1220" stroke="#2f6b52" stroke-width="1.5"/>
+      <text class="lbl" x="716" y="168" fill="#8fd6ae">What gets stored</text>
+      <foreignObject x="714" y="180" width="364" height="86">
+        <div class="outstr" id="hOut"></div>
+      </foreignObject>
+    </g>
+    <text class="cap" id="hOutCap" x="896" y="300" text-anchor="middle">60 characters, every time</text>
+
+    <!-- ---- and nothing comes back ---- -->
+    <!-- Label under the line, not on it: a box straddling the arrow chopped it
+         into two stubs and read as a broken path rather than a blocked one. -->
+    <g class="noway" id="hNoway">
+      <path class="backline flowline" d="M700 358 L266 358"
+            stroke="var(--danger)" stroke-dasharray="7 6" marker-end="url(#ar-no)"/>
+      <text class="cap" x="483" y="390" text-anchor="middle" fill="#ff9a92"
+            style="font-size:14px;font-weight:700">No way back. Not with any key. There is nothing to decrypt.</text>
+    </g>
+
+    <!-- ---- the verify direction ----
+         The one thing the figure used to leave out entirely: the stored string
+         is not just an output, it is the recipe the check re-runs. -->
+    <g class="fade" id="hVerify">
+      <path d="M700 200 C 648 200, 640 60, 620 53" fill="none" stroke="var(--good)"
+            stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#ar-ok)"/>
+      <text class="cap" x="700" y="120" fill="#8fd6ae" style="font-size:12px">
+        the salt is read back out</text>
+      <path class="backline flowline" d="M700 358 L266 358"
+            stroke="var(--good)" stroke-dasharray="7 6" marker-end="url(#ar-ok)"/>
+      <text class="cap" x="483" y="390" text-anchor="middle" fill="#8fd6ae"
+            style="font-size:14px;font-weight:700">Same salt in, same string out — so the two can be compared.</text>
+      <text class="cap" x="896" y="322" text-anchor="middle" fill="var(--good)"
+            style="font-size:15px;font-weight:800">✓ identical — it is the right secret</text>
+    </g>
+  </svg>
+</div>
+
+<section id="life">
+  <h2><span class="n">1</span>The life of a secret</h2>
+  <p class="lede">Six beats. The row below is a <b>custody track</b> — the six places this value can be, and what is sitting in each one right now. Watch how briefly the readable secret exists, and how it is never in two places at once.</p>
+
+  <div class="track" id="track"></div>
+  <div class="beat">
+    <div class="no" id="beatNo">1<small>of 6</small></div>
+    <div>
+      <div class="bt" id="beatT"></div>
+      <div class="bd" id="beatD"></div>
+    </div>
+  </div>
+  <div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> to walk the beats. The step is kept in the URL, so a link lands on the beat you were looking at.</div>
+</section>
+
+<section id="anatomy">
+  <h2><span class="n">2</span>Where the salt actually is</h2>
+  <p class="lede">This is the whole of what the authorization server stores — one 60-character string, sliced live from the real hash rather than transcribed. <b>There is no salt column.</b> There is no external key, and no pepper. The salt is already in the string, in the open, and that is not a mistake.</p>
+
+  <div class="anat">
+    <div class="hashline" id="anat"></div>
+    <div class="anat-rows" id="anatRows"></div>
+  </div>
+
+  <div class="callout">
+    <b>A salt is not a secret.</b> Its job is to make two identical secrets hash differently, so one cracked value does not unlock every other row, and so precomputed tables are useless. It defeats <i>bulk</i> attacks, not targeted ones — which is why publishing it alongside the digest costs nothing. Storing it separately would buy no security and add a way to lose it.
+  </div>
+</section>
+
+<section id="nondet">
+  <h2><span class="n">3</span>The same secret, hashed three times</h2>
+  <p class="lede">All three of these are hashes of the <b>identical</b> secret, produced seconds apart. All three verify against it. Every character after the cost is different — because each run drew a fresh salt.</p>
+
+  <div class="hashes" id="hashes"></div>
+
+  <div class="callout">
+    <b>bcrypt is not deterministic</b>, so "the server hashes what you sent and compares it to what it stored" cannot be how verification works — it would fail every time. That description invites exactly the right question, <i>then why do two hashes of one secret differ?</i>, and has no answer.
+  </div>
+</section>
+
+<section id="verify">
+  <h2><span class="n">4</span>So what does verification actually do</h2>
+  <p class="lede">The stored string is not just an output — it is a <b>recipe</b>. Verification reads the parameters back out of it and re-runs the same derivation with them.</p>
+
+  <div class="seq">
+    <div class="step-card">
+      <div class="sc-n">Step 1 · read</div>
+      <div class="sc-t">Extract cost and salt</div>
+      <div class="sc-d">Parse them out of the stored string. This is why the format is public and self-describing.</div>
+    </div>
+    <div class="step-card">
+      <div class="sc-n">Step 2 · derive</div>
+      <div class="sc-t">Re-run bcrypt</div>
+      <div class="sc-d">Hash the presented secret with <i>that</i> cost and <i>that</i> salt — not a fresh one. Same inputs, same output.</div>
+    </div>
+    <div class="step-card">
+      <div class="sc-n">Step 3 · compare</div>
+      <div class="sc-t">Constant time</div>
+      <div class="sc-d">Compare the two digests without short-circuiting on the first differing byte, so the time taken leaks nothing about how much matched.</div>
+    </div>
+    <div class="step-card">
+      <div class="sc-n">Step 4 · answer</div>
+      <div class="sc-t">One bit</div>
+      <div class="sc-d">True or false. At no point was the stored secret recovered, because it is not in there to recover.</div>
+    </div>
+  </div>
+
+  <div class="callout good">
+    <b>Nothing is ever decrypted.</b> bcrypt is a one-way function, not a cipher — there is no key that turns the stored string back into the secret. "We do not need salting unless we want to decrypt the password" inverts it: you can never decrypt it, and the salt is what makes the one-way direction safe to store.
+  </div>
+</section>
+
+<section id="cost">
+  <h2><span class="n">5</span>The cost factor is the point of using bcrypt at all</h2>
+  <p class="lede">The <code>10</code> in the string is a <b>base-2 logarithm</b>: each step up doubles the work. That knob is why a 1999 algorithm is still usable in 2026 — you raise it as hardware gets faster. Measured on this machine just now:</p>
+
+  <div class="bars" id="bars"></div>
+
+  <div class="callout">
+    <b>Against this particular secret, the slowness is not what saves you — the entropy is.</b> A 256-bit random value has no dictionary and no pattern to exploit, so no realistic number of guesses gets there whether each one costs 50&nbsp;ms or 50&nbsp;ns. The hashing is there for a different threat: if the credential store is read by someone who should not have it, what leaks is 60 characters that authenticate <i>nothing</i>. Slow hashing is what keeps that true even for the human-chosen secrets that inevitably end up in the same table.
+  </div>
+</section>
+
+<section id="refs">
+  <h2><span class="n">6</span>Where this comes from</h2>
+  <div class="refs">
+    <div class="ref"><b>RFC 6749 §2.3.1</b> · <i>Client Password</i> — establishes that a client may hold a secret and authenticate with it. Read first-party 2026-08-06.</div>
+    <div class="ref"><b>RFC 4086</b> (BCP 106) · <i>Randomness Requirements for Security</i> — §3 Entropy Sources, §6 Pseudo-random Number Generators. Why the generator must be a CSPRNG and not a convenience <code>rand()</code>.</div>
+    <div class="ref"><b>OpenBSD <code>crypt_newhash(3)</code></b> — "the value of rounds can be between 4 and 31 and specifies the base 2 logarithm of the number of rounds." The cost semantics, first-party.</div>
+    <div class="ref"><b>Provos &amp; Mazières, USENIX 1999</b> · <i>A Future-Adaptable Password Scheme</i> — the original bcrypt paper; the adaptable cost factor is its whole thesis.</div>
+    <div class="ref ours"><b>ours, not a spec</b><br>No RFC requires client secrets to be hashed. RFC 6749 leaves storage to the implementation entirely. Hashing them is our own decision, borrowed from password practice — worth saying out loud so nobody goes looking for the clause.</div>
+    <div class="ref ours"><b>ours, not a spec</b><br>No pepper. A pepper is a secret added to every hash, and it needs its own custody — which is the same problem as protecting a signing key, moved somewhere less visible. Its absence here is a choice, not an oversight.</div>
+  </div>
+
+  <div class="elsewhere">
+    <span class="lbl">Elsewhere — someone else on hashing</span>
+    <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">Password Storage Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+    <span class="why">Backs two of this page's numbers from outside it: bcrypt at a work
+    factor of <b>10 or more</b>, and that you do not generate or manage salts by hand because
+    the library does it internally. Read it for the caveat this page does not cover either —
+    bcrypt's 72-byte input limit. <b>It stops short of §2's actual claim</b> that the salt sits
+    inside the output string; that part stays first-party here, read out of a real
+    implementation rather than borrowed.</span>
+  </div>
+
+  <div class="nav">
+    <a href="../client-credentials-flow/" class="home">← Back to the flow</a>
+    <a href="../dive-token-created/">Next dive · how a token is created →</a>
+  </div>
+</section>
+
+<script type="module">
+  import { stepper, $, saveHash, loadHash } from "/_kit/viz.js";
+
+  // ---- the real artifacts ------------------------------------------------
+  // Generated 2026-08-06: `crypto.randomBytes(32).toString('base64url')` for the
+  // secret, then bcrypt cost 10 three times over that same secret. All three
+  // hashes verified true against it before being pasted here.
+  const SECRET = "40zAU4KlBhlYbiWf-JasKEs9Xji4zBqZ6_RUd8BJonA";
+  const HASHES = [
+    "$2b$10$CrGr3XZ/ARykWfLvSgF0Fu0d4uQUd62WtGanotLs/8qf7H/680BA2",
+    "$2b$10$b3lEZhnee7vIRrmbtj9KfeRHRUvUgpiuV1uS8itH5bBT7FRSmZdK.",
+    "$2b$10$qcy3lt7huXlHt6HwI1Hkz.D.ZjTil7BoMHYrGWWTfiC.8QxeHnJw2",
+  ];
+  const HASH = HASHES[0];
+  const trunc = (s, n) => s.length > n ? s.slice(0, n) + "…" : s;
+
+  // ---- 0. the hero machine ----------------------------------------------
+  // One timeline, six phases, driven by class toggles rather than by animating
+  // attributes from JS — so `prefers-reduced-motion` can kill the motion in CSS
+  // while the timeline still walks to the same end state.
+  const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const svg = document.querySelector(".hero svg");
+  const el = s => svg.querySelector(s);
+  let run = 0;
+
+  // Paint the stored string, revealing `shown` characters. Segment colours come
+  // from the same 4/6/7/29 offsets the anatomy section uses, so the salt run the
+  // machine just dropped in is the salt run highlighted here.
+  function paintOut(hash, shown, hot) {
+    const cls = i => i < 4 ? "sv" : i < 6 ? "sc" : i < 7 ? "sv"
+                    : i < 29 ? (hot ? "ss" : "sv") : "sd";
+    el("#hOut").innerHTML = [...hash].map((c, i) =>
+      i < shown ? `<span class="${cls(i)}">${c}</span>`
+                : `<span class="pending">·</span>`).join("");
+  }
+
+  // Eight steps. Each `render` is ABSOLUTE — it draws the state for step i from
+  // scratch rather than accumulating — so stepping backwards, jumping on the
+  // track and deep-linking all land on exactly the same picture.
+  const HSTEPS = [
+    `Here is the secret: 256 random bits from a cryptographically secure generator. Right now this is the only thing in the world that has to stay private.`,
+    `It goes into bcrypt.`,
+    `A brand-new random salt is drawn — <b>a different one every single time this runs</b>.`,
+    `The two get chewed on together, 1,024 times over. That is what <b>cost 10</b> means: 2¹⁰ rounds. Cost 11 would be 2,048, and twice as slow.`,
+    `Out comes exactly 60 characters. <b>The secret itself is not in there.</b>`,
+    `And the salt from step 3? Stored right there in the open, inside the same string. <b>There is no salt column.</b>`,
+    `Nothing goes back the other way. There is no key that undoes this, because it is not encryption.`,
+    `So how is a secret ever <i>checked</i>? The salt is read back out of the stored string and the machine is run again with it. Same secret plus same salt gives the same 60 characters — and those can be compared.`,
+  ];
+
+  function renderHero(i) {
+    const hash = HASHES[run % HASHES.length];
+    $("#hNo").innerHTML = (i + 1) + "<small>of " + HSTEPS.length + "</small>";
+    $("#hStatus").innerHTML = HSTEPS[i];
+    [...$("#hTrack").children].forEach((t, k) =>
+      t.className = "tick" + (k < i ? " done" : k === i ? " now" : ""));
+
+    const verifying = i >= 7;
+    el("#hLine1").classList.toggle("live", i === 1 || verifying);
+    el("#hLine2").classList.toggle("live", i === 4);
+    el("#hHopper").classList.toggle("on", i >= 2);
+    // re-trigger the drop only on the step that shows it happening
+    svg.classList.remove("dropping");
+    // reading a layout property forces the reflow that lets the animation
+    // re-trigger; SVG elements have no offsetWidth, so measure the box instead
+    if (i === 2 && !REDUCED) { void svg.getBoundingClientRect().width; svg.classList.add("dropping"); }
+    svg.classList.toggle("spinning", i === 3 && !REDUCED);
+
+    el("#hRounds").textContent = i >= 3 ? "1,024 of 1,024 rounds" : "0 of 1,024 rounds";
+    paintOut(hash, i >= 4 ? hash.length : 0, i >= 5);
+    $("#hOutCap").textContent = i >= 5
+      ? "the highlighted run IS the salt — no second column"
+      : "60 characters, every time";
+
+    // step 8 swaps the whole figure into its verify reading
+    el("#hInLbl").textContent = verifying ? "The secret, presented again" : "The secret";
+    el("#hSaltLbl").textContent = verifying ? "The SAME salt" : "A fresh salt";
+    el("#hSaltVal").textContent = verifying ? "reused, not redrawn" : "128 random bits";
+    $("#hNoway").classList.toggle("on", i === 6);
+    $("#hVerify").classList.toggle("on", verifying);
+  }
+
+  $("#hTrack").innerHTML = HSTEPS.map(() => `<div class="tick"></div>`).join("");
+  let playing = false;
+  const setPlayLabel = () => { $("#hPlay").textContent = playing ? "❚❚ Pause" : "▶ Play"; };
+
+  const HERO = stepper({
+    n: HSTEPS.length, hashKey: "hero", autoplayMs: 3200,
+    target: document.querySelector(".hero"),   // scoped: the beats stepper below owns document arrows
+    onStep: i => {
+      renderHero(i);
+      if (i >= HSTEPS.length - 1 && playing) { playing = false; setPlayLabel(); }
+    },
+  });
+  HERO.pause();                                 // stepper autostarts when given autoplayMs
+  setPlayLabel();
+
+  $("#hPlay").onclick = () => {
+    if (playing) { HERO.pause(); playing = false; }
+    else {
+      if (HERO.current >= HSTEPS.length - 1) HERO.go(0);
+      HERO.play(); playing = true;
+    }
+    setPlayLabel();
+  };
+  $("#hNext").onclick = () => { playing = false; setPlayLabel(); HERO.next(); };
+  $("#hPrev").onclick = () => { playing = false; setPlayLabel(); HERO.prev(); };
+  // Restart also draws a NEW salt, so replaying is the demonstration: same
+  // secret, genuinely different string.
+  $("#hRestart").onclick = () => {
+    playing = false; setPlayLabel(); run++;
+    HERO.go(0); renderHero(0);
+  };
+  [...$("#hTrack").children].forEach((t, k) => {
+    t.onclick = () => { playing = false; setPlayLabel(); HERO.go(k); };
+  });
+
+  // ---- 1. the custody track ---------------------------------------------
+  // Six places, six beats. `state` is one of: clear | hashed | gone | "" .
+  const PLACES = ["Random source", "Operator's screen", "Client config",
+                  "The network", "Server memory", "Credential store"];
+  const BEATS = [
+    { t: "Generate", n: 6,
+      d: `32 bytes are drawn from a cryptographically secure random source and encoded — ${SECRET.length} characters, 256 bits of entropy. Not a passphrase somebody thought of, and not <code>Math.random()</code>: an attacker who can predict the generator does not need to guess the output.`,
+      v: [["clear", trunc(SECRET, 22)], ["", "—"], ["", "—"], ["", "—"], ["", "—"], ["", "—"]] },
+    { t: "Hash",
+      d: `Before it is shown to anyone, it is hashed with bcrypt at cost 10. The server derives the value it will keep <b>first</b> — the readable secret is already on its way out.`,
+      v: [["gone", "discarded"], ["", "—"], ["", "—"], ["", "—"], ["clear", trunc(SECRET, 20)], ["hashed", trunc(HASH, 20)]] },
+    { t: "Show it once",
+      d: `The only moment the secret is legible to a human. It is on the screen, and after this page is closed it can never be displayed again — not by support, not by an administrator, not by the database owner. Nobody is withholding it; nobody has it.`,
+      v: [["gone", "discarded"], ["clear", trunc(SECRET, 20)], ["", "—"], ["", "—"], ["gone", "wiped"], ["hashed", trunc(HASH, 20)]] },
+    { t: "Store",
+      d: `What remains on the server is one 60-character string. Read the whole credential store and you have no working credential — only proof of what one would look like.`,
+      v: [["gone", "discarded"], ["gone", "closed"], ["clear", trunc(SECRET, 20)], ["", "—"], ["gone", "wiped"], ["hashed", trunc(HASH, 20)]] },
+    { t: "Present",
+      d: `The client sends the secret to the token endpoint over TLS to get a token. This happens <b>once per token</b>, not once per API call — which is exactly why a deliberately slow hash is affordable here and would not be on every request.`,
+      v: [["gone", "discarded"], ["gone", "closed"], ["clear", trunc(SECRET, 20)], ["clear", "TLS"], ["clear", trunc(SECRET, 20)], ["hashed", trunc(HASH, 20)]] },
+    { t: "Verify",
+      d: `The server reads the cost and salt back out of the stored string, re-derives with them, and compares in constant time. One bit comes out. The presented secret is dropped and the whole cycle can start again from an empty server.`,
+      v: [["gone", "discarded"], ["gone", "closed"], ["clear", trunc(SECRET, 20)], ["gone", "closed"], ["gone", "compared, dropped"], ["hashed", trunc(HASH, 20)]] },
+  ];
+
+  const track = $("#track");
+  track.innerHTML = PLACES.map((p, i) =>
+    `<div class="place" data-viz-id="place-${i}" data-label="${p}">
+       <div class="pn">${p}</div><div class="pv" id="pv${i}">—</div>
+     </div>`).join("");
+
+  function renderBeat(i) {
+    const b = BEATS[i];
+    $("#beatNo").innerHTML = (i + 1) + "<small>of " + BEATS.length + "</small>";
+    $("#beatT").textContent = b.t;
+    $("#beatD").innerHTML = b.d;
+    b.v.forEach(([state, text], k) => {
+      const el = track.children[k];
+      el.className = "place" + (state ? " " + state : "");
+      el.querySelector(".pv").textContent = text;
+    });
+  }
+  stepper({ n: BEATS.length, onStep: renderBeat, hashKey: "beat" });
+
+  // ---- 2. the anatomy ----------------------------------------------------
+  // Sliced from HASH itself: $2b$ | 10 | $ | 22 salt | 31 digest. Deriving the
+  // offsets means the labels can never point at the wrong characters.
+  const rest = HASH.slice(7);                    // after "$2b$10$"
+  const SEGS = [
+    ["s-ver",  HASH.slice(0, 4),  "Algorithm", "4 chars",
+     "bcrypt, revision <b>2b</b>. Not a choice made per credential — it names which implementation quirks apply."],
+    ["s-cost", HASH.slice(4, 6),  "Cost",      "2 chars",
+     "A base-2 logarithm: <b>2¹⁰ = 1,024 rounds</b>. Raise it as hardware gets faster; old hashes keep verifying at their own cost."],
+    ["s-sep",  HASH.slice(6, 7),  "", "", ""],
+    ["s-salt", rest.slice(0, 22), "Salt",
+     rest.slice(0, 22).length + " chars",
+     "<b>128 bits of random, stored in the clear, right here.</b> Not secret, not separate, not optional — this is the answer to \"where is the salt?\"."],
+    ["s-dig",  rest.slice(22),    "Digest",
+     rest.slice(22).length + " chars",
+     "184 bits of the bcrypt output. The only part that depends on the secret — and the only part that is one-way."],
+  ];
+  $("#anat").innerHTML = SEGS.map(([cls, txt, lab]) =>
+    `<span class="seg ${cls}" data-viz-id="seg-${lab || "sep"}" data-label="${lab || "separator"}">${txt}` +
+    (lab ? `<span class="bar"></span>` : "") + `</span>`).join("");
+  $("#anatRows").innerHTML = SEGS.filter(s => s[2]).map(([cls, , lab, size, what]) =>
+    `<div class="r-name ${cls}">${lab}</div><div class="r-size">${size}</div>` +
+    `<div class="r-what">${what}</div>`).join("");
+
+  // ---- 3. three hashes ---------------------------------------------------
+  // Highlight per character against the first hash, so "identical up to the
+  // cost, divergent after it" is something the reader sees rather than is told.
+  $("#hashes").innerHTML = HASHES.map((h, i) => {
+    const marked = [...h].map((c, k) =>
+      HASHES.every(o => o[k] === c)
+        ? `<span class="same">${c}</span>`
+        : `<span class="diff">${c}</span>`).join("");
+    return `<div><span class="lbl">run ${i + 1}</span>${marked}</div>`;
+  }).join("");
+
+  // ---- 5. the work factor ------------------------------------------------
+  // Measured on this machine 2026-08-06 with Bun's bcrypt. Absolute numbers are
+  // hardware-specific; the doubling per cost step is the invariant.
+  const COSTS = [[4, 0.9], [10, 52.8], [12, 205.5], [14, 771.0]];
+  const max = Math.max(...COSTS.map(c => c[1]));
+  $("#bars").innerHTML = COSTS.map(([c, ms]) =>
+    `<div class="bl">cost ${c}</div>` +
+    `<div class="bb" style="width:${Math.max(2, (ms / max) * 100)}%" ` +
+    `data-viz-id="cost-${c}" data-label="cost ${c}"></div>` +
+    `<div class="bv">${ms.toFixed(1)} ms</div>`).join("");
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<div class="og-card">
+  <style>
+    .og-card{
+      position:relative; width:1200px; height:630px; overflow:hidden;
+      box-sizing:border-box; padding:36px 46px 34px;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:#e6edf3;
+      background:
+        radial-gradient(1120px 640px at 26% -22%, rgba(88,166,255,.13), transparent 60%),
+        radial-gradient(820px 560px at 96% 4%, rgba(63,185,80,.07), transparent 58%),
+        #0d1117;
+    }
+    .og-card *{box-sizing:border-box;}
+    /* hairline top edge */
+    .og-card::before{
+      content:""; position:absolute; left:0; right:0; top:0; height:3px;
+      background:linear-gradient(90deg,#58a6ff,#39c5bb 34%,#bc8cff 60%,#e3b341 80%,#f85149);
+      opacity:.9;
+    }
+
+    /* ---------- header ---------- */
+    .head{display:flex; justify-content:space-between; align-items:flex-start; gap:28px;}
+    .eyebrow{
+      font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      font-size:12px; letter-spacing:.26em; color:#58a6ff; font-weight:600;
+      text-transform:uppercase; margin:0 0 10px;
+    }
+    h1{
+      margin:0; font-size:47px; line-height:1.0; font-weight:800;
+      letter-spacing:-.022em; color:#f0f6fc;
+    }
+    .essence{
+      margin:12px 0 0; max-width:600px; font-size:16.5px; line-height:1.42; color:#9aa4af;
+    }
+    .essence b{color:#c9d3de; font-weight:600;}
+
+    .score{flex:0 0 auto; text-align:right; padding-top:4px;}
+    .score .big{font-size:50px; font-weight:800; letter-spacing:-.03em; color:#3fb950; line-height:.92;}
+    .score .big small{font-size:26px; color:#8b949e; font-weight:700;}
+    .score .cap{font-size:12px; color:#8b949e; margin-top:4px; max-width:190px; margin-left:auto; line-height:1.35;}
+    .score .gap{
+      margin-top:10px; display:inline-flex; align-items:center; gap:7px;
+      font-size:13px; color:#d29922; font-weight:600;
+      border:1px solid rgba(210,153,34,.45); border-radius:8px; padding:5px 10px;
+      background:rgba(210,153,34,.08);
+    }
+
+    /* ---------- band between header + matrix ---------- */
+    .band{
+      display:flex; justify-content:space-between; align-items:center;
+      margin:22px 0 10px; padding-bottom:9px;
+      border-bottom:1px solid #21262d;
+    }
+    .mlabel{
+      font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      font-size:11.5px; letter-spacing:.14em; color:#8b949e; text-transform:uppercase;
+    }
+    .mlabel b{color:#c9d3de;}
+    .legend{display:flex; gap:18px; align-items:center;}
+    .lg{display:flex; align-items:center; gap:7px; font-size:11.5px; color:#8b949e;}
+    .lg .sw{width:20px; height:10px; border-radius:3px;}
+    .lg .sw.full{background:#8b949e;}
+    .lg .sw.part{border:1.5px dashed #8b949e; background:transparent;}
+    .lg .sw.gap{border:none; width:auto; color:#d29922; font-weight:700;}
+
+    /* ---------- matrix ---------- */
+    .matrix{margin-top:4px;}
+    .row{display:flex; align-items:center; height:15px; margin-bottom:4.6px;}
+    .row.chead{height:18px; margin-bottom:9px;}
+    .id{
+      flex:0 0 24px; font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      font-size:10px; font-weight:700; color:#0d1117; text-align:center;
+      height:15px; line-height:15px; border-radius:4px; margin-right:9px;
+    }
+    .name{
+      flex:0 0 236px; font-size:12px; color:#b9c2cc; white-space:nowrap; overflow:hidden;
+      text-overflow:ellipsis; letter-spacing:-.005em; padding-right:12px;
+    }
+    .cells{display:flex; flex:1; gap:8px;}
+    .cell{flex:1; height:15px; border-radius:3.5px; position:relative;
+          background:rgba(255,255,255,.018); border:1px solid rgba(255,255,255,.045);}
+    .cell.full{border:none;}
+    .cell.part{background:transparent;}
+    /* column colors */
+    .c0{--cc:#58a6ff;} .c1{--cc:#3fb950;} .c2{--cc:#e3b341;}
+    .c3{--cc:#39c5bb;} .c4{--cc:#bc8cff;} .c5{--cc:#f85149;}
+    .cell.full{background:var(--cc); box-shadow:0 0 0 1px color-mix(in srgb,var(--cc) 55%,transparent), 0 2px 9px -2px var(--cc);}
+    .cell.part{border:1.5px dashed color-mix(in srgb,var(--cc) 62%,transparent);}
+    .cell.part::after{content:""; position:absolute; inset:0; margin:auto; width:4px; height:4px;
+                      border-radius:50%; background:color-mix(in srgb,var(--cc) 72%,transparent);}
+
+    /* column header cells */
+    .chead .cells .cell{background:transparent; border:none; height:auto;}
+    .colh{display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.01em; white-space:nowrap;}
+    .colh .dot{width:8px; height:8px; border-radius:50%; flex:0 0 8px;}
+    .chead .id{background:transparent;}
+    .chead .name{color:#8b949e; font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+                 font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;}
+
+    /* gap rows */
+    .row.gap .name{color:#d29922; font-weight:600;}
+    .row.gap .name .warn{color:#d29922; font-weight:800; margin-right:5px;}
+
+    /* family number badge colors */
+    .fam-sec{background:#f85149;} .fam-truth{background:#58a6ff;}
+    .fam-content{background:#bc8cff;} .fam-ops{background:#39c5bb;}
+
+    /* ---------- foundation ---------- */
+    .foundation{
+      margin-top:15px; display:flex; align-items:center; gap:11px;
+      border:1px dashed rgba(63,185,80,.5); border-radius:9px;
+      background:rgba(63,185,80,.05); padding:8px 14px;
+      font-size:12.5px; color:#9aa4af;
+    }
+    .foundation .fk{color:#3fb950; font-weight:700; letter-spacing:.01em;}
+    .foundation .arrows{margin-left:auto; font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+                        font-size:11px; color:#586069; letter-spacing:.08em; text-transform:uppercase;}
+  </style>
+
+  <div class="head">
+    <div class="titleblock">
+      <div class="eyebrow">Risk Governance · Control Coverage</div>
+      <h1>AI Risk Coverage Map</h1>
+      <p class="essence">Three industry AI-risk frameworks — <b>OWASP LLM</b>, <b>NIST 600-1</b>, <b>NIST 100-2</b> — deduplicated into one risk set, each mapped to the control that owns it. Coverage, overlap, and gaps at a glance.</p>
+    </div>
+    <div class="score">
+      <div class="big">13<small>/15</small></div>
+      <div class="cap">risks with a primary control owner</div>
+      <div class="gap">⚠ 2 open gaps · no primary</div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="mlabel">Coverage matrix · <b>15 risks</b> × <b>6 controls</b></div>
+    <div class="legend">
+      <span class="lg"><span class="sw full"></span> primary owner</span>
+      <span class="lg"><span class="sw part"></span> supporting</span>
+      <span class="lg"><span class="sw gap">⚠</span> no primary owner</span>
+    </div>
+  </div>
+
+  <div class="matrix">
+    <!-- column header -->
+    <div class="row chead">
+      <div class="id"></div>
+      <div class="name">Consolidated risk</div>
+      <div class="cells">
+        <div class="cell"><div class="colh" style="color:#58a6ff"><span class="dot" style="background:#58a6ff"></span>Guardrails</div></div>
+        <div class="cell"><div class="colh" style="color:#3fb950"><span class="dot" style="background:#3fb950"></span>Arch/Access</div></div>
+        <div class="cell"><div class="colh" style="color:#e3b341"><span class="dot" style="background:#e3b341"></span>Supply</div></div>
+        <div class="cell"><div class="colh" style="color:#39c5bb"><span class="dot" style="background:#39c5bb"></span>Data Gov</div></div>
+        <div class="cell"><div class="colh" style="color:#bc8cff"><span class="dot" style="background:#bc8cff"></span>Gateway</div></div>
+        <div class="cell"><div class="colh" style="color:#f85149"><span class="dot" style="background:#f85149"></span>Governance</div></div>
+      </div>
+    </div>
+
+    <div class="row"><div class="id fam-sec">1</div><div class="name">Prompt injection &amp; adversarial input</div><div class="cells"><div class="cell c0 full"></div><div class="cell c1 full"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-sec">2</div><div class="name">Data &amp; model poisoning</div><div class="cells"><div class="cell c0"></div><div class="cell c1"></div><div class="cell c2 full"></div><div class="cell c3 part"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-sec">3</div><div class="name">Sensitive info disclosure &amp; privacy</div><div class="cells"><div class="cell c0 full"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3 full"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-sec">4</div><div class="name">Supply chain &amp; component integrity</div><div class="cells"><div class="cell c0"></div><div class="cell c1"></div><div class="cell c2 full"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-sec">5</div><div class="name">Improper output handling</div><div class="cells"><div class="cell c0 part"></div><div class="cell c1 full"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-sec">6</div><div class="name">Excessive agency</div><div class="cells"><div class="cell c0"></div><div class="cell c1 full"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-sec">7</div><div class="name">Vector &amp; embedding (RAG) weaknesses</div><div class="cells"><div class="cell c0"></div><div class="cell c1 full"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row gap"><div class="id fam-truth">8</div><div class="name"><span class="warn">⚠</span>Misinformation &amp; confabulation</div><div class="cells"><div class="cell c0 part"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-truth">9</div><div class="name">Information integrity</div><div class="cells"><div class="cell c0 part"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5 full"></div></div></div>
+    <div class="row"><div class="id fam-content">10</div><div class="name">Harmful / toxic content generation</div><div class="cells"><div class="cell c0 full"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row gap"><div class="id fam-content">11</div><div class="name"><span class="warn">⚠</span>Harmful bias &amp; homogenization</div><div class="cells"><div class="cell c0"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3 part"></div><div class="cell c4"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-content">12</div><div class="name">Human–AI configuration</div><div class="cells"><div class="cell c0"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5 full"></div></div></div>
+    <div class="row"><div class="id fam-content">13</div><div class="name">Intellectual property</div><div class="cells"><div class="cell c0 part"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4"></div><div class="cell c5 full"></div></div></div>
+    <div class="row"><div class="id fam-ops">14</div><div class="name">Unbounded consumption</div><div class="cells"><div class="cell c0"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4 full"></div><div class="cell c5"></div></div></div>
+    <div class="row"><div class="id fam-ops">15</div><div class="name">Environmental impact</div><div class="cells"><div class="cell c0"></div><div class="cell c1"></div><div class="cell c2"></div><div class="cell c3"></div><div class="cell c4 full"></div><div class="cell c5"></div></div></div>
+  </div>
+
+  <div class="foundation">
+    <span class="fk">🧪 Evaluation — the assurance layer</span>
+    <span>verifies every control works &amp; catches regressions — spans all six buckets (NIST RMF <i>Measure</i>).</span>
+    <span class="arrows">26 → dedup → 15 → owned by → 6 + 1</span>
+  </div>
+</div>

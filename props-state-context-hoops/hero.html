@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Props · State · Context — the basketball cut</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel-2:#21262d; --border:#30363d;
+    --text:#e6edf3; --muted:#8b949e;
+    --props:#58a6ff; --state:#3fb950; --context:#bc8cff;
+    --ball:#e8a13c; --ball-stroke:#7a4d12; --warn:#d29922;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  .og-card{
+    width:1200px; height:630px; overflow:hidden; position:relative;
+    background:var(--bg); color:var(--text);
+    font-family:var(--sans);
+    display:flex; align-items:stretch;
+  }
+
+  /* ---- ambient light + court texture ---- */
+  .og-card::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(760px 520px at 84% 18%, rgba(188,140,255,.16), transparent 60%),
+      radial-gradient(680px 520px at 10% 96%, rgba(88,166,255,.14), transparent 60%),
+      radial-gradient(520px 420px at 92% 88%, rgba(63,185,80,.07), transparent 60%);
+  }
+  .grain{
+    position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background:
+      linear-gradient(rgba(48,54,61,.20) 1px,transparent 1px) 0 0/100% 42px,
+      linear-gradient(90deg,rgba(48,54,61,.14) 1px,transparent 1px) 0 0/42px 100%;
+    -webkit-mask-image:radial-gradient(1100px 640px at 70% 45%,#000,transparent 78%);
+            mask-image:radial-gradient(1100px 640px at 70% 45%,#000,transparent 78%);
+  }
+
+  /* ================= LEFT : type ================= */
+  .left{
+    position:relative; z-index:2;
+    width:600px; flex:none;
+    padding:54px 8px 50px 68px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+
+  .kicker{
+    display:flex; align-items:center; gap:13px;
+    font-family:var(--mono); font-size:14.5px; letter-spacing:.19em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .kicker .atom{width:26px;height:26px;flex:none;}
+  .kicker .div{width:1px;height:15px;background:var(--border);}
+
+  .titleblock{margin-top:2px;}
+  .word{
+    display:flex; align-items:baseline; gap:20px; line-height:.98;
+  }
+  .word + .word{margin-top:16px;}
+  .word .w{
+    font-size:82px; font-weight:800; letter-spacing:-.028em;
+  }
+  .word .role{
+    font-family:var(--mono); font-size:15.5px; letter-spacing:.02em;
+    color:var(--muted); position:relative; top:-4px;
+  }
+  .word .role b{font-weight:600;}
+  .w-props{color:var(--props);}   .r-props b{color:var(--props);}
+  .w-state{color:var(--state);}   .r-state b{color:var(--state);}
+  .w-context{color:var(--context);} .r-context b{color:var(--context);}
+  .dots{color:var(--muted); font-weight:400;}
+
+  .essence{
+    margin-top:30px; max-width:500px;
+    font-size:25px; line-height:1.34; color:var(--text); font-weight:450;
+  }
+  .essence .q{color:var(--muted);}
+
+  .footer{
+    display:flex; align-items:center; gap:14px;
+    font-family:var(--mono); font-size:14px; color:var(--muted);
+  }
+  .footer .chip{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 11px; border:1px solid var(--border); border-radius:8px;
+    background:rgba(33,38,45,.55);
+  }
+  .footer .sw{width:9px;height:9px;border-radius:2.5px;}
+
+  /* ================= RIGHT : motif ================= */
+  .right{
+    position:relative; z-index:2; flex:1;
+    display:flex; align-items:center; justify-content:center;
+    padding:34px 60px 34px 20px;
+  }
+  .court{
+    position:relative; width:520px; height:562px;
+    background:linear-gradient(180deg,rgba(22,27,34,.92),rgba(13,17,23,.92));
+    border:1px solid var(--border); border-radius:20px;
+    box-shadow:0 30px 70px -30px #000, inset 0 1px 0 rgba(230,237,243,.04);
+    overflow:hidden;
+  }
+  .court .hdr{
+    position:absolute; top:16px; left:20px; right:20px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .court .hdr .dotset{display:flex;gap:6px;}
+  .court .hdr .d{width:9px;height:9px;border-radius:50%;}
+  svg{display:block;width:100%;height:100%;}
+
+  /* node label styling handled inline via <text> */
+</style>
+</head>
+<body>
+<div class="og-card">
+  <div class="grain"></div>
+
+  <!-- ============ LEFT ============ -->
+  <div class="left">
+    <div class="kicker">
+      <svg class="atom" viewBox="-12 -12 24 24" fill="none">
+        <circle r="2.1" fill="#58a6ff"/>
+        <g stroke="#58a6ff" stroke-width="1" fill="none" opacity=".9">
+          <ellipse rx="11" ry="4.2"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+        </g>
+      </svg>
+      <span>React data flow</span>
+      <span class="div"></span>
+      <span>the basketball cut</span>
+    </div>
+
+    <div class="titleblock">
+      <div class="word">
+        <span class="w w-props">Props</span>
+        <span class="role r-props">the <b>pass</b> · down only</span>
+      </div>
+      <div class="word">
+        <span class="w w-state">State</span>
+        <span class="role r-state">your own <b>dribble</b></span>
+      </div>
+      <div class="word">
+        <span class="w w-context">Context</span>
+        <span class="role r-context">the <b>jumbotron</b></span>
+      </div>
+      <div class="essence">
+        Where React data lives <span class="q">—</span> and
+        <span class="q">who’s allowed to see it,</span> explained for basketball nerds.
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="chip"><span class="sw" style="background:var(--props)"></span>props</span>
+      <span class="chip"><span class="sw" style="background:var(--state)"></span>state</span>
+      <span class="chip"><span class="sw" style="background:var(--context)"></span>context</span>
+    </div>
+  </div>
+
+  <!-- ============ RIGHT : mini court/tree ============ -->
+  <div class="right">
+    <div class="court">
+      <div class="hdr">
+        <span>component tree</span>
+        <span class="dotset">
+          <span class="d" style="background:#f85149"></span>
+          <span class="d" style="background:#d29922"></span>
+          <span class="d" style="background:#3fb950"></span>
+        </span>
+      </div>
+
+      <svg viewBox="0 0 520 562" aria-hidden="true">
+        <defs>
+          <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#58a6ff"/>
+          </marker>
+          <radialGradient id="ballg" cx="38%" cy="32%" r="72%">
+            <stop offset="0%" stop-color="#f6bd63"/>
+            <stop offset="100%" stop-color="#e8a13c"/>
+          </radialGradient>
+          <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="4"/>
+          </filter>
+        </defs>
+
+        <!-- faint three-point arc, court motif -->
+        <g opacity=".18" stroke="#30363d" fill="none" stroke-width="1.4">
+          <path d="M70,562 L70,470 A190,190 0 0 1 450,470 L450,562"/>
+          <circle cx="260" cy="470" r="52"/>
+        </g>
+
+        <!-- ===== context beams (jumbotron broadcast) ===== -->
+        <g stroke="#bc8cff" stroke-width="1.6" fill="none" stroke-dasharray="5 6" opacity=".55">
+          <path d="M260,116 L110,300"/>
+          <path d="M260,116 L410,300"/>
+          <path d="M260,116 L150,470"/>
+          <path d="M260,116 L370,470"/>
+        </g>
+
+        <!-- ===== edges ===== -->
+        <!-- Game -> Scoreboard : the props pass (hot blue) -->
+        <path d="M232,190 C170,232 140,250 128,272" stroke="#58a6ff" stroke-width="3.2" fill="none"/>
+        <!-- Game -> Team -->
+        <path d="M288,190 C350,232 380,250 392,272" stroke="#30363d" stroke-width="2.2" fill="none"/>
+        <!-- Team -> PG -->
+        <path d="M372,340 C340,372 320,388 300,410" stroke="#30363d" stroke-width="2.2" fill="none"/>
+        <!-- Team -> SG -->
+        <path d="M412,340 C420,372 424,390 424,410" stroke="#30363d" stroke-width="2.2" fill="none"/>
+
+        <!-- ===== JUMBOTRON (context) ===== -->
+        <g>
+          <rect x="150" y="66" width="220" height="52" rx="12" fill="#21262d" stroke="#bc8cff" stroke-width="2"/>
+          <text x="171" y="98" font-family="ui-monospace,Menlo,monospace" font-size="17" font-weight="700" fill="#e6edf3">🕒 GameClock</text>
+          <text x="171" y="86" font-family="ui-monospace,Menlo,monospace" font-size="10.5" letter-spacing=".04em" fill="#bc8cff">CONTEXT.PROVIDER</text>
+        </g>
+        <!-- broadcast token -->
+        <g transform="translate(392,150)">
+          <rect x="-38" y="-14" width="76" height="26" rx="7" fill="#161b22" stroke="#bc8cff" stroke-width="1.4"/>
+          <text x="0" y="4" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="600" fill="#bc8cff">🕒 7:24</text>
+        </g>
+
+        <!-- ===== GAME (root) ===== -->
+        <g>
+          <rect x="196" y="138" width="128" height="52" rx="11" fill="#21262d" stroke="#485563" stroke-width="1.8"/>
+          <text x="260" y="162" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="17" font-weight="700" fill="#e6edf3">&lt;Game&gt;</text>
+          <text x="260" y="179" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,sans-serif" font-size="11" fill="#8b949e">root · the franchise</text>
+        </g>
+
+        <!-- ===== SCOREBOARD (props child) ===== -->
+        <g>
+          <rect x="40" y="272" width="176" height="60" rx="11" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+          <text x="128" y="299" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="16" font-weight="700" fill="#e6edf3">&lt;Scoreboard&gt;</text>
+          <text x="128" y="317" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,sans-serif" font-size="11" fill="#8b949e">reads the score prop</text>
+        </g>
+        <!-- prop tag -->
+        <g transform="translate(128,258)">
+          <rect x="-46" y="-15" width="92" height="24" rx="7" fill="#161b22" stroke="#58a6ff" stroke-width="1.4"/>
+          <text x="0" y="2" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="600" fill="#58a6ff">score: 102</text>
+        </g>
+
+        <!-- ===== TEAM (middleman) ===== -->
+        <g>
+          <rect x="332" y="272" width="146" height="60" rx="11" fill="#21262d" stroke="#485563" stroke-width="1.8"/>
+          <text x="405" y="299" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="16" font-weight="700" fill="#e6edf3">&lt;Team&gt;</text>
+          <text x="405" y="317" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,sans-serif" font-size="11" fill="#8b949e">the bench · middleman</text>
+        </g>
+
+        <!-- ===== PLAYERS (state leaves) ===== -->
+        <g>
+          <rect x="238" y="410" width="118" height="76" rx="11" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+          <text x="297" y="440" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="15.5" font-weight="700" fill="#e6edf3">&lt;Player&gt;</text>
+          <text x="297" y="457" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,sans-serif" font-size="11" fill="#8b949e">PG</text>
+        </g>
+        <g>
+          <rect x="368" y="410" width="118" height="76" rx="11" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+          <text x="427" y="437" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="15.5" font-weight="700" fill="#e6edf3">&lt;Player&gt;</text>
+          <text x="427" y="453" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,sans-serif" font-size="11" fill="#8b949e">SG</text>
+          <!-- own-state dribble badge -->
+          <rect x="382" y="461" width="90" height="20" rx="6" fill="rgba(63,185,80,.16)" stroke="#3fb950" stroke-width="1.2"/>
+          <text x="427" y="475" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11.5" font-weight="600" fill="#3fb950">dribbles: 3 ▲</text>
+        </g>
+
+        <!-- ===== the basketball, mid-pass on the props edge ===== -->
+        <ellipse cx="150" cy="248" rx="15" ry="6" fill="#000" opacity=".28" filter="url(#soft)"/>
+        <g transform="translate(150,238)">
+          <circle r="15" fill="url(#ballg)" stroke="#7a4d12" stroke-width="1.6"/>
+          <path d="M-15,0 H15 M0,-15 V15 M-11,-10 C-4,-3 -4,3 -11,10 M11,-10 C4,-3 4,3 11,10"
+                stroke="#7a4d12" stroke-width="1.3" fill="none" opacity=".85"/>
+          <ellipse cx="-5" cy="-6" rx="4.5" ry="3" fill="#fff" opacity=".28"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Managing Microsoft as Code — hero</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --good: #3fb950;
+    --teal: #4ec9b0;
+    --warn: #d29922;
+    --danger: #f85149;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(210,153,34,0.10), transparent 58%),
+      radial-gradient(950px 560px at 108% 6%, rgba(248,81,73,0.07), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  .left { width: 626px; padding: 64px 16px 64px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--warn); background: rgba(210,153,34,0.10);
+    border: 1px solid rgba(210,153,34,0.24);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 30px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 10px var(--warn); }
+
+  .title { font-size: 84px; line-height: 0.93; font-weight: 800; letter-spacing: -0.045em; }
+  .title .hl { color: var(--danger); }
+
+  .essence { margin-top: 28px; font-size: 29px; line-height: 1.3; font-weight: 600; letter-spacing: -0.02em; max-width: 508px; }
+  .essence .hl { color: var(--warn); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 490px; }
+  .sub code { font-family: var(--mono); font-size: 0.88em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 13.5px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 13px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--warn); box-shadow: 0 0 6px rgba(210,153,34,0.5); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 60px 56px 4px; position: relative; z-index: 2; }
+  .panel {
+    width: 420px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.04em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); }
+  svg.grid { width: 100%; display: block; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>Infrastructure as code &middot; Microsoft</div>
+
+      <div class="title">Declarative<br><span class="hl">taps out.</span></div>
+
+      <div class="essence">
+        The only tool that reaches <em>all</em> of Microsoft is the one that gives you <span class="hl">nothing free</span>.
+      </div>
+
+      <div class="sub">
+        Bicep owns ARM. Terraform wades into Entra. But there is no Bicep resource for a <code>DLP rule</code> &mdash; past that line, the cmdlet <em>is</em> the API.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>azurerm + azuread</span>
+        <span class="chip"><span class="tk"></span>Microsoft.Graph</span>
+        <span class="chip"><span class="tk"></span>Purview</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">Day 1 &mdash; how far each reaches</span>
+          <span class="s">3 surfaces</span>
+        </div>
+
+        <svg class="grid" viewBox="0 0 380 336" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .rl  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11.5px; fill: #e6e8ee; dominant-baseline: middle; }
+              .rs  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 9.5px; fill: #5b6378; dominant-baseline: middle; }
+              .ch  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11px; fill: #9aa1b1; text-anchor: middle; letter-spacing: .04em; }
+              .cv  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+              .ft  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #5b6378; text-anchor: middle; }
+              .fn  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 15px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+              .fs  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11px; text-anchor: middle; dominant-baseline: middle; }
+              .fl  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #5b6378; dominant-baseline: middle; letter-spacing: .05em; text-transform: uppercase; }
+            </style>
+            <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="8" height="8" fill="#0a0c11"/>
+              <line x1="0" y1="0" x2="0" y2="8" stroke="#2a1416" stroke-width="5"/>
+            </pattern>
+          </defs>
+
+          <!-- column headers -->
+          <text class="ch" x="164" y="12">Bicep</text>
+          <text class="ch" x="248" y="12">Terraform</text>
+          <text class="ch" x="332" y="12" fill="#d29922">PowerShell</text>
+
+          <!-- ===== ROW 1: Azure resources ===== -->
+          <text class="rl" x="0" y="42">Azure resources</text>
+          <text class="rs" x="0" y="58">ARM control plane</text>
+          <g>
+            <rect x="126" y="26" width="76" height="46" rx="8" fill="#12261a" stroke="#3fb950"/>
+            <text class="cv" x="164" y="50" fill="#3fb950">FULL</text>
+            <rect x="210" y="26" width="76" height="46" rx="8" fill="#12261a" stroke="#3fb950"/>
+            <text class="cv" x="248" y="50" fill="#3fb950">FULL</text>
+            <rect x="294" y="26" width="76" height="46" rx="8" fill="#241d0c" stroke="#d29922"/>
+            <text class="cv" x="332" y="50" fill="#d29922">SCRIPTED</text>
+          </g>
+
+          <!-- ===== ROW 2: Entra ID ===== -->
+          <text class="rl" x="0" y="106">Entra ID</text>
+          <text class="rs" x="0" y="122">Microsoft Graph</text>
+          <g>
+            <rect x="126" y="90" width="76" height="46" rx="8" fill="#0f2521" stroke="#4ec9b0"/>
+            <text class="cv" x="164" y="114" fill="#4ec9b0">PARTIAL</text>
+            <rect x="210" y="90" width="76" height="46" rx="8" fill="#12261a" stroke="#3fb950"/>
+            <text class="cv" x="248" y="114" fill="#3fb950">FULL</text>
+            <rect x="294" y="90" width="76" height="46" rx="8" fill="#241d0c" stroke="#d29922"/>
+            <text class="cv" x="332" y="114" fill="#d29922">SCRIPTED</text>
+          </g>
+
+          <!-- ===== ROW 3: M365 / Purview ===== -->
+          <text class="rl" x="0" y="170">M365 &middot; Purview</text>
+          <text class="rs" x="0" y="186">DLP &middot; Exchange</text>
+          <g>
+            <rect x="126" y="154" width="76" height="46" rx="8" fill="url(#hatch)" stroke="#f85149"/>
+            <text class="cv" x="164" y="178" fill="#f85149">CAN'T</text>
+            <rect x="210" y="154" width="76" height="46" rx="8" fill="#0f2521" stroke="#4ec9b0"/>
+            <text class="cv" x="248" y="178" fill="#4ec9b0">PARTIAL</text>
+            <rect x="294" y="154" width="76" height="46" rx="8" fill="#241d0c" stroke="#d29922"/>
+            <text class="cv" x="332" y="178" fill="#d29922">SCRIPTED</text>
+          </g>
+
+          <!-- the wall: where declarative stops -->
+          <line x1="126" y1="146" x2="286" y2="146" stroke="#f85149" stroke-width="2" stroke-dasharray="6 4" opacity="0.75"/>
+          <text class="ft" x="206" y="215" fill="#f85149">&#9650; declarative stops here</text>
+
+          <!-- footer: the two-line verdict -->
+          <line x1="0" y1="238" x2="370" y2="238" stroke="#232838"/>
+
+          <text class="fl" x="0" y="268">surface reach</text>
+          <text class="fn" x="164" y="268" fill="#f85149">STOPS</text>
+          <text class="fn" x="248" y="268" fill="#4ec9b0">THIN</text>
+          <text class="fn" x="332" y="268" fill="#d29922">100%</text>
+
+          <text class="fl" x="0" y="304">idempotency</text>
+          <text class="fs" x="164" y="304" fill="#8b949e">free</text>
+          <text class="fs" x="248" y="304" fill="#8b949e">free</text>
+          <text class="fs" x="332" y="304" fill="#e6e8ee">hand-rolled</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

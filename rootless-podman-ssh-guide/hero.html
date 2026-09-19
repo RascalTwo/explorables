@@ -1,0 +1,143 @@
+<div class="og-card">
+  <style>
+    .og-card{
+      position:relative; width:1200px; height:630px; overflow:hidden;
+      background:#0d1117; color:#e6edf3;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; text-rendering:geometricPrecision;
+    }
+    .og-card *{box-sizing:border-box; margin:0; padding:0}
+    .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+
+    /* ---- background craft: dot grid + dual radial glows + hairline frame ---- */
+    .bg-grid{position:absolute; inset:0;
+      background-image:radial-gradient(#ffffff 0.9px, transparent 0.9px);
+      background-size:34px 34px; opacity:.028}
+    .bg-glow-a{position:absolute; width:760px; height:760px; left:-190px; top:-320px;
+      background:radial-gradient(closest-side, rgba(88,166,255,.20), transparent 70%)}
+    .bg-glow-b{position:absolute; width:820px; height:820px; right:-260px; bottom:-360px;
+      background:radial-gradient(closest-side, rgba(63,185,80,.16), transparent 70%)}
+    .frame{position:absolute; inset:22px; border:1px solid #1c2330; border-radius:18px; pointer-events:none}
+
+    .wrap{position:absolute; inset:0; padding:60px 64px 56px;
+      display:flex; flex-direction:column; justify-content:space-between}
+
+    /* ---- eyebrow ---- */
+    .eyebrow{display:flex; align-items:center; gap:11px;
+      font-size:14.5px; letter-spacing:.20em; text-transform:uppercase; color:#8b949e; font-weight:600}
+    .eyebrow .dot{width:8px; height:8px; border-radius:50%; background:#3fb950;
+      box-shadow:0 0 0 4px rgba(63,185,80,.16)}
+    .eyebrow .pod{color:#58a6ff; font-size:17px; letter-spacing:0}
+
+    /* ---- title ---- */
+    .title{margin-top:22px; font-size:74px; line-height:1.0; font-weight:800; letter-spacing:-.028em; color:#f4f8fc}
+    .title .ssh{color:#58a6ff}
+    .title .ssh .amp{color:#3d6ea8; font-weight:700}
+    .essence{margin-top:22px; max-width:660px; font-size:21px; line-height:1.5; color:#9aa4ae; font-weight:400}
+    .essence b{color:#e6edf3; font-weight:600}
+
+    /* ---- diagram : the pipeline motif ---- */
+    .diagram{display:flex; align-items:stretch; gap:0; height:236px}
+
+    .node{border:1px solid #2a3340; border-radius:14px; background:#12171f;
+      box-shadow:0 12px 40px -18px rgba(0,0,0,.7); position:relative}
+    .node .cap{font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#6e7681; font-weight:700}
+
+    /* local node */
+    .local{width:288px; flex:none; padding:20px 22px; display:flex; flex-direction:column; justify-content:space-between}
+    .local .art{display:flex; align-items:center; justify-content:center; flex:1}
+    .local .cmd{font-size:13px; color:#58a6ff}
+    .local .cmd .mut{color:#586573}
+
+    /* tunnel */
+    .tunnel{width:196px; flex:none; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center}
+    .tunnel .lab{position:absolute; top:44px; font-size:12.5px; color:#58a6ff; font-weight:600; letter-spacing:.02em;
+      display:flex; align-items:center; gap:7px}
+    .tunnel .lab .key{font-size:14px}
+    .tunnel .sub{position:absolute; bottom:44px; font-size:11px; color:#586573; letter-spacing:.08em; text-transform:uppercase}
+
+    /* remote node */
+    .remote{flex:1; border-color:#1f6f37; padding:19px 22px; display:flex; flex-direction:column;
+      background:linear-gradient(180deg,#12181b,#101a14)}
+    .remote .head{display:flex; align-items:center; gap:11px}
+    .remote .head .cap{color:#7f8b83}
+    .remote .host{margin-left:auto; font-size:12.5px; color:#3fb950; background:#0f2417; border:1px solid #1f6f37;
+      border-radius:7px; padding:3px 10px}
+    .grid{display:flex; gap:12px; margin-top:16px; flex:1}
+    .chip{flex:1; border:1px solid #23303a; border-radius:10px; background:#161d22;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; position:relative; overflow:hidden}
+    .chip::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:#1f6f37; opacity:.85}
+    .chip .box{font-size:24px; color:#3fb950; line-height:1}
+    .chip .nm{font-size:12px; color:#9aa4ae}
+    .remote .foot{margin-top:15px; display:flex; align-items:center; gap:10px; font-size:13px; color:#8b949e}
+    .remote .foot .badge{font-size:11.5px; letter-spacing:.04em; color:#3fb950; background:#0f2417;
+      border:1px solid #1f6f37; border-radius:6px; padding:2px 9px}
+    .remote .foot .iso{color:#6e7681}
+  </style>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow-a"></div>
+  <div class="bg-glow-b"></div>
+  <div class="frame"></div>
+
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><span class="dot"></span><span class="pod">▣</span>&nbsp;Personalized · step-by-step setup guide</div>
+      <h1 class="title">Rootless Podman<br><span class="ssh">over SSH</span></h1>
+      <p class="essence">Run <b>non-root</b> containers on a remote Linux box — driven from your own machine over a single SSH key.</p>
+    </div>
+
+    <div class="diagram">
+      <!-- LOCAL -->
+      <div class="node local">
+        <div class="cap">Your machine</div>
+        <div class="art">
+          <svg width="112" height="80" viewBox="0 0 112 80" fill="none" aria-hidden="true">
+            <rect x="18" y="8" width="76" height="50" rx="6" fill="#0a0d12" stroke="#2a3340" stroke-width="2"/>
+            <rect x="26" y="16" width="60" height="34" rx="3" fill="#0d1622" stroke="#1c2a3a" stroke-width="1"/>
+            <path d="M30 24 l7 5 -7 5" stroke="#58a6ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="42" y1="34" x2="58" y2="34" stroke="#3d5266" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M8 66 h96 l-6 8 h-84 z" fill="#12171f" stroke="#2a3340" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="46" y1="70" x2="66" y2="70" stroke="#2a3340" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="cmd mono">$ podman <span class="mut">--remote</span></div>
+      </div>
+
+      <!-- TUNNEL -->
+      <div class="tunnel">
+        <div class="lab"><span class="key">🔑</span>SSH · your key</div>
+        <svg width="196" height="120" viewBox="0 0 196 120" fill="none" aria-hidden="true">
+          <!-- tube -->
+          <rect x="6" y="49" width="184" height="22" rx="11" fill="#0c1420" stroke="#1a2740" stroke-width="1"/>
+          <!-- flow line -->
+          <line x1="16" y1="60" x2="168" y2="60" stroke="#58a6ff" stroke-width="2.5"
+                stroke-linecap="round" stroke-dasharray="2 12"/>
+          <line x1="16" y1="60" x2="150" y2="60" stroke="#58a6ff" stroke-width="2.5" opacity=".35"/>
+          <!-- arrow head -->
+          <path d="M166 51 l16 9 -16 9 z" fill="#58a6ff"/>
+        </svg>
+        <div class="sub mono">encrypted channel</div>
+      </div>
+
+      <!-- REMOTE -->
+      <div class="node remote">
+        <div class="head">
+          <span class="box mono" style="font-size:18px;color:#3fb950">🐧</span>
+          <span class="cap">Shared Linux server</span>
+          <span class="host mono">you@box</span>
+        </div>
+        <div class="grid">
+          <div class="chip"><span class="box">▣</span><span class="nm mono">web</span></div>
+          <div class="chip"><span class="box">▣</span><span class="nm mono">api</span></div>
+          <div class="chip"><span class="box">▣</span><span class="nm mono">db</span></div>
+          <div class="chip"><span class="box">▣</span><span class="nm mono">cache</span></div>
+        </div>
+        <div class="foot">
+          <span class="badge mono">rootless · uid 1000</span>
+          <span class="iso">your containers &amp; images — isolated from every other user</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

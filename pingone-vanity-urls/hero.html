@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --moves: #56d364;
+    --stays: #e3b341;
+    --accent: #58a6ff;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(86,211,100,0.10), transparent 58%),
+      radial-gradient(950px 560px at 108% 8%, rgba(227,179,65,0.075), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ---- LEFT ---- */
+  .left { width: 618px; padding: 64px 18px 64px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--moves); background: rgba(86,211,100,0.10);
+    border: 1px solid rgba(86,211,100,0.22);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 30px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--moves); box-shadow: 0 0 10px var(--moves); }
+
+  .title { font-size: 88px; line-height: 0.93; font-weight: 800; letter-spacing: -0.045em; }
+  .title .hl { color: var(--stays); }
+
+  .essence { margin-top: 28px; font-size: 29px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; max-width: 505px; }
+  .essence .g { color: var(--moves); }
+  .essence .a { color: var(--stays); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 480px; }
+  .sub code { font-family: var(--mono); font-size: 0.88em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 13.5px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 13px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--accent); box-shadow: 0 0 6px rgba(88,166,255,0.5); }
+
+  /* ---- RIGHT ---- */
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 60px 56px 6px; position: relative; z-index: 2; }
+  .panel {
+    width: 424px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.05em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); }
+
+  .urlbar {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px;
+    padding: 9px 12px; font-family: var(--mono); font-size: 13.5px; margin-bottom: 16px;
+  }
+  .urlbar .lock { color: var(--moves); font-size: 11px; }
+  .urlbar .van { color: var(--moves); font-weight: 700; }
+  .urlbar .rest { color: var(--fg-faint); }
+
+  svg.split { width: 100%; display: block; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <!-- LEFT -->
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>PingOne &middot; custom domains</div>
+
+      <div class="title">Your domain.<br><span class="hl">Their console.</span></div>
+
+      <div class="essence">
+        A vanity URL moves the <span class="g">auth edge</span> &mdash; not the <span class="a">config plane</span>.
+      </div>
+
+      <div class="sub">
+        If it&rsquo;s a screen a customer sees, it can move. If it&rsquo;s an admin console or <code>api.pingone.com</code>, it never does.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>CNAME + TXT</span>
+        <span class="chip"><span class="tk"></span>PEM cert chain</span>
+        <span class="chip"><span class="tk"></span>one per environment</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: the split, one frame -->
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">What crosses over</span>
+          <span class="s">auth edge only</span>
+        </div>
+
+        <div class="urlbar">
+          <span class="lock">&#128274;</span><span class="van">auth.example.com</span><span class="rest">/&lt;envID&gt;/as/authorize</span>
+        </div>
+
+        <svg class="split" viewBox="0 0 384 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .hd  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; dominant-baseline: middle; }
+              .hs  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10.5px; fill: #5b6378; dominant-baseline: middle; }
+              .row { font-family: -apple-system, "Inter", system-ui, sans-serif; font-size: 13px; fill: #e6e8ee; dominant-baseline: middle; }
+              .rsub{ font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #5b6378; dominant-baseline: middle; }
+              .edge{ font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; fill: #9aa1b1; dominant-baseline: middle; }
+            </style>
+          </defs>
+
+          <!-- ===== MOVES ===== -->
+          <text class="hd" x="0" y="8" fill="#56d364">MOVES UNDER YOUR DOMAIN</text>
+          <rect x="0" y="20" width="384" height="112" rx="10" fill="rgba(86,211,100,0.05)" stroke="rgba(86,211,100,0.28)"/>
+
+          <g>
+            <rect x="14" y="33" width="7" height="7" rx="2" fill="#56d364"/>
+            <text class="row" x="32" y="37">/as/authorize &middot; /as/token</text>
+            <text class="rsub" x="32" y="51">the OIDC flow URLs</text>
+          </g>
+          <g>
+            <rect x="14" y="66" width="7" height="7" rx="2" fill="#56d364"/>
+            <text class="row" x="32" y="70">Login &middot; registration &middot; MFA &middot; reset</text>
+            <text class="rsub" x="32" y="84">hosted screens + DaVinci flows</text>
+          </g>
+          <g>
+            <rect x="14" y="99" width="7" height="7" rx="2" fill="#56d364"/>
+            <text class="row" x="32" y="103">/myaccount &middot; branding assets</text>
+            <text class="rsub" x="32" y="117">the self-service portal</text>
+          </g>
+
+          <!-- ===== THE EDGE ===== -->
+          <line x1="0" y1="152" x2="112" y2="152" stroke="#3a4256" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="272" y1="152" x2="384" y2="152" stroke="#3a4256" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <rect x="118" y="141" width="148" height="22" rx="11" fill="#0a0c11" stroke="#3a4256"/>
+          <text class="edge" x="192" y="153" text-anchor="middle">THE AUTH EDGE</text>
+
+          <!-- ===== STAYS ===== -->
+          <text class="hd" x="0" y="184" fill="#e3b341">STAYS ON PING</text>
+          <text class="hs" x="106" y="184">*.pingone.com</text>
+          <rect x="0" y="196" width="384" height="122" rx="10" fill="rgba(227,179,65,0.05)" stroke="rgba(227,179,65,0.28)"/>
+
+          <g>
+            <rect x="14" y="209" width="7" height="7" rx="2" fill="#e3b341"/>
+            <text class="row" x="32" y="213">PingOne Admin Console</text>
+            <text class="rsub" x="32" y="227">explicitly not supported</text>
+          </g>
+          <g>
+            <rect x="14" y="242" width="7" height="7" rx="2" fill="#e3b341"/>
+            <text class="row" x="32" y="246">api.pingone.com</text>
+            <text class="rsub" x="32" y="260">the plane Terraform calls</text>
+          </g>
+          <g>
+            <rect x="14" y="275" width="7" height="7" rx="2" fill="#e3b341"/>
+            <text class="row" x="32" y="279">Regional auth base</text>
+            <text class="rsub" x="32" y="293">anything you didn&rsquo;t front</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

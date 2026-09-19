@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --bg-3: #161a25;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --jj: #6ee7b7;
+    --jj-2: #34d399;
+    --git: #f59e0b;
+    --git-2: #fb923c;
+    --danger: #f87171;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(1150px 620px at 8% -12%, rgba(110,231,183,0.10), transparent 58%),
+      radial-gradient(950px 560px at 108% 6%, rgba(245,158,11,0.08), transparent 60%),
+      var(--bg);
+    font-family: var(--sans);
+    color: var(--fg);
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* hairline frame + corner ticks for editorial crafted feel */
+  .frame {
+    position: absolute; inset: 22px;
+    border: 1px solid rgba(35,40,56,0.7);
+    border-radius: 18px;
+    pointer-events: none;
+  }
+  .og-card::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ---- LEFT: editorial column ---- */
+  .left {
+    width: 640px;
+    padding: 64px 20px 64px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--jj);
+    background: rgba(110,231,183,0.10);
+    border: 1px solid rgba(110,231,183,0.22);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 34px;
+    text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jj); box-shadow: 0 0 10px var(--jj); }
+
+  .title {
+    font-size: 112px; line-height: 0.92; font-weight: 800;
+    letter-spacing: -0.045em;
+    display: flex; align-items: baseline; gap: 24px;
+  }
+  .title .jj { color: var(--jj); }
+  .title .git { color: var(--git); }
+  .title .vs {
+    font-size: 46px; font-weight: 500; font-style: italic;
+    color: var(--fg-faint); letter-spacing: -0.02em;
+    font-family: var(--mono);
+  }
+
+  .essence {
+    margin-top: 30px;
+    font-size: 30px; line-height: 1.28; font-weight: 600;
+    letter-spacing: -0.02em; color: var(--fg);
+    max-width: 500px;
+  }
+  .essence .hl-jj { color: var(--jj); }
+  .essence .hl-git { color: var(--git); }
+
+  .sub {
+    margin-top: 18px;
+    font-size: 17.5px; line-height: 1.5; color: var(--fg-dim);
+    max-width: 470px;
+  }
+  .sub code {
+    font-family: var(--mono); font-size: 0.9em;
+    color: var(--fg); background: var(--code-bg);
+    padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line);
+  }
+
+  .chips { display: flex; gap: 10px; margin-top: 34px; flex-wrap: wrap; }
+  .chip {
+    font-family: var(--mono); font-size: 13.5px;
+    color: var(--fg-dim);
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 8px 13px; border-radius: 8px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--jj); box-shadow: 0 0 6px rgba(110,231,183,0.5); }
+
+  /* ---- RIGHT: the rebase-race DAG panel ---- */
+  .right {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 64px 60px 8px;
+    position: relative; z-index: 2;
+  }
+  .panel {
+    width: 440px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .panel-cap .t { font-family: var(--mono); font-size: 13px; color: var(--fg-dim); letter-spacing: 0.04em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 12px; color: var(--fg-faint); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; }
+  .col-h {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 0 6px;
+  }
+  .col-h.git { color: var(--git); }
+  .col-h.jj { color: var(--jj); }
+  .col-h .blob { width: 9px; height: 9px; border-radius: 50%; }
+  .col-h.git .blob { background: var(--git); box-shadow: 0 0 8px rgba(245,158,11,0.6); }
+  .col-h.jj .blob { background: var(--jj); box-shadow: 0 0 8px rgba(110,231,183,0.6); }
+
+  svg.graph { width: 100%; display: block; }
+
+  .foot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 8px; }
+  .stat { padding: 2px 0; }
+  .stat .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 30px; line-height: 1; }
+  .stat.git .n { color: var(--git); }
+  .stat.jj .n { color: var(--jj); }
+  .stat .l { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 5px; }
+  .stat .d { font-size: 12.5px; color: var(--fg-dim); margin-top: 3px; line-height: 1.35; max-width: 175px; }
+
+  .divider { width: 1px; background: var(--line); }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <!-- LEFT -->
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>Version control &middot; git-compatible</div>
+
+      <div class="title">
+        <span class="jj">jj</span>
+        <span class="vs">vs</span>
+        <span class="git">Git</span>
+      </div>
+
+      <div class="essence">
+        Git, but better for the workflows where <span class="hl-git">Git</span> is worst.
+      </div>
+
+      <div class="sub">
+        A new front-end for your existing <code>.git</code> repos &mdash; same remotes, radically different model under your hands.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>no staging area</span>
+        <span class="chip"><span class="tk"></span>universal undo</span>
+        <span class="chip"><span class="tk"></span>conflicts are data</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: the rebase race, one frame -->
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">One rebase, both tools</span>
+          <span class="s">3 commits &rarr; moved main</span>
+        </div>
+
+        <div class="cols">
+          <div class="col-h git"><span class="blob"></span>Git</div>
+          <div class="col-h jj"><span class="blob"></span>jj</div>
+        </div>
+
+        <svg class="graph" viewBox="0 0 440 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .rail-git { stroke: #232838; stroke-width: 2.5; }
+              .rail-jj  { stroke: #2b3a3a; stroke-width: 2.5; }
+              .cm-main circle { fill: var(--git); stroke: #0b0d12; stroke-width: 2; }
+              .cm-feat circle { fill: var(--jj); stroke: #0b0d12; stroke-width: 2; }
+              .cm circle.ring { fill: none; stroke: #f87171; stroke-width: 3.2; }
+              .lab { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11px; fill: #9aa1b1; dominant-baseline: middle; }
+              .halt-t { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #f87171; font-weight: 700; }
+            </style>
+          </defs>
+
+          <!-- ===== GIT RAIL (x=68) : broken by halts ===== -->
+          <!-- segments of rail, interrupted at conflict halts -->
+          <line class="rail-git" x1="68" y1="272" x2="68" y2="212"/>
+          <!-- HALT gap between main tip and F1 -->
+          <line class="rail-git" x1="68" y1="196" x2="68" y2="150"/>
+          <line class="rail-git" x1="68" y1="134" x2="68" y2="88"/>
+          <!-- HALT gap before F3 -->
+          <line class="rail-git" x1="68" y1="72" x2="68" y2="40"/>
+
+          <!-- git nodes bottom->top: main, main-tip, F1(conflict/halt), F2, F3(conflict/halt) -->
+          <g class="cm cm-main"><circle cx="68" cy="272" r="12"/><text class="lab" x="88" y="272">main</text></g>
+          <g class="cm cm-main"><circle cx="68" cy="212" r="12"/><text class="lab" x="88" y="212">tip</text></g>
+          <g class="cm cm-feat"><circle cx="68" cy="150" r="12"/><circle class="ring" cx="68" cy="150" r="16.5"/><text class="lab" x="88" y="150">F1</text></g>
+          <g class="cm cm-feat"><circle cx="68" cy="88" r="12"/><text class="lab" x="88" y="88">F2</text></g>
+          <g class="cm cm-feat"><circle cx="68" cy="40" r="12"/><circle class="ring" cx="68" cy="40" r="16.5"/><text class="lab" x="88" y="40">F3</text></g>
+
+          <!-- HALT barriers on git rail -->
+          <g transform="translate(68,204)">
+            <rect x="-13" y="-4" width="26" height="8" rx="2.5" fill="#1a0f10" stroke="#f87171" stroke-width="1.5"/>
+            <line x1="-4" y1="-4" x2="-4" y2="4" stroke="#f87171" stroke-width="2"/>
+            <line x1="4" y1="-4" x2="4" y2="4" stroke="#f87171" stroke-width="2"/>
+          </g>
+          <g transform="translate(68,80)">
+            <rect x="-13" y="-4" width="26" height="8" rx="2.5" fill="#1a0f10" stroke="#f87171" stroke-width="1.5"/>
+            <line x1="-4" y1="-4" x2="-4" y2="4" stroke="#f87171" stroke-width="2"/>
+            <line x1="4" y1="-4" x2="4" y2="4" stroke="#f87171" stroke-width="2"/>
+          </g>
+
+          <!-- ===== jj RAIL (x=280) : one continuous flow ===== -->
+          <line class="rail-jj" x1="280" y1="272" x2="280" y2="40"/>
+
+          <g class="cm cm-main"><circle cx="280" cy="272" r="12"/><text class="lab" x="300" y="272">main</text></g>
+          <g class="cm cm-main"><circle cx="280" cy="212" r="12"/><text class="lab" x="300" y="212">tip</text></g>
+          <g class="cm cm-feat"><circle cx="280" cy="150" r="12"/><circle class="ring" cx="280" cy="150" r="16.5"/><text class="lab" x="300" y="150">F1</text></g>
+          <g class="cm cm-feat"><circle cx="280" cy="88" r="12"/><text class="lab" x="300" y="88">F2</text></g>
+          <g class="cm cm-feat"><circle cx="280" cy="40" r="12"/><circle class="ring" cx="280" cy="40" r="16.5"/><text class="lab" x="300" y="40">F3</text></g>
+        </svg>
+
+        <div class="foot">
+          <div class="stat git">
+            <div class="n">2</div>
+            <div class="l">halts</div>
+            <div class="d">rebase stops dead &mdash; resolve before you move</div>
+          </div>
+          <div class="stat jj">
+            <div class="n">0</div>
+            <div class="l">halts</div>
+            <div class="d">conflicts ride inside the commit &mdash; fix whenever</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

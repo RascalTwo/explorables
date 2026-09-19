@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The journey of a change · Terraform monorepo</title>
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="The journey of a change · Terraform monorepo">
+<meta name="viz:description" content="One reusable module, four isolated environments, a gated road to prod: an interactive walkthrough of a change moving through the pipeline — edit → MR → plan ×4 → merge → sequential apply → prod gate → CAB. Plus a hard look at the state file: what it is, where it lives, who can really read it, and how you'd move or seal it.">
+<meta name="viz:tag" content="Terraform">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  body { display:flex; flex-direction:column; min-height:100%; }
+  .viz-header { padding:16px 24px 10px; border-bottom:1px solid var(--border); }
+  .viz-header h1 { font-size:19px; }
+  .viz-header .sub { font-size:12.5px; }
+
+  /* progress rail */
+  .rail { display:flex; gap:6px; padding:10px 24px; flex-wrap:wrap; border-bottom:1px solid var(--border);
+          background:linear-gradient(var(--panel), transparent); }
+  .chip { font-size:11.5px; color:var(--muted); border:1px solid var(--border); background:var(--panel-2);
+          padding:4px 9px; border-radius:20px; cursor:pointer; white-space:nowrap; user-select:none;
+          display:flex; align-items:center; gap:6px; transition:.15s; }
+  .chip:hover { color:var(--text); border-color:var(--accent); }
+  .chip .n { font-variant-numeric:tabular-nums; opacity:.6; }
+  .chip.active { color:#0d1117; background:var(--accent); border-color:var(--accent); font-weight:600; }
+  .chip.active .n { opacity:.8; }
+  .chip.done { color:var(--text); }
+
+  main { flex:1; display:grid; grid-template-columns: 1fr 340px; gap:0; min-height:0; }
+  /* `safe center` keeps a too-tall scene from clipping at the top edge when it overflows */
+  #stage { padding:18px 24px; display:flex; flex-direction:column; justify-content:safe center;
+           min-width:0; overflow-y:auto; }
+  .scene { width:100%; height:auto; max-height:64vh; display:block; }
+  aside { border-left:1px solid var(--border); padding:22px 22px 16px; background:var(--panel);
+          display:flex; flex-direction:column; overflow:auto; }
+  aside .tag { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  aside h2 { font-size:17px; margin:6px 0 12px; letter-spacing:-0.01em; }
+  aside .body { font-size:13px; color:var(--text); }
+  aside .body p { margin:0 0 11px; }
+  aside .body .real { margin-top:14px; padding:11px 12px; border:1px solid var(--border); border-left:3px solid var(--accent);
+                      border-radius:6px; background:var(--panel-2); font-size:12.5px; color:var(--muted); }
+  aside .body .real b { color:var(--text); }
+  code, .mono { font-family:var(--mono); font-size:.92em; }
+  aside .body code { background:var(--panel-2); padding:.5px 4px; border-radius:4px; color:#9fd1ff; }
+
+  footer { display:flex; align-items:center; justify-content:space-between; padding:12px 24px;
+           border-top:1px solid var(--border); background:var(--panel); }
+  .nav { display:flex; gap:10px; }
+  button.nav-btn { font:inherit; font-size:13px; color:var(--text); background:var(--panel-2); border:1px solid var(--border);
+            padding:7px 16px; border-radius:8px; cursor:pointer; transition:.15s; }
+  button.nav-btn:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+  button.nav-btn:disabled { opacity:.4; cursor:default; }
+  .counter { font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+
+  /* reveal */
+  .rv { opacity:0; animation:rvin .5s ease forwards; animation-delay:var(--d,0s); }
+  @keyframes rvin { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  svg .rv { transform-box:fill-box; transform-origin:center; }
+
+  /* svg text helpers */
+  .t  { font-family:var(--sans); fill:var(--text); }
+  .tm { font-family:var(--mono); fill:var(--muted); }
+  .lbl { font-family:var(--sans); fill:var(--muted); font-size:12px; }
+  .ttl { font-family:var(--sans); fill:var(--text); font-weight:600; }
+
+  /* html card scenes */
+  .cards { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .card2 { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px 18px; }
+  .card2 h3 { margin:0 0 4px; font-size:14px; }
+  .card2 .who { font-size:11.5px; color:var(--muted); margin-bottom:12px; }
+  .diff { font-family:var(--mono); font-size:12px; line-height:1.6; background:#0a0e14; border:1px solid var(--border);
+          border-radius:8px; padding:10px 12px; overflow:auto; }
+  .diff .path { color:var(--muted); display:block; margin-bottom:6px; font-size:11px; }
+  .diff .add { color:#3fb950; } .diff .add::before{ content:"+ "; }
+  .diff .del { color:#f85149; } .diff .del::before{ content:"- "; }
+  .diff .ctx { color:var(--muted); } .diff .ctx::before{ content:"  "; }
+  .blast { margin-top:12px; font-size:12px; padding:7px 10px; border-radius:6px; }
+  .blast.all { background:rgba(248,81,73,.1); border:1px solid rgba(248,81,73,.35); color:#ffb3ae; }
+  .blast.one { background:rgba(88,166,255,.1); border:1px solid rgba(88,166,255,.35); color:#a9d1ff; }
+
+  .epi { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .epi .card2 { display:flex; flex-direction:column; gap:10px; }
+  .bars { display:flex; align-items:flex-end; gap:18px; height:130px; padding:6px 4px 0; }
+  .bar { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; justify-content:flex-end; }
+  .bar .b { width:38px; border-radius:5px 5px 0 0; }
+  .bar .v { font-family:var(--mono); font-size:12px; color:var(--text); }
+  .bar .e { font-size:11px; color:var(--muted); }
+  .bar .tier { font-size:10px; padding:1px 6px; border-radius:10px; border:1px solid var(--border); color:var(--muted); }
+  .bar .tier.prem { color:#ffd9a8; border-color:#d29922; background:rgba(210,153,34,.12); }
+  .slist { list-style:none; margin:0; padding:0; font-size:12.5px; }
+  .slist li { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid var(--border); }
+  .slist li:last-child{border:0;}
+  .slist .k { font-family:var(--mono); font-size:11.5px; color:#9fd1ff; }
+  .pill { margin-left:auto; font-size:10.5px; padding:2px 8px; border-radius:10px; white-space:nowrap; }
+  .pill.in { background:rgba(210,153,34,.14); color:#ffd9a8; border:1px solid rgba(210,153,34,.4); }
+  .pill.out { background:rgba(63,185,80,.12); color:#9be7a8; border:1px solid rgba(63,185,80,.4); }
+  .note { font-size:11.5px; color:var(--muted); }
+
+  .legend { padding-top:10px; }
+
+  /* left-aligned mono specimen inside an SVG labelBox */
+  .spec { font-family:var(--mono); font-size:10.5px; line-height:1.6; text-align:left !important;
+          align-items:flex-start !important; justify-content:flex-start !important; overflow:hidden; }
+  .spec .kk { color:#9fd1ff; } .spec .vv { color:#9be7a8; }
+  .spec .hot { color:#ffb3ae; background:rgba(248,81,73,.16); border-radius:3px; padding:0 3px; }
+  .spec .cmt { color:var(--muted); }
+
+  /* control-portability matrix */
+  .mtx { width:100%; border-collapse:collapse; font-size:12px; }
+  .mtx th { text-align:left; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+            font-weight:600; padding:0 10px 8px; border-bottom:1px solid var(--border); }
+  .mtx th:first-child { width:190px; }
+  .mtx td { padding:5px 10px; border-bottom:1px solid var(--border); vertical-align:top;
+            color:var(--muted); line-height:1.35; font-size:11.5px; }
+  .mtx td:first-child { color:var(--text); font-weight:600; font-size:12px; }
+  .mtx tr.punch td { background:rgba(248,81,73,.07); border-bottom-color:rgba(248,81,73,.3); }
+  .mtx tr.punch td:first-child { color:#ffb3ae; }
+  .mtx .mono { color:#9fd1ff; }
+  .chipx { display:inline-block; font-size:9.5px; padding:1px 6px; border-radius:9px; margin-bottom:2px;
+           border:1px solid; letter-spacing:.03em; }
+  .chipx.auto  { color:#9be7a8; border-color:rgba(63,185,80,.45); background:rgba(63,185,80,.1); }
+  .chipx.cfg   { color:#ffd9a8; border-color:rgba(210,153,34,.45); background:rgba(210,153,34,.12); }
+  .chipx.build { color:#e0b8ff; border-color:rgba(188,140,255,.45); background:rgba(188,140,255,.12); }
+  .chipx.win   { color:#a9d1ff; border-color:rgba(88,166,255,.5); background:rgba(88,166,255,.12); }
+  .chipx.same  { color:#ffb3ae; border-color:rgba(248,81,73,.45); background:rgba(248,81,73,.1); }
+  .verdict { margin-top:10px; padding:10px 14px; border-radius:8px; font-size:11.5px; line-height:1.45;
+             background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--warn); }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="The journey of a change · Terraform monorepo">
+<meta property="og:description" content="One reusable module, four isolated environments, a gated road to prod: an interactive walkthrough of a change moving through the pipeline — edit → MR → plan ×4 → merge → sequential apply → prod gate → CAB. Plus a hard look at the state file: what it is, where it lives, who can really read it, and how you'd move or seal it.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/terraform-change-journey/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/terraform-change-journey/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <header class="viz-header">
+    <h1>The journey of a change</h1>
+    <p class="sub">One reusable module · four isolated environments · a gated road to prod — <span class="mono">terraform monorepo</span></p>
+  </header>
+
+  <nav class="rail" id="rail"></nav>
+
+  <main>
+    <section id="stage"></section>
+    <aside>
+      <div class="tag" id="nTag"></div>
+      <h2 id="nTitle"></h2>
+      <div class="body" id="nBody"></div>
+      <div style="flex:1"></div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="counter" id="counter"></div>
+    <div class="nav">
+      <button class="nav-btn" id="prev">← Prev</button>
+      <button class="nav-btn" id="next">Next →</button>
+    </div>
+  </footer>
+
+<script type="module">
+import { arrowMarkers, connect, side, center, labelBox, saveHash, loadHash, $, $$ } from "/_kit/viz.js";
+
+const ENV = { dev:"#58a6ff", test:"#3fb950", stage:"#d29922", prod:"#f85149" };
+const ENVS = ["dev","test","stage","prod"];
+const N = (x,y,w,h) => ({x,y,w,h});
+
+// rounded box + non-overflowing label, with optional delay reveal
+function box(n, { fill="var(--panel-2)", stroke="var(--border)", sw=1.5, rx=10, dash="", label="", cls="", d=null }={}) {
+  const rv = d!=null ? `rv` : "";
+  const sty = d!=null ? `style="--d:${d}s"` : "";
+  return `<g class="${cls} ${rv}" ${sty}>
+    <rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="${rx}" fill="${fill}" stroke="${stroke}"
+          stroke-width="${sw}" ${dash?`stroke-dasharray="${dash}"`:""}/>
+    ${label?labelBox(n, label):""}
+  </g>`;
+}
+function edge(a, b, { marker="ah", flow=false, color="var(--border)", w=2 }={}) {
+  return `<path d="${connect(a,b)}" fill="none" stroke="${color}" stroke-width="${w}"
+            class="${flow?"flow":""}" marker-end="url(#${marker})"/>`;
+}
+// token that rides a path
+function token(d, { dur=3, color="var(--accent)", r=5 }={}) {
+  return `<circle r="${r}" fill="${color}"><animateMotion dur="${dur}s" repeatCount="indefinite" path="${d}"/></circle>`;
+}
+const scene = (vb, inner) => `<svg class="scene" viewBox="${vb}" preserveAspectRatio="xMidYMid meet">${arrowMarkers()}${inner}</svg>`;
+const envChip = (env, n, d) => box(n, { fill:ENV[env]+"22", stroke:ENV[env], label:`<b style="color:${ENV[env]}">${env}</b>`, d });
+
+// ── Scene 0 — the map ──────────────────────────────────────────────────────
+function sMap() {
+  const mod  = N(40, 60, 220, 78);
+  const root = N(40, 200, 220, 132);
+  let s = "";
+  s += edge(mod, root, { marker:"ah-accent", color:"var(--accent)" });
+  s += box(mod,  { fill:"var(--panel)", stroke:"var(--accent)", label:`<div><b>modules/poc-environment</b><div style="color:var(--muted);font-size:11px">one reusable module</div></div>`, d:0 });
+  s += box(root, { fill:"var(--panel)", stroke:"var(--accent)", label:`<div><b>environments/root.hcl</b><div style="color:var(--muted);font-size:11px">shared wiring, written once:<br>generates <span class="mono">backend.tf</span> + <span class="mono">provider.tf</span></div></div>`, d:.15 });
+
+  const colW = 178, x0 = 330, step = 192, top = 60;
+  // root.hcl inherited by every env — one clean bus + vertical risers (no crossing diagonals)
+  const centers = ENVS.map((_, i) => (x0 + i*step) + colW/2);
+  const busY = 30, jx = 296;
+  s += `<path d="M ${root.x+root.w} ${root.y+24} H ${jx} V ${busY} H ${centers[centers.length-1]}" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".55"/>`;
+  centers.forEach(cx => {
+    s += `<path d="M ${cx} ${busY} V ${top}" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".55" marker-end="url(#ah-accent)"/>`;
+  });
+  s += `<text x="${jx+8}" y="${busY-7}" class="lbl" style="font-size:10.5px;fill:var(--accent)">root.hcl wiring inherited by every environment</text>`;
+  ENVS.forEach((env,i) => {
+    const x = x0 + i*step;
+    const head  = N(x, top, colW, 46);
+    const inp   = N(x, top+58, colW, 56);
+    const iso   = N(x-6, top+128, colW+12, 150);          // isolation boundary
+    const state = N(x, top+140, colW, 56);
+    const creds = N(x, top+208, colW, 56);
+    const d = .3 + i*.12;
+    s += box(iso, { fill:"transparent", stroke:ENV[env]+"66", dash:"4 5", rx:14, d:d+.05 });
+    s += envChip(env, head, d);
+    s += box(inp,   { label:`<div style="font-size:11px"><span class="mono">terragrunt.hcl</span><br>app_tier · replica_count</div>`, d:d+.04 });
+    s += box(state, { fill:"var(--panel)", stroke:ENV[env]+"99", label:`<div style="font-size:11px">🔒 state: <b>${env}</b><br><span style="color:var(--muted)">isolated · encrypted at rest</span></div>`, d:d+.08 });
+    s += box(creds, { fill:"var(--panel)", stroke:ENV[env]+"99", label:`<div style="font-size:11px">env-scoped creds<br><span style="color:var(--muted)">${env} only</span></div>`, d:d+.12 });
+  });
+  s += `<text x="${330-6}" y="${60+128-12}" class="lbl" style="font-size:10.5px">dashed = isolation boundary (state + creds never shared)</text>`;
+  return scene("0 0 1120 360", s);
+}
+
+// ── Scene 1 — the change ───────────────────────────────────────────────────
+function sChange() {
+  return `<div class="cards">
+    <div class="card2 rv" style="--d:0s">
+      <h3>① Edit a <span style="color:var(--danger)">shared</span> file</h3>
+      <div class="who">the module, or <span class="mono">root.hcl</span> — the wiring inherited by every env</div>
+      <div class="diff">
+        <span class="path">modules/poc-environment/main.tf</span>
+        <span class="ctx">resource "gitlab_project_variable" "replica_count" {</span>
+        <span class="del">  masked = false</span>
+        <span class="add">  masked = true</span>
+        <span class="ctx">}</span>
+      </div>
+      <div class="blast all">blast radius → <b>all four environments</b> re-plan</div>
+    </div>
+    <div class="card2 rv" style="--d:.12s">
+      <h3>② Change <span style="color:var(--accent)">one env's</span> input</h3>
+      <div class="who">a few lines in a single <span class="mono">environments/&lt;env&gt;/terragrunt.hcl</span></div>
+      <div class="diff">
+        <span class="path">environments/prod/terragrunt.hcl</span>
+        <span class="ctx">inputs = {</span>
+        <span class="ctx">  app_tier      = "premium"</span>
+        <span class="del">  replica_count = 5</span>
+        <span class="add">  replica_count = 6</span>
+        <span class="ctx">}</span>
+      </div>
+      <div class="blast one">blast radius → <b>prod only</b></div>
+    </div>
+  </div>`;
+}
+
+// ── Scene 2 — open MR, pipeline fans out ───────────────────────────────────
+function sFanout() {
+  const mr  = N(60, 150, 200, 80);
+  let s = "";
+  s += box(mr, { fill:"var(--panel)", stroke:"var(--accent)", label:`<div><b>Merge Request</b><div style="color:var(--muted);font-size:11px">CI_PIPELINE_SOURCE =<br><span class="mono">merge_request_event</span></div></div>`, d:0 });
+  const x = 470, w = 250, top = 30, gap = 24, h = 70;
+  ENVS.forEach((env,i) => {
+    const job = N(x, top + i*(h+gap), w, h);
+    s += edge({x:mr.x+mr.w, y:mr.y+mr.h/2, w:0,h:0}, job, { color:ENV[env], marker:"ah", w:2, flow:true });
+    s += box(job, { fill:ENV[env]+"1e", stroke:ENV[env], label:`<div><b style="color:${ENV[env]}">plan:${env}</b><div style="color:var(--muted);font-size:11px">stage: plan · interruptible</div></div>`, d:.15+i*.1 });
+    s += `<g class="rv" style="--d:${.2+i*.1}s">${token(connect({x:mr.x+mr.w,y:mr.y+mr.h/2,w:0,h:0}, job), { color:ENV[env], dur:2.2 })}</g>`;
+  });
+  s += `<text x="${x}" y="${top-10}" class="lbl">all four <tspan class="mono">plan</tspan> jobs run in parallel — one per environment</text>`;
+  s += `<rect x="${x-14}" y="${top-2}" width="${w+28}" height="${4*(h+gap)-gap+8}" rx="14" fill="none" stroke="var(--border)" stroke-dasharray="4 5"/>`;
+  return scene("0 0 1120 410", s);
+}
+
+// ── Scene 3 — anatomy of a plan (the deep dive) ────────────────────────────
+function sAnatomy() {
+  // snake of 8 stages, two rows
+  const stages = [
+    ["terragrunt init", "generate backend.tf + provider.tf, install providers, init the backend", "var(--accent)"],
+    ["validate config", "static — needs no state: HCL well-formed, types, the env_name allow-list rule", "var(--c5)"],
+    ["pull state", "auth with CI_JOB_TOKEN → download the GitLab-managed state (encrypted at rest)", "var(--c4)"],
+    ["refresh", "provider reads real-world resources via the provider's API → drift detection", "var(--warn)"],
+    ["desired vs current", "compare the HCL (desired) against state + refreshed reality (current)", "var(--accent)"],
+    ["the diff = the plan", "+ create · ~ update · − destroy", "var(--good)"],
+    ["validate plan", "the generated plan is internally consistent and applyable", "var(--c5)"],
+    ["render + post", "on an MR: SHOW it (MR comment + native TF widget). Do NOT apply.", "var(--good)"],
+  ];
+  const w = 232, h = 92, gapX = 30;
+  const xs = [40, 40+w+gapX, 40+2*(w+gapX), 40+3*(w+gapX)];
+  const row1 = 60, row2 = 300;
+  const nodes = stages.map((st,i) => {
+    const row = i < 4 ? 0 : 1;
+    const col = row === 0 ? i : 7 - i;     // snake: row2 goes right→left
+    return N(xs[col], row===0?row1:row2, w, h);
+  });
+  let s = "";
+  // connectors following execution order
+  for (let i=0;i<nodes.length-1;i++) {
+    const a = nodes[i], b = nodes[i+1];
+    s += edge(a, b, { color:"var(--border)", marker:"ah", w:2 });
+  }
+  // the moving token along the whole snake
+  let pathD = `M ${center(nodes[0]).x} ${center(nodes[0]).y}`;
+  for (let i=1;i<nodes.length;i++) pathD += ` L ${center(nodes[i]).x} ${center(nodes[i]).y}`;
+  s += token(pathD, { dur:6, color:"#fff", r:5 });
+  stages.forEach((st,i) => {
+    s += box(nodes[i], { fill:"var(--panel)", stroke:st[2],
+      label:`<div><div style="font-size:9px;color:var(--muted);font-family:var(--mono)">${String(i+1).padStart(2,"0")}</div>
+             <b style="color:${st[2]}">${st[0]}</b>
+             <div style="color:var(--muted);font-size:10.5px;line-height:1.3;margin-top:3px">${st[1]}</div></div>`, d:i*.18 });
+  });
+  // emphasise the SHOW (not apply) terminal
+  s += `<text x="${xs[0]}" y="${row1-18}" class="ttl" style="font-size:13px">What actually happens inside one <tspan class="mono">terragrunt plan</tspan></text>`;
+  return scene("0 0 1120 430", s);
+}
+
+// ── Scene — the state file: what it is, where it lives ─────────────────────
+function sState() {
+  let s = "";
+  s += `<text x="40" y="20" class="ttl" style="font-size:13px">Step 03 said “pull state”. So what <tspan fill="var(--accent)">is</tspan> that, and where does it physically live?</text>`;
+
+  // Band 1 — the ledger
+  const desired = N(40, 40, 264, 112);
+  const ledger  = N(428, 40, 264, 112);
+  const real    = N(816, 40, 264, 112);
+  s += edge(desired, ledger, { color:"var(--accent)", marker:"ah-accent", w:2 });
+  s += edge(real, ledger, { color:"var(--warn)", marker:"ah-warn", w:2 });
+  s += box(desired, { fill:"var(--panel)", stroke:"var(--accent)",
+    label:`<div><b style="color:var(--accent)">desired</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">your HCL — <span class="mono">gitlab_project_variable<br>.replica_count</span><br>a <b>name you chose</b></div></div>`, d:0 });
+  s += box(ledger, { fill:"rgba(88,166,255,.08)", stroke:"var(--accent)", sw:2,
+    label:`<div><b style="color:var(--accent)">📒 the state file</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">a JSON <b>ledger</b> binding<br><span class="mono">your name ⇄ the provider's opaque ID</span><br>+ a cached copy of every attribute</div></div>`, d:.12 });
+  s += box(real, { fill:"var(--panel)", stroke:"var(--warn)",
+    label:`<div><b style="color:var(--warn)">current</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">the real object — <span class="mono">id: "4711/replica_count"</span><br>a <b>name the API chose</b></div></div>`, d:.24 });
+  s += `<text x="560" y="172" text-anchor="middle" class="lbl" style="font-size:11px">Delete the ledger and Terraform forgets it ever made anything — it would <tspan fill="var(--danger)">re-create</tspan>, not update. <tspan fill="var(--muted)">That is its whole job.</tspan></text>`;
+
+  // Band 2 — the wire
+  s += `<text x="40" y="212" class="ttl" style="font-size:13px">Where the bytes actually sit — nobody commits a <tspan class="mono">.tfstate</tspan>; it never touches the repo</text>`;
+  const chain = [
+    ["CI job", "<span class='mono'>plan:prod</span>", "var(--c4)"],
+    ["backend.tf", "generated by <span class='mono'>root.hcl</span> → <span class='mono'>http</span> backend", "var(--muted)"],
+    ["GitLab REST API", "<span class='mono'>/api/v4/projects/:id<br>/terraform/state/prod</span>", "var(--accent)"],
+    ["🔒 Lockbox", "AES, key derived from<br><span class='mono'>db_key_base</span>", "var(--good)"],
+    ["at rest", "Postgres + object storage<br><b>as ciphertext</b>", "var(--c5)"],
+  ];
+  const cw = 186, cgap = 30, cy = 232, ch = 88;
+  chain.forEach((c,i) => {
+    const n = N(40 + i*(cw+cgap), cy, cw, ch);
+    if (i>0) s += edge(N(40+(i-1)*(cw+cgap), cy, cw, ch), n, { color:"var(--border)", marker:"ah", w:1.8, flow:i<3 });
+    s += box(n, { fill:"var(--panel)", stroke:c[2],
+      label:`<div><b style="color:${c[2]};font-size:11.5px">${c[0]}</b><div style="color:var(--muted);font-size:10px;margin-top:3px;line-height:1.35">${c[1]}</div></div>`, d:.4+i*.12 });
+  });
+
+  // Band 3 — one per env
+  s += `<text x="40" y="352" class="lbl" style="font-size:11px">…and there are <tspan fill="var(--text)">four of them</tspan> — one state object per environment, each with its own lock and its own credentials</text>`;
+  const ew = 248, egap = 20;
+  ENVS.forEach((env,i) => {
+    s += box(N(40 + i*(ew+egap), 362, ew, 46), { fill:ENV[env]+"18", stroke:ENV[env], rx:8,
+      label:`<span class="mono" style="font-size:10.5px;color:${ENV[env]}">…/terraform/state/<b>${env}</b></span>`, d:1.0+i*.08 });
+  });
+  return scene("0 0 1120 424", s);
+}
+
+
+// ── Scene — if we move the state, does the security move with it? ──────────
+function sMoveState() {
+  const rows = [
+    ["Encryption at rest",
+      ["auto","Lockbox AES, key from <span class='mono'>db_key_base</span>. Nothing to switch on."],
+      ["auto","Azure Storage SSE — on by default, cannot be disabled."],
+      ["auto","SSE-S3 (AES-256) on every new object by default."],
+      ["build","Only whatever you store it on gives you. Nothing is handed over."]],
+    ["Who holds the key",
+      ["cfg","The GitLab instance. You do <b>not</b> hold it separately."],
+      ["cfg","Microsoft-managed, or <b>your</b> CMK in Key Vault."],
+      ["cfg","AWS-managed, or <b>your</b> CMK via <span class='mono'>kms_key_id</span>."],
+      ["win","<b>You do, entirely.</b> Usually the whole reason to leave."]],
+    ["Who can read it",
+      ["auto","Project role + <span class='mono'>admin_terraform_state</span>. <b>Developer+</b> reads."],
+      ["cfg","Entra RBAC — <span class='mono'>Storage Blob Data Contributor</span>. You wire it up."],
+      ["cfg","IAM + bucket policy — <span class='mono'>s3:GetObject</span>. You wire it up."],
+      ["build","Whatever you write. The backend offers Basic auth or mTLS — <b>and nothing else</b>."]],
+    ["Locking",
+      ["auto","Built into the HTTP backend's lock endpoint."],
+      ["auto","Native to the blob — nothing to provision."],
+      ["auto","Native lockfile via <span class='mono'>use_lockfile</span>; <span class='mono'>dynamodb_table</span> is deprecated."],
+      ["build","You implement <span class='mono'>LOCK</span>/<span class='mono'>UNLOCK</span> and <span class='mono'>423</span>. Correctness under concurrency is <b>on you</b>."]],
+    ["Versioning / recovery",
+      ["cfg","Versions are retained; <b>no documented rollback flow</b>."],
+      ["cfg","Blob versioning + soft delete — you enable both."],
+      ["cfg","Bucket versioning — you enable it."],
+      ["build","Only what you build. There is no default."]],
+    ["Network isolation",
+      ["cfg","A public API surface, gated by token."],
+      ["cfg","Private endpoint / network rules."],
+      ["cfg","VPC endpoint / bucket-policy conditions."],
+      ["win","<b>Anywhere you like</b> — including fully air-gapped."]],
+    ["Plaintext to an authorized reader",
+      ["same","YES"],["same","YES"],["same","YES"],["same","YES"]],
+  ];
+  const LABELS = { auto:"inherited", cfg:"you configure", build:"you build it", win:"yours by construction", same:"unchanged" };
+  const chip = c => `<span class="chipx ${c}">${LABELS[c]}</span>`;
+  const body = rows.map((r,i) => {
+    const punch = i === rows.length-1;
+    const cells = r.slice(1).map(c => `<td>${chip(c[0])}<div>${c[1]}</div></td>`).join("");
+    return `<tr class="${punch?"punch":""} rv" style="--d:${i*.07}s"><td>${r[0]}</td>${cells}</tr>`;
+  }).join("");
+  return `<div>
+    <table class="mtx">
+      <thead><tr><th>Control</th><th style="color:var(--accent)">GitLab today</th>
+        <th style="color:var(--c4)">Azure Blob (<span class="mono">azurerm</span>)</th>
+        <th style="color:var(--c8)">Amazon S3 (<span class="mono">s3</span>)</th>
+        <th style="color:var(--c5)">Your own (<span class="mono">http</span>)</th></tr></thead>
+      <tbody>${body}</tbody>
+    </table>
+    <div class="verdict rv" style="--d:.6s">
+      <b style="color:var(--warn)">“Same security” is true for the boring row and false for the rows that matter.</b>
+      Encryption at rest transfers for free — every backend has it. What does <b>not</b> transfer is the
+      <b>access-control plane</b>: GitLab hands you a working one (project roles) on day one, a storage account hands
+      you an empty one, and a service you write yourself hands you a compiler. Moving is a <b>lateral</b> move on
+      encryption, a <b>downgrade</b> on out-of-the-box authz, and a genuine <b>upgrade</b> on key custody and network
+      isolation — <i>if</i> you actually do the work.
+      <span style="color:#ffb3ae">And the last row never moves: no backend makes state opaque to whoever holds a
+      valid credential.</span> <span style="color:var(--muted)">The only thing that does is encrypting client-side
+      before the bytes ever leave — which Terraform OSS cannot do at all, and OpenTofu ≥ 1.7 can.</span>
+    </div>
+  </div>`;
+}
+
+// ── Scene — the backend is a socket, not a fixture ─────────────────────────
+function sBackends() {
+  let s = "";
+  s += `<text x="40" y="20" class="ttl" style="font-size:13px">Don't want the state in GitLab? Then don't — it's <tspan fill="var(--accent)">one implementation</tspan> of a swappable interface.</text>`;
+
+  const cfg  = N(40, 46, 230, 116);
+  const sock = N(316, 46, 200, 116);
+  s += edge(cfg, sock, { color:"var(--accent)", marker:"ah-accent", w:2 });
+  s += box(cfg, { fill:"var(--panel)", stroke:"var(--border)",
+    label:`<div><b>your HCL + modules</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">knows <b>nothing</b> about where state lives.<br>Not one line changes if you move it.</div></div>`, d:0 });
+  s += box(sock, { fill:"rgba(88,166,255,.1)", stroke:"var(--accent)", sw:2,
+    label:`<div><b style="color:var(--accent)">🔌 the backend block</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">a <b>transport</b>, not a format<br><span class="mono">generated by root.hcl</span></div></div>`, d:.12 });
+
+  const CAT = [
+    ["s3", "Amazon S3"],            ["azurerm", "Azure Blob"],
+    ["gcs", "Google Cloud Storage"], ["oci", "Oracle OCI"],
+    ["oss", "Alibaba OSS"],         ["cos", "Tencent COS"],
+    ["pg", "PostgreSQL"],           ["consul", "Consul KV"],
+    ["kubernetes", "K8s Secret"],   ["remote", "HCP Terraform"],
+    ["local", "Local disk"],        ["http", "Any HTTP endpoint"],
+  ];
+  const bw = 130, bgap = 8, bh = 54, bvg = 10, gx = 572, gy = 46;
+  s += `<path d="M ${sock.x+sock.w} 104 H ${gx-12}" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".5" marker-end="url(#ah-accent)"/>`;
+  s += `<text x="${gx}" y="34" class="lbl" style="font-size:10.5px">twelve ship with Terraform 1.x — pick any one</text>`;
+  CAT.forEach(([id,name],i) => {
+    const n = N(gx + (i%4)*(bw+bgap), gy + ((i/4)|0)*(bh+bvg), bw, bh);
+    const hot = id === "http";
+    s += box(n, { fill:hot?"rgba(88,166,255,.18)":"var(--panel)", stroke:hot?"var(--accent)":"var(--border)",
+      sw:hot?2:1.2, rx:8,
+      label:`<div style="font-size:10px;line-height:1.2;color:${hot?"var(--accent)":"var(--text)"}">${name}<div class="mono" style="font-size:8.5px;color:var(--muted);margin-top:2px">${id}</div></div>`, d:.24+i*.04 });
+  });
+  s += `<text x="${gx}" y="${gy + 3*(bh+bvg) + 6}" class="lbl" style="font-size:10.5px;fill:var(--accent)">↑ GitLab <tspan font-style="italic">is</tspan> an <tspan class="mono">http</tspan> backend. Nothing more exotic than that.</text>`;
+
+  s += `<text x="40" y="278" class="ttl" style="font-size:13px">…and the file itself is portable — plain, backend-agnostic JSON</text>`;
+  const j   = N(40, 294, 440, 128);
+  const mig = N(544, 294, 250, 128);
+  const dst = N(858, 294, 234, 128);
+  s += edge(j, mig, { color:"var(--good)", marker:"ah-good", w:2, flow:true });
+  s += edge(mig, dst, { color:"var(--good)", marker:"ah-good", w:2, flow:true });
+  s += box(j, { fill:"#0a0e14", stroke:"var(--border)",
+    label:`<div class="spec">{<br>&nbsp;&nbsp;<span class="kk">"version"</span>: <span class="vv">4</span>, <span class="kk">"serial"</span>: <span class="vv">42</span>,<br>&nbsp;&nbsp;<span class="kk">"lineage"</span>: <span class="vv">"8f2a-…"</span>,<br>&nbsp;&nbsp;<span class="kk">"resources"</span>: [ … ]<br>}<br><span class="cmt">// the backend never owned this format</span></div>`, d:.6 });
+  s += box(mig, { fill:"var(--panel)", stroke:"var(--good)",
+    label:`<div><b class="mono" style="color:var(--good);font-size:11px">init -migrate-state</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">copies state into the new backend.<br><span class="mono">-reconfigure</span> starts fresh instead.</div></div>`, d:.75 });
+  s += box(dst, { fill:"var(--panel)", stroke:"var(--accent)",
+    label:`<div><b style="color:var(--accent)">any of the twelve</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px">…or one you write yourself →</div></div>`, d:.9 });
+  s += `<text x="40" y="446" class="lbl" style="font-size:11px">The catalogue shifts over time — <tspan class="mono">artifactory · etcd · etcdv3 · manta · swift</tspan> were retired in Terraform 1.3 — which is exactly why <tspan fill="var(--text)">the move stays cheap</tspan>.</text>`;
+  return scene("0 0 1120 460", s);
+}
+
+// ── Scene — roll your own state service ────────────────────────────────────
+function sHttpBackend() {
+  let s = "";
+  s += `<text x="40" y="20" class="ttl" style="font-size:13px">And if none of the twelve fit? <tspan fill="var(--good)">The <tspan class="mono">http</tspan> backend is a contract — you can implement it yourself.</tspan></text>`;
+  s += box(N(40, 46, 400, 252), { fill:"#0a0e14", stroke:"var(--accent)",
+    label:`<div class="spec"><span class="cmt"># root.hcl generates this — same as today,</span><br><span class="cmt"># just pointed somewhere else</span><br>backend <span class="vv">"http"</span> {<br>&nbsp;&nbsp;<span class="kk">address</span>        = <span class="vv">"https://state.us/prod"</span><br>&nbsp;&nbsp;<span class="kk">lock_address</span>   = <span class="vv">"https://state.us/prod/lock"</span><br>&nbsp;&nbsp;<span class="kk">unlock_address</span> = <span class="vv">"https://state.us/prod/lock"</span><br>&nbsp;&nbsp;<span class="kk">username</span>       = <span class="vv">"ci"</span><br>&nbsp;&nbsp;<span class="kk">password</span>       = <span class="vv">"$TOKEN"</span><br>}<br><br><span class="cmt"># defaults you rarely touch:</span><br><span class="cmt"># update_method = POST · lock_method = LOCK</span><br><span class="cmt"># unlock_method = UNLOCK · retry_max = 2</span><br><span class="cmt"># mTLS: client_certificate_pem, …</span></div>`, d:0 });
+
+  const rows = [
+    ["GET",    "{address}",            "→ <b>200</b> + the state JSON &nbsp;·&nbsp; no state yet ⇒ 404/204", "var(--accent)"],
+    ["POST",   "{address}?ID=&lt;lock&gt;", "→ persist the new state &nbsp;<span style='opacity:.6'>(update_method)</span>", "var(--good)"],
+    ["LOCK",   "{lock_address}",       "→ <b>200</b> ok &nbsp;·&nbsp; <b style='color:#ffb3ae'>423 Locked</b> (or 409) + holding lock info", "var(--warn)"],
+    ["UNLOCK", "{unlock_address}",     "→ <b>200</b> ok", "var(--warn)"],
+    ["DELETE", "{address}",            "→ purge the state", "var(--danger)"],
+  ];
+  const rw = 612, rh = 44, rgap = 8, rx0 = 480, ry0 = 46;
+  s += `<text x="${rx0}" y="34" class="lbl" style="font-size:10.5px">the entire protocol — five verbs</text>`;
+  rows.forEach((r,i) => {
+    s += box(N(rx0, ry0 + i*(rh+rgap), rw, rh), { fill:"var(--panel)", stroke:r[3], rx:7, sw:1.4,
+      label:`<div style="font-size:11px;text-align:left"><b class="mono" style="color:${r[3]};display:inline-block;width:64px">${r[0]}</b><span class="mono" style="color:#9fd1ff">${r[1]}</span> <span style="color:var(--muted)">${r[2]}</span></div>`, d:.15+i*.1 });
+  });
+  s += `<text x="${rx0}" y="${ry0 + 5*(rh+rgap) + 6}" class="lbl" style="font-size:10px">🟡 <tspan class="mono">423</tspan> is doc-specified; the GET status codes and <tspan class="mono">?ID=</tspan> are client convention, not written spec.</text>`;
+
+  s += box(N(40, 322, 1052, 104), { fill:"var(--panel-2)", stroke:"var(--warn)", rx:8,
+    label:`<div style="font-size:11px;line-height:1.5;text-align:left"><b style="color:var(--warn)">A conformant server is an afternoon. Owning one is forever.</b> The moment it's yours, you own <b>lock correctness under concurrency</b>, durability, versioning, backup &amp; restore, authn/authz — and the 3am page when a stale lock wedges a prod apply. GitLab, S3 and Azure hand you all of that for free. <span style="color:var(--good)">Build your own only when a hard requirement makes the twelve genuinely unusable</span> — an air-gap, a data-sovereignty rule, an HSM you're obliged to use. <span style="color:var(--muted)">“We might want to someday” is not one of those.</span></div>`, d:.8 });
+  return scene("0 0 1120 438", s);
+}
+
+
+// ── Scene 4 — × four environments ──────────────────────────────────────────
+function sLoop() {
+  let s = "";
+  const laneH = 60, top = 40, gap = 18, x = 40, w = 360;
+  const mr = N(760, top + 0.5*(4*(laneH+gap)-gap) - 70, 300, 140);
+  ENVS.forEach((env,i) => {
+    const lane = N(x, top + i*(laneH+gap), w, laneH);
+    s += box(lane, { fill:ENV[env]+"16", stroke:ENV[env],
+      label:`<div style="font-size:11.5px"><b style="color:${ENV[env]}">plan:${env}</b> &nbsp;→&nbsp; init · pull state · refresh · diff</div>`, d:i*.12 });
+    const plan = N(x+w+26, top + i*(laneH+gap)+8, 150, laneH-16);
+    s += edge(lane, plan, { color:ENV[env], marker:"ah", w:1.8, flow:true });
+    s += box(plan, { fill:"var(--panel)", stroke:ENV[env], label:`<div style="font-size:11px">plan-${env}<br><span style="color:var(--muted)">+a ~b −c</span></div>`, d:.1+i*.12 });
+    s += edge(plan, mr, { color:"var(--border)", marker:"ah", w:1.5 });
+  });
+  s += box(mr, { fill:"var(--panel)", stroke:"var(--accent)",
+    label:`<div><b>One MR, four plans</b><div style="color:var(--muted);font-size:11px;margin-top:4px">native Terraform widget · per-env comments · downloadable artifacts</div><div style="color:var(--good);font-size:11px;margin-top:6px">shown for review — nothing applied yet</div></div>`, d:.6 });
+  return scene("0 0 1120 360", s);
+}
+
+// ── Scene 5 — merge → sequential apply ─────────────────────────────────────
+function sApply() {
+  let s = "";
+  const merge = N(30, 140, 150, 80);
+  s += box(merge, { fill:"var(--panel)", stroke:"var(--good)", label:`<div><b>merge → main</b><div style="color:var(--muted);font-size:11px">re-plan, then apply</div></div>`, d:0 });
+  const seq = ["dev","test","stage"];
+  const w = 170, h = 80, gap = 56, x0 = 240, y = 140;
+  let prev = merge;
+  seq.forEach((env,i) => {
+    const job = N(x0 + i*(w+gap), y, w, h);
+    s += edge(prev, job, { color:ENV[env], marker:"ah", w:2.2 });
+    s += `<text x="${(side(prev,"right").x+side(job,"left").x)/2}" y="${y-8}" class="lbl" text-anchor="middle" style="font-size:10px">needs ✓</text>`;
+    s += box(job, { fill:ENV[env]+"1e", stroke:ENV[env], label:`<div><b style="color:${ENV[env]}">apply:${env}</b><div style="color:var(--muted);font-size:11px">auto · on main</div></div>`, d:.2+i*.25 });
+    prev = job;
+  });
+  // token dev→test→stage
+  const gate = N(x0 + 3*(w+gap), y, w+10, h);
+  s += `<path d="M ${side(prev,'right').x} ${side(prev,'right').y} L ${side(gate,'left').x} ${side(gate,'left').y}" fill="none" stroke="var(--danger)" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#ah-danger)"/>`;
+  s += box(gate, { fill:"rgba(248,81,73,.08)", stroke:"var(--danger)", dash:"6 5",
+    label:`<div><b style="color:var(--danger)">⏸ apply:prod</b><div style="color:var(--muted);font-size:11px">when: manual<br>pipeline pauses here</div></div>`, d:1.0 });
+  let pd = `M ${center(merge).x} ${center(merge).y}`;
+  [N(x0,y,w,h),N(x0+(w+gap),y,w,h),N(x0+2*(w+gap),y,w,h)].forEach(nd=> pd += ` L ${center(nd).x} ${center(nd).y}`);
+  s += token(pd, { dur:3.2, color:"#fff", r:5 });
+  s += `<text x="30" y="118" class="ttl" style="font-size:13px">dev → test → stage apply automatically, in order. prod does not.</text>`;
+  return scene("0 0 1120 300", s);
+}
+
+// ── Scene 6 — the prod gate ────────────────────────────────────────────────
+function sGate() {
+  let s = "";
+  const gate = N(420, 120, 280, 150);
+  s += box(gate, { fill:"rgba(248,81,73,.08)", stroke:"var(--danger)", sw:2,
+    label:`<div><div style="font-size:30px">⏸</div><b style="color:var(--danger)">apply:prod — parked</b><div style="color:var(--muted);font-size:11px;margin-top:4px">needs a human ▶ <b style="color:var(--text)">and</b> an open CAB window</div></div>`, d:0 });
+  const facts = [
+    [N(60,40,300,64),  "when: manual", "the job won't start itself — a person must click ▶ play", "var(--warn)"],
+    [N(60,128,300,64), "Protected Environment", "on GitLab Free: Maintainers and above only", "var(--accent)"],
+    [N(60,216,300,64), "resource_group: prod", "two lingering manual gates can't fire together — they queue", "var(--c5)"],
+    [N(760,40,300,64), "interruptible: false", "a newer pipeline won't auto-cancel the parked gate", "var(--c4)"],
+    [N(760,128,300,64),"needs: apply:stage", "stage must have applied cleanly first", "var(--good)"],
+    [N(760,216,300,80),"CAB approval check", "the click only <i>requests</i> the apply. A pre-apply step calls the external change system — no approved <b>window + commit</b> → job fails <b>before</b> terraform runs. Fail-closed.", "var(--danger)"],
+  ];
+  facts.forEach((f,i) => {
+    const n = f[0];
+    const hard = i===5;
+    s += edge(n, gate, { color:hard?"var(--danger)":"var(--border)", marker:hard?"ah-danger":"ah", w:hard?2:1.3 });
+    s += box(n, { fill:hard?"rgba(248,81,73,.08)":"var(--panel)", stroke:f[3], sw:hard?2:1.5,
+      label:`<div style="font-size:11px"><b style="color:${f[3]}" class="mono">${f[1]}</b><div style="color:var(--muted);margin-top:2px">${f[2]}</div></div>`, d:.15+i*.12 });
+  });
+  return scene("0 0 1120 316", s);
+}
+
+// ── Scene — the stacking gate ──────────────────────────────────────────────
+function sStack() {
+  let s = "";
+  const mx = [180, 420, 660];                 // merge column centers
+  const topLaneY = 78, botLaneY = 250;
+  s += `<text x="30" y="${topLaneY+14}" class="lbl" style="font-size:11px">dev · test · stage</text>`;
+  s += `<text x="30" y="${botLaneY+14}" class="lbl" style="font-size:11px;fill:var(--danger)">prod (parked)</text>`;
+  s += `<line x1="120" y1="${topLaneY-30}" x2="790" y2="${topLaneY-30}" stroke="var(--border)"/>`;
+  mx.forEach((cx,i) => {
+    const d = i*.3;
+    s += `<text x="${cx}" y="${topLaneY-36}" text-anchor="middle" class="lbl" style="font-size:10.5px">merge #${i+1}</text>`;
+    // non-prod applies the delta immediately
+    s += box(N(cx-58, topLaneY, 116, 40), { fill:"rgba(63,185,80,.12)", stroke:"var(--good)",
+      label:`<span style="font-size:11px;color:#9be7a8">Δ${i+1} applied ✓</span>`, d });
+    // prod's pending plan grows by one each merge
+    for (let k=0;k<=i;k++)
+      s += box(N(cx-58, botLaneY + k*30, 116, 26), { fill:"rgba(248,81,73,.13)", stroke:"var(--danger)", rx:6,
+        label:`<span style="font-size:10.5px;color:#ffb3ae">Δ${k+1} pending</span>`, d:d+.12+k*.05 });
+  });
+  // last stack → gate → release
+  const gate = N(850, botLaneY+4, 110, 82);
+  const out  = N(995, botLaneY+4, 120, 82);
+  s += `<path d="M ${mx[2]+60} ${botLaneY+13} L ${gate.x} ${botLaneY+13}" fill="none" stroke="var(--danger)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah-danger)"/>`;
+  s += box(gate, { fill:"rgba(210,153,34,.1)", stroke:"var(--warn)",
+    label:`<div><div style="font-size:20px">▶</div><span style="font-size:10.5px;color:#ffd9a8">prod approved</span></div>`, d:1.15 });
+  s += `<path d="${connect(gate,out)}" fill="none" stroke="var(--good)" stroke-width="2" marker-end="url(#ah-good)"/>`;
+  s += box(out, { fill:"rgba(63,185,80,.12)", stroke:"var(--good)",
+    label:`<div style="font-size:10.5px;color:#9be7a8"><b>Δ1+Δ2+Δ3</b><br>all apply at once</div>`, d:1.3 });
+  s += `<text x="30" y="${botLaneY+128}" class="lbl" style="font-size:11px">while prod is parked, every merge stacks onto its pending plan — nothing is lost, and the diff only grows until someone approves it</text>`;
+  return scene("0 0 1120 410", s);
+}
+
+// ── Scene — the authority (team earns the prod door) ───────────────────────
+function sCab() {
+  let s = "";
+  s += `<text x="40" y="22" class="ttl" style="font-size:13px">By the time prod is on the table, the <tspan fill="var(--accent)">team</tspan> has already earned it.</text>`;
+  // Phase A — prerequisites, already satisfied (a completed checklist)
+  const pre = [
+    "Team makes the change",
+    "Reviewed — MR, ≥2 approvers",
+    "Auto-deployed: dev → test → stage",
+    "Validated in every non-prod env",
+  ];
+  const pw = 250, ph = 54, py = 44, pgap = 18;
+  pre.forEach((p,i) => {
+    const n = N(40 + i*(pw+pgap), py, pw, ph);
+    if (i>0) s += edge(N(40+(i-1)*(pw+pgap),py,pw,ph), n, { color:"var(--border)", marker:"ah", w:1.5 });
+    s += box(n, { fill:"var(--panel)", stroke:i===3?"var(--good)":"var(--border)",
+      label:`<div style="font-size:11.5px"><span style="color:var(--good)">✓</span> ${p}</div>`, d:i*.12 });
+  });
+  s += `<text x="560" y="${py+ph+30}" text-anchor="middle" class="lbl" style="font-size:11px;fill:var(--warn)">↓ only now does the team want this change in production ↓</text>`;
+  // Phase B — the prod authority flow. The approval lives in an EXTERNAL system;
+  // the pipeline queries it and fail-closes — enforcement is machine, not honour.
+  const flow = [
+    ["📝 Change request", "what · why · rollback · blast radius · <b>the commit</b>", "var(--muted)"],
+    ["🏛 CAB reviews", "weighs risk, sets a start → end window", "var(--warn)"],
+    ["✅ Approved", "external system records the <b>window [start → end]</b> <i>and</i> the exact <b>commit</b>", "var(--good)"],
+    ["▶ Maintainer clicks ▶", "an authorized few <i>request</i> the apply — the click alone isn't enough", "var(--accent)"],
+    ["🔎 window + commit check", "queries the change system — <b>fail-closed</b> unless the window is open <b>and</b> the commit matches", "var(--danger)"],
+    ["🚀 apply:prod", "runs only <b>inside the window</b>, only for the <b>approved commit</b>", "var(--c4)"],
+  ];
+  const fw = 168, fh = 96, fy = py+ph+54, fgap = 14;
+  flow.forEach((f,i) => {
+    const n = N(40 + i*(fw+fgap), fy, fw, fh);
+    if (i>0) { const go = i===3, hard = i>=4;
+      s += edge(N(40+(i-1)*(fw+fgap),fy,fw,fh), n, { color:go?"var(--good)":hard?"var(--danger)":"var(--border)", marker:go?"ah-good":hard?"ah-danger":"ah", w:2 }); }
+    s += box(n, { fill:i>=4?"rgba(248,81,73,.06)":"var(--panel)", stroke:f[2], sw:i>=4?2:1.5,
+      label:`<div><b style="color:${f[2]}">${f[0]}</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.3">${f[1]}</div></div>`, d:.5+i*.14 });
+  });
+  s += `<text x="560" y="${fy+fh+30}" text-anchor="middle" class="lbl" style="font-size:11.5px;fill:var(--warn)">The approval isn't a person's promise — it's a <tspan fill="var(--good)">machine-readable window <tspan fill="var(--c4)">and commit</tspan> in an external system</tspan>.</text>`;
+  s += `<text x="560" y="${fy+fh+50}" text-anchor="middle" class="lbl" style="font-size:11.5px;fill:var(--warn)">The pipeline <tspan fill="var(--danger)">checks both and fail-closes</tspan> — a <tspan fill="var(--c4)">different commit</tspan> or a <tspan fill="var(--c4)">different time</tspan> is <tspan fill="var(--c4)">physically impossible</tspan>, not merely against the rules.</text>`;
+  return scene("0 0 1120 430", s);
+}
+
+// ── Scene 8 — epilogue ─────────────────────────────────────────────────────
+function sEpilogue() {
+  const reps = { dev:2, test:2, stage:3, prod:5 };
+  const tiers = { dev:"standard", test:"standard", stage:"standard", prod:"premium" };
+  const maxR = 5;
+  const bars = ENVS.map(env => `
+    <div class="bar">
+      <span class="v">${reps[env]}</span>
+      <div class="b" style="height:${20 + (reps[env]/maxR)*100}px;background:${ENV[env]}"></div>
+      <span class="e" style="color:${ENV[env]}">${env}</span>
+      <span class="tier ${tiers[env]==="premium"?"prem":""}">${tiers[env]}</span>
+    </div>`).join("");
+  const secrets = [
+    ["DEMO_SUPPLIED_SECRET", "a secret you pass in", "in"],
+    ["DEMO_GENERATED_SECRET", "random_password the tool creates", "in"],
+    ["DEMO_SENSITIVE_IN_STATE", "sensitive=true only hides output, not state", "in"],
+    ["provider auth token", "ephemeral — never written to state", "out"],
+  ];
+  const slist = secrets.map(x => `<li><span class="k">${x[0]}</span><span class="note">${x[1]}</span>
+     <span class="pill ${x[2]}">${x[2]==="in"?"in state 🔒":"ephemeral"}</span></li>`).join("");
+  return `<div class="epi">
+    <div class="card2 rv" style="--d:0s">
+      <h3>Same module, divergent shape</h3>
+      <div class="who">one <span class="mono">poc-environment</span>, four sets of inputs — replicas below, tiers tagged</div>
+      <div class="bars">${bars}</div>
+      <div class="note">prod also carries extra labels (<span class="mono">prod::on-call</span>, <span class="mono">prod::change-mgmt</span>) the others don't.</div>
+    </div>
+    <div class="card2 rv" style="--d:.15s">
+      <h3>Secrets in state — handled, not feared</h3>
+      <div class="who">what lands in the (encrypted-at-rest) state vs what never does</div>
+      <ul class="slist">${slist}</ul>
+      <div class="note">State is encrypted <b>at rest</b> (GitLab Lockbox) — but it is served <b>decrypted</b> to any <b>Developer+</b> (<span class="mono">admin_terraform_state</span>). Encryption is not the control; <b>not putting secrets in state</b> is. Provider-auth secrets stay ephemeral.</div>
+    </div>
+  </div>`;
+}
+
+// ── Scene — the tripwire (out-of-band change detection) ────────────────────
+function sTripwire() {
+  let s = "";
+  s += `<text x="40" y="22" class="ttl" style="font-size:13px">Everything so far is the happy path. So how would we know if someone went <tspan fill="var(--danger)">around</tspan> all of it?</text>`;
+
+  const src = N(40, 96, 244, 104);
+  s += box(src, { fill:"rgba(248,81,73,.08)", stroke:"var(--danger)", sw:2,
+    label:`<div><b style="color:var(--danger)">🚪 Out-of-band change</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">the pipeline <b>can't</b> apply to prod out of band (fail-closed on the CAB window), so this can only be the <b>console</b> — break-glass, or a leaked credential</div></div>`, d:0 });
+
+  // Layer 1 — drift detection (top lane): catches MANAGED objects
+  const a1 = N(360, 48, 256, 96);
+  const b1 = N(704, 48, 232, 96);
+  s += edge(src, a1, { color:"var(--warn)", marker:"ah-warn", w:2 });
+  s += edge(a1, b1, { color:"var(--warn)", marker:"ah-warn", w:2, flow:true });
+  s += box(a1, { fill:"var(--panel)", stroke:"var(--warn)",
+    label:`<div><b style="color:var(--warn)">Layer 1 · scheduled drift job</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">per-env <span class="mono">terragrunt plan</span> vs the <b>approved baseline commit</b> recorded in state</div></div>`, d:.15 });
+  s += box(b1, { fill:"rgba(248,81,73,.07)", stroke:"var(--danger)",
+    label:`<div><b style="color:var(--danger)">non-empty plan → job FAILS</b><div style="color:var(--muted);font-size:10.5px;margin-top:4px;line-height:1.35">diff captured &amp; alerted. baseline un-forgeable — writing it needs <span class="mono">admin_terraform_state</span> = CI</div></div>`, d:.3 });
+  s += `<text x="360" y="160" class="lbl" style="font-size:10.5px">catches changes to <tspan fill="var(--warn)">managed</tspan> objects — the Tripwire move: compare to a trusted baseline, alarm on difference</text>`;
+
+  // Layer 2 — audit-log poll (bottom lane): catches ANYTHING, attributed to a person
+  const a2 = N(360, 230, 256, 116);
+  const b2 = N(704, 226, 232, 124);
+  s += edge(src, a2, { color:"var(--c4)", marker:"ah", w:2 });
+  s += edge(a2, b2, { color:"var(--c4)", marker:"ah", w:2, flow:true });
+  s += box(a2, { fill:"var(--panel)", stroke:"var(--c4)",
+    label:`<div><b style="color:var(--c4)">Layer 2 · log collector polls the audit API</b><div style="color:var(--muted);font-size:10px;margin-top:4px;line-height:1.35">REST collector → <span class="mono">GET /activities</span> every ~1 min (OAuth2, <span class="mono">recordedat</span> filter, pages via <span class="mono">_links.next</span>). <b>Pull, not webhook</b> — nothing inbound.</div></div>`, d:.45 });
+  s += box(b2, { fill:"var(--panel)", stroke:"var(--accent)",
+    label:`<div><b style="color:var(--accent)">config-change events → SIEM</b><div class="mono" style="color:var(--muted);font-size:9.5px;margin-top:4px;line-height:1.5">APPLICATION.UPDATED<br>POLICY.UPDATED · POPULATION.UPDATED<br>RESOURCE.UPDATED · GATEWAY.UPDATED · …</div></div>`, d:.6 });
+  s += `<text x="360" y="362" class="lbl" style="font-size:10.5px">catches <tspan fill="var(--accent)">any</tspan> human touch — even a brand-new, unmanaged object — attributed to a person</text>`;
+
+  // both layers converge → SIEM alarm
+  const siem = N(968, 130, 124, 132);
+  s += edge(b1, siem, { color:"var(--border)", marker:"ah", w:1.6 });
+  s += edge(b2, siem, { color:"var(--border)", marker:"ah", w:1.6 });
+  s += box(siem, { fill:"rgba(248,81,73,.1)", stroke:"var(--danger)", sw:2,
+    label:`<div><div style="font-size:22px">🚨</div><b style="color:var(--danger)">SIEM</b><div style="color:var(--muted);font-size:10px;margin-top:2px">→ alarm</div></div>`, d:.85 });
+
+  // prevention bookend — lead with the physical seal, then the residual hole
+  s += box(N(40, 392, 1052, 62), { fill:"var(--panel-2)", stroke:"var(--border)", rx:8,
+    label:`<div style="font-size:11px;line-height:1.45">🔒 <b>Why this is only a backstop:</b> a prod apply is <b style="color:var(--danger)">fail-closed on the CAB window</b> — the pipeline <b>physically cannot</b> converge prod outside an approved window. The <b>only</b> remaining way around is a <b>console write</b>, which is <b>break-glass only</b>. <span style="color:var(--muted)">Detection above exists for exactly that one residual path.</span></div>`, d:1.0 });
+
+  return scene("0 0 1120 470", s);
+}
+
+// ── steps registry ─────────────────────────────────────────────────────────
+const STEPS = [
+  { tag:"The terrain", title:"One module, four isolated environments", render:sMap,
+    body:`<p>Everything starts from <b>one reusable module</b>. Terragrunt's <code>root.hcl</code> writes the shared backend + provider wiring <i>once</i>; each environment inherits it and supplies only what differs.</p>
+          <p>Every environment gets its <b>own state</b> and its <b>own env-scoped credentials</b> — <code>dev</code> can never read <code>prod</code>'s secrets.</p>
+          <div class="real"><b>Why it matters:</b> this is the SaaS shape — four environments, four credential sets, one codebase to maintain.</div>` },
+
+  { tag:"The trigger", title:"Someone makes a change", render:sChange,
+    body:`<p>A change is either to a <b>shared file</b> (the module or <code>root.hcl</code> — felt by all four envs) or to <b>one env's inputs</b> (a few lines in its <code>terragrunt.hcl</code>).</p>
+          <p>Either way, the engineer opens a <b>merge request</b>. Nothing touches infrastructure yet.</p>
+          <div class="real"><b>The blast radius is visible in the diff</b> — that's the point of keeping per-env values in tiny, separate files.</div>` },
+
+  { tag:"The pipeline", title:"The MR fans out into four plans", render:sFanout,
+    body:`<p>Opening the MR triggers the pipeline. The <code>plan</code> stage runs <b>one job per environment, in parallel</b> — each gated on <code>merge_request_event</code>.</p>
+          <p>Each job is <code>interruptible</code>: push a new commit and the in-flight plans cancel and restart.</p>
+          <div class="real">Each <code>plan:&lt;env&gt;</code> resolves <b>only its own environment's credentials</b> (env-scoped CI variables). The prod job never sees dev's secret.</div>` },
+
+  { tag:"The deep dive", title:"What a terraform plan actually does", render:sAnatomy,
+    body:`<p>A plan is not magic — it's a pipeline. <b>Init</b> installs providers and wires the backend. <b>Validate</b> runs next — purely static, it needs no state at all. Only then does it <b>pull the state</b> (encrypted at rest) with the CI job token and <b>refresh</b>: the provider reads real-world resources through <b>the provider's API</b> to detect drift.</p>
+          <p>Now it has two pictures: <b>desired</b> (your HCL) and <b>current</b> (state + reality). The difference <b>is the plan</b>.</p>
+          <div class="real"><b>On a merge request it stops at "show".</b> The plan is rendered and posted — never applied.</div>` },
+
+  { tag:"The ledger", title:"What the state file is, and where it lives", render:sState,
+    body:`<p>The plan pulled "state". State is a <b>JSON ledger</b>. Its one job is to bind <b>the name you chose</b> in HCL (<code>gitlab_project_variable.replica_count</code>) to <b>the opaque ID the provider chose</b> (<code>4711/replica_count</code>) — plus a cached copy of every attribute it last saw.</p>
+          <p>That binding is why <code>plan</code> can say <i>"update"</i> instead of <i>"create a second one"</i>. Lose the ledger and Terraform loses all memory of what it built.</p>
+          <p><b>Nobody commits a <code>.tfstate</code>.</b> <code>root.hcl</code> generates a <code>backend.tf</code> pointing at GitLab's <code>http</code> backend, so the CI job <code>PUT</code>s and <code>GET</code>s it over the REST API at <code>/api/v4/projects/:id/terraform/state/&lt;env&gt;</code>. GitLab encrypts it with the <b>Lockbox</b> gem (key derived from the instance's <code>db_key_base</code>) and stores the ciphertext in Postgres + object storage.</p>
+          <div class="real"><b>Four environments, four state objects</b> — separate locks, separate credentials, separate blast radius. <code>dev</code>'s job holds no token that can read <code>prod</code>'s state.</div>` },
+
+  { tag:"The socket", title:"If you'd rather not keep the state in GitLab", render:sBackends,
+    body:`<p>For this PoC the state lives in GitLab. If you'd rather it didn't — a different trust boundary, a different operator, a policy that says so — <b>nothing in the codebase has to change</b>. Where state lives is a deployment detail.</p>
+          <p>Terraform's <code>backend</code> block is an <b>interface</b>. Your HCL, your modules, your pipeline — none of them know or care where state lives. <b>Twelve backends ship with Terraform 1.x</b>: Amazon S3, Azure Blob, Google Cloud Storage, Oracle OCI Object Storage, Alibaba OSS, Tencent COS, a PostgreSQL database, Consul's KV store, a Kubernetes Secret, HCP Terraform, local disk — and <code>http</code>, any endpoint that speaks the protocol. GitLab is simply a server that speaks <code>http</code>. Nothing more exotic than that.</p>
+          <p>And the artifact is portable: state is <b>plain JSON</b> with a <code>version</code>, a <code>serial</code>, a <code>lineage</code> and a list of resources. The backend is a transport; it never owned the format. <code>terraform init -migrate-state</code> copies it into a new home.</p>
+          <div class="real"><b>The requirement isn't "use GitLab" — it's "treat state as sensitive."</b> Meet that bar and <b>any</b> of the twelve is a legitimate home for it. Pick the one whose access-control story you actually want to own.</div>` },
+
+  { tag:"The move", title:"“If we move it, same security” — mostly no", render:sMoveState,
+    body:`<p>So we <i>can</i> move it. Would the security follow? The honest answer has three parts, and only the first is the comforting one.</p>
+          <p><b>Encryption at rest transfers for free.</b> Every serious backend has it — Azure Blob encrypts by default and won't even let you turn it off. Roll your own and you get exactly what your storage layer gives you, no more. Nobody really wins this row.</p>
+          <p><b>Authorization does not transfer.</b> Today GitLab <i>hands</i> you a working access-control plane: project membership, roles, <code>admin_terraform_state</code>, one place to audit. A storage account hands you an <b>empty</b> one; a service you write yourself hands you a <b>compiler</b>. You now own an Entra RBAC assignment — or every line of authn/authz — plus locking, versioning and network rules, and you own <b>keeping them correct forever</b>. That's not the same security; that's the same security <i>if you build it and never drift</i>.</p>
+          <p><b>What you gain</b> is real, though: custody of your own key (CMK / KMS — or entirely yours, if you host it), network isolation up to and including an air-gap, and a genuine versioning-and-rollback story, which GitLab does not publish.</p>
+          <div class="real"><b>And the row that never moves:</b> no backend on earth makes state opaque to whoever holds a valid credential. If the actual worry is "a human reads a secret out of prod state", <b>relocating the file does not address it</b>.</div>` },
+
+  { tag:"Roll your own", title:"If none of the twelve fit, the door is open", render:sHttpBackend,
+    body:`<p>Suppose every supported backend fails a hard requirement — an air-gap, a sovereignty rule, an HSM you're obliged to use. You are <b>not stuck</b>. The <code>http</code> backend is a published contract, and anything that speaks it is a valid state store.</p>
+          <p><b>Five verbs.</b> <code>GET</code> the state. <code>POST</code> it back (with the lock ID as a query param). <code>LOCK</code> and <code>UNLOCK</code> — returning <b>423 Locked</b> plus the holding lock info when it's already taken. <code>DELETE</code> to purge. Point <code>root.hcl</code> at your <code>address</code> / <code>lock_address</code> and Terraform never knows the difference. Basic auth or mTLS, your choice.</p>
+          <p>Then the state sits <b>wherever you want</b> — a bucket you control, a vault, an HSM-backed store, a box with no route to the internet.</p>
+          <div class="real"><b>But be honest about the bill.</b> A conformant server is an afternoon; <i>owning</i> one is forever. You inherit lock correctness under concurrency, durability, versioning, backup/restore, authn/authz, and the 3am page when a stale lock wedges a prod apply. GitLab and S3 give you all of that for free. <b>"We might want to someday" is not a requirement.</b></div>` },
+
+  { tag:"The loop", title:"…and again, for all four", render:sLoop,
+    body:`<p>That whole anatomy runs <b>four times over</b>, once per environment. The MR ends up with four plans side by side.</p>
+          <p>You see them as the <b>native Terraform widget</b>, as <b>per-env comments</b>, and as <b>downloadable artifacts</b>.</p>
+          <div class="real">Reviewers approve against <b>exactly what will change</b>, per environment — not a hand-wave. Still nothing applied.</div>` },
+
+  { tag:"Merge to main", title:"Merge applies dev → test → stage", render:sApply,
+    body:`<p>On merge to <code>main</code>, the pipeline re-plans and then <b>applies sequentially</b>: <code>apply:dev</code>, then <code>test</code>, then <code>stage</code> — each <code>needs</code> the previous to succeed.</p>
+          <p>A failure partway through <b>stops the chain</b> before it reaches prod.</p>
+          <div class="real">Sequential <code>needs</code> chaining means prod is only ever reached after the lower environments proved the change applies cleanly.</div>` },
+
+  { tag:"The gate", title:"prod parks behind a manual gate", render:sGate,
+    body:`<p>The pipeline reaches <code>apply:prod</code> and <b>stops</b>. <code>when: manual</code> means it will not run until a human clicks ▶.</p>
+          <p>And not just any human: prod is a <b>Protected Environment</b> and <code>interruptible: false</code>, so a parked gate <i>lingers</i> instead of being cancelled. <code>resource_group: prod</code> then keeps two lingering gates from firing at once.</p>
+          <p>But the click alone doesn't apply anything. A <b>pre-apply step calls the external change-management system</b> and asks: <i>is there an approved CAB window covering right now?</i> No active window → the job <b>fails before <code>terraform apply</code> ever runs</b>. The gate is <b>fail-closed</b>: the machine enforces the window, not the maintainer's memory.</p>
+          <div class="real"><b>Every</b> env's applies are already serialized by GitLab <b>state locking</b> — the prod extras here are about <b>who</b> may apply and <b>when</b>. "Who" = Protected Environment (Maintainers+). "When" = the external CAB window check — which is what makes an out-of-window prod apply <b>physically impossible from the pipeline</b>.</div>` },
+
+  { tag:"The stack", title:"Parked, not lost — the plan stacks", render:sStack,
+    body:`<p>Holding prod doesn't drop the change. Every later merge applies to dev/test/stage right away but <b>stacks onto prod's pending plan</b>.</p>
+          <p>You don't approve each change separately — the pending diff just <b>grows</b>. When prod is finally approved, <b>everything queued since the last prod apply goes in together</b>.</p>
+          <div class="real"><b>That's the feature:</b> at approval time you review one cumulative diff and see <b>exactly</b> what you're letting into prod.</div>` },
+
+  { tag:"The authority", title:"Who presses it, when, and for what", render:sCab,
+    body:`<p>The play button is the easy part. <b>Earning the right to press it</b> is the rest.</p>
+          <p>A change only reaches the prod question after the <b>team</b> built it, got it <b>reviewed</b> (MR, ≥2 approvers), and watched it <b>deploy and validate</b> across dev, test and stage. <i>Then</i> the team files a <b>change request</b> and the <b>CAB</b> weighs risk and timing.</p>
+          <p>Approval doesn't live in someone's head — it's written to an <b>external change-management system</b> as a machine-readable window <code>[start → end]</code> <b>bound to a specific commit</b>. When a Maintainer clicks ▶, a <b>pre-apply step queries that system</b> and passes only if the window is open <i>and</i> the commit being deployed is the approved one. Anything else → <b>the job fails before terraform, fail-closed</b>.</p>
+          <div class="real"><b>Two gates, stacked:</b> a technical one (the protected manual job) and the <b>CAB approval in the external system</b> — a <b>window</b> and a <b>commit</b>. Because the pipeline <i>checks</i> both rather than trusting the operator, deploying the <b>wrong commit</b> or at the <b>wrong time</b> is <b>physically impossible</b> — not merely policy-violating. The window even closes itself when it ends.</div>` },
+
+  { tag:"The tripwire", title:"If someone goes around all this — how would we know?", render:sTripwire,
+    body:`<p>Everything so far is the <b>happy path</b> — an approved change flowing through. But suppose someone edits PingOne <b>in the console</b>, outside Terraform (a break-glass session, or a leaked credential). Two layers catch it.</p>
+          <p><b>Layer 1 — scheduled drift detection.</b> A per-env job re-plans live PingOne against the <b>approved baseline commit recorded in state</b> (the last <i>applied</i> commit per env, so the parked prod gate isn't misread). A non-empty plan <b>fails the job and captures the diff</b>; the baseline is un-forgeable because writing it needs <code>admin_terraform_state</code> — CI only.</p>
+          <p><b>Layer 2 — audit-log polling.</b> Drift only sees <i>managed</i> objects, so a brand-new hand-made object could hide. So a <b>log collector polls PingOne's audit API</b> (<code>GET /activities</code>) every ~minute for config-change events — <code>APPLICATION.UPDATED</code>, <code>POLICY.UPDATED</code>, <code>POPULATION.UPDATED</code>, <code>RESOURCE.UPDATED</code> … — and routes them to the <b>SIEM</b>. It's a <b>pull</b>, not a webhook: no inbound connections are opened.</p>
+          <p>The machine-enforced prod window (previous step) is what makes this tripwire sharp. Because the pipeline is <b>fail-closed on the CAB window</b>, it <b>physically cannot apply to prod out of band</b> — so the only way to change prod outside an approved window is a <b>console write</b>. That collapses the tripwire's job to one residual path, and lets the SIEM alarm on <b>any</b> prod-affecting event whose timestamp falls outside a CAB-approved window, not just on drift.</p>
+          <div class="real"><b>Drift = "managed config changed"; audit stream = "any human touched the system."</b> Together they're the Tripwire equivalent — paired with break-glass-only console write for prevention. <span style="color:var(--muted)">🔵 Exact event set + drift destination still being finalized.</span></div>` },
+
+  { tag:"Epilogue", title:"Divergence & secret hygiene", render:sEpilogue,
+    body:`<p>Same module, four shapes: replicas scale <b>2 → 2 → 3 → 5</b>, prod runs the <b>premium</b> tier and carries extra labels — all just different <i>inputs</i>.</p>
+          <p>Secrets that land in state are <b>manageable, not harmless</b>: state is encrypted at rest, but served in plaintext to any <b>Developer+</b>. Provider-auth tokens stay <b>ephemeral</b> and never land at all — which is the only bulletproof answer.</p>
+          <div class="real">The journey ends where it began — one module, four isolated environments, and a prod door only the right people can open.</div>` },
+];
+
+// ── driver ─────────────────────────────────────────────────────────────────
+const railEl = $("#rail"), stageEl = $("#stage");
+const nTag = $("#nTag"), nTitle = $("#nTitle"), nBody = $("#nBody"), counter = $("#counter");
+const prevBtn = $("#prev"), nextBtn = $("#next");
+
+STEPS.forEach((st,i) => {
+  const c = document.createElement("div");
+  c.className = "chip"; c.dataset.i = i;
+  c.innerHTML = `<span class="n">${String(i+1).padStart(2,"0")}</span>${st.tag}`;
+  c.addEventListener("click", () => go(i));
+  railEl.appendChild(c);
+});
+
+let cur = loadHash().step ?? 0;
+if (cur < 0 || cur >= STEPS.length) cur = 0;
+
+function render() {
+  const st = STEPS[cur];
+  stageEl.innerHTML = st.render();
+  nTag.textContent = "Step " + (cur+1) + " · " + st.tag;
+  nTitle.textContent = st.title;
+  nBody.innerHTML = st.body;
+  counter.textContent = `Step ${cur+1} of ${STEPS.length}`;
+  prevBtn.disabled = cur === 0;
+  nextBtn.disabled = cur === STEPS.length-1;
+  $$(".chip").forEach((c,i) => {
+    c.classList.toggle("active", i === cur);
+    c.classList.toggle("done", i < cur);
+  });
+}
+function go(i) {
+  cur = Math.max(0, Math.min(STEPS.length-1, i));
+  saveHash({ step: cur });
+  render();
+}
+prevBtn.addEventListener("click", () => go(cur-1));
+nextBtn.addEventListener("click", () => go(cur+1));
+window.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight" || e.key === "PageDown") go(cur+1);
+  if (e.key === "ArrowLeft"  || e.key === "PageUp")   go(cur-1);
+});
+render();
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<div class="og-card" style="
+  width:1200px; height:630px; overflow:hidden; position:relative;
+  box-sizing:border-box;
+  background:#0d1117;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  color:#e6edf3;">
+
+  <!-- ambient depth: accent glow top-right + faint grid -->
+  <div style="position:absolute;inset:0;
+    background:
+      radial-gradient(1100px 520px at 88% -8%, rgba(88,166,255,.16), transparent 60%),
+      radial-gradient(700px 500px at 6% 118%, rgba(188,140,255,.10), transparent 62%),
+      linear-gradient(#0d1117,#0d1117);"></div>
+  <div style="position:absolute;inset:0;opacity:.5;
+    background-image:
+      linear-gradient(rgba(48,54,61,.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48,54,61,.35) 1px, transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(1000px 620px at 30% 45%, #000 30%, transparent 88%);
+            mask-image:radial-gradient(1000px 620px at 30% 45%, #000 30%, transparent 88%);"></div>
+
+  <!-- content grid inside the 1080x565 safe zone -->
+  <div style="position:absolute; left:60px; top:44px; width:1080px; height:542px;
+    display:grid; grid-template-columns:470px 550px; column-gap:60px; align-items:center;">
+
+    <!-- ============ LEFT: type column ============ -->
+    <div style="display:flex; flex-direction:column; gap:0;">
+
+      <!-- kicker -->
+      <div style="display:flex; align-items:center; gap:11px; margin-bottom:22px;">
+        <span style="width:22px; height:2px; background:#58a6ff; display:inline-block;"></span>
+        <span style="font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+          font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#58a6ff; font-weight:700;">
+          Metrics-Driven Development</span>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+          font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#8b949e;">· Explainer</span>
+      </div>
+
+      <!-- headline -->
+      <h1 style="margin:0; font-size:63px; line-height:1.0; letter-spacing:-2.2px; font-weight:800;">
+        Evals are the<br>new <span style="color:#58a6ff;">test cases.</span>
+      </h1>
+
+      <!-- assertEquals → measure transform motif -->
+      <div style="margin-top:26px; display:flex; align-items:center; gap:14px;
+        font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13.5px;">
+        <span style="padding:7px 11px; border:1px solid #30363d; border-radius:7px; background:#161b22;
+          color:#8b949e; text-decoration:line-through; text-decoration-color:#f85149;">assertEquals(expected, actual)</span>
+        <span style="color:#58a6ff; font-size:17px;">→</span>
+        <span style="padding:7px 11px; border:1px solid rgba(63,185,80,.5); border-radius:7px;
+          background:rgba(63,185,80,.08); color:#3fb950; font-weight:600;">score() ≥ threshold</span>
+      </div>
+
+      <!-- essence -->
+      <p style="margin:24px 0 0; font-size:16.5px; line-height:1.6; color:#8b949e; max-width:460px;">
+        TDD and BDD, carried into non-deterministic AI. The exact-match
+        assertion gives way to a <span style="color:#e6edf3;">measured score</span> —
+        correctness, faithfulness, grounding — tracked over time toward a
+        <span style="color:#58a6ff;">go-to-prod line.</span>
+      </p>
+
+      <!-- lineage ladder -->
+      <div style="margin-top:30px; display:flex; align-items:center; gap:9px;
+        font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12.5px; font-weight:700;">
+        <span style="padding:5px 12px; border-radius:99px; border:1px solid #30363d; color:#8b949e;">TDD</span>
+        <span style="color:#484f58;">›</span>
+        <span style="padding:5px 12px; border-radius:99px; border:1px solid #30363d; color:#8b949e;">BDD</span>
+        <span style="color:#484f58;">›</span>
+        <span style="padding:5px 13px; border-radius:99px; border:1px solid #58a6ff; color:#58a6ff;
+          background:rgba(88,166,255,.10); box-shadow:0 0 0 4px rgba(88,166,255,.08);">★ MDD</span>
+      </div>
+    </div>
+
+    <!-- ============ RIGHT: the milestone trend chart (focal point) ============ -->
+    <div style="position:relative; border:1px solid #30363d; border-radius:14px;
+      background:linear-gradient(180deg,#161b22,#12161c);
+      box-shadow:0 24px 60px rgba(0,0,0,.45); padding:18px 20px 14px;">
+
+      <!-- panel header + legend -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <span style="font-size:13px; font-weight:700; color:#e6edf3; letter-spacing:.01em;">Eval metrics over time</span>
+        <div style="display:flex; gap:14px; font-size:11px; color:#8b949e;
+          font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;">
+          <span style="display:flex; align-items:center; gap:5px;"><span style="width:13px;height:3px;border-radius:2px;background:#bc8cff;display:inline-block;"></span>Faithfulness</span>
+          <span style="display:flex; align-items:center; gap:5px;"><span style="width:13px;height:3px;border-radius:2px;background:#3fb950;display:inline-block;"></span>Correctness</span>
+          <span style="display:flex; align-items:center; gap:5px;"><span style="width:13px;height:3px;border-radius:2px;background:#4ec9b0;display:inline-block;"></span>Retrieval</span>
+        </div>
+      </div>
+
+      <svg viewBox="0 0 600 400" style="width:100%; height:auto; display:block; overflow:visible;">
+        <defs>
+          <linearGradient id="ship" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3fb950" stop-opacity=".16"/>
+            <stop offset="1" stop-color="#3fb950" stop-opacity=".03"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ship / all-clear band (after last milestone) -->
+        <rect x="490.67" y="30" width="69.33" height="310" fill="url(#ship)"/>
+        <line x1="490.67" y1="30" x2="490.67" y2="340" stroke="#3fb950" stroke-width="1" stroke-opacity=".5"/>
+        <text x="525" y="24" text-anchor="middle" fill="#3fb950" font-size="10.5" font-weight="700"
+          letter-spacing=".06em" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">SHIP ✓</text>
+
+        <!-- horizontal gridlines + y labels -->
+        <g font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#8b949e">
+          <line x1="40" y1="340" x2="560" y2="340" stroke="#30363d" stroke-width="1.5"/>
+          <line x1="40" y1="278" x2="560" y2="278" stroke="#30363d" stroke-width="1" stroke-opacity=".45"/>
+          <line x1="40" y1="216" x2="560" y2="216" stroke="#30363d" stroke-width="1" stroke-opacity=".45"/>
+          <line x1="40" y1="154" x2="560" y2="154" stroke="#30363d" stroke-width="1" stroke-opacity=".45"/>
+          <line x1="40" y1="92"  x2="560" y2="92"  stroke="#30363d" stroke-width="1" stroke-opacity=".45"/>
+          <text x="32" y="344" text-anchor="end">0</text>
+          <text x="32" y="220" text-anchor="end">40</text>
+          <text x="32" y="96"  text-anchor="end">80</text>
+          <text x="32" y="34"  text-anchor="end">100%</text>
+        </g>
+
+        <!-- milestone vertical event lines + M labels -->
+        <g stroke="#58a6ff" stroke-width="1" stroke-dasharray="3 4" stroke-opacity=".38">
+          <line x1="92" y1="34" x2="92" y2="340"/>
+          <line x1="178.67" y1="34" x2="178.67" y2="340"/>
+          <line x1="265.33" y1="34" x2="265.33" y2="340"/>
+          <line x1="334.67" y1="34" x2="334.67" y2="340"/>
+          <line x1="386.67" y1="34" x2="386.67" y2="340"/>
+          <line x1="490.67" y1="34" x2="490.67" y2="340"/>
+        </g>
+        <g fill="#58a6ff" font-size="10" font-weight="700" text-anchor="middle"
+           font-family="ui-monospace,Menlo,monospace">
+          <text x="92" y="46">M1</text>
+          <text x="178.67" y="46">M2</text>
+          <text x="265.33" y="46">M3</text>
+          <text x="334.67" y="46">M4</text>
+          <text x="386.67" y="46">M5</text>
+          <text x="490.67" y="46">M6</text>
+        </g>
+
+        <!-- per-metric go-to-prod threshold lines (each its own colour) -->
+        <g stroke-width="1.4" stroke-dasharray="5 5">
+          <line x1="40" y1="45.5" x2="560" y2="45.5" stroke="#bc8cff" stroke-opacity=".6"/>
+          <line x1="40" y1="92"   x2="560" y2="92"   stroke="#3fb950" stroke-opacity=".55"/>
+          <line x1="40" y1="123"  x2="560" y2="123"  stroke="#4ec9b0" stroke-opacity=".5"/>
+        </g>
+        <g font-size="9.5" font-weight="700" font-family="ui-monospace,Menlo,monospace">
+          <text x="44" y="42"  fill="#bc8cff">≥95</text>
+        </g>
+
+        <!-- Retrieval (teal) -->
+        <polyline fill="none" stroke="#4ec9b0" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"
+          points="40,324.5 92,116.8 178.67,104.4 265.33,76.5 334.67,76.5 386.67,73.4 490.67,61 560,61"/>
+        <!-- Correctness (green) -->
+        <polyline fill="none" stroke="#3fb950" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"
+          points="40,309 92,222.2 178.67,169.5 265.33,123 334.67,126.1 386.67,95.1 490.67,67.2 560,67.2"/>
+        <!-- Faithfulness (purple) — the headline metric, dips at M4 then recovers -->
+        <polyline fill="none" stroke="#bc8cff" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"
+          points="40,231.5 92,154 178.67,116.8 265.33,98.2 334.67,141.6 386.67,61 490.67,42.4 560,42.4"/>
+
+        <!-- vertex dots on faithfulness -->
+        <g fill="#bc8cff">
+          <circle cx="92" cy="154" r="2.6"/><circle cx="178.67" cy="116.8" r="2.6"/>
+          <circle cx="265.33" cy="98.2" r="2.6"/><circle cx="386.67" cy="61" r="2.6"/>
+          <circle cx="490.67" cy="42.4" r="2.6"/>
+        </g>
+
+        <!-- regression callout at M4 -->
+        <circle cx="334.67" cy="141.6" r="6" fill="none" stroke="#f85149" stroke-width="1.6"/>
+        <circle cx="334.67" cy="141.6" r="2.6" fill="#f85149"/>
+        <text x="342" y="163" fill="#f85149" font-size="10" font-weight="700"
+          font-family="ui-monospace,Menlo,monospace">regression</text>
+
+        <!-- x axis label -->
+        <text x="300" y="372" text-anchor="middle" fill="#8b949e" font-size="10.5" letter-spacing=".14em"
+          font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">TIME · MEASURED DAILY + AD HOC</text>
+      </svg>
+
+      <!-- footnote strip -->
+      <div style="margin-top:8px; padding-top:9px; border-top:1px solid #21262d;
+        font-size:11px; color:#8b949e; display:flex; align-items:center; gap:7px;
+        font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;">
+        <span style="width:0; height:11px; border-left:1.4px dashed #8b949e; display:inline-block;"></span>
+        per-metric go-to-prod line
+        <span style="color:#484f58;">·</span>
+        ship when every metric holds above its own bar
+      </div>
+    </div>
+  </div>
+</div>

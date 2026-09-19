@@ -1,0 +1,198 @@
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel-2:#21262d; --border:#30363d;
+    --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff;
+    --good:#3fb950; --warn:#d29922; --danger:#f85149; --c4:#bc8cff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  .og-card{
+    position:relative;
+    width:1200px; height:630px; overflow:hidden;
+    background:
+      radial-gradient(880px 460px at 50% 66%, rgba(88,166,255,.09), transparent 70%),
+      radial-gradient(1500px 900px at 50% -22%, rgba(230,237,243,.035), transparent 68%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* faint background rails — the motif as texture */
+  .og-card::before,.og-card::after{
+    content:""; position:absolute; top:96px; bottom:96px; width:2px;
+    background:linear-gradient(180deg,transparent,rgba(88,166,255,.16) 22%,rgba(88,166,255,.16) 78%,transparent);
+  }
+  .og-card::before{left:60px;}
+  .og-card::after{right:60px;}
+
+  .frame{position:absolute; inset:0; padding:66px 96px 60px; display:flex; flex-direction:column;}
+
+  /* ---- header type ---- */
+  .eyebrow{
+    display:flex; align-items:center; gap:12px;
+    font-family:var(--mono); font-size:13.5px; letter-spacing:.24em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .eyebrow .tick{color:var(--accent); font-weight:700;}
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--border);}
+
+  h1{
+    margin-top:20px;
+    font-size:78px; line-height:.98; font-weight:800; letter-spacing:-.03em;
+    color:var(--text);
+  }
+  h1 .brk{color:var(--accent); font-weight:600; opacity:.85;}
+
+  .essence{
+    margin-top:22px; max-width:760px;
+    font-size:20px; line-height:1.5; color:var(--muted); font-weight:400;
+  }
+  .essence b{color:var(--text); font-weight:600;}
+  .essence .a{color:var(--accent); font-weight:600;}
+  .essence .p{color:var(--c4); font-weight:600;}
+
+  /* ---- focal: the rails pipeline ---- */
+  .stage{margin-top:auto; padding-top:8px;}
+  .pipe{display:flex; align-items:center; justify-content:center; gap:0;}
+
+  .node{
+    border-radius:13px; background:var(--panel); border:1.5px solid var(--border);
+    padding:14px 16px 15px; text-align:center;
+  }
+  .node .kick{font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);}
+  .node .ttl{font-size:18px; font-weight:700; color:var(--text); margin-top:5px;}
+  .node .sub{font-size:11.5px; color:var(--muted); margin-top:5px; line-height:1.3;}
+
+  .pill{width:132px; height:96px; display:flex; flex-direction:column; justify-content:center;}
+
+  .model{
+    width:150px; height:96px; display:flex; flex-direction:column; justify-content:center;
+    border-color:var(--c4); border-width:2px;
+    background:linear-gradient(180deg, rgba(188,140,255,.10), rgba(188,140,255,.03));
+  }
+  .model .ttl{color:var(--c4);}
+
+  .rail{
+    width:210px; height:168px; display:flex; flex-direction:column; justify-content:center;
+    border-color:var(--accent); border-width:2px;
+    background:linear-gradient(180deg, rgba(88,166,255,.10), rgba(88,166,255,.03));
+  }
+  .rail .ttl{color:var(--accent);}
+  .rail .verdicts{display:flex; justify-content:center; gap:16px; margin-top:14px;}
+  .rail .v{display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .rail .v .d{width:9px; height:9px; border-radius:50%;}
+  .rail .v .l{font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted);}
+  .d.allow{background:var(--good); box-shadow:0 0 8px rgba(63,185,80,.55);}
+  .d.transform{background:var(--warn); box-shadow:0 0 8px rgba(210,153,34,.55);}
+  .d.block{background:var(--danger); box-shadow:0 0 8px rgba(248,81,73,.55);}
+
+  .arrow{flex:0 0 auto; width:52px; display:flex; align-items:center; justify-content:center;}
+
+  /* ---- footer legend ---- */
+  .foot{
+    margin-top:26px; display:flex; align-items:baseline; gap:14px;
+    font-family:var(--mono); font-size:12.5px; color:var(--muted); letter-spacing:.02em;
+  }
+  .foot .lead{color:var(--text); font-weight:600; letter-spacing:0; font-family:var(--sans); font-size:13px;}
+  .foot .k{color:var(--accent);}
+  .foot .v-allow{color:var(--good);} .foot .v-transform{color:var(--warn);} .foot .v-block{color:var(--danger);}
+</style>
+
+<div class="og-card">
+  <div class="frame">
+
+    <div class="eyebrow">
+      <span class="tick">[ ]</span>
+      <span>NVIDIA NeMo Guardrails</span>
+      <span class="dot"></span>
+      <span>Technical Explainer</span>
+    </div>
+
+    <h1>Why <span class="brk">[</span>NeMo Guardrails<span class="brk">]</span></h1>
+
+    <p class="essence">
+      An LLM is a powerful engine with no seatbelt. Every guardrail is the same two-sided
+      checkpoint&nbsp;— an <span class="a">input rail</span> and an <span class="a">output rail</span>
+      bracketing <span class="p">the model</span>, each deciding: <b>allow, transform, or block</b>.
+    </p>
+
+    <div class="stage">
+      <div class="pipe">
+
+        <div class="node pill">
+          <div class="kick">User</div>
+          <div class="ttl">Prompt</div>
+        </div>
+
+        <div class="arrow">
+          <svg width="52" height="24" viewBox="0 0 52 24" fill="none">
+            <line x1="2" y1="12" x2="42" y2="12" stroke="#58a6ff" stroke-width="2.2"/>
+            <path d="M40 6 L48 12 L40 18" stroke="#58a6ff" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="node rail">
+          <div class="kick">On the way in</div>
+          <div class="ttl">Input rails</div>
+          <div class="verdicts">
+            <div class="v"><span class="d allow"></span><span class="l">Allow</span></div>
+            <div class="v"><span class="d transform"></span><span class="l">Xform</span></div>
+            <div class="v"><span class="d block"></span><span class="l">Block</span></div>
+          </div>
+        </div>
+
+        <div class="arrow">
+          <svg width="52" height="24" viewBox="0 0 52 24" fill="none">
+            <line x1="2" y1="12" x2="42" y2="12" stroke="#58a6ff" stroke-width="2.2"/>
+            <path d="M40 6 L48 12 L40 18" stroke="#58a6ff" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="node model">
+          <div class="kick">Nemotron</div>
+          <div class="ttl">The model</div>
+          <div class="sub">sees only vetted input</div>
+        </div>
+
+        <div class="arrow">
+          <svg width="52" height="24" viewBox="0 0 52 24" fill="none">
+            <line x1="2" y1="12" x2="42" y2="12" stroke="#58a6ff" stroke-width="2.2"/>
+            <path d="M40 6 L48 12 L40 18" stroke="#58a6ff" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="node rail">
+          <div class="kick">On the way out</div>
+          <div class="ttl">Output rails</div>
+          <div class="verdicts">
+            <div class="v"><span class="d allow"></span><span class="l">Allow</span></div>
+            <div class="v"><span class="d transform"></span><span class="l">Xform</span></div>
+            <div class="v"><span class="d block"></span><span class="l">Block</span></div>
+          </div>
+        </div>
+
+        <div class="arrow">
+          <svg width="52" height="24" viewBox="0 0 52 24" fill="none">
+            <line x1="2" y1="12" x2="42" y2="12" stroke="#58a6ff" stroke-width="2.2"/>
+            <path d="M40 6 L48 12 L40 18" stroke="#58a6ff" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="node pill">
+          <div class="kick">User</div>
+          <div class="ttl">Reply</div>
+        </div>
+
+      </div>
+
+      <div class="foot">
+        <span class="lead">The rails pattern</span>
+        <span>NVIDIA-trained NeMoGuard classifiers <span class="k">·</span> Colang config <span class="k">·</span> fail-closed by contract</span>
+      </div>
+    </div>
+
+  </div>
+</div>

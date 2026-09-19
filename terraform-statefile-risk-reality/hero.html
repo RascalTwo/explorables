@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Terraform state file — exposure risk assessment</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --stop: #f0655a;
+    --stop-2: #f7938a;
+    --accent: #25c78e;
+    --accent-2: #7fe6c2;
+    --caution: #e6ac47;
+    --blue: #5f8ff2;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(240,101,90,0.10), transparent 58%),
+      radial-gradient(950px 560px at 108% 8%, rgba(37,199,142,0.07), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  .left { width: 630px; padding: 64px 16px 64px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 13.5px; letter-spacing: 0.08em;
+    color: var(--stop-2); background: rgba(240,101,90,0.10);
+    border: 1px solid rgba(240,101,90,0.24);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 30px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--stop); box-shadow: 0 0 10px var(--stop); }
+
+  .title { font-size: 88px; line-height: 0.92; font-weight: 800; letter-spacing: -0.045em; }
+  .title .hl { color: var(--accent); }
+
+  .essence { margin-top: 28px; font-size: 29px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; max-width: 512px; }
+  .essence .bad { color: var(--stop-2); }
+  .essence .hl { color: var(--accent-2); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 500px; }
+  .sub code { font-family: var(--mono); font-size: 0.88em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 9px; margin-top: 30px; flex-wrap: nowrap; }
+  .chip { font-family: var(--mono); font-size: 13px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 11px; border-radius: 8px; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--stop); box-shadow: 0 0 6px rgba(240,101,90,0.5); }
+  .chip.g .tk { background: var(--accent); box-shadow: 0 0 6px rgba(37,199,142,0.5); }
+  .chip.b .tk { background: var(--blue); box-shadow: 0 0 6px rgba(95,143,242,0.5); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 60px 56px 4px; position: relative; z-index: 2; }
+  .panel {
+    width: 424px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.04em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); }
+  svg.graph { width: 100%; display: block; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>Security &middot; Terraform state exposure</div>
+
+      <div class="title">Rotation won&rsquo;t<br><span class="hl">save you.</span></div>
+
+      <div class="essence">
+        <span class="bad">9 of 13</span> leaked secrets aren&rsquo;t PingOne&rsquo;s to revoke &mdash; so <span class="hl">keep them out of state.</span>
+      </div>
+
+      <div class="sub">
+        The PingOne provider has no write-only support, so managed secrets land in <code>terraform.tfstate</code> in plaintext. Almost every catastrophic one is an <em>input</em> &mdash; it belongs in the vault.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>vault the inputs</span>
+        <span class="chip g"><span class="tk"></span>rotate the rest</span>
+        <span class="chip b"><span class="tk"></span>no takeover</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">Does PingOne rotation kill it?</span>
+          <span class="s">13 secrets in state</span>
+        </div>
+
+        <svg class="graph" viewBox="0 0 384 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .hd  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10.5px; letter-spacing: .06em; font-weight: 700; }
+              .nm  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11px; fill: #9aa1b1; dominant-baseline: middle; }
+              .nmb { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 11px; fill: #e6e8ee; dominant-baseline: middle; }
+              .cnt { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 30px; font-weight: 700; }
+              .cl  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 9.5px; letter-spacing: .05em; fill: #5b6378; }
+              .fx  { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; letter-spacing: .04em; font-weight: 700; }
+            </style>
+          </defs>
+
+          <!-- ===== NO block ===== -->
+          <rect x="0" y="0" width="384" height="218" rx="11" fill="#160d0d" stroke="#3a1d1c"/>
+          <rect x="0" y="0" width="3.5" height="218" rx="1.75" fill="#f0655a"/>
+
+          <text class="hd" x="16" y="22" fill="#f0655a">NO &mdash; OWNED ELSEWHERE</text>
+          <text class="cnt" x="368" y="28" fill="#f0655a" text-anchor="end">9</text>
+
+          <!-- rows -->
+          <g>
+            <circle cx="21" cy="48" r="3.5" fill="#f0655a"/><text class="nmb" x="34" y="48">Twilio auth token</text><text class="cl" x="368" y="51" text-anchor="end">read OTP bodies</text>
+            <circle cx="21" cy="68" r="3.5" fill="#f0655a"/><text class="nmb" x="34" y="68">imported signing key</text><text class="cl" x="368" y="71" text-anchor="end">forge any token</text>
+            <circle cx="21" cy="88" r="3.5" fill="#f0655a"/><text class="nmb" x="34" y="88">custom-domain TLS key</text><text class="cl" x="368" y="91" text-anchor="end">clone the login</text>
+            <circle cx="21" cy="108" r="3.5" fill="#e6ac47"/><text class="nm" x="34" y="108">SMTP password</text><text class="cl" x="368" y="111" text-anchor="end">aligned phishing</text>
+            <circle cx="21" cy="128" r="3.5" fill="#e6ac47"/><text class="nm" x="34" y="128">RADIUS shared secret</text><text class="cl" x="368" y="131" text-anchor="end">forge Access-Accept</text>
+            <circle cx="21" cy="148" r="3.5" fill="#5f8ff2"/><text class="nm" x="34" y="148">external-IdP secrets</text><text class="cl" x="368" y="151" text-anchor="end">Google / Entra</text>
+            <circle cx="21" cy="168" r="3.5" fill="#5f8ff2"/><text class="nm" x="34" y="168">APNS / FCM push keys</text><text class="cl" x="368" y="171" text-anchor="end">spoofed approvals</text>
+            <circle cx="21" cy="188" r="3.5" fill="#5f8ff2"/><text class="nm" x="34" y="188">LDAP bind password</text><text class="cl" x="368" y="191" text-anchor="end">read-only recon</text>
+            <circle cx="21" cy="206" r="3.5" fill="#5b6378"/><text class="nm" x="34" y="206">reCAPTCHA secret</text><text class="cl" x="368" y="209" text-anchor="end">minor</text>
+          </g>
+
+          <!-- ===== YES block ===== -->
+          <rect x="0" y="232" width="384" height="106" rx="11" fill="#0c1f18" stroke="#1d3d31"/>
+          <rect x="0" y="232" width="3.5" height="106" rx="1.75" fill="#25c78e"/>
+
+          <text class="hd" x="16" y="254" fill="#25c78e">YES &mdash; PINGONE-GENERATED</text>
+          <text class="cnt" x="368" y="260" fill="#25c78e" text-anchor="end">4</text>
+
+          <g>
+            <circle cx="21" cy="280" r="3.5" fill="#25c78e"/><text class="nmb" x="34" y="280">worker-app secret</text><text class="cl" x="368" y="283" text-anchor="end">dead on rotate</text>
+            <circle cx="21" cy="300" r="3.5" fill="#25c78e"/><text class="nm" x="34" y="300">app client secret</text><text class="cl" x="368" y="303" text-anchor="end">dead on rotate</text>
+            <circle cx="21" cy="320" r="3.5" fill="#25c78e"/><text class="nm" x="34" y="320">gateway credential JWT &middot; seed password</text>
+          </g>
+
+          <!-- verdict rail -->
+          <text class="fx" x="4" y="366" fill="#5b6378">KEEP 9 IN THE VAULT</text>
+          <line x1="128" y1="362" x2="238" y2="362" stroke="#232838" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <text class="fx" x="380" y="366" fill="#25c78e" text-anchor="end">STATE IS BOUNDED</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

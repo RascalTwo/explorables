@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Compose → Kubernetes → Helm — hero</title>
+</head>
+<body style="margin:0;background:#05070f;">
+
+<div class="og-card" style="
+    width:1200px;height:630px;overflow:hidden;position:relative;
+    background:
+      radial-gradient(140% 120% at 82% 6%, rgba(43,179,163,.14), rgba(43,179,163,0) 46%),
+      radial-gradient(120% 120% at 12% 96%, rgba(36,150,237,.12), rgba(36,150,237,0) 50%),
+      linear-gradient(180deg,#0a0e1c,#0b1020 42%);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,system-ui,sans-serif;
+    color:#e8edff;
+    display:flex;align-items:center;">
+
+  <!-- hairline frame -->
+  <div style="position:absolute;inset:20px;border:1px solid rgba(39,50,90,.55);border-radius:20px;
+       pointer-events:none;"></div>
+
+  <!-- faint dotted texture, very low -->
+  <div style="position:absolute;inset:0;opacity:.5;pointer-events:none;
+       background-image:radial-gradient(rgba(147,160,198,.06) 1px, transparent 1px);
+       background-size:26px 26px;"></div>
+
+  <!-- ==================== LEFT: TYPE ==================== -->
+  <div style="position:relative;flex:0 0 auto;width:452px;padding:0 0 0 78px;box-sizing:border-box;">
+
+    <div style="font:700 14px/1 'SF Mono',ui-monospace,'JetBrains Mono',Menlo,monospace;
+         letter-spacing:3.5px;color:#5b8def;text-transform:uppercase;margin-bottom:30px;">
+      The mental model
+    </div>
+
+    <!-- staggered, ascending title -->
+    <div style="font-weight:800;letter-spacing:-1.2px;line-height:1.02;">
+      <div style="font-size:58px;color:#2496ed;">Compose</div>
+      <div style="font-size:58px;margin-left:34px;">
+        <span style="color:#4a5680;font-weight:600;">→ </span><span style="color:#5b8def;">Kubernetes</span>
+      </div>
+      <div style="font-size:58px;margin-left:68px;">
+        <span style="color:#4a5680;font-weight:600;">→ </span><span style="color:#2bb3a3;">Helm</span>
+      </div>
+    </div>
+
+    <div style="width:40px;height:3px;border-radius:2px;margin:30px 0 22px;
+         background:linear-gradient(90deg,#2496ed,#5b8def,#2bb3a3);"></div>
+
+    <p style="margin:0;font-size:19px;line-height:1.55;color:#93a0c6;max-width:36ch;">
+      The same app carried up three rungs — what each layer
+      <span style="color:#cdd6f4;">adds</span>, what it
+      <span style="color:#cdd6f4;">costs</span>, and why you climb the next.
+    </p>
+
+    <div style="margin-top:30px;display:flex;gap:8px;">
+      <span style="font:600 12px/1 'SF Mono',ui-monospace,Menlo,monospace;padding:7px 12px;
+           border-radius:999px;border:1px solid #27325a;color:#93a0c6;">Kubernetes</span>
+      <span style="font:600 12px/1 'SF Mono',ui-monospace,Menlo,monospace;padding:7px 12px;
+           border-radius:999px;border:1px solid #27325a;color:#93a0c6;">Helm</span>
+    </div>
+  </div>
+
+  <!-- ==================== RIGHT: ASCENDING RUNGS ==================== -->
+  <div style="position:relative;flex:1 1 auto;height:100%;display:flex;align-items:center;
+       justify-content:center;padding-right:34px;">
+    <svg width="600" height="560" viewBox="0 0 600 560" role="img"
+         aria-label="An app carried up three ascending rungs: Docker Compose, Kubernetes, Helm"
+         style="display:block;overflow:visible;">
+      <defs>
+        <radialGradient id="focal" cx="50%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#2bb3a3" stop-opacity=".22"/>
+          <stop offset="100%" stop-color="#2bb3a3" stop-opacity="0"/>
+        </radialGradient>
+        <marker id="arrK" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#5b8def"/>
+        </marker>
+        <marker id="arrH" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#2bb3a3"/>
+        </marker>
+      </defs>
+
+      <!-- focal glow behind top rung -->
+      <ellipse cx="500" cy="150" rx="210" ry="170" fill="url(#focal)"/>
+
+      <!-- stair risers (the solid step faces) -->
+      <path d="M210,494 L210,368 L405,368 L405,242 L600,242 L600,494 Z"
+            fill="rgba(20,29,56,.5)" stroke="rgba(39,50,90,.7)" stroke-width="1"/>
+
+      <!-- connecting arrows: the app climbing -->
+      <line x1="196" y1="416" x2="238" y2="376" stroke="#5b8def" stroke-width="2.4"
+            marker-end="url(#arrK)"/>
+      <line x1="391" y1="290" x2="433" y2="250" stroke="#2bb3a3" stroke-width="2.4"
+            marker-end="url(#arrH)"/>
+
+      <!-- ============ RUNG 1 · COMPOSE (x=10 y=418) ============ -->
+      <g transform="translate(10,418)">
+        <rect width="200" height="76" rx="14" fill="#141d38" stroke="#2496ed" stroke-width="1.8"/>
+        <rect x="2" y="6" width="6" height="64" rx="3" fill="#2496ed"/>
+        <!-- one file -->
+        <rect x="24" y="24" width="30" height="30" rx="6" fill="rgba(36,150,237,.18)" stroke="#2496ed" stroke-width="1.6"/>
+        <line x1="31" y1="33" x2="47" y2="33" stroke="#7fc0ff" stroke-width="1.6"/>
+        <line x1="31" y1="39" x2="47" y2="39" stroke="#7fc0ff" stroke-width="1.6"/>
+        <line x1="31" y1="45" x2="42" y2="45" stroke="#7fc0ff" stroke-width="1.6"/>
+        <text x="70" y="35" fill="#e8edff" font-size="14" font-weight="700"
+              font-family="'SF Mono',ui-monospace,Menlo,monospace">compose.yml</text>
+        <text x="70" y="53" fill="#93a0c6" font-size="12"
+              font-family="-apple-system,Menlo,sans-serif">1 file · 1 box</text>
+      </g>
+      <!-- label -->
+      <g transform="translate(12,516)">
+        <circle cx="5" cy="-4" r="5" fill="#2496ed"/>
+        <text x="18" y="0" fill="#e8edff" font-size="16" font-weight="800"
+              letter-spacing="1.5" font-family="-apple-system,sans-serif">COMPOSE</text>
+        <text x="18" y="20" fill="#93a0c6" font-size="12.5"
+              font-family="-apple-system,sans-serif">one host, one file</text>
+      </g>
+
+      <!-- ============ RUNG 2 · KUBERNETES (x=205 y=292) ============ -->
+      <g transform="translate(205,292)">
+        <rect width="200" height="76" rx="14" fill="#141d38" stroke="#5b8def" stroke-width="1.8"/>
+        <rect x="2" y="6" width="6" height="64" rx="3" fill="#5b8def"/>
+        <!-- exploded typed objects -->
+        <rect x="24" y="22" width="18" height="18" rx="4" fill="rgba(122,162,255,.9)"/>
+        <rect x="48" y="22" width="18" height="18" rx="4" fill="rgba(70,199,154,.9)"/>
+        <rect x="72" y="22" width="18" height="18" rx="4" fill="rgba(224,162,59,.9)"/>
+        <rect x="96" y="22" width="18" height="18" rx="4" fill="rgba(176,124,232,.9)"/>
+        <rect x="120" y="22" width="18" height="18" rx="4" fill="rgba(224,97,122,.9)"/>
+        <text x="24" y="58" fill="#9bb6ff" font-size="12.5" font-weight="600"
+              font-family="'SF Mono',ui-monospace,Menlo,monospace">typed objects</text>
+      </g>
+      <g transform="translate(207,390)">
+        <circle cx="5" cy="-4" r="5" fill="#5b8def"/>
+        <text x="18" y="0" fill="#e8edff" font-size="16" font-weight="800"
+              letter-spacing="1.5" font-family="-apple-system,sans-serif">KUBERNETES</text>
+        <text x="18" y="20" fill="#93a0c6" font-size="12.5"
+              font-family="-apple-system,sans-serif">a self-healing cluster</text>
+      </g>
+
+      <!-- ============ RUNG 3 · HELM (x=400 y=166) ============ -->
+      <g transform="translate(400,166)">
+        <rect width="200" height="76" rx="14" fill="#141d38" stroke="#2bb3a3" stroke-width="1.8"/>
+        <rect x="2" y="6" width="6" height="64" rx="3" fill="#2bb3a3"/>
+        <!-- the objects, bundled into one chart -->
+        <rect x="22" y="18" width="108" height="42" rx="8" fill="rgba(43,179,163,.08)"
+              stroke="#2bb3a3" stroke-width="1.4" stroke-dasharray="4 4"/>
+        <rect x="30" y="32" width="13" height="13" rx="3" fill="rgba(122,162,255,.9)"/>
+        <rect x="47" y="32" width="13" height="13" rx="3" fill="rgba(70,199,154,.9)"/>
+        <rect x="64" y="32" width="13" height="13" rx="3" fill="rgba(224,162,59,.9)"/>
+        <rect x="81" y="32" width="13" height="13" rx="3" fill="rgba(176,124,232,.9)"/>
+        <rect x="98" y="32" width="13" height="13" rx="3" fill="rgba(224,97,122,.9)"/>
+        <text x="146" y="35" fill="#6fded0" font-size="13.5" font-weight="700"
+              font-family="'SF Mono',ui-monospace,Menlo,monospace">chart</text>
+        <text x="146" y="52" fill="#93a0c6" font-size="10.5"
+              font-family="'SF Mono',Menlo,monospace">+values</text>
+      </g>
+      <g transform="translate(402,264)">
+        <circle cx="5" cy="-4" r="5" fill="#2bb3a3"/>
+        <text x="18" y="0" fill="#e8edff" font-size="16" font-weight="800"
+              letter-spacing="1.5" font-family="-apple-system,sans-serif">HELM</text>
+        <text x="18" y="20" fill="#93a0c6" font-size="12.5"
+              font-family="-apple-system,sans-serif">one chart, every env</text>
+      </g>
+    </svg>
+  </div>
+
+</div>
+</body>
+</html>

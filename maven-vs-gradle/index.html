@@ -1,0 +1,1537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<title>Maven vs Gradle — there is no winner, only a context</title>
+<meta name="viz:title" content="Maven vs Gradle — there is no winner, only a context">
+<meta name="viz:description" content="For most JVM projects this is tabs-versus-spaces. Four constraints — two each way — turn it into a real decision. Twelve dimensions scored and re-weighted live, plus the one property that generates both pro/con lists.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  :root {
+    --mvn: #bc8cff;            /* Maven  — kit --c4, meaning-free purple */
+    --mvn-dim: rgba(188,140,255,0.16);
+    --grd: #4ec9b0;            /* Gradle — kit --c5, meaning-free teal   */
+    --grd-dim: rgba(78,201,176,0.16);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1100px 520px at 8% -8%, rgba(188,140,255,0.07), transparent 62%),
+      radial-gradient(900px 480px at 104% 4%, rgba(78,201,176,0.07), transparent 62%),
+      var(--bg);
+  }
+  main { max-width: 1080px; margin: 0 auto; padding: 56px 24px 120px; }
+
+  h1 { font-size: clamp(2.2rem, 5vw, 3.3rem); line-height: 1.04; letter-spacing: -0.03em; margin: 0 0 14px; }
+  h2 { font-size: 1.85rem; letter-spacing: -0.02em; margin: 0 0 6px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  p  { color: var(--muted); margin: 0 0 14px; max-width: 74ch; }
+  .lede { font-size: 1.18rem; max-width: 70ch; }
+  .lede b { color: var(--text); font-weight: 600; }
+  section { margin-top: 84px; scroll-margin-top: 24px; }
+  .sec-head { border-top: 1px solid var(--border); padding-top: 26px; margin-bottom: 22px; }
+  .sec-n { font-family: var(--mono); font-size: 0.74rem; color: var(--faint); letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+  .whatami { font-size: 0.92rem; color: var(--faint); border-left: 2px solid var(--border); padding-left: 12px; margin: 0 0 20px; max-width: 76ch; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; color: var(--muted); background: var(--panel); border: 1px solid var(--border); padding: 5px 12px; border-radius: 999px; margin-bottom: 22px; }
+  .eyebrow .d1 { width: 7px; height: 7px; border-radius: 50%; background: var(--mvn); }
+  .eyebrow .d2 { width: 7px; height: 7px; border-radius: 50%; background: var(--grd); }
+
+  .m { color: var(--mvn); font-weight: 600; }
+  .g { color: var(--grd); font-weight: 600; }
+
+  /* stat tiles */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 30px 0 0; }
+  .tile { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px 16px 14px; }
+  .tile .k { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+  .tile .v { font-size: 1.55rem; font-weight: 700; letter-spacing: -0.02em; margin-top: 6px; line-height: 1.1; }
+  .tile .s { font-size: 0.82rem; color: var(--muted); margin-top: 5px; }
+
+  /* controls */
+  .ctl-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .ctl { font-family: var(--sans); font-size: 0.86rem; color: var(--muted); background: var(--panel); border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: all .14s; }
+  .ctl:hover { color: var(--text); border-color: var(--faint); }
+  .ctl[aria-pressed="true"] { color: var(--bg); background: var(--text); border-color: var(--text); font-weight: 600; }
+  .ctl-hint { font-size: 0.82rem; color: var(--faint); margin: 4px 0 18px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.82rem; color: var(--muted); margin: 14px 0 0; }
+  .legend b { color: var(--text); font-weight: 600; }
+
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  svg text { font-family: var(--sans); }
+  .tick { font-size: 11px; fill: var(--faint); }
+  .rowlab { font-size: 13px; fill: var(--muted); }
+  .rowlab.on { fill: var(--text); font-weight: 600; }
+  .hit { cursor: pointer; }
+  .hit:hover ~ .rowlab, .row.on .rowlab { fill: var(--text); }
+
+  /* detail drawer */
+  .detail { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-top: 16px; }
+  .detail .dh { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+  .detail .dt { font-size: 1.12rem; font-weight: 700; color: var(--text); }
+  .detail .dscore { font-family: var(--mono); font-size: 0.82rem; color: var(--faint); }
+  .sides { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sides .sd { border-radius: 10px; padding: 14px 15px; font-size: 0.92rem; line-height: 1.5; }
+  .sides .sd.mv { background: var(--mvn-dim); border: 1px solid rgba(188,140,255,0.28); }
+  .sides .sd.gr { background: var(--grd-dim); border: 1px solid rgba(78,201,176,0.28); }
+  .sides .sd .who { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 6px; }
+  .sides .sd.mv .who { color: var(--mvn); }
+  .sides .sd.gr .who { color: var(--grd); }
+  .detail .why { font-size: 0.88rem; color: var(--faint); margin: 12px 0 0; border-top: 1px solid var(--border); padding-top: 11px; }
+
+  /* verdict bar */
+  .verdict { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px 6px; margin-bottom: 18px; }
+  .verdict .vh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .verdict .vt { font-size: 1.05rem; font-weight: 700; }
+  .verdict .vs { font-size: 0.86rem; color: var(--muted); }
+
+  /* panels & ledger */
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; }
+  .ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .col { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .col > .ch { padding: 14px 20px; font-weight: 700; font-size: 1.05rem; border-bottom: 1px solid var(--border); }
+  .col.mv > .ch { color: var(--mvn); background: var(--mvn-dim); }
+  .col.gr > .ch { color: var(--grd); background: var(--grd-dim); }
+  .col .grp { padding: 14px 20px 16px; }
+  .col .grp + .grp { border-top: 1px solid var(--border); }
+  .col .gt { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
+  .col .gt.pro { color: var(--good); }
+  .col .gt.con { color: var(--danger); }
+  .col ul { margin: 0; padding-left: 18px; }
+  .col li { font-size: 0.9rem; line-height: 1.52; color: var(--muted); margin-bottom: 8px; }
+  .col li b { color: var(--text); font-weight: 600; }
+  .col li:last-child { margin-bottom: 0; }
+
+  .caveat { background: rgba(210,153,34,0.09); border: 1px solid rgba(210,153,34,0.32); border-radius: 12px; padding: 15px 18px; margin-top: 16px; }
+  .caveat .ct { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warn); margin-bottom: 7px; }
+  .caveat p { font-size: 0.88rem; margin: 0; color: var(--muted); max-width: none; }
+
+  .srcs { font-size: 0.85rem; color: var(--faint); line-height: 1.9; }
+  .srcs a { color: var(--muted); }
+  .srcs .n { font-family: var(--mono); color: var(--faint); }
+
+  .kbd { font-family: var(--mono); font-size: 0.78rem; background: var(--panel-2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .sides, .ledger { grid-template-columns: 1fr; }
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Maven vs Gradle — there is no winner, only a context">
+<meta property="og:description" content="For most JVM projects this is tabs-versus-spaces. Four constraints — two each way — turn it into a real decision. Twelve dimensions scored and re-weighted live, plus the one property that generates both pro/con lists.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/maven-vs-gradle/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/maven-vs-gradle/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<main>
+
+<header>
+  <div class="eyebrow"><span class="d1"></span><span class="d2"></span> JVM build tools · state of play, August 2026</div>
+  <h1>Maven vs Gradle</h1>
+  <p class="lede">For most JVM projects this really is tabs-versus-spaces, and pretending otherwise wastes everyone&rsquo;s time.
+  <b>There are exactly four constraints that turn it into a real decision</b> &mdash; two forcing each way &mdash; and outside
+  those it is taste. This page scores twelve dimensions, lets you re-weight them by what you are actually building,
+  and shows you where the four hard edges are.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">Maven, stable</div><div class="v m">3.9.16</div><div class="s">2026&#8209;05&#8209;13 · still runs on Java&nbsp;8</div></div>
+    <div class="tile"><div class="k">Maven, next</div><div class="v m">4.0.0&#8209;rc&#8209;6</div><div class="s">2026&#8209;08&#8209;04 · <b style="color:var(--warn)">still no GA</b></div></div>
+    <div class="tile"><div class="k">Gradle, current</div><div class="v g">9.7.x</div><div class="s">2026&#8209;08&#8209;06 · Java&nbsp;17+ · SemVer</div></div>
+    <div class="tile"><div class="k">Share of Java devs</div><div class="v"><span class="m">67%</span> <span style="color:var(--faint);font-size:1rem">Maven</span></div><div class="s">JetBrains ecosystem survey, 2025</div></div>
+  </div>
+</header>
+
+<!-- ══ 1 · SCOREBOARD ═══════════════════════════════════════════ -->
+<section id="board">
+  <div class="sec-head">
+    <span class="sec-n">01 · the scoreboard</span>
+    <h2>Twelve dimensions on one axis</h2>
+  </div>
+  <p class="whatami"><b>What am I looking at:</b> one row per dimension. <b>Horizontal position</b> is who wins it and
+  by how much &mdash; left is Maven, right is Gradle, centre is a tie. <b>Dot size</b> is how much that dimension
+  matters <i>for the project you pick below</i>. The needle at the top is the weighted verdict. Click any row for the evidence.</p>
+
+  <div class="ctl-row" id="ctx-row" role="group" aria-label="Project context"></div>
+  <div class="ctl-hint">Pick what you are actually building. Weights change, dots resize, the needle moves. <span class="kbd">←</span> <span class="kbd">→</span> also walk the rows.</div>
+
+  <div class="verdict">
+    <div class="vh"><div class="vt" id="v-title">&nbsp;</div><div class="vs" id="v-sub">&nbsp;</div></div>
+    <svg id="needle" viewBox="0 0 900 74" role="img" aria-label="Weighted verdict needle"></svg>
+  </div>
+
+  <svg id="board-svg" viewBox="0 0 900 520" role="img" aria-label="Dimension scoreboard"></svg>
+
+  <div class="legend">
+    <span><b>Axis units:</b> a &minus;100…+100 opinion score, not a measurement.</span>
+    <span><b>Dot area:</b> weight 0&ndash;3 in the selected context.</span>
+    <span><b>Hollow dot:</b> weight 0 &mdash; irrelevant here.</span>
+  </div>
+
+  <div class="detail" id="detail"></div>
+</section>
+
+<!-- ══ 2 · ROOT CAUSE ═══════════════════════════════════════════ -->
+<section id="root">
+  <div class="sec-head">
+    <span class="sec-n">02 · root cause</span>
+    <h2>Every row above has the same cause</h2>
+  </div>
+  <p>Those twelve dimensions are not twelve independent findings. They are one architectural decision, read twelve
+  ways. <span class="m">A POM is data you parse.</span> <span class="g">A build script is a program you run.</span>
+  Every advantage and every complaint either tool has falls out of that, which is also why the argument never
+  resolves &mdash; each side is naming a different face of the same coin.</p>
+  <p class="whatami"><b>What am I looking at:</b> six consequences of that one property. Each row is a single coin:
+  the <b>left face</b> is what being data gets you, the <b>right face</b> is what being a program gets you.
+  <b>▲ marks the side that wins that row</b> &mdash; and they split three-all, which is the whole argument in one
+  picture. Click a row for what the coin actually is.</p>
+
+  <svg id="root-svg" viewBox="0 0 900 420" role="img" aria-label="One property, six consequences, mirrored"></svg>
+  <div class="detail" id="root-detail"></div>
+</section>
+
+<!-- ══ 3 · MECHANISM ════════════════════════════════════════════ -->
+<section id="mech">
+  <div class="sec-head">
+    <span class="sec-n">03 · mechanism</span>
+    <h2>Why the speed gap exists at all</h2>
+  </div>
+  <p>It is not that Gradle&rsquo;s compiler is faster &mdash; they both shell out to <code>javac</code>. The gap is
+  structural. <span class="m">Maven runs a fixed linear lifecycle</span>: phases in a fixed order, every phase every
+  time, with no memory of the last run. <span class="g">Gradle builds a task graph</span> and asks each node
+  &ldquo;have your inputs changed since last time?&rdquo; before running it. Everything else &mdash; the 2&times;, the
+  40&times;, the marketing &mdash; falls out of that one difference.</p>
+  <p class="whatami"><b>What am I looking at:</b> the same project built five ways. Each node is a phase (left) or a task
+  (right); <b>fill colour</b> is what happened to it. The <b>bar under each column</b> is wall-clock, drawn to scale
+  &mdash; longer bar, slower build, same scale on both sides. Steps 1&ndash;4 favour Gradle; step&nbsp;5 is the one
+  that goes the other way, and it is the loop you spend the most time in.</p>
+
+  <div class="ctl-row">
+    <button class="ctl" id="mp">◀ back</button>
+    <button class="ctl" id="mn">next ▶</button>
+    <span class="ctl" style="cursor:default" id="mc">1 / 4</span>
+  </div>
+  <div class="ctl-hint" id="mcap">&nbsp;</div>
+
+  <svg id="mech-svg" viewBox="0 0 900 470" role="img" aria-label="Maven lifecycle versus Gradle task graph"></svg>
+
+  <div class="legend" id="mech-legend"></div>
+
+  <div class="caveat">
+    <div class="ct">the honest footnote</div>
+    <p>Maven&rsquo;s column is not fixed at that height forever. <b>mvnd</b> (the Maven Daemon, a GraalVM-native client
+    over a warm JVM) removes the per-invocation start-up cost, and the <b>maven-build-cache-extension</b> adds real
+    input-hashing and cache reuse. Both are opt-in add-ons rather than the default, which is exactly the point:
+    Gradle ships this behaviour as the tool, Maven ships it as something you have to go and adopt.</p>
+  </div>
+</section>
+
+<!-- ══ 4 · BENCHMARKS ═══════════════════════════════════════════ -->
+<section id="bench">
+  <div class="sec-head">
+    <span class="sec-n">04 · the numbers, and who made them</span>
+    <h2>&ldquo;Up to 100&times; faster&rdquo;, read carefully</h2>
+  </div>
+  <p class="whatami"><b>What am I looking at:</b> Gradle&rsquo;s own published speed-up multipliers, by project size and
+  scenario. <b>Bar length</b> is the multiplier on a <b>log scale</b> (each gridline is 10&times;) &mdash; a linear axis
+  would flatten everything below 20&times; into nothing. Higher is a bigger claimed Gradle win. Hover a bar for the exact figure.</p>
+
+  <div class="ctl-row" id="bench-row" role="group" aria-label="Benchmark scenario"></div>
+  <div class="ctl-hint">Toggle a scenario off to compare the other two directly.</div>
+
+  <svg id="bench-svg" viewBox="0 0 900 400" role="img" aria-label="Gradle speed-up multipliers by project size"></svg>
+
+  <div class="caveat">
+    <div class="ct">whose benchmark is this</div>
+    <p>Every number above is from <b>Gradle&rsquo;s own comparison page</b> &mdash; a vendor benchmarking itself against
+    a competitor. Three things it says in its own footnotes: the runs are on a <b>2018 MacBook Pro</b>; the biggest
+    multipliers require <b>Develocity&rsquo;s remote build cache</b>, which is a paid product; and the incremental numbers
+    (the 7&times;&ndash;85&times; ones) <b>assume Maven&rsquo;s incremental compile is broken</b> and therefore compare
+    Gradle&rsquo;s incremental build against a Maven <i>clean</i> build. That assumption is not unreasonable &mdash; it is
+    a genuine, long-standing Maven complaint &mdash; but it is doing most of the work in the headline.</p>
+  </div>
+</section>
+
+<!-- ══ 5 · LEDGER ═══════════════════════════════════════════════ -->
+<section id="ledger">
+  <div class="sec-head">
+    <span class="sec-n">05 · pros and cons, unhedged</span>
+    <h2>What each one is genuinely good and bad at</h2>
+  </div>
+  <div class="ledger">
+    <div class="col mv">
+      <div class="ch">Apache Maven</div>
+      <div class="grp">
+        <div class="gt pro">▲ pros</div>
+        <ul>
+          <li><b>Convention over configuration.</b> One project layout, one lifecycle, one answer. You can open a Maven repo you have never seen and know where everything is.</li>
+          <li><b>The POM is data, not code.</b> IDEs, CI, SBOM generators, Dependabot and Renovate can all read a <code>pom.xml</code> <i>without executing it</i>. That is a bigger deal than it sounds.</li>
+          <li><b>Near-total stability.</b> POMs written in 2012 still build in 2026. Maven 3.9.16 still runs on Java&nbsp;8, which matters if your estate does.</li>
+          <li><b>Twenty years of matching answers.</b> The plugin corpus is the largest in the JVM world and your exact error message is already on Stack Overflow.</li>
+          <li><b>67% share</b> means every new hire already knows it. Onboarding cost is zero.</li>
+          <li><b>Hard to make weird.</b> Escaping the conventions takes deliberate effort, so builds stay legible even on teams that do not care about builds.</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <div class="gt con">▼ cons</div>
+        <ul>
+          <li><b>No first-class incremental build or build cache.</b> A no-op rebuild costs roughly what a cold one does. This is <i>the</i> complaint.</li>
+          <li><b>XML.</b> Verbose, no expressions, six lines to name one dependency, and conditionals smuggled in through profiles.</li>
+          <li><b>Custom logic means writing a Mojo</b> &mdash; a separate plugin artifact with its own groupId, version and release cycle. There is no &ldquo;just put four lines here&rdquo;.</li>
+          <li><b>A cold JVM per invocation</b>, unless you go and adopt mvnd.</li>
+          <li><b>Java-centric.</b> Kotlin, Scala, JS and native targets are second-class or simply absent.</li>
+          <li><b>Maven 4 has been in release candidate since 2024</b> and is still not GA as of rc-6 (Aug 2026). The good stuff is real but you cannot depend on it yet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col gr">
+      <div class="ch">Gradle</div>
+      <div class="grp">
+        <div class="gt pro">▲ pros</div>
+        <ul>
+          <li><b>Genuinely fast, by design.</b> Per-task up-to-date checks, local <i>and</i> remote build cache, configuration cache, parallel execution, a warm daemon. Not one trick &mdash; five.</li>
+          <li><b>Concise.</b> Roughly 35 lines against Maven&rsquo;s 62 for the same project; the Kotlin DSL gives you type-safe autocomplete on the build itself.</li>
+          <li><b>Extensible in place.</b> Four lines in the build script beats publishing a plugin artifact to do the same job.</li>
+          <li><b>Polyglot and multiplatform.</b> Java, Kotlin, Groovy, Scala, Android, C/C++, Swift, JS &mdash; first-class, not bolted on.</li>
+          <li><b>The Wrapper pins the tool version in the repo.</b> Everyone and CI run the identical Gradle with no install step. Maven copied this later, for good reason.</li>
+          <li><b>It is the only supported build tool for Android.</b> The Android Gradle Plugin has no Maven equivalent. For that one use case the comparison ends here.</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <div class="gt con">▼ cons</div>
+        <ul>
+          <li><b>The build is a program</b>, so it accrues bespoke logic the way programs do. Over five years <code>build.gradle</code> drifts in a way <code>pom.xml</code> does not.</li>
+          <li><b>The two-phase model</b> &mdash; configuration, then execution &mdash; is a real conceptual hurdle, and most genuinely confusing Gradle bugs live inside it.</li>
+          <li><b>An upgrade tax on every major.</b> Gradle&nbsp;9 forced Java&nbsp;17, jumped to Groovy&nbsp;4 and Kotlin&nbsp;2.2, removed <code>jcenter()</code> and deleted deprecated APIs; third-party plugins touching internal APIs broke.</li>
+          <li><b>IDE sync must execute your build logic</b> to know what the project is. That is precisely why Isolated Projects had to be invented.</li>
+          <li><b>Two DSLs</b>, Groovy and Kotlin, splitting the documentation, the examples and every answer you find.</li>
+          <li><b>The best numbers need a paid product.</b> Develocity&rsquo;s remote cache is where the biggest multipliers come from.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6 · ROUTER ═══════════════════════════════════════════════ -->
+<section id="router">
+  <div class="sec-head">
+    <span class="sec-n">06 · pick one</span>
+    <h2>The decision, as a flowchart</h2>
+  </div>
+  <p class="whatami"><b>What am I looking at:</b> answer top to bottom. Click <b>yes</b> or <b>no</b> on the highlighted
+  question and the path lights up; the first <b>yes</b> ends it. Questions are ordered <b>hardest constraint first</b>,
+  and each outcome is tagged with what kind of constraint it is: a <b style="color:var(--danger)">hard constraint</b>
+  (the other tool cannot do this), a <b style="color:var(--warn)">cost</b> (both can, one is cheaper), or a
+  <b style="color:var(--faint)">preference</b>. Four of the seven are hard, two each way. Clear all of them and
+  you are in tabs-versus-spaces territory, which is where most projects live.</p>
+  <svg id="router-svg" viewBox="0 0 900 720" role="img" aria-label="Decision flowchart for choosing Maven or Gradle"></svg>
+  <div class="ctl-row" style="margin-top:14px"><button class="ctl" id="rreset">↺ start over</button></div>
+  <div class="detail" id="rout-detail"></div>
+</section>
+
+<!-- ══ 7 · CONVERGENCE ══════════════════════════════════════════ -->
+<section id="conv">
+  <div class="sec-head">
+    <span class="sec-n">07 · where this is going</span>
+    <h2>They are stealing from each other</h2>
+  </div>
+  <p>The interesting thing about 2026 is that the two roadmaps point at one another. Maven 4 is adopting the daemon,
+  the cache and the CI-friendly versioning that made Gradle fast. Gradle 9 is adopting the isolation and
+  cacheable-by-default determinism that made Maven predictable. <span class="whatami" style="display:block;margin-top:12px;border:0;padding:0"><b>What am I looking at:</b>
+  each item sits on a horizontal axis by <b>who originally had it</b> &mdash; and the arrow shows which direction it is being copied.</span></p>
+  <svg id="conv-svg" viewBox="0 0 900 480" role="img" aria-label="Features converging between Maven and Gradle"></svg>
+</section>
+
+<!-- ══ SOURCES ══════════════════════════════════════════════════ -->
+<section id="src">
+  <div class="sec-head"><span class="sec-n">sources</span><h2>Where the facts came from</h2></div>
+  <div class="panel srcs">
+    <div><span class="n">[1]</span> <a href="https://maven.apache.org/docs/history.html">Maven release history</a> &mdash; 3.9.16 (2026-05-13), 3.10.0-rc-1 (2026-07-09), 4.0.0-rc-6 (2026-08-04), no 4.0 GA.</div>
+    <div><span class="n">[2]</span> <a href="https://maven.apache.org/whatsnewinmaven4.html">What&rsquo;s new in Maven 4</a> &mdash; consumer/build POM split, version-less parent, <code>&lt;subprojects&gt;</code>, BOM packaging, mvnsh, mvnup, <code>--resume</code>, <code>${revision}</code>, Java&nbsp;17.</div>
+    <div><span class="n">[3]</span> <a href="https://docs.gradle.org/9.7.0/release-notes.html">Gradle 9.7.0 release notes</a> and <a href="https://gradle.org/whats-new/gradle-9/">What&rsquo;s new in Gradle 9</a> &mdash; configuration cache as preferred mode, SemVer, Java&nbsp;17+, Kotlin&nbsp;2 / Groovy&nbsp;4.</div>
+    <div><span class="n">[4]</span> <a href="https://docs.gradle.org/current/userguide/upgrading_major_version_9.html">Upgrading to Gradle 9</a> &mdash; removed APIs, <code>jcenter()</code> removal, plugin breakage.</div>
+    <div><span class="n">[5]</span> <a href="https://blog.gradle.org/introducing-isolated-projects">Isolated Projects</a> &mdash; incubating in 9.7; Gradle&rsquo;s own 300-subproject sync 84s→47s, a 2,500-project monorepo 10m53s→2m59s.</div>
+    <div><span class="n">[6]</span> <a href="https://gradle.org/gradle-and-maven-performance/">Gradle &amp; Maven performance comparison</a> &mdash; the multipliers in §03, and the caveats quoted with them.</div>
+    <div><span class="n">[7]</span> <a href="https://tomgregory.com/gradle/maven-vs-gradle-comparison/">Tom Gregory, Maven vs Gradle in depth</a> &mdash; the 35-vs-62-line config figure and independent timing runs.</div>
+    <div><span class="n">[8]</span> <a href="https://lp.jetbrains.com/the-state-of-java-2025/">JetBrains, The State of Java 2025</a> &mdash; Maven at 67% of Java developers.</div>
+    <div><span class="n">[9]</span> <a href="https://github.com/apache/maven-mvnd/">apache/maven-mvnd</a> &mdash; the Maven Daemon, GraalVM-native client over a warm JVM.</div>
+    <div><span class="n">[10]</span> <a href="https://docs.gradle.org/current/userguide/compatibility.html">Gradle compatibility matrix</a> &mdash; Gradle 8.x runs on Java 8+ (with a deprecation warning from JVM 16 down); Gradle 9 requires Java 17 to run itself, while still compiling and testing against Java 8 via toolchains.</div>
+    <div><span class="n">[11]</span> mvnd speed-ups &mdash; reported at 7&ndash;10&times; on small projects and 3&ndash;5&times; on large ones, with warm repeat builds measured far higher. Indicative: unlike the Gradle figures these are community reports, not a controlled suite.</div>
+    <div><span class="n">[12]</span> IDE sync cost &mdash; a Kotlin JVM project with 2,000+ Gradle subprojects averaged 8.4 minutes per sync (~220&nbsp;ms/subproject); <a href="https://engineering.block.xyz/blog/shrinking-elephants">Block</a> reported a cold sync of 24.7 minutes.</div>
+    <div style="margin-top:12px;color:var(--faint)">Scores in §01 are <b>editorial judgement</b>, calibrated against those sources. They are an argument, not a measurement &mdash; which is why you can re-weight them.</div>
+  </div>
+</section>
+
+</main>
+<script type="module">
+import { stepper, saveHash, loadHash, $, esc } from "/_kit/viz.js";
+
+const NS = "http://www.w3.org/2000/svg";
+const el = (n, a = {}, kids = []) => {
+  const e = document.createElementNS(NS, n);
+  for (const [k, v] of Object.entries(a)) if (v !== null && v !== undefined) e.setAttribute(k, v);
+  for (const c of [].concat(kids)) e.append(c);
+  return e;
+};
+const txt = (s) => document.createTextNode(s);
+const MVN = "var(--c4)", GRD = "var(--c5)";
+
+/* ══════════════════════════════════════════════════════════════════════
+   01 · SCOREBOARD — score is editorial; weight comes from the context.
+   x encodes who wins; dot area encodes how much it matters here.
+   ══════════════════════════════════════════════════════════════════ */
+const DIMS = [
+  { id:"speed",   label:"Raw build speed",              score:  72,
+    mv:"Cold JVM per invocation, every phase every time — but mvnd (a warm daemon) reportedly buys back 7–10× on small projects and 3–5× on large ones. Almost nobody installs it, then concludes Maven is slow.",
+    gr:"Warm daemon, parallel task execution, and it only runs what actually needs running.",
+    why:"Gradle's own benchmarks put clean builds 2–10× ahead depending on module count; independent runs land lower but in the same direction." },
+  { id:"cache",   label:"Incremental work & caching",   score:  88,
+    mv:"No first-class build cache. A no-op rebuild costs about what a cold one does. An opt-in extension exists and is decent.",
+    gr:"Per-task input hashing, UP-TO-DATE skipping, a local cache, a remote cache, and a configuration cache on top.",
+    why:"This is the single biggest structural difference between the two tools — §02 shows the mechanism." },
+  { id:"predict", label:"Predictability & reproducibility", score: -72,
+    mv:"A POM is data. The same POM does the same thing on your laptop and on the build agent, because there is nothing in it to diverge.",
+    gr:"A build script is a program with an environment. Works-on-my-machine build failures are a real category here.",
+    why:"Less variance between local and CI runs is the reason a lot of large regulated shops never left Maven." },
+  { id:"learn",   label:"Learning curve",               score: -58,
+    mv:"One structure, one lifecycle, and twenty years of Stack Overflow answers that match your error verbatim.",
+    gr:"You need Groovy or Kotlin, plus the configuration-vs-execution phase model, before the error messages start making sense.",
+    why:"JetBrains 2025: the top reason cited for Maven is simplicity (52%); the top reason for Gradle is speed (48%)." },
+  { id:"verbose", label:"Conciseness of the build file", score: 64,
+    mv:"XML. Six lines to name one dependency, no expressions, and conditionals smuggled in through profiles.",
+    gr:"About 35 lines against Maven's 62 for the same project, and the Kotlin DSL autocompletes the build itself.",
+    why:"Shorter is not automatically better — but it is measurably shorter, and it reads more like intent." },
+  { id:"flex",    label:"Custom logic & extensibility",  score:  88,
+    mv:"Anything the plugins don't do means writing a Mojo: a separate artifact, its own version, its own release cycle.",
+    gr:"Three levels of customisation without leaving the repo. Four lines in the build script and you are done.",
+    why:"This is simultaneously Gradle's best feature and the root cause of every unmaintainable build script in existence." },
+  { id:"ide",     label:"IDE sync & static tooling",    score: -38,
+    mv:"The POM is parsed, not executed, so re-import is near-instant and SBOM scanners, Dependabot and Renovate read it directly.",
+    gr:"Sync must run your build logic through the Tooling API to learn what the project even is — every time you touch a build file.",
+    why:"A Kotlin JVM project with 2,000+ subprojects averaged 8.4 minutes per IDE sync (~220ms per subproject); one reported cold sync ran 24.7 minutes. This is the feedback loop developers actually live in, and it is the clearest Maven win on the page." },
+  { id:"eco",     label:"Plugin ecosystem maturity",     score: -28,
+    mv:"The largest plugin corpus in the JVM world, and plugins written in 2015 still work today.",
+    gr:"A rich plugin portal, but plugins that touched internal APIs broke on the Gradle 9 jump.",
+    why:"Gradle's ecosystem is not smaller so much as less stable across major versions." },
+  { id:"poly",    label:"Non-Java languages & targets",  score:  90,
+    mv:"Java-centric by design. Kotlin, Scala and JS are bolted on; native targets are effectively absent.",
+    gr:"Java, Kotlin, Groovy, Scala, Android, C/C++, Swift and JS as first-class citizens.",
+    why:"For Android this isn't even a comparison: the Android Gradle Plugin has no Maven equivalent." },
+  { id:"upgrade", label:"Upgrade stability",            score: -78,
+    mv:"POMs from 2012 still build in 2026, and 3.9.16 still runs on Java 8. Upgrades are non-events.",
+    gr:"Gradle 9 forced Java 17, jumped Groovy to 4 and Kotlin to 2.2, removed jcenter() and deleted deprecated APIs.",
+    why:"Every Gradle major is a small migration project. Every Maven major has, so far, not been." },
+  { id:"adopt",   label:"Adoption & hireability",       score: -52,
+    mv:"67% of Java developers. Whoever you hire next already knows it.",
+    gr:"Large and growing, dominant in Android and Kotlin, but the minority position on the JVM overall.",
+    why:"JetBrains State of Developer Ecosystem 2025, n > 5,000." },
+  { id:"ci",      label:"CI cost at scale",             score:  70,
+    mv:"Every agent starts from zero every time. At 200 modules that is a real line on a cloud bill.",
+    gr:"A warm remote cache means CI downloads outputs it already built instead of rebuilding them.",
+    why:"The catch: the remote cache that produces the best numbers is Develocity, a paid product." },
+];
+
+const CTX = [
+  { id:"greenfield", label:"Greenfield service", sub:"one team · 1–20 modules · Spring Boot",
+    line:"Speed you will never notice, against a build every hire already understands.",
+    w:{speed:1,cache:1,predict:3,learn:3,verbose:2,flex:1,ide:2,eco:2,poly:0,upgrade:3,adopt:3,ci:1} },
+  { id:"monorepo", label:"Enterprise monorepo", sub:"200+ modules · CI time is a budget line",
+    line:"This is the shape the benchmarks were written about. Caching stops being a nicety.",
+    w:{speed:3,cache:3,predict:2,learn:1,verbose:1,flex:3,ide:2,eco:1,poly:2,upgrade:1,adopt:1,ci:3} },
+  { id:"oss", label:"Open-source library", sub:"published to Maven Central",
+    line:"Drive-by contributors and downstream consumers both need to read your build without running it.",
+    w:{speed:1,cache:0,predict:3,learn:2,verbose:2,flex:1,ide:2,eco:3,poly:0,upgrade:3,adopt:3,ci:1} },
+  { id:"polyglot", label:"Polyglot / multiplatform", sub:"JVM + native + JS from one build",
+    line:"Maven does not really compete here; it was never trying to.",
+    w:{speed:2,cache:2,predict:1,learn:1,verbose:2,flex:3,ide:1,eco:1,poly:3,upgrade:1,adopt:1,ci:2} },
+  { id:"legacy", label:"Legacy Java 8 estate", sub:"regulated · low change rate",
+    line:"Gradle 9 needs Java 17 just to run. Maven 3.9 still runs on 8. That alone decides it.",
+    w:{speed:1,cache:0,predict:3,learn:2,verbose:1,flex:0,ide:2,eco:3,poly:0,upgrade:3,adopt:3,ci:0} },
+  { id:"android", label:"Android app", sub:"no contest", forced: 100,
+    line:"The Android Gradle Plugin ships for Gradle and only Gradle. Nothing else on this page applies.",
+    w:{speed:2,cache:3,predict:1,learn:1,verbose:1,flex:2,ide:2,eco:1,poly:3,upgrade:1,adopt:1,ci:3} },
+];
+
+const X0 = 277, XC = 577, X1 = 877, SX = (s) => XC + s * 3;
+const ROW_Y = (i) => 60 + i * 36;
+
+let ctxIdx = loadHash().c ?? 0;
+let selIdx = loadHash().d ?? 0;
+
+/* — context buttons — */
+const ctxRow = $("#ctx-row");
+CTX.forEach((c, i) => {
+  const b = document.createElement("button");
+  b.className = "ctl"; b.type = "button";
+  b.dataset.vizId = `ctx-${c.id}`; b.dataset.label = c.label;
+  b.textContent = c.label;
+  b.title = c.sub;
+  b.onclick = () => { ctxIdx = i; drawBoard(); persist(); };
+  ctxRow.append(b);
+});
+
+/* — static chrome of the board — */
+const board = $("#board-svg");
+function drawBoard() {
+  const ctx = CTX[ctxIdx];
+  [...ctxRow.children].forEach((b, i) => b.setAttribute("aria-pressed", String(i === ctxIdx)));
+  board.replaceChildren();
+
+  // axis grid + headers
+  for (const s of [-100, -50, 0, 50, 100]) {
+    const x = SX(s);
+    board.append(el("line", { x1: x, y1: 34, x2: x, y2: 474, stroke: "var(--border)",
+      "stroke-width": s === 0 ? 1.5 : 1, "stroke-dasharray": s === 0 ? null : "3 5" }));
+    const t = el("text", { x, y: 494, "text-anchor": "middle", class: "tick" });
+    t.append(txt(s === 0 ? "tie" : Math.abs(s)));
+    board.append(t);
+  }
+  const hM = el("text", { x: X0, y: 22, "text-anchor": "start", "font-size": 12,
+    "font-weight": 700, "letter-spacing": "0.12em", fill: MVN });
+  hM.append(txt("◀ MAVEN WINS")); board.append(hM);
+  const hG = el("text", { x: X1, y: 22, "text-anchor": "end", "font-size": 12,
+    "font-weight": 700, "letter-spacing": "0.12em", fill: GRD });
+  hG.append(txt("GRADLE WINS ▶")); board.append(hG);
+
+  DIMS.forEach((d, i) => {
+    const y = ROW_Y(i), w = ctx.w[d.id], x = SX(d.score), col = d.score < 0 ? MVN : GRD;
+    const g = el("g", { class: "row" + (i === selIdx ? " on" : ""),
+      "data-viz-id": `dim-${d.id}`, "data-label": `${d.label} — score ${d.score}, weight ${w}` });
+
+    g.append(el("line", { x1: X0, y1: y, x2: X1, y2: y, stroke: "var(--border)", "stroke-width": 1 }));
+    g.append(el("line", { x1: XC, y1: y, x2: x, y2: y, stroke: col, "stroke-width": 3,
+      "stroke-linecap": "round", opacity: w === 0 ? 0.18 : 0.45 }));
+
+    const r = w === 0 ? 4.5 : 4.5 + w * 2.6;
+    g.append(el("circle", { cx: x, cy: y, r, fill: w === 0 ? "var(--bg)" : col,
+      stroke: col, "stroke-width": w === 0 ? 1.5 : 0,
+      opacity: w === 0 ? 0.55 : (i === selIdx ? 1 : 0.85) }));
+
+    const lab = el("text", { x: 232, y: y + 4, "text-anchor": "end",
+      class: "rowlab" + (i === selIdx ? " on" : "") });
+    lab.append(txt(d.label)); g.append(lab);
+
+    const hit = el("rect", { x: 0, y: y - 17, width: 900, height: 34, fill: "transparent", class: "hit" });
+    hit.append(el("title", {}, [txt(`${d.label}: ${d.score > 0 ? "Gradle" : "Maven"} by ${Math.abs(d.score)}, weight ${w}/3 here`)]));
+    hit.addEventListener("click", () => { selIdx = i; drawBoard(); persist(); });
+    g.append(hit);
+    board.append(g);
+  });
+
+  drawNeedle(agg(ctx), ctx);
+  drawDetail();
+}
+
+function agg(ctx) {
+  if (ctx.forced !== undefined) return ctx.forced;
+  let num = 0, den = 0;
+  for (const d of DIMS) { const w = ctx.w[d.id]; num += w * d.score; den += w; }
+  return den ? num / den : 0;
+}
+
+function drawNeedle(a, ctx) {
+  const s = $("#needle"); s.replaceChildren();
+  const defs = el("defs");
+  const lg = el("linearGradient", { id: "ng", x1: "0", x2: "1" });
+  lg.append(el("stop", { offset: "0", "stop-color": MVN }));
+  lg.append(el("stop", { offset: "0.5", "stop-color": "var(--border)" }));
+  lg.append(el("stop", { offset: "1", "stop-color": GRD }));
+  defs.append(lg); s.append(defs);
+
+  s.append(el("rect", { x: X0, y: 44, width: X1 - X0, height: 10, rx: 5, fill: "url(#ng)", opacity: 0.75 }));
+  s.append(el("line", { x1: XC, y1: 38, x2: XC, y2: 60, stroke: "var(--faint)", "stroke-width": 1 }));
+
+  const lm = el("text", { x: X0, y: 70, "text-anchor": "start", class: "tick" }); lm.append(txt("all-Maven")); s.append(lm);
+  const lg2 = el("text", { x: X1, y: 70, "text-anchor": "end", class: "tick" }); lg2.append(txt("all-Gradle")); s.append(lg2);
+
+  const x = SX(Math.max(-100, Math.min(100, a)));
+  const g = el("g", { "data-viz-id": "verdict-needle", "data-label": `weighted verdict ${a.toFixed(0)}` });
+  g.append(el("path", { d: `M ${x - 9} 26 L ${x + 9} 26 L ${x} 40 Z`, fill: a < 0 ? MVN : GRD }));
+  g.append(el("line", { x1: x, y1: 40, x2: x, y2: 58, stroke: a < 0 ? MVN : GRD, "stroke-width": 2 }));
+  s.append(g);
+
+  const strong = Math.abs(a) >= 25, tie = Math.abs(a) < 8;
+  const who = a < 0 ? "Maven" : "Gradle";
+  $("#v-title").innerHTML = ctx.forced !== undefined
+    ? `<span class="g">Gradle</span> — and it is not a decision`
+    : tie ? `Genuinely close &mdash; call it on taste`
+    : `<span class="${a < 0 ? "m" : "g"}">${who}</span>, ${strong ? "clearly" : "on balance"} <span style="color:var(--faint);font-family:var(--mono);font-size:.8rem">(${a > 0 ? "+" : ""}${a.toFixed(0)})</span>`;
+  $("#v-sub").textContent = ctx.line;
+}
+
+function drawDetail() {
+  const d = DIMS[selIdx];
+  $("#detail").innerHTML = `
+    <div class="dh">
+      <div class="dt">${esc(d.label)}</div>
+      <div class="dscore">score ${d.score > 0 ? "+" : ""}${d.score} · weight ${CTX[ctxIdx].w[d.id]}/3 for &ldquo;${esc(CTX[ctxIdx].label)}&rdquo;</div>
+    </div>
+    <div class="sides">
+      <div class="sd mv"><span class="who">Maven</span>${d.mv}</div>
+      <div class="sd gr"><span class="who">Gradle</span>${d.gr}</div>
+    </div>
+    <p class="why">${d.why}</p>`;
+}
+
+const persist = () => saveHash({ c: ctxIdx, d: selIdx, m: mechStep });
+addEventListener("keydown", (e) => {
+  if (/input|textarea|select/i.test(e.target.tagName)) return;
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    selIdx = Math.max(0, Math.min(DIMS.length - 1, selIdx + (e.key === "ArrowDown" ? 1 : -1)));
+    e.preventDefault(); drawBoard(); persist();
+  }
+});
+
+/* ══════════════════════════════════════════════════════════════════════
+   02 · ROOT CAUSE — one property, six consequences, mirrored.
+   Left face = build file is data. Right face = build file is a program.
+   ══════════════════════════════════════════════════════════════════ */
+const COIN = [
+  { k: "Reading it",       win: "m",
+    m: "static tools parse it",           g: "tooling must execute it",
+    d: "To know a Maven project's dependency graph you read a file. To know a Gradle project's you run its build logic. That is the same fact behind instant re-import, behind SBOM/Dependabot support, and behind the 8.4-minute IDE sync." },
+  { k: "Changing it",      win: "g",
+    m: "custom logic means a plugin artifact", g: "four lines in the script",
+    d: "Data can't express behaviour, so Maven makes you leave the file and publish a Mojo. A program can, so Gradle lets you write it inline — which is the single most-cited reason people prefer it." },
+  { k: "Drift over years", win: "m",
+    m: "cannot accumulate logic",          g: "accumulates logic",
+    d: "The exact property that makes Gradle extensible makes it drift. After five years and four teams a pom.xml is still a pom.xml; a build.gradle.kts is a small unowned codebase." },
+  { k: "Between two runs", win: "g",
+    m: "no memory — redoes everything",    g: "task graph, hashed inputs, cache",
+    d: "A declarative lifecycle has nowhere to record what it already did. A program can model tasks as nodes with inputs and outputs, and skip the ones that haven't changed. §03 draws this." },
+  { k: "Upgrading",        win: "m",
+    m: "a schema can evolve compatibly",   g: "API changes break plugins",
+    d: "You can add elements to a format without invalidating old files. You cannot delete methods from an API without breaking every plugin that called them — which is what Gradle 9 did." },
+  { k: "Saying things",    win: "g",
+    m: "verbose, no expressions",          g: "a whole language, concise",
+    d: "35 lines against 62 for the same project. XML has no conditionals, so Maven smuggles them in through profiles; Gradle just has an if statement." },
+];
+let coinSel = -1;
+const RX_M = 372, RX_G = 528, ROW_Y0 = 150, ROW_P = 44;
+const rsv = $("#root-svg");
+
+function drawRoot() {
+  rsv.replaceChildren();
+  const defs = el("defs");
+  for (const [id, c] of [["rtm", MVN], ["rtg", GRD]]) {
+    const m = el("marker", { id, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 5,
+      markerHeight: 5, orient: "auto-start-reverse" });
+    m.append(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c }));
+    defs.append(m);
+  }
+  rsv.append(defs);
+
+  // the one property, splitting
+  const box = (x, y, w, h, txt2, col, mono) => {
+    rsv.append(el("rect", { x, y, width: w, height: h, rx: 8, fill: "var(--panel)",
+      stroke: col, "stroke-width": 1.6 }));
+    const t = el("text", { x: x + w / 2, y: y + h / 2 + 5, "text-anchor": "middle",
+      "font-size": 13, "font-weight": 700, fill: col,
+      "font-family": mono ? "var(--mono)" : "var(--sans)" });
+    t.append(txt(txt2)); rsv.append(t);
+  };
+  box(360, 14, 180, 34, "the build file is…", "var(--border)");
+  rsv.append(el("path", { d: "M 400 48 C 400 68, 250 62, 250 80", fill: "none", stroke: MVN,
+    "stroke-width": 1.8, opacity: 0.7, "marker-end": "url(#rtm)" }));
+  rsv.append(el("path", { d: "M 500 48 C 500 68, 650 62, 650 80", fill: "none", stroke: GRD,
+    "stroke-width": 1.8, opacity: 0.7, "marker-end": "url(#rtg)" }));
+  box(160, 82, 180, 34, "DATA", MVN, true);
+  box(560, 82, 180, 34, "A PROGRAM", GRD, true);
+  for (const [x, t2, col] of [[250, "pom.xml — you parse it", MVN], [650, "build.gradle — you run it", GRD]]) {
+    const e = el("text", { x, y: 132, "text-anchor": "middle", "font-size": 10.5, fill: col, opacity: 0.75 });
+    e.append(txt(t2)); rsv.append(e);
+  }
+
+  COIN.forEach((c, i) => {
+    const y = ROW_Y0 + i * ROW_P, sel = i === coinSel;
+    const g = el("g", { class: "row", "data-viz-id": `coin-${i}`,
+      "data-label": `${c.k}: Maven "${c.m}" vs Gradle "${c.g}" — ${c.win === "m" ? "Maven" : "Gradle"} wins` });
+
+    if (sel) g.append(el("rect", { x: 8, y: y - 17, width: 884, height: 34, rx: 8,
+      fill: "var(--panel)", stroke: "var(--border)" }));
+
+    // the coin's edge — a hairline joining the two faces
+    g.append(el("line", { x1: RX_M + 6, y1: y, x2: RX_G - 6, y2: y, stroke: "var(--border)",
+      "stroke-dasharray": "2 4" }));
+    const k = el("text", { x: 450, y: y + 4, "text-anchor": "middle", "font-size": 10,
+      "letter-spacing": "0.08em", fill: sel ? "var(--text)" : "var(--faint)",
+      "font-family": "var(--mono)" });
+    k.append(txt(c.k.toUpperCase())); g.append(k);
+    // mask the dashes behind the centre label
+    g.insertBefore(el("rect", { x: 390, y: y - 9, width: 120, height: 18,
+      fill: sel ? "var(--panel)" : "var(--bg)" }), k);
+
+    for (const [side, x, anchor, mark] of [["m", RX_M, "end", "◀"], ["g", RX_G, "start", "▶"]]) {
+      const wins = c.win === side, col = side === "m" ? MVN : GRD;
+      const t = el("text", { x, y: y + 4, "text-anchor": anchor, "font-size": 12.5,
+        "font-weight": wins ? 700 : 500,
+        fill: wins ? col : "var(--faint)", opacity: wins ? 1 : 0.8 });
+      t.append(txt(wins ? `▲ ${c[side]}` : `▽ ${c[side]}`)); g.append(t);
+    }
+
+    const hit = el("rect", { x: 0, y: y - 20, width: 900, height: 40, fill: "transparent", class: "hit" });
+    hit.append(el("title", {}, [txt(`${c.k} — ${c.win === "m" ? "Maven" : "Gradle"} wins this one`)]));
+    hit.addEventListener("click", () => { coinSel = coinSel === i ? -1 : i; drawRoot(); });
+    g.append(hit);
+    rsv.append(g);
+  });
+
+  const tally = el("text", { x: 450, y: 412, "text-anchor": "middle", "font-size": 11.5, fill: "var(--muted)" });
+  tally.append(txt("▲ = the winning face. Three each. Same coin, six times."));
+  rsv.append(tally);
+
+  $("#root-detail").innerHTML = coinSel < 0
+    ? `<p style="margin:0;color:var(--faint)">Click any row. Each one is a single property seen from two sides &mdash; there is no version of Gradle that keeps the extensibility and loses the drift, because they are the same sentence.</p>`
+    : `<div class="dh"><div class="dt">${esc(COIN[coinSel].k)}</div><div class="dscore">${COIN[coinSel].win === "m" ? "Maven" : "Gradle"} takes this face</div></div>
+       <p style="margin:0;color:var(--muted)">${COIN[coinSel].d}</p>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   03 · MECHANISM — fixed lifecycle vs task DAG, four scenarios.
+   Node fill = what happened to it. Bar length = wall-clock, to scale.
+   ══════════════════════════════════════════════════════════════════ */
+const MP = ["validate", "compile", "test", "package", "verify", "install"];
+const GT = [
+  { id: "compileJava",     x: 495, y: 54,  w: 178, h: 40 },
+  { id: "processResources",x: 690, y: 54,  w: 178, h: 40 },
+  { id: "classes",         x: 592, y: 110, w: 178, h: 40 },
+  { id: "jar",             x: 495, y: 166, w: 178, h: 40 },
+  { id: "compileTestJava", x: 690, y: 166, w: 178, h: 40 },
+  { id: "test",            x: 690, y: 222, w: 178, h: 40 },
+  { id: "build",           x: 592, y: 278, w: 178, h: 40 },
+];
+const GE = [["compileJava","classes"],["processResources","classes"],["classes","jar"],
+            ["classes","compileTestJava"],["compileTestJava","test"],["jar","build"],["test","build"]];
+
+const RUN = "run", SKIP = "skip", CACHE = "cache", CONF = "conf", IDLE = "idle";
+const ST = {
+  [RUN]:   { fill: "var(--c5)", op: 1,    label: "EXECUTED",   dash: null },
+  [SKIP]:  { fill: "var(--bg)", op: 0.9,  label: "UP-TO-DATE", dash: null },
+  [CACHE]: { fill: "var(--bg)", op: 0.9,  label: "FROM-CACHE", dash: "5 4" },
+  [CONF]:  { fill: "var(--bg)", op: 0.9,  label: "RE-CONFIGURED", dash: null },
+  [IDLE]:  { fill: "var(--bg)", op: 0.6,  label: "NOT RUN",     dash: "2 4" },
+};
+const STROKE = { [RUN]: "var(--c5)", [SKIP]: "var(--faint)", [CACHE]: "var(--accent)",
+                 [CONF]: "var(--warn)", [IDLE]: "var(--faint)" };
+const TEXTC  = { [RUN]: "var(--bg)", [SKIP]: "var(--faint)", [CACHE]: "var(--accent)",
+                 [CONF]: "var(--warn)", [IDLE]: "var(--faint)" };
+
+const allRun = Object.fromEntries(GT.map((t) => [t.id, RUN]));
+const MECH = [
+  { cap: "<b>Cold build, nothing warm, nothing cached.</b> This is the one case where they are close — and Gradle actually pays a little extra here to start its daemon.",
+    mt: 100, gt: 92, md: 90, g: { ...allRun } },
+  { cap: "<b>Run it again. You changed nothing.</b> Maven has no memory of the previous run, so it walks the whole lifecycle again. Every Gradle task answers &ldquo;my inputs are byte-identical&rdquo; and is skipped.",
+    mt: 100, gt: 4, md: 45, g: Object.fromEntries(GT.map((t) => [t.id, SKIP])) },
+  { cap: "<b>You edit one test file.</b> A Maven phase is all-or-nothing, so everything recompiles and every test re-runs. Gradle re-runs only the two tasks downstream of the file you touched.",
+    mt: 100, gt: 21, md: 48,
+    g: { compileJava: SKIP, processResources: SKIP, classes: SKIP, jar: SKIP, compileTestJava: RUN, test: RUN, build: RUN } },
+  { cap: "<b>A fresh CI checkout against a warm remote cache.</b> Maven starts from zero, because it always does. Gradle downloads the outputs someone else already built rather than building them again.",
+    mt: 100, gt: 11, md: 95,
+    g: { compileJava: CACHE, processResources: CACHE, classes: CACHE, jar: CACHE, compileTestJava: CACHE, test: CACHE, build: RUN } },
+  { cap: "<b>You edit the build file itself — and this is the one Maven wins outright.</b> Maven re-reads a POM: it is data, so nothing executes. Gradle has to re-run your build logic to find out what the project now is, and your IDE has to sync, which means doing it again through the Tooling API.",
+    mt: 3, gt: 68, md: 3, mvn: IDLE,
+    note: "measured elsewhere: a 2,000-subproject Kotlin build averaged 8.4 min per IDE sync",
+    g: Object.fromEntries(GT.map((t) => [t.id, CONF])) },
+];
+
+let mechStep = loadHash().m ?? 0;
+const mech = $("#mech-svg");
+const BAR_X_M = 130, BAR_X_G = 495, BAR_SCALE = 2.4, BAR_Y = 378;
+
+function drawMech() {
+  const s = MECH[mechStep];
+  mech.replaceChildren();
+  const defs = el("defs");
+  for (const [id, c] of [["mah", "var(--faint)"], ["mahc", "var(--c5)"]]) {
+    const m = el("marker", { id, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 5,
+      markerHeight: 5, orient: "auto-start-reverse" });
+    m.append(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c }));
+    defs.append(m);
+  }
+  mech.append(defs);
+
+  // column headers
+  const h1 = el("text", { x: 235, y: 26, "text-anchor": "middle", "font-size": 13.5, "font-weight": 700, fill: MVN });
+  h1.append(txt("MAVEN — fixed lifecycle, in order, every time")); mech.append(h1);
+  const h2 = el("text", { x: 680, y: 26, "text-anchor": "middle", "font-size": 13.5, "font-weight": 700, fill: GRD });
+  h2.append(txt("GRADLE — task graph, each node asks first")); mech.append(h2);
+  mech.append(el("line", { x1: 440, y1: 14, x2: 440, y2: 440, stroke: "var(--border)", "stroke-dasharray": "4 6" }));
+
+  // ── Maven: linear chain, always fully executed ──
+  const mst = s.mvn ?? RUN;                       // phases share one state per scenario
+  MP.forEach((p, i) => {
+    const y = 54 + i * 44, x = 130, w = 210, h = 32;
+    const ran = mst === RUN;
+    const g = el("g", { "data-viz-id": `mvn-phase-${p}`,
+      "data-label": `Maven phase ${p} — ${ran ? "EXECUTED" : ST[mst].label}` });
+    g.append(el("rect", { x, y, width: w, height: h, rx: 7, fill: ran ? MVN : "var(--bg)",
+      stroke: ran ? "none" : MVN, "stroke-width": 1.4, "stroke-dasharray": ran ? null : "2 4",
+      opacity: ran ? 0.9 : 0.5 }));
+    const t = el("text", { x: x + w / 2, y: y + 21, "text-anchor": "middle", "font-size": 13,
+      "font-weight": 600, fill: ran ? "var(--bg)" : MVN, opacity: ran ? 1 : 0.75,
+      "font-family": "var(--mono)" });
+    t.append(txt(p)); g.append(t);
+    if (i < MP.length - 1)
+      g.append(el("line", { x1: x + w / 2, y1: y + h, x2: x + w / 2, y2: y + 44, stroke: MVN,
+        "stroke-width": 2, opacity: ran ? 0.7 : 0.25, "marker-end": "url(#mah)" }));
+    mech.append(g);
+  });
+  const mn = el("text", { x: 235, y: 336, "text-anchor": "middle", "font-size": 11.5, fill: "var(--faint)" });
+  mn.append(txt(mst === RUN ? "no node can be skipped — there is nothing to ask"
+                            : "nothing executes — the POM is data, so it is simply re-read"));
+  mech.append(mn);
+
+  // ── Gradle: DAG, per-node state ──
+  const byId = Object.fromEntries(GT.map((t) => [t.id, t]));
+  for (const [a, b] of GE) {
+    const A = byId[a], B = byId[b];
+    const st = s.g[b];
+    mech.append(el("path", {
+      d: `M ${A.x + A.w / 2} ${A.y + A.h} C ${A.x + A.w / 2} ${A.y + A.h + 9}, ${B.x + B.w / 2} ${B.y - 9}, ${B.x + B.w / 2} ${B.y}`,
+      fill: "none", stroke: st === RUN ? "var(--c5)" : "var(--faint)", "stroke-width": 1.6,
+      opacity: st === RUN ? 0.8 : 0.4, "marker-end": st === RUN ? "url(#mahc)" : "url(#mah)" }));
+  }
+  GT.forEach((t) => {
+    const st = s.g[t.id], k = ST[st];
+    const g = el("g", { "data-viz-id": `gradle-task-${t.id}`, "data-label": `Gradle task ${t.id} — ${k.label}` });
+    g.append(el("rect", { x: t.x, y: t.y, width: t.w, height: t.h, rx: 7, fill: k.fill,
+      stroke: STROKE[st], "stroke-width": 1.6, "stroke-dasharray": k.dash, opacity: k.op }));
+    const a = el("text", { x: t.x + 11, y: t.y + 18, "font-size": 12.5, "font-weight": 600,
+      fill: TEXTC[st], "font-family": "var(--mono)" });
+    a.append(txt(t.id)); g.append(a);
+    const b = el("text", { x: t.x + 11, y: t.y + 32, "font-size": 9,
+      "letter-spacing": "0.1em", fill: st === RUN ? "var(--bg)" : STROKE[st], opacity: 0.9 });
+    b.append(txt(k.label)); g.append(b);
+    g.append(el("title", {}, [txt(`${t.id}: ${k.label}`)]));
+    mech.append(g);
+  });
+
+  // ── wall-clock bars, drawn to scale ──
+  const bl = el("text", { x: 130, y: 360, "font-size": 11, "letter-spacing": "0.1em", fill: "var(--faint)" });
+  bl.append(txt("WALL-CLOCK, RELATIVE TO A COLD MAVEN BUILD")); mech.append(bl);
+  for (const [x0, t, col, name] of [[BAR_X_M, s.mt, MVN, "Maven"], [BAR_X_G, s.gt, GRD, "Gradle"]]) {
+    const g = el("g", { "data-viz-id": `time-${name.toLowerCase()}`, "data-label": `${name} relative time ${t}` });
+    g.append(el("rect", { x: x0, y: BAR_Y, width: 100 * BAR_SCALE, height: 22, rx: 4,
+      fill: "var(--panel-2)" }));
+    g.append(el("rect", { x: x0, y: BAR_Y, width: Math.max(3, t * BAR_SCALE), height: 22, rx: 4, fill: col }));
+    const v = el("text", { x: x0 + 100 * BAR_SCALE + 10, y: BAR_Y + 16, "font-size": 13,
+      "font-weight": 700, fill: col });
+    v.append(txt(`${t}`)); g.append(v);
+    const n = el("text", { x: x0, y: BAR_Y + 38, "font-size": 11.5, fill: "var(--muted)" });
+    n.append(txt(name)); g.append(n);
+    mech.append(g);
+  }
+
+  // Where the same Maven build lands once mvnd is holding a warm JVM. Indicative,
+  // not measured — it is here because leaving it out is how Maven gets read as slow.
+  if (s.md !== undefined && s.md < s.mt) {
+    const mx = BAR_X_M + s.md * BAR_SCALE;
+    const g = el("g", { "data-viz-id": "time-mvnd", "data-label": `Maven with mvnd, indicative ${s.md}` });
+    // label sits BELOW the bar — above it collides with the wall-clock caption
+    g.append(el("line", { x1: mx, y1: BAR_Y - 3, x2: mx, y2: BAR_Y + 26, stroke: "var(--warn)",
+      "stroke-width": 2 }));
+    g.append(el("path", { d: `M ${mx - 5} ${BAR_Y + 33} L ${mx + 5} ${BAR_Y + 33} L ${mx} ${BAR_Y + 26} Z`,
+      fill: "var(--warn)" }));
+    const l = el("text", { x: mx, y: BAR_Y + 45, "text-anchor": "middle", "font-size": 10,
+      "font-weight": 700, fill: "var(--warn)", "font-family": "var(--mono)" });
+    l.append(txt(`▲ mvnd ≈${s.md}`)); g.append(l);
+    g.append(el("title", {}, [txt(`Same Maven build with a warm mvnd daemon — indicative, ~${s.md} vs ${s.mt}`)]));
+    mech.append(g);
+  }
+  if (s.note) {
+    const n = el("text", { x: 130, y: BAR_Y + 60, "font-size": 10.5, fill: "var(--warn)" });
+    n.append(txt(s.note)); mech.append(n);
+  }
+
+  $("#mc").textContent = `${mechStep + 1} / ${MECH.length}`;
+  $("#mcap").innerHTML = s.cap;
+  persist();
+}
+
+$("#mech-legend").innerHTML = [
+  ["var(--c5)", "var(--c5)", null, "<b>EXECUTED</b> — actually did the work"],
+  ["var(--bg)", "var(--faint)", null, "<b>UP-TO-DATE</b> — inputs unchanged, skipped"],
+  ["var(--bg)", "var(--accent)", "3 3", "<b>FROM-CACHE</b> — output pulled, not rebuilt"],
+  ["var(--bg)", "var(--warn)", null, "<b>RE-CONFIGURED</b> — build logic re-run to learn the project"],
+  ["var(--bg)", "var(--faint)", "2 3", "<b>NOT RUN</b> — nothing executed at all"],
+].map(([f, st, d, l]) =>
+  `<span><svg width="15" height="15" style="display:inline-block;vertical-align:-3px;width:15px" viewBox="0 0 15 15"><rect x="1" y="3" width="13" height="10" rx="2" fill="${f}" stroke="${st}" stroke-width="1.5" ${d ? `stroke-dasharray="${d}"` : ""}/></svg> ${l}</span>`
+).join("") + `<span style="color:var(--faint)"><b>Bar length</b> = wall-clock, same scale in both columns.</span>`
+  + `<span style="color:var(--warn)"><b>▲ mvnd tick</b> = the same Maven build with a warm daemon — indicative, not measured.</span>`;
+
+const mstep = stepper({ n: MECH.length, hashKey: "mstep", onStep: (i) => { mechStep = i; drawMech(); } });
+mstep.go(mechStep);
+$("#mn").onclick = () => mstep.next();
+$("#mp").onclick = () => mstep.prev();
+
+/* ══════════════════════════════════════════════════════════════════════
+   04 · BENCHMARKS — Gradle's own multipliers, log scale.
+   ══════════════════════════════════════════════════════════════════ */
+const SCEN = [
+  { id: "clean", label: "clean build",        col: "var(--c7)" },
+  { id: "inc",   label: "incremental change", col: "var(--c5)" },
+  { id: "cache", label: "with build cache",   col: "var(--c4)" },
+];
+const BENCH = [
+  { name: "Single library",      sub: "commons-lang3", clean: [1.7, "1.7×"], inc: null,        cache: [30, "up to 30×"] },
+  { name: "10 modules",          sub: "small multi-project", clean: [2.5, "2–3×"], inc: [7, "~7×"],  cache: [14, "up to 14×"] },
+  { name: "100 modules",         sub: "medium multi-project", clean: [4.5, "4–5×"], inc: [40, "~40×"], cache: [13, "up to 13×"] },
+  { name: "500 modules",         sub: "large multi-project", clean: [6.5, "3–10×"], inc: [85, "~85×"], cache: [13, "up to 13×"] },
+  { name: "50,000 source files", sub: "one monolith", clean: [2.5, "2–3×"], inc: [7, "~7×"],  cache: [3, "up to 3×"] },
+];
+const BX0 = 220, BW = 620, bx = (v) => BX0 + (Math.log10(v) / 2) * BW;
+const on = new Set(SCEN.map((s) => s.id));
+
+const brow = $("#bench-row");
+SCEN.forEach((s) => {
+  const b = document.createElement("button");
+  b.className = "ctl"; b.type = "button";
+  b.dataset.vizId = `scen-${s.id}`; b.dataset.label = s.label;
+  b.innerHTML = `<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${s.col};margin-right:7px;vertical-align:0"></span>${s.label}`;
+  b.onclick = () => { on.has(s.id) ? on.delete(s.id) : on.add(s.id); drawBench(); };
+  brow.append(b);
+});
+
+const bench = $("#bench-svg");
+function drawBench() {
+  [...brow.children].forEach((b, i) => b.setAttribute("aria-pressed", String(on.has(SCEN[i].id))));
+  bench.replaceChildren();
+  for (const v of [1, 2, 5, 10, 20, 50, 100]) {
+    const x = bx(v);
+    bench.append(el("line", { x1: x, y1: 34, x2: x, y2: 370, stroke: "var(--border)",
+      "stroke-dasharray": v === 1 ? null : "3 5", "stroke-width": v === 1 ? 1.5 : 1 }));
+    const t = el("text", { x, y: 26, "text-anchor": "middle", class: "tick" });
+    t.append(txt(v === 1 ? "1× (parity)" : v + "×")); bench.append(t);
+  }
+  const ax = el("text", { x: BX0 + BW / 2, y: 392, "text-anchor": "middle", class: "tick" });
+  ax.append(txt("claimed Gradle speed-up vs Maven — logarithmic axis, each gridline is a different order of change"));
+  bench.append(ax);
+
+  BENCH.forEach((row, i) => {
+    const y0 = 50 + i * 64;
+    const active = SCEN.filter((s) => on.has(s.id));
+    const n = el("text", { x: 208, y: y0 + 24, "text-anchor": "end", "font-size": 13,
+      "font-weight": 600, fill: "var(--text)" });
+    n.append(txt(row.name)); bench.append(n);
+    const sb = el("text", { x: 208, y: y0 + 40, "text-anchor": "end", "font-size": 10.5, fill: "var(--faint)" });
+    sb.append(txt(row.sub)); bench.append(sb);
+
+    active.forEach((s, j) => {
+      const d = row[s.id], y = y0 + j * 18;
+      if (!d) {
+        const t = el("text", { x: BX0 + 8, y: y + 12, "font-size": 10.5, fill: "var(--faint)",
+          "font-style": "italic" });
+        t.append(txt("not published for this project size")); bench.append(t);
+        return;
+      }
+      const g = el("g", { "data-viz-id": `bench-${i}-${s.id}`,
+        "data-label": `${row.name}, ${s.label}: ${d[1]} faster` });
+      g.append(el("rect", { x: BX0, y, width: Math.max(2, bx(d[0]) - BX0), height: 15, rx: 3,
+        fill: s.col, opacity: 0.88 }));
+      const v = el("text", { x: bx(d[0]) + 8, y: y + 12, "font-size": 11.5, "font-weight": 700, fill: s.col });
+      v.append(txt(d[1])); g.append(v);
+      g.append(el("title", {}, [txt(`${row.name} · ${s.label} · ${d[1]} faster than Maven`)]));
+      bench.append(g);
+    });
+    if (!active.length) {
+      const t = el("text", { x: BX0 + 8, y: y0 + 22, "font-size": 11.5, fill: "var(--faint)" });
+      t.append(txt("no scenario selected")); bench.append(t);
+    }
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   06 · ROUTER — first yes wins.
+   ══════════════════════════════════════════════════════════════════ */
+const TAGS = { hard:  ["hard constraint",      "var(--danger)"],
+               soft:  ["preference",           "var(--faint)"],
+               money: ["cost, not capability", "var(--warn)"] };
+const Q = [
+  { q: "Are you building an Android app?", tag: "hard",
+    t: "Gradle. This is not a decision.", side: "g",
+    d: "Not a convention — a dependency. The Android-specific work (manifest and resource merging, dexing, R8 shrinking, the build-variant matrix, AAB packaging and signing) is performed <i>by</i> the Android Gradle Plugin, which Google ships for Gradle and only Gradle. Dropping Gradle means reimplementing Google's toolchain. The old community android-maven-plugin never tracked the platform through App Bundles, R8 or Compose." },
+  { q: "Do you target anything that isn't the JVM — Kotlin/Native, JS, wasm, iOS?", tag: "hard",
+    t: "Gradle.", side: "g",
+    d: "The toolchain that compiles to those targets ships as a Gradle plugin. Maven has never seriously competed here and is not trying to. Kotlin Multiplatform in particular is Gradle-only in practice." },
+  { q: "Are your build agents stuck on a JVM below Java 17, and you can't change that?", tag: "hard",
+    t: "Maven — on a version still being maintained.", side: "m",
+    d: "<b>Careful: there are two Java versions in play.</b> The JVM that <i>runs the build tool</i>, and the Java you <i>compile against</i>. Both tools decouple these with toolchains, so needing to emit Java 8 bytecode constrains neither — Gradle 9 runs on 17 and happily targets 8.<br><br>This only bites on the first one. Gradle 9 <b>will not start</b> below Java 17. Gradle 8.x still runs on Java 8 but has been warning for years that this ends, so it is a frozen path. Maven 3.9.16 runs on Java 8 and shipped three months ago." },
+  { q: "Must your dependency graph be derivable without executing build code?", tag: "hard",
+    t: "Maven.", side: "m",
+    d: "The property is <b>static readability</b>, not offline-ness — both tools work fine offline. To know a Maven project's dependencies you parse a file; to know a Gradle project's you run its build logic. Where &ldquo;we do not execute untrusted code to enumerate our dependencies&rdquo; is a written control — regulated finance, defence, parts of healthcare — that is decisive. It is also why SBOM, licence-scanning and Renovate tooling has an easier time with Maven generally." },
+  { q: "Is there an existing Maven build that already works?", tag: "soft",
+    t: "Stay on Maven — but fix the speed first.", side: "m",
+    d: "Adopt <b>mvnd</b> and the <b>maven-build-cache-extension</b> before you consider migrating. That is an afternoon; a Gradle migration on a real codebase is weeks, and it re-derives build logic that is currently boring and correct. Most teams who believe Maven is slow have never run the daemon. Migrate only if you tried the afternoon and it genuinely wasn't enough." },
+  { q: "Is CI wall-clock a budget line — 100+ modules, or builds people sit and wait on?", tag: "money",
+    t: "Gradle, with a remote build cache.", side: "g",
+    d: "This is economic rather than absolute: both tools <i>can</i> do it, but remote caching is Gradle's architecture and Maven's opt-in extension. This is the exact shape the benchmarks in §04 were written about and the one case where the big multipliers are honestly earned. Budget for the upgrade tax on every Gradle major, and for Develocity if you want the best of it." },
+  { q: "Publishing an open-source library, or running a low-churn estate?", tag: "soft",
+    t: "Maven.", side: "m",
+    d: "Drive-by contributors already know it, downstream consumers can read your build without running it, and upgrades will not interrupt you for a decade. Build speed you will never notice is not worth trading for that." },
+];
+const DEFAULT_T = { t: "Nothing forces you. This is tabs-versus-spaces.", side: "m",
+  d: "You cleared all four hard constraints and both economic ones, which puts you with the majority of JVM projects. Either tool will do this job. If you want a tiebreak: take the one 67% of the ecosystem already knows and whose upgrades are non-events — but that is a preference, and anyone who tells you it is an engineering decision is selling something. Revisit only if CI time becomes something you actually complain about." };
+
+const QY = [20, 108, 196, 284, 372, 460, 548], QX = 40, QW = 340, QH = 54, TX = 480, TW = 380;
+let routeAns = [];
+const rsvg = $("#router-svg");
+
+function nodeBox(g, x, y, w, h, { fill, stroke, dash, text, sub, tcol, bold }) {
+  g.append(el("rect", { x, y, width: w, height: h, rx: 9, fill, stroke,
+    "stroke-width": 1.6, "stroke-dasharray": dash }));
+  const t = el("text", { x: x + 14, y: sub ? y + 22 : y + h / 2 + 5, "font-size": 12.5,
+    "font-weight": bold ? 700 : 500, fill: tcol });
+  t.append(txt(text)); g.append(t);
+  if (sub) {
+    const s = el("text", { x: x + 14, y: y + 39, "font-size": 10.5, fill: "var(--faint)" });
+    s.append(txt(sub)); g.append(s);
+  }
+}
+
+function drawRouter() {
+  rsvg.replaceChildren();
+  const defs = el("defs");
+  for (const [id, c] of [["rah", "var(--faint)"], ["rahg", GRD], ["rahm", MVN]]) {
+    const m = el("marker", { id, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 5.5,
+      markerHeight: 5.5, orient: "auto-start-reverse" });
+    m.append(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c }));
+    defs.append(m);
+  }
+  rsvg.append(defs);
+
+  const active = routeAns.length;                 // index of the live question
+  const yesAt = routeAns.indexOf("y");            // -1 if none
+  const done = yesAt >= 0 || routeAns.length === Q.length;
+  const chosen = yesAt >= 0 ? Q[yesAt] : (routeAns.length === Q.length ? DEFAULT_T : null);
+
+  Q.forEach((q, i) => {
+    const y = QY[i], live = i === active && !done, past = i < active;
+    const g = el("g", { "data-viz-id": `q-${i}`, "data-label": `Question ${i + 1}: ${q.q}` });
+
+    // yes edge → terminal
+    const yes = routeAns[i] === "y";
+    g.append(el("line", { x1: QX + QW, y1: y + QH / 2, x2: TX, y2: y + QH / 2,
+      stroke: yes ? (q.side === "g" ? GRD : MVN) : "var(--border)", "stroke-width": yes ? 2.4 : 1.4,
+      "marker-end": yes ? (q.side === "g" ? "url(#rahg)" : "url(#rahm)") : "url(#rah)",
+      opacity: yes ? 1 : 0.4 }));
+
+    // no edge → next question
+    if (i < Q.length - 1)
+      g.append(el("line", { x1: QX + QW / 2, y1: y + QH, x2: QX + QW / 2, y2: QY[i + 1],
+        stroke: routeAns[i] === "n" ? "var(--text)" : "var(--border)",
+        "stroke-width": routeAns[i] === "n" ? 2.2 : 1.4, "marker-end": "url(#rah)",
+        opacity: routeAns[i] === "n" ? 0.9 : 0.4 }));
+
+    nodeBox(g, QX, y, QW, QH, {
+      fill: live ? "var(--panel-2)" : "var(--panel)",
+      stroke: live ? "var(--accent)" : "var(--border)",
+      text: `${i + 1}.`, tcol: live ? "var(--accent)" : "var(--faint)", bold: true,
+    });
+    const wrap = el("foreignObject", { x: QX + 34, y: y + 6, width: QW - 44, height: QH - 12 });
+    const div = document.createElement("div");
+    div.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+    div.style.cssText = `font:500 12.5px/1.3 var(--sans);color:${live ? "var(--text)" : past ? "var(--faint)" : "var(--muted)"};display:flex;align-items:center;height:100%`;
+    div.textContent = q.q;
+    wrap.append(div); g.append(wrap);
+
+    if (live) {
+      for (const [lbl, key, px, py] of [["YES →", "y", QX + QW + 6, y + QH / 2 - 11],
+                                        ["NO ↓", "n", QX + QW / 2 - 26, y + QH + 9]]) {
+        const b = el("g", { class: "hit", "data-viz-id": `q-${i}-${key}`, "data-label": `${q.q} → ${key === "y" ? "yes" : "no"}` });
+        b.append(el("rect", { x: px, y: py, width: 52, height: 22, rx: 11,
+          fill: "var(--accent)", opacity: 0.92 }));
+        const t = el("text", { x: px + 26, y: py + 15, "text-anchor": "middle", "font-size": 10.5,
+          "font-weight": 700, fill: "var(--bg)" });
+        t.append(txt(lbl)); b.append(t);
+        b.addEventListener("click", () => { routeAns[i] = key; routeAns.length = i + 1; drawRouter(); });
+        g.append(b);
+      }
+    }
+    rsvg.append(g);
+
+    // terminal for this question's yes
+    const tg = el("g", { "data-viz-id": `t-${i}`, "data-label": `Outcome: ${q.t}` });
+    const picked = routeAns[i] === "y";
+    nodeBox(tg, TX, y, TW, QH, {
+      fill: picked ? (q.side === "g" ? "rgba(78,201,176,0.16)" : "rgba(188,140,255,0.16)") : "var(--panel)",
+      stroke: picked ? (q.side === "g" ? GRD : MVN) : "var(--border)",
+      dash: picked ? null : "4 4",
+      text: q.t, tcol: picked ? (q.side === "g" ? GRD : MVN) : "var(--faint)", bold: picked,
+    });
+    const [tl, tc] = TAGS[q.tag];
+    const tb = el("text", { x: TX + TW - 12, y: y + 17, "text-anchor": "end", "font-size": 8.5,
+      "letter-spacing": "0.1em", fill: tc, "font-family": "var(--mono)", opacity: picked ? 1 : 0.7 });
+    tb.append(txt(tl.toUpperCase())); tg.append(tb);
+    tg.setAttribute("opacity", picked ? 1 : 0.5);
+    rsvg.append(tg);
+  });
+
+  // fall-through terminal
+  const fell = routeAns.length === Q.length && yesAt < 0;
+  const fg = el("g", { "data-viz-id": "t-default", "data-label": `Outcome: ${DEFAULT_T.t}` });
+  fg.append(el("path", { d: `M ${QX + QW / 2} ${QY[Q.length - 1] + QH} L ${QX + QW / 2} 663 L ${TX} 663`,
+    fill: "none", stroke: fell ? "var(--text)" : "var(--border)", "stroke-width": fell ? 2.2 : 1.4,
+    "marker-end": fell ? "url(#rahm)" : "url(#rah)", opacity: fell ? 0.9 : 0.4 }));
+  nodeBox(fg, TX, 636, TW, QH, {
+    fill: fell ? "rgba(188,140,255,0.16)" : "var(--panel)",
+    stroke: fell ? MVN : "var(--border)", dash: fell ? null : "4 4",
+    text: DEFAULT_T.t, tcol: fell ? MVN : "var(--faint)", bold: fell,
+  });
+  const ft = el("text", { x: TX + TW - 12, y: 653, "text-anchor": "end", "font-size": 8.5,
+    "letter-spacing": "0.1em", fill: "var(--faint)", "font-family": "var(--mono)" });
+  ft.append(txt("NO CONSTRAINT — TASTE")); fg.append(ft);
+  fg.setAttribute("opacity", fell ? 1 : 0.5);
+  rsvg.append(fg);
+
+  $("#rout-detail").innerHTML = chosen
+    ? `<div class="dh"><div class="dt" style="color:${chosen.side === "g" ? GRD : MVN}">${esc(chosen.t)}</div></div><p style="margin:0;color:var(--muted)">${chosen.d}</p>`
+    : `<p style="margin:0;color:var(--faint)">Answer question ${active + 1} above. The first <b>yes</b> ends the chart — the questions are ordered by how hard a constraint they are, so the earliest one that applies to you is the one that actually decides it.</p>`;
+}
+$("#rreset").onclick = () => { routeAns = []; drawRouter(); };
+
+/* ══════════════════════════════════════════════════════════════════════
+   07 · CONVERGENCE — x = who had it first; arrow tip = how far it landed.
+   ══════════════════════════════════════════════════════════════════ */
+const RAIL_M = 140, RAIL_G = 800;
+const CONV = [
+  { from: "g", tip: 158, label: "Pin the tool version in the repo",  note: "→ Maven Wrapper (mvnw), shipped" },
+  { from: "g", tip: 320, label: "A warm daemon instead of a cold JVM", note: "→ mvnd, and mvnsh in Maven 4 — opt-in / RC" },
+  { from: "g", tip: 430, label: "Hash the inputs, reuse the outputs", note: "→ maven-build-cache-extension — opt-in" },
+  { from: "g", tip: 335, label: "Parallel-aware, resumable reactor",  note: "→ Maven 4 -b concurrent and --resume — RC only" },
+  { from: "m", tip: 690, label: "Configuration that is data you can cache", note: "→ configuration cache: preferred in 9.0, default target 10" },
+  { from: "m", tip: 600, label: "Projects that cannot reach into each other", note: "→ Isolated Projects, incubating in 9.7" },
+  { from: "m", tip: 330, label: "A build file you can read without running it", note: "→ still open: IDE sync must execute build logic", open: true },
+];
+const conv = $("#conv-svg");
+function drawConv() {
+  conv.replaceChildren();
+  const defs = el("defs");
+  for (const [id, c] of [["cam", MVN], ["cag", GRD], ["caw", "var(--warn)"]]) {  // head matches its line
+    const m = el("marker", { id, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 6,
+      markerHeight: 6, orient: "auto-start-reverse" });
+    m.append(el("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: c }));
+    defs.append(m);
+  }
+  conv.append(defs);
+
+  for (const [x, col, name, anchor] of [[RAIL_M, MVN, "MAVEN", "start"], [RAIL_G, GRD, "GRADLE", "end"]]) {
+    conv.append(el("line", { x1: x, y1: 60, x2: x, y2: 408, stroke: col, "stroke-width": 3, opacity: 0.55 }));
+    const t = el("text", { x: anchor === "start" ? x - 4 : x + 4, y: 42, "text-anchor": anchor,
+      "font-size": 13, "font-weight": 700, fill: col, "letter-spacing": "0.1em" });
+    t.append(txt(name)); conv.append(t);
+  }
+  const sub = el("text", { x: 470, y: 42, "text-anchor": "middle", "font-size": 11, fill: "var(--faint)" });
+  sub.append(txt("arrow starts at whoever had the idea · tip shows how far it has actually landed on the other side"));
+  conv.append(sub);
+
+  CONV.forEach((c, i) => {
+    const y = 88 + i * 46;
+    const src = c.from === "g" ? RAIL_G : RAIL_M;
+    const col = c.open ? "var(--warn)" : (c.from === "g" ? GRD : MVN);
+    const mk = c.open ? "url(#caw)" : (c.from === "g" ? "url(#cag)" : "url(#cam)");
+    const g = el("g", { "data-viz-id": `conv-${i}`,
+      "data-label": `${c.label} — originated with ${c.from === "g" ? "Gradle" : "Maven"} ${c.note}` });
+
+    g.append(el("circle", { cx: src, cy: y, r: 4, fill: col }));
+    g.append(el("line", { x1: src, y1: y, x2: c.tip, y2: y, stroke: col, "stroke-width": 2,
+      "stroke-dasharray": c.open ? "6 5" : null, opacity: 0.85, "marker-end": mk }));
+
+    const mid = (src + c.tip) / 2;
+    const t = el("text", { x: mid, y: y - 9, "text-anchor": "middle", "font-size": 12,
+      "font-weight": 600, fill: "var(--text)" });
+    t.append(txt(c.label)); g.append(t);
+    const n = el("text", { x: mid, y: y + 18, "text-anchor": "middle", "font-size": 10.5,
+      fill: c.open ? "var(--warn)" : "var(--faint)" });
+    n.append(txt(c.note)); g.append(n);
+    g.append(el("title", {}, [txt(`${c.label} ${c.note}`)]));
+    conv.append(g);
+  });
+
+  const k = el("text", { x: 470, y: 442, "text-anchor": "middle", "font-size": 11, fill: "var(--faint)" });
+  k.append(txt("A short arrow means the idea has been copied in name but not yet in practice. A dashed one means it has not been copied at all."));
+  conv.append(k);
+}
+
+/* ── init ── */
+drawBoard();
+drawRoot();
+drawBench();
+drawRouter();
+drawConv();
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

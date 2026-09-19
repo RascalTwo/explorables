@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gdml6LmpzIOKAlCBzaGFyZWQgaGVscGVycyBmb3IgL3ZpeiBwYWdlcy4gTG9hZCB3aXRoOgovLyAgIDxzY3JpcHQgdHlwZT0ibW9kdWxlIj4KLy8gICAgIGltcG9ydCB7IGFycm93TWFya2VycywgY29ubmVjdCwgc2lkZSwgbGFiZWxCb3gsIHZpekF1ZGl0LCAkLCAkJCwgZXNjLCBzYXZlSGFzaCwgbG9hZEhhc2gsIHZpekVudiB9IGZyb20gIi9fa2l0L3Zpei5qcyI7Ci8vICAgPC9zY3JpcHQ+Ci8vIFNlcnZlZCBieSB0aGUgdml6IHNlcnZlciBhdCAvX2tpdC92aXouanMgZnJvbSB0aGUgc2tpbGwncyBvd24ga2l0LyBkaXIsIHNvIGl0J3MKLy8gb25lIHNvdXJjZSBvZiB0cnV0aCBhY3Jvc3MgZXZlcnkgdml6LiBQYWlycyB3aXRoIC9fa2l0L3Zpei1raXQuY3NzLgoKZXhwb3J0IGNvbnN0IFNWR05TID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIjsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLy8gRGVmYXVsdCBhcnJvd2hlYWQgcGFsZXR0ZSwga2V5ZWQgdG8gdGhlIHZpei1raXQgaW50ZW50IHRva2Vucy4gU1ZHIG1hcmtlcnMgY2FuJ3QKLy8gaW5oZXJpdCB0aGUgc3Ryb2tlIGNvbG9yIG9mIHRoZSBsaW5lIHRoYXQgdXNlcyB0aGVtLCBzbyB5b3UgZ2VudWluZWx5IG5lZWQgb25lCi8vIG1hcmtlciBwZXIgY29sb3Ig4oCUIHRoaXMgZW1pdHMgdGhlbSBhbGwgd2l0aCBzdGFibGUgaWRzIHNvIHlvdSBzdG9wIHJlLWRlcml2aW5nCi8vIHRoZSBzYW1lIDxtYXJrZXI+IGJsb2NrIHBlciBkaWFncmFtLiBSZWZlcmVuY2UgYXMgbWFya2VyLWVuZD0idXJsKCNhaC1hY2NlbnQpIi4KLy8KLy8gVGhlc2UgYXJlIHZhcigpIHJlZmVyZW5jZXMsIG5vdCBoZXhlcywgT04gUFVSUE9TRTogYSBwYWdlIHRoYXQgb3ZlcnJpZGVzIHRoZQovLyB0b2tlbnMgKHNlZSBraXQvUkVBRE1FLm1kKSByZS10aGVtZXMgaXRzIGFycm93aGVhZHMgZm9yIGZyZWUuIEhhcmRjb2RpbmcgdGhlCi8vIGhleGVzIGhlcmUgd291bGQgc2lsZW50bHkgc3RyYW5kIGV2ZXJ5IG1hcmtlciBhdCB0aGUgZGVmYXVsdCBwYWxldHRlLgpjb25zdCBERUZBVUxUX01BUktFUlMgPSB7CiAgYWg6ICJ2YXIoLS1tdXRlZCkiLCAvLyB0aGUgZGVmYXVsdCBlZGdlCiAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAiYWgtZ29vZCI6ICJ2YXIoLS1nb29kKSIsCiAgImFoLXdhcm4iOiAidmFyKC0td2FybikiLAogICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07CgovLyBSZXR1cm5zIGEgPGRlZnM+4oCmPC9kZWZzPiBzdHJpbmcuIERyb3AgaXQgb25jZSBhdCB0aGUgdG9wIG9mIHlvdXIgPHN2Zz4uCmV4cG9ydCBmdW5jdGlvbiBhcnJvd01hcmtlcnMocGFsZXR0ZSA9IERFRkFVTFRfTUFSS0VSUykgewogIGNvbnN0IG1hcmtlcnMgPSBPYmplY3QuZW50cmllcyhwYWxldHRlKQogICAgLm1hcCgKICAgICAgKFtpZCwgZmlsbF0pID0+CiAgICAgICAgYDxtYXJrZXIgaWQ9IiR7aWR9IiB2aWV3Qm94PSIwIDAgMTAgMTAiIHJlZlg9IjkiIHJlZlk9IjUiIGAgKwogICAgICAgIGBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8tc3RhcnQtcmV2ZXJzZSI+YCArCiAgICAgICAgYDxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgZmlsbD0iJHtmaWxsfSIvPjwvbWFya2VyPmAsCiAgICApCiAgICAuam9pbigiIik7CiAgcmV0dXJuIGA8ZGVmcz4ke21hcmtlcnN9PC9kZWZzPmA7Cn0KCi8vIEEgbm9kZSBpcyBqdXN0IHt4LCB5LCB3LCBofS4gY2VudGVyKCkgYW5kIHNpZGUoKSBkZXJpdmUgY29ubmVjdGlvbiBwb2ludHMgZnJvbQovLyBpdCwgc28gYW4gZWRnZSBzdGF5cyBhdHRhY2hlZCB0byB0aGUgYm94IG5vIG1hdHRlciBob3cgdGhlIGJveCBjaGFuZ2VzLgpleHBvcnQgY29uc3QgY2VudGVyID0gKG4pID0+ICh7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCAvIDIgfSk7CgpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4KICAoewogICAgdG9wOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSB9LAogICAgYm90dG9tOiB7IHg6IG4ueCArIG4udyAvIDIsIHk6IG4ueSArIG4uaCB9LAogICAgbGVmdDogeyB4OiBuLngsIHk6IG4ueSArIG4uaCAvIDIgfSwKICAgIHJpZ2h0OiB7IHg6IG4ueCArIG4udywgeTogbi55ICsgbi5oIC8gMiB9LAogIH0pW3doZXJlXTsKCi8vIFN0cmFpZ2h0IGVkZ2UgYmV0d2VlbiB0d28gbm9kZXMsIGF1dG8tcGlja2luZyB0aGUgZmFjaW5nIHNpZGVzIGJhc2VkIG9uIHRoZWlyCi8vIHJlbGF0aXZlIHBvc2l0aW9uLiBSZXR1cm5zIGFuIFNWRyBwYXRoICJkIiBzdHJpbmc7IHNldCB0aGUgbWFya2VyIHlvdXJzZWxmIHZpYQovLyB0aGUgZWxlbWVudCdzIG1hcmtlci1lbmQgYXR0cmlidXRlLiBGb3IgPjUgbm9kZXMgd2l0aCBjcm9zc2luZyBlZGdlcywgcmVhY2ggZm9yCi8vIGEgbGF5b3V0IGVuZ2luZSAoZGFncmUgLyBkMy1kYWcgLyBtZXJtYWlkKSBpbnN0ZWFkIG9mIHBsYWNpbmcgbm9kZXMgYnkgaGFuZCDigJQKLy8gdGhhdCdzIHRoZSBwb2ludCB3aGVyZSBtYW51YWwgY29vcmRpbmF0ZXMgc3RvcCBiZWluZyB3b3J0aCBpdC4KZXhwb3J0IGZ1bmN0aW9uIGNvbm5lY3QoYSwgYikgewogIGNvbnN0IGNhID0gY2VudGVyKGEpLAogICAgY2IgPSBjZW50ZXIoYik7CiAgY29uc3QgaG9yaXogPSBNYXRoLmFicyhjYi54IC0gY2EueCkgPiBNYXRoLmFicyhjYi55IC0gY2EueSk7CiAgY29uc3QgcGEgPSBob3JpegogICAgPyBzaWRlKGEsIGNiLnggPiBjYS54ID8gInJpZ2h0IiA6ICJsZWZ0IikKICAgIDogc2lkZShhLCBjYi55ID4gY2EueSA/ICJib3R0b20iIDogInRvcCIpOwogIGNvbnN0IHBiID0gaG9yaXoKICAgID8gc2lkZShiLCBjYi54ID4gY2EueCA/ICJsZWZ0IiA6ICJyaWdodCIpCiAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICByZXR1cm4gYE0gJHtwYS54fSAke3BhLnl9IEwgJHtwYi54fSAke3BiLnl9YDsKfQoKLy8gQSBsYWJlbCB0aGF0IENBTk5PVCBvdmVyZmxvdyBpdHMgYm94LiA8Zm9yZWlnbk9iamVjdD4gbGV0cyB0aGUgYnJvd3NlciB3cmFwIGFuZAovLyBlbGxpcHNpemUgSFRNTCBuYXRpdmVseSwgdW5saWtlIHJhdyA8dGV4dD4gd2hpY2ggeW91J2QgaGF2ZSB0byBtZWFzdXJlIGJ5IGhhbmQKLy8gKGFuZCBoaXN0b3JpY2FsbHkgZ3Vlc3NlZCB3cm9uZykuIFVzZSB0aGlzIGZvciBhbnkgbXVsdGktd29yZCBsYWJlbCBpbnNpZGUgYQovLyBmaXhlZC13aWR0aCBib3guIFN0eWxlIHZpYSB0aGUgLnZzdmctbGFiZWwgY2xhc3MgaW4gdml6LWtpdC5jc3MuCmV4cG9ydCBmdW5jdGlvbiBsYWJlbEJveChub2RlLCBodG1sLCBjbHMgPSAiIikgewogIHJldHVybiAoCiAgICBgPGZvcmVpZ25PYmplY3QgeD0iJHtub2RlLnh9IiB5PSIke25vZGUueX0iIHdpZHRoPSIke25vZGUud30iIGhlaWdodD0iJHtub2RlLmh9Ij5gICsKICAgIGA8ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBjbGFzcz0idnN2Zy1sYWJlbCAke2Nsc30iPiR7aHRtbH08L2Rpdj5gICsKICAgIGA8L2ZvcmVpZ25PYmplY3Q+YAogICk7Cn0KCi8vIFZlcmlmaWNhdGlvbiBiYWNrc3RvcC4gSWYgeW91IERPIGhhbmQtcm9sbCA8dGV4dD4sIGNhbGwgdGhpcyBvbmNlIGFmdGVyIHJlbmRlcjoKLy8gaXQgb3V0bGluZXMgKGluIHJlZCkgYW55IDx0ZXh0PiB3aG9zZSBib3VuZGluZyBib3ggc3BpbGxzIHBhc3QgdGhlIDxyZWN0PiBpbiBpdHMKLy8gZ3JvdXAsIGFuZCBkcm9wcyBhIGZpeGVkIGJhbm5lciBzbyBhbiBvdmVyZmxvdyBpcyBpbXBvc3NpYmxlIHRvIG1pc3MgaW4gdGhlIG9wZW4KLy8gYnJvd3NlciDigJQgb3IgaW4gYW55IHNjcmVlbnNob3QgeW91IHRha2UgdG8gdmVyaWZ5IHRoZSBwYWdlLiBSZXR1cm5zIHRoZSBsaXN0IG9mCi8vIG9mZmVuZGluZyBzdHJpbmdzIChlbXB0eSA9IGNsZWFuKS4gVGhlIHJlY3QtaW4tc2FtZS08Zz4gcGFpcmluZyBpcyBhIGhldXJpc3RpYzsKLy8gaXQgY2F0Y2hlcyB0aGUgY29tbW9uIGNhc2Ugd2hlcmUgZWFjaCBib3grbGFiZWwgbGl2ZSBpbiBvbmUgPGc+LgpleHBvcnQgZnVuY3Rpb24gdml6QXVkaXQocm9vdCA9IGRvY3VtZW50KSB7CiAgY29uc3QgYmFkID0gW107CiAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICBjb25zdCByZWN0ID0gdC5jbG9zZXN0KCJnIik/LnF1ZXJ5U2VsZWN0b3IoInJlY3QiKTsKICAgIGlmICghcmVjdCkgY29udGludWU7CiAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgY29uc3QgcmIgPSByZWN0LmdldEJCb3goKTsKICAgIGNvbnN0IHNwaWxscyA9CiAgICAgIHRiLnggPCByYi54IC0gMSB8fAogICAgICB0Yi55IDwgcmIueSAtIDEgfHwKICAgICAgdGIueCArIHRiLndpZHRoID4gcmIueCArIHJiLndpZHRoICsgMSB8fAogICAgICB0Yi55ICsgdGIuaGVpZ2h0ID4gcmIueSArIHJiLmhlaWdodCArIDE7CiAgICBpZiAoc3BpbGxzKSB7CiAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgfQogIH0KICBpZiAoYmFkLmxlbmd0aCkgewogICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICBjb25zdCBiYW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGJhbm5lci50ZXh0Q29udGVudCA9IGDimqAgJHtiYWQubGVuZ3RofSB0ZXh0IG92ZXJmbG93KHMpIOKAlCBzZWUgcmVkIG91dGxpbmVzYDsKICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAiZm9udDoxMnB4LzEgc2Fucy1zZXJpZjtwYWRkaW5nOjZweCAxMHB4O2JvcmRlci1yYWRpdXM6NnB4IjsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYmFubmVyKTsKICB9CiAgcmV0dXJuIGJhZDsKfQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCi8vIFNtYWxsIHV0aWxpdGllcyB0aGF0IGV2ZXJ5IHZpeiByZS1kZXJpdmVzLgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmV4cG9ydCBjb25zdCAkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiByb290LnF1ZXJ5U2VsZWN0b3Ioc2VsKTsKZXhwb3J0IGNvbnN0ICQkID0gKHNlbCwgcm9vdCA9IGRvY3VtZW50KSA9PiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOwoKLy8gRXNjYXBlIGJlZm9yZSBpbmplY3RpbmcgdGV4dCBpbnRvIGlubmVySFRNTC4KZXhwb3J0IGNvbnN0IGVzYyA9IChzKSA9PgogIFN0cmluZyhzKS5yZXBsYWNlKAogICAgL1smPD4iJ10vZywKICAgIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdLAogICk7CgovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LgpleHBvcnQgY29uc3Qgc2F2ZUhhc2ggPSAob2JqKSA9PgogIGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKCmV4cG9ydCBjb25zdCBsb2FkSGFzaCA9ICgpID0+IHsKICB0cnkgewogICAgcmV0dXJuIEpTT04ucGFyc2UoZGVjb2RlVVJJQ29tcG9uZW50KGxvY2F0aW9uLmhhc2guc2xpY2UoMSkpIHx8ICJ7fSIpOwogIH0gY2F0Y2ggewogICAgcmV0dXJuIHt9OwogIH0KfTsKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTdGVwcGVkIHdhbGt0aHJvdWdocyDigJQgdGhlIHNlY29uZC1tb3N0IHJlLWRlcml2ZWQgdGhpbmcgYWZ0ZXIgU1ZHIGdlb21ldHJ5LgovLwovLyB+MjAgdml6emVzIGhhbmQtcm9sbGVkIGFycm93LWtleSBzdGVwcGluZyBhbmQgZWFjaCBnb3QgYSBkaWZmZXJlbnQgc3Vic2V0Ci8vIHJpZ2h0OiBzb21lIGNhbGxlZCBwcmV2ZW50RGVmYXVsdCAoc28gdGhlIHBhZ2UgZGlkbid0IGFsc28gc2Nyb2xsKSwgc29tZQovLyBjbGFtcGVkIGF0IHRoZSBlbmRzLCBzb21lIHdyYXBwZWQsIHNvbWUgbGVmdCBhbiBhdXRvcGxheSB0aW1lciBydW5uaW5nIGFmdGVyCi8vIHRoZSB1c2VyIG1hbnVhbGx5IG5hdmlnYXRlZC4gVGhpcyBpcyB0aGF0IGxvZ2ljIG9uY2UsIHdpdGggdGhlIFVSTC1oYXNoCi8vIHJvdW5kLXRyaXAgd2lyZWQgaW4gc28gYSBzdGVwIHN1cnZpdmVzIGhvdC1yZWxvYWQuCi8vCi8vICAgY29uc3QgcyA9IHN0ZXBwZXIoeyBuOiBTVEVQUy5sZW5ndGgsIG9uU3RlcDogaSA9PiByZW5kZXIoaSkgfSk7Ci8vCi8vIEJpbmRzIOKGkC/ihpIv4oaRL+KGkywgU3BhY2UsIFBhZ2VVcC9Eb3duLCBIb21lL0VuZCBvbiB0aGUgZG9jdW1lbnQuIEF1dG9wbGF5IHBhdXNlcwovLyBvbiBhbnkgbWFudWFsIG5hdmlnYXRpb24uIFJldHVybnMgaGFuZGxlcyBzbyB5b3UgY2FuIGRyaXZlIGl0IGZyb20gYnV0dG9ucyB0b28uCmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSA9IHt9KSB7CiAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChsb2FkSGFzaCgpW2hhc2hLZXldID8/IDAsIDApLCBuIC0gMSk7CiAgbGV0IHRpbWVyID0gbnVsbDsKCiAgY29uc3QgZW1pdCA9ICgpID0+IHsKICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgb25TdGVwPy4oaSk7CiAgfTsKICBjb25zdCBnbyA9ICh0bywgbWFudWFsID0gdHJ1ZSkgPT4gewogICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgaWYgKG1hbnVhbCkgcGF1c2UoKTsgLy8gYSBtYW51YWwgbmF2IGFsd2F5cyB3aW5zIG92ZXIgYXV0b3BsYXkKICAgIGlmIChuZXh0ID09PSBpKSByZXR1cm47CiAgICBpID0gbmV4dDsKICAgIGVtaXQoKTsKICB9OwogIGNvbnN0IHBsYXkgPSAoKSA9PiB7CiAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpIHJldHVybjsKICAgIHRpbWVyID0gc2V0SW50ZXJ2YWwoKCkgPT4gewogICAgICBpZiAoaSA+PSBuIC0gMSkgcmV0dXJuIHBhdXNlKCk7CiAgICAgIGdvKGkgKyAxLCBmYWxzZSk7CiAgICB9LCBhdXRvcGxheU1zKTsKICB9OwogIGNvbnN0IHBhdXNlID0gKCkgPT4gewogICAgY2xlYXJJbnRlcnZhbCh0aW1lcik7CiAgICB0aW1lciA9IG51bGw7CiAgfTsKCiAgY29uc3QgS0VZUyA9IHsKICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgIEFycm93TGVmdDogLTEsIEFycm93VXA6IC0xLCBQYWdlVXA6IC0xLAogIH07CiAgdGFyZ2V0LmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLCAoZSkgPT4gewogICAgaWYgKGUubWV0YUtleSB8fCBlLmN0cmxLZXkgfHwgZS5hbHRLZXkpIHJldHVybjsKICAgIGlmICgvXihJTlBVVHxURVhUQVJFQXxTRUxFQ1QpJC8udGVzdChlLnRhcmdldC50YWdOYW1lKSB8fCBlLnRhcmdldC5pc0NvbnRlbnRFZGl0YWJsZSkgcmV0dXJuOwogICAgaWYgKGUua2V5IGluIEtFWVMpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOyAvLyBlbHNlIFNwYWNlL1BhZ2VEb3duIHNjcm9sbHMgdGhlIHBhZ2UgdG9vCiAgICAgIGdvKGkgKyBLRVlTW2Uua2V5XSk7CiAgICB9IGVsc2UgaWYgKGUua2V5ID09PSAiSG9tZSIpIHsKICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpOwogICAgICBnbygwKTsKICAgIH0gZWxzZSBpZiAoZS5rZXkgPT09ICJFbmQiKSB7CiAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgZ28obiAtIDEpOwogICAgfQogIH0pOwoKICBlbWl0KCk7CiAgaWYgKGF1dG9wbGF5TXMpIHBsYXkoKTsKCiAgcmV0dXJuIHsKICAgIGdvLAogICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgcHJldjogKCkgPT4gZ28oaSAtIDEpLAogICAgcGxheSwKICAgIHBhdXNlLAogICAgZ2V0IGN1cnJlbnQoKSB7CiAgICAgIHJldHVybiBpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRGlyZWN0IG1hbmlwdWxhdGlvbiDigJQgZHJhZyB0aGUgYXJ0d29yaywgbm90IGEgc2xpZGVyLgovLwovLyBUaGUgYmVzdCBpbnRlcmFjdGl2ZSBleHBsYWluZXJzIG9uIHRoZSB3ZWIgKENpZWNoYW5vd3NraSdzLCBub3RhYmx5KSBjb250YWluCi8vIGFsbW9zdCB6ZXJvIDxpbnB1dCB0eXBlPSJyYW5nZSI+LiBJbnN0ZWFkIHlvdSBkcmFnIHRoZSBmaWd1cmUgSVRTRUxGLCBhbmQgb25lCi8vIHBvaW50ZXIgZHJhZyBkcml2ZXMgdHdvIHBhcmFtZXRlcnMgYXQgb25jZS4gQSBzbGlkZXIgcHV0cyBhIHN0cmlwIG9mIFVJIGNocm9tZQovLyBiZXR3ZWVuIHRoZSByZWFkZXIgYW5kIHRoZSBwaGVub21lbm9uOyBkcmFnZ2luZyB0aGUgdGhpbmcgcmVtb3ZlcyBpdC4KLy8KLy8gICB0d29BeGlzKHN2ZywgewovLyAgICAgeDogWzAsIDFdLCB5OiBbLTkwLCA5MF0sICAgICAgICAgIC8vIGNsYW1wZWQgcmFuZ2VzCi8vICAgICBvbkNoYW5nZTogKHgsIHkpID0+IHJlZHJhdyh4LCB5KSwKLy8gICB9KTsKLy8KLy8gVXNlcyBwb2ludGVyIGV2ZW50cyArIHNldFBvaW50ZXJDYXB0dXJlLCBzbyBtb3VzZS90b3VjaC9wZW4gYWxsIHdvcmsgYW5kIGEgZHJhZwovLyB0aGF0IGxlYXZlcyB0aGUgZWxlbWVudCBzdGlsbCB0cmFja3MuIFNldCBgc3BlZWRgIHRvIHR1bmUgc2Vuc2l0aXZpdHkuCmV4cG9ydCBmdW5jdGlvbiB0d29BeGlzKGVsLCB7IHg6IHhyID0gWzAsIDFdLCB5OiB5ciA9IFswLCAxXSwgc3RhcnQsIG9uQ2hhbmdlLCBzcGVlZCA9IDEgfSA9IHt9KSB7CiAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogIGNvbnN0IHNwYW4gPSAocikgPT4gclsxXSAtIHJbMF07CiAgbGV0IHggPSBzdGFydCA/IHN0YXJ0WzBdIDogKHhyWzBdICsgeHJbMV0pIC8gMjsKICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogIGxldCBweCA9IG51bGwsIHB5ID0gbnVsbDsKCiAgZWwuc3R5bGUudG91Y2hBY3Rpb24gPSAibm9uZSI7IC8vIGVsc2UgdGhlIGJyb3dzZXIgc2Nyb2xscyBpbnN0ZWFkIG9mIGRyYWdnaW5nCiAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwoKICBlbC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICBweCA9IGUuY2xpZW50WDsgcHkgPSBlLmNsaWVudFk7CiAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICBlbC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogIH0pOwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgIGlmIChweCA9PT0gbnVsbCkgcmV0dXJuOwogICAgY29uc3QgciA9IGVsLmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpOwogICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICB4ID0gY2xhbXAoeCArICgoZS5jbGllbnRYIC0gcHgpIC8gci53aWR0aCkgKiBzcGFuKHhyKSAqIHNwZWVkLCB4cik7CiAgICB5ID0gY2xhbXAoeSArICgoZS5jbGllbnRZIC0gcHkpIC8gci5oZWlnaHQpICogc3Bhbih5cikgKiBzcGVlZCwgeXIpOwogICAgcHggPSBlLmNsaWVudFg7IHB5ID0gZS5jbGllbnRZOwogICAgb25DaGFuZ2U/Lih4LCB5KTsKICB9KTsKICBjb25zdCBlbmQgPSAoKSA9PiB7CiAgICBweCA9IHB5ID0gbnVsbDsKICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICB9OwogIGVsLmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJ1cCIsIGVuZCk7CiAgZWwuYWRkRXZlbnRMaXN0ZW5lcigicG9pbnRlcmNhbmNlbCIsIGVuZCk7CgogIG9uQ2hhbmdlPy4oeCwgeSk7CiAgcmV0dXJuIHsKICAgIHNldDogKG54LCBueSkgPT4gewogICAgICB4ID0gY2xhbXAobngsIHhyKTsgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICB9LAogICAgZ2V0IHZhbHVlKCkgewogICAgICByZXR1cm4gW3gsIHldOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gRmlndXJlIGxpZmVjeWNsZSDigJQgb25seSByZW5kZXIgd2hhdCdzIG9uIHNjcmVlbiwgYW5kIGdpdmUgT05FIGZpZ3VyZSBmb2N1cy4KLy8KLy8gQSBsb25nIGV4cGxhaW5lciB3aXRoIG1hbnkgYW5pbWF0ZWQgZmlndXJlcyB3aWxsIG1lbHQgYSBsYXB0b3AgaWYgdGhleSBhbGwgcnVuCi8vIGF0IG9uY2UuIFR3byBzZXBhcmF0ZSBzaWduYWxzIGZpeCBpdCwgYW5kIHRoZSBzZWNvbmQgaXMgYSBuYXJyYXRpdmUgZGV2aWNlIGFzCi8vIG11Y2ggYXMgYSBwZXJmIG9uZToKLy8gICB2aXNpYmxlIOKAlCBpcyB0aGlzIGZpZ3VyZSBvbiBzY3JlZW4gYXQgYWxsPyAg4oaSIHN0b3AgZHJhd2luZyB3aGVuIGl0IGlzbid0Ci8vICAgYWN0aXZlICDigJQgaXMgdGhpcyB0aGUgZmlndXJlIHRoZSByZWFkZXIgaXMgTE9PS0lORyBhdCAobW9zdCBjZW50ZXJlZCk/Ci8vICAgICAgICAgICAgIOKGkiBleGFjdGx5IG9uZSBhdCBhIHRpbWU7IHVzZSBpdCB0byBydW4gdGhlICJoZXJvIiBhbmltYXRpb24sIHNob3cKLy8gICAgICAgICAgICAgICBjb250cm9scywgb3Igc3RhcnQgYXVkaW8sIHNvIHRoZSBwYWdlIHRlbGxzIHlvdSB3aGVyZSB0byBsb29rLgovLwovLyAgIGZpZ3VyZUxpZmVjeWNsZShbeyBlbCwgc2V0VmlzaWJsZSwgc2V0QWN0aXZlIH0sIC4uLl0pOwovLwovLyBBbHNvIHBhdXNlcyBldmVyeXRoaW5nIHdoZW4gdGhlIHRhYiBpcyBoaWRkZW4g4oCUIGJhY2tncm91bmQgdGFicyB0aHJvdHRsZQovLyByZXF1ZXN0QW5pbWF0aW9uRnJhbWUgdG8gfjFmcHMsIHdoaWNoIHNpbGVudGx5IHN0YWxscyBhbmltYXRpb24gbG9vcHMuCmV4cG9ydCBmdW5jdGlvbiBmaWd1cmVMaWZlY3ljbGUoZmlndXJlcywgeyByb290ID0gbnVsbCB9ID0ge30pIHsKICBjb25zdCBzZWVuID0gbmV3IE1hcCgpOwoKICBjb25zdCBpbyA9IG5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigKICAgIChlbnRyaWVzKSA9PiB7CiAgICAgIGZvciAoY29uc3QgZSBvZiBlbnRyaWVzKSB7CiAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgIGlmICghZikgY29udGludWU7CiAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgZi5zZXRWaXNpYmxlPy4oZS5pc0ludGVyc2VjdGluZyAmJiAhZG9jdW1lbnQuaGlkZGVuKTsKICAgICAgfQogICAgICBwaWNrQWN0aXZlKCk7CiAgICB9LAogICAgeyByb290LCB0aHJlc2hvbGQ6IDAgfSwKICApOwogIGZpZ3VyZXMuZm9yRWFjaCgoZikgPT4gaW8ub2JzZXJ2ZShmLmVsKSk7CgogIGxldCBhY3RpdmVGID0gbnVsbDsKICBmdW5jdGlvbiBwaWNrQWN0aXZlKCkgewogICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgIGxldCBiZXN0ID0gbnVsbCwgYmVzdEQgPSBJbmZpbml0eTsKICAgIGZvciAoY29uc3QgZiBvZiBmaWd1cmVzKSB7CiAgICAgIGlmICghc2Vlbi5nZXQoZikpIGNvbnRpbnVlOwogICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgaWYgKGQgPCBiZXN0RCkgeyBiZXN0RCA9IGQ7IGJlc3QgPSBmOyB9CiAgICB9CiAgICBpZiAoYmVzdCA9PT0gYWN0aXZlRikgcmV0dXJuOwogICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4oZmFsc2UpOwogICAgYWN0aXZlRiA9IGJlc3Q7CiAgICBhY3RpdmVGPy5zZXRBY3RpdmU/Lih0cnVlKTsKICB9CgogIGxldCBxdWV1ZWQgPSBmYWxzZTsKICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgIGlmIChxdWV1ZWQpIHJldHVybjsKICAgIHF1ZXVlZCA9IHRydWU7CiAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICB9OwogIGFkZEV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsLCB7IHBhc3NpdmU6IHRydWUgfSk7CiAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJ2aXNpYmlsaXR5Y2hhbmdlIiwgKCkgPT4gewogICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgfSk7CgogIHBpY2tBY3RpdmUoKTsKICByZXR1cm4gewogICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICBkZXN0cm95KCkgewogICAgICBpby5kaXNjb25uZWN0KCk7CiAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInNjcm9sbCIsIG9uU2Nyb2xsKTsKICAgICAgcmVtb3ZlRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwpOwogICAgfSwKICB9Owp9CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gUnVudGltZSBlbnZpcm9ubWVudCDigJQgaXMgdGhlcmUgYSBsaXZlIHZpeiBzZXJ2ZXIgYmVoaW5kIHRoaXMgcGFnZT8KLy8KLy8gQSB2aXogY2FuIHJ1biBpbiB0aHJlZSB3b3JsZHMsIGFuZCBsaXZlLWRhdGEgVUkgbmVlZHMgdG8ga25vdyB3aGljaDoKLy8gICAic3RhdGljIiAg4oCUIGEgcHVibGlzaGVkL2lubGluZWQgYnVpbGQuIFRoZXJlIGlzIE5PIHNlcnZlciBhbmQgbmV2ZXIgd2lsbCBiZQovLyAgICAgICAgICAgICAgIG9uZSB0aGlzIHNlc3Npb247IGJ1aWxkLnRzIHN0YW1wcyB3aW5kb3cuX19WSVpfU1RBVElDX18gaW50byB0aGUKLy8gICAgICAgICAgICAgICBzZWxmLWNvbnRhaW5lZCBIVE1MIGl0IGVtaXRzLgovLyAgICJsaXZlIiAgICDigJQgc2VydmVkIGJ5IHRoZSB2aXogZGV2IHNlcnZlciwgYW5kIGl0IGFuc3dlcnMgKGZldGNoIGFwaS8qIHdpbGwgd29yaykuCi8vICAgIm9mZmxpbmUiIOKAlCBzZXJ2ZWQgYXMgaWYgYnkgYSBzZXJ2ZXIsIGJ1dCBpdCBpc24ndCBhbnN3ZXJpbmcgcmlnaHQgbm93IChkZXYKLy8gICAgICAgICAgICAgICBzZXJ2ZXIgc3RvcHBlZCwgb3BlbmVkIGZyb20gZGlzaywgZXRjLikg4oCUIHRyZWF0IGxpa2Ugc3RhdGljLgovLwovLyBQcm9iZXMgdGhlIHNlcnZlci1nbG9iYWwgL19oZWFsdGggb25jZSBhbmQgY2FjaGVzIHRoZSBwcm9taXNlLiBVc2UgaXQgdG8gZ2F0ZQovLyBhbnl0aGluZyB0aGF0IGZldGNoZXMgYXBpLyo6IHJlbmRlciByZWFsIGRhdGEgb25seSBvbiAibGl2ZSIsIG90aGVyd2lzZSBzaG93IGEKLy8gInJ1biBtZSBsb2NhbGx5IGZvciBsaXZlIGRhdGEiIHBsYWNlaG9sZGVyIGluc3RlYWQgb2Ygc3Bpbm5pbmcgZm9yZXZlci4KLy8gICBjb25zdCBlbnYgPSBhd2FpdCB2aXpFbnYoKTsKLy8gICBpZiAoZW52ICE9PSAibGl2ZSIpIHsgc2hvd1BsYWNlaG9sZGVyKCk7IHJldHVybjsgfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgcmV0dXJuIChfdml6RW52UCA/Pz0gKGFzeW5jICgpID0+IHsKICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pIHJldHVybiAic3RhdGljIjsKICAgIHRyeSB7CiAgICAgIGNvbnN0IHIgPSBhd2FpdCBmZXRjaCgiL19oZWFsdGgiLCB7IGNhY2hlOiAibm8tc3RvcmUiIH0pOwogICAgICByZXR1cm4gci5vayA/ICJsaXZlIiA6ICJvZmZsaW5lIjsKICAgIH0gY2F0Y2ggewogICAgICByZXR1cm4gIm9mZmxpbmUiOwogICAgfQogIH0pKCkpOwp9Cg=="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+  <meta name="viz:tag" content="AI">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browser Automation for AI Agents</title>
+<meta name="viz:kind" content="explanatory">
+<meta name="viz:title" content="Browser Automation for AI Agents">
+<meta name="viz:description" content="Head-to-head on the ways an AI agent can drive a browser — the Codex Chrome extension, Claude Code's Chrome integration, and model-agnostic Playwright MCP — across what each can do and where each breaks down.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2a313c;
+    --txt:#e6edf3; --dim:#9aa6b2; --faint:#6b7785;
+    --codex:#10a37f; --codexbg:rgba(16,163,127,.12);
+    --claude:#d77757; --claudebg:rgba(215,119,87,.12);
+    --pw:#3b82f6; --pwbg:rgba(59,130,246,.12);
+    --good:#3fb950; --warn:#d29922; --bad:#f85149;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:32px 20px 80px;}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:1.8rem;font-weight:700;letter-spacing:-.02em}
+  .sub{color:var(--dim);margin-top:6px;font-size:.95rem}
+  .meta{color:var(--faint);font-size:.8rem;margin-top:4px}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .card.codex::before{background:var(--codex)} .card.claude::before{background:var(--claude)} .card.pw::before{background:var(--pw)}
+  .card h2{font-size:1.15rem;display:flex;align-items:center;gap:8px}
+  .badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:6px}
+  .b-codex{background:var(--codexbg);color:var(--codex)} .b-claude{background:var(--claudebg);color:var(--claude)} .b-pw{background:var(--pwbg);color:var(--pw)}
+  .tagline{color:var(--dim);font-size:.85rem;margin:8px 0 14px;min-height:2.6em}
+  .card ul{list-style:none;font-size:.84rem}
+  .card li{padding:5px 0 5px 18px;position:relative;color:var(--txt)}
+  .card li::before{position:absolute;left:0;top:5px;font-size:.8rem}
+  li.pro::before{content:"✓";color:var(--good)} li.con::before{content:"✕";color:var(--bad)} li.neu::before{content:"•";color:var(--faint)}
+
+  /* matrix */
+  .section-h{font-size:1.05rem;font-weight:650;margin:38px 0 14px;display:flex;align-items:center;gap:10px}
+  .section-h .hint{font-size:.75rem;color:var(--faint);font-weight:400}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:.83rem;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  th,td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+  thead th{background:var(--panel2);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);position:sticky;top:0}
+  thead th.c-codex{color:var(--codex)} thead th.c-claude{color:var(--claude)} thead th.c-pw{color:var(--pw)}
+  tbody tr:last-child td{border-bottom:none}
+  td.rowlabel{font-weight:600;color:var(--txt);width:165px;background:var(--panel2)}
+  tr:hover td{background:rgba(255,255,255,.025)}
+  tr:hover td.rowlabel{background:var(--panel2)}
+  .pill{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 6px;border-radius:5px;margin-right:5px;vertical-align:middle}
+  .p-good{background:rgba(63,185,80,.16);color:var(--good)} .p-warn{background:rgba(210,153,34,.16);color:var(--warn)} .p-bad{background:rgba(248,81,73,.16);color:var(--bad)} .p-neu{background:rgba(139,148,158,.16);color:var(--dim)}
+  td small{color:var(--faint);display:block;margin-top:2px;font-size:.74rem}
+  .diff-row td:not(.rowlabel){background:rgba(210,153,34,.05)}
+
+  /* decision helper */
+  .helper{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px;margin-top:38px}
+  .helper h3{font-size:1.05rem;margin-bottom:4px}
+  .helper .sub2{color:var(--dim);font-size:.85rem;margin-bottom:18px}
+  .qs{display:flex;flex-direction:column;gap:14px}
+  .q{}
+  .q .qt{font-size:.9rem;font-weight:600;margin-bottom:7px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{background:var(--panel2);border:1px solid var(--border);color:var(--dim);font-size:.82rem;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.12s;user-select:none}
+  .opt:hover{border-color:var(--faint);color:var(--txt)}
+  .opt.sel{background:#fff;color:#0d1117;border-color:#fff;font-weight:600}
+  .result{margin-top:20px;padding:18px;border-radius:12px;background:var(--panel2);border:1px solid var(--border);font-size:.9rem;min-height:60px}
+  .result .winner{font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .scorebar{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .sb{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:9px 12px}
+  .sb .nm{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .sb .track{height:6px;background:#0d1117;border-radius:3px;margin-top:6px;overflow:hidden}
+  .sb .fill{height:100%;border-radius:3px;transition:width .3s}
+  .reset{margin-top:14px;font-size:.78rem;color:var(--faint);cursor:pointer;text-decoration:underline}
+
+  footer{margin-top:46px;color:var(--faint);font-size:.78rem;line-height:1.7;border-top:1px solid var(--border);padding-top:18px}
+  a{color:#58a6ff}
+  @media(max-width:840px){.cards{grid-template-columns:1fr}td.rowlabel{width:auto}table{font-size:.78rem}}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Browser Automation for AI Agents">
+<meta property="og:description" content="Head-to-head on the ways an AI agent can drive a browser — the Codex Chrome extension, Claude Code's Chrome integration, and model-agnostic Playwright MCP — across what each can do and where each breaks down.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/browser-agent-tools-comparison/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/browser-agent-tools-comparison/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="wrap">
+  <h1>Browser Automation for AI Agents</h1>
+  <div class="sub">Codex Chrome extension &nbsp;·&nbsp; Claude Code Chrome integration &nbsp;·&nbsp; Playwright MCP (model-agnostic)</div>
+  <div class="meta">Snapshot 2026‑05‑12 · sourced from the deep-research report · both vendor tools are beta/days-old — specifics will drift</div>
+
+  <div class="cards">
+    <div class="card codex">
+      <h2><span class="badge b-codex">OpenAI</span> Codex Chrome extension</h2>
+      <div class="tagline">Web Store extension ↔ native-messaging host ↔ Codex app. Drives your <b>real signed-in Chrome</b>. Launched May 7 2026.</div>
+      <ul>
+        <li class="pro">Zero-config: Codex app → Plugins → add Chrome plugin</li>
+        <li class="pro">Bundled with ChatGPT Plus/Pro/Business/Enterprise (temp. Free/Go)</li>
+        <li class="pro">Tab-groups-per-thread; can access browser history (per-request)</li>
+        <li class="con">Locked to ChatGPT / Codex</li>
+        <li class="con">Chrome only — no Edge / Firefox / Brave</li>
+        <li class="con">Broad Chrome permissions (debugger, history, modify site data)</li>
+        <li class="neu">Best if you already live in ChatGPT</li>
+      </ul>
+    </div>
+    <div class="card claude">
+      <h2><span class="badge b-claude">Anthropic</span> Claude Code + Chrome</h2>
+      <div class="tagline">Web Store extension ↔ native-messaging host ↔ Claude Code CLI / VS Code. Drives your <b>real Chrome or Edge</b>. Beta.</div>
+      <ul>
+        <li class="pro">Strongest default guardrails (category blocklist, per-domain JS approval, no autonomous mode)</li>
+        <li class="pro"><code>claude --chrome</code> / <code>/chrome</code>; auto in VS Code</li>
+        <li class="pro">GIF session recording built in</li>
+        <li class="con">Requires a <b>direct</b> Anthropic plan — not via Bedrock / Vertex / Foundry</li>
+        <li class="con">Chrome + Edge only; no Brave/Arc; no WSL</li>
+        <li class="con">2 disclosed extension CVEs in 2026 (ShadowPrompt, ClaudeBleed) — both patched</li>
+        <li class="neu">Best if you already live in Claude Code / VS Code</li>
+      </ul>
+    </div>
+    <div class="card pw">
+      <h2><span class="badge b-pw">Microsoft · OSS</span> Playwright MCP</h2>
+      <div class="tagline">MCP server (stdio / HTTP). Launches its <b>own Playwright browser</b> — isolated by default. Apache‑2.0, free.</div>
+      <ul>
+        <li class="pro">No lock-in — any model, any MCP client; self-hostable, Docker</li>
+        <li class="pro">Chromium + Firefox + WebKit + Chrome channels</li>
+        <li class="pro">Testing-grade: network mocking, tracing, video, assertions</li>
+        <li class="pro">Accessibility-tree first — "no vision models"</li>
+        <li class="con">"<b>Not a security boundary</b>" — guardrails are the client's job</li>
+        <li class="con">~13.7K tokens/request just for tool definitions</li>
+        <li class="neu">Best for portability, self-hosting, web testing, custom agents</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-h">Comparison matrix <span class="hint">⬛ amber-tinted rows = the three options materially diverge</span></div>
+  <table id="matrix"></table>
+
+  <div class="helper">
+    <h3>Which should I pick?</h3>
+    <div class="sub2">Answer what's true for you — the bars update live. (Heuristic, not gospel.)</div>
+    <div class="qs" id="qs"></div>
+    <div class="result" id="result">Pick some answers above…</div>
+    <div class="scorebar" id="scores"></div>
+    <div class="reset" id="reset">reset answers</div>
+  </div>
+
+  <footer>
+    All three share the same core promise — build your app, then test/debug/operate it in a browser without leaving the agent — and the same core risk: <b>prompt injection from page content</b>. The real fork is <i>vendor bridge vs. agnostic server</i>. "Uses your real browser" is convenience <i>and</i> attack surface; Playwright MCP's isolated-by-default browser has the smaller blast radius. Token cost is now a first-class criterion — leaner agnostic peers (<code>browser-use</code> ~89% WebVoyager @ 200–400 tok/page, Vercel <code>agent-browser</code>, Playwright CLI+skills) undercut Playwright MCP's overhead.<br>
+    Full report: <code>~/Documents/Browser_Automation_Agents_Research_20260512/</code> · primary sources: <a href="https://developers.openai.com/codex/app/chrome-extension">Codex docs</a> · <a href="https://code.claude.com/docs/en/chrome">Claude Code Chrome docs</a> · <a href="https://github.com/microsoft/playwright-mcp">playwright-mcp</a>
+  </footer>
+</div>
+
+<script>
+// ---------- matrix data ----------
+// pill: g=good w=warn b=bad n=neutral ; text + optional small note
+const COLS = ["Codex Chrome ext.","Claude Code + Chrome","Playwright MCP"];
+const ROWS = [
+  { label:"Model / vendor lock-in", diff:true,
+    cells:[
+      {p:"b",t:"ChatGPT / Codex only"},
+      {p:"b",t:"Direct Anthropic plan only", s:"not via Bedrock / Vertex / Foundry"},
+      {p:"g",t:"None", s:"any model, any MCP client"} ]},
+  { label:"Where the browser runs", diff:true,
+    cells:[
+      {p:"w",t:"Your real signed-in Chrome"},
+      {p:"w",t:"Your real Chrome / Edge"},
+      {p:"g",t:"Its own Playwright browser", s:"isolated by default; persistent / extension mode optional"} ]},
+  { label:"Browsers supported", diff:true,
+    cells:[
+      {p:"w",t:"Chrome only"},
+      {p:"w",t:"Chrome + Edge", s:"no Brave/Arc, no WSL"},
+      {p:"g",t:"Chromium · Firefox · WebKit · Chrome channels"} ]},
+  { label:"Setup effort",
+    cells:[
+      {p:"g",t:"Low", s:"Plugins menu → add Chrome plugin"},
+      {p:"g",t:"Low", s:"install ext (≥1.0.36) + claude --chrome / /chrome"},
+      {p:"w",t:"Medium", s:"npx @playwright/mcp@latest in MCP config; 50+ flags"} ]},
+  { label:"Cost / token overhead", diff:true,
+    cells:[
+      {p:"g",t:"Bundled w/ ChatGPT plan", s:"temp. Free/Go; 2× usage promo → May 31 2026"},
+      {p:"g",t:"Bundled w/ direct Anthropic plan"},
+      {p:"w",t:"$0 (Apache-2.0)", s:"but ~13.7K tokens/req of tool defs — leaner peers exist"} ]},
+  { label:"Page → model channel",
+    cells:[
+      {p:"n",t:"DOM + screenshots"},
+      {p:"n",t:"DOM + screenshots + computer tool"},
+      {p:"g",t:"Accessibility tree first", s:'"no vision models"; vision opt-in'} ]},
+  { label:"Built-in guardrails", diff:true,
+    cells:[
+      {p:"w",t:"Per-domain approval, history confirmation, blocklist", s:'"treat pages as untrusted"'},
+      {p:"g",t:"Strongest defaults", s:"category blocklist (banks/crypto/adult…), per-domain JS approval, purchase confirmation, no CAPTCHA-solving, no autonomous mode"},
+      {p:"b",t:'"Not a security boundary"', s:"host/origin allowlists & isolated profiles only — category/action gating is the client's job"} ]},
+  { label:"Disclosed 2026 vulns", diff:true,
+    cells:[
+      {p:"g",t:"None found"},
+      {p:"w",t:"ShadowPrompt + ClaudeBleed", s:"both patched"},
+      {p:"g",t:"None tool-specific", s:"general MCP-server caveats apply"} ]},
+  { label:"Testing features", diff:true,
+    cells:[
+      {p:"b",t:"Not surfaced"},
+      {p:"w",t:"Not surfaced", s:"GIF recording yes"},
+      {p:"g",t:"First-class", s:"network mock · tracing · video · assertions"} ]},
+  { label:"Self-host / CI",
+    cells:[
+      {p:"b",t:"No"},
+      {p:"b",t:"No"},
+      {p:"g",t:"Yes", s:"Docker · HTTP/SSE · headless"} ]},
+  { label:"Best at",
+    cells:[
+      {p:"n",t:"\"I live in ChatGPT — operate my logged-in SaaS + test my app\""},
+      {p:"n",t:"\"I live in Claude Code/VS Code — debug→fix loop + authenticated apps, conservative defaults\""},
+      {p:"n",t:"\"Portable, self-hosted, model-agnostic browser tool; rigorous web testing; custom agents\""} ]},
+];
+
+const PILLLBL = {g:"good",w:"ok",b:"weak",n:"—"};
+function pillEl(p){ if(p==="n") return ""; const cls={g:"p-good",w:"p-warn",b:"p-bad",n:"p-neu"}[p]; return `<span class="pill ${cls}">${PILLLBL[p]}</span>`; }
+
+const tbl = document.getElementById("matrix");
+let thead = `<thead><tr><th>Dimension</th><th class="c-codex">Codex Chrome ext.</th><th class="c-claude">Claude Code + Chrome</th><th class="c-pw">Playwright MCP</th></tr></thead>`;
+let tb = "<tbody>";
+for(const r of ROWS){
+  tb += `<tr class="${r.diff?'diff-row':''}"><td class="rowlabel">${r.label}</td>`;
+  for(const c of r.cells){ tb += `<td>${pillEl(c.p)}${c.t}${c.s?`<small>${c.s}</small>`:""}</td>`; }
+  tb += `</tr>`;
+}
+tb += "</tbody>";
+tbl.innerHTML = thead + tb;
+
+// ---------- decision helper ----------
+// each option contributes weighted points per answer. idx: 0=Codex 1=Claude 2=PW
+const QUESTIONS = [
+  { q:"Which agent do you already pay for / use daily?",
+    opts:[
+      {l:"ChatGPT / Codex", w:[3,0,0]},
+      {l:"Claude (direct plan: Pro/Max/Team/Ent)", w:[0,3,0]},
+      {l:"Claude via Bedrock / Vertex / Foundry only", w:[0,-2,2]},
+      {l:"Mix / neither / building a product", w:[0,0,2]} ]},
+  { q:"How much do you care about avoiding vendor lock-in?",
+    opts:[
+      {l:"A lot — must be model/platform agnostic", w:[-2,-2,4]},
+      {l:"Somewhat", w:[0,0,1]},
+      {l:"Don't care", w:[1,1,0]} ]},
+  { q:"Do you need to self-host / run in CI / headless?",
+    opts:[
+      {l:"Yes", w:[-3,-3,4]},
+      {l:"No — interactive dev only", w:[1,1,0]} ]},
+  { q:"How important are testing features (network mocking, tracing, video, assertions)?",
+    opts:[
+      {l:"Core to what I'm doing", w:[-1,-1,3]},
+      {l:"Nice to have", w:[0,0,1]},
+      {l:"Not needed", w:[1,1,0]} ]},
+  { q:"How conservative does the default security posture need to be?",
+    opts:[
+      {l:"Very — regulated / sensitive, want strong defaults out of the box", w:[0,3,-1]},
+      {l:"I'll configure guardrails myself", w:[0,0,2]},
+      {l:"Average", w:[1,1,1]} ]},
+  { q:"Token / context budget of the agent?",
+    opts:[
+      {l:"Tight — minimize tool overhead", w:[1,1,-2], note:"…and consider browser-use / agent-browser / Playwright CLI instead of Playwright MCP"},
+      {l:"Comfortable", w:[0,0,1]} ]},
+  { q:"Do you need to drive your already-logged-in browser session (Gmail, Salesforce, internal SSO)?",
+    opts:[
+      {l:"Yes, that's the whole point", w:[2,2,0], note:"…Playwright MCP can do it too via persistent/extension mode, but it's not the default"},
+      {l:"No / isolated browser is fine or preferred", w:[0,0,2]} ]},
+  { q:"Which engine do you need?",
+    opts:[
+      {l:"Firefox or WebKit/Safari coverage required", w:[-3,-3,3]},
+      {l:"Chromium-family is fine", w:[1,1,0]} ]},
+];
+
+const state = QUESTIONS.map(()=>null);
+const qsEl = document.getElementById("qs");
+QUESTIONS.forEach((Q,qi)=>{
+  const d = document.createElement("div"); d.className="q";
+  let html = `<div class="qt">${qi+1}. ${Q.q}</div><div class="opts">`;
+  Q.opts.forEach((o,oi)=>{ html += `<span class="opt" data-q="${qi}" data-o="${oi}">${o.l}</span>`; });
+  html += `</div>`; d.innerHTML = html; qsEl.appendChild(d);
+});
+
+const META = [
+  {nm:"Codex Chrome ext.", color:"var(--codex)", pick:"Use the Codex Chrome extension — bundled, zero-config via the Plugins menu, built for operating your logged-in SaaS + testing your web app. Keep its allowlist tight; deny browser-history access unless a task needs it."},
+  {nm:"Claude Code + Chrome", color:"var(--claude)", pick:"Use <code>claude --chrome</code> (or <code>/chrome</code>). Strongest default guardrails of the three. Don't enable Chrome \"by default\" unless you need it — it inflates context. On Bedrock/Vertex/Foundry only? You'll need a separate claude.ai account or go agnostic."},
+  {nm:"Playwright MCP", color:"var(--pw)", pick:"Use Playwright MCP. Default to <b>isolated</b> profiles; only use persistent/extension mode when a task truly needs your logged-in state. Set <code>--allowed-hosts</code>/<code>--blocked-origins</code> aggressively, keep file access workspace-scoped — remember it's <b>not a security boundary</b>, so put auth/approval logic in the client."},
+];
+
+function recompute(){
+  const sc=[0,0,0]; const notes=new Set();
+  state.forEach((oi,qi)=>{ if(oi===null) return; const o=QUESTIONS[qi].opts[oi]; o.w.forEach((v,k)=>sc[k]+=v); if(o.note) notes.add(o.note); });
+  const answered = state.filter(x=>x!==null).length;
+  // render bars
+  const min=Math.min(...sc,0), max=Math.max(...sc,1); const span=Math.max(max-min,1);
+  const sb = META.map((m,i)=>{ const pct=Math.round(((sc[i]-min)/span)*100);
+    return `<div class="sb"><div class="nm" style="color:${m.color}">${m.nm}</div><div class="track"><div class="fill" style="width:${pct}%;background:${m.color}"></div></div><div style="font-size:.72rem;color:var(--faint);margin-top:4px">score ${sc[i]>0?'+':''}${sc[i]}</div></div>`;
+  }).join("");
+  document.getElementById("scores").innerHTML = sb;
+  const res = document.getElementById("result");
+  if(answered===0){ res.innerHTML = "Pick some answers above…"; return; }
+  const best = sc.indexOf(Math.max(...sc));
+  const tie = sc.filter(v=>v===sc[best]).length>1;
+  let html = `<div class="winner" style="color:${META[best].color}">→ ${tie?'(close call) ':''}${META[best].nm}</div><div>${META[best].pick}</div>`;
+  if(notes.size) html += `<div style="margin-top:10px;font-size:.82rem;color:var(--dim)">${[...notes].map(n=>'↳ '+n).join("<br>")}</div>`;
+  if(answered<QUESTIONS.length) html += `<div style="margin-top:10px;font-size:.78rem;color:var(--faint)">(${answered}/${QUESTIONS.length} answered — answer the rest to sharpen it)</div>`;
+  res.innerHTML = html;
+}
+qsEl.addEventListener("click",e=>{ const t=e.target.closest(".opt"); if(!t) return;
+  const qi=+t.dataset.q, oi=+t.dataset.o;
+  state[qi] = (state[qi]===oi)?null:oi;
+  [...qsEl.querySelectorAll(`.opt[data-q="${qi}"]`)].forEach(el=>el.classList.toggle("sel", +el.dataset.o===state[qi]));
+  recompute();
+});
+document.getElementById("reset").addEventListener("click",()=>{ state.fill(null); [...qsEl.querySelectorAll(".opt")].forEach(el=>el.classList.remove("sel")); recompute(); });
+recompute();
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>
