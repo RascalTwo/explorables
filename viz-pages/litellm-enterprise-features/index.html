@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="LiteLLM">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LiteLLM - OSS vs Enterprise</title>
+<meta name="viz:title" content="LiteLLM - OSS vs Enterprise">
+<meta name="viz:description" content="A capability-domain breakdown of what the free MIT LiteLLM proxy does, what the paid Enterprise license adds on top.'s a clean path to those features without paying.">
+<meta name="viz:uid" content="v-dc11308c34e3">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<style>
+  :root {
+    --bg: #0c0e14;
+    --panel: #151823;
+    --panel-2: #1c2030;
+    --border: #2a2f42;
+    --text: #e6e9f0;
+    --muted: #8b93a7;
+    --accent: #6ea8fe;
+    --oss: #4ade80;
+    --oss-bg: #11241a;
+    --oss-border: #1f3d2c;
+    --ent: #f0a85a;
+    --ent-bg: #261c10;
+    --ent-border: #463318;
+    --work: #b48ef0;
+    --work-bg: #1e1726;
+    --work-border: #3a2d4a;
+    --code-bg: #0a0c11;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.55;
+    padding: 30px 22px 90px; max-width: 1400px; margin: 0 auto;
+  }
+  h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+  h1 .sub { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 10px; }
+  .lede { color: var(--muted); font-size: 14px; margin: 10px 0 20px; max-width: 920px; }
+  .lede strong { color: var(--text); }
+  .lede a { color: var(--accent); text-decoration: none; }
+  .lede a:hover { text-decoration: underline; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 20; background: var(--bg);
+    display: flex; gap: 7px; flex-wrap: wrap; padding: 12px 0; margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav a {
+    font-size: 12.5px; color: var(--muted); text-decoration: none;
+    background: var(--panel); border: 1px solid var(--border); padding: 6px 11px; border-radius: 18px;
+    transition: all 0.12s; white-space: nowrap;
+  }
+  .nav a:hover { color: var(--text); border-color: var(--accent); }
+
+  .legend-bar { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; font-size: 12.5px; }
+  .legend-bar .item { display: flex; align-items: center; gap: 7px; color: var(--muted); }
+  .legend-bar .chip { width: 13px; height: 13px; border-radius: 4px; }
+  .chip.oss { background: var(--oss-bg); border: 1px solid var(--oss); }
+  .chip.ent { background: var(--ent-bg); border: 1px solid var(--ent); }
+  .chip.work { background: var(--work-bg); border: 1px solid var(--work); }
+
+  .domain {
+    margin-bottom: 26px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    background: var(--panel);
+  }
+  .domain > .head {
+    display: flex; align-items: baseline; gap: 12px; padding: 14px 18px; background: var(--panel-2);
+    border-bottom: 1px solid var(--border); cursor: pointer; user-select: none;
+  }
+  .domain > .head h2 { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; }
+  .domain > .head .tag { font-size: 12px; color: var(--muted); flex: 1; }
+  .domain > .head .toggle { color: var(--muted); font-size: 13px; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  @media (max-width: 1000px) { .cols { grid-template-columns: 1fr; } }
+  .col { padding: 15px 17px; border-right: 1px solid var(--border); }
+  .col:last-child { border-right: none; }
+  @media (max-width: 1000px) { .col { border-right: none; border-bottom: 1px solid var(--border); } .col:last-child { border-bottom: none; } }
+  .col.oss  { background: linear-gradient(180deg, var(--oss-bg) 0%, transparent 140px); }
+  .col.ent  { background: linear-gradient(180deg, var(--ent-bg) 0%, transparent 140px); }
+  .col.work { background: linear-gradient(180deg, var(--work-bg) 0%, transparent 140px); }
+  .col h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 11px;
+    display: flex; align-items: center; gap: 7px; font-weight: 700;
+  }
+  .col.oss h3 { color: var(--oss); }
+  .col.ent h3 { color: var(--ent); }
+  .col.work h3 { color: var(--work); }
+  .col h3 .ic { font-size: 14px; }
+  .col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .col li { font-size: 13px; padding-left: 16px; position: relative; color: #d2d8e4; }
+  .col li::before { position: absolute; left: 0; top: 0; }
+  .col.oss li::before  { content: "✓"; color: var(--oss); font-weight: 700; }
+  .col.ent li::before  { content: "🔒"; font-size: 10px; top: 2px; }
+  .col.work li::before { content: "→"; color: var(--work); font-weight: 700; }
+  .col li code, .col li .mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px;
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: #c8d0e0;
+  }
+  .col li b { color: #fff; font-weight: 650; }
+  .col li .note { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+
+  footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--border); color: #5a6276; font-size: 12px; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .collapsed .cols { display: none; }
+</style>
+</head>
+<body>
+<h1>LiteLLM Proxy — OSS vs Enterprise <span class="sub">by capability domain · source-verified 2026-06-26</span></h1>
+<p class="lede">
+  For each domain: <strong style="color:var(--oss)">what the free MIT proxy does</strong>,
+  <strong style="color:var(--ent)">what the paid license adds on top</strong>, and
+  <strong style="color:var(--work)">how to get the paid stuff without paying</strong> (where there's a clean path).
+  Canonical docs: <a href="https://docs.litellm.ai/docs/enterprise" target="_blank">docs.litellm.ai/docs/enterprise</a>.
+  Click a domain header to collapse it.
+</p>
+
+<nav class="nav" id="nav"></nav>
+
+<div class="legend-bar">
+  <div class="item"><span class="chip oss"></span> OSS / MIT — free, no license</div>
+  <div class="item"><span class="chip ent"></span> Enterprise — needs <code style="font-size:11px">LITELLM_LICENSE</code></div>
+  <div class="item"><span class="chip work"></span> OSS workaround for the Enterprise feature</div>
+</div>
+
+<div style="margin-bottom:24px; border:1px solid var(--ent-border); border-left:3px solid var(--ent); border-radius:10px; padding:14px 16px; background:var(--ent-bg);">
+  <div style="font-weight:650; font-size:13.5px; color:var(--ent); margin-bottom:6px;">⚠️ "Honor-system" — a third category</div>
+  <div style="font-size:12.5px; color:#d2d8e4;">
+    Three layers are independent: the <b>license</b> (the repo <code class="mono" style="font-size:11px">LICENSE</code> makes everything outside <code class="mono" style="font-size:11px">enterprise/</code> <b>MIT</b>), the <b>code gate</b> (a runtime <code class="mono" style="font-size:11px">premium_user</code> check), and the <b>docs marketing</b>. A few features the docs label "✨ Enterprise" have <b>no code gate</b> and live in the <b>MIT</b> tree — so they run on OSS and using them is <em>not a license violation</em>. But the vendor sells them: they may add a gate in a future release (breaks on upgrade), ship no support/SLA, and you're leaning on the paid tier against intent. <b>Honor-system, not free</b> — tagged <b style="color:var(--ent)">⚠ honor-system</b> below. <span style="color:var(--muted)">(Not legal advice.)</span>
+  </div>
+</div>
+
+<div id="domains"></div>
+
+
+<footer>
+  Sources: <a href="https://docs.litellm.ai/docs/enterprise" target="_blank">Enterprise docs</a> ·
+  <a href="https://github.com/BerriAI/litellm/tree/main/enterprise/litellm_enterprise" target="_blank"><code>enterprise/litellm_enterprise/</code> source tree</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/team_budgets" target="_blank">budgets</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/guardrails/quick_start" target="_blank">guardrails</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/logging" target="_blank">logging</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/admin_ui_sso" target="_blank">admin UI SSO</a>.
+  Capability split reflects litellm <code>main</code>; the OSS/Enterprise line drifts between releases — pin your version. Gating is enforced by in-code <code>premium_user</code> checks, not file location, so verify by running rather than by where a file sits.
+</footer>
+
+<script src="./app.js"></script>
+</body>
+</html>

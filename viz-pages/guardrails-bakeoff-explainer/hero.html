@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --cA: #46d39a;
+    --cB: #e8a33d;
+    --cBp: #22b8cf;
+    --cC: #9a7be0;
+    --cCp: #e06c9a;
+    --danger: #f87171;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(70,211,154,0.10), transparent 58%),
+      radial-gradient(980px 560px at 106% 8%, rgba(224,108,154,0.09), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  .left { width: 620px; padding: 64px 16px 64px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em;
+    color: var(--cA); background: rgba(70,211,154,0.10);
+    border: 1px solid rgba(70,211,154,0.24);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 30px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cA); box-shadow: 0 0 10px var(--cA); }
+
+  .title { font-size: 88px; line-height: 0.93; font-weight: 800; letter-spacing: -0.045em; }
+  .title .hl { color: var(--cCp); }
+
+  .essence { margin-top: 28px; font-size: 29px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; max-width: 505px; }
+  .essence .hl { color: var(--cBp); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 490px; }
+  .sub code { font-family: var(--mono); font-size: 0.88em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 13.5px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 13px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--cA); box-shadow: 0 0 6px rgba(70,211,154,0.5); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 60px 56px 4px; position: relative; z-index: 2; }
+  .panel {
+    width: 424px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.04em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); }
+  svg.grid { width: 100%; display: block; }
+
+  .foot { display: flex; margin-top: 14px; border-top: 1px solid var(--line); padding-top: 13px; gap: 16px; }
+  .stat { flex: 1; }
+  .stat .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 27px; line-height: 1; }
+  .stat.ok .n { color: var(--cA); }
+  .stat.bad .n { color: var(--danger); }
+  .stat .l { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 5px; }
+  .stat .d { font-size: 12px; color: var(--fg-dim); margin-top: 4px; line-height: 1.35; }
+  .vr { width: 1px; background: var(--line); }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>Guardrails &middot; packaging bake-off</div>
+
+      <div class="title">Same rules.<br><span class="hl">Different box.</span></div>
+
+      <div class="essence">
+        The rules never changed. The <span class="hl">packaging</span> decided whether they ran.
+      </div>
+
+      <div class="sub">
+        Five ways to ship one guardrail engine. The two as-shipped images are missing the PII masker &mdash; <code>en_core_web_lg</code> or Presidio &mdash; so everything but jailbreak crashes.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>Presidio + spaCy</span>
+        <span class="chip"><span class="tk"></span>OTel &rarr; Phoenix</span>
+        <span class="chip"><span class="tk"></span>NIM Operator</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">5 cases &times; 5 runs</span>
+          <span class="s">judge held constant</span>
+        </div>
+
+        <svg class="grid" viewBox="0 0 384 214" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .hd   { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 9.5px; text-anchor: middle; letter-spacing: 0.02em; }
+              .rw   { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10px; fill: #9aa1b1; dominant-baseline: middle; }
+              .cellt{ font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10.5px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+            </style>
+          </defs>
+
+          <!-- shipped column highlight (Micro+) -->
+          <rect x="322" y="0" width="60" height="214" rx="8" fill="rgba(224,108,154,0.07)" stroke="rgba(224,108,154,0.30)"/>
+
+          <!-- column headers -->
+          <text class="hd" x="128" y="10" fill="#46d39a">Custom</text>
+          <text class="hd" x="184" y="10" fill="#e8a33d">Raw OSS</text>
+          <text class="hd" x="240" y="10" fill="#22b8cf">OSS+</text>
+          <text class="hd" x="296" y="10" fill="#9a7be0">Micro</text>
+          <text class="hd" x="352" y="10" fill="#e06c9a">Micro+</text>
+
+          <!-- benign email -->
+          <text class="rw" x="0" y="40">benign email</text>
+          <rect x="103" y="28" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="128" y="41" fill="#46d39a">5/5</text>
+          <rect x="159" y="28" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="184" y="41" fill="#f87171">0/5</text>
+          <rect x="215" y="28" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="240" y="41" fill="#46d39a">5/5</text>
+          <rect x="271" y="28" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="296" y="41" fill="#f87171">0/5</text>
+          <rect x="327" y="28" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="352" y="41" fill="#46d39a">5/5</text>
+
+          <!-- SSN + card -->
+          <text class="rw" x="0" y="72">SSN + card</text>
+          <rect x="103" y="60" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="128" y="73" fill="#46d39a">5/5</text>
+          <rect x="159" y="60" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="184" y="73" fill="#f87171">0/5</text>
+          <rect x="215" y="60" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="240" y="73" fill="#46d39a">5/5</text>
+          <rect x="271" y="60" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="296" y="73" fill="#f87171">0/5</text>
+          <rect x="327" y="60" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="352" y="73" fill="#46d39a">5/5</text>
+
+          <!-- prompt-injection -->
+          <text class="rw" x="0" y="104">prompt-injection</text>
+          <rect x="103" y="92" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="128" y="105" fill="#46d39a">5/5</text>
+          <rect x="159" y="92" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="184" y="105" fill="#46d39a">5/5</text>
+          <rect x="215" y="92" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="240" y="105" fill="#46d39a">5/5</text>
+          <rect x="271" y="92" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="296" y="105" fill="#46d39a">5/5</text>
+          <rect x="327" y="92" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="352" y="105" fill="#46d39a">5/5</text>
+
+          <!-- banned claim -->
+          <text class="rw" x="0" y="136">banned claim</text>
+          <rect x="103" y="124" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="128" y="137" fill="#46d39a">5/5</text>
+          <rect x="159" y="124" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="184" y="137" fill="#f87171">0/5</text>
+          <rect x="215" y="124" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="240" y="137" fill="#46d39a">5/5</text>
+          <rect x="271" y="124" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="296" y="137" fill="#f87171">0/5</text>
+          <rect x="327" y="124" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="352" y="137" fill="#46d39a">5/5</text>
+
+          <!-- PII in reply -->
+          <text class="rw" x="0" y="168">PII in reply</text>
+          <rect x="103" y="156" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="128" y="169" fill="#46d39a">5/5</text>
+          <rect x="159" y="156" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="184" y="169" fill="#f87171">0/5</text>
+          <rect x="215" y="156" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="240" y="169" fill="#46d39a">5/5</text>
+          <rect x="271" y="156" width="50" height="24" rx="5" fill="rgba(248,113,113,0.16)"/><text class="cellt" x="296" y="169" fill="#f87171">0/5</text>
+          <rect x="327" y="156" width="50" height="24" rx="5" fill="rgba(70,211,154,0.20)"/><text class="cellt" x="352" y="169" fill="#46d39a">5/5</text>
+
+          <text class="hd" x="352" y="196" fill="#e06c9a" font-size="8.5" letter-spacing="0.1em">SHIPPED</text>
+        </svg>
+
+        <div class="foot">
+          <div class="stat ok">
+            <div class="n">3</div>
+            <div class="l">pass all 5</div>
+            <div class="d">Custom, OSS+Parity, Micro+Parity &mdash; identical behavior</div>
+          </div>
+          <div class="vr"></div>
+          <div class="stat bad">
+            <div class="n">1</div>
+            <div class="l">of 5, as shipped</div>
+            <div class="d">Raw OSS &amp; Microservice block jailbreak, nothing else</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Reading Pod — hero card</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0}
+
+  /* palette sampled from the viz index.html */
+  :root{
+    --paper:#f2f0e9; --surface:#f7f5ef; --card:#ffffff; --line:#e4dfd3;
+    --ink:#34433b; --navy:#2f3160; --muted:#8b8678; --soft:#6f6a5e;
+    --teal:#5d9e86; --teal-d:#4f8a74;
+    --coral:#e8966c; --coral-d:#df8455;
+    --indigo:#6164c9; --peach:#f0a878;
+    --track:#e9e4d8;
+    --font:"Poppins","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  }
+
+  html,body{background:#d9d6cc}
+  body{display:flex; align-items:center; justify-content:center; padding:40px}
+
+  .og-card{
+    position:relative;
+    width:1200px; height:630px;
+    overflow:hidden;
+    background:var(--paper);
+    font-family:var(--font);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    isolation:isolate;
+  }
+
+  /* ambient warmth — coral glow top, teal glow bottom, matching hero/closing */
+  .og-card::before{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(52% 60% at 16% -8%, rgba(232,150,108,.20), transparent 60%),
+      radial-gradient(60% 70% at 108% 118%, rgba(93,158,134,.20), transparent 62%);
+  }
+  /* faint page-edge striations, very subtle, as texture */
+  .og-card::after{
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.5;
+    background:radial-gradient(120% 120% at 50% 0%, transparent 60%, rgba(52,67,59,.05));
+  }
+
+  /* ============ LEFT — editorial type ============ */
+  .left{
+    position:relative; z-index:2;
+    width:632px; flex:none;
+    padding:74px 40px 74px 76px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+
+  .lockup{display:flex; align-items:center; gap:13px; margin-bottom:30px}
+  .mark{
+    width:52px; height:52px; border-radius:15px; flex:none;
+    display:grid; place-items:center; font-size:27px;
+    background:linear-gradient(150deg,#ffffff,#f4f1e8);
+    border:1px solid var(--line);
+    box-shadow:0 12px 22px -14px rgba(52,67,59,.45), inset 0 1px 0 #fff;
+  }
+  .wordmark{font-size:16px; font-weight:700; letter-spacing:.04em; color:var(--navy)}
+  .eyebrow{
+    display:block; font-size:11.5px; font-weight:700; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--coral-d); margin-top:3px;
+  }
+
+  h1{
+    font-size:82px; line-height:.98; font-weight:800; letter-spacing:-.03em;
+    color:var(--ink);
+  }
+  h1 .thin{font-weight:600; color:var(--soft); display:block; font-size:33px; letter-spacing:-.01em; margin-bottom:6px}
+
+  .essence{
+    margin-top:24px; font-size:26px; font-weight:700; letter-spacing:-.01em;
+    color:var(--teal-d);
+  }
+  .essence b{color:var(--coral-d)}
+
+  .sub{
+    margin-top:15px; max-width:33ch;
+    font-size:17px; line-height:1.5; color:var(--soft);
+  }
+
+  .pills{display:flex; gap:9px; flex-wrap:wrap; margin-top:26px}
+  .pill{
+    font-size:12.5px; color:var(--soft);
+    background:var(--card); border:1px solid var(--line);
+    padding:7px 14px; border-radius:999px;
+    box-shadow:0 5px 12px -10px rgba(52,67,59,.5);
+  }
+  .pill b{color:var(--ink); font-weight:700}
+
+  /* ============ RIGHT — motif: pod of readers around a book stack ============ */
+  .right{
+    position:relative; z-index:1;
+    flex:1; display:grid; place-items:center;
+  }
+  .motif{position:relative; width:478px; height:478px}
+
+  /* the "pod" — an orbit ring with reader nodes around it */
+  .ring{
+    position:absolute; inset:34px;
+    border-radius:50%;
+    border:2px dashed rgba(93,158,134,.45);
+  }
+  .ring.inner{
+    inset:70px;
+    border:1.5px solid rgba(93,158,134,.16);
+    border-style:solid;
+  }
+  .node{
+    position:absolute; width:56px; height:56px; border-radius:50%;
+    display:grid; place-items:center; font-size:25px;
+    background:linear-gradient(150deg,#ffffff,#f5f2e9);
+    border:1px solid var(--line);
+    box-shadow:0 14px 24px -14px rgba(52,67,59,.5), inset 0 1px 0 #fff;
+  }
+  .node.a{top:14px;  left:211px}
+  .node.b{top:120px; left:24px; background:linear-gradient(150deg,#eff6f1,#e5efe8)}
+  .node.c{top:120px; left:398px; background:linear-gradient(150deg,#fdf1e8,#f9e7d7)}
+  .node.d{top:344px; left:70px;  background:linear-gradient(150deg,#eeeffb,#e4e6f7)}
+  .node.e{top:344px; left:352px}
+
+  /* the book stack — the focal object */
+  .stack{
+    position:absolute; left:50%; top:52%;
+    transform:translate(-50%,-50%);
+    width:314px;
+  }
+  .book{
+    position:relative;
+    height:50px; border-radius:8px;
+    display:flex; align-items:stretch;
+    overflow:hidden;
+    box-shadow:0 16px 26px -18px rgba(52,67,59,.55);
+    border:1px solid rgba(52,67,59,.06);
+  }
+  .book + .book{margin-top:-4px}
+  .book .spine{width:19px; flex:none}
+  .book .pages{
+    flex:1;
+    background:
+      repeating-linear-gradient(90deg,#f0ebe0 0 2px,#faf7f0 2px 6px);
+    border-left:1px solid rgba(52,67,59,.08);
+  }
+  /* leaning pile — each slab nudged + rotated a touch */
+  .b1{width:314px; transform:rotate(1.6deg);  z-index:1}
+  .b2{width:300px; margin-left:11px; transform:rotate(-1.4deg); z-index:2}
+  .b3{width:308px; margin-left:3px;  transform:rotate(1.1deg);  z-index:3}
+  .b4{width:296px; margin-left:16px; transform:rotate(-.6deg);  z-index:4}
+  .b1 .spine{background:var(--indigo)}
+  .b2 .spine{background:var(--teal)}
+  .b3 .spine{background:var(--peach)}
+  .b4 .spine{background:var(--coral)}
+
+  /* coral bookmark ribbon poking from the top book */
+  .ribbon{
+    position:absolute; z-index:6; top:-24px; right:52px;
+    width:24px; height:66px; background:var(--coral);
+    clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);
+    box-shadow:0 10px 16px -10px rgba(223,132,85,.7);
+  }
+
+  /* the signature: a "currently reading" progress card overlapping the stack */
+  .progress{
+    position:absolute; z-index:7; left:50%; bottom:-30px;
+    transform:translateX(-50%);
+    width:300px;
+    background:var(--card); border:1px solid var(--line);
+    border-radius:13px; padding:14px 16px 15px;
+    box-shadow:0 26px 40px -22px rgba(52,67,59,.6);
+  }
+  .progress .lab{
+    font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--coral-d); margin-bottom:6px;
+  }
+  .progress .title{font-size:15px; font-weight:800; color:var(--ink)}
+  .progress .author{font-size:12px; color:var(--soft); margin-bottom:11px}
+  .pbar{height:9px; border-radius:99px; background:var(--track); overflow:hidden}
+  .pbar > i{display:block; height:100%; width:38%; border-radius:99px;
+    background:linear-gradient(90deg,var(--coral),var(--coral-d))}
+  .pmeta{display:flex; justify-content:space-between; font-size:11.5px; color:var(--soft); margin-top:8px}
+  .pmeta b{color:var(--ink); font-weight:700}
+</style>
+</head>
+<body>
+  <div class="og-card">
+
+    <div class="left">
+      <div class="lockup">
+        <div class="mark">📚</div>
+        <div>
+          <div class="wordmark">The Reading Pod</div>
+          <span class="eyebrow">A newcomer's first 10 minutes</span>
+        </div>
+      </div>
+
+      <h1><span class="thin">Welcome to</span>The Reading&nbsp;Pod</h1>
+
+      <div class="essence">No one reads alone.</div>
+
+      <p class="sub">Every page tracked, your whole library organized, and a pod that gets your taste — one calm, distraction-free space.</p>
+
+      <div class="pills">
+        <span class="pill"><b>Track</b> every page</span>
+        <span class="pill"><b>Organize</b> your library</span>
+        <span class="pill"><b>Join</b> a pod</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="motif">
+        <div class="ring"></div>
+        <div class="ring inner"></div>
+
+        <div class="node a">📖</div>
+        <div class="node b">🐉</div>
+        <div class="node c">⭐</div>
+        <div class="node d">📈</div>
+        <div class="node e">🔖</div>
+
+        <div class="stack">
+          <div class="ribbon"></div>
+          <div class="book b1"><span class="spine"></span><span class="pages"></span></div>
+          <div class="book b2"><span class="spine"></span><span class="pages"></span></div>
+          <div class="book b3"><span class="spine"></span><span class="pages"></span></div>
+          <div class="book b4"><span class="spine"></span><span class="pages"></span></div>
+
+          <div class="progress">
+            <div class="lab">Currently reading</div>
+            <div class="title">Project Hail Mary</div>
+            <div class="author">by Andy Weir</div>
+            <div class="pbar"><i></i></div>
+            <div class="pmeta"><span>182 / 476 pages</span><b>38%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

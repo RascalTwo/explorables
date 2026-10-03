@@ -1,0 +1,166 @@
+<div class="og-card">
+  <style>
+    .og-card{
+      position:relative;width:1200px;height:630px;overflow:hidden;
+      background:#0d1117;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:#e6edf3;
+    }
+    /* faint technical grid + top glow wash */
+    .og-bg{position:absolute;inset:0;
+      background-image:
+        radial-gradient(1100px 520px at 78% 42%, rgba(88,166,255,.10), transparent 60%),
+        radial-gradient(900px 600px at 8% 0%, rgba(63,185,80,.05), transparent 55%),
+        linear-gradient(rgba(48,54,61,.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48,54,61,.35) 1px, transparent 1px);
+      background-size:auto,auto,44px 44px,44px 44px;
+      -webkit-mask-image:linear-gradient(90deg,#000,#000);
+    }
+    .og-vign{position:absolute;inset:0;
+      background:radial-gradient(1400px 900px at 50% 45%, transparent 55%, rgba(0,0,0,.55));}
+
+    .og-safe{position:absolute;left:60px;top:32px;width:1080px;height:566px;display:flex;}
+
+    /* ---- left: type column ---- */
+    .og-left{width:452px;display:flex;flex-direction:column;justify-content:center;padding-right:24px;}
+    .og-eyebrow{
+      font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      font-size:14px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+      color:#58a6ff;display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+    .og-eyebrow::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(88,166,255,.5),transparent);}
+    .og-title{font-size:104px;line-height:.94;font-weight:760;letter-spacing:-.035em;margin:0;}
+    .og-title .b{color:#58a6ff;}
+    .og-essence{margin:26px 0 0;font-size:20px;line-height:1.5;color:#8b949e;max-width:430px;font-weight:450;}
+    .og-essence b{color:#e6edf3;font-weight:600;}
+    .og-chips{margin-top:34px;display:flex;gap:10px;flex-wrap:wrap;}
+    .og-chip{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      font-size:12.5px;font-weight:600;letter-spacing:.04em;padding:6px 12px;border-radius:999px;
+      border:1px solid #30363d;color:#8b949e;background:rgba(33,38,45,.6);}
+    .og-chip .d{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:1px;}
+
+    /* ---- right: motif ---- */
+    .og-right{flex:1;position:relative;display:flex;align-items:center;justify-content:center;}
+    .og-svg{width:600px;height:auto;display:block;}
+  </style>
+
+  <div class="og-bg"></div>
+  <div class="og-vign"></div>
+
+  <div class="og-safe">
+    <div class="og-left">
+      <div class="og-eyebrow">LiteLLM &middot; AI Gateway</div>
+      <h1 class="og-title">Why<br><span class="b">LiteLLM?</span></h1>
+      <p class="og-essence">One front door for every model — collapse the <b>N&times;M mesh</b> into a single OpenAI-compatible endpoint.</p>
+      <div class="og-chips">
+        <span class="og-chip"><span class="d" style="background:#58a6ff"></span>What it solves</span>
+        <span class="og-chip"><span class="d" style="background:#3fb950"></span>What you get</span>
+        <span class="og-chip"><span class="d" style="background:#bc8cff"></span>How to get access</span>
+      </div>
+    </div>
+
+    <div class="og-right">
+      <svg class="og-svg" viewBox="0 0 560 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Many app callers routed through one LiteLLM gateway to many providers">
+        <defs>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="7" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <linearGradient id="door" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1b3153"/>
+            <stop offset="1" stop-color="#122036"/>
+          </linearGradient>
+          <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9ecbff" stop-opacity=".95"/>
+            <stop offset="1" stop-color="#58a6ff" stop-opacity="0"/>
+          </linearGradient>
+          <marker id="ain" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+            <path d="M0 0L7 3.5L0 7z" fill="#58a6ff"/>
+          </marker>
+          <marker id="aout" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+            <path d="M0 0L7 3.5L0 7z" fill="#3fb950"/>
+          </marker>
+        </defs>
+
+        <!-- soft focal halo behind the door -->
+        <ellipse cx="290" cy="158" rx="118" ry="150" fill="#58a6ff" opacity="0.10" filter="url(#glow)"/>
+
+        <!-- caller -> gateway (blue, converging) -->
+        <g fill="none" stroke="#58a6ff" stroke-width="1.6" opacity=".9" marker-end="url(#ain)">
+          <path d="M132 46 C 196 46 198 158 246 158"/>
+          <path d="M132 118 C 196 118 200 158 246 158"/>
+          <path d="M132 190 C 196 190 200 158 246 158"/>
+          <path d="M132 262 C 196 262 198 158 246 158"/>
+        </g>
+        <!-- gateway -> providers (green, fanning) -->
+        <g fill="none" stroke="#3fb950" stroke-width="1.6" opacity=".9" marker-end="url(#aout)">
+          <path d="M334 158 C 382 158 384 46 428 46"/>
+          <path d="M334 158 C 382 158 384 118 428 118"/>
+          <path d="M334 158 C 382 158 384 190 428 190"/>
+          <path d="M334 158 C 382 158 384 262 428 262"/>
+        </g>
+
+        <!-- caller boxes (left) -->
+        <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" font-weight="600">
+          <g>
+            <rect x="8" y="26" width="124" height="40" rx="9" fill="#161b22" stroke="#30363d"/>
+            <text x="70" y="50" text-anchor="middle" fill="#c9d4e0">Chatbot</text>
+          </g>
+          <g>
+            <rect x="8" y="98" width="124" height="40" rx="9" fill="#161b22" stroke="#30363d"/>
+            <text x="70" y="122" text-anchor="middle" fill="#c9d4e0">Classifier</text>
+          </g>
+          <g>
+            <rect x="8" y="170" width="124" height="40" rx="9" fill="#161b22" stroke="#30363d"/>
+            <text x="70" y="194" text-anchor="middle" fill="#c9d4e0">Inbox agent</text>
+          </g>
+          <g>
+            <rect x="8" y="242" width="124" height="40" rx="9" fill="#161b22" stroke="#30363d"/>
+            <text x="70" y="266" text-anchor="middle" fill="#c9d4e0">RAG API</text>
+          </g>
+        </g>
+
+        <!-- provider boxes (right) -->
+        <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" font-weight="600">
+          <g>
+            <rect x="428" y="26" width="124" height="40" rx="9" fill="#161b22" stroke="#264b3a"/>
+            <text x="490" y="50" text-anchor="middle" fill="#9fd8ab">Llama · on-prem</text>
+          </g>
+          <g>
+            <rect x="428" y="98" width="124" height="40" rx="9" fill="#161b22" stroke="#264b3a"/>
+            <text x="490" y="122" text-anchor="middle" fill="#9fd8ab">Embeddings</text>
+          </g>
+          <g>
+            <rect x="428" y="170" width="124" height="40" rx="9" fill="#161b22" stroke="#264b3a"/>
+            <text x="490" y="194" text-anchor="middle" fill="#9fd8ab">Rerank</text>
+          </g>
+          <g>
+            <rect x="428" y="242" width="124" height="40" rx="9" fill="#161b22" stroke="#264b3a"/>
+            <text x="490" y="266" text-anchor="middle" fill="#9fd8ab">Cloud · GPT…</text>
+          </g>
+        </g>
+
+        <!-- THE FRONT DOOR — focal point -->
+        <g filter="url(#glow)">
+          <path d="M248 268 L248 78 Q248 44 290 44 Q332 44 332 78 L332 268 Z"
+                fill="url(#door)" stroke="#58a6ff" stroke-width="2.4"/>
+        </g>
+        <!-- inner opening / light beam through the door -->
+        <path d="M266 268 L266 92 Q266 70 290 70 Q314 70 314 92 L314 268 Z"
+              fill="url(#beam)" opacity=".55"/>
+        <line x1="290" y1="84" x2="290" y2="262" stroke="#cfe4ff" stroke-width="1.2" opacity=".6"/>
+
+        <!-- door labels -->
+        <text x="290" y="150" text-anchor="middle" fill="#eaf3ff"
+              font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+              font-size="22" font-weight="700" letter-spacing="1">/v1</text>
+        <text x="290" y="176" text-anchor="middle" fill="#9ecbff"
+              font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif"
+              font-size="11.5" font-weight="600" letter-spacing=".14em">LITELLM</text>
+
+        <text x="290" y="304" text-anchor="middle" fill="#6e7b8a"
+              font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+              font-size="11" letter-spacing=".05em">one endpoint · keys · budgets · routing</text>
+      </svg>
+    </div>
+  </div>
+</div>

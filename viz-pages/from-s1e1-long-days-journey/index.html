@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FROM · S1E1 — Long Day's Journey Into Night</title>
+<meta name="viz:uid" content="v-02613a9991a5">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="FROM">
+<meta name="viz:tag" content="TV & Film">
+<meta name="viz:spoiler" content="true">
+<meta name="viz:title" content="FROM S1E1 — Long Day's Journey Into Night">
+<meta name="viz:description" content="An interactive day-into-night map of the pilot: faction swimlanes on a shifting sky, a live sun/moon dome, and a town map where the creatures emerge as it darkens.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root{
+    --matthews:#e8b04b; --town:#4aa3c7; --colony:#9a86ef;
+    --crash:#e08a45; --creature:#d64560; --victim:#7b8494;
+    --bg0:#070912; --panel:#0e1220; --line:#1e2740;
+  }
+  body{background:var(--bg0);color:#e7ecf5;font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:22px 26px 60px;}
+  h1,h2,h3{margin:0;font-weight:650;letter-spacing:.2px}
+  .wrap{max-width:1280px;margin:0 auto}
+  /* header */
+  .top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+  .ttl{font-size:13px;letter-spacing:3px;color:#8fa3c2;text-transform:uppercase}
+  .ep{font-size:30px;font-weight:700;letter-spacing:.3px;margin-top:2px}
+  .ep em{font-style:italic;color:#cdd8ea;font-weight:500}
+  .meta{font-size:12px;color:#7d8aa3;margin-top:4px}
+  .sign{border:2px solid #3a2b18;background:#140f07;border-radius:8px;padding:8px 14px;text-align:center;box-shadow:inset 0 0 24px #000;min-width:150px}
+  .sign .lab{font-size:9px;letter-spacing:2px;color:#c79a4e;text-transform:uppercase}
+  .sign .num{font:700 32px/1 "DS-Digital",ui-monospace,monospace;color:#ffb54a;text-shadow:0 0 12px #d68a2a88}
+  .sign .sub{font-size:8.5px;color:#6e5a34;letter-spacing:1px;margin-top:2px}
+  /* hero */
+  .hero{display:grid;grid-template-columns:340px 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:var(--panel)}
+  #dome{display:block;width:100%;height:210px}
+  .readout{padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+  .rline{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .clock{font:700 26px/1 ui-monospace,monospace;color:#fff;letter-spacing:1px}
+  .tod{font-size:14px;letter-spacing:3px;text-transform:uppercase;padding:3px 12px;border-radius:20px;background:#1a2138;border:1px solid var(--line)}
+  .scnttl{font-size:20px;font-weight:650;color:#fff}
+  .scnloc{font-size:12.5px;color:#8ea1c0}
+  .scnloc b{color:#c7d4e8;font-weight:600}
+  .gauge{margin-top:2px}
+  .gauge .glab{display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px;color:#8ea1c0;text-transform:uppercase;margin-bottom:4px}
+  .gtrack{height:9px;border-radius:6px;background:#0a0e1a;border:1px solid var(--line);overflow:hidden}
+  .gfill{height:100%;border-radius:6px;background:linear-gradient(90deg,#3a2a5a,#d68a2a,#ffd36b);transition:width .35s}
+  .urgent{color:var(--creature);font-weight:700;letter-spacing:1px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:.35}}
+  /* controls */
+  .ctl{display:flex;align-items:center;gap:14px;margin:0 2px 8px}
+  .btn{cursor:pointer;border:1px solid var(--line);background:#141a2c;color:#cdd8ea;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3a4a72;background:#18213a}
+  .hint{font-size:11.5px;color:#6e7c96}
+  /* timeline */
+  .tlwrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:#070a13}
+  #tl{display:block;width:100%;height:330px}
+  .node{cursor:pointer}
+  .node circle{transition:r .12s,stroke-width .12s}
+  .node:hover circle{stroke:#fff}
+  .nsel circle{stroke:#fff;stroke-width:3}
+  .nnum{font:700 10px/1 ui-monospace,monospace;fill:#05070f;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+  .lanelab{font:600 11px/1 sans-serif;letter-spacing:1px;text-anchor:end}
+  .tick{font:10px/1 ui-monospace,monospace;fill:#5c6a86;text-anchor:middle}
+  .phline{stroke:#fff;stroke-width:1.5;stroke-dasharray:3 3;opacity:.85;pointer-events:none}
+  .phgrip{fill:#fff;cursor:ew-resize}
+  /* lower grid */
+  .low{display:grid;grid-template-columns:1fr 360px;gap:16px}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0;overflow:hidden}
+  #map{display:block;width:100%;height:auto;background:radial-gradient(120% 120% at 50% 40%,#0c1120,#060810)}
+  .pin{cursor:pointer}
+  .pin text{font:600 10.5px/1 sans-serif;fill:#b9c6dd;pointer-events:none}
+  .pin:hover text{fill:#fff}
+  .psel .pdot{stroke:#fff;stroke-width:3}
+  .detail{padding:16px 18px}
+  .detail h3{font-size:16px;margin-bottom:2px}
+  .dloc{font-size:12px;color:#8ea1c0;margin-bottom:10px}
+  .dsum{font-size:13.5px;color:#d3ddec;margin-bottom:12px}
+  .quote{border-left:3px solid #3a4a72;padding:4px 0 4px 12px;margin:12px 0;font-style:italic;color:#e7ecf5;font-size:14px}
+  .quote .by{display:block;font-style:normal;font-size:11px;color:#8ea1c0;margin-top:4px;letter-spacing:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chip{font-size:11px;padding:2px 9px;border-radius:20px;border:1px solid var(--line);background:#131a2c;color:#cdd8ea}
+  .chip i{font-style:normal;opacity:.55;font-size:9px;margin-left:4px}
+  .badge{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:5px;font-weight:700;margin-bottom:8px}
+  /* roster */
+  .roster{padding:14px 16px 18px}
+  .roster h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#8ea1c0;margin:14px 0 8px}
+  .roster h3:first-child{margin-top:0}
+  .fac{display:flex;align-items:center;gap:7px;margin:6px 0;font-size:13px}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .fac .role{color:#8391a8;font-size:11.5px}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;padding:10px 16px;border-top:1px solid var(--line);font-size:11.5px;color:#a9b6cd}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  @media(max-width:1000px){.hero{grid-template-columns:1fr}.low{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="ttl">FROM · Season 1 · Episode 1 · dir. Jack Bender · wr. John Griffin</div>
+      <div class="ep">Long Day's <em>Journey Into Night</em></div>
+      <div class="meta">A pilot built as one countdown — from dusk, through a stolen daylight, back into the dark. Click a scene · drag the playhead · watch the town after sundown.</div>
+    </div>
+    <div class="sign" data-viz-id="sign" data-label="Nights without incident sign">
+      <div class="lab">Nights Without Incident</div>
+      <div class="num">96</div>
+      <div class="sub">— resets tonight —</div>
+    </div>
+  </div>
+
+  <!-- HERO: sky dome + readout -->
+  <div class="hero">
+    <svg id="dome" viewBox="0 0 340 210" preserveAspectRatio="xMidYMid slice"></svg>
+    <div class="readout">
+      <div class="rline">
+        <span class="clock" id="r-clock">00:00</span>
+        <span class="tod" id="r-tod">Dusk</span>
+      </div>
+      <div>
+        <div class="scnttl" id="r-title">—</div>
+        <div class="scnloc" id="r-loc">—</div>
+      </div>
+      <div class="gauge">
+        <div class="glab"><span>Daylight</span><span id="r-dpct">—</span></div>
+        <div class="gtrack"><div class="gfill" id="r-dfill" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctl">
+    <button class="btn" id="prev">‹ Prev</button>
+    <button class="btn" id="next">Next ›</button>
+    <button class="btn" id="play">▶ Play the day</button>
+    <span class="hint">Use <b>← →</b> to step through the night · or click a scene · drag the playhead. The band behind the threads <b>is</b> the sky.</span>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="tlwrap">
+    <svg id="tl" viewBox="0 0 1000 330"></svg>
+  </div>
+
+  <!-- LOWER: map + detail/roster -->
+  <div class="low">
+    <div class="card">
+      <svg id="map" viewBox="0 0 520 520"></svg>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--matthews)"></span>The Matthews</span>
+        <span><span class="dot" style="background:var(--town)"></span>Townsfolk</span>
+        <span><span class="dot" style="background:var(--colony)"></span>Colony House</span>
+        <span><span class="dot" style="background:var(--crash)"></span>Crash newcomers</span>
+        <span><span class="dot" style="background:var(--creature)"></span>The creatures</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="detail" id="detail"></div>
+      <div class="roster" id="roster"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<div class="og-card">
+  <style>
+    .og-card{
+      /* palette lifted from the viz's viz-kit.css */
+      --bg:#0d1117; --panel:#161b22; --panel2:#21262d; --border:#30363d;
+      --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --good:#3fb950;
+      --warn:#d29922; --danger:#f85149; --c4:#bc8cff; --teal:#4ec9b0;
+      --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+      position:relative; width:1200px; height:630px; overflow:hidden;
+      background:
+        radial-gradient(1300px 780px at 76% -22%, color-mix(in srgb,var(--good) 16%, transparent), transparent 60%),
+        radial-gradient(1500px 900px at 50% -32%, color-mix(in srgb,var(--panel) 62%, transparent), transparent 74%),
+        var(--bg);
+      color:var(--text); font-family:var(--sans);
+      box-sizing:border-box;
+    }
+    .og-card *{box-sizing:border-box;}
+    /* faint engineering grid */
+    .og-grid{position:absolute; inset:0;
+      background-image:
+        linear-gradient(color-mix(in srgb,var(--border) 55%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb,var(--border) 55%, transparent) 1px, transparent 1px);
+      background-size:44px 44px; opacity:.28;
+      -webkit-mask-image:radial-gradient(1100px 620px at 50% 42%, #000 40%, transparent 88%);
+              mask-image:radial-gradient(1100px 620px at 50% 42%, #000 40%, transparent 88%);}
+
+    .og-wrap{position:absolute; inset:0; padding:52px 58px; display:flex; flex-direction:column;}
+
+    /* ---- header ---- */
+    .og-eyebrow{display:flex; align-items:center; gap:11px; font-family:var(--mono);
+      font-size:14px; letter-spacing:.19em; text-transform:uppercase; color:var(--muted);}
+    .og-eyebrow .pulse{width:9px; height:9px; border-radius:50%; background:var(--good);
+      box-shadow:0 0 0 4px color-mix(in srgb,var(--good) 22%, transparent);}
+    .og-eyebrow .sep{color:var(--border);}
+    .og-eyebrow b{color:var(--text); font-weight:600; letter-spacing:.13em;}
+
+    .og-title{margin:20px 0 0; font-size:57px; line-height:1.03; font-weight:800;
+      letter-spacing:-.021em; color:var(--text);}
+    .og-title .g{color:var(--muted); font-weight:650;}
+    .og-title .hl{color:var(--good);}
+
+    .og-essence{margin-top:16px; font-size:20px; line-height:1.5; color:var(--muted);
+      max-width:660px;}
+    .og-essence .no{color:var(--danger); font-weight:650;}
+    .og-essence .yes{color:var(--good); font-weight:650;}
+    .og-essence code{font-family:var(--mono); font-size:17px; color:var(--text);
+      background:color-mix(in srgb,var(--good) 12%, transparent);
+      border:1px solid color-mix(in srgb,var(--good) 30%, var(--border));
+      padding:1px 7px; border-radius:6px;}
+
+    /* ---- stage ---- */
+    .og-stage{margin-top:auto; display:grid;
+      grid-template-columns:246px 116px 1fr; align-items:stretch; gap:0;
+      background:linear-gradient(180deg, color-mix(in srgb,var(--panel) 88%, transparent), var(--panel));
+      border:1px solid var(--border); border-radius:16px; padding:18px 22px 20px;
+      position:relative; height:262px;
+      box-shadow:0 1px 0 color-mix(in srgb,#fff 5%,transparent) inset, 0 22px 55px -30px #000;}
+    /* saturated-lane hatch behind the whole stage */
+    .og-stage::before{content:""; position:absolute; inset:1px; border-radius:15px;
+      background:repeating-linear-gradient(45deg, transparent 0 9px, color-mix(in srgb,#fff 2.2%, transparent) 9px 18px);
+      pointer-events:none;}
+
+    .col-head{font-family:var(--mono); font-size:11px; letter-spacing:.13em;
+      text-transform:uppercase; color:var(--muted); margin-bottom:11px; display:flex;
+      align-items:center; gap:8px;}
+    .col-head .tick{color:var(--border);}
+
+    /* chips */
+    .chips{display:flex; flex-direction:column; gap:8px; position:relative; z-index:1;}
+    .chip{display:flex; align-items:center; gap:9px; padding:7px 11px; border-radius:10px;
+      border:1px solid var(--border); background:#0d1422; font-size:14px; font-weight:600;
+      color:var(--text); position:relative;}
+    .chip .sw{width:9px; height:9px; border-radius:3px; flex:none;}
+    .chip .lab{flex:1; white-space:nowrap;}
+    .chip .tag{font-family:var(--mono); font-size:11px; font-weight:600; padding:2px 7px;
+      border-radius:6px; letter-spacing:.02em;}
+    .chip .rank{font-family:var(--mono); font-size:12px; font-weight:700; color:var(--muted);
+      width:22px; text-align:right; flex:none;}
+    .chip.batch .sw{background:var(--muted);}
+    .chip.batch .tag{background:color-mix(in srgb,var(--muted) 16%, transparent); color:var(--muted);}
+    .chip.chat{border-color:color-mix(in srgb,var(--good) 62%, var(--border));
+      box-shadow:0 0 0 1px color-mix(in srgb,var(--good) 26%, transparent) inset,
+                 0 0 22px -6px color-mix(in srgb,var(--good) 60%, transparent);}
+    .chip.chat .sw{background:var(--good);} .chip.chat .lab{color:var(--good);}
+    .chip.chat .tag{background:color-mix(in srgb,var(--good) 20%, transparent); color:var(--good);}
+    .chip.cheat{border-color:color-mix(in srgb,var(--danger) 55%, var(--border));}
+    .chip.cheat .sw{background:var(--danger);} .chip.cheat .lab{color:var(--danger);}
+    .chip.cheat .tag{background:color-mix(in srgb,var(--danger) 18%, transparent); color:var(--danger);}
+    .chip .stamp{font-family:var(--mono); font-size:11px; color:var(--muted);}
+    .chip .stamp s{color:var(--danger); text-decoration-thickness:1.5px; opacity:.8;}
+    .chip .stamp b{color:var(--good);}
+    .chip.rankrow .rank{color:var(--text);}
+    .chip.chat.rankrow .rank{color:var(--good);}
+
+    /* gate column */
+    .gate{position:relative; z-index:1; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;}
+    .gate svg{display:block;}
+    .gate .cap{margin-top:9px; font-family:var(--mono); font-size:10.5px; letter-spacing:.11em;
+      text-transform:uppercase; color:var(--good); text-align:center; line-height:1.5;}
+    .gate .cap b{color:var(--text);}
+
+    /* output column */
+    .out{position:relative; z-index:1; display:flex; flex-direction:column;}
+    .out-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:11px;}
+    .gpu{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:12px;
+      color:var(--text);}
+    .gpu .glow{width:26px; height:26px; border-radius:6px;
+      background:radial-gradient(circle at 40% 35%, color-mix(in srgb,var(--good) 85%,#fff), var(--good) 55%, color-mix(in srgb,var(--good) 40%,#000));
+      box-shadow:0 0 18px -2px color-mix(in srgb,var(--good) 75%, transparent); position:relative;}
+    .gpu .glow::after{content:""; position:absolute; inset:6px; border-radius:2px;
+      border:1.5px solid color-mix(in srgb,#0d1117 60%, transparent);}
+    .gpu small{color:var(--muted);}
+
+    .footline{position:absolute; left:58px; bottom:20px; font-family:var(--mono);
+      font-size:12.5px; color:var(--muted); letter-spacing:.02em;}
+    .footline b{color:var(--text);}
+    .brand{position:absolute; right:58px; bottom:20px; font-family:var(--mono);
+      font-size:12.5px; color:var(--muted); letter-spacing:.06em;}
+    .brand .n{color:var(--accent);}
+  </style>
+
+  <div class="og-grid"></div>
+
+  <div class="og-wrap">
+    <div class="og-eyebrow">
+      <span class="pulse"></span>
+      <b>LITELLM · REQUEST PRIORITY</b>
+      <span class="sep">/</span>
+      <span>ON-PREM GPU LANE · MEASURED LIVE</span>
+    </div>
+
+    <h1 class="og-title">
+      Prioritizing requests on a busy GPU<br>
+      <span class="g">— three ways LiteLLM can <span class="hl">do it</span></span>
+    </h1>
+
+    <p class="og-essence">
+      One saturated lane, one slot. Two built-in priority paths are
+      <span class="no">forgeable</span> or <span class="no">flaky</span> — a
+      <code>~35-line</code> key-based gate <span class="yes">isn't</span>.
+    </p>
+
+    <!-- signature motif: saturated lane · priority gate orders chat ahead of batch -->
+    <div class="og-stage">
+      <!-- submitted queue -->
+      <div>
+        <div class="col-head"><span class="tick">▚</span>submitted · as sent</div>
+        <div class="chips">
+          <div class="chip batch"><span class="sw"></span><span class="lab">batch ①</span><span class="tag">key 100</span></div>
+          <div class="chip batch"><span class="sw"></span><span class="lab">batch ②</span><span class="tag">key 100</span></div>
+          <div class="chip chat"><span class="sw"></span><span class="lab">chat</span><span class="tag">key 0</span></div>
+          <div class="chip cheat"><span class="sw"></span><span class="lab">cheat</span><span class="tag">body 0</span></div>
+        </div>
+      </div>
+
+      <!-- the gate -->
+      <div class="gate">
+        <svg width="86" height="176" viewBox="0 0 86 176" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3fb950" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#3fb950" stop-opacity=".35"/>
+            </linearGradient>
+          </defs>
+          <!-- incoming rails -->
+          <path d="M0 40 H26 M0 68 H26 M0 96 H26 M0 124 H26" stroke="#30363d" stroke-width="2"/>
+          <!-- ordered exit rail -->
+          <path d="M60 88 H86" stroke="url(#gg)" stroke-width="2.5"/>
+          <path d="M78 82 l8 6 -8 6" stroke="#3fb950" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- gate pillar -->
+          <rect x="27" y="8" width="32" height="160" rx="9" fill="#0d1422"
+                stroke="#3fb950" stroke-width="2"/>
+          <rect x="27" y="8" width="32" height="160" rx="9" fill="none"
+                stroke="#3fb950" stroke-opacity=".25" stroke-width="7"/>
+          <!-- keyhole -->
+          <circle cx="43" cy="74" r="8.5" fill="none" stroke="#3fb950" stroke-width="2.4"/>
+          <path d="M43 82 L39.5 100 h7 Z" fill="#3fb950"/>
+        </svg>
+        <div class="cap"><b>KEY GATE</b><br>priority = the key<br>body ignored</div>
+      </div>
+
+      <!-- served in order -> GPU -->
+      <div class="out">
+        <div class="out-head">
+          <div class="col-head" style="margin:0;"><span class="tick">▚</span>served · in order</div>
+          <div class="gpu"><small>into</small><span class="glow"></span>GPU · 1 slot</div>
+        </div>
+        <div class="chips">
+          <div class="chip chat rankrow"><span class="rank">#1</span><span class="sw"></span><span class="lab">chat</span><span class="stamp"><b>served first</b></span></div>
+          <div class="chip batch rankrow"><span class="rank">#2</span><span class="sw"></span><span class="lab">batch ①</span><span class="tag">key 100</span></div>
+          <div class="chip batch rankrow"><span class="rank">#3</span><span class="sw"></span><span class="lab">batch ②</span><span class="tag">key 100</span></div>
+          <div class="chip cheat rankrow"><span class="rank">#4</span><span class="sw"></span><span class="lab">cheat</span><span class="stamp"><s>body 0</s> → <b>key 100</b></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footline">chat beats the forged <b>priority:0</b> every run — the gate stamps it back to the key's 100.</div>
+  <div class="brand"><span class="n">litellm</span> · request-priority</div>
+</div>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>On-Behalf-Of Token Exchange (RFC 8693) — PingOne</title>
+<meta name="viz:uid" content="v-00b8fa181a0d">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="On-Behalf-Of Token Exchange (RFC 8693) — PingOne">
+<meta name="viz:description" content="How an API gateway swaps a user token for a downstream one via RFC 8693 On-Behalf-Of exchange with PingOne — and what it verifies locally vs. over the network.">
+<meta name="viz:tag" content="PingOne">
+<meta name="viz:tag" content="API">
+<link rel="stylesheet" href="/_kit/viz-kit.css" />
+<style>
+  body { margin: 0; padding: 24px 28px 64px; }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 1080px) { .layout { grid-template-columns: 1fr; } }
+
+  /* sequence diagram */
+  #seq { width: 100%; height: auto; display: block; }
+  .lifeline { stroke: var(--border); stroke-width: 2; }
+  .lane-box rect { fill: var(--panel-2); stroke: var(--border); stroke-width: 1.5; rx: 8; }
+  .msg-line { stroke-width: 2; fill: none; opacity: .16; transition: opacity .3s, stroke .3s; }
+  .msg-line.active { opacity: 1; }
+  .msg-line.done { opacity: .45; }
+  .msg-line.dashed { stroke-dasharray: 5 4; }
+  /* recap frame: every message shown uniformly, no single highlight */
+  #seq.summary .msg-line { opacity: .7; }
+  .msg-label { transition: opacity .3s; }
+  .actor-glow { opacity: 0; transition: opacity .3s; }
+  .actor-glow.on { opacity: 1; }
+
+  /* controls */
+  .controls { display: flex; align-items: center; gap: 10px; margin: 4px 0 14px; flex-wrap: wrap; }
+  button.ctl {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 7px; padding: 7px 13px; font: 600 13px var(--sans); cursor: pointer;
+  }
+  button.ctl:hover { border-color: var(--accent); }
+  button.ctl.primary { background: var(--accent); color: #06101f; border-color: var(--accent); }
+  button.ctl:disabled { opacity: .4; cursor: default; }
+  .stepcount { color: var(--muted); font: 600 13px var(--mono); margin-left: auto; }
+  .progress { height: 4px; background: var(--panel-2); border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+  .progress > i { display: block; height: 100%; background: var(--accent); transition: width .35s; }
+
+  /* narration */
+  .narr { min-height: 92px; }
+  .narr .tag { font: 700 11px var(--mono); letter-spacing: .5px; text-transform: uppercase; color: var(--accent); }
+  .narr h2 { margin: 6px 0 8px; font-size: 18px; }
+  .narr p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 14px; }
+  .narr code { background: var(--panel-2); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; color: var(--text); }
+
+  /* token cards */
+  .tokens { display: flex; flex-direction: column; gap: 12px; }
+  .tok {
+    border: 1px solid var(--border); border-radius: 10px; background: var(--panel);
+    padding: 12px 14px; opacity: .32; transition: opacity .35s, border-color .35s, box-shadow .35s;
+  }
+  .tok.live { opacity: 1; }
+  .tok.focus { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 6px 24px -8px var(--accent); }
+  .tok .thead { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+  .tok .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .tok .tname { font: 700 13px var(--sans); }
+  .tok .tkind { font: 600 10.5px var(--mono); color: var(--muted); margin-left: auto; text-transform: uppercase; letter-spacing: .4px; }
+  .claims { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font: 12.5px var(--mono); }
+  .claims .k { color: var(--muted); }
+  .claims .v { color: var(--text); }
+  .claims .v .hl { color: var(--accent); font-weight: 700; }
+  .claims .v .act { color: var(--c4); font-weight: 700; }
+  .claims .v .aud { color: var(--good); font-weight: 700; }
+
+  /* PingOne call ledger */
+  .ledger { margin-top: 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); padding: 13px 14px; }
+  .ledger h3 { font: 700 12px var(--sans); margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+  .ledger h3 .pip { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+  .ledger .lead { font-size: 11.5px; color: var(--muted); margin: 0 0 10px; line-height: 1.4; }
+  .lrow { display: grid; grid-template-columns: 46px 1fr; gap: 9px; align-items: baseline;
+    padding: 6px 8px; border-radius: 7px; border: 1px solid transparent; opacity: .42;
+    transition: opacity .3s, border-color .3s, background .3s; }
+  .lrow.live { opacity: 1; }
+  .lrow.active { border-color: var(--accent); background: var(--panel-2); }
+  .lrow .verb { font: 700 10px var(--mono); text-align: center; padding: 2px 0; border-radius: 4px;
+    border: 1px solid var(--border); }
+  .lrow .verb.post { color: var(--warn); }
+  .lrow .verb.get { color: var(--good); }
+  .lrow .desc { font: 12px var(--mono); color: var(--muted); line-height: 1.35; }
+  .lrow .desc b { color: var(--text); font-weight: 700; }
+  .lrow .cache { display: none; margin-left: 6px; font: 700 9.5px var(--mono); color: var(--good);
+    border: 1px solid var(--good); border-radius: 4px; padding: 0 5px; }
+  .lrow.cached.active .cache { display: inline; }
+  .ledger .foot { font-size: 11.5px; color: var(--muted); margin-top: 11px; padding-top: 10px;
+    border-top: 1px dashed var(--border); line-height: 1.5; }
+  .ledger .foot code { background: var(--panel-2); padding: 0 5px; border-radius: 4px; color: var(--text); font-size: 11px; }
+  .ledger .foot .no { color: var(--danger); font-weight: 700; }
+
+  .codref { margin-top: 16px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .codref code { color: var(--accent); }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 10px; }
+  kbd { background: var(--panel-2); border:1px solid var(--border); border-bottom-width:2px; border-radius:4px; padding:0 5px; font: 600 11px var(--mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="viz-header">
+    <h1>On-Behalf-Of Token Exchange <span style="color:var(--muted);font-weight:600">· RFC 8693 · PingOne</span></h1>
+    <div class="sub">How an API gateway swaps an <em>organization's</em> token for a delegated token the downstream API will accept — and how <strong>every token is verified against PingOne's published JWKS</strong>. No impersonation, no introspection.</div>
+  </div>
+
+  <div class="controls">
+    <button class="ctl" id="prev">‹ Back</button>
+    <button class="ctl primary" id="next">Next ›</button>
+    <button class="ctl" id="play">▶ Play</button>
+    <button class="ctl" id="reset">↺ Reset</button>
+    <span class="stepcount" id="stepcount"></span>
+  </div>
+  <div class="progress"><i id="bar"></i></div>
+
+  <div class="layout">
+    <div class="panel">
+      <svg id="seq" viewBox="0 0 770 760" role="img" aria-label="Sequence diagram"></svg>
+    </div>
+
+    <div>
+      <div class="panel narr" id="narr"></div>
+
+      <div class="tokens" style="margin-top:16px">
+        <div class="tok" id="tok-member">
+          <div class="thead"><span class="dot" style="background:var(--c1)"></span><span class="tname">Organization token</span><span class="tkind">subject_token</span></div>
+          <div class="claims">
+            <span class="k">sub</span><span class="v"><span class="hl">1111</span> <span style="color:var(--muted)">(org #)</span></span>
+            <span class="k">aud</span><span class="v">api-gateway</span>
+            <span class="k">scope</span><span class="v">data.read</span>
+            <span class="k">grant</span><span class="v">client_credentials <span style="color:var(--muted)">— no end user</span></span>
+          </div>
+        </div>
+
+        <div class="tok" id="tok-actor">
+          <div class="thead"><span class="dot" style="background:var(--c3)"></span><span class="tname">Gateway client token</span><span class="tkind">actor_token</span></div>
+          <div class="claims">
+            <span class="k">sub</span><span class="v"><span class="act">api-gateway</span> <span style="color:var(--muted)">(client)</span></span>
+            <span class="k">aud</span><span class="v">pingone STS</span>
+            <span class="k">grant</span><span class="v">client_credentials</span>
+          </div>
+        </div>
+
+        <div class="tok" id="tok-deleg">
+          <div class="thead"><span class="dot" style="background:var(--good)"></span><span class="tname">Delegated token</span><span class="tkind">issued by exchange</span></div>
+          <div class="claims">
+            <span class="k">sub</span><span class="v"><span class="hl">1111</span> <span style="color:var(--muted)">← still the organization</span></span>
+            <span class="k">act</span><span class="v">{ sub: <span class="act">api-gateway</span> }</span>
+            <span class="k">aud</span><span class="v"><span class="aud">data-api</span> <span style="color:var(--muted)">← now the Data API</span></span>
+            <span class="k">scope</span><span class="v">data.read</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ledger" id="ledger">
+        <h3><span class="pip"></span>Calls to PingOne</h3>
+        <p class="lead">The only network calls the gateway makes to PingOne. Everything else — signature, issuer, audience, scope, <code>act</code> — is verified <strong>locally</strong>.</p>
+
+        <div class="lrow" id="lr-authn-cc" data-row="authn-cc">
+          <span class="verb post">POST</span>
+          <span class="desc"><b>/as/token</b> · grant=<b>client_credentials</b><br><span style="color:var(--muted)">org's id+secret → org token</span></span>
+        </div>
+        <div class="lrow cached" id="lr-jwks" data-row="jwks">
+          <span class="verb get">GET</span>
+          <span class="desc"><b>/as/jwks</b> · signing keys <span class="cache">cached hit</span><br><span style="color:var(--muted)">fetched once, then every token verified offline</span></span>
+        </div>
+        <div class="lrow" id="lr-actor-cc" data-row="actor-cc">
+          <span class="verb post">POST</span>
+          <span class="desc"><b>/as/token</b> · grant=<b>client_credentials</b><br><span style="color:var(--muted)">gateway's id+secret → actor_token</span></span>
+        </div>
+        <div class="lrow" id="lr-exchange" data-row="exchange">
+          <span class="verb post">POST</span>
+          <span class="desc"><b>/as/token</b> · grant=<b>token-exchange</b><br><span style="color:var(--muted)">subject + actor → delegated token</span></span>
+        </div>
+
+        <div class="foot">
+          <span class="no">No <code>/as/introspect</code>.</span> Tokens are JWTs — signature is checked against the cached JWKS, and <code>iss</code> / <code>aud</code> / <code>scope</code> / <code>act</code> are all checked in-process. The single per-token dependency on PingOne is the JWKS, and that's cached.
+        </div>
+      </div>
+
+      <div class="codref">
+        <strong>In short:</strong> the gateway fetches its own <code>actor_token</code>, then calls <code>grant_type=…:token-exchange</code>.
+        The downstream API validates each token against the cached JWKS (signature + issuer) and checks <code>scope</code> + the <code>act</code> claim.
+      </div>
+      <div class="hint">⌨ <kbd>←</kbd>/<kbd>→</kbd> step · <kbd>Space</kbd> play/pause</div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:uid" content="v-fc6472aec84e">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="Basketball">
+<meta name="viz:title" content="The Euro Step">
+<meta name="viz:description" content="Basketball's slickest finishing move, broken down five ways: the path, the physics of why it works, rookie-vs-pro, a 3D view, and the footwork. Interactive, for newcomers.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<script type="importmap">{ "imports": { "three": "https://esm.sh/three@0.160.0", "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/" } }</script>
+<style>
+  body { margin: 0; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 24px; }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 22px; border-bottom: 1px solid var(--line, #2c3647); }
+  .tabs button { font: inherit; cursor: pointer; background: transparent; color: var(--ink-dim, #9fb0c3);
+    border: none; border-bottom: 2px solid transparent; padding: 10px 14px 12px; margin-bottom: -1px; font-size: 14px; }
+  .tabs button:hover { color: var(--ink, #e7ecf3); }
+  .tabs button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .two { display: grid; grid-template-columns: minmax(340px, 540px) 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  svg.court { width: 100%; height: auto; display: block; border-radius: 14px; touch-action: none; background:#15110a; }
+  .controls { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .controls button { font: inherit; cursor: pointer; background: var(--panel-2, #1b2230); color: var(--ink, #e7ecf3);
+    border: 1px solid var(--line, #2c3647); border-radius: 9px; padding: 8px 14px; }
+  .controls button:hover { border-color: var(--accent); }
+  .controls button.primary { background: var(--accent); color: #06121f; border-color: var(--accent); font-weight: 600; }
+  input[type=range] { flex: 1; min-width: 120px; accent-color: var(--accent); }
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step { padding: 13px 15px; border: 1px solid var(--line, #2c3647); border-radius: 12px; background: var(--panel, #141a24);
+    cursor: pointer; transition: border-color .15s, background .15s; }
+  .step:hover { border-color: var(--accent); }
+  .step.active { border-color: var(--accent); background: #16202e; box-shadow: 0 0 0 1px var(--accent) inset; }
+  .step h3 { margin: 0 0 4px; font-size: 14.5px; display: flex; align-items: center; gap: 9px; }
+  .step .num { display: inline-grid; place-items: center; width: 21px; height: 21px; border-radius: 50%;
+    background: var(--accent); color: #06121f; font-size: 12px; font-weight: 700; flex: none; }
+  .step p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-dim, #9fb0c3); }
+  .legend { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 11px; font-size: 12.5px; color: var(--ink-dim, #9fb0c3); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .prose { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .prose b { color: var(--ink, #e7ecf3); }
+  .prose h3 { color: var(--ink, #e7ecf3); margin: 16px 0 6px; font-size: 15px; }
+  .verdict { margin-top: 14px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line, #2c3647); background: var(--panel, #141a24); }
+  .verdict .big { font-size: 19px; font-weight: 700; }
+  .verdict.open { border-color: #36c98f; box-shadow: 0 0 0 1px #36c98f inset; } .verdict.open .big { color: #36c98f; }
+  .verdict.contested { border-color: #e2493f; box-shadow: 0 0 0 1px #e2493f inset; } .verdict.contested .big { color: #e2493f; }
+  .verdict p { margin: 6px 0 0; font-size: 13px; color: var(--ink-dim, #9fb0c3); line-height: 1.5; }
+  .hint { font-size: 13px; color: var(--ink-dim, #9fb0c3); margin-top: 12px; }
+  .tldr { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .tldr b { color: var(--ink, #e7ecf3); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="viz-header" style="padding:0;">
+    <h1 style="margin:0;">The Euro Step</h1>
+    <div class="sub">Basketball's slickest finishing move — dodging a defender at the rim, legally. Five ways to see it.</div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="move" class="active">1 · The Move</button>
+    <button data-tab="why">2 · Why It Works</button>
+    <button data-tab="vs">3 · Rookie vs Pro</button>
+    <button data-tab="d3">4 · 3D View</button>
+    <button data-tab="feet">5 · The Footwork</button>
+  </nav>
+
+  <!-- ============ TAB 1: THE MOVE ============ -->
+  <section id="tab-move" class="tab active">
+    <div class="two">
+      <div>
+        <svg class="court move-court" viewBox="0 0 500 490" aria-label="Top-down half court animation">
+          <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+          <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+          <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>
+          <g class="prints"></g>
+          <path class="trail" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.55"/>
+          <g class="def"><circle r="13" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">D</text></g>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+        </svg>
+        <div class="controls">
+          <button class="play primary">▶ Play</button>
+          <button class="restart">↺ Restart</button>
+          <input class="scrub" type="range" min="0" max="1000" value="0">
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#36c98f"></i> Ball-handler</span>
+          <span><i class="dot" style="background:#e2493f"></i> Defender</span>
+          <span><i class="dot" style="background:#ff9b3c"></i> Ball</span>
+        </div>
+      </div>
+      <div>
+        <p class="tldr"><b>The idea:</b> instead of jumping <i>straight</i> at the rim into a waiting defender, you take your two
+        allowed steps in <b>two different directions</b> — one way to make the defender commit, then the other way to slip past
+        for the layup. Hit ▶ and watch the green dot.</p>
+        <p class="tldr" style="margin:10px 0 16px;"><b>Why it's legal:</b> once you stop dribbling (the “gather”), the rules give
+        you <b>two steps</b>. The Euro Step just uses those two steps to zig-zag instead of going straight.</p>
+        <div class="steps move-steps"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: WHY IT WORKS ============ -->
+  <section id="tab-why" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court why-court" viewBox="0 0 500 490" aria-label="Interactive half court">
+          <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+          <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+          <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>
+          <defs>
+            <marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e2493f"/></marker>
+            <marker id="mf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9fb0c3"/></marker>
+          </defs>
+          <circle class="reach" fill="#e2493f" fill-opacity="0.13" stroke="#e2493f" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <line class="fakeArrow" stroke="#9fb0c3" stroke-width="2.5" stroke-dasharray="4 4" marker-end="url(#mf)"/>
+          <line class="momArrow" stroke="#e2493f" stroke-width="3" marker-end="url(#mv)"/>
+          <g class="finish"><circle r="13" fill="none" stroke-width="3"/><text y="5" text-anchor="middle" font-size="15">⛹</text></g>
+          <path class="wpath" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <g class="def" style="cursor:grab"><circle r="22" fill="transparent"/><circle r="13" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" style="pointer-events:none">D</text></g>
+        </svg>
+        <div class="controls">
+          <button class="wplay primary">▶ Run the move</button>
+          <button class="wreset">↺ Reset defender</button>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#e2493f"></i> Defender (drag me)</span>
+          <span><i class="dot" style="background:#36c98f"></i> Ball-handler</span>
+          <span style="color:#e2493f">◌ reachable zone</span>
+          <span style="color:#e2493f">→ momentum</span>
+        </div>
+      </div>
+      <div>
+        <div class="verdict"><div class="big">—</div><p class="vtext"></p></div>
+        <p class="hint">Drag <b style="color:#e2493f">D</b> anywhere, then hit <b>Run the move</b>. The dashed red circle is everywhere
+        the defender can still reach in the ~0.4&nbsp;s a layup takes. Finish lands <b>outside</b> it → bucket.</p>
+        <div class="prose">
+          <h3>The trick isn't speed — it's commitment</h3>
+          <p>A defender must honor your <b>first</b> step, so they lean to cut it off. The instant they do, their body has
+          <b>momentum</b> that way (red arrow). Humans can't reverse momentum instantly — for a few tenths of a second they're
+          <i>carried</i> the way they committed.</p>
+          <h3>The second step attacks the space they vacated</h3>
+          <p>Your second step goes the <b>opposite</b> way. The reachable circle <b>shifts toward the fake</b> — that shift is
+          the whole move. Drag D around: it's hardest to beat a defender who sits back and <i>doesn't</i> commit, which is
+          exactly why a good Euro Step <b>sells</b> the fake to force the lean.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: ROOKIE vs PRO ============ -->
+  <section id="tab-vs" class="tab">
+    <p class="tldr" style="margin-bottom:16px;">Same defender. Same starting spot. <b>Left:</b> the rookie drives straight and runs
+    into the wall (an offensive foul — a “charge”). <b>Right:</b> the Euro Step goes <i>around</i> the wall. Press once, watch both.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div class="vs-pane" data-kind="rookie">
+        <div style="font-size:14px; font-weight:600; color:#e2493f; margin-bottom:8px;">❌ Straight drive</div>
+        <svg class="vs-court" viewBox="0 0 280 300">
+          <rect x="6" y="6" width="268" height="288" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="95" y="6" width="90" height="150" fill="#3a2b14" stroke="#6b5836" stroke-width="1.5"/>
+          <circle cx="140" cy="156" r="42" fill="none" stroke="#6b5836" stroke-width="1.5"/>
+          <line x1="118" y1="26" x2="162" y2="26" stroke="#cbb78a" stroke-width="3"/>
+          <circle cx="140" cy="38" r="8" fill="none" stroke="#ff7a3c" stroke-width="2.5"/>
+          <path class="vtrail" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <g class="vdef"><circle r="12" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">D</text></g>
+          <g class="voff"><circle r="12" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">O</text><circle class="vball" r="5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.2"/></g>
+          <text class="vstamp" x="140" y="230" text-anchor="middle" font-size="20" font-weight="800" opacity="0"></text>
+        </svg>
+      </div>
+      <div class="vs-pane" data-kind="pro">
+        <div style="font-size:14px; font-weight:600; color:#36c98f; margin-bottom:8px;">✓ Euro Step</div>
+        <svg class="vs-court" viewBox="0 0 280 300">
+          <rect x="6" y="6" width="268" height="288" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="95" y="6" width="90" height="150" fill="#3a2b14" stroke="#6b5836" stroke-width="1.5"/>
+          <circle cx="140" cy="156" r="42" fill="none" stroke="#6b5836" stroke-width="1.5"/>
+          <line x1="118" y1="26" x2="162" y2="26" stroke="#cbb78a" stroke-width="3"/>
+          <circle cx="140" cy="38" r="8" fill="none" stroke="#ff7a3c" stroke-width="2.5"/>
+          <path class="vtrail" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <g class="vdef"><circle r="12" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">D</text></g>
+          <g class="voff"><circle r="12" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">O</text><circle class="vball" r="5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.2"/></g>
+          <text class="vstamp" x="140" y="92" text-anchor="middle" font-size="20" font-weight="800" opacity="0"></text>
+        </svg>
+      </div>
+    </div>
+    <div class="controls"><button class="vsplay primary">▶ Run both</button></div>
+  </section>
+
+  <!-- ============ TAB 4: 3D VIEW ============ -->
+  <section id="tab-d3" class="tab">
+    <div class="two">
+      <div>
+        <div class="d3-canvas" style="width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden; background:#0c0a06;"></div>
+        <div class="controls">
+          <button class="d3play primary">▶ Play</button>
+          <input class="d3scrub" type="range" min="0" max="1000" value="0">
+          <label style="font-size:12.5px;color:var(--ink-dim,#9fb0c3);display:inline-flex;gap:5px;align-items:center;"><input class="d3rot" type="checkbox" checked> spin</label>
+        </div>
+        <div class="legend"><span>🖱 drag to orbit · scroll to zoom</span></div>
+      </div>
+      <div>
+        <div class="verdict" style="border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;">
+          <div class="big" style="color:var(--accent);font-size:16px;" id="d3phaseTitle">The drive</div>
+          <p class="d3phase" style="margin-top:6px;">Press ▶ and orbit around the move.</p>
+        </div>
+        <div class="prose">
+          <h3>The same move, in 3D</h3>
+          <p>Now you can see what the top-down view flattens: the <b>lean</b>. On step 1 the body tilts toward the fake to sell it;
+          on step 2 it whips the other way while the <b>ball swings across the body</b>, shielded from the defender.</p>
+          <p>The two long, low strides — far wider than a normal running step — are what cover the ground sideways. That's the
+          Euro Step's signature look: not faster, just <i>wider</i> and in two directions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 5: THE FOOTWORK ============ -->
+  <section id="tab-feet" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court feet-court" viewBox="0 0 300 430" aria-label="Footwork rhythm">
+          <rect x="6" y="6" width="288" height="418" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <!-- direction-to-rim arrow -->
+          <line x1="150" y1="60" x2="150" y2="26" stroke="#6b5836" stroke-width="2" marker-end="url(#mf)"/>
+          <text x="150" y="80" text-anchor="middle" font-size="11" fill="#7d8aa0">↑ toward the rim</text>
+          <!-- gather feet -->
+          <g class="fp" data-id="gather"><ellipse cx="128" cy="350" rx="13" ry="20" fill="#5b6b82"/><ellipse cx="172" cy="350" rx="13" ry="20" fill="#5b6b82"/><text x="150" y="392" text-anchor="middle" font-size="12" fill="#9fb0c3">gather (0)</text></g>
+          <!-- step 1 -->
+          <g class="fp" data-id="s1"><ellipse cx="225" cy="265" rx="14" ry="21" fill="#36c98f"/><text x="225" y="270" text-anchor="middle" font-size="16" font-weight="800" fill="#06231a">1</text></g>
+          <!-- step 2 -->
+          <g class="fp" data-id="s2"><ellipse cx="80" cy="180" rx="14" ry="21" fill="#36c98f"/><text x="80" y="185" text-anchor="middle" font-size="16" font-weight="800" fill="#06231a">2</text></g>
+          <!-- illegal 3rd -->
+          <g class="fp" data-id="s3"><ellipse cx="165" cy="120" rx="14" ry="21" fill="#e2493f"/><text x="165" y="126" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">3</text></g>
+          <!-- connecting path -->
+          <path class="feet-path" d="M150 350 L225 265 L80 180" fill="none" stroke="#36c98f" stroke-width="2" stroke-dasharray="4 4" opacity="0"/>
+        </svg>
+      </div>
+      <div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
+          <div class="feet-count" style="font-size:40px; font-weight:800; color:var(--accent); line-height:1;">0</div>
+          <div style="color:var(--ink-dim,#9fb0c3); font-size:14px;">/ 2 steps used <span style="opacity:.7">(after the gather)</span></div>
+        </div>
+        <div class="feet-banner verdict" style="margin-top:8px;"><div class="big" style="font-size:16px;">Press a button below</div><p class="feet-msg">The gather is “step zero” — picking up your dribble. Then you get exactly two steps.</p></div>
+        <div class="controls">
+          <button class="feet-legal primary">▶ Legal Euro Step</button>
+          <button class="feet-travel">⚠ Take a 3rd step</button>
+        </div>
+        <div class="prose">
+          <h3>Why two steps, in two directions</h3>
+          <p>The whole move lives inside one rule: the moment you stop dribbling — the <b>gather</b> — you may take <b>two steps</b>
+          before you shoot or pass. Most layups spend those two steps going <i>straight</i>. The Euro Step spends them going
+          <b>two different ways</b>: one to move the defender, one to beat them.</p>
+          <p>Take a <b>third</b> step (or move your pivot foot before the gather) and it's a <b>travel</b> — a turnover. Watch the
+          counter: step 3 is where it turns red. Selling a huge fake while staying inside two steps is the skill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

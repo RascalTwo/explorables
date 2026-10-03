@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="Terraform">
+  <meta name="viz:tag" content="Ansible">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ansible vs Terraform</title>
+<meta name="viz:uid" content="v-01b19c581e38">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="Ansible vs Terraform">
+<meta name="viz:description" content="When to reach for Terraform vs. Ansible: place any task on two axes — provisioning vs. configuration, declarative vs. procedural — see where each wins head-to-head, and a flow to decide.">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root{
+    --tf:#a371f7;       /* Terraform — purple */
+    --tf-dim:#5a3d8c;
+    --ans:#f85149;      /* Ansible — red */
+    --ans-dim:#8c3530;
+    --both:#3fb950;
+  }
+  body{max-width:1180px;margin:0 auto;padding:28px 22px 90px;}
+  .sub a{color:var(--accent)}
+  section{margin:46px 0;}
+  h2{font-size:21px;margin:0 0 4px;letter-spacing:.2px}
+  .lead{color:var(--muted);font-size:13.5px;margin:0 0 20px;max-width:760px;line-height:1.5}
+  .tf{color:var(--tf)} .ans{color:var(--ans)} .both{color:var(--both)}
+
+  /* mental-model cards */
+  .mm{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .mm .card{border-top:3px solid;padding:18px 20px}
+  .mm .card.tfc{border-color:var(--tf)}
+  .mm .card.ansc{border-color:var(--ans)}
+  .mm h3{margin:0 0 2px;font-size:17px}
+  .mm .tag{font-size:11px;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);font-family:var(--mono)}
+  .mm .one{font-size:14.5px;margin:10px 0 6px;line-height:1.5}
+  .mm .ex{color:var(--muted);font-size:12.5px;line-height:1.5}
+  @media(max-width:760px){.mm{grid-template-columns:1fr}}
+
+  /* delete test */
+  .subh{font-size:16px;margin:42px 0 2px}
+  .dtest{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .dtest-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:13.5px}
+  #dtoggle{appearance:none;background:var(--accent);color:#06122a;border:0;font-weight:700;padding:9px 16px;border-radius:9px;cursor:pointer;font-size:13px;font-family:var(--sans);white-space:nowrap}
+  #dtoggle:hover{filter:brightness(1.1)}
+  .dcols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.dcols{grid-template-columns:1fr}}
+  .dlabel{font-weight:700;font-size:14px;margin-bottom:6px}
+  .codeblk{background:#0b0f15;border:1px solid var(--border);border-radius:9px;padding:12px 14px;margin:0;font-family:var(--mono);font-size:12px;line-height:1.7;overflow-x:auto;white-space:pre}
+  .codeblk .ln{display:block}
+  .codeblk .dbln{color:var(--accent)}
+  .codeblk .removed{display:block;color:var(--danger);text-decoration:line-through;opacity:.5}
+  .dout{margin-top:10px;background:#0b0f15;border:1px solid var(--border);border-radius:9px;padding:11px 14px;font-family:var(--mono);font-size:12px;line-height:1.65;min-height:96px}
+  .dout .cmd{color:var(--muted)}
+  .dout .warnline{color:var(--danger)}
+  .dout .plan{color:var(--text);margin-top:2px}
+  .dout .say{margin-top:7px;font-family:var(--sans);font-size:12.5px;line-height:1.4}
+  .dout .say.ok{color:var(--good)} .dout .say.warn{color:var(--warn)} .dout .say.bad{color:var(--danger)}
+  .dout .bad{color:var(--danger)}
+  .punch{margin-top:16px;font-size:13px;line-height:1.6;color:var(--muted);border-top:1px dashed var(--border);padding-top:14px}
+  .punch b{color:var(--text)} .punch b.tf{color:var(--tf)} .punch b.ans{color:var(--ans)}
+  .seg{display:inline-flex;border:1px solid var(--border);border-radius:9px;overflow:hidden}
+  .seg button{appearance:none;background:var(--panel-2);color:var(--muted);border:0;padding:8px 15px;font-size:12.5px;cursor:pointer;font-family:var(--sans);white-space:nowrap}
+  .seg button.on{background:var(--accent);color:#06122a;font-weight:700}
+  .seg button:not(.on):hover{color:var(--text)}
+  .subcap{text-align:center;color:var(--muted);font-size:11px;margin:4px 0 0}
+  .ginfo{display:flex;gap:18px;justify-content:center;margin:10px 0 0;font-size:12px}
+  .ginfo .gi{display:flex;align-items:center;gap:7px;color:var(--muted)}
+  .ginfo .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+
+  /* quadrant */
+  .quadwrap{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+  .quadwrap .legend{flex-direction:column;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 16px;min-width:190px}
+  .legend-item{font-size:12px}
+
+  /* matrix */
+  table.matrix{border-collapse:collapse;width:100%;font-size:13px}
+  table.matrix th,table.matrix td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  table.matrix thead th{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:2px solid var(--border)}
+  table.matrix th.dim{color:var(--text);font-weight:600;width:170px}
+  table.matrix td.tfcell{border-left:2px solid var(--tf-dim)}
+  table.matrix td.anscell{border-left:2px solid var(--ans-dim)}
+  table.matrix tbody tr:hover{background:var(--panel)}
+  .col-tf,.col-ans{font-weight:700}
+
+  /* pros cons */
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.pc{grid-template-columns:1fr}}
+  .pc .card{padding:0;overflow:hidden}
+  .pc .head{padding:13px 18px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:9px}
+  .pc.tfg .head{background:linear-gradient(90deg,rgba(163,113,247,.18),transparent)}
+  .pc.ansg .head{background:linear-gradient(90deg,rgba(248,81,73,.18),transparent)}
+  .pc ul{margin:0;padding:6px 0 12px}
+  .pc li{list-style:none;padding:7px 18px 7px 40px;position:relative;font-size:13px;line-height:1.45}
+  .pc li.pro::before{content:"+";position:absolute;left:18px;color:var(--good);font-weight:700}
+  .pc li.con::before{content:"–";position:absolute;left:19px;color:var(--danger);font-weight:700}
+  .pc li b{color:var(--text)}
+  .pc li span{color:var(--muted)}
+  .pc .divider{border-top:1px dashed var(--border);margin:4px 16px}
+
+  /* excels/fails head to head */
+  .ef{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.ef{grid-template-columns:1fr}}
+  .ef .card{padding:16px 18px}
+  .ef h4{margin:0 0 10px;font-size:14px;display:flex;align-items:center;gap:8px}
+  .ef .row{display:flex;gap:10px;padding:7px 0;font-size:12.5px;line-height:1.4;border-bottom:1px solid var(--border)}
+  .ef .row:last-child{border-bottom:0}
+  .ef .ico{flex:0 0 18px;text-align:center}
+  .win{color:var(--good)} .lose{color:var(--danger)}
+
+  /* combo pipeline */
+  .combo{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px 6px}
+
+  /* wizard */
+  .wizwrap{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+  @media(max-width:860px){.wizwrap{grid-template-columns:1fr}}
+  .wiz{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 22px 18px;min-height:230px;position:relative}
+  .wiz .qn{font-size:11px;font-family:var(--mono);color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+  .wiz .q{font-size:18px;line-height:1.4;margin:10px 0 20px;font-weight:600}
+  .wiz .opts{display:flex;flex-direction:column;gap:10px}
+  .wiz button.opt{appearance:none;text-align:left;background:var(--panel-2);border:1px solid var(--border);color:var(--text);
+    padding:13px 16px;border-radius:10px;font-size:14px;cursor:pointer;transition:.12s;font-family:var(--sans)}
+  .wiz button.opt:hover{border-color:var(--accent);background:#1d2430;transform:translateX(3px)}
+  .wiz .result{text-align:center;padding:6px 4px}
+  .wiz .result .badge{display:inline-block;font-size:26px;font-weight:800;letter-spacing:.5px;margin:6px 0 4px}
+  .wiz .result p{color:var(--muted);font-size:13.5px;line-height:1.55;margin:8px auto 0;max-width:330px}
+  .wiz .controls{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+  .wiz .controls button{appearance:none;background:none;border:1px solid var(--border);color:var(--muted);
+    padding:6px 13px;border-radius:8px;font-size:12px;cursor:pointer;font-family:var(--sans)}
+  .wiz .controls button:hover{color:var(--text);border-color:var(--accent)}
+  .wiz .breadcrumbs{font-size:11px;color:var(--muted);font-family:var(--mono);min-height:16px}
+  .wiz .breadcrumbs .y{color:var(--good)} .wiz .breadcrumbs .n{color:var(--danger)}
+  .flowcard{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:6px 10px 12px;overflow:auto}
+  .flowcard .mermaid{display:flex;justify-content:center}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px}
+  .footnote{color:var(--muted);font-size:11.5px;line-height:1.5;margin-top:10px;border-top:1px solid var(--border);padding-top:12px}
+</style>
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>Ansible <span style="color:var(--muted);font-weight:400">vs</span> Terraform</h1>
+  <div class="sub">When to reach for each, where they win and lose head-to-head, and a flow to decide. Clean-room opinion — the short version: <b class="tf">Terraform builds the house</b>, <b class="ans">Ansible furnishes &amp; maintains it</b>, and they're <b class="both">often used together</b>.</div>
+</div>
+
+<!-- ───────────── MENTAL MODEL ───────────── -->
+<section>
+  <h2>The one-line mental model</h2>
+  <p class="lead">Almost every "which one?" question dissolves once you place the task on two axes: <b>provisioning vs. configuration</b>, and <b>declarative vs. procedural</b>. The two tools were built for opposite corners.</p>
+  <div class="mm">
+    <div class="card tfc">
+      <div class="tag">Provisioning · Declarative · Stateful</div>
+      <h3 class="tf">Terraform</h3>
+      <div class="one">"Here is the <b>infrastructure that should exist</b> — make reality match it."</div>
+      <div class="ex">Creates &amp; destroys cloud resources: VMs, VPCs/subnets, load balancers, managed databases, DNS records, IAM, Kubernetes clusters, even SaaS objects (GitHub repos, Cloudflare, Datadog). You describe the end state; it diffs against a <b>state file</b> and computes the create/update/destroy plan.</div>
+    </div>
+    <div class="card ansc">
+      <div class="tag">Configuration · Procedural · Stateless</div>
+      <h3 class="ans">Ansible</h3>
+      <div class="one">"Here are the <b>steps to bring these machines</b> to a known state — run them, in order, idempotently."</div>
+      <div class="ex">Configures the <b>inside</b> of machines that already exist: installs packages, templates config files, deploys app code, restarts services, patches fleets, orchestrates rolling deploys, configures network gear. Connects over SSH/WinRM — no agent, no state file. Re-run anytime to re-converge.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── THE REAL DIFFERENCE ───────────── -->
+<section>
+  <h2>"They both just define → apply → converge. So what's the <em>real</em> difference?"</h2>
+  <p class="lead">Fair challenge — on the <b>create</b> path they genuinely look identical. The difference stays hidden until the second run, and it reduces to one property: <b>does the tool keep a ledger of what it made?</b> Terraform does. Ansible doesn't. Watch what happens when you <b>remove</b> a resource:</p>
+
+  <div class="dtest" id="dtest">
+    <div class="dtest-bar">
+      <div>Your config declares three things — a <b>web server</b>, a <b>DNS record</b>, and a <b>database</b> — and you've already applied it once.</div>
+      <button id="dtoggle"></button>
+    </div>
+    <div class="dcols">
+      <div>
+        <div class="dlabel tf">Terraform &nbsp;<span style="color:var(--muted);font-weight:400;font-size:11px">(HCL)</span></div>
+        <pre class="codeblk" id="tf-code"></pre>
+        <div class="dout" id="tf-out"></div>
+      </div>
+      <div>
+        <div class="dlabel ans">Ansible &nbsp;<span style="color:var(--muted);font-weight:400;font-size:11px">(playbook)</span></div>
+        <pre class="codeblk" id="ans-code"></pre>
+        <div class="dout" id="ans-out"></div>
+      </div>
+    </div>
+    <div class="punch" id="dpunch"></div>
+  </div>
+
+  <h3 class="subh">And the physical reason neither can <em>fully</em> cover for the other</h3>
+  <p class="lead">Even setting the ledger aside, the two act on different planes. A cloud's management API can conjure a VM but can't <code>apt install</code> inside it; an SSH session can configure an OS but can't summon the box it isn't on yet. That gap is structural, not a missing feature.</p>
+  <div class="combo">
+    <svg id="planes" width="100%" height="300" viewBox="0 0 1080 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Control plane vs OS plane"></svg>
+  </div>
+  <div class="hint">Each tool <em>can</em> lean across the line — Terraform <code>provisioners</code>, Ansible's cloud modules — but the moment it does, it loses the very thing that made it good (state-tracked lifecycle for Terraform; simple stateless convergence for Ansible). That's why "just use the one I already have for everything" quietly stops working as the job grows.</div>
+</section>
+
+<!-- ───────────── THE MIRROR IMAGE ───────────── -->
+<section>
+  <h2>"...so just use Terraform for everything"? Here's the mirror image</h2>
+  <p class="lead">The delete test was a <b>biased sample</b> — it showed the one axis where Terraform's model wins. Its <b>closed-world authority</b> ("this config is the whole truth; destroy anything I didn't declare") is a superpower <em>on the control plane</em>. Point that exact same property at the inside of a running OS and it becomes a wrecking ball. A typical server carries <b>~10,000</b> packages, files, services, users, and cron jobs. You care about three. Toggle how each tool treats the other ~9,997:</p>
+
+  <div class="dtest" id="invtest">
+    <div class="dtest-bar">
+      <div>One server's OS. You declare <b>3</b> things — <span style="color:var(--good)">nginx · your app · one config file</span>. What happens to everything you <em>didn't</em> mention?</div>
+      <div class="seg" id="invseg">
+        <button data-v="ans" class="on">Ansible · additive</button>
+        <button data-v="tf">Terraform · closed-world</button>
+      </div>
+    </div>
+    <svg id="invgrid" width="100%" height="232" viewBox="0 0 1000 232" preserveAspectRatio="xMidYMid meet" role="img" aria-label="OS resources grid"></svg>
+    <div class="ginfo">
+      <div class="gi"><span class="dot" style="background:var(--good)"></span> declared (3)</div>
+      <div class="gi"><span class="dot" id="gi-rest" style="background:#2b3138"></span> <span id="gi-rest-label">everything else — untouched</span></div>
+    </div>
+    <div class="subcap">Grid is illustrative — each dot stands in for a cluster of real resources; a live box has thousands.</div>
+    <div class="punch" id="invpunch"></div>
+  </div>
+
+  <div class="hint">
+    <b style="color:var(--text)">The kernel of truth in your instinct, though:</b> the industry really is consolidating toward Terraform's declarative side — immutable infrastructure and containers. But watch where the config work goes: it doesn't vanish, it <b>relocates</b> from <em>run-time</em> (Ansible converging a live server) to <em>build-time</em> (a Dockerfile or Packer template baking an image that Terraform then rolls out). And a Dockerfile is still an ordered list of imperative <code>RUN</code> steps — the procedural config problem didn't disappear, it just moved earlier. So "Terraform for everything" in practice means <b>"stop having mutable servers to configure,"</b> not "Terraform configures servers." For brownfield boxes, on-prem, network gear, stateful databases, and ad-hoc day-2 ops ("SSH to these 50 hosts and rotate this cert <em>now</em>"), mutable config management is still very much alive — that's just not a job Terraform's state-reconciliation model was ever built to do.
+  </div>
+</section>
+
+<!-- ───────────── QUADRANT ───────────── -->
+<section>
+  <h2>Where they sit in the landscape</h2>
+  <p class="lead">The two anchor opposite regions. Faint markers are neighbours you'll often hear compared — they help triangulate what each tool actually <em>is</em>.</p>
+  <div class="quadwrap">
+    <svg id="quad" width="560" height="440" viewBox="0 0 560 440" role="img" aria-label="Positioning quadrant"></svg>
+    <div class="legend">
+      <div class="legend-item"><span class="swatch" style="background:var(--tf)"></span> <b class="tf">Terraform</b> — primary</div>
+      <div class="legend-item"><span class="swatch" style="background:var(--ans)"></span> <b class="ans">Ansible</b> — primary</div>
+      <div class="legend-item" style="margin-top:6px;color:var(--muted)"><span class="swatch" style="background:#484f58"></span> neighbouring tools</div>
+      <div class="footnote" style="margin-top:14px;border:0;padding:0">
+        Ansible <em>aims</em> for declarative idempotency but is procedural underneath — order matters, and a raw <code>shell:</code> task is only as idempotent as you make it. That's why it sits below the declarative line.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── MATRIX ───────────── -->
+<section>
+  <h2>Head-to-head, dimension by dimension</h2>
+  <p class="lead">Same questions asked of both. The contrasts here drive every recommendation further down.</p>
+  <table class="matrix">
+    <thead>
+      <tr><th class="dim">Dimension</th><th class="col-tf tf">Terraform</th><th class="col-ans ans">Ansible</th></tr>
+    </thead>
+    <tbody id="matrix-body"></tbody>
+  </table>
+</section>
+
+<!-- ───────────── PROS / CONS ───────────── -->
+<section>
+  <h2>Pros &amp; cons</h2>
+  <div class="pc tfg card-wrap">
+  </div>
+  <div class="pc">
+    <div class="card pc tfg" style="display:block">
+      <div class="head tf">▲ Terraform</div>
+      <ul id="tf-pros"></ul>
+      <div class="divider"></div>
+      <ul id="tf-cons"></ul>
+    </div>
+    <div class="card pc ansg" style="display:block">
+      <div class="head ans">▲ Ansible</div>
+      <ul id="ans-pros"></ul>
+      <div class="divider"></div>
+      <ul id="ans-cons"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── EXCELS / FAILS ───────────── -->
+<section>
+  <h2>Where each <span class="win">excels</span> and <span class="lose">fails</span> — relative to the other</h2>
+  <p class="lead">Not absolute strengths — these are the jobs where reaching for the <em>other</em> tool would actively hurt.</p>
+  <div class="ef">
+    <div class="card">
+      <h4 class="tf">Terraform</h4>
+      <div id="tf-ef"></div>
+    </div>
+    <div class="card">
+      <h4 class="ans">Ansible</h4>
+      <div id="ans-ef"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── COMBO ───────────── -->
+<section>
+  <h2>The pattern that ends most arguments: use both</h2>
+  <p class="lead">They're not really competitors — they own different phases of the same lifecycle. The canonical pipeline hands off from one to the other.</p>
+  <div class="combo">
+    <svg id="combo" width="100%" height="180" viewBox="0 0 1080 180" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Provision then configure pipeline"></svg>
+  </div>
+  <div class="hint">Terraform stands up the network, VMs, and managed services → emits IPs/hostnames → Ansible connects in to install, configure, and deploy. (For immutable infra, swap Ansible's role onto <b>Packer</b> at bake time and let Terraform roll out the finished image.)</div>
+</section>
+
+<!-- ───────────── DECISION WIZARD + FLOWCHART ───────────── -->
+<section>
+  <h2>Decide: which one for <em>your</em> task?</h2>
+  <p class="lead">Answer the wizard on the left — it walks the same logic the flowchart on the right lays out all at once. Your path is saved in the URL, so you can share the result.</p>
+  <div class="wizwrap">
+    <div>
+      <div class="wiz" id="wiz"></div>
+      <div class="footnote">This is a starting heuristic, not a law. Edge cases exist (Terraform <code>provisioners</code>, Ansible's cloud modules) — but reaching across the line is usually a smell worth a second look.</div>
+    </div>
+    <div class="flowcard">
+      <div class="mermaid" id="flow"></div>
+      <div class="hint" style="text-align:center">Full decision tree — green = your current wizard answer path.</div>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

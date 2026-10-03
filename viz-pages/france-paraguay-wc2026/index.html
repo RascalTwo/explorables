@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>France 1–0 Paraguay · World Cup 2026 R16</title>
+<meta name="viz:uid" content="v-9f0c148590b3">
+<meta name="viz:posture" content="local">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:title" content="France 1–0 Paraguay · World Cup 2026 Round of 16">
+<meta name="viz:description" content="Visual breakdown of France's 1–0 win over Paraguay: minute-by-minute timeline, xG race, tale-of-the-tape, formations and the penalty that decided it.">
+<meta name="viz:tests" content="smoke: the only input is the #scrub range (0 to 7, one stop per match beat), beside the Pause/Play/Replay and Restart buttons; app.ts holds eight fixed beats and the scrubber only looks one up by index, setting the clock, the ball spot and the caption from that beat, while play advances the same lookup from elapsed time, so nothing shown is computed from user input and a break shows as a wrong caption, clock or ball position beside the beat name a reader can see. The smoke render loads only the default state (Kick-off, playing) and does not step the scrubber or play through to the goal and full-time beats">
+<link rel="stylesheet" href="/_kit/viz-kit.css">
+<style>
+  :root{
+    --fra:#3b7dff; --fra-dim:#20345f;
+    --par:#e2445c; --par-dim:#5c2130;
+    --ink:#e8ecf4; --muted:#8b93a7; --panel:#141824; --line:#242a3a;
+    --pitch:#16351f; --pitch2:#1c4227;
+  }
+  body{max-width:1200px;margin:0 auto;padding:0 18px 60px;color:var(--ink)}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .span12{grid-column:span 12}.span8{grid-column:span 8}.span6{grid-column:span 6}
+  .span5{grid-column:span 5}.span7{grid-column:span 7}.span4{grid-column:span 4}
+  @media(max-width:860px){.grid > *{grid-column:span 12 !important}}
+  .ptitle{font:600 12px/1 ui-sans-serif,system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+  h1{font:800 30px/1.05 ui-sans-serif,system-ui;margin:22px 0 2px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .fra{color:var(--fra)}.par{color:var(--par)}
+  /* scoreboard */
+  .board{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;padding:8px 0 4px}
+  .team{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:150px}
+  .flag{font-size:40px;line-height:1}
+  .tname{font:700 20px/1 ui-sans-serif;letter-spacing:.01em}
+  .score{font:900 64px/0.9 ui-sans-serif;font-variant-numeric:tabular-nums}
+  .score .dash{color:var(--muted);margin:0 14px;font-weight:400}
+  .winglow{text-shadow:0 0 26px rgba(59,125,255,.55)}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);
+        border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#0e121c}
+  .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  /* tale of the tape */
+  .tot-row{display:grid;grid-template-columns:64px 1fr 64px;align-items:center;gap:12px;margin:11px 0}
+  .tot-lab{grid-column:1/4;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:-4px}
+  .tot-num{font:700 15px/1 ui-sans-serif;font-variant-numeric:tabular-nums}
+  .tot-num.l{text-align:right}.tot-num.r{text-align:left}
+  .bar-wrap{display:flex;height:14px;border-radius:7px;overflow:hidden;background:#0e121c}
+  .bar-l{background:var(--fra);height:100%}.bar-r{background:var(--par);height:100%}
+  .bar-gap{width:2px;background:var(--panel)}
+  /* legend */
+  .lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+  .lg span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  /* penalty flow */
+  .flowstep{display:flex;align-items:center;gap:12px;margin:10px 0}
+  .fnum{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;
+        font:700 13px ui-sans-serif;background:#0e121c;border:1px solid var(--line)}
+  .ftext{font-size:14px}.ftext b{color:var(--ink)}
+  .arrowdown{color:var(--line);margin-left:14px;font-size:16px;line-height:.6}
+  .keyline{font-size:12px;color:var(--muted);margin-top:8px}
+  .note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic}
+  /* ===== STORY MODE ===== */
+  .story-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .story-title{font:700 16px/1 ui-sans-serif;margin:0}
+  .story-hint{font-size:12px;color:var(--muted)}
+  .clock{font:800 22px/1 ui-sans-serif;font-variant-numeric:tabular-nums;color:var(--ink);
+         background:#0e121c;border:1px solid var(--line);border-radius:8px;padding:6px 12px;min-width:64px;text-align:center}
+  .clock .sc{font-size:13px;color:var(--muted);font-weight:600}
+  .stage{position:relative;border-radius:12px;overflow:hidden;background:#0d2a15}
+  #replay{display:block;width:100%;height:auto}
+  .ball{filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));transition:transform .9s cubic-bezier(.45,.05,.3,1)}
+  .ball.fast{transition:transform .28s cubic-bezier(.6,0,.9,.3)}
+  .burst{opacity:0}
+  .cap{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(9,13,22,.92);
+       border:1px solid var(--line);border-left:4px solid var(--fra);border-radius:10px;padding:12px 15px;
+       backdrop-filter:blur(3px);transition:opacity .35s, transform .35s;opacity:0;transform:translateY(8px)}
+  .cap.show{opacity:1;transform:none}
+  .cap.par{border-left-color:var(--par)}.cap.mid{border-left-color:var(--muted)}
+  .cap.goal{border-left-color:#ffd24a;background:rgba(40,32,6,.94)}
+  .cap b{display:block;font:700 15px/1.2 ui-sans-serif;margin-bottom:5px}
+  .cap.goal b{color:#ffd24a;font-size:19px}
+  .cap p{margin:0;font-size:13px;line-height:1.5;color:#cfd5e2}
+  .controls{display:flex;align-items:center;gap:12px;margin-top:12px}
+  .btn{cursor:pointer;border:1px solid var(--line);background:#0e121c;color:var(--ink);
+       border-radius:8px;padding:8px 14px;font:600 13px ui-sans-serif}
+  .btn:hover{border-color:var(--fra)}
+  .scrub{flex:1;accent-color:var(--fra);cursor:pointer}
+  .goalflash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,210,74,.35),transparent 60%);
+             opacity:0;pointer-events:none;transition:opacity .2s}
+  .goaltext{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;
+            font:900 clamp(40px,9vw,110px)/1 ui-sans-serif;color:#ffd24a;letter-spacing:.05em;
+            text-shadow:0 4px 30px rgba(0,0,0,.6);opacity:0;transform:scale(.6)}
+</style>
+</head>
+<body>
+
+<h1>France <span class="fra">1</span> – <span class="par">0</span> Paraguay</h1>
+<div class="sub">FIFA World Cup 2026 · Round of 16 · Philadelphia Stadium · 4 July 2026</div>
+
+<!-- ============ SCOREBOARD ============ -->
+<div class="panel span12" style="margin-bottom:14px">
+  <div class="board">
+    <div class="team">
+      <div class="flag">🇫🇷</div><div class="tname fra">FRANCE</div>
+      <div class="chip">4-2-3-1 · possession 76%</div>
+    </div>
+    <div class="score"><span class="winglow fra">1</span><span class="dash">–</span><span class="par">0</span></div>
+    <div class="team">
+      <div class="flag">🇵🇾</div><div class="tname par">PARAGUAY</div>
+      <div class="chip">5-4-1 · possession 24%</div>
+    </div>
+  </div>
+  <div class="meta-row">
+    <span class="chip">⚽ Kylian Mbappé 70′ (pen)</span>
+    <span class="chip">🧤 Gill 4 saves</span>
+    <span class="chip">🎯 xG 1.36 – 0.15</span>
+    <span class="chip">➡️ France to QF vs Canada / Morocco</span>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- ============ STORY MODE (animated replay) ============ -->
+  <div class="panel span12">
+    <div class="story-head">
+      <div>
+        <p class="story-title">▶ Story mode — the whole match in ~40 seconds</p>
+        <div class="story-hint">Never watched soccer? Just press play. The ball travels to each big moment and every soccer word gets explained.</div>
+      </div>
+      <div class="clock" id="clock">0<span class="sc">′</span></div>
+    </div>
+    <div class="stage">
+      <svg id="replay" viewBox="0 0 1000 430" role="img" aria-label="Animated match replay"></svg>
+      <div class="goalflash" id="flash"></div>
+      <div class="goaltext" id="goaltext">GOAL!</div>
+      <div class="cap" id="cap"><b></b><p></p></div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="play">⏸ Pause</button>
+      <button class="btn" id="restart">↺ Restart</button>
+      <input class="scrub" id="scrub" type="range" min="0" max="7" step="1" value="0">
+    </div>
+  </div>
+
+  <!-- ============ TIMELINE ============ -->
+  <div class="panel span12">
+    <p class="ptitle">Minute-by-minute — France above the line, Paraguay below</p>
+    <svg id="timeline" viewBox="0 0 1000 300" role="img" aria-label="Match timeline"></svg>
+    <div class="lg">
+      <span><i class="dot" style="background:var(--fra)"></i>France</span>
+      <span><i class="dot" style="background:var(--par)"></i>Paraguay</span>
+      <span>⚽ goal &nbsp; 🟨 card &nbsp; 🔄 sub &nbsp; 🎯 chance &nbsp; 🧤 save &nbsp; 📺 VAR</span>
+    </div>
+  </div>
+
+  <!-- ============ xG RACE ============ -->
+  <div class="panel span7">
+    <p class="ptitle">Expected-goals race (cumulative)</p>
+    <svg id="xg" viewBox="0 0 620 300" role="img" aria-label="xG race"></svg>
+    <div class="note">Totals are official (1.36 vs 0.15). The step timing is reconstructed from the recorded shot/chance events, so treat the curve shape as indicative rather than exact.</div>
+  </div>
+
+  <!-- ============ POSSESSION DONUT ============ -->
+  <div class="panel span5">
+    <p class="ptitle">Who had the ball</p>
+    <svg id="poss" viewBox="0 0 400 300" role="img" aria-label="Possession"></svg>
+  </div>
+
+  <!-- ============ TALE OF THE TAPE ============ -->
+  <div class="panel span5">
+    <p class="ptitle">Tale of the tape</p>
+    <div id="tot"></div>
+  </div>
+
+  <!-- ============ FORMATIONS ============ -->
+  <div class="panel span7">
+    <p class="ptitle">Shape on the pitch — France pressing, Paraguay in a low block</p>
+    <svg id="pitch" viewBox="0 0 700 320" role="img" aria-label="Formations"></svg>
+    <div class="note">Line-ups approximate — reconstructed from the reported XIs; a couple of Paraguay names were garbled across sources.</div>
+  </div>
+
+  <!-- ============ THE GOAL ============ -->
+  <div class="panel span5">
+    <p class="ptitle">The goal · 70′ · the only one that mattered</p>
+    <div id="goal"></div>
+  </div>
+
+</div>
+
+<div class="note" style="text-align:center;margin-top:20px">
+  Sources: SI · Al Jazeera · ESPN · FOX Sports · VAVEL live blogs. Compiled 4 Jul 2026.
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viz:tag" content="AI">
+<meta name="viz:uid" content="v-41689fdc0901">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browser Automation for AI Agents</title>
+<meta name="viz:title" content="Browser Automation for AI Agents">
+<meta name="viz:description" content="Head-to-head on the ways an AI agent can drive a browser — the Codex Chrome extension, Claude Code's Chrome integration, and model-agnostic Playwright MCP — across what each can do and where each breaks down.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2a313c;
+    --txt:#e6edf3; --dim:#9aa6b2; --faint:#6b7785;
+    --codex:#10a37f; --codexbg:rgba(16,163,127,.12);
+    --claude:#d77757; --claudebg:rgba(215,119,87,.12);
+    --pw:#3b82f6; --pwbg:rgba(59,130,246,.12);
+    --good:#3fb950; --warn:#d29922; --bad:#f85149;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:32px 20px 80px;}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:1.8rem;font-weight:700;letter-spacing:-.02em}
+  .sub{color:var(--dim);margin-top:6px;font-size:.95rem}
+  .meta{color:var(--faint);font-size:.8rem;margin-top:4px}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .card.codex::before{background:var(--codex)} .card.claude::before{background:var(--claude)} .card.pw::before{background:var(--pw)}
+  .card h2{font-size:1.15rem;display:flex;align-items:center;gap:8px}
+  .badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:6px}
+  .b-codex{background:var(--codexbg);color:var(--codex)} .b-claude{background:var(--claudebg);color:var(--claude)} .b-pw{background:var(--pwbg);color:var(--pw)}
+  .tagline{color:var(--dim);font-size:.85rem;margin:8px 0 14px;min-height:2.6em}
+  .card ul{list-style:none;font-size:.84rem}
+  .card li{padding:5px 0 5px 18px;position:relative;color:var(--txt)}
+  .card li::before{position:absolute;left:0;top:5px;font-size:.8rem}
+  li.pro::before{content:"✓";color:var(--good)} li.con::before{content:"✕";color:var(--bad)} li.neu::before{content:"•";color:var(--faint)}
+
+  /* matrix */
+  .section-h{font-size:1.05rem;font-weight:650;margin:38px 0 14px;display:flex;align-items:center;gap:10px}
+  .section-h .hint{font-size:.75rem;color:var(--faint);font-weight:400}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:.83rem;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  th,td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+  thead th{background:var(--panel2);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);position:sticky;top:0}
+  thead th.c-codex{color:var(--codex)} thead th.c-claude{color:var(--claude)} thead th.c-pw{color:var(--pw)}
+  tbody tr:last-child td{border-bottom:none}
+  td.rowlabel{font-weight:600;color:var(--txt);width:165px;background:var(--panel2)}
+  tr:hover td{background:rgba(255,255,255,.025)}
+  tr:hover td.rowlabel{background:var(--panel2)}
+  .pill{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 6px;border-radius:5px;margin-right:5px;vertical-align:middle}
+  .p-good{background:rgba(63,185,80,.16);color:var(--good)} .p-warn{background:rgba(210,153,34,.16);color:var(--warn)} .p-bad{background:rgba(248,81,73,.16);color:var(--bad)} .p-neu{background:rgba(139,148,158,.16);color:var(--dim)}
+  td small{color:var(--faint);display:block;margin-top:2px;font-size:.74rem}
+  .diff-row td:not(.rowlabel){background:rgba(210,153,34,.05)}
+
+  /* decision helper */
+  .helper{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px;margin-top:38px}
+  .helper h3{font-size:1.05rem;margin-bottom:4px}
+  .helper .sub2{color:var(--dim);font-size:.85rem;margin-bottom:18px}
+  .qs{display:flex;flex-direction:column;gap:14px}
+  .q{}
+  .q .qt{font-size:.9rem;font-weight:600;margin-bottom:7px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{background:var(--panel2);border:1px solid var(--border);color:var(--dim);font-size:.82rem;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.12s;user-select:none}
+  .opt:hover{border-color:var(--faint);color:var(--txt)}
+  .opt.sel{background:#fff;color:#0d1117;border-color:#fff;font-weight:600}
+  .result{margin-top:20px;padding:18px;border-radius:12px;background:var(--panel2);border:1px solid var(--border);font-size:.9rem;min-height:60px}
+  .result .winner{font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .scorebar{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .sb{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:9px 12px}
+  .sb .nm{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .sb .track{height:6px;background:#0d1117;border-radius:3px;margin-top:6px;overflow:hidden}
+  .sb .fill{height:100%;border-radius:3px;transition:width .3s}
+  .reset{margin-top:14px;font-size:.78rem;color:var(--faint);cursor:pointer;text-decoration:underline}
+
+  footer{margin-top:46px;color:var(--faint);font-size:.78rem;line-height:1.7;border-top:1px solid var(--border);padding-top:18px}
+  a{color:#58a6ff}
+  @media(max-width:840px){.cards{grid-template-columns:1fr}td.rowlabel{width:auto}table{font-size:.78rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Browser Automation for AI Agents</h1>
+  <div class="sub">Codex Chrome extension &nbsp;·&nbsp; Claude Code Chrome integration &nbsp;·&nbsp; Playwright MCP (model-agnostic)</div>
+  <div class="meta">Snapshot 2026‑05‑12 · sourced from the deep-research report · both vendor tools are beta/days-old — specifics will drift</div>
+
+  <div class="cards">
+    <div class="card codex">
+      <h2><span class="badge b-codex">OpenAI</span> Codex Chrome extension</h2>
+      <div class="tagline">Web Store extension ↔ native-messaging host ↔ Codex app. Drives your <b>real signed-in Chrome</b>. Launched May 7 2026.</div>
+      <ul>
+        <li class="pro">Zero-config: Codex app → Plugins → add Chrome plugin</li>
+        <li class="pro">Bundled with ChatGPT Plus/Pro/Business/Enterprise (temp. Free/Go)</li>
+        <li class="pro">Tab-groups-per-thread; can access browser history (per-request)</li>
+        <li class="con">Locked to ChatGPT / Codex</li>
+        <li class="con">Chrome only — no Edge / Firefox / Brave</li>
+        <li class="con">Broad Chrome permissions (debugger, history, modify site data)</li>
+        <li class="neu">Best if you already live in ChatGPT</li>
+      </ul>
+    </div>
+    <div class="card claude">
+      <h2><span class="badge b-claude">Anthropic</span> Claude Code + Chrome</h2>
+      <div class="tagline">Web Store extension ↔ native-messaging host ↔ Claude Code CLI / VS Code. Drives your <b>real Chrome or Edge</b>. Beta.</div>
+      <ul>
+        <li class="pro">Strongest default guardrails (category blocklist, per-domain JS approval, no autonomous mode)</li>
+        <li class="pro"><code>claude --chrome</code> / <code>/chrome</code>; auto in VS Code</li>
+        <li class="pro">GIF session recording built in</li>
+        <li class="con">Requires a <b>direct</b> Anthropic plan — not via Bedrock / Vertex / Foundry</li>
+        <li class="con">Chrome + Edge only; no Brave/Arc; no WSL</li>
+        <li class="con">2 disclosed extension CVEs in 2026 (ShadowPrompt, ClaudeBleed) — both patched</li>
+        <li class="neu">Best if you already live in Claude Code / VS Code</li>
+      </ul>
+    </div>
+    <div class="card pw">
+      <h2><span class="badge b-pw">Microsoft · OSS</span> Playwright MCP</h2>
+      <div class="tagline">MCP server (stdio / HTTP). Launches its <b>own Playwright browser</b> — isolated by default. Apache‑2.0, free.</div>
+      <ul>
+        <li class="pro">No lock-in — any model, any MCP client; self-hostable, Docker</li>
+        <li class="pro">Chromium + Firefox + WebKit + Chrome channels</li>
+        <li class="pro">Testing-grade: network mocking, tracing, video, assertions</li>
+        <li class="pro">Accessibility-tree first — "no vision models"</li>
+        <li class="con">"<b>Not a security boundary</b>" — guardrails are the client's job</li>
+        <li class="con">~13.7K tokens/request just for tool definitions</li>
+        <li class="neu">Best for portability, self-hosting, web testing, custom agents</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-h">Comparison matrix <span class="hint">⬛ amber-tinted rows = the three options materially diverge</span></div>
+  <table id="matrix"></table>
+
+  <div class="helper">
+    <h3>Which should I pick?</h3>
+    <div class="sub2">Answer what's true for you — the bars update live. (Heuristic, not gospel.)</div>
+    <div class="qs" id="qs"></div>
+    <div class="result" id="result">Pick some answers above…</div>
+    <div class="scorebar" id="scores"></div>
+    <div class="reset" id="reset">reset answers</div>
+  </div>
+
+  <footer>
+    All three share the same core promise — build your app, then test/debug/operate it in a browser without leaving the agent — and the same core risk: <b>prompt injection from page content</b>. The real fork is <i>vendor bridge vs. agnostic server</i>. "Uses your real browser" is convenience <i>and</i> attack surface; Playwright MCP's isolated-by-default browser has the smaller blast radius. Token cost is now a first-class criterion — leaner agnostic peers (<code>browser-use</code> ~89% WebVoyager @ 200–400 tok/page, Vercel <code>agent-browser</code>, Playwright CLI+skills) undercut Playwright MCP's overhead.<br>
+    Full report: <code>~/Documents/Browser_Automation_Agents_Research_20260512/</code> · primary sources: <a href="https://developers.openai.com/codex/app/chrome-extension">Codex docs</a> · <a href="https://code.claude.com/docs/en/chrome">Claude Code Chrome docs</a> · <a href="https://github.com/microsoft/playwright-mcp">playwright-mcp</a>
+  </footer>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
