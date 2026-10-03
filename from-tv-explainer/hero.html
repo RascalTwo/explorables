@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FROM — A Field Guide · hero</title>
+<style>
+  :root{
+    --bg:#0a0c0a; --fg:#e7e3d6; --muted:#8f8b7c;
+    --forest:#16291a; --forest2:#1d3823;
+    --amber:#d9a441; --talis:#cf9b3f;
+    --blood:#8c2b22; --blood2:#b5392d;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000}
+
+  .og-card{
+    position:relative;
+    width:1200px;height:630px;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 50% -18%, #0f130d 0%, transparent 55%),
+      linear-gradient(180deg, #090b09 0%, #0b0e0a 46%, #0d0c09 66%, #0a0906 100%);
+    color:var(--fg);
+    font-family:var(--sans);
+  }
+
+  /* sundown / blood glow rising from behind the treeline, aligned under the O */
+  .glow{
+    position:absolute; left:52%; top:100%;
+    width:820px; height:620px;
+    transform:translate(-50%,-58%);
+    background:
+      radial-gradient(50% 50% at 50% 50%,
+        rgba(181,57,45,0.42) 0%,
+        rgba(140,43,34,0.26) 34%,
+        rgba(90,30,24,0.10) 58%,
+        transparent 74%);
+    filter:blur(2px);
+  }
+  /* cold dim moon, high, secondary */
+  .moon{
+    position:absolute; right:132px; top:78px;
+    width:96px; height:96px; border-radius:50%;
+    background:
+      radial-gradient(circle at 38% 36%, #2a3242 0%, #171d29 52%, #0e131c 100%);
+    box-shadow:0 0 60px 8px rgba(58,74,99,0.20);
+    opacity:.62;
+  }
+  .moon::after{
+    content:""; position:absolute; inset:-2px; border-radius:50%;
+    box-shadow:inset -18px -14px 26px rgba(0,0,0,0.55);
+  }
+
+  /* treeline */
+  .trees{position:absolute; left:0; right:0; bottom:0; width:100%; height:340px; display:block}
+
+  /* watcher eyes, nestled in a valley of the near treeline */
+  .eyes{position:absolute; left:733px; bottom:120px; width:20px; height:6px}
+  .eye{
+    position:absolute; top:0; width:4px; height:4px; border-radius:50%;
+    background:var(--talis);
+    box-shadow:0 0 7px 2px rgba(207,155,63,0.75), 0 0 2px 1px rgba(217,164,65,0.9);
+  }
+  .eye.l{left:0} .eye.r{right:0}
+
+  /* content */
+  .stage{position:absolute; inset:0; z-index:5}
+
+  .kicker{
+    position:absolute; top:150px; left:0; right:0; text-align:center;
+    font-size:15px; letter-spacing:6.5px; text-transform:uppercase;
+    color:var(--talis);
+    font-weight:600;
+  }
+  .kicker .dot{color:var(--blood2); margin:0 12px; letter-spacing:0}
+
+  .mark{
+    position:absolute; top:186px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-weight:700;
+    font-size:186px; line-height:1; letter-spacing:26px;
+    text-indent:26px; /* balance trailing letter-spacing */
+    color:#efeadd;
+    text-shadow:0 2px 26px rgba(0,0,0,0.55);
+  }
+  .mark .o{
+    color:var(--blood2);
+    text-shadow:
+      0 0 22px rgba(181,57,45,0.75),
+      0 0 46px rgba(140,43,34,0.55),
+      0 2px 30px rgba(0,0,0,0.4);
+  }
+
+  .rule{
+    position:absolute; top:404px; left:50%; transform:translateX(-50%);
+    width:74px; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(217,164,65,0.55),transparent);
+  }
+
+  .essence{
+    position:absolute; top:426px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-style:italic;
+    font-size:29px; letter-spacing:.4px;
+    color:#d9d3c4;
+  }
+  .essence b{color:var(--blood2); font-style:italic; font-weight:700}
+
+  /* bottom meta row, sits low over the dark treeline base */
+  .meta{
+    position:absolute; bottom:34px; left:60px; right:60px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:13.5px; letter-spacing:1.6px; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .meta .tag{
+    display:inline-flex; align-items:center; gap:9px;
+    color:var(--talis);
+    border:1px solid rgba(47,93,58,0.9);
+    background:rgba(14,22,15,0.72);
+    border-radius:999px; padding:6px 14px 6px 12px;
+    letter-spacing:1.4px;
+  }
+  .meta .tag svg{display:block}
+
+  /* film grain */
+  .grain{position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay; pointer-events:none}
+  /* corner vignette for cinematic weight */
+  .vignette{
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(130% 115% at 50% 42%, transparent 52%, rgba(0,0,0,0.55) 100%);
+  }
+</style>
+</head>
+<body>
+  <div class="og-card">
+
+    <div class="glow"></div>
+    <div class="moon"></div>
+
+    <!-- treeline: two silhouetted pine layers for depth -->
+    <svg class="trees" viewBox="0 0 1200 340" preserveAspectRatio="none" aria-hidden="true">
+      <!-- distant layer -->
+      <path fill="#101c12" opacity="0.9" d="M-20 340
+        L-20 175 L20 118 L55 185 L95 90 L135 190 L175 128 L215 186
+        L255 76 L300 196 L345 108 L388 186 L430 60 L475 191 L520 124 L560 183
+        L605 84 L650 193 L695 104 L738 186 L780 70 L825 191 L870 120 L910 186
+        L955 86 L1000 193 L1045 114 L1088 186 L1130 78 L1175 191 L1220 128
+        L1220 340 Z"/>
+      <!-- near layer, near-black -->
+      <path fill="#050805" d="M-30 340
+        L-30 205 L30 118 L90 210 L150 86 L210 214 L270 138 L330 205
+        L390 70 L450 214 L510 122 L570 208 L630 82 L690 214 L750 128 L810 205
+        L870 66 L930 214 L990 116 L1050 208 L1110 90 L1170 214 L1230 138
+        L1230 340 Z"/>
+    </svg>
+
+    <div class="eyes"><span class="eye l"></span><span class="eye r"></span></div>
+
+    <div class="stage">
+      <div class="kicker">A Field Guide <span class="dot">&#9679;</span> Season One</div>
+
+      <div class="mark">FR<span class="o">O</span>M</div>
+
+      <div class="rule"></div>
+      <div class="essence">A town you can&rsquo;t leave. A night you might not <b>survive</b>.</div>
+
+      <div class="meta">
+        <span>MGM+ &nbsp;&middot;&nbsp; Sci-fi horror mystery</span>
+        <span class="tag">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+            <path d="M6 0 L1 12 H11 Z" fill="#1d3823"/>
+            <path d="M6 3 L2.6 12 H9.4 Z" fill="#2f5d3a"/>
+            <rect x="5.2" y="11" width="1.6" height="3" fill="#3a2c18"/>
+          </svg>
+          Spoiler-safe
+        </span>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+    <svg class="grain" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+  </div>
+</body>
+</html>

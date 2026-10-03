@@ -1,0 +1,205 @@
+<div class="og-card">
+  <style>
+    .og-card{
+      position:relative; width:1200px; height:630px; overflow:hidden;
+      box-sizing:border-box;
+      --bg:#0d1117; --panel:#161b22; --panel-2:#21262d; --border:#30363d;
+      --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --good:#3fb950; --warn:#d29922;
+      --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      background:
+        radial-gradient(1200px 640px at 8% -20%, color-mix(in srgb,var(--good) 12%,transparent), transparent 60%),
+        radial-gradient(1200px 640px at 92% 120%, color-mix(in srgb,var(--warn) 12%,transparent), transparent 60%),
+        radial-gradient(1400px 900px at 50% -40%, color-mix(in srgb,var(--panel) 60%,transparent), transparent 72%),
+        var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
+      -webkit-font-smoothing:antialiased;
+    }
+    .og-card *{ box-sizing:border-box; }
+    /* faint grid texture */
+    .grid{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(color-mix(in srgb,var(--border) 45%,transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb,var(--border) 45%,transparent) 1px, transparent 1px);
+      background-size:48px 48px;
+      -webkit-mask-image:radial-gradient(1100px 620px at 50% 42%, #000 0%, transparent 78%);
+              mask-image:radial-gradient(1100px 620px at 50% 42%, #000 0%, transparent 78%);
+      opacity:.5;
+    }
+    .frame{ position:absolute; inset:0; padding:56px 60px 48px; display:flex; flex-direction:column; }
+
+    /* ── header ── */
+    .eyebrow{ font-family:var(--mono); font-size:14px; letter-spacing:.26em; text-transform:uppercase;
+      color:var(--muted); display:flex; align-items:center; gap:14px; }
+    .eyebrow .dot{ width:7px; height:7px; border-radius:999px; background:var(--accent);
+      box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent); }
+    .eyebrow .rule{ flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+
+    h1{ margin:18px 0 0; font-size:62px; line-height:1.02; letter-spacing:-1.6px; font-weight:800; }
+    h1 .q{ color:var(--text); }
+    h1 .sub{ display:block; font-size:34px; font-weight:600; letter-spacing:-.6px; margin-top:10px; color:var(--muted); }
+    h1 .sub b.t{ color:var(--good); font-weight:700; }
+    h1 .sub b.b{ color:var(--warn); font-weight:700; }
+    .essence{ margin:16px 0 0; font-size:18px; line-height:1.45; color:var(--muted); max-width:760px; }
+    .essence b{ color:var(--text); font-weight:600; }
+
+    /* ── the spectrum motif (focal) ── */
+    .spectrum{ position:relative; margin-top:auto; height:262px; }
+
+    .callouts{ position:absolute; left:0; right:0; top:0; height:96px; }
+    .chip{ position:absolute; top:0; width:270px; padding:12px 14px 11px;
+      background:linear-gradient(180deg,var(--panel-2),var(--panel));
+      border:1px solid var(--border); border-radius:12px;
+      box-shadow:0 12px 30px -14px rgba(0,0,0,.75); }
+    .chip.left{ left:0; border-color:color-mix(in srgb,var(--good) 46%,var(--border)); }
+    .chip.right{ right:0; border-color:color-mix(in srgb,var(--warn) 46%,var(--border)); }
+    .chip .star{ position:absolute; top:-9px; width:20px; height:20px; border-radius:999px;
+      display:flex; align-items:center; justify-content:center; font-size:11px; color:#0d1117; font-weight:900; }
+    .chip.left .star{ left:14px; background:var(--good); box-shadow:0 0 0 4px color-mix(in srgb,var(--good) 22%,transparent); }
+    .chip.right .star{ right:14px; background:var(--warn); box-shadow:0 0 0 4px color-mix(in srgb,var(--warn) 22%,transparent); }
+    .chip .nm{ font-size:19px; font-weight:700; letter-spacing:-.2px; }
+    .chip .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-top:1px; }
+    .chip.left .tag{ color:var(--good); }
+    .chip.right .tag{ color:var(--warn); }
+    .scores{ display:flex; gap:12px; margin-top:9px; }
+    .scores .ax{ display:flex; flex-direction:column; align-items:center; gap:3px; }
+    .scores .ax .g{ font-size:15px; line-height:1; }
+    .scores .ax .lab{ font-family:var(--mono); font-size:8.5px; letter-spacing:.02em; color:var(--muted); text-transform:uppercase; }
+    .g.y{ color:var(--good); } .g.a{ color:var(--accent); } .g.p{ color:var(--warn); } .g.n{ color:var(--muted); }
+
+    /* rail */
+    .railwrap{ position:absolute; left:0; right:0; top:150px; }
+    .rail{ position:relative; height:10px; border-radius:999px;
+      background:linear-gradient(90deg,
+        color-mix(in srgb,var(--good) 85%,transparent),
+        color-mix(in srgb,var(--accent) 80%,transparent) 50%,
+        color-mix(in srgb,var(--warn) 88%,transparent));
+      box-shadow:0 0 34px -6px color-mix(in srgb,var(--accent) 55%,transparent); }
+    .node{ position:absolute; top:50%; transform:translate(-50%,-50%);
+      width:13px; height:13px; border-radius:999px; background:var(--panel-2);
+      border:2px solid var(--muted); }
+    .node.g{ border-color:var(--good); background:color-mix(in srgb,var(--good) 30%,var(--panel)); }
+    .node.a{ border-color:var(--accent); background:color-mix(in srgb,var(--accent) 30%,var(--panel)); }
+    .node.p{ border-color:var(--warn); background:color-mix(in srgb,var(--warn) 30%,var(--panel)); }
+    .node.hub{ width:26px; height:26px; border-width:3px; }
+    .node.hub.g{ box-shadow:0 0 0 5px color-mix(in srgb,var(--good) 18%,transparent); }
+    .node.hub.p{ box-shadow:0 0 0 5px color-mix(in srgb,var(--warn) 18%,transparent); }
+    /* connector stems from hub up to chip */
+    .stem{ position:absolute; bottom:150px; width:2px; height:56px; }
+    .stem.g{ background:linear-gradient(180deg,transparent,var(--good)); }
+    .stem.p{ background:linear-gradient(180deg,transparent,var(--warn)); }
+
+    /* minor labels below rail */
+    .mlabel{ position:absolute; top:172px; transform:translateX(-50%);
+      font-size:13px; color:var(--text); white-space:nowrap; text-align:center; }
+    .mlabel.lo{ top:196px; }
+    .mlabel .k{ display:block; font-family:var(--mono); font-size:9px; letter-spacing:.04em;
+      text-transform:uppercase; color:var(--muted); margin-top:1px; }
+
+    /* pole end labels */
+    .pole{ position:absolute; top:118px; font-family:var(--mono); font-weight:700;
+      font-size:13px; letter-spacing:.16em; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+    .pole.l{ left:0; color:var(--good); }
+    .pole.r{ right:0; color:var(--warn); }
+
+    /* ── footer ── */
+    .foot{ position:absolute; left:60px; right:60px; bottom:26px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding-top:16px; border-top:1px solid var(--border); }
+    .legend{ display:flex; gap:20px; font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:.02em; }
+    .legend b{ font-weight:700; }
+    .thesis{ font-size:15px; color:var(--text); font-weight:600; }
+    .thesis .em{ color:var(--accent); }
+  </style>
+
+  <div class="grid"></div>
+
+  <div class="frame">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      <span>Self-hostable RAG engines · a merit-based map</span>
+      <span class="rule"></span>
+      <span>10 scored · no winner</span>
+    </div>
+
+    <h1>
+      <span class="q">Which RAG engine?</span>
+      <span class="sub"><b class="t">Turnkey</b> vs <b class="b">build</b> — the honest map.</span>
+    </h1>
+
+    <p class="essence">One spectrum, from <b>handle-anything appliances</b> to <b>build-it-yourself frameworks</b> — scored across parsing, hybrid+rerank, graph, footprint &amp; license.</p>
+
+    <div class="spectrum">
+      <!-- starred worked-example callouts -->
+      <div class="callouts">
+        <div class="chip left" style="left:2%">
+          <span class="star">★</span>
+          <div class="nm">RAGFlow</div>
+          <div class="tag">turnkey example · Apache-2.0</div>
+          <div class="scores">
+            <div class="ax"><span class="g y">●</span><span class="lab">parse</span></div>
+            <div class="ax"><span class="g y">●</span><span class="lab">hybrid</span></div>
+            <div class="ax"><span class="g y">●</span><span class="lab">graph</span></div>
+            <div class="ax"><span class="g n">○</span><span class="lab">weight</span></div>
+            <div class="ax"><span class="g y">●</span><span class="lab">licen.</span></div>
+          </div>
+        </div>
+        <div class="chip right" style="right:2%">
+          <span class="star">★</span>
+          <div class="nm">Spring AI</div>
+          <div class="tag">build example · Java</div>
+          <div class="scores">
+            <div class="ax"><span class="g n">○</span><span class="lab">parse</span></div>
+            <div class="ax"><span class="g p">◐</span><span class="lab">hybrid</span></div>
+            <div class="ax"><span class="g n">○</span><span class="lab">graph</span></div>
+            <div class="ax"><span class="g y">●</span><span class="lab">weight</span></div>
+            <div class="ax"><span class="g y">●</span><span class="lab">licen.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- pole labels -->
+      <div class="pole l">◀ Turnkey appliance</div>
+      <div class="pole r">Build it yourself ▶</div>
+
+      <!-- stems -->
+      <div class="stem g" style="left:6%"></div>
+      <div class="stem p" style="left:82%"></div>
+
+      <!-- rail + nodes -->
+      <div class="railwrap">
+        <div class="rail">
+          <div class="node hub g" style="left:6%"></div>
+          <div class="node g"  style="left:16%"></div>
+          <div class="node g"  style="left:24%"></div>
+          <div class="node a"  style="left:41%"></div>
+          <div class="node a"  style="left:50%"></div>
+          <div class="node a"  style="left:59%"></div>
+          <div class="node hub p" style="left:82%"></div>
+          <div class="node p"  style="left:89.5%"></div>
+          <div class="node p"  style="left:95%"></div>
+        </div>
+      </div>
+
+      <!-- minor engine labels -->
+      <div class="mlabel"    style="left:16%">Onyx</div>
+      <div class="mlabel lo" style="left:24%">Dify</div>
+      <div class="mlabel"    style="left:41%">NVIDIA<span class="k">blueprint</span></div>
+      <div class="mlabel lo" style="left:50%">Haystack</div>
+      <div class="mlabel"    style="left:59%">LightRAG</div>
+      <div class="mlabel lo" style="left:89.5%">LlamaIndex</div>
+      <div class="mlabel"    style="left:95%">LangChain.js</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="legend">
+      <span><b class="g y">●</b> native / strong</span>
+      <span><b class="g p">◐</b> you configure</span>
+      <span><b class="g n">○</b> DIY / weak</span>
+    </div>
+    <div class="thesis">No declared winner — <span class="em">both ends work</span>. You pick.</div>
+  </div>
+</div>

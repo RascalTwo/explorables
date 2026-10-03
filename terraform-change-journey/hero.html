@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The journey of a change · Terraform monorepo</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel-2:#21262d; --border:#30363d;
+    --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff;
+    --dev:#58a6ff; --test:#3fb950; --stage:#d29922; --prod:#f85149;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  .og-card{
+    width:1200px; height:630px; overflow:hidden; position:relative;
+    background:
+      radial-gradient(1200px 780px at 78% 118%, rgba(248,81,73,.14), transparent 55%),
+      radial-gradient(1400px 900px at 50% -34%, rgba(88,166,255,.10), transparent 62%),
+      #0d1117;
+    font-family:var(--sans); color:var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
+  /* faint blueprint grid */
+  .og-card::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(139,148,158,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,148,158,.05) 1px, transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(1200px 700px at 50% 40%, #000 40%, transparent 85%);
+            mask-image:radial-gradient(1200px 700px at 50% 40%, #000 40%, transparent 85%);
+  }
+  /* hairline frame in the safe zone */
+  .frame{ position:absolute; inset:32px; border:1px solid var(--border); border-radius:16px;
+          box-shadow:inset 0 1px 0 rgba(230,237,243,.03); }
+
+  .content{ position:absolute; inset:32px; padding:52px 60px; }
+
+  /* ── header row ── */
+  .eyebrow{ display:flex; align-items:center; gap:12px; }
+  .eyebrow .sq{ width:11px; height:11px; border-radius:3px; background:var(--accent);
+                box-shadow:0 0 0 4px rgba(88,166,255,.14); }
+  .eyebrow .txt{ font-family:var(--mono); font-size:14px; letter-spacing:.32em;
+                 text-transform:uppercase; color:var(--muted); }
+  .eyebrow .txt b{ color:var(--text); font-weight:600; }
+
+  /* env legend, top-right */
+  .legend{ position:absolute; top:52px; right:60px; display:flex; gap:20px; align-items:center; }
+  .legend .lg{ display:flex; align-items:center; gap:7px; font-family:var(--mono);
+               font-size:12.5px; color:var(--muted); }
+  .legend .dot{ width:9px; height:9px; border-radius:50%; }
+
+  h1{ font-size:66px; line-height:1.0; letter-spacing:-.028em; font-weight:640;
+      margin-top:34px; color:var(--text); }
+  h1 .grad{ background:linear-gradient(92deg,#e6edf3,#a9d1ff); -webkit-background-clip:text;
+            background-clip:text; -webkit-text-fill-color:transparent; }
+
+  .essence{ margin-top:22px; font-size:21px; line-height:1.5; color:var(--muted);
+            max-width:760px; letter-spacing:.002em; }
+  .essence .k{ color:var(--text); font-weight:500; }
+  .essence .prod{ color:var(--prod); font-weight:600; }
+
+  /* motif anchored to the lower band */
+  .motif{ position:absolute; left:60px; right:60px; bottom:44px; }
+
+  .stat{ font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="legend">
+      <span class="lg"><span class="dot" style="background:var(--dev)"></span>dev</span>
+      <span class="lg"><span class="dot" style="background:var(--test)"></span>test</span>
+      <span class="lg"><span class="dot" style="background:var(--stage)"></span>stage</span>
+      <span class="lg"><span class="dot" style="background:var(--prod)"></span>prod</span>
+    </div>
+
+    <div class="content">
+      <div class="eyebrow">
+        <span class="sq"></span>
+        <span class="txt">terraform&nbsp;monorepo · <b>ci/cd&nbsp;pipeline</b></span>
+      </div>
+
+      <h1>The journey of<br><span class="grad">a change</span></h1>
+
+      <p class="essence">
+        One reusable module, <span class="k">four isolated environments</span>,
+        a gated road to <span class="prod">prod</span> — a change moving from edit to release.
+      </p>
+    </div>
+
+    <!-- ── signature motif: the gated road (transit line) ── -->
+    <div class="motif">
+      <svg width="1080" height="210" viewBox="0 0 1080 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="road" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0"   stop-color="#58a6ff"/>
+            <stop offset=".42" stop-color="#3fb950"/>
+            <stop offset=".72" stop-color="#d29922"/>
+            <stop offset="1"   stop-color="#f85149"/>
+          </linearGradient>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="14"/>
+          </filter>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3.2" orient="auto">
+            <path d="M0 0 L7 3.2 L0 6.4 Z" fill="#3fb950"/>
+          </marker>
+        </defs>
+
+        <!-- gate glow (focal) -->
+        <ellipse cx="905" cy="96" rx="70" ry="82" fill="#f85149" opacity=".16" filter="url(#glow)"/>
+
+        <!-- main travelled line: edit → stage apply -->
+        <line x1="50" y1="96" x2="788" y2="96" stroke="url(#road)" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- dashed manual segment into the gate -->
+        <line x1="788" y1="96" x2="856" y2="96" stroke="#f85149" stroke-width="3.5"
+              stroke-dasharray="7 6" stroke-linecap="round"/>
+        <!-- released segment out of the gate -->
+        <line x1="954" y1="96" x2="1008" y2="96" stroke="#3fb950" stroke-width="3.5"
+              stroke-linecap="round" marker-end="url(#ah)"/>
+
+        <!-- plan ×4 fan (between MR and merge) -->
+        <path d="M195 96 C 268 42, 382 42, 455 96" stroke="#58a6ff" stroke-width="2" opacity=".9"/>
+        <path d="M195 96 C 268 68, 382 68, 455 96" stroke="#3fb950" stroke-width="2" opacity=".9"/>
+        <path d="M195 96 C 268 124,382 124,455 96" stroke="#d29922" stroke-width="2" opacity=".9"/>
+        <path d="M195 96 C 268 150,382 150,455 96" stroke="#f85149" stroke-width="2" opacity=".9"/>
+        <text x="325" y="26" text-anchor="middle" class="stat" fill="#8b949e"
+              font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12.5">plan ×4 · parallel</text>
+
+        <!-- stations -->
+        <!-- edit -->
+        <circle cx="50" cy="96" r="8" fill="#0d1117" stroke="#58a6ff" stroke-width="2.5"/>
+        <!-- MR -->
+        <circle cx="195" cy="96" r="8" fill="#0d1117" stroke="#58a6ff" stroke-width="2.5"/>
+        <!-- merge -->
+        <circle cx="555" cy="96" r="9" fill="#0d1117" stroke="#3fb950" stroke-width="2.5"/>
+        <path d="M551 96 l3 3 l6 -7" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- apply beads dev → test → stage -->
+        <circle cx="648" cy="96" r="6.5" fill="#58a6ff"/>
+        <circle cx="708" cy="96" r="6.5" fill="#3fb950"/>
+        <circle cx="768" cy="96" r="6.5" fill="#d29922"/>
+
+        <!-- ── the prod gate (focal point) ── -->
+        <rect x="856" y="40" width="98" height="112" rx="14"
+              fill="#1a1012" stroke="#f85149" stroke-width="2.5"/>
+        <rect x="856" y="40" width="98" height="112" rx="14" fill="#f85149" opacity=".06"/>
+        <!-- pause glyph -->
+        <rect x="890" y="68" width="9" height="34" rx="2.5" fill="#f85149"/>
+        <rect x="911" y="68" width="9" height="34" rx="2.5" fill="#f85149"/>
+        <text x="905" y="130" text-anchor="middle" fill="#ffb3ae"
+              font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" font-weight="600">CAB gate</text>
+
+        <!-- prod released -->
+        <circle cx="1030" cy="96" r="9" fill="#0d1117" stroke="#f85149" stroke-width="2.5"/>
+        <circle cx="1030" cy="96" r="3.2" fill="#f85149"/>
+
+        <!-- station labels -->
+        <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12.5"
+           letter-spacing=".04em" fill="#8b949e" text-anchor="middle">
+          <text x="50"  y="182">edit</text>
+          <text x="195" y="182">open MR</text>
+          <text x="555" y="182">merge</text>
+          <text x="708" y="182" fill="#c9d1d9">apply&nbsp;→&nbsp;dev·test·stage</text>
+          <text x="905" y="182" fill="#f85149">manual&nbsp;·&nbsp;window</text>
+          <text x="1030" y="182" fill="#c9d1d9">prod</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

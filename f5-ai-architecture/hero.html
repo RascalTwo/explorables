@@ -1,0 +1,220 @@
+<div class="og-card">
+  <style>
+    .og-card {
+      width: 1200px; height: 630px; overflow: hidden; position: relative;
+      background:
+        radial-gradient(1100px 520px at 62% 118%, rgba(244,114,182,0.10), transparent 60%),
+        radial-gradient(760px 460px at 8% -18%, rgba(96,165,250,0.09), transparent 60%),
+        linear-gradient(180deg, #0e1420 0%, #0b0f17 55%, #0a0e16 100%);
+      color: #e7edf6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* faint engineering dot-grid */
+    .og-card .grid {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(147,161,181,0.055) 1px, transparent 1.4px);
+      background-size: 34px 34px; mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+    }
+    .og-card .frame-glow {
+      position: absolute; left: 50%; top: 372px; transform: translateX(-50%);
+      width: 300px; height: 210px; border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(244,114,182,0.22), transparent 72%);
+      filter: blur(8px);
+    }
+    .og-card .inner {
+      position: absolute; left: 60px; top: 44px; width: 1080px; height: 542px;
+      display: flex; flex-direction: column;
+    }
+
+    /* ---- header ---- */
+    .og-card .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12.5px; letter-spacing: 0.20em; text-transform: uppercase;
+      color: #6f7d93; font-weight: 600;
+    }
+    .og-card .eyebrow .f5 {
+      color: #0b0f17; background: linear-gradient(180deg,#e7edf6,#aeb9cc);
+      font-weight: 800; letter-spacing: 0.02em; padding: 3px 9px 2px; border-radius: 5px;
+      font-size: 13px;
+    }
+    .og-card .eyebrow .dot { width: 4px; height: 4px; border-radius: 50%; background: #3c4a66; }
+
+    .og-card h1 {
+      margin: 18px 0 0; font-size: 60px; line-height: 1.02; font-weight: 700;
+      letter-spacing: -0.022em; color: #f3f7fc;
+    }
+    .og-card h1 .ai {
+      background: linear-gradient(92deg, #22d3ee 0%, #60a5fa 40%, #a78bfa 70%, #f472b6 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .og-card .essence {
+      margin: 16px 0 0; font-size: 20px; line-height: 1.4; color: #9fb0c6; max-width: 940px;
+      letter-spacing: -0.005em;
+    }
+    .og-card .essence b { color: #d6e0ee; font-weight: 600; }
+
+    /* ---- diagram ---- */
+    .og-card .adsp {
+      position: relative; margin-top: 30px; flex: 1;
+      border: 1.5px solid #2f3b56; border-radius: 16px;
+      background: linear-gradient(180deg, rgba(20,27,42,0.55), rgba(12,17,27,0.35));
+      padding: 20px 20px 16px;
+      display: flex; flex-direction: column; gap: 11px;
+    }
+    .og-card .adsp-label {
+      position: absolute; top: -10px; left: 22px; background: #0b0f17; padding: 0 11px;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #aeb9cc; font-weight: 700;
+    }
+    .og-card .adsp-label small { color: #5e6c82; text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+    .og-card .lane {
+      border: 1px dashed #36425c; border-radius: 10px; padding: 7px 13px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #6f7d93;
+    }
+    .og-card .lane.agent { background: rgba(96,165,250,0.05); border-color: #33436a; }
+    .og-card .lane.observe { background: rgba(251,191,36,0.055); border-color: #4a4326; }
+    .og-card .lane .tag {
+      font-size: 10px; text-transform: none; letter-spacing: 0; color: #93a1b5;
+      border: 1px solid #29354c; border-radius: 999px; padding: 1.5px 9px;
+    }
+    .og-card .lane .spacer { flex: 1; }
+    .og-card .lane .flow { display: flex; gap: 6px; align-items: center; }
+    .og-card .lane .flow i { width: 22px; height: 3px; border-radius: 2px; display: block; }
+
+    /* pipeline */
+    .og-card .pipeline { display: flex; align-items: stretch; gap: 0; }
+    .og-card .zone { flex: 1 1 0; display: flex; flex-direction: column; }
+    .og-card .zone-card {
+      flex: 1; background: #161f30; border: 1px solid #29354c; border-radius: 11px;
+      padding: 9px 10px 10px; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; gap: 7px;
+    }
+    .og-card .zone-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent);
+    }
+    .og-card .zone-card.neutral { background: #14181f; border-style: dashed; border-color: #333a45; }
+    .og-card .z-name { font-size: 12.5px; font-weight: 650; letter-spacing: -0.01em; color: #e7edf6; margin-top: 2px; }
+    .og-card .z-desc { font-size: 10px; color: #5e6c82; line-height: 1.35; }
+    .og-card .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
+    .og-card .cpill {
+      font-size: 9.5px; color: #cdd7e6; background: #1c2840; border: 1px solid #2c3a57;
+      border-left: 2px solid var(--accent); border-radius: 5px; padding: 2px 6px; line-height: 1.2;
+    }
+
+    /* focal AI-security card */
+    .og-card .zone-card.focal {
+      border-color: #f472b6;
+      box-shadow: 0 0 0 1px rgba(244,114,182,0.35), 0 10px 34px rgba(244,114,182,0.22);
+      background: linear-gradient(180deg, #1d2033, #171c2c);
+    }
+    .og-card .zone-card.focal .star { color: #34d399; font-size: 11px; margin-right: 3px; }
+    .og-card .zone-card.focal .z-name { color: #ffdcef; }
+
+    .og-card .arrow {
+      flex: 0 0 26px; display: flex; align-items: center; justify-content: center;
+      color: #46577a; font-size: 15px;
+    }
+
+    /* pillar legend */
+    .og-card .legend { display: flex; align-items: center; gap: 20px; margin-top: 12px; padding-left: 2px; }
+    .og-card .lg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #93a1b5; }
+    .og-card .lg .sw { width: 11px; height: 11px; border-radius: 3px; }
+    .og-card .lg b { color: #cdd7e6; font-weight: 600; }
+  </style>
+
+  <div class="grid"></div>
+  <div class="frame-glow"></div>
+
+  <div class="inner">
+    <div class="eyebrow">
+      <span class="f5">F5</span>
+      Application Delivery &amp; Security Platform
+      <span class="dot"></span>
+      Reference Architecture
+    </div>
+
+    <h1>F5 in an <span class="ai">AI Solution</span> Architecture</h1>
+    <div class="essence">
+      How one platform maps onto the lifecycle of an AI request — <b>data ingest → inference → APIs → agents → public edge → multicloud</b> — pillar by pillar.
+    </div>
+
+    <!-- signature motif: the ADSP pipeline -->
+    <div class="adsp">
+      <span class="adsp-label">F5 ADSP &nbsp;<small>· one umbrella — every layer below is a module, not a separate stack</small></span>
+
+      <div class="lane agent">
+        Agentic / MCP plane
+        <span class="tag">agent-to-agent &amp; tool calls — spans the whole flow</span>
+        <span class="spacer"></span>
+        <span class="flow"><i style="background:#60a5fa"></i><i style="background:#60a5fa;opacity:.55"></i><i style="background:#60a5fa;opacity:.28"></i></span>
+      </div>
+
+      <div class="pipeline">
+        <div class="zone">
+          <div class="zone-card" style="--accent:#22d3ee">
+            <div class="z-name">Data Ingest</div>
+            <div class="z-desc">S3-compatible acceleration — don't starve the GPUs.</div>
+            <div class="chips"><span class="cpill">Deliver AI</span></div>
+          </div>
+        </div>
+        <div class="arrow">▶</div>
+        <div class="zone">
+          <div class="zone-card" style="--accent:#f472b6">
+            <div class="z-name">Public Edge</div>
+            <div class="z-desc">Internet-facing perimeter of the AI app.</div>
+            <div class="chips"><span class="cpill">WAF</span><span class="cpill">Bot Defense</span></div>
+          </div>
+        </div>
+        <div class="arrow">▶</div>
+        <div class="zone">
+          <div class="zone-card" style="--accent:#60a5fa">
+            <div class="z-name">App &amp; API Tier</div>
+            <div class="z-desc">The API sprawl a RAG / agent app consumes.</div>
+            <div class="chips"><span class="cpill">API Gateway</span><span class="cpill">NGINX</span></div>
+          </div>
+        </div>
+        <div class="arrow">▶</div>
+        <div class="zone">
+          <div class="zone-card focal" style="--accent:#f472b6">
+            <div class="z-name"><span class="star">★</span>AI Security Runtime</div>
+            <div class="z-desc">Inline prompt &amp; response inspection — the model's front door.</div>
+            <div class="chips"><span class="cpill">AI Guardrails</span></div>
+          </div>
+        </div>
+        <div class="arrow">▶</div>
+        <div class="zone">
+          <div class="zone-card" style="--accent:#a78bfa">
+            <div class="z-name">Inference Fabric</div>
+            <div class="z-desc">"AI-factory" load balancing across GPU nodes.</div>
+            <div class="chips"><span class="cpill">Scale AI</span><span class="cpill">DPU</span></div>
+          </div>
+        </div>
+        <div class="arrow">▶</div>
+        <div class="zone">
+          <div class="zone-card neutral" style="--accent:#6b7689">
+            <div class="z-name">Model Factory</div>
+            <div class="z-desc">The LLMs &amp; inference engines themselves.</div>
+            <div class="chips"><span class="cpill" style="--accent:#6b7689">Not F5</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lane observe">
+        Observability &amp; operations
+        <span class="tag">F5 Insight — one view spanning every zone above</span>
+        <span class="spacer"></span>
+        <span class="flow"><i style="background:#fbbf24;opacity:.3"></i><i style="background:#fbbf24;opacity:.55"></i><i style="background:#fbbf24"></i></span>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="lg"><span class="sw" style="background:#22d3ee"></span><b>Deliver</b></span>
+      <span class="lg"><span class="sw" style="background:#f472b6"></span><b>Secure</b></span>
+      <span class="lg"><span class="sw" style="background:#a78bfa"></span><b>Scale</b></span>
+      <span class="lg"><span class="sw" style="background:#60a5fa"></span><b>Connect</b></span>
+      <span class="lg"><span class="sw" style="background:#fbbf24"></span><b>Observe</b></span>
+    </div>
+  </div>
+</div>

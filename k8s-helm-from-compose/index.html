@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta name="viz:uid" content="v-b83ba4eab241">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compose → Kubernetes → Helm</title>
+<meta name="viz:title" content="Compose → Kubernetes → Helm">
+<meta name="viz:description" content="The same app carried from Docker Compose to Kubernetes to Helm — what each layer adds, what it costs, and why you'd climb the next rung.">
+<meta name="viz:tag" content="Kubernetes">
+<meta name="viz:tag" content="Helm">
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#11182e; --panel:#151d36; --panel2:#1b2647;
+    --ink:#e8edff; --muted:#93a0c6; --line:#27325a;
+    --docker:#2496ed; --k8s:#5b8def; --helm:#2bb3a3;
+    --pod:#7aa2ff; --svc:#46c79a; --ing:#e0a23b; --cfg:#b07ce8; --sec:#e0617a;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:linear-gradient(180deg,#0a0e1c,#0b1020 40%);color:var(--ink);
+        font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--k8s)}
+  code,pre{font-family:var(--mono)}
+
+  /* layout */
+  .wrap{display:grid;grid-template-columns:210px 1fr;max-width:1320px;margin:0 auto;gap:0}
+  nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 14px;border-right:1px solid var(--line)}
+  nav .brand{font-weight:700;font-size:14px;letter-spacing:.3px;margin-bottom:22px;color:var(--muted)}
+  nav a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:7px 10px;border-radius:8px;
+        border-left:2px solid transparent;transition:.15s}
+  nav a:hover{color:var(--ink);background:var(--panel)}
+  nav a.active{color:var(--ink);background:var(--panel);border-left-color:var(--k8s)}
+  main{padding:64px 56px 140px;min-width:0}
+  section{margin:0 0 130px;scroll-margin-top:30px}
+  section:last-child{margin-bottom:60px}
+
+  h1{font-size:42px;line-height:1.15;margin:0 0 14px;letter-spacing:-.5px}
+  h1 .grad{background:linear-gradient(90deg,var(--docker),var(--k8s),var(--helm));
+            -webkit-background-clip:text;background-clip:text;color:transparent}
+  h2{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--k8s);margin:0 0 10px}
+  h3{font-size:24px;margin:0 0 10px;letter-spacing:-.2px}
+  p{color:#cdd6f4;max-width:70ch}
+  .lead{font-size:19px;color:#cdd6f4;max-width:66ch}
+  .muted{color:var(--muted)}
+  .tag{display:inline-block;font:600 11px/1 var(--mono);padding:5px 9px;border-radius:999px;
+       border:1px solid var(--line);color:var(--muted);margin-right:6px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .grid2.tight{gap:14px}
+
+  pre.code{background:#0a0f20;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+       overflow:auto;font-size:12.5px;line-height:1.65;margin:0}
+  .filelabel{font:600 11px/1 var(--mono);color:var(--muted);letter-spacing:.5px;
+        padding:7px 12px;background:#0a0f20;border:1px solid var(--line);border-bottom:none;
+        border-radius:10px 10px 0 0;display:inline-block;position:relative;top:1px}
+  pre.code.attached{border-radius:0 10px 10px 10px}
+  .kw{color:#7fb2ff}.str{color:#9be6a0}.num{color:#e0a23b}.com{color:#5b6688}.key{color:#c9b6f0}
+  .hl{color:#ffd479;background:rgba(255,212,121,.10);border-radius:3px;padding:0 2px}
+
+  .callout{border-left:3px solid var(--k8s);background:var(--panel2);
+       padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;color:#cdd6f4}
+  .callout b{color:#fff}
+  .pill{display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--mono);
+       padding:6px 10px;border-radius:8px}
+  .p-docker{background:rgba(36,150,237,.16);color:#7fc0ff}
+  .p-k8s{background:rgba(91,141,239,.16);color:#9bb6ff}
+  .p-helm{background:rgba(43,179,163,.16);color:#6fded0}
+
+  /* mapping */
+  .map{display:grid;grid-template-columns:1fr 56px 1fr;gap:0;align-items:stretch}
+  .map .col{display:flex;flex-direction:column;gap:10px}
+  .map .row{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+       padding:11px 14px;font:13px/1.4 var(--mono)}
+  .map .row .t{font-size:11px;color:var(--muted);font-family:var(--sans);margin-bottom:3px}
+  .map .row.h{outline:2px solid var(--k8s);outline-offset:-1px}
+  .map .arrows{display:flex;flex-direction:column;justify-content:space-around;align-items:center}
+  .map .arrows span{color:var(--muted);font-size:18px}
+  .obj-pod{border-left:3px solid var(--pod)} .obj-svc{border-left:3px solid var(--svc)}
+  .obj-ing{border-left:3px solid var(--ing)} .obj-cfg{border-left:3px solid var(--cfg)}
+  .obj-sec{border-left:3px solid var(--sec)} .obj-dep{border-left:3px solid var(--k8s)}
+
+  /* topology */
+  .topo-wrap{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start}
+  .topo{background:radial-gradient(120% 120% at 50% 0%,#0e1530,#090d1c);
+       border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  svg{display:block;width:100%;height:auto}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .legend .li{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+  .legend .sw{width:12px;height:12px;border-radius:3px}
+  .inspect{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+       padding:18px 20px;min-height:260px;position:sticky;top:24px}
+  .inspect h4{margin:0 0 4px;font-size:17px}
+  .inspect .kind{font:600 11px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .inspect .body{font-size:14px;color:#cdd6f4;margin-top:12px}
+  .inspect .analog{margin-top:14px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  .inspect .analog b{color:#fff}
+  .node-hit{cursor:pointer}
+  .ctrls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+  button.btn{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+       border-radius:9px;padding:9px 15px;font:600 13px var(--sans);cursor:pointer;transition:.15s}
+  button.btn:hover{border-color:var(--k8s);background:#22305a}
+  button.btn.on{background:var(--k8s);border-color:var(--k8s);color:#06122c}
+
+  /* helm machine */
+  .helm{display:grid;grid-template-columns:300px 1fr 1fr;gap:16px;align-items:start}
+  .helm .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .helm .ph{padding:11px 16px;border-bottom:1px solid var(--line);font:600 12px var(--sans);
+       color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .helm .pb{padding:14px 16px}
+  .ctrl{margin-bottom:18px}
+  .ctrl label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px;font-weight:600}
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{flex:1;background:transparent;color:var(--muted);border:none;padding:9px 0;
+       font:600 13px var(--sans);cursor:pointer}
+  .seg button.on{background:var(--helm);color:#04201d}
+  input[type=range]{width:100%;accent-color:var(--helm)}
+  .rngval{font:700 14px var(--mono);color:var(--helm)}
+  .toggle{display:flex;align-items:center;justify-content:space-between;
+       background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:10px 13px}
+  .toggle .sw{width:42px;height:24px;border-radius:999px;background:#2a3458;position:relative;
+       cursor:pointer;transition:.18s;flex:none}
+  .toggle .sw::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;
+       background:#fff;top:3px;left:3px;transition:.18s}
+  .toggle.on .sw{background:var(--helm)} .toggle.on .sw::after{left:21px}
+  pre.tpl,pre.out{background:#0a0f20;margin:0;padding:14px 16px;font-size:12px;line-height:1.6;
+       overflow:auto;max-height:520px}
+  .v{color:#ffd479;background:rgba(255,212,121,.12);border-radius:3px;padding:0 3px}
+  .ctl{color:#7fdcff;background:rgba(127,220,255,.10);border-radius:3px;padding:0 3px}
+  pre.out{transition:background .3s}
+  pre.out.flash{background:#10243a}
+  .filetabs{display:flex;gap:4px;flex-wrap:wrap}
+  .filetabs button{background:transparent;border:1px solid var(--line);color:var(--muted);
+       border-radius:7px 7px 0 0;padding:6px 11px;font:600 11px var(--mono);cursor:pointer}
+  .filetabs button.on{background:#0a0f20;color:var(--ink);border-bottom-color:#0a0f20}
+  .tree{font:12px/1.9 var(--mono);color:var(--muted)}
+  .tree b{color:var(--ink)} .tree .c{color:#5b6688}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px}
+  hr.s{border:none;border-top:1px solid var(--line);margin:34px 0}
+  .big-arrow{text-align:center;color:var(--muted);font-size:30px;margin:26px 0;letter-spacing:8px}
+  @media (max-width:1100px){
+    .wrap{grid-template-columns:1fr} nav{display:none} main{padding:40px 24px 100px}
+    .helm{grid-template-columns:1fr} .topo-wrap{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compose → Kubernetes → Helm">
+<meta property="og:description" content="The same app carried from Docker Compose to Kubernetes to Helm — what each layer adds, what it costs, and why you'd climb the next rung.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/k8s-helm-from-compose/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/k8s-helm-from-compose/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="brand">COMPOSE → K8S → HELM</div>
+    <a href="#intro" class="navlink">The leap</a>
+    <a href="#anchor" class="navlink">1 · What you know</a>
+    <a href="#mapping" class="navlink">2 · The mapping</a>
+    <a href="#topology" class="navlink">3 · The topology</a>
+    <a href="#explosion" class="navlink">4 · The YAML sprawl</a>
+    <a href="#why-helm" class="navlink">5 · Why Helm</a>
+    <a href="#helm" class="navlink">6 · Helm, live</a>
+    <a href="#recap" class="navlink">Recap</a>
+  </nav>
+
+  <main>
+    <!-- INTRO -->
+    <section id="intro">
+      <h2>The mental model</h2>
+      <h1>You already run containers.<br><span class="grad">Now run them on a fleet that heals itself.</span></h1>
+      <p class="lead">Docker Compose answers <i>"run these containers together on <b>this one machine</b>."</i>
+      Kubernetes answers <i>"keep these containers running, the right number of them, reachable, across <b>a cluster of machines</b> — and put them back when something dies."</i></p>
+      <div class="callout">
+        <b>The single biggest shift:</b> Compose is <i>imperative-ish</i> — you bring it up, you bring it down.
+        Kubernetes is <b>declarative + reconciling</b>. You submit the desired state ("I want 3 replicas of this image, reachable on port 80"),
+        and a control loop continuously makes reality match it. Kill a container and it comes back — not because you restarted it, but because reality drifted from the spec.
+      </div>
+      <div class="grid2 tight" style="margin-top:8px">
+        <div class="card"><span class="pill p-docker">docker compose up</span>
+          <p style="margin:12px 0 0">One YAML file. One host. <code>services</code>, networks, volumes. You own the box.</p></div>
+        <div class="card"><span class="pill p-k8s">kubectl apply -f</span>
+          <p style="margin:12px 0 0">Many typed objects. A scheduler places them on nodes. A controller keeps them alive. You own the <i>intent</i>.</p></div>
+      </div>
+    </section>
+
+    <!-- ANCHOR -->
+    <section id="anchor">
+      <h2>1 · The thing you already know</h2>
+      <h3>A familiar 3-service compose file</h3>
+      <p>A frontend, an API, and a Postgres database. Hold this picture — every Kubernetes concept below maps back to a line in here.</p>
+      <span class="filelabel">docker-compose.yml</span>
+      <pre class="code attached" id="composeCode"></pre>
+      <div class="callout" style="margin-top:18px">
+        Everything Compose bundles into one file — <b>which image, how many, what port, what config, what's exposed to the world</b> —
+        Kubernetes splits into <b>separate, individually-managed objects</b>. That split is the whole lesson. Next section maps it line by line.
+      </div>
+    </section>
+
+    <!-- MAPPING -->
+    <section id="mapping">
+      <h2>2 · The mapping</h2>
+      <h3>Every Compose idea becomes a Kubernetes object</h3>
+      <p>Same app, re-expressed. Hover a Compose concept on the left to see which Kubernetes object absorbs it.</p>
+      <div class="map" id="mapGrid">
+        <div class="col" id="mapLeft"></div>
+        <div class="arrows" id="mapArrows"></div>
+        <div class="col" id="mapRight"></div>
+      </div>
+      <div class="callout" style="margin-top:20px">
+        <b>The mental rule:</b> a <code>service:</code> in Compose is never <i>one</i> thing in Kubernetes.
+        It fans out into a <b>Deployment</b> (how many, which image, self-healing),
+        a <b>Service</b> (a stable in-cluster address that load-balances across the copies),
+        and — if it faces the internet — an <b>Ingress</b> (host/path routing + TLS).
+        Config and secrets are lifted <i>out</i> of the workload into <b>ConfigMap</b>/<b>Secret</b> so the same image runs unchanged in every environment.
+      </div>
+    </section>
+
+    <!-- TOPOLOGY -->
+    <section id="topology">
+      <h2>3 · The topology</h2>
+      <h3>How the objects actually relate at runtime</h3>
+      <p>This is the same app, alive in a cluster. Click any object to inspect it. Then hit <b>Send a request</b> to watch a browser hit travel
+      Internet → Ingress → Service → one healthy Pod — and <b>Kill a Pod</b> to watch the Deployment reconcile.</p>
+
+      <div class="ctrls">
+        <button class="btn" id="btnTraffic">▶ Send a request</button>
+        <button class="btn" id="btnKill">✕ Kill a Pod</button>
+        <button class="btn" id="btnScale">＋ Scale to 4 replicas</button>
+        <button class="btn" id="btnReset">↺ Reset</button>
+      </div>
+
+      <div class="topo-wrap" style="margin-top:16px">
+        <div class="topo">
+          <svg id="topoSvg" viewBox="0 0 760 540" role="img" aria-label="Kubernetes topology"></svg>
+        </div>
+        <div class="inspect" id="inspect">
+          <div class="kind">Inspector</div>
+          <h4>Click any object</h4>
+          <div class="body">Each colored box is a real Kubernetes object you'd write YAML for. The dashed groupings (Node, Cluster) are physical/logical boundaries the scheduler manages — you don't usually write YAML for those.</div>
+          <div class="analog"><b>Tip:</b> the arrows are "manages" / "routes to" relationships, not network wiring you configure by hand. Kubernetes wires them from labels.</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="li"><span class="sw" style="background:var(--ing)"></span>Ingress — L7 router (host/path → Service)</div>
+        <div class="li"><span class="sw" style="background:var(--svc)"></span>Service — stable virtual IP, load-balances Pods</div>
+        <div class="li"><span class="sw" style="background:var(--k8s)"></span>Deployment / ReplicaSet — desired replica count</div>
+        <div class="li"><span class="sw" style="background:var(--pod)"></span>Pod — 1+ containers, the unit that runs</div>
+        <div class="li"><span class="sw" style="background:var(--cfg)"></span>ConfigMap — non-secret config</div>
+        <div class="li"><span class="sw" style="background:var(--sec)"></span>Secret — credentials, base64 at rest</div>
+      </div>
+    </section>
+
+    <!-- EXPLOSION -->
+    <section id="explosion">
+      <h2>4 · The YAML sprawl</h2>
+      <h3>One compose file → a pile of manifests</h3>
+      <p>That single <code>docker-compose.yml</code> becomes <b>roughly a dozen</b> Kubernetes manifests once you account for every service's Deployment, Service, config, secrets, and the Ingress. This is real and it's the pain Helm exists to solve.</p>
+      <div class="grid2" style="align-items:start">
+        <div>
+          <span class="filelabel">before — 1 file</span>
+          <pre class="code attached"><span class="com"># docker-compose.yml</span>
+<span class="key">services:</span>
+  web:   <span class="com"># …</span>
+  api:   <span class="com"># …</span>
+  db:    <span class="com"># …</span>
+
+<span class="com"># 1 file. ~30 lines.
+# `docker compose up` and done.</span></pre>
+        </div>
+        <div>
+          <span class="filelabel">after — raw kubernetes</span>
+          <pre class="code attached"><span class="com"># k8s/</span>
+web-deployment.yaml      <span class="com"># 40+ lines</span>
+web-service.yaml
+api-deployment.yaml
+api-service.yaml
+api-configmap.yaml
+api-secret.yaml
+db-statefulset.yaml
+db-service.yaml
+db-pvc.yaml
+ingress.yaml
+<span class="com"># …same values copy-pasted across files</span></pre>
+        </div>
+      </div>
+      <div class="callout">
+        Now multiply by environments. <b>dev</b> wants 1 replica and a <code>*.dev</code> host;
+        <b>prod</b> wants 4 replicas, real TLS, bigger memory limits. With raw YAML you either keep
+        <b>3 near-identical copies of every file</b> or hand-edit before each deploy. Both rot. Enter Helm.
+      </div>
+    </section>
+
+    <!-- WHY HELM -->
+    <section id="why-helm">
+      <h2>5 · Why Helm</h2>
+      <h3>Helm is "docker-compose-meets-templating", for Kubernetes</h3>
+      <p>Helm packages that pile of manifests into one versioned, parameterised unit called a <b>chart</b>.
+      Think of it as: <b>the manifests become templates</b>, the per-environment differences move into <b>one <code>values.yaml</code></b>,
+      and <code>helm install</code> renders templates + values into final manifests and applies them — like <code>docker compose up</code>, but for a templated bundle.</p>
+
+      <div class="grid2 tight">
+        <div class="card">
+          <div class="kind muted" style="font:600 11px/1 var(--mono);letter-spacing:1px">ANALOGY</div>
+          <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px">
+            <tr><td style="padding:6px 0;color:var(--muted)">Docker image</td><td style="text-align:right">reusable artifact</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">→ Helm chart</td><td style="text-align:right;color:var(--helm)">reusable app package</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">docker run -e VAR=…</td><td style="text-align:right">params at runtime</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">→ helm install -f values</td><td style="text-align:right;color:var(--helm)">params at deploy</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">Docker Hub</td><td style="text-align:right">image registry</td></tr>
+            <tr><td style="padding:6px 0;color:var(--muted)">→ chart repo / OCI</td><td style="text-align:right;color:var(--helm)">chart registry</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="kind muted" style="font:600 11px/1 var(--mono);letter-spacing:1px">CHART ANATOMY</div>
+          <div class="tree" style="margin-top:10px">
+<b>myapp/</b><br>
+├── <b>Chart.yaml</b>      <span class="c"># name + version of the chart</span><br>
+├── <b>values.yaml</b>     <span class="c"># default knobs (replicas, image, host…)</span><br>
+├── <b>templates/</b><br>
+│   ├── deployment.yaml <span class="c"># manifest w/ {{ }} holes</span><br>
+│   ├── service.yaml<br>
+│   └── ingress.yaml<br>
+└── charts/         <span class="c"># sub-charts (e.g. postgres dep)</span>
+          </div>
+          <div class="hint">A chart is just this directory, tarred. <code>helm install web ./myapp -f prod.yaml</code> renders it and applies the result to the cluster.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HELM LIVE -->
+    <section id="helm">
+      <h2>6 · Helm, live</h2>
+      <h3>Turn the knobs. Watch the manifests render.</h3>
+      <p>Left = the inputs you control (<code>values.yaml</code> + env override). Middle = the chart <b>template</b> (notice the <span class="v">{{ .Values… }}</span> holes and <span class="ctl">{{ if }}</span> logic). Right = the <b>rendered manifest</b> Helm hands to the cluster. Change anything on the left and the right re-renders instantly — that's exactly what <code>helm template</code> does.</p>
+
+      <div class="helm">
+        <div class="panel">
+          <div class="ph">Inputs</div>
+          <div class="pb">
+            <div class="ctrl">
+              <label>Environment (values override)</label>
+              <div class="seg" id="envSeg">
+                <button data-env="dev" class="on">dev</button>
+                <button data-env="staging">staging</button>
+                <button data-env="prod">prod</button>
+              </div>
+              <div class="hint">Picks <code>values-&lt;env&gt;.yaml</code>, layered over base <code>values.yaml</code>.</div>
+            </div>
+            <div class="ctrl">
+              <label>replicaCount — <span class="rngval" id="repVal">1</span></label>
+              <input type="range" id="repRange" min="1" max="6" value="1">
+            </div>
+            <div class="ctrl">
+              <label>image.tag</label>
+              <div class="seg" id="tagSeg">
+                <button data-tag="1.0.0" class="on">1.0.0</button>
+                <button data-tag="1.4.2">1.4.2</button>
+                <button data-tag="latest">latest</button>
+              </div>
+            </div>
+            <div class="ctrl">
+              <div class="toggle on" id="ingToggle">
+                <div><div style="font-weight:600;font-size:13px">ingress.enabled</div>
+                  <div class="hint" style="margin:2px 0 0">Expose to the internet?</div></div>
+                <div class="sw"></div>
+              </div>
+            </div>
+            <div class="ctrl" style="margin-bottom:0">
+              <label>Effective values (merged)</label>
+              <pre class="tpl" id="valsView" style="max-height:180px"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="ph">
+            <span>templates/</span>
+            <div class="filetabs" id="tplTabs">
+              <button data-f="deployment" class="on">deployment.yaml</button>
+              <button data-f="service">service.yaml</button>
+              <button data-f="ingress">ingress.yaml</button>
+            </div>
+          </div>
+          <pre class="tpl" id="tplView"></pre>
+        </div>
+
+        <div class="panel">
+          <div class="ph">
+            <span>rendered → <code style="color:var(--helm)">kubectl apply</code></span>
+            <span class="hint" id="renderNote" style="margin:0">helm template</span>
+          </div>
+          <pre class="out" id="outView"></pre>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:20px">
+        Try it: drag <b>replicaCount</b> and watch <code>spec.replicas</code> change. Switch to <b>prod</b> — replicas, image tag,
+        and the ingress host all move at once from <i>one</i> override file. Toggle <b>ingress.enabled</b> off and the entire
+        <code>ingress.yaml</code> output vanishes — that's the <span class="ctl">{{- if }}</span> guard doing its job.
+        <b>One chart, every environment, no copy-paste.</b>
+      </div>
+    </section>
+
+    <section id="recap">
+      <h2>Recap</h2>
+      <h3>The whole arc in five sentences</h3>
+      <ol style="max-width:72ch;color:#cdd6f4;font-size:16px;line-height:1.9">
+        <li><b>Compose</b> runs containers together on one host; you manage the process.</li>
+        <li><b>Kubernetes</b> runs them across a cluster and <i>reconciles</i> reality to a declared spec — so things self-heal.</li>
+        <li>One Compose service explodes into typed objects: <b>Deployment</b> (how many / which image), <b>Service</b> (stable address + load-balancing), <b>Ingress</b> (internet routing), <b>ConfigMap/Secret</b> (config out of the image).</li>
+        <li>Raw manifests duplicate across environments and rot.</li>
+        <li><b>Helm</b> templates those manifests + one <code>values.yaml</code> into a versioned, installable package — <code>docker compose up</code> energy, cluster-scale.</li>
+      </ol>
+    </section>
+  </main>
+</div>
+
+<script type="module">
+// app.ts
+import yaml from "https://esm.sh/js-yaml@4.1.0";
+(function() {
+  const lines = [
+    [["com", "# docker-compose.yml"]],
+    [["key", "services:"]],
+    [["plain", "  "], ["key", "web:"]],
+    [["plain", "    "], ["key", "image: "], ["str", "myco/web:1.0.0"]],
+    [["plain", "    "], ["key", "ports: "], ["hl", '["80:8080"]'], ["com", "   # exposed to users"]],
+    [["plain", "    "], ["key", "depends_on: "], ["plain", "[api]"]],
+    [["plain", "  "], ["key", "api:"]],
+    [["plain", "    "], ["key", "image: "], ["str", "myco/api:1.0.0"]],
+    [["plain", "    "], ["key", "deploy:"]],
+    [["plain", "      "], ["key", "replicas: "], ["num", "3"], ["com", "        # how many copies"]],
+    [["plain", "    "], ["key", "restart: "], ["plain", "always"], ["com", "     # keep it alive"]],
+    [["plain", "    "], ["key", "environment:"]],
+    [["plain", "      "], ["plain", "LOG_LEVEL: "], ["str", "info"]],
+    [["plain", "      "], ["plain", "DB_PASSWORD: "], ["str", "${DB_PASSWORD}"], ["com", "  # a secret"]],
+    [["plain", "  "], ["key", "db:"]],
+    [["plain", "    "], ["key", "image: "], ["str", "postgres:16"]],
+    [["plain", "    "], ["key", "volumes: "], ["str", "[pgdata:/var/lib/postgresql/data]"], ["com", " # state"]]
+  ];
+  document.getElementById("composeCode").innerHTML = lines.map((l) => l.map(([c, t]) => `<span class="${c === "plain" ? "" : c}">${esc(t)}</span>`).join("")).join(`
+`);
+})();
+function esc(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+var mapData = [
+  {
+    l: "image: myco/api:1.0.0",
+    lt: "which container to run",
+    r: "Deployment → spec.template.spec.containers[].image",
+    rt: "Deployment",
+    cls: "obj-dep"
+  },
+  {
+    l: "deploy.replicas: 3",
+    lt: "how many copies",
+    r: "Deployment → spec.replicas (ReplicaSet keeps the count)",
+    rt: "Deployment / ReplicaSet",
+    cls: "obj-dep"
+  },
+  {
+    l: "restart: always",
+    lt: "keep it alive",
+    r: "(built in) controller reconciles dead Pods automatically",
+    rt: "Controller loop",
+    cls: "obj-dep"
+  },
+  {
+    l: "(running container)",
+    lt: "the unit that executes",
+    r: "Pod — 1+ containers sharing network/volumes",
+    rt: "Pod",
+    cls: "obj-pod"
+  },
+  {
+    l: 'ports: ["80:8080"]',
+    lt: "reach it by a stable name",
+    r: "Service — stable virtual IP, load-balances across Pods",
+    rt: "Service",
+    cls: "obj-svc"
+  },
+  {
+    l: "(facing the internet)",
+    lt: "expose to users + host/TLS",
+    r: "Ingress — L7 host/path routing into a Service",
+    rt: "Ingress",
+    cls: "obj-ing"
+  },
+  {
+    l: "environment: LOG_LEVEL",
+    lt: "non-secret config",
+    r: "ConfigMap — injected as env vars or files",
+    rt: "ConfigMap",
+    cls: "obj-cfg"
+  },
+  {
+    l: "DB_PASSWORD: ${…}",
+    lt: "credentials",
+    r: "Secret — same idea, separate object, base64 at rest",
+    rt: "Secret",
+    cls: "obj-sec"
+  },
+  {
+    l: "volumes: pgdata:/…",
+    lt: "durable state",
+    r: "PersistentVolumeClaim — storage that outlives the Pod",
+    rt: "PVC",
+    cls: "obj-pod"
+  }
+];
+var ml = document.getElementById("mapLeft");
+var mr = document.getElementById("mapRight");
+var ma = document.getElementById("mapArrows");
+mapData.forEach((d, i) => {
+  ml.insertAdjacentHTML("beforeend", `<div class="row" data-i="${i}"><div class="t">${d.lt}</div>${esc(d.l)}</div>`);
+  mr.insertAdjacentHTML("beforeend", `<div class="row ${d.cls}" data-i="${i}"><div class="t">${d.rt}</div>${esc(d.r)}</div>`);
+  ma.insertAdjacentHTML("beforeend", `<span data-i="${i}">→</span>`);
+});
+document.querySelectorAll("#mapGrid .row").forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    const i = el.dataset["i"];
+    document.querySelectorAll(`#mapGrid .row`).forEach((r) => r.classList.toggle("h", r.dataset["i"] === i));
+    document.querySelectorAll("#mapArrows span").forEach((s) => s.style.color = s.dataset["i"] === i ? "#fff" : "");
+  });
+});
+var NS = "http://www.w3.org/2000/svg";
+var svg = document.getElementById("topoSvg");
+var COL = { pod: "#7aa2ff", svc: "#46c79a", ing: "#e0a23b", cfg: "#b07ce8", sec: "#e0617a", k8s: "#5b8def" };
+function el(tag, attrs = {}, txt) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs)
+    e.setAttribute(k, String(attrs[k]));
+  if (txt != null)
+    e.textContent = txt;
+  return e;
+}
+function box(x, y, w, h, color, label, sub, kind, fill) {
+  const g = el("g", { class: "node-hit", transform: `translate(${x},${y})` });
+  g.appendChild(el("rect", {
+    width: w,
+    height: h,
+    rx: 9,
+    fill: fill || "#141d38",
+    stroke: color,
+    "stroke-width": 1.6
+  }));
+  g.appendChild(el("rect", { width: 5, height: h, rx: 2, fill: color }));
+  const t = el("text", { x: 14, y: h / 2 - 3, fill: "#e8edff", "font-size": 13, "font-weight": 600 });
+  t.textContent = label;
+  g.appendChild(t);
+  if (sub) {
+    const s = el("text", { x: 14, y: h / 2 + 14, fill: "#93a0c6", "font-size": 10.5 });
+    s.textContent = sub;
+    g.appendChild(s);
+  }
+  g._kind = kind;
+  return g;
+}
+function dashedRegion(x, y, w, h, label) {
+  const g = el("g", {});
+  g.appendChild(el("rect", {
+    x,
+    y,
+    width: w,
+    height: h,
+    rx: 12,
+    fill: "none",
+    stroke: "#34406b",
+    "stroke-dasharray": "5 5",
+    "stroke-width": 1.4
+  }));
+  const t = el("text", { x: x + 12, y: y + 18, fill: "#5e6c98", "font-size": 11, "font-weight": 700, "letter-spacing": "1.5" });
+  t.textContent = label;
+  g.appendChild(t);
+  return g;
+}
+function line(x1, y1, x2, y2, color) {
+  return el("line", { x1, y1, x2, y2, stroke: color || "#3b4774", "stroke-width": 1.6, "marker-end": "url(#arr)" });
+}
+var defs = el("defs");
+defs.innerHTML = `<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+  <path d="M0,0 L7,3 L0,6 Z" fill="#4a5a8f"/></marker>`;
+svg.appendChild(defs);
+var state = { replicas: 3, killedIdx: null };
+function drawTopo() {
+  [...svg.querySelectorAll("g,line,.region,text.world")].forEach((n2) => n2.remove());
+  svg.appendChild(defs);
+  svg.appendChild(dashedRegion(150, 70, 594, 452, "KUBERNETES CLUSTER"));
+  svg.appendChild(dashedRegion(168, 250, 560, 256, "NODE  (a worker machine)"));
+  const user = box(20, 30, 108, 46, "#9fb0d8", "\uD83C\uDF10 Internet", "browser request", "internet", "#0e1430");
+  user.querySelector("rect:nth-child(1)").setAttribute("stroke", "#5e6c98");
+  svg.appendChild(user);
+  const ing = box(250, 96, 210, 52, COL.ing, "Ingress", "host/path → Service · TLS", "ingress");
+  svg.appendChild(ing);
+  const svc = box(250, 178, 210, 52, COL.svc, "Service: api", "stable VIP · load-balances", "service");
+  svg.appendChild(svc);
+  svg.appendChild(box(196, 272, 300, 30, COL.k8s, "Deployment: api  →  ReplicaSet", "desired replicas = " + state.replicas, "deployment"));
+  const podY = 320, n = state.replicas, totalW = 520, startX = 210;
+  const pods = [];
+  for (let i = 0;i < n; i++) {
+    const gap = Math.min(120, totalW / Math.max(n, 1));
+    const px = startX + i * (gap + 6);
+    const dead = state.killedIdx === i;
+    const g = box(px, podY, 108, 70, dead ? "#e0617a" : COL.pod, dead ? "Pod ✕" : "Pod", "api container", dead ? "pod-dead" : "pod", dead ? "#2a1622" : "#141d38");
+    if (dead)
+      g.style.opacity = String(0.45);
+    g.dataset["idx"] = String(i);
+    g.appendChild(el("rect", {
+      x: 14,
+      y: 44,
+      width: 80,
+      height: 18,
+      rx: 4,
+      fill: "none",
+      stroke: dead ? "#e0617a" : "#3b4774",
+      "stroke-dasharray": dead ? "3 3" : "0"
+    }));
+    const ct = el("text", { x: 18, y: 57, fill: "#93a0c6", "font-size": 9 });
+    ct.textContent = dead ? "restarting…" : "myco/api:1.0.0";
+    g.appendChild(ct);
+    svg.appendChild(g);
+    pods.push({ g, px, dead });
+  }
+  const cfg = box(520, 178, 200, 40, COL.cfg, "ConfigMap", "LOG_LEVEL=info", "configmap");
+  const sec = box(520, 228, 200, 40, COL.sec, "Secret", "DB_PASSWORD ••••", "secret");
+  svg.appendChild(cfg);
+  svg.appendChild(sec);
+  svg.appendChild(line(128, 53, 250, 118));
+  svg.appendChild(line(355, 148, 355, 178));
+  svg.appendChild(line(355, 230, 355, 272));
+  pods.forEach((p) => {
+    if (!p.dead)
+      svg.appendChild(line(346, 302, p.px + 54, podY, "#3b4774"));
+  });
+  svg.appendChild(el("path", {
+    d: `M520,205 C470,235 ${pods[0] ? pods[0].px + 54 : 300},300 ${pods[0] ? pods[0].px + 54 : 300},320`,
+    fill: "none",
+    stroke: COL.cfg,
+    "stroke-dasharray": "3 4",
+    "stroke-width": 1.3,
+    opacity: 0.6
+  }));
+  svg.appendChild(el("path", {
+    d: `M520,250 C470,275 ${pods[0] ? pods[0].px + 54 : 300},305 ${pods[0] ? pods[0].px + 54 : 300},322`,
+    fill: "none",
+    stroke: COL.sec,
+    "stroke-dasharray": "3 4",
+    "stroke-width": 1.3,
+    opacity: 0.6
+  }));
+  bindInspect();
+}
+var INFO = {
+  internet: {
+    k: "External traffic",
+    h: "The user / browser",
+    b: 'Outside the cluster entirely. Kubernetes has no object for "the internet" — traffic just arrives at the cluster edge and the Ingress controller is the first thing that handles it.',
+    a: "Compose analog: <b>whoever curls <code>localhost:80</code></b>."
+  },
+  ingress: {
+    k: "Ingress",
+    h: "L7 HTTP router",
+    b: "Routes by hostname and path (e.g. <code>api.myco.com/*</code> → the api Service) and terminates TLS. One Ingress can fan many hostnames into many Services. Needs an ingress controller (nginx, Traefik) running in the cluster to actually do the work.",
+    a: 'Compose analog: the <b><code>ports:</code> "80:…"</b> publish line + whatever reverse proxy you bolted on. Compose has no real equivalent for host/path routing — this is new.'
+  },
+  service: {
+    k: "Service",
+    h: "Stable address + load balancer",
+    b: "Pods are cattle: they get new IPs when they restart. A Service is a <b>fixed virtual IP and DNS name</b> (<code>api.default.svc</code>) that always points at the <i>currently healthy</i> Pods, spreading traffic across them. It finds its Pods by <b>label selector</b>, not by hardcoded IPs.",
+    a: "Compose analog: <b>the service name on the Compose network</b> — <code>http://api:8080</code> just worked. A K8s Service is that, made explicit and load-balanced."
+  },
+  deployment: {
+    k: "Deployment → ReplicaSet",
+    h: "Desired-state controller",
+    b: 'You declare "I want N replicas of image X". The Deployment creates a ReplicaSet, which creates Pods and <b>continuously reconciles</b>: a Pod dies → a new one is created; you change the image → it rolls out new Pods and retires old ones with zero downtime.',
+    a: "Compose analog: <b><code>deploy.replicas</code> + <code>restart: always</code></b> — but with rolling updates, rollbacks, and self-healing built in."
+  },
+  pod: {
+    k: "Pod",
+    h: "The atomic run unit",
+    b: 'One (or a few tightly-coupled) containers that share a network namespace and storage. <b>Pods are disposable</b> — you almost never create them directly; a Deployment makes and replaces them. This is the closest thing to "a running container" from Compose.',
+    a: "Compose analog: <b>one running container of a service</b>. The difference: a Pod is meant to be thrown away and remade, not nursed."
+  },
+  "pod-dead": {
+    k: "Pod (terminating)",
+    h: "A Pod that just died",
+    b: "It crashed or was killed. Notice the Deployment hasn't given up — the ReplicaSet immediately schedules a replacement to restore the declared count. You did nothing; the control loop did. Hit Reset to see it healed.",
+    a: "Compose analog: the moment <code>restart: always</code> kicks in — except Kubernetes also reschedules onto a different machine if this node is gone."
+  },
+  configmap: {
+    k: "ConfigMap",
+    h: "Non-secret configuration",
+    b: "Key/value config lifted out of the image so the <b>same image</b> runs in dev/staging/prod with different settings. Injected into Pods as environment variables or mounted files.",
+    a: "Compose analog: the non-secret half of <b><code>environment:</code></b> / an <code>env_file</code>."
+  },
+  secret: {
+    k: "Secret",
+    h: "Credentials, separated",
+    b: "Mechanically almost identical to a ConfigMap, but a distinct object so access can be restricted (RBAC) and it's base64-encoded at rest (encrypt it for real with KMS/sealed-secrets). Keeps passwords out of your image and out of Git.",
+    a: "Compose analog: <b><code>${DB_PASSWORD}</code></b> from your <code>.env</code> — now a first-class, access-controlled object."
+  }
+};
+function bindInspect() {
+  svg.querySelectorAll(".node-hit").forEach((g) => {
+    g.addEventListener("click", () => {
+      const i = INFO[g._kind];
+      if (!i)
+        return;
+      document.querySelectorAll(".node-hit rect:first-child").forEach((r) => r.setAttribute("stroke-width", "1.6"));
+      g.querySelector("rect:first-child").setAttribute("stroke-width", "3");
+      document.getElementById("inspect").innerHTML = `<div class="kind">${i.k}</div><h4>${i.h}</h4>
+         <div class="body">${i.b}</div><div class="analog">${i.a}</div>`;
+    });
+  });
+}
+drawTopo();
+function sendRequest() {
+  const path = [[74, 53], [355, 118], [355, 204]];
+  const alive = [...svg.querySelectorAll(".node-hit")].filter((g) => g.dataset["idx"] != null && !g.querySelector("text").textContent.includes("✕"));
+  const target = alive[Math.floor(Math.random() * alive.length)];
+  if (target) {
+    const m = target.getAttribute("transform").match(/translate\(([\d.]+),([\d.]+)\)/);
+    path.push([+m[1] + 54, +m[2]]);
+  }
+  const dot = el("circle", { r: 7, fill: "#ffd479", filter: "url(#g)" });
+  if (!svg.querySelector("#g")) {
+    const f = el("filter", { id: "g" });
+    f.innerHTML = '<feGaussianBlur stdDeviation="2.5"/><feComponentTransfer><feFuncA type="linear" slope="2"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>';
+    defs.appendChild(f);
+  }
+  svg.appendChild(dot);
+  let seg = 0, t = 0;
+  const tick = () => {
+    if (seg >= path.length - 1) {
+      dot.remove();
+      return;
+    }
+    const [a, b] = [path[seg], path[seg + 1]];
+    const x = a[0] + (b[0] - a[0]) * t, y = a[1] + (b[1] - a[1]) * t;
+    dot.setAttribute("cx", String(x));
+    dot.setAttribute("cy", String(y));
+    t += 0.045;
+    if (t >= 1) {
+      t = 0;
+      seg++;
+    }
+    requestAnimationFrame(tick);
+  };
+  tick();
+}
+document.getElementById("btnTraffic").onclick = () => {
+  sendRequest();
+  setTimeout(sendRequest, 260);
+  setTimeout(sendRequest, 520);
+};
+document.getElementById("btnKill").onclick = () => {
+  state.killedIdx = Math.floor(Math.random() * state.replicas);
+  drawTopo();
+  setTimeout(() => {
+    state.killedIdx = null;
+    drawTopo();
+  }, 2600);
+};
+document.getElementById("btnScale").onclick = () => {
+  state.replicas = state.replicas === 4 ? 3 : 4;
+  drawTopo();
+  document.getElementById("btnScale").textContent = state.replicas === 4 ? "－ Scale to 3 replicas" : "＋ Scale to 4 replicas";
+};
+document.getElementById("btnReset").onclick = () => {
+  state = { replicas: 3, killedIdx: null };
+  drawTopo();
+  document.getElementById("btnScale").textContent = "＋ Scale to 4 replicas";
+};
+var baseValues = `replicaCount: 1
+image:
+  repository: myco/api
+  tag: 1.0.0
+service:
+  port: 80
+ingress:
+  enabled: true
+  host: api.local
+resources:
+  memory: 256Mi`;
+var envOverrides = {
+  dev: `# values-dev.yaml  (override)
+replicaCount: 1
+ingress:
+  host: api.dev.myco.com`,
+  staging: `# values-staging.yaml
+replicaCount: 2
+image:
+  tag: 1.4.2
+ingress:
+  host: api.staging.myco.com
+resources:
+  memory: 512Mi`,
+  prod: `# values-prod.yaml
+replicaCount: 4
+image:
+  tag: 1.4.2
+ingress:
+  host: api.myco.com
+resources:
+  memory: 1Gi`
+};
+var templates = {
+  deployment: `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: { app: {{ .Release.Name }}-api }
+  template:
+    metadata:
+      labels: { app: {{ .Release.Name }}-api }
+    spec:
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: {{ .Values.resources.memory }}`,
+  service: `apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  selector: { app: {{ .Release.Name }}-api }
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080`,
+  ingress: `{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-api
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-api
+                port: { number: {{ .Values.service.port }} }
+{{- else }}
+# ingress.enabled=false → Helm renders nothing.
+# The Ingress object simply never exists in the cluster.
+{{- end }}`
+};
+var ui = { env: "dev", replicas: 1, tag: "1.0.0", ingress: true, file: "deployment" };
+function deepMerge(a, b) {
+  const o = structuredClone(a);
+  for (const k in b) {
+    o[k] = b[k] && typeof b[k] === "object" && !Array.isArray(b[k]) ? deepMerge(o[k] || {}, b[k]) : b[k];
+  }
+  return o;
+}
+function resolve(path, ctx) {
+  path = path.trim();
+  if (path.startsWith(".Release.Name"))
+    return ctx.Release.Name;
+  if (path.startsWith(".Values.")) {
+    return path.slice(8).split(".").reduce((o, k) => o == null ? o : o[k], ctx.Values);
+  }
+  return "";
+}
+function renderTpl(tpl, ctx) {
+  let s = tpl;
+  function block(str) {
+    const re = /\{\{-?\s*(if|else|end)?\s*([^}]*?)\s*-?\}\}/g;
+    let m;
+    let tokens = [];
+    let idx = 0;
+    while (m = re.exec(str)) {
+      tokens.push({ type: "text", v: str.slice(idx, m.index), raw: m[0], pre: m.index });
+      const trimL = m[0].startsWith("{{-"), trimR = m[0].endsWith("-}}");
+      tokens.push({ type: "tag", kw: m[1] || "expr", expr: m[2], trimL, trimR });
+      idx = re.lastIndex;
+    }
+    tokens.push({ type: "text", v: str.slice(idx) });
+    let res = "";
+    let skip = [false];
+    for (let t = 0;t < tokens.length; t++) {
+      const tk = tokens[t];
+      if (tk.type === "text") {
+        let v = tk.v;
+        if (tokens[t + 1]?.trimL)
+          v = v.replace(/[ \t]*\n?$/, "");
+        if (tokens[t - 1]?.trimR)
+          v = v.replace(/^\n?[ \t]*/, "");
+        if (!skip.includes(true))
+          res += v;
+      } else if (tk.kw === "if") {
+        const val = resolve(tk.expr.replace(/^if\s*/, ""), ctx);
+        skip.push(skip.includes(true) ? true : !truthy(val));
+      } else if (tk.kw === "else") {
+        const top = skip.pop();
+        const parentSkip = skip.includes(true);
+        skip.push(parentSkip ? true : !top === false ? true : false);
+        skip[skip.length - 1] = parentSkip ? true : !top;
+      } else if (tk.kw === "end") {
+        skip.pop();
+      } else {
+        if (!skip.includes(true))
+          res += String(resolve(tk.expr, ctx));
+      }
+    }
+    return res;
+  }
+  return block(s).replace(/\n{3,}/g, `
+
+`).replace(/^\n+/, "");
+}
+function truthy(v) {
+  return !(v === false || v == null || v === "" || v === 0);
+}
+function mergedValues() {
+  const base = yaml.load(baseValues);
+  const ov = yaml.load(envOverrides[ui.env].split(`
+`).filter((l) => !l.trim().startsWith("#")).join(`
+`)) || {};
+  let v = deepMerge(base, ov);
+  v.replicaCount = ui.replicas;
+  v.image.tag = ui.tag;
+  v.ingress.enabled = ui.ingress;
+  return v;
+}
+function highlightTpl(t) {
+  return esc(t).replace(/(\{\{-?\s*(?:if|else|end)[^}]*?-?\}\})/g, '<span class="ctl">$1</span>').replace(/(\{\{-?\s*\.[^}]*?-?\}\})/g, '<span class="v">$1</span>');
+}
+function highlightOut(t) {
+  return esc(t).replace(/^(\s*[\w.\/-]+:)/gm, '<span style="color:#7fb2ff">$1</span>').replace(/(kind: \w+)/g, '<span style="color:#ffd479">$1</span>');
+}
+var outView = document.getElementById("outView");
+function refresh() {
+  const V = mergedValues();
+  const ctx = { Release: { Name: "web" }, Chart: { Name: "myapp" }, Values: V };
+  document.getElementById("tplView").innerHTML = highlightTpl(templates[ui.file]);
+  let rendered = renderTpl(templates[ui.file], ctx).trim();
+  outView.innerHTML = highlightOut(rendered);
+  document.getElementById("valsView").innerHTML = esc(yaml.dump(V, { indent: 2 }).trim());
+  document.getElementById("repVal").textContent = String(ui.replicas);
+  outView.classList.add("flash");
+  setTimeout(() => outView.classList.remove("flash"), 300);
+  document.getElementById("renderNote").textContent = ui.file === "ingress" && !ui.ingress ? "rendered: (nothing — guarded out)" : "helm template";
+}
+document.querySelectorAll("#envSeg button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("#envSeg button").forEach((x) => x.classList.remove("on"));
+  b.classList.add("on");
+  ui.env = b.dataset["env"];
+  const ov = yaml.load(envOverrides[ui.env].split(`
+`).filter((l) => !l.trim().startsWith("#")).join(`
+`)) || {};
+  if (ov.replicaCount) {
+    ui.replicas = ov.replicaCount;
+    document.getElementById("repRange").value = String(ui.replicas);
+  }
+  if (ov.image && ov.image.tag) {
+    ui.tag = ov.image.tag;
+    document.querySelectorAll("#tagSeg button").forEach((x) => x.classList.toggle("on", x.dataset["tag"] === ui.tag));
+  }
+  refresh();
+});
+document.getElementById("repRange").oninput = (e) => {
+  ui.replicas = +e.target.value;
+  refresh();
+};
+document.querySelectorAll("#tagSeg button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("#tagSeg button").forEach((x) => x.classList.remove("on"));
+  b.classList.add("on");
+  ui.tag = b.dataset["tag"];
+  refresh();
+});
+document.getElementById("ingToggle").onclick = function() {
+  ui.ingress = !ui.ingress;
+  this.classList.toggle("on", ui.ingress);
+  refresh();
+};
+document.querySelectorAll("#tplTabs button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("#tplTabs button").forEach((x) => x.classList.remove("on"));
+  b.classList.add("on");
+  ui.file = b.dataset["f"];
+  refresh();
+});
+refresh();
+var links = [...document.querySelectorAll(".navlink")];
+var obs = new IntersectionObserver((es) => {
+  es.forEach((e) => {
+    if (e.isIntersecting) {
+      links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
+    }
+  });
+}, { rootMargin: "-30% 0px -60% 0px" });
+document.querySelectorAll("section").forEach((s) => obs.observe(s));
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>
