@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managing Microsoft as Code</title>
+<meta name="viz:uid" content="v-9b90319ee455">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="Managing Microsoft as Code — pick your weapon">
+<meta name="viz:description" content="ClickOps vs Bicep vs Terraform vs idempotent PowerShell for provisioning the Microsoft cloud — plus where Ansible actually fits (Day-2 config, a different game).">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  body { max-width: 1200px; margin: 0 auto; padding-bottom: 80px; }
+  .viz-header { padding: 28px 24px 8px; }
+  .viz-header h1 { font-size: 26px; }
+  .viz-header .sub { font-size: 13.5px; max-width: 780px; line-height: 1.6; }
+  section { padding: 20px 24px; }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+  h2 { font-size: 17px; margin: 0 0 4px; font-weight: 650; letter-spacing: -.01em; }
+  .lead { color: var(--muted); font-size: 13px; margin: 0 0 16px; max-width: 860px; line-height: 1.6; }
+
+  /* ---- Coverage matrix ---- */
+  .matrix { display: grid; grid-template-columns: 210px repeat(3, 1fr) 22px 1fr; gap: 6px; align-items: stretch; }
+  .mx-spacer { border: 0; background: none; }
+  .mx-group { display: flex; align-items: center; gap: 8px; padding: 6px 4px 2px; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .mx-group .tag { font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border); letter-spacing: .04em; }
+  .mx-group.g1 .tag { color: var(--good); border-color: color-mix(in srgb, var(--good) 45%, var(--border)); }
+  .mx-group.g2 .tag { color: var(--c4); border-color: color-mix(in srgb, var(--c4) 45%, var(--border)); }
+  .mx-colhead { padding: 10px 12px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--border); }
+  .mx-colhead.day2 { border-color: color-mix(in srgb, var(--c4) 40%, var(--border)); }
+  .mx-colhead .t { font-weight: 650; font-size: 13px; }
+  .mx-colhead .d { color: var(--muted); font-size: 11px; margin-top: 3px; line-height: 1.4; }
+  .mx-colhead .ex { color: var(--muted); font-size: 10.5px; margin-top: 4px; font-family: var(--mono); opacity: .8; }
+  .mx-rowhead { display: flex; flex-direction: column; justify-content: center; padding: 10px 14px; border-radius: 8px; background: var(--panel); border: 1px solid var(--border); }
+  .mx-rowhead .t { font-weight: 650; font-size: 13.5px; }
+  .mx-rowhead .k { color: var(--muted); font-size: 10.5px; margin-top: 3px; }
+  .mx-rowhead.loser .t { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--danger); }
+  .mx-rowhead.diff { border-color: color-mix(in srgb, var(--c4) 40%, var(--border)); }
+  .mx-rowhead.diff .t::after { content: " ≠"; color: var(--c4); }
+  .cell { border-radius: 8px; padding: 12px 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 5px; min-height: 74px; transition: transform .12s ease, box-shadow .12s ease; }
+  .cell.day2 { position: relative; }
+  .cell:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+  .cell .lvl { font-weight: 650; font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+  .cell .note { font-size: 11px; color: var(--muted); line-height: 1.4; }
+  .cell .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+
+  .lvl-full    { background: color-mix(in srgb, var(--good) 16%, var(--panel)); border-color: color-mix(in srgb, var(--good) 45%, var(--border)); }
+  .lvl-full .dot, .sw-full { background: var(--good); }
+  .lvl-partial { background: color-mix(in srgb, var(--c5) 15%, var(--panel)); border-color: color-mix(in srgb, var(--c5) 45%, var(--border)); }
+  .lvl-partial .dot, .sw-partial { background: var(--c5); }
+  .lvl-scripted{ background: color-mix(in srgb, var(--warn) 15%, var(--panel)); border-color: color-mix(in srgb, var(--warn) 45%, var(--border)); }
+  .lvl-scripted .dot, .sw-scripted { background: var(--warn); }
+  .lvl-manual  { background: color-mix(in srgb, var(--muted) 10%, var(--panel)); border-color: var(--border); }
+  .lvl-manual .dot, .sw-manual { background: var(--muted); }
+  .lvl-none    { background: repeating-linear-gradient(45deg, var(--bg), var(--bg) 6px, var(--panel) 6px, var(--panel) 12px); border-color: var(--border); }
+  .lvl-none .lvl { color: var(--danger); }
+  .lvl-none .dot, .sw-none { background: var(--danger); }
+  /* the one green cell nobody else has — give it a quiet glow */
+  .cell.day2.lvl-full { box-shadow: 0 0 0 1px color-mix(in srgb, var(--good) 40%, transparent), 0 0 22px color-mix(in srgb, var(--good) 22%, transparent); }
+
+  .legend { margin-top: 16px; }
+  .legend .swatch { border-radius: 50%; }
+  .reach-note { margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.6; max-width: 900px; }
+  .reach-note b { color: var(--text); }
+
+  /* ---- Decision flow ---- */
+  .flowgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .flowcard { position: relative; padding: 16px; padding-left: 18px; }
+  .flowcard::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 4px; border-radius: 4px; background: var(--accent); }
+  .flowcard.f-azure::before { background: var(--good); }
+  .flowcard.f-entra::before { background: var(--c5); }
+  .flowcard.f-m365::before  { background: var(--warn); }
+  .flowcard.f-guest::before { background: var(--c4); }
+  .flowcard.f-explore::before { background: var(--muted); }
+  .flowcard .q { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+  .flowcard .w { font-size: 14px; font-weight: 650; margin: 5px 0 8px; }
+  .flowcard .a { font-size: 12.5px; line-height: 1.5; }
+  .flowcard .a b { color: var(--text); }
+  .flowcard .a .arw { color: var(--accent); font-weight: 700; }
+
+  /* ---- Tool cards ---- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; }
+  .tool { display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+  .tool.loser { opacity: .82; }
+  .tool.diff { border-color: color-mix(in srgb, var(--c4) 40%, var(--border)); }
+  .tool .top { display: flex; align-items: baseline; gap: 10px; }
+  .tool .rank { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .tool h3 { margin: 0; font-size: 16px; font-weight: 680; letter-spacing: -.01em; }
+  .tool.loser h3 { text-decoration: line-through; text-decoration-color: var(--danger); color: var(--muted); }
+  .tool .tag { margin-left: auto; font-size: 10.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .tool .verdict { font-size: 12.5px; line-height: 1.55; color: var(--text); }
+  .tool .verdict .em { color: var(--accent); font-weight: 600; }
+  .tool.diff .verdict .em { color: var(--c4); }
+  .specs { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 11.5px; }
+  .specs dt { color: var(--muted); }
+  .specs dd { margin: 0; color: var(--text); }
+  .pc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11.5px; }
+  .pc ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .pc .pros li::before { content: "+ "; color: var(--good); font-weight: 700; }
+  .pc .cons li::before { content: "\2212 "; color: var(--danger); font-weight: 700; }
+  .pc li { line-height: 1.4; color: var(--muted); }
+  .badge { position: absolute; top: 0; right: 0; font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-bottom-left-radius: 8px; }
+  .badge.winner { background: var(--good); color: #04140a; }
+  .badge.loser  { background: var(--danger); color: #1a0505; }
+  .badge.diff   { background: var(--c4); color: #14061f; }
+
+  .kicker { margin-top: 8px; padding: 16px 20px; border-left: 3px solid var(--warn); background: color-mix(in srgb, var(--warn) 7%, var(--panel)); border-radius: 0 10px 10px 0; font-size: 13px; line-height: 1.6; }
+  .kicker b { color: var(--text); }
+  .kicker + .kicker { border-left-color: var(--c4); background: color-mix(in srgb, var(--c4) 7%, var(--panel)); }
+  .kicker.field { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--panel)); }
+  .kicker .src { display: block; margin-top: 8px; font-size: 11px; color: var(--muted); font-style: italic; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Managing Microsoft as Code — pick your weapon">
+<meta property="og:description" content="ClickOps vs Bicep vs Terraform vs idempotent PowerShell for provisioning the Microsoft cloud — plus where Ansible actually fits (Day-2 config, a different game).">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/microsoft-config-as-code/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/microsoft-config-as-code/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <div class="viz-header">
+    <h1>Managing Microsoft as Code — pick your weapon</h1>
+    <div class="sub">You want to stop clicking around the portal and manage your Microsoft cloud <em>as code</em>. Here are your real options — and the punchline: no single <em>declarative</em> tool reaches the whole surface (only imperative PowerShell does, by hand-rolling the idempotency the others give free), so you pick by <b>what you're trying to touch</b>, not by taste. (And one of them, Ansible, isn't even in the same race.)</div>
+  </div>
+
+  <section>
+    <p class="eyebrow">The map</p>
+    <h2>How far each tool reaches — across two different jobs</h2>
+    <p class="lead">Two things get called "infrastructure as code," and they're different jobs. <b style="color:var(--good)">Day 1 — provision</b> the cloud surface (the three left columns; harder to reach as you go right). <b style="color:var(--c4)">Day 2 — configure</b> what runs <em>inside</em> the machines (the far-right column). Bicep is a fortress on Azure. Terraform wades into identity. Only idempotent PowerShell reaches DLP/Purview. And <b style="color:var(--c4)">Ansible owns a column the others can't touch at all</b> — but it's a column that's empty if you run no VMs.</p>
+    <div class="matrix" id="matrix"></div>
+    <div class="legend" id="legend"></div>
+    <div class="reach-note">
+      <b>Reading it:</b> the three Day-1 columns are one axis — the Microsoft cloud surface, getting harder to reach left→right, until only hand-written PowerShell gets there. The Day-2 column is a <b>different axis entirely</b>: configuring the guest OS + apps inside VMs. That's Ansible's home turf and the one bright-green cell no provisioning tool owns — and it goes dark for everyone (Ansible included) the moment you're all-PaaS / serverless.
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The routing rule</p>
+    <h2>"What am I trying to manage?" → the tool</h2>
+    <p class="lead">Skip the religious war. The surface you're touching picks the tool for you.</p>
+    <div class="flowgrid" id="flow"></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The contenders</p>
+    <h2>Pros, cons & the verdict</h2>
+    <p class="lead">01–03 are the real fight over provisioning the Microsoft cloud, ranked by how much of the "as code" dream they deliver. ClickOps is on the board to be the loser. Ansible sits apart (<span style="color:var(--c4)">≠</span>) — it's not competing, it's playing a different game.</p>
+    <div class="cards" id="cards"></div>
+    <div class="kicker">
+      <b>The provisioning mental model:</b> declarative IaC (Bicep / Terraform) owns the ARM control plane — the <em>resources</em>. Everything else — identity in Entra, data-plane config in Purview / Exchange / Teams — is the escape hatch's job: <b>idempotent PowerShell over Microsoft's admin modules</b>, each just a glorified authenticated API call. Real shops run <em>both</em> side by side.
+    </div>
+    <div class="kicker">
+      <b>Where Ansible fits:</b> it's not a rival to any of those — it owns <b>Day 2</b>, configuring the guest OS + apps <em>inside</em> your VMs (its real rivals are Puppet / Chef / PowerShell DSC). It <em>can</em> provision Azure via the Microsoft-maintained <code>azure.azcollection</code>, but that's redundant vs Terraform/Bicep. Its one uncontested value is the in-VM layer — <b>essential if you run VM fleets, zero value if you're all Container Apps / Functions + M365.</b>
+    </div>
+    <div class="kicker field">
+      <b>Field note — capable ≠ approved.</b> The winning tool isn't always the most capable one, it's the most capable <em>approved</em> one. In a real M365 Copilot rollout in a regulated environment, Terraform (the best declarative option) was <b>org-banned</b> — and since PowerShell already covers 100%, the shipped answer was <b>PowerShell-only</b>, hand-rolled idempotency and all. Two caveats ride along: the Bicep/Terraform gaps are <b>maturity, not architecture</b> — all three call the same Graph APIs, and the declarative ceiling is already rising (a preview <code>msgraph</code> Terraform provider can now do group licensing). The only <em>truly</em> un-automatable residue is small and portal-only: Cloud Policy Service, some Copilot admin toggles.
+      <span class="src">Corroborated against a real-world 4-variant Copilot IaC build (bicep-max / terraform-max / cascade-max / powershell-only).</span>
+    </div>
+  </section>
+
+<script type="module">
+// app.ts
+var LEVELS = {
+  full: { label: "Full", note: "First-class — the engine does the work" },
+  partial: { label: "Partial", note: "Works, but narrow / incomplete coverage" },
+  scripted: { label: "Scripted", note: "Reachable — but you write the idempotency yourself" },
+  manual: { label: "Manual", note: "By hand only — clicking, not code" },
+  none: { label: "Can't", note: "Out of reach for this tool" }
+};
+var SURFACES = [
+  { key: "azure", group: "day1", t: "Azure resources", d: "ARM control plane", ex: "VMs · storage · networking · app svc" },
+  { key: "entra", group: "day1", t: "Entra ID / identity", d: "Microsoft Graph", ex: "users · groups · app regs" },
+  { key: "m365", group: "day1", t: "M365 · Purview · Exchange", d: "data-plane admin APIs", ex: "DLP · compliance · Teams policy" },
+  { key: "guest", group: "day2", t: "Inside the VM", d: "guest OS + app config", ex: "packages · services · app deploy" }
+];
+var TOOLS = [
+  {
+    name: "ClickOps (the portal)",
+    kind: "point & click",
+    loser: true,
+    rank: "✗",
+    tag: "not code",
+    badge: "loser",
+    cov: { azure: "manual", entra: "manual", m365: "manual", guest: "manual" },
+    verdict: "The loser by construction. Fine to <span class='em'>explore</span> — poison to <span class='em'>ship</span>. Nothing is repeatable, reviewable, or recoverable.",
+    specs: { Style: "Imperative, by hand", State: "Your memory", Scope: "Everything (one click at a time)", Effort: "Zero up front, infinite later" },
+    pros: ["Zero setup", "Discoverable / great for learning", "Fine for a one-off poke"],
+    cons: ["Not repeatable", "No version control or review", "Drifts silently", "Doesn't scale past one human"]
+  },
+  {
+    name: "Bicep / ARM",
+    kind: "declarative · Azure-native",
+    rank: "01",
+    tag: "Azure only",
+    cov: { azure: "full", entra: "partial", m365: "none", guest: "none" },
+    verdict: "<span class='em'>Best for pure-Azure resources.</span> No state file (ARM is the state), day-one coverage of new Azure features, and it's just nicer ARM JSON.",
+    specs: { Style: "Declarative (Day 1)", State: "None — ARM holds it", Scope: "Azure control plane", Effort: "Low — no backend to run" },
+    pros: ["No state file to manage", "First-party, day-one Azure features", "Clean vs raw ARM JSON", "Free idempotency"],
+    cons: ["Azure-only, single cloud", "No data-plane reach", "Entra: Graph ext is GA but narrow (7 types, no CA)", "Makes the VM, can't configure inside it"]
+  },
+  {
+    name: "Terraform",
+    kind: "declarative · multi-cloud",
+    rank: "02",
+    tag: "widest declarative reach",
+    badge: "winner",
+    cov: { azure: "full", entra: "full", m365: "partial", guest: "none" },
+    verdict: "<span class='em'>Best when you're multi-cloud</span> or need resources <em>and</em> identity in one tool — <code>azurerm</code> + <code>azuread</code> cover both.",
+    specs: { Style: "Declarative (Day 1)", State: "tfstate — you run a backend", Scope: "Azure + Entra + ~everything", Effort: "Medium — state + provider versions" },
+    pros: ["Multi-cloud, one language", "azuread reaches identity", "Huge module ecosystem", "Mature plan / apply / destroy"],
+    cons: ["State file to store, lock, protect", "azurerm can lag Azure's API", "Thin on M365 / Purview", "Guest-OS config is an anti-pattern here"]
+  },
+  {
+    name: "Idempotent PowerShell / CLI",
+    kind: "imperative, written to converge",
+    rank: "03",
+    tag: "reaches everything",
+    badge: "winner",
+    cov: { azure: "scripted", entra: "scripted", m365: "scripted", guest: "scripted" },
+    verdict: "<span class='em'>The escape hatch.</span> When Bicep and Terraform tap out — DLP, Purview, Exchange, Teams — this is the <em>only</em> door. Write the check-then-act scripts once; they reach 100% of the surface.",
+    specs: { Style: "Imperative, hand-made idempotent", State: "None — you write the convergence", Scope: "Everything: Az · Graph · Exchange/S&C", Effort: "High — you build what the engines give free" },
+    pros: ["Reaches the entire surface", "Only option for M365 / Purview / Exchange", "Guest config too (DSC / remoting)", "Just an authenticated API call underneath"],
+    cons: ["You hand-roll idempotency", "No state engine or drift-correction", "No plan / preview", "Most code to own"]
+  },
+  {
+    name: "Ansible",
+    kind: "config management · agentless YAML",
+    rank: "≠",
+    diff: true,
+    tag: "different game: Day 2",
+    badge: "diff",
+    cov: { azure: "partial", entra: "partial", m365: "scripted", guest: "full" },
+    verdict: "<span class='em'>Not a rival — a different layer.</span> It owns the one thing the others can't touch: configuring the guest OS + apps <em>inside</em> your VMs, and keeping them that way. Real rivals: Puppet / Chef / PowerShell DSC — not Bicep.",
+    specs: { Style: "Idempotent playbooks (Day 2)", State: "None — idempotent modules", Scope: "In-VM config (+ can provision, subpar)", Effort: "Medium — pays off only if you have VMs" },
+    pros: ["Owns Day-2 in-VM config — uniquely", "Agentless, one tool for a whole fleet", "azcollection is Microsoft-maintained", "Can also orchestrate your PowerShell"],
+    cons: ["Provisioning is redundant vs TF/Bicep", "No native M365 / Purview reach", "In-VM config isn't Azure-specific", "Zero value if you're all-PaaS + M365"]
+  }
+];
+var mx = document.querySelector("#matrix");
+mx.insertAdjacentHTML("beforeend", `<div></div>`);
+mx.insertAdjacentHTML("beforeend", `<div class="mx-group g1" style="grid-column: span 3"><span class="tag">DAY 1</span> Provision — the cloud surface</div>`);
+mx.insertAdjacentHTML("beforeend", `<div class="mx-spacer"></div>`);
+mx.insertAdjacentHTML("beforeend", `<div class="mx-group g2"><span class="tag">DAY 2</span> Configure — inside</div>`);
+mx.insertAdjacentHTML("beforeend", `<div></div>`);
+for (const s of SURFACES) {
+  if (s.key === "guest")
+    mx.insertAdjacentHTML("beforeend", `<div class="mx-spacer"></div>`);
+  mx.insertAdjacentHTML("beforeend", `<div class="mx-colhead ${s.group === "day2" ? "day2" : ""}"><div class="t">${s.t}</div><div class="d">${s.d}</div><div class="ex">${s.ex}</div></div>`);
+}
+for (const tool of TOOLS) {
+  const cls = tool.loser ? "loser" : tool.diff ? "diff" : "";
+  mx.insertAdjacentHTML("beforeend", `<div class="mx-rowhead ${cls}"><div class="t">${tool.name}</div><div class="k">${tool.kind}</div></div>`);
+  for (const s of SURFACES) {
+    if (s.key === "guest")
+      mx.insertAdjacentHTML("beforeend", `<div class="mx-spacer"></div>`);
+    const lv = tool.cov[s.key];
+    mx.insertAdjacentHTML("beforeend", `<div class="cell lvl-${lv} ${s.group === "day2" ? "day2" : ""}" data-viz-id="cell-${tool.rank}-${s.key}" data-label="${tool.name} × ${s.t}">
+         <div class="lvl"><span class="dot"></span>${LEVELS[lv].label}</div>
+         <div class="note">${LEVELS[lv].note}</div>
+       </div>`);
+  }
+}
+document.querySelector("#legend").innerHTML = `<div class="legend">` + Object.entries(LEVELS).map(([k, v]) => `<span class="legend-item"><span class="swatch sw-${k}"></span>${v.label}</span>`).join("") + `</div>`;
+var FLOW = [
+  { cls: "f-azure", q: "Provisioning…", w: "Azure resources — VMs, storage, networking", a: "<span class='arw'>→</span> <b>Bicep</b> if you're all-in on Azure. <b>Terraform</b> if you're multi-cloud or want it in the same repo as everything else." },
+  { cls: "f-entra", q: "Provisioning…", w: "Identity — users, groups, app registrations", a: "<span class='arw'>→</span> <b>Terraform <code>azuread</code></b>, or <b>Microsoft.Graph PowerShell</b>. (Bicep's Graph ext is GA but narrow — 7 types, no Conditional Access.)" },
+  { cls: "f-m365", q: "Provisioning…", w: "M365 — DLP, compliance, Exchange, Teams", a: "<span class='arw'>→</span> <b>Idempotent PowerShell</b> over the admin modules. There is no Bicep resource for a DLP rule — the cmdlet <em>is</em> the API." },
+  { cls: "f-guest", q: "Configuring…", w: "Inside the VMs — OS, packages, app deploy, patching", a: "<span class='arw'>→</span> <b>Ansible</b> (or Puppet / Chef / DSC). The only layer Bicep/Terraform can't reach — and <em>moot</em> if you run no VMs." },
+  { cls: "f-explore", q: "Just…", w: "Poking around once to learn", a: "<span class='arw'>→</span> <b>ClickOps</b> is genuinely fine here — just never let it become how you <em>ship</em>." }
+];
+document.querySelector("#flow").innerHTML = FLOW.map((f) => `<div class="card flowcard ${f.cls}"><div class="q">${f.q}</div><div class="w">${f.w}</div><div class="a">${f.a}</div></div>`).join("");
+document.querySelector("#cards").innerHTML = TOOLS.map((t) => `
+  <div class="card tool ${t.loser ? "loser" : ""} ${t.diff ? "diff" : ""}" data-viz-id="tool-${t.rank}" data-label="${t.name}">
+    ${t.badge === "winner" ? `<div class="badge winner">PICK ME</div>` : ""}
+    ${t.badge === "loser" ? `<div class="badge loser">DON'T SHIP IT</div>` : ""}
+    ${t.badge === "diff" ? `<div class="badge diff">DIFFERENT GAME</div>` : ""}
+    <div class="top"><span class="rank">${t.rank}</span><h3>${t.name}</h3><span class="tag">${t.tag}</span></div>
+    <div class="verdict">${t.verdict}</div>
+    <dl class="specs">
+      ${Object.entries(t.specs).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}
+    </dl>
+    <div class="pc">
+      <ul class="pros">${t.pros.map((p) => `<li>${p}</li>`).join("")}</ul>
+      <ul class="cons">${t.cons.map((c) => `<li>${c}</li>`).join("")}</ul>
+    </div>
+  </div>`).join("");
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

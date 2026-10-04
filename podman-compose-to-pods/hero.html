@@ -1,0 +1,260 @@
+<!-- Open Graph hero poster — 1200x630 — Docker Compose to Podman pods -->
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  .og-card{
+    position:relative;
+    width:1200px; height:630px; overflow:hidden;
+    background:#0d1117;
+    background-image:
+      radial-gradient(660px 520px at 88% 84%, rgba(188,140,255,.16), transparent 62%),
+      radial-gradient(560px 460px at 6% 6%, rgba(88,166,255,.10), transparent 60%);
+    display:flex; align-items:center; gap:46px;
+    padding:48px 56px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#e6edf3;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace; }
+
+  /* faint hairline separating the two columns */
+  .og-card::after{
+    content:""; position:absolute; top:96px; bottom:96px; left:556px;
+    width:1px;
+    background:linear-gradient(180deg,transparent,#2a3340 22%,#2a3340 78%,transparent);
+  }
+
+  /* ---- LEFT: type block ---- */
+  .type{ flex:0 0 452px; position:relative; z-index:2; }
+
+  .eyebrow{
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    font-size:12.5px; font-weight:600; letter-spacing:.20em; text-transform:uppercase;
+    color:#6e7681;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:26px;
+  }
+  .eyebrow .tick{ width:22px; height:2px; background:#4b3a73; border-radius:2px; }
+
+  h1.title{
+    font-size:47px; line-height:1.03; font-weight:800; letter-spacing:-.022em;
+    color:#e6edf3;
+  }
+  h1.title .docker{ color:#58a6ff; }
+  h1.title .arrow{ color:#8a6fd0; font-weight:700; }
+  h1.title .podman{ color:#bc8cff; }
+
+  .deck{
+    margin-top:20px;
+    font-size:21px; font-weight:700; letter-spacing:-.01em; color:#e6edf3;
+  }
+  .deck .u{
+    background:linear-gradient(180deg,transparent 72%, rgba(188,140,255,.40) 72%);
+    padding-bottom:1px;
+  }
+
+  .essence{
+    margin-top:18px;
+    font-size:15px; line-height:1.62; color:#8b949e;
+    max-width:430px;
+  }
+  .essence b{ color:#cdd6e0; font-weight:600; }
+
+  .pills{ margin-top:26px; display:flex; gap:9px; }
+  .pill{
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    font-size:11px; font-weight:600; letter-spacing:.01em;
+    color:#c9b8ea;
+    background:#1d1530; border:1px solid #4b3a73;
+    padding:5px 11px; border-radius:20px;
+  }
+
+  /* ---- RIGHT: focal motif ---- */
+  .stage{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; }
+  .stage svg{ height:534px; width:auto; display:block; }
+</style>
+
+<div class="og-card">
+
+  <div class="type">
+    <div class="eyebrow"><span class="tick"></span>Containers · Compose · Pods</div>
+
+    <h1 class="title">
+      <span class="docker">Docker</span> Compose<br>
+      <span class="arrow">→</span> <span class="podman">Podman</span>
+    </h1>
+
+    <div class="deck">The honest road to <span class="u">Pods</span>.</div>
+
+    <p class="essence">
+      Eight services on one laptop — feel the <b>eight-terminal pain</b>,
+      let Compose rescue you, learn <b>why teams leave Docker</b>, and land on
+      Podman's native answer.
+    </p>
+
+    <div class="pills">
+      <span class="pill">pods</span>
+      <span class="pill">kube&nbsp;play</span>
+      <span class="pill">Quadlet</span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <svg viewBox="0 0 560 522" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Eight scattered terminals collapsing into one Podman pod on a shared loopback">
+      <defs>
+        <filter id="podGlow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="26"/>
+        </filter>
+        <linearGradient id="jArrow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#58a6ff"/>
+          <stop offset="1" stop-color="#bc8cff"/>
+        </linearGradient>
+        <linearGradient id="podTop" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#bc8cff" stop-opacity=".10"/>
+          <stop offset=".5" stop-color="#bc8cff" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ============ THE PAIN: 8 scattered, disconnected terminals ============ -->
+      <text x="30" y="16" class="mono" fill="#6e7681" font-size="11.5"
+            font-weight="600" letter-spacing="2.4">8 SERVICES · 8 TERMINALS</text>
+
+      <!-- reusable-looking tiles, hand-placed with jitter + rotation -->
+      <g opacity=".52" stroke="#24405e">
+        <!-- tile group template: rect + 3 dots + cursor -->
+        <g transform="translate(34,30) rotate(-5)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(168,24) rotate(4)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(300,32) rotate(-3)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(434,28) rotate(6)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(96,84) rotate(3)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(232,90) rotate(-6)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(366,86) rotate(5)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+        <g transform="translate(478,92) rotate(-4)">
+          <rect width="56" height="40" rx="6" fill="#0a0d12"/>
+          <circle cx="9" cy="9" r="1.7" fill="#f85149"/><circle cx="15" cy="9" r="1.7" fill="#d29922"/><circle cx="21" cy="9" r="1.7" fill="#3fb950"/>
+          <rect x="9" y="22" width="9" height="2.4" rx="1" fill="#f85149" stroke="none"/>
+        </g>
+      </g>
+
+      <!-- ============ THE JOURNEY ARROW ============ -->
+      <g>
+        <line x1="280" y1="150" x2="280" y2="182" stroke="url(#jArrow)" stroke-width="2.4"/>
+        <path d="M280 190 l-6 -9 h12 z" fill="#bc8cff"/>
+        <text x="300" y="176" class="mono" fill="#8b949e" font-size="11"
+              letter-spacing=".3">compose, then pods</text>
+        <text x="176" y="176" class="mono" fill="#6e7681" font-size="11"
+              letter-spacing=".3" text-anchor="end">rescue &amp; leave</text>
+      </g>
+
+      <!-- ============ THE POD (focal climax) ============ -->
+      <ellipse cx="288" cy="378" rx="230" ry="150" fill="#bc8cff" opacity=".16" filter="url(#podGlow)"/>
+
+      <!-- pod container -->
+      <rect x="22" y="206" width="516" height="288" rx="22" fill="#150e22"
+            stroke="#4b3a73" stroke-width="2"/>
+      <rect x="22" y="206" width="516" height="288" rx="22" fill="url(#podTop)"/>
+
+      <!-- pod header -->
+      <circle cx="46" cy="234" r="4.5" fill="#bc8cff"/>
+      <text x="58" y="238" class="mono" fill="#bc8cff" font-size="13.5"
+            font-weight="700" letter-spacing=".2">pod:&#160;myapp</text>
+      <text x="516" y="238" class="mono" fill="#6e7681" font-size="11"
+            text-anchor="end" letter-spacing=".2">one network namespace</text>
+
+      <!-- 8 unified service boxes -->
+      <!-- blue: nginx web api / green: worker scheduler / amber: postgres redis minio -->
+      <g class="mono" font-size="9" font-weight="600" text-anchor="middle">
+        <!-- box template: rect + tier dot + label -->
+        <g><rect x="40"  y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.4"/>
+           <circle cx="48" cy="264" r="2.4" fill="#58a6ff"/>
+           <text x="65"  y="277" fill="#e6edf3">nginx</text></g>
+        <g><rect x="99"  y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.4"/>
+           <circle cx="107" cy="264" r="2.4" fill="#58a6ff"/>
+           <text x="124" y="277" fill="#e6edf3">web</text></g>
+        <g><rect x="157" y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.4"/>
+           <circle cx="165" cy="264" r="2.4" fill="#58a6ff"/>
+           <text x="182" y="277" fill="#e6edf3">api</text></g>
+        <g><rect x="216" y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.4"/>
+           <circle cx="224" cy="264" r="2.4" fill="#3fb950"/>
+           <text x="241" y="277" fill="#e6edf3">worker</text></g>
+        <g><rect x="274" y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.4"/>
+           <circle cx="282" cy="264" r="2.4" fill="#3fb950"/>
+           <text x="299" y="277" fill="#e6edf3">sched</text></g>
+        <g><rect x="333" y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#d29922" stroke-width="1.4"/>
+           <circle cx="341" cy="264" r="2.4" fill="#d29922"/>
+           <text x="358" y="277" fill="#e6edf3">postgres</text></g>
+        <g><rect x="391" y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#d29922" stroke-width="1.4"/>
+           <circle cx="399" cy="264" r="2.4" fill="#d29922"/>
+           <text x="416" y="277" fill="#e6edf3">redis</text></g>
+        <g><rect x="450" y="256" width="50" height="34" rx="8" fill="#161b22" stroke="#d29922" stroke-width="1.4"/>
+           <circle cx="458" cy="264" r="2.4" fill="#d29922"/>
+           <text x="475" y="277" fill="#e6edf3">minio</text></g>
+      </g>
+
+      <!-- connectors down to the shared loopback -->
+      <g stroke="#4b3a73" stroke-width="1.3">
+        <line x1="65"  y1="290" x2="65"  y2="366"/>
+        <line x1="124" y1="290" x2="124" y2="366"/>
+        <line x1="182" y1="290" x2="182" y2="366"/>
+        <line x1="241" y1="290" x2="241" y2="366"/>
+        <line x1="299" y1="290" x2="299" y2="366"/>
+        <line x1="358" y1="290" x2="358" y2="366"/>
+        <line x1="416" y1="290" x2="416" y2="366"/>
+        <line x1="475" y1="290" x2="475" y2="366"/>
+      </g>
+
+      <!-- shared loopback line -->
+      <line x1="46" y1="366" x2="500" y2="366" stroke="#bc8cff" stroke-width="2.2"/>
+      <circle cx="46" cy="366" r="3" fill="#bc8cff"/><circle cx="500" cy="366" r="3" fill="#bc8cff"/>
+      <text x="46" y="386" class="mono" fill="#c9b8ea" font-size="11" font-weight="600"
+            letter-spacing=".2">127.0.0.1 (lo)</text>
+      <text x="500" y="386" class="mono" fill="#8b949e" font-size="11" text-anchor="end"
+            letter-spacing=".2">one shared port space</text>
+
+      <!-- link down to infra container -->
+      <line x1="273" y1="366" x2="273" y2="406" stroke="#4b3a73" stroke-width="1.3"/>
+
+      <!-- infra / pause container -->
+      <rect x="150" y="406" width="246" height="44" rx="11" fill="#1d1530"
+            stroke="#bc8cff" stroke-width="1.3" stroke-dasharray="4 4"/>
+      <text x="273" y="426" class="mono" fill="#c9b8ea" font-size="11" font-weight="600"
+            text-anchor="middle" letter-spacing=".2">infra (pause) container</text>
+      <text x="273" y="440" class="mono" fill="#8b949e" font-size="9.5"
+            text-anchor="middle" letter-spacing=".2">holds the shared netns</text>
+
+      <!-- caption -->
+      <text x="280" y="482" class="mono" fill="#6e7681" font-size="10.5"
+            text-anchor="middle" letter-spacing="1.6">ONE POD · ONE NETWORK NAMESPACE</text>
+    </svg>
+  </div>
+
+</div>

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How an access token is created securely</title>
+<meta name="viz:uid" content="v-a9320047f564">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="unlisted">
+<meta name="viz:title" content="How an access token is created securely">
+<meta name="viz:description" content="Dive B of the client credentials flow: RS256, the signing input, and the claims that carry weight — with a real token you can decode on the page, because a JWT is signed and not encrypted.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  /* The token on this page is REAL: generated 2026-08-06 with node:crypto against
+     a real RSA-2048 keypair. It verifies against its public key, and flipping one
+     character of the signing input makes it fail. Every decoded value shown is
+     decoded in the browser from those bytes, not transcribed — so a reader who
+     runs the same base64url decode gets exactly what the page claims. */
+  body { max-width:1180px; margin:0 auto; padding:26px 26px 90px }
+  section { margin-top:34px }
+  h2 { font-size:17px; margin:0 0 4px; letter-spacing:-.2px }
+  h2 .n { color:var(--faint); font-variant-numeric:tabular-nums; margin-right:9px }
+  .lede { color:var(--muted); font-size:13.5px; line-height:1.6; margin:0 0 16px; max-width:78ch }
+  .lede b, p b { color:var(--text) }
+  code { font-family:var(--mono); font-size:.92em; color:#7fd7ff }
+
+  /* One colour vocabulary for the three parts of a JWT, used identically on the
+     verification dive so the two pages read as one diagram seen twice. */
+  .c-head { color:var(--c4) } .c-pay { color:var(--c5) } .c-sig { color:var(--good) }
+  .sw { display:inline-block; width:9px; height:9px; border-radius:2px;
+        background:currentColor; margin-right:7px; vertical-align:middle }
+
+  /* ---- keypair --------------------------------------------------------- */
+  .halves { display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:stretch }
+  .half { border:1px solid var(--border); border-radius:10px; padding:15px 17px;
+          background:var(--panel) }
+  .half.priv { border-color:var(--danger) }
+  .half.pub { border-color:var(--good) }
+  .half h3 { margin:0 0 3px; font-size:14px }
+  .half.priv h3 { color:var(--danger) } .half.pub h3 { color:var(--good) }
+  .half .hs { color:var(--faint); font-size:10.5px; letter-spacing:.09em;
+              text-transform:uppercase; margin-bottom:9px }
+  .half p { margin:0; color:var(--muted); font-size:12.5px; line-height:1.6 }
+  .split { display:flex; align-items:center; color:var(--faint); font-size:11px;
+           letter-spacing:.1em; writing-mode:vertical-rl; justify-content:center }
+
+  /* ---- the assembly line ----------------------------------------------- */
+  .asm { display:grid; gap:12px }
+  .row { display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:start;
+         border:1px solid var(--border); border-radius:10px; padding:13px 15px;
+         background:var(--panel); opacity:.35; transition:opacity .3s ease, border-color .3s ease }
+  .row.on { opacity:1; border-color:var(--accent) }
+  .row .rl { font-size:12.5px; font-weight:650 }
+  .row .rl small { display:block; color:var(--faint); font-weight:400; font-size:10.5px;
+                   margin-top:3px; letter-spacing:.04em; text-transform:uppercase }
+  .row .rv { font-family:var(--mono); font-size:11.5px; line-height:1.65;
+             word-break:break-all; color:var(--muted) }
+  .row .rn { color:var(--muted); font-size:12.5px; line-height:1.6; margin-top:7px;
+             font-family:var(--sans) }
+  .row .rn b { color:var(--text) }
+
+  .beat { display:flex; gap:16px; align-items:flex-start; border:1px solid var(--border);
+          border-radius:10px; padding:14px 16px; background:var(--panel); margin-top:14px }
+  .beat .no { background:var(--accent); color:#04121f; font-weight:800; border-radius:8px;
+              min-width:40px; text-align:center; padding:7px 4px; font-size:15px;
+              line-height:1.1; flex:none }
+  .beat .no small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .beat .bt { font-size:15px; font-weight:600 }
+  .beat .bd { color:var(--muted); font-size:13px; line-height:1.6; margin-top:4px }
+  .hint { color:var(--faint); font-size:11.5px; margin-top:10px }
+  .hint kbd { font-family:var(--mono); border:1px solid var(--border); border-radius:4px;
+              padding:0 5px; color:var(--muted) }
+
+  /* ---- the token itself ------------------------------------------------- */
+  .tok { font-family:var(--mono); font-size:12px; line-height:1.75; word-break:break-all;
+         background:#0a1220; border:1px solid var(--border); border-radius:10px;
+         padding:16px 18px }
+  .tok .dot { color:var(--text); font-weight:700 }
+  .tok .si { background:#131d2e; border-radius:3px; box-shadow:0 0 0 1px #2b3b5c }
+
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px }
+  .box { border:1px solid var(--border); border-radius:10px; background:var(--panel);
+         padding:14px 16px }
+  .box h4 { margin:0 0 9px; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+            color:var(--faint) }
+  .box pre { margin:0; font-family:var(--mono); font-size:11.5px; line-height:1.65;
+             color:var(--muted); white-space:pre-wrap; word-break:break-all }
+  .box pre .k { color:#7fd7ff } .box pre .s { color:var(--good) } .box pre .num { color:#e0b0ff }
+
+  button.reveal { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+                  padding:8px 14px; font-size:12.5px; font-weight:650; cursor:pointer;
+                  font-family:var(--sans) }
+  button.reveal:hover { filter:brightness(1.12) }
+  button.reveal[disabled] { background:var(--panel-2); color:var(--faint); cursor:default }
+
+  .callout { border-left:3px solid var(--warn); background:#1e1808; border-radius:0 8px 8px 0;
+             padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.6;
+             color:#e8d9b4 }
+  .callout b { color:var(--warn) } .callout i { color:#fff; font-style:italic }
+  .callout.danger { border-color:var(--danger); background:#2a1315; color:#f3c7c3 }
+  .callout.danger b { color:var(--danger) }
+  .callout.good { border-color:var(--good); background:#0d2015; color:#c6e8d1 }
+  .callout.good b { color:var(--good) }
+
+  /* ---- claims ----------------------------------------------------------- */
+  .claims { display:grid; grid-template-columns:auto auto 1fr; gap:0; font-size:12.5px;
+            border:1px solid var(--border); border-radius:10px; overflow:hidden }
+  .claims > div { padding:11px 14px; border-top:1px solid var(--border) }
+  .claims > div:nth-child(-n+3) { border-top:0; background:var(--panel-2);
+            font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint) }
+  .claims .cn { font-family:var(--mono); color:#7fd7ff; white-space:nowrap }
+  .claims .cv { font-family:var(--mono); color:var(--muted); white-space:nowrap;
+                font-size:11.5px }
+  .claims .cw { color:var(--muted); line-height:1.55 }
+  .claims .cw b { color:var(--text) }
+  .claims .hot { background:#161d13 }
+  .claims .hot .cw b { color:var(--good) }
+
+  /* ---- sourcing --------------------------------------------------------- */
+  .refs { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+  .ref { border:1px solid var(--border); border-radius:9px; padding:12px 14px;
+         background:var(--panel); font-size:12.5px; line-height:1.6; color:var(--muted) }
+  .ref b { color:#a9e2ff } .ref i { color:var(--text); font-style:normal }
+  .ours { border-left:3px solid var(--warn) }
+  .ours b { color:var(--warn); text-transform:uppercase; letter-spacing:.04em; font-size:11px }
+
+  .nav { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+  .nav a { display:inline-block; padding:9px 14px; border-radius:8px;
+           background:#151f3a; border:1px solid #3a5288; color:#9fc6ff;
+           text-decoration:none; font-size:13px }
+  .nav a:hover { background:#1d2c50; border-color:var(--accent); color:#cfe4ff }
+  .nav a.home { background:transparent; border-color:var(--border); color:var(--muted) }
+
+  /* ======================================================================
+     THE HERO FIGURE — one picture for the one thing people get wrong.
+     "Signed" gets heard as "secret", so the figure puts the two side by
+     side and lets an eye try to look through each: straight through the
+     glass on the left, flat into a wall on the right. Then it breaks the
+     seal, because "unchangeable" is what signing actually buys.
+     ====================================================================== */
+  .hero { margin:22px 0 0; border:1px solid var(--border); border-radius:14px;
+          background:linear-gradient(180deg,#0c1424,#0a1120); overflow:hidden }
+  .hero-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+              padding:14px 18px; border-bottom:1px solid var(--border) }
+  .hero-bar h2 { margin:0; font-size:15px }
+  .hero-bar .spacer { flex:1 }
+  .hero:focus { outline:none; box-shadow:0 0 0 1px var(--accent) }
+  .hero-bar button { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+                     padding:8px 15px; font-size:13px; font-weight:650; cursor:pointer;
+                     font-family:var(--sans) }
+
+  /* Step controls — same idiom as the protocol walkthroughs. Nothing advances
+     on its own unless you press play; the point is being able to stop and read. */
+  .hnarr { display:flex; gap:13px; align-items:center;
+           padding:12px 18px; border-bottom:1px solid var(--border) }
+  .hstepno { background:var(--accent); color:#04121f; font-weight:800; border-radius:7px;
+             padding:5px 9px; font-size:14px; line-height:1.05; text-align:center;
+             flex:none; min-width:34px }
+  .hstepno small { display:block; font-weight:600; opacity:.75; font-size:9px }
+  .hnarr .t { font-size:14.5px; font-weight:600; color:var(--text); line-height:1.45 }
+  .htrack { display:flex; gap:3px; padding:11px 18px 13px }
+  .htrack .tick { height:5px; flex:1; background:#1e2a41; border-radius:3px; cursor:pointer }
+  .htrack .tick:hover { background:#3b5286 }
+  .htrack .tick.done { background:#2c4a72 }
+  .htrack .tick.now { background:var(--accent) }
+
+  /* the keypair prologue — the seal needs an origin, or it is just a sticker */
+  .keybox .kb { fill:#141b2e }
+  .keybox.priv .kb { stroke:var(--danger) } .keybox.pub .kb { stroke:var(--good) }
+  .keybox .kt { font-family:var(--sans); font-size:13px; font-weight:700 }
+  .keybox.priv .kt { fill:var(--danger) } .keybox.pub .kt { fill:var(--good) }
+  .keybox .ks { font-family:var(--sans); font-size:11.5px; fill:var(--muted) }
+  .keybox.act .kb { stroke-width:3; filter:drop-shadow(0 0 9px currentColor) }
+  .hero-bar button:hover { filter:brightness(1.12) }
+  .hero-bar button.ghost { background:transparent; color:var(--muted);
+                           border:1px solid var(--border) }
+  .hero-bar button.ghost:hover { color:var(--text); border-color:var(--muted); filter:none }
+  .hero svg { display:block; width:100%; height:auto }
+
+  .hero .ttl { font-family:var(--sans); font-size:15px; font-weight:700 }
+  .hero .lbl { font-family:var(--sans); font-size:11px; letter-spacing:.09em;
+               text-transform:uppercase; fill:var(--faint) }
+  .hero .cap { font-family:var(--sans); font-size:13px; fill:var(--muted) }
+
+  /* Everything the timeline reveals starts hidden and is switched on by step. */
+  .fade { opacity:0; transition:opacity .4s ease }
+  .fade.on { opacity:1 }
+
+  .ray { stroke-width:3; stroke-dasharray:8 6; opacity:0;
+         transition:opacity .35s ease }
+  .ray.on { opacity:1; animation:ray .6s linear infinite }
+  @keyframes ray { to { stroke-dashoffset:-14 } }
+
+  .hero .verdict-txt { font-family:var(--sans); font-size:14px; font-weight:700; opacity:0;
+                       transition:opacity .4s ease }
+  .hero .verdict-txt.on { opacity:1 }
+
+  .payline { font-family:var(--mono); font-size:13px; line-height:1.75;
+             color:#cfe4ff; transition:color .4s ease }
+  .payline .k { color:var(--c5) }
+  /* Three states, not two. `dim` = the claims have not been written yet. Normal
+     = written, and the server can obviously read them. `lit` = the moment an
+     OUTSIDER reads them, which is the beat the figure is actually making. */
+  .payline.dim { color:#1a2740 }
+  .payline.dim .k { color:#1a2740 }
+  .payline.lit { color:#eaf5ff; text-shadow:0 0 13px rgba(140,220,255,.45) }
+  .payline .edited { color:var(--danger); background:#3a1a1c; border-radius:3px;
+                     padding:0 3px; font-weight:700 }
+  .blocks { font-family:var(--mono); font-size:15px; line-height:1.7; color:#2b3a55;
+            letter-spacing:2px; word-break:break-all }
+
+  .seal { transition:all .4s ease }
+  .seal.broken .sealring { stroke:var(--danger) }
+  .seal.broken .sealface { fill:#3a1a1c }
+  .seal.broken .sealtxt { fill:var(--danger) }
+  .sealcrack { opacity:0; transition:opacity .3s ease }
+  .seal.broken .sealcrack { opacity:1 }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ray.on { animation:none } .verdict-txt, .payline, .seal { transition:none }
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="How an access token is created securely">
+<meta property="og:description" content="Dive B of the client credentials flow: RS256, the signing input, and the claims that carry weight — with a real token you can decode on the page, because a JWT is signed and not encrypted.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/dive-token-created/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/dive-token-created/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<div class="viz-header">
+  <h1>How an access token is created securely</h1>
+  <div class="sub">Dive B of <a href="../client-credentials-flow/" style="color:var(--accent)">the client credentials flow</a> — what the authorization server actually does between checking the secret and returning a string.</div>
+</div>
+
+<div class="hero" tabindex="0">
+  <div class="hero-bar">
+    <h2>Where the signature comes from — and what it is not</h2>
+    <div class="spacer"></div>
+    <button class="ghost" id="hRestart">⟲ Restart</button>
+    <button class="ghost" id="hPrev">‹ Step</button>
+    <button id="hPlay">▶ Play</button>
+    <button class="ghost" id="hNext">Step ›</button>
+  </div>
+  <div class="hnarr">
+    <div class="hstepno" id="hNo">1<small>of 8</small></div>
+    <div class="t" id="hStatus"></div>
+  </div>
+  <div class="htrack" id="hTrack"></div>
+  <svg viewBox="0 0 1120 566" role="img"
+       aria-label="Left: a signed token drawn as glass with a wax seal — an eye reads straight through it, and editing it breaks the seal. Right: an encrypted blob drawn as a solid wall the same eye cannot see into.">
+    <defs>
+      <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#1b2740" stroke-width="5"/>
+      </pattern>
+    </defs>
+
+    <!-- ============ the keypair: where the seal comes from ============ -->
+    <g class="fade" id="bKeys">
+      <g class="keybox priv" id="bPriv">
+        <rect class="kb" x="60" y="16" width="216" height="70" rx="10" stroke-width="2"/>
+        <text class="kt" x="80" y="46">Private half</text>
+        <text class="ks" x="80" y="68">signs · never leaves the building</text>
+      </g>
+      <!-- no "one keypair" chip between the boxes: they sit 20px apart and any
+           centred label overlapped both. Step 1's narration says it instead. -->
+      <g class="keybox pub" id="bPub">
+        <rect class="kb" x="296" y="16" width="216" height="70" rx="10" stroke-width="2"/>
+        <text class="kt" x="316" y="46">Public half</text>
+        <text class="ks" x="316" y="68">verifies · given to anyone</text>
+      </g>
+    </g>
+
+    <!-- ================= LEFT: signed ================= -->
+    <text class="ttl" x="285" y="122" text-anchor="middle" fill="var(--good)">A signed token</text>
+    <text class="cap" x="285" y="143" text-anchor="middle">what a JWT actually is</text>
+
+    <g class="fade" id="bGlass" data-viz-id="hero-glass" data-label="signed token">
+      <!-- glass: near-transparent fill, dashed edge — you are meant to read the
+           contents THROUGH it, which is the entire point being made -->
+      <rect x="60" y="160" width="450" height="212" rx="12"
+            fill="#0e2a1d" fill-opacity=".55" stroke="var(--good)"
+            stroke-width="2" stroke-dasharray="10 5"/>
+      <text class="lbl" x="80" y="186" fill="#8fd6ae">You can see straight through it</text>
+      <foreignObject x="78" y="196" width="360" height="160">
+        <div class="payline dim" id="bPay"></div>
+      </foreignObject>
+
+      <g class="seal fade" id="bSeal" transform="translate(452,324)">
+        <circle class="sealring" r="34" fill="none" stroke="var(--good)" stroke-width="3"/>
+        <circle class="sealface" r="29" fill="#0d2015"/>
+        <path class="sealcrack" d="M-6 -26 L4 -6 L-6 6 L5 26" stroke="var(--danger)"
+              stroke-width="3" fill="none"/>
+        <!-- paint-order puts the halo behind the glyphs so the word survives the
+             crack drawn across it -->
+        <text class="sealtxt" y="5" text-anchor="middle" fill="var(--good)"
+              stroke="#0a1120" stroke-width="3.5" style="paint-order:stroke fill;
+              font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.06em">SEAL</text>
+      </g>
+    </g>
+
+    <!-- The left ray runs UP INTO the card and reaches the text; the right one
+         stops short at the wall. That difference in length is the whole figure. -->
+    <!-- The left ray runs UP INTO the card and reaches the text; the right one
+         stops short at the wall. That difference in length is the whole figure. -->
+    <path id="bRayL" class="ray" d="M285 472 L285 320" stroke="var(--good)"/>
+    <text class="cap" id="bCapL" x="285" y="512" text-anchor="middle">&nbsp;</text>
+    <text class="verdict-txt" id="bVerdL" x="285" y="540" text-anchor="middle"
+          fill="var(--good)">&nbsp;</text>
+
+    <!-- ================= RIGHT: encrypted ================= -->
+    <g class="fade" id="bSolid" data-viz-id="hero-solid" data-label="encrypted blob">
+      <text class="ttl" x="835" y="122" text-anchor="middle" fill="var(--c4)">An encrypted blob</text>
+      <text class="cap" x="835" y="143" text-anchor="middle">what a JWT is not</text>
+      <rect x="610" y="160" width="450" height="212" rx="12"
+            fill="#141b2e" stroke="var(--c4)" stroke-width="2"/>
+      <rect x="610" y="160" width="450" height="212" rx="12" fill="url(#hatch)"/>
+      <text class="lbl" x="630" y="186" fill="#b9a6ff">Solid. Nothing to see.</text>
+      <foreignObject x="628" y="196" width="414" height="160">
+        <div class="blocks">▓▓▒▓▓▒▒▓▓▓▒▓▒▓▓▒▓▒▓▓▓▒▓▓▒▓▒▓▓▒▓▓▒▓▓▓▒▓▒▓▓▒▓▒▓▓▓▒▓▓▒▓▒▓▓▒▓▓▒▓▓▓▒▓▒▓▓▒▓▒▓▓▓▒▓</div>
+      </foreignObject>
+    </g>
+
+    <path id="bRayR" class="ray" d="M835 472 L835 394" stroke="var(--c4)"/>
+    <!-- the ray stops dead at the wall; this bar is what it hits -->
+    <rect id="bWall" class="fade" x="770" y="380" width="130" height="9" rx="4"
+          fill="var(--danger)"/>
+    <text class="cap" id="bCapR" x="835" y="512" text-anchor="middle">&nbsp;</text>
+    <text class="verdict-txt" id="bVerdR" x="835" y="540" text-anchor="middle"
+          fill="var(--c4)">&nbsp;</text>
+
+    <!-- the same observer looks at both -->
+    <g class="fade" id="bEyes">
+      <g transform="translate(285,480)">
+        <path d="M-26 0 Q0 -17 26 0 Q0 17 -26 0 z" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <circle r="7" fill="var(--muted)"/>
+      </g>
+      <g transform="translate(835,480)">
+        <path d="M-26 0 Q0 -17 26 0 Q0 17 -26 0 z" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <circle r="7" fill="var(--muted)"/>
+      </g>
+      <text class="cap" x="560" y="485" text-anchor="middle" style="font-size:12px">
+        anybody at all — no key, no permission
+      </text>
+    </g>
+  </svg>
+</div>
+
+<section id="keys">
+  <h2><span class="n">1</span>Two halves of one key, and only one of them moves</h2>
+  <p class="lede">Signing is asymmetric, and that asymmetry is the entire reason this scales. The authorization server can prove it minted a token to parties it has never met, without ever sharing anything that would let them mint one.</p>
+
+  <div class="halves">
+    <div class="half priv">
+      <div class="hs">Never leaves</div>
+      <h3>Private key</h3>
+      <p>Signs. Held only by the authorization server. Anyone who obtains it can mint tokens that every resource server will accept, so its custody <b>is</b> the security of the whole system.</p>
+    </div>
+    <div class="split">ONE KEYPAIR</div>
+    <div class="half pub">
+      <div class="hs">Published deliberately</div>
+      <h3>Public key</h3>
+      <p>Verifies. Handed out freely to anyone who needs to check a token. Publishing it costs nothing — it cannot produce a signature, only test one.</p>
+    </div>
+  </div>
+
+  <div class="callout good">
+    <b>How the public half gets to the verifier is a separate subject with its own page.</b> Key sets, <code>kid</code>, rotation, caching, discovery — none of it is repeated here.
+    <div class="nav" style="margin-top:11px"><a href="../jwks-explainer/">How signing keys are published →</a></div>
+  </div>
+</section>
+
+<section id="assembly">
+  <h2><span class="n">2</span>Assembling the token</h2>
+  <p class="lede">A JWT is not a container the server puts values into — it is a <b>string built by concatenation</b>, and the signature is computed over the exact characters that end up on the wire. Step through the five stages; each one is the literal input to the next.</p>
+
+  <div class="asm" id="asm"></div>
+
+  <div class="beat">
+    <div class="no" id="beatNo">1<small>of 5</small></div>
+    <div>
+      <div class="bt" id="beatT"></div>
+      <div class="bd" id="beatD"></div>
+    </div>
+  </div>
+  <div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> to walk the stages.</div>
+
+  <div class="callout">
+    <b>The signature covers the encoded text, not the decoded objects.</b> That is why a verifier must check the bytes it received rather than re-serialising the JSON it parsed — two different encodings of the same object produce two different signatures, and only one of them is the one that was signed.
+  </div>
+</section>
+
+<section id="plain">
+  <h2><span class="n">3</span>A JWT is signed. It is not encrypted.</h2>
+  <p class="lede">This is the point people get wrong most often, and it changes what you are willing to put in a token. Below is the real token from above. The payload is base64url — an <b>encoding</b>, not a cipher. There is no key involved in reading it, and nothing stops anyone who holds the token from doing so.</p>
+
+  <div class="tok" id="tokFull"></div>
+
+  <div style="margin-top:14px">
+    <button class="reveal" id="btnDecode">Decode the payload — no key, right here in your browser</button>
+  </div>
+
+  <div class="cols" id="decoded" hidden>
+    <div class="box">
+      <h4><span class="sw c-head"></span>Header, decoded</h4>
+      <pre id="outHead"></pre>
+    </div>
+    <div class="box">
+      <h4><span class="sw c-pay"></span>Payload, decoded</h4>
+      <pre id="outPay"></pre>
+    </div>
+  </div>
+
+  <div class="callout danger" id="afterDecode" hidden>
+    <b>Every claim was readable, and no secret was needed to read it.</b> The signature does not hide the payload; it only makes changing the payload detectable. So a token is a safe place for an identifier, a scope and an expiry — and the wrong place for anything you would not put in a log line.
+  </div>
+</section>
+
+<section id="claims">
+  <h2><span class="n">4</span>The claims that carry weight</h2>
+  <p class="lede">Values decoded from the real token. Most of these are required for an OAuth 2.0 access token by RFC 9068 §2.2. Two of them are worth more attention than they usually get.</p>
+
+  <div class="claims" id="claimTable"></div>
+
+  <div class="callout">
+    <b>Note what is <i>not</i> here: a user.</b> With no resource owner in the flow, <code>sub</code> identifies the calling application itself — RFC 9068 §2.2 says so explicitly. A token from this grant does not represent a person, and any code that assumes <code>sub</code> is a user account will be wrong the first time it meets one.
+  </div>
+</section>
+
+<section id="custody">
+  <h2><span class="n">5</span>The signing key does not have to be stored anywhere</h2>
+  <p class="lede">Worth stating because it reframes the question. Key custody is usually discussed as "which vault" — but a keypair generated in memory at startup and never written to disk is a legitimate design.</p>
+
+  <div class="cols">
+    <div class="box">
+      <h4>What it costs</h4>
+      <p style="margin:0;color:var(--muted);font-size:12.5px;line-height:1.6">A restart invalidates every token already issued. At a 60-second lifetime, that is a window of at most one minute in which callers get a rejection and fetch a new token — which they are built to do anyway, because tokens expire on their own.</p>
+    </div>
+    <div class="box">
+      <h4>What it buys</h4>
+      <p style="margin:0;color:var(--muted);font-size:12.5px;line-height:1.6">Nothing at rest. No key file, no vault entry, no backup containing it, no rotation procedure, and no way to leak it from storage — because there is no storage. Rotation becomes a restart.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Multiple instances change the answer.</b> Two servers generating their own keypairs publish two different public keys, so the verifier has to be able to hold both — which is precisely what a key set is for, and another reason the key-distribution page is worth reading before deciding this.
+  </div>
+</section>
+
+<section id="refs">
+  <h2><span class="n">6</span>Where this comes from</h2>
+  <div class="refs">
+    <div class="ref"><b>RFC 7518 §3.3</b> · <i>Digital Signature with RSASSA-PKCS1-v1_5</i> — <code>RS256</code> is "RSASSA-PKCS1-v1_5 using SHA-256", and "a key of size 2048 bits or larger MUST be used with these algorithms." Read first-party 2026-08-06.</div>
+    <div class="ref"><b>RFC 7519 §3</b> · <i>JSON Web Token (JWT)</i> — "A JWT is represented as a sequence of URL-safe parts separated by period ('.') characters. Each part contains a base64url-encoded value."</div>
+    <div class="ref"><b>RFC 9068 §2.2</b> · <i>Data Structure</i> — the required claims <code>iss</code>, <code>exp</code>, <code>aud</code>, <code>sub</code>, <code>client_id</code>, <code>iat</code>, <code>jti</code>; and for grants with no resource owner, <code>sub</code> "SHOULD correspond to an identifier the authorization server uses to indicate the client application."</div>
+    <div class="ref"><b>RFC 9068 §2.1</b> · <i>Header</i> — <code>typ</code> is <code>at+jwt</code>, declaring this is an access token and not some other JWT. "JWT access tokens MUST NOT use 'none' as the signing algorithm."</div>
+    <div class="ref"><b>RFC 9700 §2.3</b> (BCP 240) · <i>Access Token Privilege Restriction</i> — "access tokens SHOULD be audience-restricted to a specific resource server or, if that is not feasible, to a small set of resource servers."</div>
+    <div class="ref ours"><b>ours, not a spec</b><br>The 60-second lifetime, the in-memory-keypair option and the "would you put it in a log line" test are our own judgement calls. No RFC sets a token lifetime.</div>
+  </div>
+
+  <div class="elsewhere">
+    <span class="lbl">Elsewhere — the same signing rules, from the security side</span>
+    <a href="https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html">JSON Web Token Cheat Sheet</a><span class="who">· OWASP Cheat Sheet Series</span>
+    <span class="why">This page draws <em>how</em> a token gets signed; that one lists what goes
+    wrong when it is done badly. The overlap worth following: it argues signatures over MACs
+    because with a shared MAC key <b>every service that can verify a token can also mint
+    one</b> — which is the argument for the asymmetric keypair drawn in §3, stated as a
+    security consequence rather than a mechanism.</span>
+  </div>
+
+  <div class="nav">
+    <a href="../client-credentials-flow/" class="home">← Back to the flow</a>
+    <a href="../dive-credential-created/" class="home">← Previous dive · the credential</a>
+    <a href="../dive-token-verified/">Next dive · how a token is verified →</a>
+  </div>
+</section>
+
+<script type="module">
+// app.ts
+import { stepper, $, $$, esc } from "/_kit/viz.js";
+var H = "eyJhbGciOiJSUzI1NiIsInR5cCI6ImF0K2p3dCIsImtpZCI6Ims4RVZMZEtGOWdaUE13X3UifQ";
+var P = "eyJpc3MiOiJodHRwczovL2FzLmV4YW1wbGUuY29tIiwic3ViIjoiOWY0YzJhZTEiLCJjbGllbnRfaWQiOiI5ZjRjMmFlMSIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tIiwiZXhwIjoxNzg2MDQ2NDYwLCJpYXQiOjE3ODYwNDY0MDAsImp0aSI6ImU4NGJjZTRkLTIyNWQtNGY4MC1iYzRlLWE1MTgxNmVkMWQ5OSIsInNjb3BlIjoicmVwb3J0czpyZWFkIn0";
+var S = "ffTp6QlrXOKdMpCejFzsG-9LMG_lleDP1zBO6yH2RlUO4IqozZCZYdPC4SPOCriS7Y40aanpcywKr8nBnD6JgKlOLWGtYtG_cX9cG0mUppfevp_evRfCSTKEPf0Ve-WSMDbyU-WHDUm3yMDS82syKa4CgR8s_VTt5tUuFKDBxXFlFSFFW1GtobUzZBBz3tI9oF40tG2mXGDcDgay_btJNCZ_6n_t6ZlzCugEUN6JyGPKZoVJw1LjmQCMmDtvs8rhCRTmmymcxxwkjASFpPapLR0renldedv2a8BLa2IaCHL_Au3_rWFL2QZgVNgEG3hxiJgQmxh5vtq27n5VMtg0Sw";
+var b64uDecode = (s) => atob(s.replaceAll("-", "+").replaceAll("_", "/") + "===".slice((s.length + 3) % 4));
+var headerObj = JSON.parse(b64uDecode(H));
+var NUM_CLAIMS = ["exp", "iat"];
+var STR_CLAIMS = ["iss", "sub", "client_id", "aud", "jti", "scope"];
+var isPayload = (o) => typeof o === "object" && o !== null && [...NUM_CLAIMS, ...STR_CLAIMS].every((k) => (k in o)) && Object.entries(o).every(([k, v]) => typeof v === (NUM_CLAIMS.includes(k) ? "number" : "string"));
+var parsePayload = (s) => {
+  const o = JSON.parse(s);
+  if (!isPayload(o))
+    throw new Error("token payload is not the expected claims");
+  return o;
+};
+var payloadObj = parsePayload(b64uDecode(P));
+var pretty = (obj) => esc(JSON.stringify(obj, null, 2)).replaceAll(/&quot;([a-z_]+)&quot;:/gu, '<span class="k">"$1"</span>:').replaceAll(/: &quot;(.*?)&quot;/gu, ': <span class="s">"$1"</span>').replaceAll(/: (\d+)/gu, ': <span class="num">$1</span>');
+var clip = (s, n) => s.length > n ? s.slice(0, n) + "…" : s;
+var PAY_ROWS = [
+  ["iss", payloadObj.iss],
+  ["sub", payloadObj.sub],
+  ["aud", payloadObj.aud],
+  ["exp", payloadObj.exp],
+  ["scope", payloadObj.scope]
+];
+var paintPay = (tampered) => {
+  $("#bPay").innerHTML = PAY_ROWS.map(([k, v]) => `<div><span class="k">${k}</span>: ` + (tampered && k === "scope" ? `<span class="edited">reports:WRITE</span>` : esc(String(v))) + `</div>`).join("");
+};
+var HSTEPS = [
+  `The authorization server holds <b>one keypair</b> — two halves that belong together and do opposite jobs.`,
+  `The private half signs, and never leaves. The public half only <i>checks</i> signatures, so it is handed to anyone who asks. Giving it away costs nothing.`,
+  `It writes down the claims: who issued this, who it is for, when it stops working.`,
+  `Then it stamps the whole thing with the private half. <b>That stamp is the signature</b> — and that is the only thing the private key was ever used for.`,
+  `Now, for contrast, here is what an <i>encrypted</i> blob looks like. Same claims inside. Completely different treatment.`,
+  `Somebody with no key at all — not the client, not you, anybody — takes a look at both.`,
+  `On the left they read every word, instantly, for free. On the right they hit a wall. <b>That</b> is what encryption looks like, and a JWT is not it.`,
+  `Change one word on the left and the seal breaks. So signing bought you <b>unchangeable</b>. It never bought you <b>unreadable</b>.`
+];
+function renderHeroB(i) {
+  $("#hNo").innerHTML = i + 1 + "<small>of " + HSTEPS.length + "</small>";
+  $("#hStatus").innerHTML = HSTEPS[i];
+  [...$("#hTrack").children].forEach((t, k) => {
+    t.className = "tick" + (k < i ? " done" : k === i ? " now" : "");
+  });
+  const on = (sel, yes) => $(sel).classList.toggle("on", yes);
+  on("#bKeys", true);
+  $("#bPriv").classList.toggle("act", i === 3);
+  $("#bPub").classList.toggle("act", i === 1);
+  on("#bGlass", i >= 2);
+  on("#bSeal", i >= 3);
+  on("#bSolid", i >= 4);
+  on("#bEyes", i >= 5);
+  on("#bRayL", i >= 5);
+  on("#bRayR", i >= 5);
+  on("#bWall", i >= 6);
+  $("#bPay").classList.toggle("dim", i < 2);
+  $("#bPay").classList.toggle("lit", i >= 6);
+  paintPay(i >= 7);
+  $("#bSeal").classList.toggle("broken", i >= 7);
+  on("#bVerdL", i >= 7);
+  on("#bVerdR", i >= 7);
+  $("#bCapL").textContent = i >= 7 ? "anyone can read it · nobody can change it" : i >= 6 ? "read it all — instantly, for free" : " ";
+  $("#bCapR").textContent = i >= 6 ? "nothing. it needs a key just to look." : " ";
+  $("#bVerdL").textContent = "SIGNED = you cannot fake it";
+  $("#bVerdR").textContent = "ENCRYPTED = you cannot read it";
+}
+$("#hTrack").innerHTML = HSTEPS.map(() => `<div class="tick"></div>`).join("");
+var playing = false;
+var setPlayLabel = () => {
+  $("#hPlay").textContent = playing ? "❚❚ Pause" : "▶ Play";
+};
+var HERO = stepper({
+  n: HSTEPS.length,
+  hashKey: "hero",
+  autoplayMs: 3400,
+  target: document.querySelector(".hero"),
+  onStep: (i) => {
+    renderHeroB(i);
+    if (i >= HSTEPS.length - 1 && playing) {
+      playing = false;
+      setPlayLabel();
+    }
+  }
+});
+HERO.pause();
+setPlayLabel();
+$("#hPlay").addEventListener("click", () => {
+  if (playing) {
+    HERO.pause();
+    playing = false;
+  } else {
+    if (HERO.current >= HSTEPS.length - 1)
+      HERO.go(0);
+    HERO.play();
+    playing = true;
+  }
+  setPlayLabel();
+});
+$("#hNext").addEventListener("click", () => {
+  playing = false;
+  setPlayLabel();
+  HERO.next();
+});
+$("#hPrev").addEventListener("click", () => {
+  playing = false;
+  setPlayLabel();
+  HERO.prev();
+});
+$("#hRestart").addEventListener("click", () => {
+  playing = false;
+  setPlayLabel();
+  HERO.go(0);
+});
+$$("#hTrack > div").forEach((t, k) => {
+  t.addEventListener("click", () => {
+    playing = false;
+    setPlayLabel();
+    HERO.go(k);
+  });
+});
+var ROWS = [
+  { l: "Header", s: "JSON", v: () => JSON.stringify(headerObj) },
+  { l: "Payload", s: "JSON", v: () => JSON.stringify(payloadObj) },
+  {
+    l: "Signing input",
+    s: "base64url(header) . base64url(payload)",
+    v: () => `<span class="c-head">${clip(H, 46)}</span><span class="dot">.</span><span class="c-pay">${clip(P, 60)}</span>`
+  },
+  {
+    l: "Signature",
+    s: "RSASSA-PKCS1-v1_5 · SHA-256",
+    v: () => `<span class="c-sig">${clip(S, 96)}</span>`
+  },
+  {
+    l: "The token",
+    s: `${H.length + P.length + S.length + 2} characters on the wire`,
+    v: () => `<span class="c-head">${clip(H, 34)}</span><span class="dot">.</span><span class="c-pay">${clip(P, 34)}</span><span class="dot">.</span><span class="c-sig">${clip(S, 34)}</span>`
+  }
+];
+var BEATS = [
+  {
+    t: "Build the header",
+    d: `Three fields: <code>alg</code> says how it will be signed, <code>typ</code> declares this is an access token rather than some other JWT, and <code>kid</code> names <b>which</b> key was used — the hook a verifier needs when there is more than one.`
+  },
+  {
+    t: "Build the payload",
+    d: `The claims. Who issued it, who it is for, who is calling, when it expires, and a unique id for this particular token. Nothing here is secret, because nothing here will be hidden.`
+  },
+  {
+    t: "Concatenate — this exact string is what gets signed",
+    d: `Each part is base64url-encoded and joined with a literal <code>.</code>. The result is the <b>JWS Signing Input</b>: not the objects, not a hash of them, but these characters.`
+  },
+  {
+    t: "Sign it with the private key",
+    d: `<code>RS256</code> is RSASSA-PKCS1-v1_5 with SHA-256 (RFC 7518 §3.3). The signing input is hashed, the hash is signed with the 2048-bit private key, and the 256-byte result is base64url-encoded into 342 characters.`
+  },
+  {
+    t: "Join with one more dot, and return it",
+    d: `That is the whole token. It goes back in a JSON response with <code>expires_in</code> and — for this grant — no refresh token. Nothing was written to a database; the token carries everything a verifier will need.`
+  }
+];
+$("#asm").innerHTML = ROWS.map((r, i) => `<div class="row" id="row${i}" data-viz-id="asm-${i}" data-label="${r.l}">
+       <div class="rl">${r.l}<small>${r.s}</small></div>
+       <div class="rv">${r.v()}</div>
+     </div>`).join("");
+stepper({ n: BEATS.length, hashKey: "stage", onStep: (i) => {
+  const b = BEATS[i];
+  $("#beatNo").innerHTML = i + 1 + "<small>of " + BEATS.length + "</small>";
+  $("#beatT").textContent = b.t;
+  $("#beatD").innerHTML = b.d;
+  ROWS.forEach((_, k) => {
+    $("#row" + k).classList.toggle("on", k <= i);
+  });
+} });
+$("#tokFull").innerHTML = `<span class="si"><span class="c-head">${H}</span><span class="dot">.</span>` + `<span class="c-pay">${P}</span></span><span class="dot">.</span>` + `<span class="c-sig">${S}</span>` + `<div style="margin-top:11px;font-family:var(--sans);font-size:11.5px;color:var(--faint)">` + `<span class="sw c-head"></span>header &nbsp; <span class="sw c-pay"></span>payload &nbsp; ` + `<span class="sw c-sig"></span>signature &nbsp;·&nbsp; the boxed region is what the signature covers</div>`;
+var btnDecode = $("#btnDecode");
+btnDecode.addEventListener("click", () => {
+  $("#outHead").innerHTML = pretty(headerObj);
+  $("#outPay").innerHTML = pretty(payloadObj);
+  $("#decoded").hidden = false;
+  $("#afterDecode").hidden = false;
+  btnDecode.textContent = "Decoded — with atob(), and nothing else";
+  btnDecode.disabled = true;
+});
+var WHY = {
+  iss: ["Who minted it", "The verifier compares this against the issuer it trusts. A valid signature from the <b>wrong issuer</b> is still a rejection."],
+  sub: ["Who it is about", "With no user in the flow, this is the client application itself — not a person."],
+  client_id: ["Who asked for it", "The same identifier issued at registration, now carried inside the token."],
+  aud: ["Who it is for", "<b>This is what stops a token minted for one service being replayed at another.</b> Without it, any API that trusts this issuer accepts a token intended for a different one — and a compromised or merely careless downstream service becomes a way into every other one. Cheap now, painful to retrofit.", 1],
+  exp: ["When it stops working", "Expiry is the <b>only</b> thing that ends a token's life. It cannot be recalled."],
+  iat: ["When it was minted", "Lets a verifier reject tokens that are implausibly old even if the expiry is generous."],
+  jti: ["Which token this is", "<b>The handle that makes mint and use correlatable after the fact.</b> Issuing and using are two separate requests, on different connections, often minutes apart — no request-scoped trace id spans them. This does. It is also what a replay-detection cache would key on.", 1],
+  scope: ["What it permits", "What was granted, which may be less than what was asked for."]
+};
+$("#claimTable").innerHTML = `<div>Claim</div><div>Value in this token</div><div>What it is doing</div>` + Object.entries(payloadObj).map(([k, v]) => {
+  const [, why, hot] = WHY[k] ?? ["", "—"];
+  const c = hot ? " hot" : "";
+  const shown = k === "exp" || k === "iat" ? `${v} <span style="color:var(--faint)">(${new Date(Number(v) * 1000).toISOString().replace("T", " ").slice(0, 19)}Z)</span>` : esc(String(v));
+  return `<div class="cn${c}">${k}</div><div class="cv${c}">${clip(shown, 120)}</div>` + `<div class="cw${c}">${why}</div>`;
+}).join("") + `<div class="cn"></div><div class="cv" style="color:var(--faint)">exp − iat</div>` + `<div class="cw">= <b>${payloadObj.exp - payloadObj.iat} seconds</b>. Short lifetimes are how this design copes with having no revocation.</div>`;
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

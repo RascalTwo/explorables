@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FROM · S1E1 — Long Day's Journey Into Night</title>
+<meta name="viz:uid" content="v-02613a9991a5">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="FROM">
+<meta name="viz:tag" content="TV & Film">
+<meta name="viz:spoiler" content="true">
+<meta name="viz:title" content="FROM S1E1 — Long Day's Journey Into Night">
+<meta name="viz:description" content="An interactive day-into-night map of the pilot: faction swimlanes on a shifting sky, a live sun/moon dome, and a town map where the creatures emerge as it darkens.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  :root{
+    --matthews:#e8b04b; --town:#4aa3c7; --colony:#9a86ef;
+    --crash:#e08a45; --creature:#d64560; --victim:#7b8494;
+    --bg0:#070912; --panel:#0e1220; --line:#1e2740;
+  }
+  body{background:var(--bg0);color:#e7ecf5;font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:22px 26px 60px;}
+  h1,h2,h3{margin:0;font-weight:650;letter-spacing:.2px}
+  .wrap{max-width:1280px;margin:0 auto}
+  /* header */
+  .top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+  .ttl{font-size:13px;letter-spacing:3px;color:#8fa3c2;text-transform:uppercase}
+  .ep{font-size:30px;font-weight:700;letter-spacing:.3px;margin-top:2px}
+  .ep em{font-style:italic;color:#cdd8ea;font-weight:500}
+  .meta{font-size:12px;color:#7d8aa3;margin-top:4px}
+  .sign{border:2px solid #3a2b18;background:#140f07;border-radius:8px;padding:8px 14px;text-align:center;box-shadow:inset 0 0 24px #000;min-width:150px}
+  .sign .lab{font-size:9px;letter-spacing:2px;color:#c79a4e;text-transform:uppercase}
+  .sign .num{font:700 32px/1 "DS-Digital",ui-monospace,monospace;color:#ffb54a;text-shadow:0 0 12px #d68a2a88}
+  .sign .sub{font-size:8.5px;color:#6e5a34;letter-spacing:1px;margin-top:2px}
+  /* hero */
+  .hero{display:grid;grid-template-columns:340px 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:var(--panel)}
+  #dome{display:block;width:100%;height:210px}
+  .readout{padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+  .rline{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .clock{font:700 26px/1 ui-monospace,monospace;color:#fff;letter-spacing:1px}
+  .tod{font-size:14px;letter-spacing:3px;text-transform:uppercase;padding:3px 12px;border-radius:20px;background:#1a2138;border:1px solid var(--line)}
+  .scnttl{font-size:20px;font-weight:650;color:#fff}
+  .scnloc{font-size:12.5px;color:#8ea1c0}
+  .scnloc b{color:#c7d4e8;font-weight:600}
+  .gauge{margin-top:2px}
+  .gauge .glab{display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px;color:#8ea1c0;text-transform:uppercase;margin-bottom:4px}
+  .gtrack{height:9px;border-radius:6px;background:#0a0e1a;border:1px solid var(--line);overflow:hidden}
+  .gfill{height:100%;border-radius:6px;background:linear-gradient(90deg,#3a2a5a,#d68a2a,#ffd36b);transition:width .35s}
+  .urgent{color:var(--creature);font-weight:700;letter-spacing:1px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:.35}}
+  /* controls */
+  .ctl{display:flex;align-items:center;gap:14px;margin:0 2px 8px}
+  .btn{cursor:pointer;border:1px solid var(--line);background:#141a2c;color:#cdd8ea;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600}
+  .btn:hover{border-color:#3a4a72;background:#18213a}
+  .hint{font-size:11.5px;color:#6e7c96}
+  /* timeline */
+  .tlwrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:#070a13}
+  #tl{display:block;width:100%;height:330px}
+  .node{cursor:pointer}
+  .node circle{transition:r .12s,stroke-width .12s}
+  .node:hover circle{stroke:#fff}
+  .nsel circle{stroke:#fff;stroke-width:3}
+  .nnum{font:700 10px/1 ui-monospace,monospace;fill:#05070f;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+  .lanelab{font:600 11px/1 sans-serif;letter-spacing:1px;text-anchor:end}
+  .tick{font:10px/1 ui-monospace,monospace;fill:#5c6a86;text-anchor:middle}
+  .phline{stroke:#fff;stroke-width:1.5;stroke-dasharray:3 3;opacity:.85;pointer-events:none}
+  .phgrip{fill:#fff;cursor:ew-resize}
+  /* lower grid */
+  .low{display:grid;grid-template-columns:1fr 360px;gap:16px}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0;overflow:hidden}
+  #map{display:block;width:100%;height:auto;background:radial-gradient(120% 120% at 50% 40%,#0c1120,#060810)}
+  .pin{cursor:pointer}
+  .pin text{font:600 10.5px/1 sans-serif;fill:#b9c6dd;pointer-events:none}
+  .pin:hover text{fill:#fff}
+  .psel .pdot{stroke:#fff;stroke-width:3}
+  .detail{padding:16px 18px}
+  .detail h3{font-size:16px;margin-bottom:2px}
+  .dloc{font-size:12px;color:#8ea1c0;margin-bottom:10px}
+  .dsum{font-size:13.5px;color:#d3ddec;margin-bottom:12px}
+  .quote{border-left:3px solid #3a4a72;padding:4px 0 4px 12px;margin:12px 0;font-style:italic;color:#e7ecf5;font-size:14px}
+  .quote .by{display:block;font-style:normal;font-size:11px;color:#8ea1c0;margin-top:4px;letter-spacing:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .chip{font-size:11px;padding:2px 9px;border-radius:20px;border:1px solid var(--line);background:#131a2c;color:#cdd8ea}
+  .chip i{font-style:normal;opacity:.55;font-size:9px;margin-left:4px}
+  .badge{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:5px;font-weight:700;margin-bottom:8px}
+  /* roster */
+  .roster{padding:14px 16px 18px}
+  .roster h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#8ea1c0;margin:14px 0 8px}
+  .roster h3:first-child{margin-top:0}
+  .fac{display:flex;align-items:center;gap:7px;margin:6px 0;font-size:13px}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .fac .role{color:#8391a8;font-size:11.5px}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;padding:10px 16px;border-top:1px solid var(--line);font-size:11.5px;color:#a9b6cd}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  @media(max-width:1000px){.hero{grid-template-columns:1fr}.low{grid-template-columns:1fr}}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="FROM S1E1 — Long Day's Journey Into Night">
+<meta property="og:description" content="An interactive day-into-night map of the pilot: faction swimlanes on a shifting sky, a live sun/moon dome, and a town map where the creatures emerge as it darkens.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/from-s1e1-long-days-journey/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/from-s1e1-long-days-journey/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="ttl">FROM · Season 1 · Episode 1 · dir. Jack Bender · wr. John Griffin</div>
+      <div class="ep">Long Day's <em>Journey Into Night</em></div>
+      <div class="meta">A pilot built as one countdown — from dusk, through a stolen daylight, back into the dark. Click a scene · drag the playhead · watch the town after sundown.</div>
+    </div>
+    <div class="sign" data-viz-id="sign" data-label="Nights without incident sign">
+      <div class="lab">Nights Without Incident</div>
+      <div class="num">96</div>
+      <div class="sub">— resets tonight —</div>
+    </div>
+  </div>
+
+  <!-- HERO: sky dome + readout -->
+  <div class="hero">
+    <svg id="dome" viewBox="0 0 340 210" preserveAspectRatio="xMidYMid slice"></svg>
+    <div class="readout">
+      <div class="rline">
+        <span class="clock" id="r-clock">00:00</span>
+        <span class="tod" id="r-tod">Dusk</span>
+      </div>
+      <div>
+        <div class="scnttl" id="r-title">—</div>
+        <div class="scnloc" id="r-loc">—</div>
+      </div>
+      <div class="gauge">
+        <div class="glab"><span>Daylight</span><span id="r-dpct">—</span></div>
+        <div class="gtrack"><div class="gfill" id="r-dfill" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctl">
+    <button class="btn" id="prev">‹ Prev</button>
+    <button class="btn" id="next">Next ›</button>
+    <button class="btn" id="play">▶ Play the day</button>
+    <span class="hint">Use <b>← →</b> to step through the night · or click a scene · drag the playhead. The band behind the threads <b>is</b> the sky.</span>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="tlwrap">
+    <svg id="tl" viewBox="0 0 1000 330"></svg>
+  </div>
+
+  <!-- LOWER: map + detail/roster -->
+  <div class="low">
+    <div class="card">
+      <svg id="map" viewBox="0 0 520 520"></svg>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--matthews)"></span>The Matthews</span>
+        <span><span class="dot" style="background:var(--town)"></span>Townsfolk</span>
+        <span><span class="dot" style="background:var(--colony)"></span>Colony House</span>
+        <span><span class="dot" style="background:var(--crash)"></span>Crash newcomers</span>
+        <span><span class="dot" style="background:var(--creature)"></span>The creatures</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="detail" id="detail"></div>
+      <div class="roster" id="roster"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+// app.ts
+import { saveHash, loadHash } from "/_kit/viz.js";
+var FAC = { matthews: "--matthews", town: "--town", colony: "--colony", crash: "--crash", creature: "--creature", victim: "--victim" };
+var col = (k) => getComputedStyle(document.documentElement).getPropertyValue(FAC[k] ?? "--town").trim();
+var scenes = [
+  {
+    id: 1,
+    clock: "00:00",
+    tod: 0.8,
+    lane: "town",
+    loc: "center",
+    title: "Curfew bell at dusk",
+    sum: "Sheriff Boyd walks the town swinging a bell — everyone home before dark. Sara closes the Diner and touches a talisman by the door; the tabletop jukebox flickers on by itself.",
+    quote: "We are closed for the night. It's time to get home.",
+    by: "Sara",
+    song: "“We Gotta Get Out of This Place”",
+    chars: ["Boyd", "Sara"]
+  },
+  {
+    id: 2,
+    clock: "02:30",
+    tod: 0.83,
+    lane: "town",
+    loc: "clinic",
+    title: "The basement, every night",
+    sum: "At the Clinic, Deputy Kenny finishes a chess game with his father Bing-Qian before Kristi and nurse Gina take the old man down to the basement for the night. Kenny lingers, sweet on Kristi.",
+    quote: "Denial is a major branch of our family tree.",
+    by: "Kristi",
+    chars: ["Kenny", "Bing-Qian", "Kristi", "Gina"]
+  },
+  {
+    id: 3,
+    clock: "05:00",
+    tod: 0.86,
+    lane: "town",
+    loc: "bar",
+    title: "Frank left behind",
+    sum: "Bartender Tom can't rouse a blackout-drunk Frank Pratt and gives up, leaving him on the floor as the light dies — Frank never makes it home to nail his windows shut.",
+    quote: "Come on, Frank! Gotta get home. It's getting dark out.",
+    by: "Tom",
+    chars: ["Tom", "Frank"]
+  },
+  {
+    id: 4,
+    clock: "05:30",
+    tod: 0.97,
+    lane: "creature",
+    loc: "pratt",
+    danger: true,
+    title: "“Grandma” at the window",
+    sum: "Lauren waits for Frank while daughter Meagan says her prayers. A smiling old woman calls through the glass, claiming to be Grandma. Meagan opens the window — the thing changes, and kills them both.",
+    quote: "It's Grandma. Come to the window… it'll be our little secret.",
+    by: "the creature",
+    chars: ["Meagan", "Lauren", "Old-Lady"]
+  },
+  {
+    id: 5,
+    clock: "07:40",
+    tod: 0.3,
+    lane: "matthews",
+    loc: "roadin",
+    title: "The Matthews on the road",
+    sum: "Hard cut to morning (“Que Sera, Sera”). The Matthews family RV rolls along a highway. Julie play-acts a toy's death for Ethan; Tabitha soothes him with a small, telling lie.",
+    quote: "There's no such thing as monsters, honey.",
+    by: "Tabitha",
+    song: "“Que Sera, Sera”",
+    chars: ["Jim", "Tabitha", "Julie", "Ethan"]
+  },
+  {
+    id: 6,
+    clock: "12:20",
+    tod: 0.34,
+    lane: "town",
+    loc: "pratt",
+    danger: true,
+    title: "Boyd makes Frank look",
+    sum: "Morning in town. Boyd beats a hungover Frank and drags him to the bodies of his wife and child — the price of one un-nailed window — then has Kenny lock him up. Father Khatri comes for last rites.",
+    quote: "A man protects his family, Frank!",
+    by: "Boyd",
+    chars: ["Boyd", "Frank", "Kenny", "Khatri"]
+  },
+  {
+    id: 7,
+    clock: "14:30",
+    tod: 0.42,
+    lane: "matthews",
+    loc: "tree",
+    title: "One fallen tree",
+    sum: "Jim and Tabitha reminisce about an old Volvo and meeting her parents. A single tree blocks the road — “a pretty selective storm” — and a swarm of crows wheels overhead. They turn back to circle around.",
+    quote: "Well, that's a pretty selective storm.",
+    by: "Tabitha",
+    chars: ["Jim", "Tabitha", "Ethan"]
+  },
+  {
+    id: 8,
+    clock: "17:20",
+    tod: 0.48,
+    lane: "colony",
+    loc: "colony",
+    title: "Colony House",
+    sum: "Donna reminds Boyd he isn't welcome at the mansion. Inside, Boyd's estranged son Ellis is sketching his girlfriend Fatima. Boyd tells him about the Pratts and asks him to come to the service.",
+    quote: "We have an arrangement, Sheriff. You don't come here.",
+    by: "Donna",
+    chars: ["Boyd", "Donna", "Ellis", "Fatima"]
+  },
+  {
+    id: 9,
+    clock: "20:00",
+    tod: 0.52,
+    lane: "matthews",
+    loc: "road",
+    title: "No signal, no highway",
+    sum: "The RV can't find the highway and has no cell service. Julie spins a horror story — a “murder” of crows hunting Ethan. Tabitha counters that they were ravens: an “unkindness.”",
+    quote: "An unkindness of ravens.",
+    by: "Tabitha",
+    chars: ["Jim", "Tabitha", "Julie", "Ethan"]
+  },
+  {
+    id: 10,
+    clock: "21:20",
+    tod: 0.55,
+    lane: "town",
+    loc: "center",
+    title: "The Pratts are buried",
+    sum: "As Khatri commits Lauren and Meagan to the earth, the townsfolk notice the newcomers' RV and stare. Boyd tells everyone to leave the family be — he and Kenny will handle it.",
+    quote: "You all remember what it was like. Just leave these people be.",
+    by: "Boyd",
+    chars: ["Khatri", "Boyd", "Kenny", "townsfolk"]
+  },
+  {
+    id: 11,
+    clock: "22:40",
+    tod: 0.58,
+    lane: "matthews",
+    loc: "center",
+    title: "“You’ll see”",
+    sum: "Jim asks Boyd for directions to the highway. Boyd, oddly careful, tells him to just follow the road up the hill — “you'll see” — knowing exactly where it leads.",
+    quote: "You just keep on following the road right up that hill… you'll see.",
+    by: "Boyd",
+    chars: ["Jim", "Boyd"]
+  },
+  {
+    id: 12,
+    clock: "26:00",
+    tod: 0.62,
+    lane: "town",
+    loc: "barn",
+    title: "The cruel part",
+    sum: "Sara catches her brother Nathan heading to the barn and names the worst of it — the newcomers still believe a road home exists. She seems to be carrying something heavier than she says.",
+    quote: "It's the part that's cruel — when you still expect to find the road that takes you home.",
+    by: "Sara",
+    chars: ["Sara", "Nathan"]
+  },
+  {
+    id: 13,
+    clock: "27:40",
+    tod: 0.66,
+    lane: "matthews",
+    loc: "road",
+    title: "Driving in circles",
+    sum: "Every road bends the RV back into town. Tabitha unravels; Jim insists he's driving straight. Out of sight, Kenny lays a spike strip — and the RV's tires blow flat.",
+    quote: "We're on the same fucking road!",
+    by: "Tabitha",
+    chars: ["Jim", "Tabitha", "Kenny"]
+  },
+  {
+    id: 14,
+    clock: "29:30",
+    tod: 0.7,
+    lane: "crash",
+    loc: "crash",
+    danger: true,
+    title: "The crash",
+    sum: "A speeding car (Jade and Tobey) forces the RV off the road; it rolls onto its side. Tabitha is knocked out and Ethan's leg is impaled on a table leg.",
+    quote: "Oh, my God, Jim — we should ask them. Maybe they know.",
+    by: "Tabitha",
+    chars: ["Jim", "Tabitha", "Julie", "Ethan", "Jade", "Tobey"]
+  },
+  {
+    id: 15,
+    clock: "31:30",
+    tod: 0.74,
+    lane: "town",
+    loc: "crash",
+    title: "Rescue before dark",
+    sum: "Tobey runs for help; Boyd sends Kenny for Kristi, Khatri and Ellis. Two hours of daylight left. Tobey is taken to the Clinic; the drunk, dazed Jade is cuffed to his wrecked car.",
+    quote: "We only have, like, two hours of daylight left.",
+    by: "Kenny",
+    badge: "2 HRS OF LIGHT",
+    chars: ["Boyd", "Kenny", "Kristi", "Khatri", "Ellis", "Tobey", "Jade"]
+  },
+  {
+    id: 16,
+    clock: "40:00",
+    tod: 0.82,
+    lane: "creature",
+    loc: "clinic",
+    danger: true,
+    title: "Sara and Tobey",
+    sum: "Back at the Clinic, Sara calms a frightened Tobey — then tells him it isn't his fault and cuts his throat. She's obeying a voice only she can hear.",
+    quote: "This isn't your fault.",
+    by: "Sara",
+    chars: ["Sara", "Tobey"]
+  },
+  {
+    id: 17,
+    clock: "41:00",
+    tod: 0.84,
+    lane: "town",
+    loc: "crash",
+    title: "Operate in the RV",
+    sum: "A table leg is clean through Ethan's thigh; removing it safely takes an hour, and only 40 minutes of light remain. Boyd's plan: stitch the boy inside the RV overnight, warded by a talisman.",
+    quote: "I don't want to bury any more kids.",
+    by: "Boyd",
+    badge: "40 MIN OF LIGHT",
+    chars: ["Kristi", "Boyd", "Kenny", "Jim"]
+  },
+  {
+    id: 18,
+    clock: "44:00",
+    tod: 0.88,
+    lane: "matthews",
+    loc: "crash",
+    title: "Whose baby",
+    sum: "Concussed, Tabitha begs to carry “Thomas” to safety; Jim has to remind her it's Ethan who's trapped. She doesn't trust these people, or their warning that the woods aren't safe after dark.",
+    quote: "Jim… it's Ethan. Ethan's the one stuck in the RV.",
+    by: "Jim",
+    chars: ["Tabitha", "Jim"],
+    mention: "Thomas"
+  },
+  {
+    id: 19,
+    clock: "48:00",
+    tod: 0.93,
+    lane: "town",
+    loc: "crash",
+    title: "Warding the RV",
+    sum: "Boyd blocks every window and hangs the talisman while Kristi preps surgery. The others' truck is flattened by Kenny's own spike strip, forcing a run through the rain to Colony House.",
+    quote: "No matter what you see, no matter what you hear — you do not stop.",
+    by: "Ellis",
+    chars: ["Boyd", "Kristi", "Jim", "Ethan", "Kenny", "Khatri", "Ellis"]
+  },
+  {
+    id: 20,
+    clock: "50:00",
+    tod: 0.99,
+    lane: "creature",
+    loc: "crash",
+    danger: true,
+    title: "They’re coming",
+    sum: "Night falls fully. Ethan seizes as Kristi works. Boyd peers through a gap — dozens of pale figures are massing out of the trees around the RV. The 96 nights are over.",
+    quote: "They're comin'.",
+    by: "Boyd",
+    chars: ["Boyd", "Kristi", "Jim", "Ethan", "creatures"]
+  }
+];
+var lanes = [
+  { key: "creature", label: "The Woods", y: 52 },
+  { key: "town", label: "Townsfolk", y: 118 },
+  { key: "colony", label: "Colony House", y: 184 },
+  { key: "matthews", label: "The Matthews", y: 236 },
+  { key: "crash", label: "Crash site", y: 288 }
+];
+var places = {
+  center: { x: 258, y: 270, label: "Town Square" },
+  diner: { x: 206, y: 236, label: "Diner" },
+  clinic: { x: 314, y: 232, label: "Clinic" },
+  station: { x: 250, y: 322, label: "Sheriff's Stn" },
+  bar: { x: 196, y: 300, label: "Bar" },
+  pratt: { x: 326, y: 314, label: "Pratt Home" },
+  barn: { x: 346, y: 186, label: "Barn" },
+  colony: { x: 424, y: 110, label: "Colony House" },
+  tree: { x: 132, y: 120, label: "Fallen Tree" },
+  roadin: { x: 78, y: 392, label: "The highway" },
+  crash: { x: 150, y: 430, label: "RV crash" }
+};
+var roster = [
+  ["The Matthews", "matthews", [
+    ["Jim", "father, driving"],
+    ["Tabitha", "mother, concussed"],
+    ["Julie", "teen daughter"],
+    ["Ethan", "young son, injured"],
+    ["Thomas", "a name Tabitha calls — unseen"]
+  ]],
+  ["Townsfolk", "town", [
+    ["Boyd", "the sheriff"],
+    ["Kenny", "deputy"],
+    ["Kristi", "doctor"],
+    ["Khatri", 'priest / "Father"'],
+    ["Sara", "runs the Diner"],
+    ["Nathan", "Sara's brother"],
+    ["Bing-Qian", "Kenny's father"],
+    ["Gina", "nurse"],
+    ["Tom", "bartender"],
+    ["Frank", "the grieving drunk"]
+  ]],
+  ["Colony House", "colony", [
+    ["Donna", "their leader"],
+    ["Ellis", "Boyd's son"],
+    ["Fatima", "Ellis's girlfriend"]
+  ]],
+  ["Crash newcomers", "crash", [
+    ["Jade", "drunk driver, cuffed"],
+    ["Tobey", "passenger, killed by Sara"]
+  ]],
+  ["The dead / the dark", "creature", [
+    ["Lauren", "Meagan's mother †"],
+    ["Meagan", "the Pratt child †"],
+    ["“Grandma”", "the thing at the window"],
+    ["The creatures", "they come at night"]
+  ]]
+];
+var skyKeys = [
+  [0, [6, 8, 16]],
+  [0.2, [30, 40, 66]],
+  [0.25, [110, 84, 126]],
+  [0.29, [201, 120, 66]],
+  [0.36, [110, 150, 190]],
+  [0.5, [150, 190, 224]],
+  [0.64, [120, 160, 200]],
+  [0.72, [214, 130, 70]],
+  [0.78, [96, 66, 112]],
+  [0.86, [38, 42, 74]],
+  [1, [6, 8, 16]]
+];
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+function skyRGB(todIn) {
+  const tod = (todIn % 1 + 1) % 1;
+  for (let i = 0;i < skyKeys.length - 1; i++) {
+    const [t0, c0] = skyKeys[i], [t1, c1] = skyKeys[i + 1];
+    if (tod >= t0 && tod <= t1) {
+      const f = (tod - t0) / (t1 - t0);
+      return [0, 1, 2].map((j) => Math.round(lerp(c0[j], c1[j], f)));
+    }
+  }
+  return skyKeys[0][1];
+}
+var skyCss = (tod) => `rgb(${skyRGB(tod).join(",")})`;
+var daylight = (tod) => Math.max(0, 1 - Math.abs(tod - 0.5) / 0.25);
+var nightAmt = (tod) => Math.max(0, Math.min(1, 1 - daylight(tod) * 1.35));
+function todLabel(tod) {
+  if (tod < 0.22 || tod >= 0.965)
+    return "Night";
+  if (tod < 0.27)
+    return "Dawn";
+  if (tod < 0.33)
+    return "Sunrise";
+  if (tod < 0.45)
+    return "Morning";
+  if (tod < 0.55)
+    return "Midday";
+  if (tod < 0.68)
+    return "Afternoon";
+  if (tod < 0.75)
+    return "Sunset";
+  if (tod < 0.86)
+    return "Dusk";
+  return "Nightfall";
+}
+var PX0 = 100;
+var PX1 = 980;
+var tmax = 52;
+var xOf = (clock) => PX0 + toMin(clock) / tmax * (PX1 - PX0);
+function toMin(mmss) {
+  const [m, s] = mmss.split(":").map(Number);
+  return m + s / 60;
+}
+var sel = (loadHash().s ? scenes.find((s) => s.id === loadHash().s) : scenes[0]) ?? scenes[0];
+var dome = document.querySelector("#dome");
+function renderDome(tod) {
+  const top = skyRGB(tod), bot = skyRGB(tod).map((c) => Math.min(255, c + 22));
+  const sunUp = tod > 0.25 && tod < 0.75;
+  const R = 140, cx = 170, cy = 196;
+  const p = sunUp ? (tod - 0.25) / 0.5 : tod >= 0.75 ? (tod - 0.75) / 0.5 : (tod + 0.25) / 0.5;
+  const a = Math.PI * (1 - p), bodyX = cx + R * Math.cos(a), bodyY = cy - R * Math.sin(a);
+  const stars = !sunUp ? Array.from({ length: 34 }, (_, i) => {
+    const sx = i * 97 % 320 + 8, sy = i * 53 % 150 + 8, op = (nightAmt(tod) * (0.3 + i % 5 / 6)).toFixed(2);
+    return `<circle cx="${sx}" cy="${sy}" r="${i % 7 === 0 ? 1.3 : 0.8}" fill="#fff" opacity="${op}"/>`;
+  }).join("") : "";
+  const body = sunUp ? `<circle cx="${bodyX}" cy="${bodyY}" r="20" fill="#ffd86b"/><circle cx="${bodyX}" cy="${bodyY}" r="30" fill="#ffd86b" opacity="0.25"/>` : `<circle cx="${bodyX}" cy="${bodyY}" r="15" fill="#dfe7f2"/><circle cx="${bodyX - 5}" cy="${bodyY - 4}" r="12" fill="${skyCss(tod)}" opacity="0.9"/>`;
+  dome.innerHTML = `
+    <defs><linearGradient id="skg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgb(${top.join(",")})"/>
+      <stop offset="1" stop-color="rgb(${bot.join(",")})"/></linearGradient></defs>
+    <rect width="340" height="210" fill="url(#skg)"/>
+    ${stars}
+    ${body}
+    <path d="M0 178 Q 60 168 110 176 T 210 174 T 340 180 L340 210 L0 210 Z" fill="#05070f" opacity="0.9"/>
+    <path d="M0 190 Q 90 182 170 188 T 340 190 L340 210 L0 210 Z" fill="#02040a"/>`;
+}
+function renderReadout(s) {
+  document.querySelector("#r-clock").textContent = s.clock;
+  const todEl = document.querySelector("#r-tod");
+  todEl.textContent = todLabel(s.tod);
+  todEl.style.background = skyCss(s.tod);
+  todEl.style.color = daylight(s.tod) > 0.4 ? "#0a0e1a" : "#e7ecf5";
+  todEl.style.borderColor = "transparent";
+  document.querySelector("#r-title").textContent = s.title;
+  const p = places[s.loc];
+  document.querySelector("#r-loc").innerHTML = `<b>${p ? p.label : s.loc}</b>`;
+  const d = Math.round(daylight(s.tod) * 100);
+  document.querySelector("#r-dfill").style.width = d + "%";
+  const pctEl = document.querySelector("#r-dpct");
+  if (s.badge) {
+    pctEl.innerHTML = `<span class="urgent">${s.badge}</span>`;
+  } else
+    pctEl.textContent = d > 2 ? d + "% sun" : s.tod < 0.2 || s.tod > 0.8 ? "after dark" : "twilight";
+}
+var tl = document.querySelector("#tl");
+function renderTL() {
+  const H = 330;
+  let g = `<defs><linearGradient id="skyband" x1="0" x2="1" y1="0" y2="0">`;
+  g += `<stop offset="0" stop-color="${skyCss(scenes[0].tod)}"/>`;
+  scenes.forEach((s2) => {
+    const off = (toMin(s2.clock) / tmax * 100).toFixed(2);
+    g += `<stop offset="${off}%" stop-color="${skyCss(s2.tod)}"/>`;
+  });
+  g += `<stop offset="100%" stop-color="${skyCss(scenes.at(-1).tod)}"/></linearGradient></defs>`;
+  let s = `<rect x="${PX0}" y="18" width="${PX1 - PX0}" height="${H - 52}" rx="10" fill="url(#skyband)"/>`;
+  s += `<rect x="${PX0}" y="18" width="${PX1 - PX0}" height="${H - 52}" rx="10" fill="#000" opacity="0.28"/>`;
+  lanes.forEach((L) => {
+    s += `<text class="lanelab" x="${PX0 - 12}" y="${L.y + 4}" fill="${col(L.key)}">${L.label}</text>`;
+    s += `<line x1="${PX0}" y1="${L.y}" x2="${PX1}" y2="${L.y}" stroke="${col(L.key)}" stroke-opacity="0.14"/>`;
+  });
+  lanes.forEach((L) => {
+    const pts = scenes.filter((sc) => sc.lane === L.key).toSorted((a, b) => toMin(a.clock) - toMin(b.clock));
+    if (pts.length > 1) {
+      const d = pts.map((p, i) => `${i ? "L" : "M"}${xOf(p.clock).toFixed(1)} ${L.y}`).join(" ");
+      s += `<path d="${d}" fill="none" stroke="${col(L.key)}" stroke-opacity="0.35" stroke-width="1.5"/>`;
+    }
+  });
+  for (let m = 0;m <= 50; m += 10) {
+    const x = PX0 + m / tmax * (PX1 - PX0);
+    s += `<line x1="${x}" y1="${H - 30}" x2="${x}" y2="${H - 24}" stroke="#39466a"/>`;
+    s += `<text class="tick" x="${x}" y="${H - 12}">${String(Math.floor(m)).padStart(2, "0")}:00</text>`;
+  }
+  scenes.forEach((sc) => {
+    const L = lanes.find((l) => l.key === sc.lane), x = xOf(sc.clock), c = col(sc.lane);
+    const selc = sc.id === sel.id ? "nsel" : "";
+    const dz = sc.danger ? `<circle cx="${x}" cy="${L.y}" r="15" fill="${col("creature")}" opacity="0.18"/>` : "";
+    s += `<g class="node ${selc}" data-id="${sc.id}" data-viz-id="scene-${sc.id}" data-label="${sc.clock} ${sc.title}">
+      ${dz}
+      <circle cx="${x}" cy="${L.y}" r="11" fill="${c}" stroke="${sc.danger ? col("creature") : "#0a0e1a"}" stroke-width="${sc.danger ? 2 : 1.5}"/>
+      <text class="nnum" x="${x}" y="${L.y}">${sc.id}</text>
+    </g>`;
+  });
+  const px = xOf(sel.clock);
+  s += `<g id="ph"><line class="phline" x1="${px}" y1="18" x2="${px}" y2="${H - 34}"/>
+        <path class="phgrip" d="M${px - 6} 12 L${px + 6} 12 L${px} 22 Z"/></g>`;
+  tl.innerHTML = g + s;
+  tl.querySelectorAll(".node").forEach((n) => n.addEventListener("click", () => select(+n.dataset["id"])));
+}
+var map = document.querySelector("#map");
+function renderMap() {
+  const tod = sel.tod, na = nightAmt(tod);
+  const forestFill = `rgb(${skyRGB(tod).map((c) => Math.round(c * 0.5)).join(",")})`;
+  let s = "";
+  s += `<rect x="0" y="0" width="520" height="520" fill="${forestFill}"/>`;
+  s += `<rect x="46" y="46" width="428" height="428" rx="26" fill="#0a1020" stroke="#1b243c"/>`;
+  const trees = [];
+  for (let i = 0;i < 46; i++) {
+    const a = i / 46 * Math.PI * 2;
+    const rx = 228, ry = 228;
+    const x = 260 + Math.cos(a) * rx * (0.86 + i * 7 % 5 / 22), y = 260 + Math.sin(a) * ry * (0.86 + i * 5 % 5 / 22);
+    if (x > 60 && x < 460 && y > 60 && y < 460)
+      continue;
+    trees.push(`<path d="M${x} ${y + 7} l-5 0 l5 -13 l5 13 z" fill="#0c1522"/><path d="M${x} ${y + 2} l-6 0 l6 -15 l6 15 z" fill="#0f1c2b"/>`);
+  }
+  s += trees.join("");
+  s += `<ellipse cx="258" cy="268" rx="150" ry="132" fill="none" stroke="#2a334d" stroke-width="10"/>`;
+  s += `<ellipse cx="258" cy="268" rx="150" ry="132" fill="none" stroke="#3c496d" stroke-width="2" stroke-dasharray="6 10"/>`;
+  s += `<path d="M138 190 Q 110 150 132 122" fill="none" stroke="#2a334d" stroke-width="9"/>`;
+  s += `<path d="M392 168 Q 420 140 424 112" fill="none" stroke="#2a334d" stroke-width="9"/>`;
+  s += `<path d="M150 372 Q 120 400 150 428" fill="none" stroke="#2a334d" stroke-width="9"/>`;
+  s += `<path d="M120 356 Q 96 380 80 392" fill="none" stroke="#26304a" stroke-width="7" stroke-dasharray="4 8"/>`;
+  s += `<text x="258" y="272" text-anchor="middle" font-size="9" letter-spacing="1" fill="#5a678a">↻ every road returns here</text>`;
+  const cpos = [[70, 120], [440, 90], [470, 300], [60, 300], [250, 58], [120, 470], [400, 468], [478, 190]];
+  cpos.forEach((p, i) => {
+    const op = (na * (0.5 + i % 3 / 4)).toFixed(2);
+    s += `<g opacity="${op}"><circle cx="${p[0]}" cy="${p[1]}" r="5.5" fill="${col("creature")}"/>
+          <circle cx="${p[0]}" cy="${p[1]}" r="10" fill="${col("creature")}" opacity="0.3"/></g>`;
+  });
+  for (const [k, p] of Object.entries(places)) {
+    const active = sel.loc === k;
+    const c = k === "colony" ? col("colony") : k === "crash" ? col("crash") : k === "roadin" ? col("matthews") : col("town");
+    s += `<g class="pin ${active ? "psel" : ""}" data-loc="${k}" data-viz-id="place-${k}" data-label="${p.label}">
+      ${active ? `<circle cx="${p.x}" cy="${p.y}" r="15" fill="${c}" opacity="0.25"><animate attributeName="r" values="12;20;12" dur="1.6s" repeatCount="indefinite"/></circle>` : ""}
+      <circle class="pdot" cx="${p.x}" cy="${p.y}" r="6" fill="${c}" stroke="#0a0e1a" stroke-width="1.5"/>
+      <text x="${p.x}" y="${p.y - 11}" text-anchor="middle">${p.label}</text>
+    </g>`;
+  }
+  map.innerHTML = s;
+  map.querySelectorAll(".pin").forEach((pin) => pin.addEventListener("click", () => {
+    const first = scenes.find((sc) => sc.loc === pin.dataset["loc"]);
+    if (first)
+      select(first.id);
+  }));
+}
+function renderDetail(s) {
+  const p = places[s.loc];
+  const badge = s.danger ? `<span class="badge" style="background:${col("creature")}22;color:${col("creature")};border:1px solid ${col("creature")}66">⚠ turning point</span>` : `<span class="badge" style="background:${col(s.lane)}22;color:${col(s.lane)};border:1px solid ${col(s.lane)}55">${lanes.find((l) => l.key === s.lane).label}</span>`;
+  const chips = (s.chars || []).map((c) => `<span class="chip">${c}</span>`).join("");
+  const song = s.song ? `<div class="chip" style="border-color:${col("colony")}55">♪ ${s.song}</div>` : "";
+  document.querySelector("#detail").innerHTML = `
+    ${badge}
+    <h3>${s.clock} · ${s.title}</h3>
+    <div class="dloc">${p ? p.label : s.loc} · in-story: ${todLabel(s.tod)}</div>
+    <div class="dsum">${s.sum}</div>
+    <div class="quote">“${s.quote}”<span class="by">— ${s.by}</span></div>
+    <div class="chips">${chips}${song}</div>`;
+}
+function renderRoster() {
+  const active = new Set(sel.chars || []);
+  let h = "";
+  roster.forEach(([title, fac, people]) => {
+    h += `<h3 style="color:${col(fac)}">${title}</h3>`;
+    people.forEach(([name, role]) => {
+      const on = active.has(name);
+      h += `<div class="fac" style="opacity:${on ? 1 : 0.5}">
+        <span class="dot" style="background:${col(fac)};box-shadow:${on ? `0 0 8px ${col(fac)}` : "none"}"></span>
+        <b>${name}</b><span class="role">— ${role}</span></div>`;
+    });
+  });
+  document.querySelector("#roster").innerHTML = h;
+}
+function paint(s) {
+  renderDome(s.tod);
+  renderReadout(s);
+  renderDetail(s);
+  renderMap();
+  renderRoster();
+  document.querySelectorAll(".node").forEach((n) => {
+    n.classList.toggle("nsel", +n.dataset["id"] === s.id);
+  });
+  const px = xOf(s.clock);
+  const ph = document.querySelector("#ph");
+  if (ph) {
+    ph.querySelector("line").setAttribute("x1", String(px));
+    ph.querySelector("line").setAttribute("x2", String(px));
+    ph.querySelector("path").setAttribute("d", `M${px - 6} 12 L${px + 6} 12 L${px} 22 Z`);
+  }
+}
+function select(id) {
+  sel = scenes.find((s) => s.id === id);
+  saveHash({ s: id });
+  paint(sel);
+}
+function step(dir) {
+  const i = scenes.findIndex((s) => s.id === sel.id);
+  const ni = Math.max(0, Math.min(scenes.length - 1, i + dir));
+  select(scenes[ni].id);
+}
+document.querySelector("#prev").addEventListener("click", () => step(-1));
+document.querySelector("#next").addEventListener("click", () => step(1));
+window.addEventListener("keydown", (e) => {
+  if (e.target instanceof Element && e.target.matches("input,textarea"))
+    return;
+  if (e.key === "ArrowLeft") {
+    stopPlay();
+    step(-1);
+    e.preventDefault();
+  } else if (e.key === "ArrowRight") {
+    stopPlay();
+    step(1);
+    e.preventDefault();
+  }
+});
+var dragging = false;
+tl.addEventListener("mousedown", (e) => {
+  if (e.target instanceof Element && e.target.classList.contains("phgrip")) {
+    dragging = true;
+    e.preventDefault();
+  }
+});
+window.addEventListener("mouseup", () => {
+  dragging = false;
+});
+window.addEventListener("mousemove", (e) => {
+  if (!dragging)
+    return;
+  const r = tl.getBoundingClientRect();
+  const sx = (e.clientX - r.left) / r.width * 1000;
+  let best = scenes[0], bd = 1e9;
+  scenes.forEach((s) => {
+    const d = Math.abs(xOf(s.clock) - sx);
+    if (d < bd) {
+      bd = d;
+      best = s;
+    }
+  });
+  if (best.id !== sel.id)
+    select(best.id);
+});
+var playing = null;
+var playBtn = document.querySelector("#play");
+function stopPlay() {
+  if (playing) {
+    clearInterval(playing);
+    playing = null;
+    playBtn.textContent = "▶ Play the day";
+  }
+}
+playBtn.addEventListener("click", () => {
+  if (playing) {
+    stopPlay();
+    return;
+  }
+  playBtn.textContent = "⏸ Pause";
+  let i = scenes.findIndex((s) => s.id === sel.id);
+  playing = setInterval(() => {
+    i = i + 1;
+    if (i >= scenes.length) {
+      stopPlay();
+      return;
+    }
+    select(scenes[i].id);
+  }, 1400);
+});
+renderTL();
+paint(sel);
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

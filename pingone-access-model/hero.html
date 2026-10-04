@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How do people get access to PingOne?</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141c;
+    --fg: #e6e8ee;
+    --fg-dim: #9aa1b1;
+    --fg-faint: #5b6378;
+    --accent: #58a6ff;
+    --good: #3fb950;
+    --warn: #d29922;
+    --danger: #f85149;
+    --line: #232838;
+    --code-bg: #0a0c11;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05060a; }
+
+  .og-card {
+    width: 1200px; height: 630px;
+    overflow: hidden; position: relative;
+    background:
+      radial-gradient(1150px 620px at 6% -12%, rgba(88,166,255,0.11), transparent 58%),
+      radial-gradient(950px 560px at 108% 8%, rgba(248,81,73,0.07), transparent 60%),
+      var(--bg);
+    font-family: var(--sans); color: var(--fg);
+    display: flex; align-items: stretch;
+  }
+  .frame { position: absolute; inset: 22px; border: 1px solid rgba(35,40,56,0.7); border-radius: 18px; pointer-events: none; }
+  .og-card::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 20%),
+      radial-gradient(1400px 800px at 50% 130%, rgba(0,0,0,0.5), transparent 60%);
+    pointer-events: none;
+  }
+
+  .left { width: 630px; padding: 60px 16px 60px 72px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 13.5px; letter-spacing: 0.08em;
+    color: var(--accent); background: rgba(88,166,255,0.10);
+    border: 1px solid rgba(88,166,255,0.24);
+    padding: 7px 14px; border-radius: 999px;
+    width: fit-content; margin-bottom: 30px; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+  .title { font-size: 94px; line-height: 0.93; font-weight: 800; letter-spacing: -0.045em; }
+  .title .hl { color: var(--accent); }
+
+  .essence { margin-top: 28px; font-size: 29px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; max-width: 520px; }
+  .essence .hl { color: var(--danger); }
+
+  .sub { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--fg-dim); max-width: 490px; }
+  .sub code { font-family: var(--mono); font-size: 0.88em; color: var(--fg); background: var(--code-bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+
+  .chips { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 13px; color: var(--fg-dim); background: var(--bg-2); border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; }
+  .chip .tk { width: 6px; height: 6px; border-radius: 2px; background: var(--accent); box-shadow: 0 0 6px rgba(88,166,255,0.5); }
+  .chip.d .tk { background: var(--danger); box-shadow: 0 0 6px rgba(248,81,73,0.5); }
+
+  .right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 60px 56px 4px; position: relative; z-index: 2; }
+  .panel {
+    width: 424px;
+    background: linear-gradient(180deg, rgba(22,26,37,0.92), rgba(17,20,28,0.92));
+    border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .panel-cap { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .panel-cap .t { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: 0.04em; text-transform: uppercase; }
+  .panel-cap .s { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); }
+  svg.graph { width: 100%; display: block; }
+
+  .foot { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .stat .n { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 28px; line-height: 1; }
+  .stat.code .n { color: var(--accent); }
+  .stat.human .n { color: var(--danger); }
+  .stat .l { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 5px; }
+  .stat .d { font-size: 12px; color: var(--fg-dim); margin-top: 4px; line-height: 1.35; }
+</style>
+</head>
+<body>
+  <div class="og-card">
+    <div class="frame"></div>
+
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span>PingOne &middot; access model</div>
+
+      <div class="title">No console.<br><span class="hl">Only code.</span></div>
+
+      <div class="essence">
+        Four reasons to want in. Exactly <span class="hl">one</span> ends with a human holding a credential.
+      </div>
+
+      <div class="sub">
+        Humans hold Git&nbsp;+&nbsp;PR approval; the pipeline holds the PingOne keys &mdash; a custom role even strips <code>admin_terraform_state</code> so only CI can apply.
+      </div>
+
+      <div class="chips">
+        <span class="chip"><span class="tk"></span>Terraform + CI</span>
+        <span class="chip"><span class="tk"></span>CAB-gated prod</span>
+        <span class="chip d"><span class="tk"></span>CyberArk break-glass</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <div class="panel-cap">
+          <span class="t">I want PingOne&hellip; in order to:</span>
+          <span class="s">4 paths</span>
+        </div>
+
+        <svg class="graph" viewBox="0 0 370 296" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .lab    { font-family: -apple-system, "Inter", system-ui, sans-serif; font-size: 13.5px; font-weight: 600; fill: #e6e8ee; dominant-baseline: middle; }
+              .sublab { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 10.5px; fill: #8b949e; dominant-baseline: middle; }
+              .tagt   { font-family: ui-monospace,"SF Mono",Menlo,monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; dominant-baseline: middle; text-anchor: middle; }
+              .rail   { stroke: #232838; stroke-width: 2; }
+            </style>
+          </defs>
+
+          <!-- spine -->
+          <line class="rail" x1="12" y1="16" x2="12" y2="270"/>
+
+          <!-- row 1: explore dev -->
+          <line class="rail" x1="12" y1="26" x2="30" y2="26"/>
+          <rect x="30" y="8" width="336" height="56" rx="9" fill="#0a0c11" stroke="#232838"/>
+          <rect x="30" y="8" width="3" height="56" rx="1.5" fill="#3fb950"/>
+          <text class="lab" x="46" y="26">Explore dev</text>
+          <text class="sublab" x="46" y="45">read-only role, declared in Terraform</text>
+          <rect x="288" y="24" width="66" height="19" rx="5" fill="rgba(88,166,255,0.12)" stroke="rgba(88,166,255,0.4)"/>
+          <text class="tagt" x="321" y="34.5" fill="#58a6ff">CODE</text>
+
+          <!-- row 2: change config -->
+          <line class="rail" x1="12" y1="98" x2="30" y2="98"/>
+          <rect x="30" y="80" width="336" height="56" rx="9" fill="#0a0c11" stroke="#232838"/>
+          <rect x="30" y="80" width="3" height="56" rx="1.5" fill="#58a6ff"/>
+          <text class="lab" x="46" y="98">Change config</text>
+          <text class="sublab" x="46" y="117">MR &rarr; review &rarr; CI applies. No grant.</text>
+          <rect x="288" y="96" width="66" height="19" rx="5" fill="rgba(88,166,255,0.12)" stroke="rgba(88,166,255,0.4)"/>
+          <text class="tagt" x="321" y="106.5" fill="#58a6ff">CODE</text>
+
+          <!-- row 3: read logs -->
+          <line class="rail" x1="12" y1="170" x2="30" y2="170"/>
+          <rect x="30" y="152" width="336" height="56" rx="9" fill="#0a0c11" stroke="#232838"/>
+          <rect x="30" y="152" width="3" height="56" rx="1.5" fill="#d29922"/>
+          <text class="lab" x="46" y="170">Read audit logs</text>
+          <text class="sublab" x="46" y="189">streamed to LogRhythm via Cribl</text>
+          <rect x="288" y="168" width="66" height="19" rx="5" fill="rgba(210,153,34,0.12)" stroke="rgba(210,153,34,0.4)"/>
+          <text class="tagt" x="321" y="178.5" fill="#d29922">SIEM</text>
+
+          <!-- row 4: break-glass -->
+          <line class="rail" x1="12" y1="242" x2="30" y2="242" stroke="#f85149"/>
+          <rect x="30" y="224" width="336" height="56" rx="9" fill="#170d0e" stroke="rgba(248,81,73,0.45)"/>
+          <rect x="30" y="224" width="3" height="56" rx="1.5" fill="#f85149"/>
+          <text class="lab" x="46" y="242">Something is on fire</text>
+          <text class="sublab" x="46" y="261" fill="#c9848a">org admin, vaulted in CyberArk</text>
+          <rect x="288" y="240" width="66" height="19" rx="5" fill="rgba(248,81,73,0.14)" stroke="rgba(248,81,73,0.5)"/>
+          <text class="tagt" x="321" y="250.5" fill="#f85149">HUMAN</text>
+        </svg>
+
+        <div class="foot">
+          <div class="stat code">
+            <div class="n">3</div>
+            <div class="l">declared in code</div>
+            <div class="d">peer-reviewed, applied by CI</div>
+          </div>
+          <div class="stat human">
+            <div class="n">1</div>
+            <div class="l">human-owned key</div>
+            <div class="d">break-glass, every use logged</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+  <meta name="viz:tag" content="LiteLLM">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LiteLLM - OSS vs Enterprise</title>
+<meta name="viz:title" content="LiteLLM - OSS vs Enterprise">
+<meta name="viz:description" content="A capability-domain breakdown of what the free MIT LiteLLM proxy does, what the paid Enterprise license adds on top.'s a clean path to those features without paying.">
+<meta name="viz:uid" content="v-dc11308c34e3">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<style>
+  :root {
+    --bg: #0c0e14;
+    --panel: #151823;
+    --panel-2: #1c2030;
+    --border: #2a2f42;
+    --text: #e6e9f0;
+    --muted: #8b93a7;
+    --accent: #6ea8fe;
+    --oss: #4ade80;
+    --oss-bg: #11241a;
+    --oss-border: #1f3d2c;
+    --ent: #f0a85a;
+    --ent-bg: #261c10;
+    --ent-border: #463318;
+    --work: #b48ef0;
+    --work-bg: #1e1726;
+    --work-border: #3a2d4a;
+    --code-bg: #0a0c11;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.55;
+    padding: 30px 22px 90px; max-width: 1400px; margin: 0 auto;
+  }
+  h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+  h1 .sub { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 10px; }
+  .lede { color: var(--muted); font-size: 14px; margin: 10px 0 20px; max-width: 920px; }
+  .lede strong { color: var(--text); }
+  .lede a { color: var(--accent); text-decoration: none; }
+  .lede a:hover { text-decoration: underline; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 20; background: var(--bg);
+    display: flex; gap: 7px; flex-wrap: wrap; padding: 12px 0; margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav a {
+    font-size: 12.5px; color: var(--muted); text-decoration: none;
+    background: var(--panel); border: 1px solid var(--border); padding: 6px 11px; border-radius: 18px;
+    transition: all 0.12s; white-space: nowrap;
+  }
+  .nav a:hover { color: var(--text); border-color: var(--accent); }
+
+  .legend-bar { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; font-size: 12.5px; }
+  .legend-bar .item { display: flex; align-items: center; gap: 7px; color: var(--muted); }
+  .legend-bar .chip { width: 13px; height: 13px; border-radius: 4px; }
+  .chip.oss { background: var(--oss-bg); border: 1px solid var(--oss); }
+  .chip.ent { background: var(--ent-bg); border: 1px solid var(--ent); }
+  .chip.work { background: var(--work-bg); border: 1px solid var(--work); }
+
+  .domain {
+    margin-bottom: 26px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    background: var(--panel);
+  }
+  .domain > .head {
+    display: flex; align-items: baseline; gap: 12px; padding: 14px 18px; background: var(--panel-2);
+    border-bottom: 1px solid var(--border); cursor: pointer; user-select: none;
+  }
+  .domain > .head h2 { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; }
+  .domain > .head .tag { font-size: 12px; color: var(--muted); flex: 1; }
+  .domain > .head .toggle { color: var(--muted); font-size: 13px; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  @media (max-width: 1000px) { .cols { grid-template-columns: 1fr; } }
+  .col { padding: 15px 17px; border-right: 1px solid var(--border); }
+  .col:last-child { border-right: none; }
+  @media (max-width: 1000px) { .col { border-right: none; border-bottom: 1px solid var(--border); } .col:last-child { border-bottom: none; } }
+  .col.oss  { background: linear-gradient(180deg, var(--oss-bg) 0%, transparent 140px); }
+  .col.ent  { background: linear-gradient(180deg, var(--ent-bg) 0%, transparent 140px); }
+  .col.work { background: linear-gradient(180deg, var(--work-bg) 0%, transparent 140px); }
+  .col h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 11px;
+    display: flex; align-items: center; gap: 7px; font-weight: 700;
+  }
+  .col.oss h3 { color: var(--oss); }
+  .col.ent h3 { color: var(--ent); }
+  .col.work h3 { color: var(--work); }
+  .col h3 .ic { font-size: 14px; }
+  .col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .col li { font-size: 13px; padding-left: 16px; position: relative; color: #d2d8e4; }
+  .col li::before { position: absolute; left: 0; top: 0; }
+  .col.oss li::before  { content: "✓"; color: var(--oss); font-weight: 700; }
+  .col.ent li::before  { content: "🔒"; font-size: 10px; top: 2px; }
+  .col.work li::before { content: "→"; color: var(--work); font-weight: 700; }
+  .col li code, .col li .mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px;
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: #c8d0e0;
+  }
+  .col li b { color: #fff; font-weight: 650; }
+  .col li .note { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+
+  footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--border); color: #5a6276; font-size: 12px; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .collapsed .cols { display: none; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="LiteLLM - OSS vs Enterprise">
+<meta property="og:description" content="A capability-domain breakdown of what the free MIT LiteLLM proxy does, what the paid Enterprise license adds on top.'s a clean path to those features without paying.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/litellm-enterprise-features/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/litellm-enterprise-features/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<h1>LiteLLM Proxy — OSS vs Enterprise <span class="sub">by capability domain · source-verified 2026-06-26</span></h1>
+<p class="lede">
+  For each domain: <strong style="color:var(--oss)">what the free MIT proxy does</strong>,
+  <strong style="color:var(--ent)">what the paid license adds on top</strong>, and
+  <strong style="color:var(--work)">how to get the paid stuff without paying</strong> (where there's a clean path).
+  Canonical docs: <a href="https://docs.litellm.ai/docs/enterprise" target="_blank">docs.litellm.ai/docs/enterprise</a>.
+  Click a domain header to collapse it.
+</p>
+
+<nav class="nav" id="nav"></nav>
+
+<div class="legend-bar">
+  <div class="item"><span class="chip oss"></span> OSS / MIT — free, no license</div>
+  <div class="item"><span class="chip ent"></span> Enterprise — needs <code style="font-size:11px">LITELLM_LICENSE</code></div>
+  <div class="item"><span class="chip work"></span> OSS workaround for the Enterprise feature</div>
+</div>
+
+<div style="margin-bottom:24px; border:1px solid var(--ent-border); border-left:3px solid var(--ent); border-radius:10px; padding:14px 16px; background:var(--ent-bg);">
+  <div style="font-weight:650; font-size:13.5px; color:var(--ent); margin-bottom:6px;">⚠️ "Honor-system" — a third category</div>
+  <div style="font-size:12.5px; color:#d2d8e4;">
+    Three layers are independent: the <b>license</b> (the repo <code class="mono" style="font-size:11px">LICENSE</code> makes everything outside <code class="mono" style="font-size:11px">enterprise/</code> <b>MIT</b>), the <b>code gate</b> (a runtime <code class="mono" style="font-size:11px">premium_user</code> check), and the <b>docs marketing</b>. A few features the docs label "✨ Enterprise" have <b>no code gate</b> and live in the <b>MIT</b> tree — so they run on OSS and using them is <em>not a license violation</em>. But the vendor sells them: they may add a gate in a future release (breaks on upgrade), ship no support/SLA, and you're leaning on the paid tier against intent. <b>Honor-system, not free</b> — tagged <b style="color:var(--ent)">⚠ honor-system</b> below. <span style="color:var(--muted)">(Not legal advice.)</span>
+  </div>
+</div>
+
+<div id="domains"></div>
+
+
+<footer>
+  Sources: <a href="https://docs.litellm.ai/docs/enterprise" target="_blank">Enterprise docs</a> ·
+  <a href="https://github.com/BerriAI/litellm/tree/main/enterprise/litellm_enterprise" target="_blank"><code>enterprise/litellm_enterprise/</code> source tree</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/team_budgets" target="_blank">budgets</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/guardrails/quick_start" target="_blank">guardrails</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/logging" target="_blank">logging</a> ·
+  <a href="https://docs.litellm.ai/docs/proxy/admin_ui_sso" target="_blank">admin UI SSO</a>.
+  Capability split reflects litellm <code>main</code>; the OSS/Enterprise line drifts between releases — pin your version. Gating is enforced by in-code <code>premium_user</code> checks, not file location, so verify by running rather than by where a file sits.
+</footer>
+
+<script type="module">
+// app.ts
+var DOMAINS = [
+  {
+    id: "auth",
+    name: "Auth & Identity (API requests)",
+    tag: "Virtual keys, the custom_auth callback, and key scoping are OSS; no-code JWT/OAuth, SCIM v2, and key rotation are Enterprise.",
+    oss: [
+      "<b>Virtual keys</b> — full CRUD: <code>/key/generate · /update · /info · /list · /delete · /block · /unblock</code>; master key via <code>LITELLM_MASTER_KEY</code>.",
+      "<b><code>custom_auth</code> callback</b> — point <code>general_settings.custom_auth</code> at your function; it gets <code>(request, api_key)</code> and returns a <code>UserAPIKeyAuth</code>. Validate JWTs, call an IdP, map headers — anything.",
+      "Key scoping: <code>team_id · user_id · models</code> allowlist, <code>metadata</code>, <code>aliases</code>, expiry/<code>duration</code>, <code>allowed_routes</code> per key, custom key header name.",
+      "<code>key_generation_settings</code> — restrict who may call <code>/key/generate</code> and with which params (role-based)."
+    ],
+    ent: [
+      "<code>litellm_jwtauth</code> — <b>no-code JWT auth</b>: LiteLLM parses & verifies the JWT, maps claims → teams/orgs for you.",
+      "<code>oauth2_config</code> — opaque-token validation against an introspection endpoint, no code.",
+      "<b>SCIM v2</b> — auto-provision/deprovision users & groups from your IdP (entire <code>/scim/v2/*</code> router gated).",
+      "Custom SSO handler class; the <code>mode: auto</code> variant of custom-auth that maps results onto virtual keys.",
+      "Virtual-key <b>regeneration / scheduled rotation</b> with grace periods (<code>/key/regenerate</code>)."
+    ],
+    work: [
+      "JWT / OAuth → <span class='verdict-clean'>write a <code>custom_auth</code> callback</span> that decodes & verifies the bearer token (PyJWT + JWKS). Explicitly documented seam; the standard self-host pattern.",
+      "SCIM → <span class='verdict-no'>no clean workaround</span>; script <code>/user/new</code> + <code>/team/member_add</code> from your IdP's webhooks.",
+      "Key rotation → cron a <code>/key/delete</code> + <code>/key/generate</code> and push the new value yourself."
+    ]
+  },
+  {
+    id: "ui",
+    name: "Admin UI & SSO",
+    tag: "The full Admin UI is OSS and SSO is free up to 5 users; SSO beyond 5 users and custom UI/email branding are Enterprise.",
+    oss: [
+      "<b>The full Admin UI</b> (<code>/ui</code>) — models, keys, teams, users, spend/logs views, key-test playground, model-add. Login via master key or <code>UI_USERNAME</code>/<code>UI_PASSWORD</code>.",
+      "<b>SSO for up to 5 users — free since v1.76.0</b>. Okta, Google, Microsoft/Entra, generic OIDC.",
+      "Internal-user self-serve UI (users mint their own keys, see own spend); the 4 global roles."
+    ],
+    ent: [
+      "SSO <b>beyond 5 users</b>.",
+      "Per-user UI RBAC / scoped UI views (a viewer sees only their team's keys, etc.).<span class='note'>No code gate found — the concrete scoping seams (<code>ui_access_mode</code>, <code>restricted_sso_group</code>) are OSS/ungated. Either mislabeled or refers to a feature not in the OSS tree.</span>",
+      "Custom UI + email branding (logo, colors)."
+    ],
+    work: [
+      "SSO past 5 seats / org-wide → <span class='verdict-clean'>front the UI with <code>oauth2-proxy</code></span> (or Cloudflare Access / F5 BIG-IP APM). Proxy does OIDC, only forwards authenticated requests.",
+      "In-UI RBAC granularity → <span class='verdict-no'>no clean workaround</span> — everyone past the front-proxy is effectively an admin. Fine for a small platform team.",
+      "Or skip the UI in prod entirely — everything is API/IaC-manageable; use the UI only in dev."
+    ]
+  },
+  {
+    id: "rbac",
+    name: "Access Control & RBAC",
+    tag: "Global roles, teams, and per-key model allowlists are OSS; team admins, Projects, and admin_only_routes are Enterprise.",
+    oss: [
+      "The 4 built-in global roles: <code>proxy_admin · proxy_admin_viewer · internal_user · internal_user_viewer</code>.",
+      "<b>Teams</b> — <code>/team/new · /update · /member_add · /member_delete · /info · /list</code>; per-team <code>models</code> allowlist, <code>max_budget</code>, <code>tpm_limit · rpm_limit · max_parallel_requests</code>, <code>blocked</code>.",
+      "Per-key model allowlists; the user → team → key hierarchy; <code>default_internal_user_params</code>.",
+      "<code>model_group_alias</code> and named model-access groups (define a group in config, grant a key/team the group name)."
+    ],
+    ent: [
+      `<b>Organizations</b> hierarchy + <code>org_admin</code> role (a layer above teams).<span class='note'><b style='color:var(--ent)'>⚠ honor-system.</b> <code>organization_endpoints.py</code> carries <em>no</em> <code>premium_user</code> check (MIT) — but docs mark org/team roles "✨ Premium". Runs on OSS, marketed as paid. (Unlike team-admins/Projects, which are hard-gated.)</span>`,
+      "<b>Team admins</b> — assigning a team member <code>role: admin</code>; team-member-permission config.",
+      `<code>admin_only_routes</code> + the <code>allowed_routes</code> route ACL.<span class='note'><b style='color:var(--ent)'>⚠ honor-system.</b> <code>admin_only_routes</code>/<code>allowed_routes</code> are gated, but <b>IP allowlists</b> (<code>allowed_ips</code>) have no code gate (<code>auth_utils.py</code>, MIT). Docs still say "You need a LiteLLM License to unlock this feature" — runs on OSS, marketed as paid.</span>`,
+      "<b>Projects</b> — a sub-team layer below teams.",
+      `Binding a <b>named model-access group that resolves to a wildcard route</b> onto a key.<span class='note'>A bare pattern like <code>models: ["openai/*"]</code> directly on a key is OSS (<code>auth_checks.py</code>); only mapping a <em>named access-group</em> to a wildcard route is gated.</span>`
+    ],
+    work: [
+      "Org hierarchy → flatten to teams with a naming convention. <span class='verdict-no'>You lose delegated org admins — <code>proxy_admin</code> is all-or-nothing, no workaround.</span>",
+      "<code>admin_only_routes</code> / route ACLs → enforce in a reverse proxy or inside your <code>custom_auth</code> callback.",
+      "IP allowlist → reverse proxy / firewall / <code>request.client.host</code> check in <code>custom_auth</code>."
+    ]
+  },
+  {
+    id: "budgets",
+    name: "Budgets & Spend",
+    tag: "Per-key/team/user/end-user/provider budgets, spend tracking, and rate limits are OSS; tag-budget enforcement, model_max_budget, and the /global/spend/report rollup are Enterprise.",
+    oss: [
+      '<b>Per-key budgets</b>: <code>max_budget</code> + <code>budget_duration</code> (<code>"30d" · "24h" · "30s"</code>) → auto-resets on the rolling window; <code>soft_budget</code> = alert threshold without blocking.',
+      "<b>Per-team budgets</b>: <code>max_budget</code> + <code>budget_duration</code> on <code>/team/new</code>, with reset tracking.",
+      "<b>Per-internal-user budgets</b>: on <code>/user/new</code>; plus <code>max_internal_user_budget</code> / <code>default_internal_user_budget</code> globals.",
+      "<b>Per-end-user (customer) budgets</b>: <code>/budget/new</code> (named budget w/ <code>max_budget · tpm_limit · rpm_limit · budget_duration</code>) → attach via <code>/customer/new · /customer/update</code>. Caps the <code>user</code> field in the request body without minting a key.",
+      "<b>Per-provider budgets</b>: <code>provider_budget_config</code> on the Router + <code>/provider/budgets</code>.",
+      "<b>Spend tracking</b>: auto cost-calc for 100+ models → <code>LiteLLM_SpendLogs</code> table; <code>x-litellm-response-cost</code> header. Tracked by key / team / user / end-user / model / <b>tag</b>.",
+      "<b>Spend query endpoints (all OSS)</b>: <code>/spend/logs · /spend/calculate · /spend/keys · /spend/users · /spend/tags · /global/spend · /global/spend/{keys,teams,end_users,models,provider,logs,tags} · /global/activity · /user/daily/activity</code> …",
+      "<b>Rate limits</b>: TPM / RPM / <code>max_parallel_requests</code> at key, team, and user level; per-model TPM/RPM dicts on a key/team; provider-level via Router. Redis-backed for multi-instance."
+    ],
+    ent: [
+      "<b>Tag-based budgets</b> — defining a budget keyed on a request tag and <em>enforcing</em> it (tag spend <em>visibility</em> is OSS).",
+      "<b><code>model_max_budget</code> on a key</b> — per-model spend caps within a single virtual key.<span class='note'>Genuinely gated — <code>key_management_endpoints.py</code> <code>validate_model_max_budget()</code> raises without a license. The runtime limiter is ungated, but you can't <em>set</em> the value via the API on OSS.</span>",
+      "<b><code>/global/spend/report</code></b> — the aggregated rollup generator (the only spend endpoint with a <code>premium_user</code> gate).",
+      "<code>get_spend_routes</code> key permission (lets a non-admin key call <code>/spend/*</code>); custom spend-log metadata fields; wildcard model-access groups on a key."
+    ],
+    work: [
+      "Tag budgets → <span class='verdict-clean'>poll <code>/spend/tags</code></span> (or query <code>LiteLLM_SpendLogs</code>) on a cron; when a tag crosses your threshold, <code>/key/update</code> the budget to ~0 or <code>/key/block</code>.",
+      "Per-model budget on a key → split into one key per model, each with its own <code>max_budget</code>.",
+      "<code>/global/spend/report</code> → build the same rollup yourself from <code>/spend/logs</code> + <code>/global/spend/teams</code> — all the raw data is there.",
+      "Non-admin <code>/spend</code> access → expose a thin endpoint that calls <code>/user/daily/activity</code> with the master key."
+    ]
+  },
+  {
+    id: "guardrails",
+    name: "Guardrails & Content Safety",
+    tag: "The guardrails framework, Presidio PII masking, and ~50 vendor connectors are OSS; LlamaGuard, LLM Guard, hide_secrets, banned-keywords/blocked-users, and tag-mode guardrail RBAC are Enterprise.",
+    oss: [
+      "<b>The guardrails framework itself</b> — the <code>CustomGuardrail</code> base class (in <code>litellm/proxy/guardrails/guardrail_hooks/</code>, <em>not</em> <code>enterprise/</code>). Subclass it, implement <code>async_pre_call_hook · async_moderation_hook · async_post_call_success_hook</code>, register under <code>guardrails:</code> in config.",
+      "<b>Presidio PII masking</b> — OSS. So are Lakera, Bedrock guardrails, Guardrails-AI, Pangea, Pillar, Javelin, Model Armor, PANW Prisma AIRS, Azure Content Safety, OpenAI moderation <em>as a guardrail</em>, <code>litellm_content_filter</code>, <code>block_code_execution</code>, <code>llm_as_a_judge</code>, Aporia — ~50 connectors, all in the main tree.<span class='note'>Some connectors still need the vendor's own paid account — but the LiteLLM-side wiring is open.</span>",
+      "<code>default_on: true</code> always-on guardrails; request-level and config-level application."
+    ],
+    ent: [
+      "<b>LlamaGuard</b>, <b>LLM Guard</b>, <b><code>hide_secrets</code></b> / secret-detection — these three live under <code>enterprise/.../enterprise_callbacks/</code>.",
+      "OpenAI / Google text-moderation in the <em>built-in <code>litellm_settings.callbacks</code> form</em> (the guardrail form is OSS).",
+      "<b>Banned keywords</b>, <b>blocked-user lists</b>, <b><code>enforced_params</code></b>.",
+      `<b>Guardrail RBAC — tag-mode only.</b> Tag-based guardrail selection + dynamic per-request params are Enterprise (<code>custom_guardrail.py</code>).<span class='note'><b style='color:var(--ent)'>⚠ honor-system.</b> Only the <em>tag</em> dimension has a code gate. <b>Per-key/team/model</b> selection has no gate (MIT) — but docs still label it "✨ Enterprise only feature". Runs on OSS, marketed as paid.</span>`
+    ],
+    work: [
+      "Any moderation / secret-scrub / banned-words logic → <span class='verdict-clean'>write a <code>custom_guardrail</code> subclass</span> that calls OpenAI <code>/moderations</code>, a Llama-Guard endpoint you host, a regex scrubber, etc.",
+      "Per-key guardrail routing → branch inside your <code>custom_guardrail</code> on <code>user_api_key_dict</code> (you get the key metadata in the hook)."
+    ]
+  },
+  {
+    id: "logging",
+    name: "Logging & Observability",
+    tag: "~30 logging integrations (incl. S3) and the CustomLogger seam are OSS; GCS/Azure-Blob logging, the HTTP callback API, and PagerDuty are Enterprise.",
+    oss: [
+      "<b>~30 integrations</b>: Langfuse, Langsmith, Arize/Phoenix, Langtrace, Athina, Lunary, MLflow, Deepeval, Galileo, Helicone, Greenscale, OpenMeter, <b>Datadog</b> (+ LLM Observability), Sentry, <b>OpenTelemetry</b> (→ Jaeger/Tempo/any OTLP), <b>Prometheus</b> (<code>/metrics</code>), <b>DynamoDB</b>, <b>AWS SQS</b>, <b>S3 bucket logging</b>.",
+      '<b>The <code>CustomLogger</code> callback class</b> — <code>callbacks: ["custom_callback.py"]</code> → async-log/transform anything.',
+      "Documented stable <code>StandardLoggingPayload</code> schema (prompt, response, cost, latency, key, team, user, model …)."
+    ],
+    ent: [
+      "<b>GCS bucket logging</b>, <b>GCS Pub/Sub logging</b>, <b>Azure Blob Storage logging</b>.",
+      "The <b>Custom Callback <em>API</em></b> (POST the payload to an HTTP endpoint — <code>enterprise/.../example_logging_api.py</code>).",
+      `<b>Header-based callback control</b> — disabling callbacks per-request via request headers (<code>callback_controls.py</code>, enterprise tree).<span class='note'><b style='color:var(--ent)'>⚠ honor-system.</b> Per-team/per-key callback <em>routing</em> (team A → Langfuse project X) has no code gate (<code>team_callback_endpoints.py</code>, MIT) — but docs mark Team/Key Logging "✨ Enterprise only". Runs on OSS, marketed as paid. (The header-driven callback-<em>disable</em> control is genuinely enterprise-tree.)</span>`,
+      "<b>PagerDuty</b> alerting; custom email/alert branding."
+    ],
+    work: [
+      "GCS / Azure Blob logging → <span class='verdict-clean'>write a <code>CustomLogger</code></span> that batches <code>StandardLoggingPayload</code> to <code>google-cloud-storage</code> / <code>azure-storage-blob</code>.",
+      "HTTP-endpoint logging → <code>CustomLogger</code> that POSTs the payload.",
+      'Per-team routing → branch in your <code>CustomLogger</code> on <code>metadata["user_api_key_team_id"]</code>.',
+      "PagerDuty → <code>CustomLogger</code> that pages on error."
+    ]
+  },
+  {
+    id: "secrets",
+    name: "Secret Managers",
+    tag: "Env-var and config-file secret resolution is OSS; first-party Vault / KMS / Key-Vault / Secret-Manager integrations are Enterprise.",
+    oss: [
+      "Plain env-var resolution and <code>os.environ/VARNAME</code> references in <code>config.yaml</code> — the proxy reads keys from the environment / config file.",
+      "<span class='note'>That's the entire native OSS surface — the whole Secret Managers doc page is Enterprise-bannered.</span>"
+    ],
+    ent: [
+      `<b>HashiCorp Vault</b>, <b>AWS Secrets Manager</b>, <b>AWS KMS</b>, <b>Azure Key Vault</b>, <b>Google Secret Manager</b>, <b>Google KMS</b>, <b>CyberArk Conjur</b> — most self-gate in their loader/constructor (requires a license).<span class='note'>The split is uneven. <b>Genuinely code-gated:</b> HashiCorp Vault, AWS KMS, Google Secret Manager, CyberArk Conjur (raise on <code>premium_user</code>/<code>LITELLM_LICENSE</code>). <b style='color:var(--ent)'>⚠ honor-system</b> (no code gate, never had one, MIT-licensed, but the docs page banners the whole topic "✨ Enterprise Feature"): AWS Secrets Manager (v2), Google KMS, Azure Key Vault — loaded by old free-standing functions in <code>proxy_server.py</code> that never got a gate. All work on OSS.</span>`,
+      "Writing minted virtual keys back into the secret store (<code>key_management_settings.store_virtual_keys</code>)."
+    ],
+    work: [
+      "<span class='verdict-clean'>External Secrets Operator / Secrets Store CSI driver</span> (or <code>vault agent inject</code>, or AWS/GCP workload-identity sidecars) — pull from your vault, project into env vars <em>before</em> LiteLLM starts. LiteLLM then reads env vars (OSS).",
+      "A deployment concern rather than a LiteLLM gap, and the standard pattern for injecting secrets into a container."
+    ]
+  },
+  {
+    id: "routing",
+    name: "Routing & Infra",
+    tag: "100+ providers, the full Router, and caching (incl. semantic) are OSS; the multi-region control plane, priority rate-limit reservations, fine-tuning passthrough, and managed vector stores/files are Enterprise.",
+    oss: [
+      "<b>100+ provider integrations</b> (OpenAI, Anthropic, <b>Azure OpenAI</b>, Bedrock, Vertex, <b>self-hosted via <code>hosted_vllm/</code></b>, …).",
+      "<b>The Router</b>: load-balancing (<code>simple-shuffle · least-busy · usage-based-routing-v2 · latency-based-routing</code>); <code>fallbacks · context_window_fallbacks · content_policy_fallbacks</code>; <code>num_retries · timeout · stream_timeout · allowed_fails · cooldown_time</code>; multiple deployments per model name; <code>model_group_alias</code>; tag-based routing; pre-call checks.",
+      "<b>Caching</b>: Redis response cache (TTL/namespacing); <b>semantic caching</b> (Redis-Semantic / Qdrant / in-memory).",
+      "Batch & files passthrough; arbitrary-provider pass-through endpoints; health checks (<code>/health · /health/liveliness · /health/readiness</code>); <code>--num_workers</code>; provider-budget-aware routing."
+    ],
+    ent: [
+      "<b>Control plane + regional data planes</b> (multi-region / multi-tenant architecture with a unified control plane).",
+      "<b>Priority-based rate-limit reservations</b> (reserve TPM/RPM for a tier under contention).",
+      "<b>Fine-tuning passthrough endpoints</b> (<code>/fine_tuning/jobs</code>).",
+      "<b>Managed vector stores</b> + <b>managed files</b>; AI Hub."
+    ],
+    work: [
+      "Multi-region → run independent proxy clusters per region behind GeoDNS (own DB or shared). <span class='verdict-no'>You lose the unified control plane</span>, but the data path works.",
+      "Priority reservations → <span class='verdict-no'>no clean OSS equivalent</span> — over-provision, or run separate proxies per tier.",
+      "Vector stores / managed files → call the provider's API directly through the passthrough."
+    ]
+  },
+  {
+    id: "audit",
+    name: "Audit & Compliance",
+    tag: "Per-request logging and the SpendLogs table are OSS; the admin-action audit log is Enterprise.",
+    oss: [
+      "Request/response logging via any §logging callback (Langfuse, S3, Datadog, <code>CustomLogger</code>, …) — full prompt / response / cost / latency / key / team / user / model per request.",
+      "<code>LiteLLM_SpendLogs</code> — durable per-request spend records, queryable via <code>/spend/logs</code>."
+    ],
+    ent: [
+      "<b>Admin-action audit logs</b> — who changed which key / team / budget, with retention policies + S3 export (<code>litellm_settings.store_audit_logs: true</code>; <code>enterprise/.../audit_logging_endpoints.py</code>)."
+    ],
+    work: [
+      "Write a <code>CustomLogger</code> that also fires on management routes — or wrap <code>/key/* · /team/* · /budget/*</code> behind a logging reverse proxy — and emit your own audit events to S3/SIEM.<span class='note'>There is no native management-action hook in OSS, so this captures request-path events but not management actions (who changed which key / team / budget).</span>"
+    ]
+  }
+];
+var domEl = document.querySelector("#domains");
+var navEl = document.querySelector("#nav");
+for (const d of DOMAINS) {
+  const a = document.createElement("a");
+  a.href = "#" + d.id;
+  a.textContent = d.name;
+  navEl.append(a);
+  const sec = document.createElement("section");
+  sec.className = "domain";
+  sec.id = d.id;
+  sec.innerHTML = `
+    <div class="head">
+      <h2>${d.name}</h2>
+      <span class="tag">${d.tag}</span>
+      <span class="toggle">▾ collapse</span>
+    </div>
+    <div class="cols">
+      <div class="col oss">
+        <h3><span class="ic">✅</span> OSS / MIT — free</h3>
+        <ul>${d.oss.map((x) => `<li>${x}</li>`).join("")}</ul>
+      </div>
+      <div class="col ent">
+        <h3><span class="ic">\uD83D\uDD12</span> Enterprise adds</h3>
+        <ul>${d.ent.map((x) => `<li>${x}</li>`).join("")}</ul>
+      </div>
+      <div class="col work">
+        <h3><span class="ic">\uD83D\uDEE0</span> Get it without Enterprise</h3>
+        <ul>${d.work.map((x) => `<li>${x}</li>`).join("")}</ul>
+      </div>
+    </div>
+  `;
+  sec.querySelector(".head").addEventListener("click", () => {
+    sec.classList.toggle("collapsed");
+    sec.querySelector(".toggle").textContent = sec.classList.contains("collapsed") ? "▸ expand" : "▾ collapse";
+  });
+  domEl.append(sec);
+}
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

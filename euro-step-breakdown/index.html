@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viz:uid" content="v-fc6472aec84e">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:tag" content="Basketball">
+<meta name="viz:title" content="The Euro Step">
+<meta name="viz:description" content="Basketball's slickest finishing move, broken down five ways: the path, the physics of why it works, rookie-vs-pro, a 3D view, and the footwork. Interactive, for newcomers.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<script type="importmap">{ "imports": { "three": "https://esm.sh/three@0.160.0", "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/" } }</script>
+<style>
+  body { margin: 0; }
+  .page { max-width: 1180px; margin: 0 auto; padding: 24px; }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 22px; border-bottom: 1px solid var(--line, #2c3647); }
+  .tabs button { font: inherit; cursor: pointer; background: transparent; color: var(--ink-dim, #9fb0c3);
+    border: none; border-bottom: 2px solid transparent; padding: 10px 14px 12px; margin-bottom: -1px; font-size: 14px; }
+  .tabs button:hover { color: var(--ink, #e7ecf3); }
+  .tabs button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .two { display: grid; grid-template-columns: minmax(340px, 540px) 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  svg.court { width: 100%; height: auto; display: block; border-radius: 14px; touch-action: none; background:#15110a; }
+  .controls { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .controls button { font: inherit; cursor: pointer; background: var(--panel-2, #1b2230); color: var(--ink, #e7ecf3);
+    border: 1px solid var(--line, #2c3647); border-radius: 9px; padding: 8px 14px; }
+  .controls button:hover { border-color: var(--accent); }
+  .controls button.primary { background: var(--accent); color: #06121f; border-color: var(--accent); font-weight: 600; }
+  input[type=range] { flex: 1; min-width: 120px; accent-color: var(--accent); }
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step { padding: 13px 15px; border: 1px solid var(--line, #2c3647); border-radius: 12px; background: var(--panel, #141a24);
+    cursor: pointer; transition: border-color .15s, background .15s; }
+  .step:hover { border-color: var(--accent); }
+  .step.active { border-color: var(--accent); background: #16202e; box-shadow: 0 0 0 1px var(--accent) inset; }
+  .step h3 { margin: 0 0 4px; font-size: 14.5px; display: flex; align-items: center; gap: 9px; }
+  .step .num { display: inline-grid; place-items: center; width: 21px; height: 21px; border-radius: 50%;
+    background: var(--accent); color: #06121f; font-size: 12px; font-weight: 700; flex: none; }
+  .step p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-dim, #9fb0c3); }
+  .legend { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 11px; font-size: 12.5px; color: var(--ink-dim, #9fb0c3); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .prose { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .prose b { color: var(--ink, #e7ecf3); }
+  .prose h3 { color: var(--ink, #e7ecf3); margin: 16px 0 6px; font-size: 15px; }
+  .verdict { margin-top: 14px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line, #2c3647); background: var(--panel, #141a24); }
+  .verdict .big { font-size: 19px; font-weight: 700; }
+  .verdict.open { border-color: #36c98f; box-shadow: 0 0 0 1px #36c98f inset; } .verdict.open .big { color: #36c98f; }
+  .verdict.contested { border-color: #e2493f; box-shadow: 0 0 0 1px #e2493f inset; } .verdict.contested .big { color: #e2493f; }
+  .verdict p { margin: 6px 0 0; font-size: 13px; color: var(--ink-dim, #9fb0c3); line-height: 1.5; }
+  .hint { font-size: 13px; color: var(--ink-dim, #9fb0c3); margin-top: 12px; }
+  .tldr { font-size: 13.5px; line-height: 1.6; color: var(--ink-dim, #9fb0c3); }
+  .tldr b { color: var(--ink, #e7ecf3); }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Euro Step">
+<meta property="og:description" content="Basketball's slickest finishing move, broken down five ways: the path, the physics of why it works, rookie-vs-pro, a 3D view, and the footwork. Interactive, for newcomers.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/euro-step-breakdown/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/euro-step-breakdown/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="page">
+  <div class="viz-header" style="padding:0;">
+    <h1 style="margin:0;">The Euro Step</h1>
+    <div class="sub">Basketball's slickest finishing move — dodging a defender at the rim, legally. Five ways to see it.</div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="move" class="active">1 · The Move</button>
+    <button data-tab="why">2 · Why It Works</button>
+    <button data-tab="vs">3 · Rookie vs Pro</button>
+    <button data-tab="d3">4 · 3D View</button>
+    <button data-tab="feet">5 · The Footwork</button>
+  </nav>
+
+  <!-- ============ TAB 1: THE MOVE ============ -->
+  <section id="tab-move" class="tab active">
+    <div class="two">
+      <div>
+        <svg class="court move-court" viewBox="0 0 500 490" aria-label="Top-down half court animation">
+          <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+          <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+          <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>
+          <g class="prints"></g>
+          <path class="trail" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.55"/>
+          <g class="def"><circle r="13" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">D</text></g>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+        </svg>
+        <div class="controls">
+          <button class="play primary">▶ Play</button>
+          <button class="restart">↺ Restart</button>
+          <input class="scrub" type="range" min="0" max="1000" value="0">
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#36c98f"></i> Ball-handler</span>
+          <span><i class="dot" style="background:#e2493f"></i> Defender</span>
+          <span><i class="dot" style="background:#ff9b3c"></i> Ball</span>
+        </div>
+      </div>
+      <div>
+        <p class="tldr"><b>The idea:</b> instead of jumping <i>straight</i> at the rim into a waiting defender, you take your two
+        allowed steps in <b>two different directions</b> — one way to make the defender commit, then the other way to slip past
+        for the layup. Hit ▶ and watch the green dot.</p>
+        <p class="tldr" style="margin:10px 0 16px;"><b>Why it's legal:</b> once you stop dribbling (the “gather”), the rules give
+        you <b>two steps</b>. The Euro Step just uses those two steps to zig-zag instead of going straight.</p>
+        <div class="steps move-steps"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: WHY IT WORKS ============ -->
+  <section id="tab-why" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court why-court" viewBox="0 0 500 490" aria-label="Interactive half court">
+          <rect x="20" y="20" width="460" height="450" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="170" y="20" width="160" height="190" fill="#3a2b14" stroke="#6b5836" stroke-width="2"/>
+          <circle cx="250" cy="210" r="60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 210 60 A 40 40 0 0 0 290 60" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <path d="M 55 20 L 55 145 A 215 215 0 0 0 445 145 L 445 20" fill="none" stroke="#6b5836" stroke-width="2"/>
+          <line x1="225" y1="42" x2="275" y2="42" stroke="#cbb78a" stroke-width="4"/>
+          <circle cx="250" cy="56" r="9" fill="none" stroke="#ff7a3c" stroke-width="3"/>
+          <defs>
+            <marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e2493f"/></marker>
+            <marker id="mf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9fb0c3"/></marker>
+          </defs>
+          <circle class="reach" fill="#e2493f" fill-opacity="0.13" stroke="#e2493f" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <line class="fakeArrow" stroke="#9fb0c3" stroke-width="2.5" stroke-dasharray="4 4" marker-end="url(#mf)"/>
+          <line class="momArrow" stroke="#e2493f" stroke-width="3" marker-end="url(#mv)"/>
+          <g class="finish"><circle r="13" fill="none" stroke-width="3"/><text y="5" text-anchor="middle" font-size="15">⛹</text></g>
+          <path class="wpath" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
+          <g class="off"><circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">O</text><circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5"/></g>
+          <g class="def" style="cursor:grab"><circle r="22" fill="transparent"/><circle r="13" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" style="pointer-events:none">D</text></g>
+        </svg>
+        <div class="controls">
+          <button class="wplay primary">▶ Run the move</button>
+          <button class="wreset">↺ Reset defender</button>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#e2493f"></i> Defender (drag me)</span>
+          <span><i class="dot" style="background:#36c98f"></i> Ball-handler</span>
+          <span style="color:#e2493f">◌ reachable zone</span>
+          <span style="color:#e2493f">→ momentum</span>
+        </div>
+      </div>
+      <div>
+        <div class="verdict"><div class="big">—</div><p class="vtext"></p></div>
+        <p class="hint">Drag <b style="color:#e2493f">D</b> anywhere, then hit <b>Run the move</b>. The dashed red circle is everywhere
+        the defender can still reach in the ~0.4&nbsp;s a layup takes. Finish lands <b>outside</b> it → bucket.</p>
+        <div class="prose">
+          <h3>The trick isn't speed — it's commitment</h3>
+          <p>A defender must honor your <b>first</b> step, so they lean to cut it off. The instant they do, their body has
+          <b>momentum</b> that way (red arrow). Humans can't reverse momentum instantly — for a few tenths of a second they're
+          <i>carried</i> the way they committed.</p>
+          <h3>The second step attacks the space they vacated</h3>
+          <p>Your second step goes the <b>opposite</b> way. The reachable circle <b>shifts toward the fake</b> — that shift is
+          the whole move. Drag D around: it's hardest to beat a defender who sits back and <i>doesn't</i> commit, which is
+          exactly why a good Euro Step <b>sells</b> the fake to force the lean.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: ROOKIE vs PRO ============ -->
+  <section id="tab-vs" class="tab">
+    <p class="tldr" style="margin-bottom:16px;">Same defender. Same starting spot. <b>Left:</b> the rookie drives straight and runs
+    into the wall (an offensive foul — a “charge”). <b>Right:</b> the Euro Step goes <i>around</i> the wall. Press once, watch both.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div class="vs-pane" data-kind="rookie">
+        <div style="font-size:14px; font-weight:600; color:#e2493f; margin-bottom:8px;">❌ Straight drive</div>
+        <svg class="vs-court" viewBox="0 0 280 300">
+          <rect x="6" y="6" width="268" height="288" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="95" y="6" width="90" height="150" fill="#3a2b14" stroke="#6b5836" stroke-width="1.5"/>
+          <circle cx="140" cy="156" r="42" fill="none" stroke="#6b5836" stroke-width="1.5"/>
+          <line x1="118" y1="26" x2="162" y2="26" stroke="#cbb78a" stroke-width="3"/>
+          <circle cx="140" cy="38" r="8" fill="none" stroke="#ff7a3c" stroke-width="2.5"/>
+          <path class="vtrail" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <g class="vdef"><circle r="12" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">D</text></g>
+          <g class="voff"><circle r="12" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">O</text><circle class="vball" r="5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.2"/></g>
+          <text class="vstamp" x="140" y="230" text-anchor="middle" font-size="20" font-weight="800" opacity="0"></text>
+        </svg>
+      </div>
+      <div class="vs-pane" data-kind="pro">
+        <div style="font-size:14px; font-weight:600; color:#36c98f; margin-bottom:8px;">✓ Euro Step</div>
+        <svg class="vs-court" viewBox="0 0 280 300">
+          <rect x="6" y="6" width="268" height="288" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <rect x="95" y="6" width="90" height="150" fill="#3a2b14" stroke="#6b5836" stroke-width="1.5"/>
+          <circle cx="140" cy="156" r="42" fill="none" stroke="#6b5836" stroke-width="1.5"/>
+          <line x1="118" y1="26" x2="162" y2="26" stroke="#cbb78a" stroke-width="3"/>
+          <circle cx="140" cy="38" r="8" fill="none" stroke="#ff7a3c" stroke-width="2.5"/>
+          <path class="vtrail" fill="none" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <g class="vdef"><circle r="12" fill="#e2493f" stroke="#3a0f0c" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">D</text></g>
+          <g class="voff"><circle r="12" fill="#36c98f" stroke="#073d2a" stroke-width="2"/><text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">O</text><circle class="vball" r="5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.2"/></g>
+          <text class="vstamp" x="140" y="92" text-anchor="middle" font-size="20" font-weight="800" opacity="0"></text>
+        </svg>
+      </div>
+    </div>
+    <div class="controls"><button class="vsplay primary">▶ Run both</button></div>
+  </section>
+
+  <!-- ============ TAB 4: 3D VIEW ============ -->
+  <section id="tab-d3" class="tab">
+    <div class="two">
+      <div>
+        <div class="d3-canvas" style="width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden; background:#0c0a06;"></div>
+        <div class="controls">
+          <button class="d3play primary">▶ Play</button>
+          <input class="d3scrub" type="range" min="0" max="1000" value="0">
+          <label style="font-size:12.5px;color:var(--ink-dim,#9fb0c3);display:inline-flex;gap:5px;align-items:center;"><input class="d3rot" type="checkbox" checked> spin</label>
+        </div>
+        <div class="legend"><span>🖱 drag to orbit · scroll to zoom</span></div>
+      </div>
+      <div>
+        <div class="verdict" style="border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;">
+          <div class="big" style="color:var(--accent);font-size:16px;" id="d3phaseTitle">The drive</div>
+          <p class="d3phase" style="margin-top:6px;">Press ▶ and orbit around the move.</p>
+        </div>
+        <div class="prose">
+          <h3>The same move, in 3D</h3>
+          <p>Now you can see what the top-down view flattens: the <b>lean</b>. On step 1 the body tilts toward the fake to sell it;
+          on step 2 it whips the other way while the <b>ball swings across the body</b>, shielded from the defender.</p>
+          <p>The two long, low strides — far wider than a normal running step — are what cover the ground sideways. That's the
+          Euro Step's signature look: not faster, just <i>wider</i> and in two directions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 5: THE FOOTWORK ============ -->
+  <section id="tab-feet" class="tab">
+    <div class="two">
+      <div>
+        <svg class="court feet-court" viewBox="0 0 300 430" aria-label="Footwork rhythm">
+          <rect x="6" y="6" width="288" height="418" fill="#241a0e" stroke="#6b5836" stroke-width="2"/>
+          <!-- direction-to-rim arrow -->
+          <line x1="150" y1="60" x2="150" y2="26" stroke="#6b5836" stroke-width="2" marker-end="url(#mf)"/>
+          <text x="150" y="80" text-anchor="middle" font-size="11" fill="#7d8aa0">↑ toward the rim</text>
+          <!-- gather feet -->
+          <g class="fp" data-id="gather"><ellipse cx="128" cy="350" rx="13" ry="20" fill="#5b6b82"/><ellipse cx="172" cy="350" rx="13" ry="20" fill="#5b6b82"/><text x="150" y="392" text-anchor="middle" font-size="12" fill="#9fb0c3">gather (0)</text></g>
+          <!-- step 1 -->
+          <g class="fp" data-id="s1"><ellipse cx="225" cy="265" rx="14" ry="21" fill="#36c98f"/><text x="225" y="270" text-anchor="middle" font-size="16" font-weight="800" fill="#06231a">1</text></g>
+          <!-- step 2 -->
+          <g class="fp" data-id="s2"><ellipse cx="80" cy="180" rx="14" ry="21" fill="#36c98f"/><text x="80" y="185" text-anchor="middle" font-size="16" font-weight="800" fill="#06231a">2</text></g>
+          <!-- illegal 3rd -->
+          <g class="fp" data-id="s3"><ellipse cx="165" cy="120" rx="14" ry="21" fill="#e2493f"/><text x="165" y="126" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">3</text></g>
+          <!-- connecting path -->
+          <path class="feet-path" d="M150 350 L225 265 L80 180" fill="none" stroke="#36c98f" stroke-width="2" stroke-dasharray="4 4" opacity="0"/>
+        </svg>
+      </div>
+      <div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:6px;">
+          <div class="feet-count" style="font-size:40px; font-weight:800; color:var(--accent); line-height:1;">0</div>
+          <div style="color:var(--ink-dim,#9fb0c3); font-size:14px;">/ 2 steps used <span style="opacity:.7">(after the gather)</span></div>
+        </div>
+        <div class="feet-banner verdict" style="margin-top:8px;"><div class="big" style="font-size:16px;">Press a button below</div><p class="feet-msg">The gather is “step zero” — picking up your dribble. Then you get exactly two steps.</p></div>
+        <div class="controls">
+          <button class="feet-legal primary">▶ Legal Euro Step</button>
+          <button class="feet-travel">⚠ Take a 3rd step</button>
+        </div>
+        <div class="prose">
+          <h3>Why two steps, in two directions</h3>
+          <p>The whole move lives inside one rule: the moment you stop dribbling — the <b>gather</b> — you may take <b>two steps</b>
+          before you shoot or pass. Most layups spend those two steps going <i>straight</i>. The Euro Step spends them going
+          <b>two different ways</b>: one to move the defender, one to beat them.</p>
+          <p>Take a <b>third</b> step (or move your pivot foot before the gather) and it's a <b>travel</b> — a turnover. Watch the
+          counter: step 3 is where it turns red. Selling a huge fake while staying inside two steps is the skill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script type="module">
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined")
+    return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
+
+// app.ts
+var need = (e, sel) => {
+  if (!e)
+    throw new Error("missing element " + sel);
+  return e;
+};
+var scope = (root) => (s) => need(root.querySelector(s), s);
+var RIM = { x: 250, y: 56 };
+var sub = (a, b) => ({ x: a.x - b.x, y: a.y - b.y });
+var add = (a, b) => ({ x: a.x + b.x, y: a.y + b.y });
+var mul = (a, k) => ({ x: a.x * k, y: a.y * k });
+var dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+var norm = (a) => {
+  const l = Math.hypot(a.x, a.y) || 1;
+  return { x: a.x / l, y: a.y / l };
+};
+var ease = (p) => p * p * (3 - 2 * p);
+function along(pts, a) {
+  const segs = pts.length - 1;
+  const x = Math.max(0, Math.min(1, a)) * segs;
+  const i = Math.min(segs - 1, Math.floor(x));
+  let f = x - i;
+  f = ease(f);
+  return { x: pts[i].x + (pts[i + 1].x - pts[i].x) * f, y: pts[i].y + (pts[i + 1].y - pts[i].y) * f };
+}
+function initMove(root) {
+  const offKeys = [{ t: 0, x: 150, y: 430 }, { t: 0.3, x: 222, y: 250 }, { t: 0.55, x: 305, y: 200 }, { t: 0.82, x: 188, y: 130 }, { t: 1, x: 232, y: 78 }];
+  const defKeys = [{ t: 0, x: 250, y: 175 }, { t: 0.3, x: 235, y: 200 }, { t: 0.55, x: 292, y: 198 }, { t: 0.82, x: 300, y: 205 }, { t: 1, x: 298, y: 210 }];
+  const prints = [{ t: 0.3, x: 222, y: 250, label: "gather" }, { t: 0.55, x: 305, y: 200, label: "1" }, { t: 0.82, x: 188, y: 130, label: "2" }];
+  const STEPS = [
+    { t0: 0, name: "The drive", body: "The ball-handler attacks the basket off the dribble. The defender slides over to cut him off — straight ahead is a dead end (and a collision)." },
+    { t0: 0.3, name: "The gather", body: "He picks up his dribble. The instant you stop dribbling, the rules give you two steps to finish. The clock on those two steps starts now." },
+    { t0: 0.55, name: "Step 1 — sell the fake", body: "First step is a long stride to one side (here, his right). It looks like he's finishing that way, so the defender lunges to block it." },
+    { t0: 0.82, name: "Step 2 — cross over", body: "He pushes off and takes his second step the OTHER way, swinging the ball across his body — right past the defender who just committed the wrong direction." },
+    { t0: 0.93, name: "The finish", body: "No one between him and the rim. Easy layup on the far side, away from the stranded defender. Two steps, two directions, bucket." }
+  ];
+  const sample = (keys, t0) => {
+    const t2 = Math.max(0, Math.min(1, t0));
+    for (let i = 0;i < keys.length - 1; i++) {
+      const a = keys[i], b = keys[i + 1];
+      if (t2 >= a.t && t2 <= b.t) {
+        const p = b.t === a.t ? 0 : ease((t2 - a.t) / (b.t - a.t));
+        return { x: a.x + (b.x - a.x) * p, y: a.y + (b.y - a.y) * p };
+      }
+    }
+    const l = keys.at(-1);
+    return { x: l.x, y: l.y };
+  };
+  const $ = scope(root);
+  const stepsEl = $(".move-steps");
+  STEPS.forEach((s, i) => {
+    const d = document.createElement("div");
+    d.className = "step";
+    d.innerHTML = `<h3><span class="num">${i + 1}</span>${s.name}</h3><p>${s.body}</p>`;
+    d.addEventListener("click", () => {
+      pause();
+      setT(s.t0 + 0.001);
+    });
+    stepsEl.append(d);
+  });
+  const off = $(".off"), def = $(".def"), ball = $(".ball"), trail = $(".trail"), printsG = $(".prints"), scrub = need(root.querySelector(".scrub"), ".scrub"), playBtn = $(".play");
+  let dPath = "";
+  for (let i = 0;i <= 120; i++) {
+    const p = sample(offKeys, i / 120);
+    dPath += (i ? " L " : "M ") + p.x.toFixed(1) + " " + p.y.toFixed(1);
+  }
+  trail.setAttribute("d", dPath);
+  function render(t2) {
+    const o = sample(offKeys, t2), d = sample(defKeys, t2);
+    off.setAttribute("transform", `translate(${o.x} ${o.y})`);
+    def.setAttribute("transform", `translate(${d.x} ${d.y})`);
+    const ah = sample(offKeys, Math.min(1, t2 + 0.04)), dx = ah.x - o.x, dy = ah.y - o.y, len = Math.hypot(dx, dy) || 1;
+    ball.setAttribute("cx", String(dx / len * 13));
+    ball.setAttribute("cy", String(dy / len * 13));
+    printsG.innerHTML = "";
+    prints.forEach((pr) => {
+      if (t2 >= pr.t - 0.001) {
+        const num = pr.label === "1" || pr.label === "2";
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.innerHTML = `<circle cx="${pr.x}" cy="${pr.y}" r="${num ? 11 : 9}" fill="none" stroke="${num ? "var(--accent)" : "#7d8aa0"}" stroke-width="${num ? 2.5 : 2}" ${num ? "" : 'stroke-dasharray="3 3"'} opacity="0.9"/><text x="${pr.x}" y="${pr.y + 4}" text-anchor="middle" font-size="${num ? 12 : 8.5}" font-weight="700" fill="${num ? "var(--accent)" : "#9fb0c3"}">${num ? pr.label : "⊕"}</text>`;
+        printsG.append(g);
+      }
+    });
+    let active = 0;
+    STEPS.forEach((s, i) => {
+      if (t2 >= s.t0)
+        active = i;
+    });
+    root.querySelectorAll(".step").forEach((el, i) => {
+      el.classList.toggle("active", i === active);
+    });
+    scrub.value = String(Math.round(t2 * 1000));
+  }
+  let playing = false, raf = null, t = 0, last = 0;
+  const DUR = 6500;
+  function tick(ts) {
+    if (!last)
+      last = ts;
+    t += (ts - last) / DUR;
+    last = ts;
+    if (t >= 1) {
+      t = 1;
+      render(t);
+      pause();
+      return;
+    }
+    render(t);
+    raf = requestAnimationFrame(tick);
+  }
+  function play() {
+    if (playing)
+      return;
+    if (t >= 1)
+      t = 0;
+    playing = true;
+    last = 0;
+    playBtn.textContent = "❚❚ Pause";
+    raf = requestAnimationFrame(tick);
+  }
+  function pause() {
+    playing = false;
+    if (raf)
+      cancelAnimationFrame(raf);
+    raf = null;
+    playBtn.textContent = "▶ Play";
+  }
+  function setT(v) {
+    t = Math.max(0, Math.min(1, v));
+    render(t);
+  }
+  playBtn.addEventListener("click", () => playing ? pause() : play());
+  $(".restart").addEventListener("click", () => {
+    pause();
+    setT(0);
+    play();
+  });
+  scrub.addEventListener("input", () => {
+    pause();
+    setT(Number(scrub.value) / 1000);
+  });
+  render(0);
+  return { onHide: pause };
+}
+function initWhy(root) {
+  const svg = root.querySelector(".why-court");
+  const $ = scope(root);
+  let D = { x: 250, y: 195 };
+  const O_START = { x: 175, y: 442 }, REACH_R = 52, LUNGE = 34;
+  function plan() {
+    const spaceSide = D.x <= RIM.x ? 1 : -1, fakeSide = -spaceSide;
+    const gather = { x: D.x, y: Math.min(D.y + 52, 300) };
+    const fake = { x: gather.x + fakeSide * 72, y: D.y + 6 };
+    const finish = { x: RIM.x + spaceSide * 46, y: 92 };
+    const toFake = norm(sub(fake, D));
+    const lungeEnd = add(D, mul(toFake, LUNGE));
+    const open = dist(finish, lungeEnd) > REACH_R;
+    const margin = Math.round(dist(finish, lungeEnd) - REACH_R);
+    return { spaceSide, fakeSide, gather, fake, finish, toFake, lungeEnd, open, margin };
+  }
+  const els = { reach: need(root.querySelector(".reach"), ".reach"), mom: need(root.querySelector(".momArrow"), ".momArrow"), fake: need(root.querySelector(".fakeArrow"), ".fakeArrow"), finish: need(root.querySelector(".finish"), ".finish"), finishC: $(".finish circle"), path: $(".wpath"), off: $(".off"), ball: $(".ball"), def: need(root.querySelector(".def"), ".def") };
+  const setLine = (el, a2, b) => {
+    el.setAttribute("x1", String(a2.x));
+    el.setAttribute("y1", String(a2.y));
+    el.setAttribute("x2", String(b.x));
+    el.setAttribute("y2", String(b.y));
+  };
+  function verdict(p) {
+    const v = $(".verdict"), big = v.querySelector(".big"), t = $(".vtext");
+    v.className = "verdict " + (p.open ? "open" : "contested");
+    if (p.open) {
+      big.textContent = `\uD83C\uDFC0 OPEN LAYUP  (+${p.margin}px clear)`;
+      t.textContent = "The defender's momentum carried them toward the fake. By the time they could change direction, the finish on the other side is already up. This is the Euro Step working.";
+    } else {
+      big.textContent = `\uD83D\uDEE1 CONTESTED  (${p.margin}px short)`;
+      t.textContent = "From here the defender can still recover to the finish — they're sitting back, not over-committing. Sell the fake harder, or pick a different finish. Drag D off-center to open the move up.";
+    }
+  }
+  function render(a2 = 0) {
+    const p = plan();
+    els.def.setAttribute("transform", `translate(${D.x} ${D.y})`);
+    const committed = a2 >= 0.45;
+    const lungeNow = committed ? p.lungeEnd : D;
+    els.reach.setAttribute("cx", String(lungeNow.x));
+    els.reach.setAttribute("cy", String(lungeNow.y));
+    els.reach.setAttribute("r", String(REACH_R));
+    els.reach.style.opacity = String(a2 >= 0.3 ? 1 : 0.35);
+    setLine(els.mom, D, lungeNow);
+    els.mom.style.opacity = String(committed ? 1 : 0.25);
+    setLine(els.fake, p.gather, p.fake);
+    els.fake.style.opacity = String(a2 >= 0.3 && a2 < 0.75 ? 1 : 0.25);
+    els.finish.setAttribute("transform", `translate(${p.finish.x} ${p.finish.y})`);
+    els.finishC.setAttribute("stroke", p.open ? "#36c98f" : "#e2493f");
+    els.finish.style.opacity = String(a2 >= 0.5 ? 1 : 0.3);
+    els.path.setAttribute("d", `M ${O_START.x} ${O_START.y} L ${p.gather.x} ${p.gather.y} L ${p.fake.x} ${p.fake.y} L ${p.finish.x} ${p.finish.y}`);
+    const o = along([O_START, p.gather, p.fake, p.finish], a2);
+    els.off.setAttribute("transform", `translate(${o.x} ${o.y})`);
+    const o2 = along([O_START, p.gather, p.fake, p.finish], Math.min(1, a2 + 0.05));
+    const d = norm(sub(o2, o));
+    els.ball.setAttribute("cx", String(d.x * 13));
+    els.ball.setAttribute("cy", String(d.y * 13));
+    if (committed) {
+      const tt = Math.min(1, (a2 - 0.45) / 0.3);
+      const dp = add(D, mul(p.toFake, LUNGE * tt));
+      els.def.setAttribute("transform", `translate(${dp.x} ${dp.y})`);
+    }
+    verdict(p);
+  }
+  let dragging = false;
+  const pt = svg.createSVGPoint();
+  const toSvg = (e) => {
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const m = svg.getScreenCTM().inverse();
+    const p = pt.matrixTransform(m);
+    return { x: p.x, y: p.y };
+  };
+  els.def.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    els.def.setPointerCapture(e.pointerId);
+    els.def.style.cursor = "grabbing";
+  });
+  svg.addEventListener("pointermove", (e) => {
+    if (!dragging)
+      return;
+    const p = toSvg(e);
+    D.x = Math.max(120, Math.min(380, p.x));
+    D.y = Math.max(80, Math.min(300, p.y));
+    render(0);
+  });
+  window.addEventListener("pointerup", () => {
+    if (dragging) {
+      dragging = false;
+      els.def.style.cursor = "grab";
+    }
+  });
+  let raf = null, a = 0, last = 0;
+  const DUR = 4200;
+  const playBtn = $(".wplay");
+  function tick(ts) {
+    if (!last)
+      last = ts;
+    a += (ts - last) / DUR;
+    last = ts;
+    if (a >= 1) {
+      a = 1;
+      render(1);
+      raf = null;
+      playBtn.textContent = "▶ Run the move";
+      return;
+    }
+    render(a);
+    raf = requestAnimationFrame(tick);
+  }
+  playBtn.addEventListener("click", () => {
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+      playBtn.textContent = "▶ Run the move";
+      render(1);
+      return;
+    }
+    a = 0;
+    last = 0;
+    playBtn.textContent = "❚❚ Stop";
+    raf = requestAnimationFrame(tick);
+  });
+  $(".wreset").addEventListener("click", () => {
+    D = { x: 250, y: 195 };
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+    }
+    playBtn.textContent = "▶ Run the move";
+    render(0);
+  });
+  render(0);
+  return { onHide: () => {
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+      playBtn.textContent = "▶ Run the move";
+    }
+  } };
+}
+function initVS(root) {
+  const cfg = {
+    rookie: {
+      o: [[0, 140, 288], [0.5, 140, 202], [0.72, 140, 176], [1, 140, 176]],
+      d: [[0, 140, 150], [1, 140, 150]],
+      stampAt: 0.72,
+      stamp: "CHARGE!",
+      color: "#e2493f",
+      ballPop: true
+    },
+    pro: {
+      o: [[0, 140, 288], [0.45, 140, 205], [0.65, 196, 170], [0.85, 92, 128], [1, 160, 66]],
+      d: [[0, 140, 150], [0.45, 140, 152], [0.65, 182, 168], [1, 188, 170]],
+      stampAt: 0.9,
+      stamp: "BUCKET \uD83C\uDFC0",
+      color: "#36c98f"
+    }
+  };
+  const sampleKf = (kf, a2) => {
+    for (let i = 0;i < kf.length - 1; i++) {
+      const A = kf[i], B = kf[i + 1];
+      if (a2 >= A[0] && a2 <= B[0]) {
+        const p = B[0] === A[0] ? 0 : ease((a2 - A[0]) / (B[0] - A[0]));
+        return { x: A[1] + (B[1] - A[1]) * p, y: A[2] + (B[2] - A[2]) * p };
+      }
+    }
+    const L = kf.at(-1);
+    return { x: L[1], y: L[2] };
+  };
+  const panes = [...root.querySelectorAll(".vs-pane")].map((pane) => {
+    const c = cfg[pane.dataset["kind"]];
+    const off = pane.querySelector(".voff"), def = pane.querySelector(".vdef"), ball = pane.querySelector(".vball"), trail = pane.querySelector(".vtrail"), stamp = pane.querySelector(".vstamp");
+    trail.setAttribute("stroke", c.color);
+    let d = "";
+    c.o.forEach((p, i) => {
+      d += (i ? " L " : "M ") + p[1] + " " + p[2];
+    });
+    trail.setAttribute("d", d);
+    return { c, off, def, ball, trail, stamp };
+  });
+  function render(a2) {
+    panes.forEach((P) => {
+      const o = sampleKf(P.c.o, a2), d = sampleKf(P.c.d, a2);
+      P.off.setAttribute("transform", `translate(${o.x} ${o.y})`);
+      P.def.setAttribute("transform", `translate(${d.x} ${d.y})`);
+      if (P.c.ballPop && a2 >= P.c.stampAt) {
+        const t = (a2 - P.c.stampAt) / (1 - P.c.stampAt);
+        P.ball.setAttribute("cx", String(42 * t));
+        P.ball.setAttribute("cy", String(-34 * t));
+      } else {
+        const o2 = sampleKf(P.c.o, Math.min(1, a2 + 0.05));
+        const dx = o2.x - o.x, dy = o2.y - o.y, len = Math.hypot(dx, dy) || 1;
+        P.ball.setAttribute("cx", String(dx / len * 11));
+        P.ball.setAttribute("cy", String(dy / len * 11));
+      }
+      P.stamp.style.opacity = String(a2 >= P.c.stampAt ? 1 : 0);
+      P.stamp.setAttribute("fill", P.c.color);
+      P.stamp.textContent = P.c.stamp;
+    });
+  }
+  let raf = null, a = 0, last = 0;
+  const DUR = 3600;
+  const btn = root.querySelector(".vsplay");
+  function tick(ts) {
+    if (!last)
+      last = ts;
+    a += (ts - last) / DUR;
+    last = ts;
+    if (a >= 1) {
+      a = 1;
+      render(1);
+      raf = null;
+      btn.textContent = "↺ Run both again";
+      return;
+    }
+    render(a);
+    raf = requestAnimationFrame(tick);
+  }
+  btn.addEventListener("click", () => {
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+      btn.textContent = "▶ Run both";
+      return;
+    }
+    a = 0;
+    last = 0;
+    btn.textContent = "❚❚ Stop";
+    raf = requestAnimationFrame(tick);
+  });
+  render(0);
+  return { onHide: () => {
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+      btn.textContent = "▶ Run both";
+    }
+  } };
+}
+function initD3(root) {
+  const host = root.querySelector(".d3-canvas");
+  const playBtn = root.querySelector(".d3play"), scrub = root.querySelector(".d3scrub"), rotChk = root.querySelector(".d3rot"), phaseEl = root.querySelector(".d3phase"), titleEl = root.querySelector("#d3phaseTitle");
+  let THREE, scene, cam, renderer, controls, raf = null, built = false, a = 0, last = 0, playing = false;
+  const DUR = 6000;
+  const figs = {};
+  const rootKf = [[0, -5, 14], [0.38, -1, 0.5], [0.5, -1, -0.5], [0.66, 2.2, -4], [0.86, -2.2, -10], [1, 0.4, -15.5]];
+  const sample3 = (kf, t) => {
+    for (let i = 0;i < kf.length - 1; i++) {
+      const A = kf[i], B = kf[i + 1];
+      if (t >= A[0] && t <= B[0]) {
+        const p = B[0] === A[0] ? 0 : ease((t - A[0]) / (B[0] - A[0]));
+        return [A[1] + (B[1] - A[1]) * p, A[2] + (B[2] - A[2]) * p];
+      }
+    }
+    const L = kf.at(-1);
+    return [L[1], L[2]];
+  };
+  const PHASES = [
+    [0, "The drive", "Attacking downhill, ball on a live dribble."],
+    [0.38, "The gather", "Picks up the ball — the two-step clock starts."],
+    [0.5, "Step 1 — the fake", "A long, low stride to one side. Watch the lean sell it."],
+    [0.7, "Step 2 — the cross", "Whips the other way; the ball swings across the body."],
+    [0.9, "The finish", "Up at the rim, far side, defender stranded."]
+  ];
+  function makeFigure(color, scale = 1) {
+    const g = new THREE.Group;
+    const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.55, metalness: 0.05 });
+    const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.7 * scale, 1.5 * scale, 6, 12), mat);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.55 * scale, 18, 18), mat);
+    g.add(torso, head);
+    const limb = (r, l) => {
+      const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, l, 4, 8), mat);
+      m.geometry.translate(0, -l / 2, 0);
+      g.add(m);
+      return m;
+    };
+    const legL = limb(0.22 * scale, 1.6 * scale), legR = limb(0.22 * scale, 1.6 * scale), armL = limb(0.18 * scale, 1.4 * scale), armR = limb(0.18 * scale, 1.4 * scale);
+    scene.add(g);
+    return { g, torso, head, legL, legR, armL, armR, scale };
+  }
+  const V = (x, y, z) => new THREE.Vector3(x, y, z);
+  function aimLimb(mesh, from, to) {
+    const dir = new THREE.Vector3().subVectors(to, from);
+    const len = dir.length() || 0.001;
+    mesh.position.copy(from);
+    mesh.quaternion.setFromUnitVectors(V(0, -1, 0), dir.clone().normalize());
+    mesh.scale.y = len / (mesh.geometry.parameters.length || 1);
+  }
+  function build() {
+    scene = new THREE.Scene;
+    scene.background = new THREE.Color(788998);
+    const w = host.clientWidth || 520, h = host.clientHeight || 520;
+    cam = new THREE.PerspectiveCamera(42, w / h, 0.1, 200);
+    cam.position.set(16, 15, 20);
+    const r = renderer = new THREE.WebGLRenderer({ antialias: true });
+    r.setSize(w, h);
+    r.setPixelRatio(Math.min(2, devicePixelRatio));
+    host.append(r.domElement);
+    scene.add(new THREE.AmbientLight(16777215, 0.55));
+    const dl = new THREE.DirectionalLight(16773336, 1.1);
+    dl.position.set(10, 20, 8);
+    scene.add(dl);
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.MeshStandardMaterial({ color: 2365966, roughness: 0.95 }));
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.z = -6;
+    scene.add(floor);
+    const paint = new THREE.Mesh(new THREE.PlaneGeometry(11, 22), new THREE.MeshStandardMaterial({ color: 3812116, roughness: 0.95 }));
+    paint.rotation.x = -Math.PI / 2;
+    paint.position.set(0, 0.02, -11);
+    scene.add(paint);
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 9), new THREE.MeshStandardMaterial({ color: 2184 }));
+    pole.position.set(0, 4.5, -23.5);
+    scene.add(pole);
+    const board = new THREE.Mesh(new THREE.BoxGeometry(6, 3.5, 0.2), new THREE.MeshStandardMaterial({ color: 13350794 }));
+    board.position.set(0, 8, -22.7);
+    scene.add(board);
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.13, 12, 28), new THREE.MeshStandardMaterial({ color: 16742972, roughness: 0.4 }));
+    rim.rotation.x = Math.PI / 2;
+    rim.position.set(0, 6.6, -21);
+    scene.add(rim);
+    figs.ball = new THREE.Mesh(new THREE.SphereGeometry(0.5, 18, 18), new THREE.MeshStandardMaterial({ color: 16751420, roughness: 0.5 }));
+    scene.add(figs.ball);
+    figs.off = makeFigure(3590543);
+    figs.def = makeFigure(14829887, 0.98);
+    controls = new OrbitControls(cam, r.domElement);
+    controls.target.set(0, 2, -9);
+    controls.enableDamping = true;
+    controls.minDistance = 10;
+    controls.maxDistance = 60;
+    controls.maxPolarAngle = Math.PI / 2.05;
+    controls.update();
+    window.addEventListener("resize", onResize);
+  }
+  function onResize() {
+    if (!renderer)
+      return;
+    const w = host.clientWidth || 520, h = host.clientHeight || 520;
+    cam.aspect = w / h;
+    cam.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  }
+  function poseFigure(f, pos, lean, footL, footR, handBall) {
+    const [x, z] = pos;
+    const y = f._y ?? 0;
+    f.g.position.set(x, 0, z);
+    f.g.rotation.set(lean.fwd, 0, lean.side);
+    f.torso.position.set(0, 2.3 + y, 0);
+    f.head.position.set(0, 3.7 + y, 0);
+    const hipL = V(-0.45, 1.5 + y, 0), hipR = V(0.45, 1.5 + y, 0), shL = V(-0.6, 3 + y, 0), shR = V(0.6, 3 + y, 0);
+    aimLimb(f.legL, hipL, V(footL[0] - x, 0, footL[1] - z));
+    aimLimb(f.legR, hipR, V(footR[0] - x, 0, footR[1] - z));
+    aimLimb(f.armR, shR, handBall ? V(handBall[0] - x, handBall[1], handBall[2] - z) : V(0.9, 1.6 + y, 0.2));
+    aimLimb(f.armL, shL, V(-0.9, 1.6 + y, 0.2));
+  }
+  function render(t) {
+    const [x, z] = sample3(rootKf, t);
+    let side = 0, fwd = 0.12;
+    if (t > 0.5 && t < 0.72)
+      side = -0.28;
+    else if (t >= 0.72 && t < 0.9)
+      side = 0.3;
+    figs.off._y = t > 0.9 ? (t - 0.9) / 0.1 * 1.6 : 0;
+    const footStepR = [2.6, -4], footStepL = [-2.6, -10];
+    const footR = t > 0.5 && t < 0.74 ? footStepR : [x + 0.5, z + 0.3];
+    const footL = t >= 0.7 ? footStepL : [x - 0.5, z + 0.3];
+    let ball;
+    if (t < 0.5)
+      ball = [x + 0.6, 2.4, z + 0.4];
+    else if (t < 0.72)
+      ball = [x + 1, 2.2, z + 0.2];
+    else if (t < 0.9)
+      ball = [x - 1, 2.3, z - 0.2];
+    else
+      ball = [0.2, 5.2 + (t - 0.9) / 0.1 * 0.8, -18.5];
+    figs.ball.position.set(ball[0], ball[1], ball[2]);
+    poseFigure(figs.off, [x, z], { side, fwd }, footL, footR, ball);
+    const dRoot = t < 0.5 ? [0, -7] : t < 0.78 ? [2.2 + (t - 0.5) / 0.28 * 1.2, -7.5] : [3.4, -7.6];
+    poseFigure(figs.def, dRoot, { side: t > 0.5 && t < 0.78 ? -0.25 : 0, fwd: 0.1 }, [dRoot[0] - 0.5, dRoot[1] + 0.4], [dRoot[0] + 0.5, dRoot[1] + 0.4], null);
+    let ph = PHASES[0];
+    PHASES.forEach((p) => {
+      if (t >= p[0])
+        ph = p;
+    });
+    titleEl.textContent = ph[1];
+    phaseEl.textContent = ph[2];
+    scrub.value = String(Math.round(t * 1000));
+  }
+  function loop(ts) {
+    if (!last)
+      last = ts;
+    if (playing) {
+      a += (ts - last) / DUR;
+      if (a >= 1) {
+        a = 1;
+        playing = false;
+        playBtn.textContent = "↺ Play again";
+      }
+      render(a);
+    }
+    last = ts;
+    controls.autoRotate = rotChk.checked;
+    controls.autoRotateSpeed = 0.8;
+    controls.update();
+    renderer.render(scene, cam);
+    raf = requestAnimationFrame(loop);
+  }
+  async function onShow() {
+    if (!built) {
+      THREE = await import("three");
+      ({ OrbitControls } = await import("three/addons/controls/OrbitControls.js"));
+      build();
+      render(0);
+      built = true;
+    }
+    onResize();
+    if (!raf) {
+      last = 0;
+      raf = requestAnimationFrame(loop);
+    }
+  }
+  function onHide() {
+    if (raf) {
+      cancelAnimationFrame(raf);
+      raf = null;
+    }
+  }
+  let OrbitControls;
+  playBtn.addEventListener("click", () => {
+    if (playing) {
+      playing = false;
+      playBtn.textContent = "▶ Play";
+    } else {
+      if (a >= 1)
+        a = 0;
+      playing = true;
+      last = 0;
+      playBtn.textContent = "❚❚ Pause";
+    }
+  });
+  scrub.addEventListener("input", () => {
+    playing = false;
+    playBtn.textContent = "▶ Play";
+    a = Number(scrub.value) / 1000;
+    if (built)
+      render(a);
+  });
+  return { onShow, onHide };
+}
+function initFeet(root) {
+  const $ = scope(root);
+  const fps = {};
+  root.querySelectorAll(".fp").forEach((g) => {
+    fps[g.dataset["id"]] = g;
+  });
+  const path = need(root.querySelector(".feet-path"), ".feet-path"), countEl = need(root.querySelector(".feet-count"), ".feet-count"), banner = $(".feet-banner"), bannerBig = banner.querySelector(".big"), msg = $(".feet-msg");
+  let timers = [];
+  const clear = () => {
+    timers.forEach(clearTimeout);
+    timers = [];
+  };
+  function reset() {
+    clear();
+    Object.values(fps).forEach((g) => {
+      g.style.opacity = "0";
+    });
+    path.style.opacity = "0";
+    countEl.textContent = "0";
+    countEl.style.color = "var(--accent)";
+    banner.className = "feet-banner verdict";
+    bannerBig.textContent = "Press a button below";
+    bannerBig.style.color = "";
+    msg.textContent = "The gather is “step zero” — picking up your dribble. Then you get exactly two steps.";
+  }
+  const show = (id) => {
+    fps[id].style.opacity = "1";
+    fps[id].animate([{ opacity: 0.3 }, { opacity: 1 }], { duration: 220 });
+  };
+  function legal() {
+    reset();
+    timers.push(setTimeout(() => {
+      show("gather");
+      msg.textContent = "Gather — dribble picked up. The two-step count starts now.";
+    }, 150), setTimeout(() => {
+      show("s1");
+      countEl.textContent = "1";
+      path.style.opacity = "0.7";
+      bannerBig.textContent = "Step 1 ✓";
+      bannerBig.style.color = "var(--accent)";
+      msg.textContent = "First step — a long stride one way to move the defender.";
+    }, 1000), setTimeout(() => {
+      show("s2");
+      countEl.textContent = "2";
+      bannerBig.textContent = "Step 2 ✓";
+      msg.textContent = "Second step — the other way, into the open space. Shoot now.";
+    }, 1900), setTimeout(() => {
+      banner.className = "feet-banner verdict open";
+      bannerBig.textContent = "\uD83C\uDFC0 LEGAL — bucket";
+      msg.textContent = "Two steps, two directions, ball released. Textbook Euro Step.";
+    }, 2700));
+  }
+  function travel() {
+    legal();
+    timers.push(setTimeout(() => {
+      show("s3");
+      countEl.textContent = "3";
+      countEl.style.color = "#e2493f";
+      banner.className = "feet-banner verdict contested";
+      bannerBig.textContent = "\uD83D\uDEAB TRAVEL — turnover";
+      bannerBig.style.color = "#e2493f";
+      msg.textContent = "That third step is a traveling violation — you only get two after the gather. Ball goes the other way.";
+      countEl.animate([{ transform: "scale(1.4)" }, { transform: "scale(1)" }], { duration: 300 });
+    }, 2700));
+  }
+  $(".feet-legal").addEventListener("click", legal);
+  $(".feet-travel").addEventListener("click", travel);
+  reset();
+  return { onHide: reset };
+}
+var inits = {
+  move: initMove(document.querySelector("#tab-move")),
+  why: initWhy(document.querySelector("#tab-why")),
+  vs: initVS(document.querySelector("#tab-vs")),
+  d3: initD3(document.querySelector("#tab-d3")),
+  feet: initFeet(document.querySelector("#tab-feet"))
+};
+document.querySelector("#tabs").addEventListener("click", (e) => {
+  const b = e.target instanceof Element ? e.target.closest("button[data-tab]") : null;
+  if (!b)
+    return;
+  const id = b.dataset["tab"];
+  document.querySelectorAll("#tabs button").forEach((x) => {
+    x.classList.toggle("active", x === b);
+  });
+  document.querySelectorAll(".tab").forEach((s) => {
+    s.classList.toggle("active", s.id === "tab-" + id);
+  });
+  Object.entries(inits).forEach(([k, api]) => {
+    if (k !== id && api && api.onHide)
+      api.onHide();
+  });
+  const cur = inits[id];
+  if (cur && cur.onShow)
+    cur.onShow();
+});
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>

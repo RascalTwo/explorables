@@ -1,0 +1,1482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="importmap">{"imports":{"/_kit/viz.js":"data:text/javascript;base64,Ly8gR0VORVJBVEVEIGZyb20ga2l0L3NyYy92aXoudHMgYnkgYGJ1biBydW4gc3luYzpraXRgIOKAlCBlZGl0IHRoYXQgZmlsZSwgbm90IHRoaXMgb25lLgovLyB2aXouanMg4oCUIHNoYXJlZCBoZWxwZXJzIGZvciAvdml6IHBhZ2VzLiBMb2FkIHdpdGg6Ci8vICAgPHNjcmlwdCB0eXBlPSJtb2R1bGUiPgovLyAgICAgaW1wb3J0IHsgYXJyb3dNYXJrZXJzLCBjb25uZWN0LCBzaWRlLCBsYWJlbEJveCwgdml6QXVkaXQsICQsICQkLCBlc2MsIHNhdmVIYXNoLCBsb2FkSGFzaCwgdml6RW52IH0gZnJvbSAiL19raXQvdml6LmpzIjsKLy8gICA8L3NjcmlwdD4KLy8gU2VydmVkIGJ5IHRoZSB2aXogc2VydmVyIGF0IC9fa2l0L3Zpei5qcyBmcm9tIHRoZSBza2lsbCdzIG93biBraXQvIGRpciwgc28gaXQncwovLyBvbmUgc291cmNlIG9mIHRydXRoIGFjcm9zcyBldmVyeSB2aXouIFBhaXJzIHdpdGggL19raXQvdml6LWtpdC5jc3MuCmV4cG9ydCBjb25zdCBTVkdOUyA9ICJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI7Ci8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBTVkcgZGlhZ3JhbXMg4oCUIGdlb21ldHJ5IGZpcnN0LgovLwovLyBUaGUgcmVjdXJyaW5nIHJld29yayBpbiBib3hlcy1hbmQtYXJyb3dzIGRpYWdyYW1zIGNvbWVzIGZyb20gdHlwaW5nIGxhYmVsIGFuZAovLyBhcnJvdyBjb29yZGluYXRlcyBhcyBpbmRlcGVuZGVudCBsaXRlcmFsczogYSBib3ggZ2V0cyByZXNpemVkIG9yIG1vdmVkLCBidXQgdGhlCi8vIGFycm93IGVuZHBvaW50IGFuZCB0aGUgbGFiZWwgcG9zaXRpb24gd2VyZSBndWVzc2VkIGFnYWluc3QgdGhlICpvbGQqIGdlb21ldHJ5LAovLyBzbyB0aGUgYXJyb3cgbm93IHBvaW50cyBhdCBlbXB0eSBzcGFjZSAob3IgdGhlIHdyb25nIGJveCkgYW5kIHRoZSBsYWJlbCBzcGlsbHMKLy8gb3V0LiBUaGUgZml4IGlzIHRvIG5ldmVyIGhhbmQtcGxhY2UgdGhvc2U6IGRlZmluZSBlYWNoIG5vZGUgT05DRSBhcyB7eCx5LHcsaH0KLy8gYW5kIGNvbXB1dGUgZXZlcnl0aGluZyBlbHNlIGZyb20gaXQuCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQovLyBEZWZhdWx0IGFycm93aGVhZCBwYWxldHRlLCBrZXllZCB0byB0aGUgdml6LWtpdCBpbnRlbnQgdG9rZW5zLiBTVkcgbWFya2VycyBjYW4ndAovLyBpbmhlcml0IHRoZSBzdHJva2UgY29sb3Igb2YgdGhlIGxpbmUgdGhhdCB1c2VzIHRoZW0sIHNvIHlvdSBnZW51aW5lbHkgbmVlZCBvbmUKLy8gbWFya2VyIHBlciBjb2xvciDigJQgdGhpcyBlbWl0cyB0aGVtIGFsbCB3aXRoIHN0YWJsZSBpZHMgc28geW91IHN0b3AgcmUtZGVyaXZpbmcKLy8gdGhlIHNhbWUgPG1hcmtlcj4gYmxvY2sgcGVyIGRpYWdyYW0uIFJlZmVyZW5jZSBhcyBtYXJrZXItZW5kPSJ1cmwoI2FoLWFjY2VudCkiLgovLwovLyBUaGVzZSBhcmUgdmFyKCkgcmVmZXJlbmNlcywgbm90IGhleGVzLCBPTiBQVVJQT1NFOiBhIHBhZ2UgdGhhdCBvdmVycmlkZXMgdGhlCi8vIHRva2VucyAoc2VlIGtpdC9SRUFETUUubWQpIHJlLXRoZW1lcyBpdHMgYXJyb3doZWFkcyBmb3IgZnJlZS4gSGFyZGNvZGluZyB0aGUKLy8gaGV4ZXMgaGVyZSB3b3VsZCBzaWxlbnRseSBzdHJhbmQgZXZlcnkgbWFya2VyIGF0IHRoZSBkZWZhdWx0IHBhbGV0dGUuCmNvbnN0IERFRkFVTFRfTUFSS0VSUyA9IHsKICAgIGFoOiAidmFyKC0tbXV0ZWQpIiwgLy8gdGhlIGRlZmF1bHQgZWRnZQogICAgImFoLWFjY2VudCI6ICJ2YXIoLS1hY2NlbnQpIiwKICAgICJhaC1nb29kIjogInZhcigtLWdvb2QpIiwKICAgICJhaC13YXJuIjogInZhcigtLXdhcm4pIiwKICAgICJhaC1kYW5nZXIiOiAidmFyKC0tZGFuZ2VyKSIsCn07Ci8vIFJldHVybnMgYSA8ZGVmcz7igKY8L2RlZnM+IHN0cmluZy4gRHJvcCBpdCBvbmNlIGF0IHRoZSB0b3Agb2YgeW91ciA8c3ZnPi4KZXhwb3J0IGZ1bmN0aW9uIGFycm93TWFya2VycyhwYWxldHRlID0gREVGQVVMVF9NQVJLRVJTKSB7CiAgICBjb25zdCBtYXJrZXJzID0gT2JqZWN0LmVudHJpZXMocGFsZXR0ZSkKICAgICAgICAubWFwKChbaWQsIGZpbGxdKSA9PiBgPG1hcmtlciBpZD0iJHtpZH0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgYCArCiAgICAgICAgYG1hcmtlcldpZHRoPSI3IiBtYXJrZXJIZWlnaHQ9IjciIG9yaWVudD0iYXV0by1zdGFydC1yZXZlcnNlIj5gICsKICAgICAgICBgPHBhdGggZD0iTTAsMCBMMTAsNSBMMCwxMCB6IiBmaWxsPSIke2ZpbGx9Ii8+PC9tYXJrZXI+YCkKICAgICAgICAuam9pbigiIik7CiAgICByZXR1cm4gYDxkZWZzPiR7bWFya2Vyc308L2RlZnM+YDsKfQovLyBBIG5vZGUgaXMganVzdCB7eCwgeSwgdywgaH0uIGNlbnRlcigpIGFuZCBzaWRlKCkgZGVyaXZlIGNvbm5lY3Rpb24gcG9pbnRzIGZyb20KLy8gaXQsIHNvIGFuIGVkZ2Ugc3RheXMgYXR0YWNoZWQgdG8gdGhlIGJveCBubyBtYXR0ZXIgaG93IHRoZSBib3ggY2hhbmdlcy4KZXhwb3J0IGNvbnN0IGNlbnRlciA9IChuKSA9PiAoeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggLyAyIH0pOwpleHBvcnQgY29uc3Qgc2lkZSA9IChuLCB3aGVyZSkgPT4gKHsKICAgIHRvcDogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgfSwKICAgIGJvdHRvbTogeyB4OiBuLnggKyBuLncgLyAyLCB5OiBuLnkgKyBuLmggfSwKICAgIGxlZnQ6IHsgeDogbi54LCB5OiBuLnkgKyBuLmggLyAyIH0sCiAgICByaWdodDogeyB4OiBuLnggKyBuLncsIHk6IG4ueSArIG4uaCAvIDIgfSwKfSlbd2hlcmVdOwovLyBTdHJhaWdodCBlZGdlIGJldHdlZW4gdHdvIG5vZGVzLCBhdXRvLXBpY2tpbmcgdGhlIGZhY2luZyBzaWRlcyBiYXNlZCBvbiB0aGVpcgovLyByZWxhdGl2ZSBwb3NpdGlvbi4gUmV0dXJucyBhbiBTVkcgcGF0aCAiZCIgc3RyaW5nOyBzZXQgdGhlIG1hcmtlciB5b3Vyc2VsZiB2aWEKLy8gdGhlIGVsZW1lbnQncyBtYXJrZXItZW5kIGF0dHJpYnV0ZS4gRm9yID41IG5vZGVzIHdpdGggY3Jvc3NpbmcgZWRnZXMsIHJlYWNoIGZvcgovLyBhIGxheW91dCBlbmdpbmUgKGRhZ3JlIC8gZDMtZGFnIC8gbWVybWFpZCkgaW5zdGVhZCBvZiBwbGFjaW5nIG5vZGVzIGJ5IGhhbmQg4oCUCi8vIHRoYXQncyB0aGUgcG9pbnQgd2hlcmUgbWFudWFsIGNvb3JkaW5hdGVzIHN0b3AgYmVpbmcgd29ydGggaXQuCmV4cG9ydCBmdW5jdGlvbiBjb25uZWN0KGEsIGIpIHsKICAgIGNvbnN0IGNhID0gY2VudGVyKGEpLCBjYiA9IGNlbnRlcihiKTsKICAgIGNvbnN0IGhvcml6ID0gTWF0aC5hYnMoY2IueCAtIGNhLngpID4gTWF0aC5hYnMoY2IueSAtIGNhLnkpOwogICAgY29uc3QgcGEgPSBob3JpegogICAgICAgID8gc2lkZShhLCBjYi54ID4gY2EueCA/ICJyaWdodCIgOiAibGVmdCIpCiAgICAgICAgOiBzaWRlKGEsIGNiLnkgPiBjYS55ID8gImJvdHRvbSIgOiAidG9wIik7CiAgICBjb25zdCBwYiA9IGhvcml6CiAgICAgICAgPyBzaWRlKGIsIGNiLnggPiBjYS54ID8gImxlZnQiIDogInJpZ2h0IikKICAgICAgICA6IHNpZGUoYiwgY2IueSA+IGNhLnkgPyAidG9wIiA6ICJib3R0b20iKTsKICAgIHJldHVybiBgTSAke3BhLnh9ICR7cGEueX0gTCAke3BiLnh9ICR7cGIueX1gOwp9Ci8vIEEgbGFiZWwgdGhhdCBDQU5OT1Qgb3ZlcmZsb3cgaXRzIGJveC4gPGZvcmVpZ25PYmplY3Q+IGxldHMgdGhlIGJyb3dzZXIgd3JhcCBhbmQKLy8gZWxsaXBzaXplIEhUTUwgbmF0aXZlbHksIHVubGlrZSByYXcgPHRleHQ+IHdoaWNoIHlvdSdkIGhhdmUgdG8gbWVhc3VyZSBieSBoYW5kCi8vIChhbmQgaGlzdG9yaWNhbGx5IGd1ZXNzZWQgd3JvbmcpLiBVc2UgdGhpcyBmb3IgYW55IG11bHRpLXdvcmQgbGFiZWwgaW5zaWRlIGEKLy8gZml4ZWQtd2lkdGggYm94LiBTdHlsZSB2aWEgdGhlIC52c3ZnLWxhYmVsIGNsYXNzIGluIHZpei1raXQuY3NzLgpleHBvcnQgZnVuY3Rpb24gbGFiZWxCb3gobm9kZSwgaHRtbCwgY2xzID0gIiIpIHsKICAgIHJldHVybiAoYDxmb3JlaWduT2JqZWN0IHg9IiR7bm9kZS54fSIgeT0iJHtub2RlLnl9IiB3aWR0aD0iJHtub2RlLnd9IiBoZWlnaHQ9IiR7bm9kZS5ofSI+YCArCiAgICAgICAgYDxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIGNsYXNzPSJ2c3ZnLWxhYmVsICR7Y2xzfSI+JHtodG1sfTwvZGl2PmAgKwogICAgICAgIGA8L2ZvcmVpZ25PYmplY3Q+YCk7Cn0KLy8gVmVyaWZpY2F0aW9uIGJhY2tzdG9wLiBJZiB5b3UgRE8gaGFuZC1yb2xsIDx0ZXh0PiwgY2FsbCB0aGlzIG9uY2UgYWZ0ZXIgcmVuZGVyOgovLyBpdCBvdXRsaW5lcyAoaW4gcmVkKSBhbnkgPHRleHQ+IHdob3NlIGJvdW5kaW5nIGJveCBzcGlsbHMgcGFzdCB0aGUgPHJlY3Q+IGluIGl0cwovLyBncm91cCwgYW5kIGRyb3BzIGEgZml4ZWQgYmFubmVyIHNvIGFuIG92ZXJmbG93IGlzIGltcG9zc2libGUgdG8gbWlzcyBpbiB0aGUgb3BlbgovLyBicm93c2VyIOKAlCBvciBpbiBhbnkgc2NyZWVuc2hvdCB5b3UgdGFrZSB0byB2ZXJpZnkgdGhlIHBhZ2UuIFJldHVybnMgdGhlIGxpc3Qgb2YKLy8gb2ZmZW5kaW5nIHN0cmluZ3MgKGVtcHR5ID0gY2xlYW4pLiBUaGUgcmVjdC1pbi1zYW1lLTxnPiBwYWlyaW5nIGlzIGEgaGV1cmlzdGljOwovLyBpdCBjYXRjaGVzIHRoZSBjb21tb24gY2FzZSB3aGVyZSBlYWNoIGJveCtsYWJlbCBsaXZlIGluIG9uZSA8Zz4uCmV4cG9ydCBmdW5jdGlvbiB2aXpBdWRpdChyb290ID0gZG9jdW1lbnQpIHsKICAgIGNvbnN0IGJhZCA9IFtdOwogICAgZm9yIChjb25zdCB0IG9mIHJvb3QucXVlcnlTZWxlY3RvckFsbCgidGV4dCIpKSB7CiAgICAgICAgY29uc3QgcmVjdCA9IHQuY2xvc2VzdCgiZyIpPy5xdWVyeVNlbGVjdG9yKCJyZWN0Iik7CiAgICAgICAgaWYgKCFyZWN0KQogICAgICAgICAgICBjb250aW51ZTsKICAgICAgICBjb25zdCB0YiA9IHQuZ2V0QkJveCgpOwogICAgICAgIGNvbnN0IHJiID0gcmVjdC5nZXRCQm94KCk7CiAgICAgICAgY29uc3Qgc3BpbGxzID0gdGIueCA8IHJiLnggLSAxIHx8CiAgICAgICAgICAgIHRiLnkgPCByYi55IC0gMSB8fAogICAgICAgICAgICB0Yi54ICsgdGIud2lkdGggPiByYi54ICsgcmIud2lkdGggKyAxIHx8CiAgICAgICAgICAgIHRiLnkgKyB0Yi5oZWlnaHQgPiByYi55ICsgcmIuaGVpZ2h0ICsgMTsKICAgICAgICBpZiAoc3BpbGxzKSB7CiAgICAgICAgICAgIHQuc3R5bGUub3V0bGluZSA9ICIxcHggc29saWQgI2Y4NTE0OSI7CiAgICAgICAgICAgIGJhZC5wdXNoKHQudGV4dENvbnRlbnQpOwogICAgICAgIH0KICAgIH0KICAgIGlmIChiYWQubGVuZ3RoKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiW3ZpekF1ZGl0XSB0ZXh0IG92ZXJmbG93OiIsIGJhZCk7CiAgICAgICAgY29uc3QgYmFubmVyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICAgICAgYmFubmVyLnRleHRDb250ZW50ID0gYOKaoCAke2JhZC5sZW5ndGh9IHRleHQgb3ZlcmZsb3cocykg4oCUIHNlZSByZWQgb3V0bGluZXNgOwogICAgICAgIGJhbm5lci5zdHlsZS5jc3NUZXh0ID0KICAgICAgICAgICAgInBvc2l0aW9uOmZpeGVkO2xlZnQ6OHB4O2JvdHRvbTo4cHg7ei1pbmRleDo5OTk5O2JhY2tncm91bmQ6I2Y4NTE0OTtjb2xvcjojZmZmOyIgKwogICAgICAgICAgICAgICAgImZvbnQ6MTJweC8xIHNhbnMtc2VyaWY7cGFkZGluZzo2cHggMTBweDtib3JkZXItcmFkaXVzOjZweCI7CiAgICAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChiYW5uZXIpOwogICAgfQogICAgcmV0dXJuIGJhZDsKfQpleHBvcnQgZnVuY3Rpb24gJChzZWwsIHJvb3QgPSBkb2N1bWVudCkgeyByZXR1cm4gcm9vdC5xdWVyeVNlbGVjdG9yKHNlbCk7IH0KZXhwb3J0IGZ1bmN0aW9uICQkKHNlbCwgcm9vdCA9IGRvY3VtZW50KSB7IHJldHVybiBbLi4ucm9vdC5xdWVyeVNlbGVjdG9yQWxsKHNlbCldOyB9Ci8vIEVzY2FwZSBiZWZvcmUgaW5qZWN0aW5nIHRleHQgaW50byBpbm5lckhUTUwuCmNvbnN0IEVOVElUSUVTID0geyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH07CmV4cG9ydCBjb25zdCBlc2MgPSAocykgPT4gU3RyaW5nKHMpLnJlcGxhY2UoL1smPD4iJ10vZywgKGMpID0+IEVOVElUSUVTW2NdID8/IGMpOwovLyBIb3QtcmVsb2FkIChhbmQgZXZlcnkgc2F2ZSkgZG9lcyBhIGZ1bGwgcGFnZSByZWZyZXNoLCBzbyBpbi1wYWdlIHN0YXRlIGlzIHdpcGVkLgovLyBQZXJzaXN0IGFueXRoaW5nIHlvdSB3YW50IHRvIHN1cnZpdmUg4oCUIG9wZW4gcGFuZWwsIHNlbGVjdGVkIHN0ZXAsIGFjdGl2ZSBmaWx0ZXJzIOKAlAovLyB0byB0aGUgVVJMIGhhc2guIEJvbnVzOiB0aGUgVVJMIGJlY29tZXMgc2hhcmVhYmxlL2RlZXAtbGlua2FibGUgZm9yIGZyZWUuCi8vIFJvdW5kLXRyaXBzIGEgcGxhaW4gb2JqZWN0LiBTYXkgd2hhdCB5b3VyIGhhc2ggaG9sZHM6IGBsb2FkSGFzaDx7IHN0ZXA6IG51bWJlciB9PigpYCDigJQKLy8gZXZlcnkga2V5IG1heSBiZSBtaXNzaW5nIChhIGZyZXNoIFVSTCwgYW4gb2xkIGxpbmspLCBzbyBlYWNoIGNvbWVzIGJhY2sgb3B0aW9uYWwuCmV4cG9ydCBjb25zdCBzYXZlSGFzaCA9IChvYmopID0+IGxvY2F0aW9uLnJlcGxhY2UoIiMiICsgZW5jb2RlVVJJQ29tcG9uZW50KEpTT04uc3RyaW5naWZ5KG9iaikpKTsKZXhwb3J0IGNvbnN0IGxvYWRIYXNoID0gKCkgPT4gewogICAgdHJ5IHsKICAgICAgICByZXR1cm4gSlNPTi5wYXJzZShkZWNvZGVVUklDb21wb25lbnQobG9jYXRpb24uaGFzaC5zbGljZSgxKSkgfHwgInt9Iik7CiAgICB9CiAgICBjYXRjaCB7CiAgICAgICAgcmV0dXJuIHt9OwogICAgfQp9Owpjb25zdCBpc1R5cGluZyA9ICh0KSA9PiB0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgKC9eKElOUFVUfFRFWFRBUkVBfFNFTEVDVCkkLy50ZXN0KHQudGFnTmFtZSkgfHwgdC5pc0NvbnRlbnRFZGl0YWJsZSk7CmV4cG9ydCBmdW5jdGlvbiBzdGVwcGVyKHsgbiwgb25TdGVwLCBhdXRvcGxheU1zID0gMCwgaGFzaEtleSA9ICJzdGVwIiwgdGFyZ2V0ID0gZG9jdW1lbnQgfSkgewogICAgbGV0IGkgPSBNYXRoLm1pbihNYXRoLm1heChOdW1iZXIobG9hZEhhc2goKVtoYXNoS2V5XSA/PyAwKSwgMCksIG4gLSAxKTsKICAgIGxldCB0aW1lciA9IG51bGw7CiAgICBjb25zdCBlbWl0ID0gKCkgPT4gewogICAgICAgIHNhdmVIYXNoKHsgLi4ubG9hZEhhc2goKSwgW2hhc2hLZXldOiBpIH0pOwogICAgICAgIG9uU3RlcD8uKGkpOwogICAgfTsKICAgIGNvbnN0IGdvID0gKHRvLCBtYW51YWwgPSB0cnVlKSA9PiB7CiAgICAgICAgY29uc3QgbmV4dCA9IE1hdGgubWluKE1hdGgubWF4KHRvLCAwKSwgbiAtIDEpOwogICAgICAgIGlmIChtYW51YWwpCiAgICAgICAgICAgIHBhdXNlKCk7IC8vIGEgbWFudWFsIG5hdiBhbHdheXMgd2lucyBvdmVyIGF1dG9wbGF5CiAgICAgICAgaWYgKG5leHQgPT09IGkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBpID0gbmV4dDsKICAgICAgICBlbWl0KCk7CiAgICB9OwogICAgY29uc3QgcGxheSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIgfHwgIWF1dG9wbGF5TXMpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB0aW1lciA9IHNldEludGVydmFsKCgpID0+IHsKICAgICAgICAgICAgaWYgKGkgPj0gbiAtIDEpCiAgICAgICAgICAgICAgICByZXR1cm4gcGF1c2UoKTsKICAgICAgICAgICAgZ28oaSArIDEsIGZhbHNlKTsKICAgICAgICB9LCBhdXRvcGxheU1zKTsKICAgIH07CiAgICBjb25zdCBwYXVzZSA9ICgpID0+IHsKICAgICAgICBpZiAodGltZXIpCiAgICAgICAgICAgIGNsZWFySW50ZXJ2YWwodGltZXIpOwogICAgICAgIHRpbWVyID0gbnVsbDsKICAgIH07CiAgICBjb25zdCBLRVlTID0gewogICAgICAgIEFycm93UmlnaHQ6IDEsIEFycm93RG93bjogMSwgUGFnZURvd246IDEsICIgIjogMSwKICAgICAgICBBcnJvd0xlZnQ6IC0xLCBBcnJvd1VwOiAtMSwgUGFnZVVwOiAtMSwKICAgIH07CiAgICB0YXJnZXQuYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChldikgPT4gewogICAgICAgIGNvbnN0IGUgPSBldjsKICAgICAgICBpZiAoZS5tZXRhS2V5IHx8IGUuY3RybEtleSB8fCBlLmFsdEtleSkKICAgICAgICAgICAgcmV0dXJuOwogICAgICAgIGlmIChpc1R5cGluZyhlLnRhcmdldCkpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCBkID0gS0VZU1tlLmtleV07CiAgICAgICAgaWYgKGQgIT09IHVuZGVmaW5lZCkgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIGVsc2UgU3BhY2UvUGFnZURvd24gc2Nyb2xscyB0aGUgcGFnZSB0b28KICAgICAgICAgICAgZ28oaSArIGQpOwogICAgICAgIH0KICAgICAgICBlbHNlIGlmIChlLmtleSA9PT0gIkhvbWUiKSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgZ28oMCk7CiAgICAgICAgfQogICAgICAgIGVsc2UgaWYgKGUua2V5ID09PSAiRW5kIikgewogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7CiAgICAgICAgICAgIGdvKG4gLSAxKTsKICAgICAgICB9CiAgICB9KTsKICAgIGVtaXQoKTsKICAgIGlmIChhdXRvcGxheU1zKQogICAgICAgIHBsYXkoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ28sCiAgICAgICAgbmV4dDogKCkgPT4gZ28oaSArIDEpLAogICAgICAgIHByZXY6ICgpID0+IGdvKGkgLSAxKSwKICAgICAgICBwbGF5LAogICAgICAgIHBhdXNlLAogICAgICAgIGdldCBjdXJyZW50KCkgewogICAgICAgICAgICByZXR1cm4gaTsKICAgICAgICB9LAogICAgfTsKfQpleHBvcnQgZnVuY3Rpb24gdHdvQXhpcyhlbCwgeyB4OiB4ciA9IFswLCAxXSwgeTogeXIgPSBbMCwgMV0sIHN0YXJ0LCBvbkNoYW5nZSwgc3BlZWQgPSAxIH0gPSB7fSkgewogICAgY29uc3QgY2xhbXAgPSAodiwgW2xvLCBoaV0pID0+IE1hdGgubWluKGhpLCBNYXRoLm1heChsbywgdikpOwogICAgY29uc3Qgc3BhbiA9IChyKSA9PiByWzFdIC0gclswXTsKICAgIGxldCB4ID0gc3RhcnQgPyBzdGFydFswXSA6ICh4clswXSArIHhyWzFdKSAvIDI7CiAgICBsZXQgeSA9IHN0YXJ0ID8gc3RhcnRbMV0gOiAoeXJbMF0gKyB5clsxXSkgLyAyOwogICAgbGV0IHB4ID0gbnVsbCwgcHkgPSBudWxsOwogICAgLy8gSFRNTCBhbmQgU1ZHIGVsZW1lbnRzIHNoYXJlIG9uZSBzZXQgb2YgcG9pbnRlciBldmVudHMsIGJ1dCBUeXBlU2NyaXB0IGNhbid0IG1lcmdlIHRoZSB0d28KICAgIC8vIHR5cGVkIGFkZEV2ZW50TGlzdGVuZXIgb3ZlcmxvYWRzIG9mIHRoZSB1bmlvbiwgc28gdHlwZSBhZ2FpbnN0IHRoZSBzaGFyZWQgbWFwIGRpcmVjdGx5LgogICAgY29uc3Qgb24gPSAodHlwZSwgZikgPT4gZWwuYWRkRXZlbnRMaXN0ZW5lcih0eXBlLCBmKTsKICAgIGVsLnN0eWxlLnRvdWNoQWN0aW9uID0gIm5vbmUiOyAvLyBlbHNlIHRoZSBicm93c2VyIHNjcm9sbHMgaW5zdGVhZCBvZiBkcmFnZ2luZwogICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgb24oInBvaW50ZXJkb3duIiwgKGUpID0+IHsKICAgICAgICBweCA9IGUuY2xpZW50WDsKICAgICAgICBweSA9IGUuY2xpZW50WTsKICAgICAgICBlbC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgZWwuc3R5bGUuY3Vyc29yID0gImdyYWJiaW5nIjsKICAgIH0pOwogICAgb24oInBvaW50ZXJtb3ZlIiwgKGUpID0+IHsKICAgICAgICBpZiAocHggPT09IG51bGwgfHwgcHkgPT09IG51bGwpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBjb25zdCByID0gZWwuZ2V0Qm91bmRpbmdDbGllbnRSZWN0KCk7CiAgICAgICAgLy8gTm9ybWFsaXplIGJ5IGVsZW1lbnQgc2l6ZSBzbyBzZW5zaXRpdml0eSBkb2Vzbid0IGRlcGVuZCBvbiByZW5kZXIgc2NhbGUuCiAgICAgICAgeCA9IGNsYW1wKHggKyAoKGUuY2xpZW50WCAtIHB4KSAvIHIud2lkdGgpICogc3Bhbih4cikgKiBzcGVlZCwgeHIpOwogICAgICAgIHkgPSBjbGFtcCh5ICsgKChlLmNsaWVudFkgLSBweSkgLyByLmhlaWdodCkgKiBzcGFuKHlyKSAqIHNwZWVkLCB5cik7CiAgICAgICAgcHggPSBlLmNsaWVudFg7CiAgICAgICAgcHkgPSBlLmNsaWVudFk7CiAgICAgICAgb25DaGFuZ2U/Lih4LCB5KTsKICAgIH0pOwogICAgY29uc3QgZW5kID0gKCkgPT4gewogICAgICAgIHB4ID0gcHkgPSBudWxsOwogICAgICAgIGVsLnN0eWxlLmN1cnNvciA9ICJncmFiIjsKICAgIH07CiAgICBvbigicG9pbnRlcnVwIiwgZW5kKTsKICAgIG9uKCJwb2ludGVyY2FuY2VsIiwgZW5kKTsKICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICByZXR1cm4gewogICAgICAgIHNldDogKG54LCBueSkgPT4gewogICAgICAgICAgICB4ID0gY2xhbXAobngsIHhyKTsKICAgICAgICAgICAgeSA9IGNsYW1wKG55LCB5cik7CiAgICAgICAgICAgIG9uQ2hhbmdlPy4oeCwgeSk7CiAgICAgICAgfSwKICAgICAgICBnZXQgdmFsdWUoKSB7CiAgICAgICAgICAgIHJldHVybiBbeCwgeV07CiAgICAgICAgfSwKICAgIH07Cn0KZXhwb3J0IGZ1bmN0aW9uIGZpZ3VyZUxpZmVjeWNsZShmaWd1cmVzLCB7IHJvb3QgPSBudWxsIH0gPSB7fSkgewogICAgY29uc3Qgc2VlbiA9IG5ldyBNYXAoKTsKICAgIGNvbnN0IGlvID0gbmV3IEludGVyc2VjdGlvbk9ic2VydmVyKChlbnRyaWVzKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBlIG9mIGVudHJpZXMpIHsKICAgICAgICAgICAgY29uc3QgZiA9IGZpZ3VyZXMuZmluZCgoZikgPT4gZi5lbCA9PT0gZS50YXJnZXQpOwogICAgICAgICAgICBpZiAoIWYpCiAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgc2Vlbi5zZXQoZiwgZS5pc0ludGVyc2VjdGluZyk7CiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKGUuaXNJbnRlcnNlY3RpbmcgJiYgIWRvY3VtZW50LmhpZGRlbik7CiAgICAgICAgfQogICAgICAgIHBpY2tBY3RpdmUoKTsKICAgIH0sIHsgcm9vdCwgdGhyZXNob2xkOiAwIH0pOwogICAgZmlndXJlcy5mb3JFYWNoKChmKSA9PiBpby5vYnNlcnZlKGYuZWwpKTsKICAgIGxldCBhY3RpdmVGID0gbnVsbDsKICAgIGZ1bmN0aW9uIHBpY2tBY3RpdmUoKSB7CiAgICAgICAgY29uc3QgbWlkID0gd2luZG93LmlubmVySGVpZ2h0IC8gMjsKICAgICAgICBsZXQgYmVzdCA9IG51bGwsIGJlc3REID0gSW5maW5pdHk7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpIHsKICAgICAgICAgICAgaWYgKCFzZWVuLmdldChmKSkKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICBjb25zdCByID0gZi5lbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKTsKICAgICAgICAgICAgY29uc3QgZCA9IE1hdGguYWJzKHIudG9wICsgci5oZWlnaHQgLyAyIC0gbWlkKTsKICAgICAgICAgICAgaWYgKGQgPCBiZXN0RCkgewogICAgICAgICAgICAgICAgYmVzdEQgPSBkOwogICAgICAgICAgICAgICAgYmVzdCA9IGY7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgaWYgKGJlc3QgPT09IGFjdGl2ZUYpCiAgICAgICAgICAgIHJldHVybjsKICAgICAgICBhY3RpdmVGPy5zZXRBY3RpdmU/LihmYWxzZSk7CiAgICAgICAgYWN0aXZlRiA9IGJlc3Q7CiAgICAgICAgYWN0aXZlRj8uc2V0QWN0aXZlPy4odHJ1ZSk7CiAgICB9CiAgICBsZXQgcXVldWVkID0gZmFsc2U7CiAgICBjb25zdCBvblNjcm9sbCA9ICgpID0+IHsKICAgICAgICBpZiAocXVldWVkKQogICAgICAgICAgICByZXR1cm47CiAgICAgICAgcXVldWVkID0gdHJ1ZTsKICAgICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4geyBxdWV1ZWQgPSBmYWxzZTsgcGlja0FjdGl2ZSgpOyB9KTsKICAgIH07CiAgICBhZGRFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCwgeyBwYXNzaXZlOiB0cnVlIH0pOwogICAgYWRkRXZlbnRMaXN0ZW5lcigicmVzaXplIiwgb25TY3JvbGwsIHsgcGFzc2l2ZTogdHJ1ZSB9KTsKICAgIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoInZpc2liaWxpdHljaGFuZ2UiLCAoKSA9PiB7CiAgICAgICAgZm9yIChjb25zdCBmIG9mIGZpZ3VyZXMpCiAgICAgICAgICAgIGYuc2V0VmlzaWJsZT8uKCFkb2N1bWVudC5oaWRkZW4gJiYgISFzZWVuLmdldChmKSk7CiAgICB9KTsKICAgIHBpY2tBY3RpdmUoKTsKICAgIHJldHVybiB7CiAgICAgICAgZ2V0IGFjdGl2ZSgpIHsgcmV0dXJuIGFjdGl2ZUY7IH0sCiAgICAgICAgZGVzdHJveSgpIHsKICAgICAgICAgICAgaW8uZGlzY29ubmVjdCgpOwogICAgICAgICAgICByZW1vdmVFdmVudExpc3RlbmVyKCJzY3JvbGwiLCBvblNjcm9sbCk7CiAgICAgICAgICAgIHJlbW92ZUV2ZW50TGlzdGVuZXIoInJlc2l6ZSIsIG9uU2Nyb2xsKTsKICAgICAgICB9LAogICAgfTsKfQpsZXQgX3ZpekVudlA7CmV4cG9ydCBmdW5jdGlvbiB2aXpFbnYoKSB7CiAgICByZXR1cm4gKF92aXpFbnZQID8/PSAoYXN5bmMgKCkgPT4gewogICAgICAgIGlmICh0eXBlb2Ygd2luZG93ICE9PSAidW5kZWZpbmVkIiAmJiB3aW5kb3cuX19WSVpfU1RBVElDX18pCiAgICAgICAgICAgIHJldHVybiAic3RhdGljIjsKICAgICAgICB0cnkgewogICAgICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goIi9faGVhbHRoIiwgeyBjYWNoZTogIm5vLXN0b3JlIiB9KTsKICAgICAgICAgICAgcmV0dXJuIHIub2sgPyAibGl2ZSIgOiAib2ZmbGluZSI7CiAgICAgICAgfQogICAgICAgIGNhdGNoIHsKICAgICAgICAgICAgcmV0dXJuICJvZmZsaW5lIjsKICAgICAgICB9CiAgICB9KSgpKTsKfQovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8gTmFycmF0aW9uIOKAlCBwbGF5IGEgZmlsbSdzIG5hcnJhdGlvbi5qc29uIGluIHN5bmMgd2l0aCBpdHMgdGltZWxpbmUuCi8vCi8vIGB2aXogdmVyaWZ5YCAvIGB2aXogcmVuZGVyYCBjb21waWxlIG5hcnJhdGlvbi5qc29uIGludG8gLnR0cy9tYW5pZmVzdC5qc29uIChLb2tvcm8KLy8gY2xpcHMgKyB5b3VyIGF1ZGlvLyBmaWxlcywgZWFjaCBwbGFjZWQgYXQgYSB0aW1lKS4gVGhpcyBwbGF5cyB0aGUgc2FtZSBjbGlwcyBhdCB0aGUKLy8gc2FtZSBtb21lbnRzLCBzbyBzdGVwcGluZyB0aGUgcGFnZSBzb3VuZHMgbGlrZSB0aGUgcmVuZGVyZWQgdmlkZW8uIENhcHRpb25zIHNob3cKLy8gb24gdGhlIHBhZ2UgYmVoaW5kIGEgQ0MgdG9nZ2xlOyBgdml6IHJlbmRlcmAgaGlkZXMgdGhlbSAodGhlIG1wNCBjYXJyaWVzIGEgc3VidGl0bGUKLy8gdHJhY2sgaW5zdGVhZCkuIENhbGwgb25jZSwgYWZ0ZXIgcmVnaXN0ZXJpbmcgdGhlIHRpbWVsaW5lOgovLyAgIHdpbmRvdy5fX3ZpeiA9IHsgdGltZWxpbmU6IHsgdG90YWwsIHNlZWssIHBsYXksIHBhdXNlLCBhdCwgY2hhcHRlcnMgfSB9OwovLyAgIG5hcnJhdGUod2luZG93Ll9fdml6LnRpbWVsaW5lKTsKLy8gSXQgb25seSByZWFkcyB0aW1lbGluZS5hdCgpOiB0aGUgcGxheWhlYWQgY3JlZXBpbmcgZm9yd2FyZCBmcmFtZSB0byBmcmFtZSBpcyAicGxheWluZyI7Ci8vIHN0YW5kaW5nIHN0aWxsIG9yIGp1bXBpbmcgKGEgc2VlaywgYSBzdGVwKSBpcyBub3QuIFNvIGl0IG5lZWRzIG5vIGhvb2tzIGludG8gdGhlIGZpbG0sCi8vIGFuZCBhIGZpbG0gdGhhdCBhdXRvcGxheXMsIGxvb3BzIG9yIGVuZHMgb24gaXRzIG93biBzdGlsbCBzb3VuZHMgcmlnaHQuCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBuYXJyYXRlKHRpbWVsaW5lLCB7IG1hbmlmZXN0ID0gIi50dHMvbWFuaWZlc3QuanNvbiIsIGNvbnRyb2xzID0gbnVsbCB9ID0ge30pIHsKICAgIC8vIEEgcHVibGlzaGVkIGJ1aWxkIGlubGluZXMgdGhlIG1hbmlmZXN0IChjbGlwcyBhcyBkYXRhOiBVUkxzKTsgYSBsaXZlIHBhZ2UgZmV0Y2hlcyBpdC4KICAgIGNvbnN0IGRhdGEgPSB3aW5kb3cuX192aXpUdHMgPz8gKGF3YWl0IGZldGNoKG1hbmlmZXN0KS50aGVuKChyKSA9PiAoci5vayA/IHIuanNvbigpIDogbnVsbCksICgpID0+IG51bGwpKTsKICAgIGlmICghZGF0YSkKICAgICAgICByZXR1cm4gY29uc29sZS5pbmZvKCJbdml6IG5hcnJhdGlvbl0gbm8gLnR0cy9tYW5pZmVzdC5qc29uIHlldCDigJQgYHZpeiB2ZXJpZnlgIGNvbXBpbGVzIG5hcnJhdGlvbi5qc29uIik7CiAgICBmb3IgKGNvbnN0IHcgb2YgZGF0YS53YXJuaW5ncyA/PyBbXSkKICAgICAgICBjb25zb2xlLndhcm4oYFt2aXogbmFycmF0aW9uXSAke3d9YCk7CiAgICBjb25zdCB0cmFja3MgPSAoZGF0YS50cmFja3M/Lmxlbmd0aCA/IGRhdGEudHJhY2tzIDogW3sgaWQ6ICJkZWZhdWx0IiwgbGFiZWw6ICJEZWZhdWx0IiwgY3VlczogZGF0YS5jdWVzIH1dKS5tYXAoKHRyYWNrKSA9PiAoewogICAgICAgIC4uLnRyYWNrLCBjdWVzOiB0cmFjay5jdWVzLm1hcCgoYykgPT4gKHsgLi4uYywgZWw6IE9iamVjdC5hc3NpZ24obmV3IEF1ZGlvKGMuc3JjKSwgeyBwcmVsb2FkOiAiYXV0byIsIHZvbHVtZTogTWF0aC5taW4oMSwgMTAgKiogKChjLmdhaW4gPz8gMCkgLyAyMCkpIH0pIH0pKSwKICAgIH0pKTsKICAgIGxldCBzZWxlY3RlZCA9IHRyYWNrcy5maW5kSW5kZXgoKHRyYWNrKSA9PiB0cmFjay5pZCA9PT0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oInZpei12b2ljZSIpKTsKICAgIGlmIChzZWxlY3RlZCA8IDApCiAgICAgICAgc2VsZWN0ZWQgPSAwOwogICAgLy8gQ2FwdGlvbnM6IGJvdHRvbS1jZW50cmUgYnkgZGVmYXVsdDsgZHJhZyB0aGVtIGFueXdoZXJlIChyZW1lbWJlcmVkIHBlciBwYWdlKSwgZG91YmxlLWNsaWNrCiAgICAvLyB0byBwdXQgdGhlbSBiYWNrLiAjdml6LWNhcHRpb25zIGlzIGhpZGRlbiBpbiByZW5kZXJzIOKAlCB0aGUgbXA0IGNhcnJpZXMgYSBzdWJ0aXRsZSB0cmFjay4KICAgIGNvbnN0IGJveCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImRpdiIpOwogICAgYm94LmlkID0gInZpei1jYXB0aW9ucyI7CiAgICBjb25zdCB0ZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgicCIpOwogICAgdGV4dC5oaWRkZW4gPSB0cnVlOwogICAgdGV4dC50aXRsZSA9ICJkcmFnIHRvIG1vdmUgwrcgZG91YmxlLWNsaWNrIHRvIHJlc2V0IjsKICAgIGJveC5hcHBlbmQodGV4dCk7CiAgICBib3guc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtpbnNldDowO3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgIHRleHQuc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDttYXJnaW46MDttYXgtd2lkdGg6bWluKDgwY2gsOTB2dyk7cGFkZGluZzo2cHggMTJweDtib3JkZXItcmFkaXVzOjZweDtiYWNrZ3JvdW5kOnJnYmEoMCwwLDAsLjc1KTtjb2xvcjojZmZmO2ZvbnQ6NTAwIDIwcHgvMS4zNSBzeXN0ZW0tdWksc2Fucy1zZXJpZjt0ZXh0LWFsaWduOmNlbnRlcjtwb2ludGVyLWV2ZW50czphdXRvO2N1cnNvcjpncmFiO3VzZXItc2VsZWN0Om5vbmU7dG91Y2gtYWN0aW9uOm5vbmUiOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmQoYm94KTsKICAgIGNvbnN0IHBvc0tleSA9IGB2aXotY2MtcG9zOiR7bG9jYXRpb24ucGF0aG5hbWV9YDsKICAgIGNvbnN0IHBsYWNlID0gKHApID0+IHsKICAgICAgICBpZiAocCkKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6IHAueCAqIGlubmVyV2lkdGggKyAicHgiLCB0b3A6IHAueSAqIGlubmVySGVpZ2h0ICsgInB4IiwgYm90dG9tOiAiIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlKC01MCUsLTUwJSkiIH0pOwogICAgICAgIGVsc2UKICAgICAgICAgICAgT2JqZWN0LmFzc2lnbih0ZXh0LnN0eWxlLCB7IGxlZnQ6ICI1MCUiLCB0b3A6ICIiLCBib3R0b206ICJ2YXIoLS12aXotY2FwdGlvbnMtYm90dG9tLDI0cHgpIiwgdHJhbnNmb3JtOiAidHJhbnNsYXRlWCgtNTAlKSIgfSk7CiAgICB9OwogICAgcGxhY2UoSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShwb3NLZXkpID8/ICJudWxsIikpOwogICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVyZG93biIsIChlKSA9PiB7CiAgICAgICAgdGV4dC5zZXRQb2ludGVyQ2FwdHVyZShlLnBvaW50ZXJJZCk7CiAgICAgICAgdGV4dC5zdHlsZS5jdXJzb3IgPSAiZ3JhYmJpbmciOwogICAgICAgIGNvbnN0IG1vdmUgPSAoZXYpID0+IHBsYWNlKHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KTsKICAgICAgICBjb25zdCB1cCA9IChldikgPT4gewogICAgICAgICAgICB0ZXh0LnJlbW92ZUV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgICAgIHRleHQuc3R5bGUuY3Vyc29yID0gImdyYWIiOwogICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShwb3NLZXksIEpTT04uc3RyaW5naWZ5KHsgeDogZXYuY2xpZW50WCAvIGlubmVyV2lkdGgsIHk6IGV2LmNsaWVudFkgLyBpbm5lckhlaWdodCB9KSk7CiAgICAgICAgfTsKICAgICAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoInBvaW50ZXJtb3ZlIiwgbW92ZSk7CiAgICAgICAgdGV4dC5hZGRFdmVudExpc3RlbmVyKCJwb2ludGVydXAiLCB1cCwgeyBvbmNlOiB0cnVlIH0pOwogICAgfSk7CiAgICB0ZXh0LmFkZEV2ZW50TGlzdGVuZXIoImRibGNsaWNrIiwgKCkgPT4geyBsb2NhbFN0b3JhZ2UucmVtb3ZlSXRlbShwb3NLZXkpOyBwbGFjZShudWxsKTsgfSk7CiAgICAvLyBDQyB0b2dnbGU6IGluc2lkZSB0aGUgcGFnZSdzIG93biBjb250cm9scyB3aGVuIGl0IGhhcyB0aGVtIChmaWxtKCkgcGFzc2VzIGl0cyBiYXIpLCBlbHNlCiAgICAvLyBib3R0b20tbGVmdCDigJQgYm90dG9tLXJpZ2h0IGJlbG9uZ3MgdG8gdGhlIHZpeiBjb21tZW50IGJ1YmJsZS4KICAgIGNvbnN0IGNjID0gT2JqZWN0LmFzc2lnbihkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJidXR0b24iKSwgeyB0eXBlOiAiYnV0dG9uIiwgdGl0bGU6ICJDYXB0aW9ucyAoYykiLCB0ZXh0Q29udGVudDogIkNDIiB9KTsKICAgIGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgInRydWUiKTsKICAgIGlmIChjb250cm9scykKICAgICAgICBjb250cm9scy5hcHBlbmQoY2MpOwogICAgZWxzZSB7CiAgICAgICAgY2Muc3R5bGUuY3NzVGV4dCA9ICJwb3NpdGlvbjpmaXhlZDtsZWZ0OjEycHg7Ym90dG9tOjEycHg7Zm9udDo2MDAgMTFweCB1aS1tb25vc3BhY2UsbW9ub3NwYWNlO3BhZGRpbmc6M3B4IDdweDtib3JkZXItcmFkaXVzOjRweDtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcmRlciwjMzAzNjNkKTtiYWNrZ3JvdW5kOnZhcigtLXBhbmVsLCMxNjFiMjIpO2NvbG9yOnZhcigtLXRleHQsI2U2ZWRmMyk7Y3Vyc29yOnBvaW50ZXI7ei1pbmRleDoyMTQ3NDgzMDAwIjsKICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZChjYyk7CiAgICB9CiAgICBjYy5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgaWYgKHRyYWNrcy5sZW5ndGggPiAxICYmIGNvbnRyb2xzKSB7CiAgICAgICAgY29uc3Qgdm9pY2UgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzZWxlY3QiKTsKICAgICAgICB2b2ljZS5zZXRBdHRyaWJ1dGUoImFyaWEtbGFiZWwiLCAiTmFycmF0aW9uIHZvaWNlIik7CiAgICAgICAgdm9pY2UudGl0bGUgPSAiTmFycmF0aW9uIHZvaWNlIjsKICAgICAgICB2b2ljZS5kYXRhc2V0WyJ2aXpDaHJvbWUiXSA9ICIiOwogICAgICAgIHZvaWNlLmlubmVySFRNTCA9IHRyYWNrcy5tYXAoKHRyYWNrLCBpKSA9PiBgPG9wdGlvbiB2YWx1ZT0iJHtpfSI+JHt0cmFjay5sYWJlbC5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAiJiI6ICImYW1wOyIsICI8IjogIiZsdDsiLCAiPiI6ICImZ3Q7IiwgJyInOiAiJnF1b3Q7IiwgIiciOiAiJiMzOTsiIH0pW2NdKX08L29wdGlvbj5gKS5qb2luKCIiKTsKICAgICAgICB2b2ljZS52YWx1ZSA9IFN0cmluZyhzZWxlY3RlZCk7CiAgICAgICAgdm9pY2Uub25jaGFuZ2UgPSAoKSA9PiB7CiAgICAgICAgICAgIGZvciAoY29uc3QgdHJhY2sgb2YgdHJhY2tzKQogICAgICAgICAgICAgICAgZm9yIChjb25zdCBjdWUgb2YgdHJhY2suY3VlcykKICAgICAgICAgICAgICAgICAgICBjdWUuZWwucGF1c2UoKTsKICAgICAgICAgICAgc2VsZWN0ZWQgPSArdm9pY2UudmFsdWU7CiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCJ2aXotdm9pY2UiLCB0cmFja3Nbc2VsZWN0ZWRdLmlkKTsKICAgICAgICB9OwogICAgICAgIGNvbnRyb2xzLmFwcGVuZCh2b2ljZSk7CiAgICB9CiAgICBsZXQgb24gPSBsb2NhbFN0b3JhZ2UuZ2V0SXRlbSgidml6LWNjIikgIT09ICIwIjsKICAgIGNvbnN0IHNob3cgPSAoKSA9PiB7IGNjLnNldEF0dHJpYnV0ZSgiYXJpYS1wcmVzc2VkIiwgU3RyaW5nKG9uKSk7IGNjLnN0eWxlLm9wYWNpdHkgPSBvbiA/ICIxIiA6ICIuNSI7IH07CiAgICBjb25zdCB0b2dnbGUgPSAoKSA9PiB7IG9uID0gIW9uOyBsb2NhbFN0b3JhZ2Uuc2V0SXRlbSgidml6LWNjIiwgb24gPyAiMSIgOiAiMCIpOyBzaG93KCk7IH07CiAgICBzaG93KCk7CiAgICBjYy5vbmNsaWNrID0gdG9nZ2xlOwogICAgYWRkRXZlbnRMaXN0ZW5lcigia2V5ZG93biIsIChlKSA9PiB7IGlmIChlLmtleSA9PT0gImMiICYmICFlLm1ldGFLZXkgJiYgIWUuY3RybEtleSAmJiAhKGUudGFyZ2V0IGluc3RhbmNlb2YgSFRNTEVsZW1lbnQgJiYgL0lOUFVUfFRFWFRBUkVBLy50ZXN0KGUudGFyZ2V0LnRhZ05hbWUpKSkKICAgICAgICB0b2dnbGUoKTsgfSk7CiAgICBsZXQgbGFzdCA9IHRpbWVsaW5lLmF0KCk7CiAgICAoZnVuY3Rpb24gbG9vcCgpIHsKICAgICAgICBjb25zdCB0ID0gdGltZWxpbmUuYXQoKTsKICAgICAgICBjb25zdCBzdGVwID0gdCAtIGxhc3Q7CiAgICAgICAgbGFzdCA9IHQ7CiAgICAgICAgY29uc3QgcGxheWluZyA9IHN0ZXAgPiAwICYmIHN0ZXAgPCAwLjI1OyAvLyBmb3J3YXJkIGJ5IGFib3V0IGEgZnJhbWU7IGJpZ2dlciBqdW1wcyBhcmUgc2Vla3MKICAgICAgICBjb25zdCByYXRlID0gdGltZWxpbmUucmF0ZSA/PyAxOyAvLyBmaWxtKCkgaGFzIGEgc3BlZWQgY29udHJvbDsgdGhlIGNsaXBzIGZvbGxvdyBpdAogICAgICAgIGZvciAoY29uc3QgYyBvZiB0cmFja3Nbc2VsZWN0ZWRdLmN1ZXMpIHsKICAgICAgICAgICAgaWYgKGMuZWwucGxheWJhY2tSYXRlICE9PSByYXRlKQogICAgICAgICAgICAgICAgYy5lbC5wbGF5YmFja1JhdGUgPSByYXRlOwogICAgICAgICAgICBjb25zdCBpbnRvID0gdCAtIGMudDsKICAgICAgICAgICAgaWYgKHBsYXlpbmcgJiYgaW50byA+PSAwICYmIGludG8gPCBjLmR1cikgewogICAgICAgICAgICAgICAgLy8gU3RhcnQsIG9yIHB1bGwgYmFjayBpbnRvIHN5bmMgaWYgdGhlIGZpbG0gYW5kIHRoZSBjbGlwIGhhdmUgZHJpZnRlZCBhcGFydC4KICAgICAgICAgICAgICAgIGlmIChjLmVsLnBhdXNlZCB8fCBNYXRoLmFicyhjLmVsLmN1cnJlbnRUaW1lIC0gaW50bykgPiAwLjMpIHsKICAgICAgICAgICAgICAgICAgICBjLmVsLmN1cnJlbnRUaW1lID0gaW50bzsKICAgICAgICAgICAgICAgICAgICBjLmVsLnBsYXkoKS5jYXRjaCgoKSA9PiB7IH0pOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsc2UgaWYgKCFjLmVsLnBhdXNlZCkKICAgICAgICAgICAgICAgIGMuZWwucGF1c2UoKTsKICAgICAgICB9CiAgICAgICAgY29uc3Qgc2FpZCA9IG9uICYmIHRyYWNrc1tzZWxlY3RlZF0uY3Vlcy5maW5kKChjKSA9PiBjLnRleHQgJiYgdCA+PSBjLnQgJiYgdCA8IGMudCArIGMuZHVyKTsKICAgICAgICB0ZXh0LnRleHRDb250ZW50ID0gc2FpZCA/IHNhaWQudGV4dCA/PyAiIiA6ICIiOwogICAgICAgIHRleHQuaGlkZGVuID0gIXNhaWQ7CiAgICAgICAgcmVxdWVzdEFuaW1hdGlvbkZyYW1lKGxvb3ApOwogICAgfSkoKTsKfQo="}}</script>
+<script>window.__VIZ_STATIC__=true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Federated credentials vs client secrets — what's actually on the wire</title>
+<meta name="viz:uid" content="v-649e38bb4c66">
+<meta name="viz:posture" content="public">
+<meta name="viz:listed" content="listed">
+<meta name="viz:title" content="Federated vs client secret">
+<meta name="viz:description" content="Wire-level walkthrough of GitHub Actions → Entra → Blob under OIDC federation vs a client secret, with per-claim provenance and the terraform command lifecycle.">
+<style>
+/* viz-kit.css — the /viz house style. Load with:
+     <link rel="stylesheet" href="/_kit/viz-kit.css">
+   Served by the viz server at /_kit/viz-kit.css from the skill's own kit/ dir.
+
+   Why this exists: nearly every viz independently re-derived the same dark theme
+   (a GitHub-dark palette), re-guessed the exact hexes (so the "same" background
+   drifted across files), and invented its own variable names (--txt vs --text vs
+   --ink) for identical concepts. This file fixes the palette and the names ONCE so
+   you can reach for var(--accent) / var(--good) instead of re-picking colors.
+
+   The dark GitHub-ish palette is the DEFAULT, not a constraint. Every rule below
+   reads its colors through var() — there is not one hardcoded hex outside :root —
+   so a page needing a brand or one-off palette overrides the tokens in a later
+   :root and keeps every component. Re-theme; don't fork. See kit/README.md. */
+
+:root {
+  /* Surfaces, back to front */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #21262d;
+  --border: #30363d;
+
+  /* Text — three tiers. --faint is for de-emphasized chrome (axis ticks, units,
+     footnotes, "n of m" counters); 72 vizzes re-derived a third tier by hand
+     before it existed here, at half a dozen different grays. */
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --faint: #6e7681;
+
+  /* Intent — accents that carry meaning */
+  --accent: #58a6ff; /* primary / links / selection */
+  --good: #3fb950; /* success / healthy / "yes" */
+  --warn: #d29922; /* caution / pending */
+  --danger: #f85149; /* error / blocked / "no" */
+
+  /* Categorical ramp — visually separable hues for diagram categories / series.
+     Use these when you need N separable colors, NOT meaning.
+
+     ⚠ ALIASING TRAP — c1/c2/c3/c6 are byte-identical to the intent colors above:
+       --c1 == --accent   --c2 == --good   --c3 == --warn   --c6 == --danger
+     So a categorical series rendered in --c2 reads as "success" next to anything
+     using --good, and --c6 reads as "error". Only --c4, --c5, --c7, --c8 are
+     unique to this ramp. This has already caused rework (a poster themed on --c2
+     went monochrome against a --good meter and had to be re-themed to --c5).
+     If your viz mixes categorical series WITH semantic color, pick from
+     --c4/--c5/--c7/--c8 first, then reach for the aliased four knowingly.
+
+     The four aliased slots are DEFINED AS the intent colors rather than repeating
+     their hexes. That's deliberate: the aliasing is self-evident wherever you read
+     this file, it cannot drift, and a re-theme keeps them in sync automatically.
+     The slots with a literal hex are the meaning-free ones. */
+  --c1: var(--accent); /* blue  — ALIAS, reads as "primary/selected" */
+  --c2: var(--good); /* green — ALIAS, reads as "success" */
+  --c3: var(--warn); /* amber — ALIAS, reads as "caution" */
+  --c4: #bc8cff; /* purple — meaning-free */
+  --c5: #4ec9b0; /* teal   — meaning-free */
+  --c6: var(--danger); /* red — ALIAS, reads as "error" */
+  --c7: #5d52b4; /* indigo  — meaning-free (ΔE 21.3 from the nearest intent color) */
+  --c8: #b70385; /* magenta — meaning-free (ΔE 20.9) */
+  /* No orange slot exists on purpose: every orange sits between --danger (hue 27°)
+     and --warn (80°), and none clears ΔE 15 from both under CVD simulation. The
+     obvious #f0883e is ΔE 1.5 from --warn to a protanope — indistinguishable. */
+
+  /* Type */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Spacing rhythm */
+  --r: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  /* Paint the canvas itself. body is height:100% (one viewport), so on a page taller
+     than the viewport the area BELOW the body box would otherwise reveal the browser's
+     default (lighter) canvas when scrolled — showing as a horizontal "line" mid-page
+     where body's --bg ends. Putting --bg on the root keeps the whole canvas dark. */
+  background-color: var(--bg);
+}
+
+body {
+  /* A faint top-glow over the flat background — the recurring "radial-gradient at
+     60% 0%" idiom, standardized. Sized large and faded to transparent well past the
+     fold (color-mix dilutes --panel) so the glow→--bg transition never forms a
+     visible edge mid-page — the earlier tight 600px gradient left a "boundary" band. */
+  background:
+    radial-gradient(1600px 1000px at 50% -30%, color-mix(in srgb, var(--panel) 55%, transparent), transparent 75%),
+    var(--bg);
+  color: var(--text);
+  font: 14px/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Links. There was no bare `a` rule here until 2026-08-19, so every naked anchor
+   in every viz fell through to the user-agent default: #0000EE on a #0d1117
+   background (2.3:1 — below the 4.5:1 floor), and #551A8B once visited, which is
+   1.5:1 and effectively invisible. Both tiers now come from tokens, so they follow
+   a re-theme. --c4 keeps the "visited is purple" convention at 8.2:1 instead of
+   abandoning it. Lowest possible specificity, so any component rule still wins. */
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:visited { color: var(--c4); }
+a:hover { color: var(--text); text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Header: title + one-line muted subtitle — the chrome ~19/22 vizzes open with. */
+.viz-header {
+  padding: 20px 24px;
+}
+.viz-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.viz-header .sub,
+.sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Panels / cards */
+.panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--r) * 1.5);
+  padding: 16px;
+}
+
+/* Slide-in detail drawer (click a node → details). Toggle .open. */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow: auto;
+  padding: 20px;
+  z-index: 50;
+}
+.drawer.open {
+  transform: none;
+}
+
+/* Legend: the single most common component (~16/22), reinvented differently each
+   time. Two swatch shapes: a filled square for nodes, a short rule for edge types. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  background: var(--accent);
+}
+/* Colour comes from `background` (inherited from .swatch), NOT border-top. It was
+   `height:0` + `border-top` until 2026-08-19, which made the documented way to
+   colour a swatch — an inline `background:` — a silent no-op: every line swatch in
+   the corpus rendered accent-blue regardless of what it was labelling. All 5
+   usages passed `background`; none passed `border-top-color`. */
+.swatch.line {
+  width: 16px;
+  height: 2px;
+  border-radius: 0;
+}
+/* Round swatch. Its absence is why 25 vizzes abandoned .swatch entirely and
+   hand-rolled a .dot/.sw at five different sizes — the shape was the blocker,
+   not the component. */
+.swatch.dot {
+  border-radius: 50%;
+}
+
+/* Status / label pill — uppercase micro-badge. Recurs in ~120 files (the
+   border-radius:999px + text-transform:uppercase idiom) and was re-derived at a
+   different size almost every time. Modifiers tint text + border together. */
+.pill {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pill.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.pill.good {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 50%, transparent);
+}
+.pill.warn {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+}
+.pill.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+}
+
+/* Animated "flow" edge — dashed line whose dashes drift along the path. The
+   @keyframes was identical everywhere but for the offset magnitude; here it's one
+   class. Apply to an SVG <path>/<line>: <path class="flow" .../>. */
+@keyframes viz-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.flow {
+  stroke-dasharray: 6 4;
+  animation: viz-dash 1s linear infinite;
+}
+
+/* Reduced motion. 108 of 161 corpus vizzes animate (rAF, @keyframes, transitions,
+   setInterval); 3 guarded it. Guarding per-viz was never going to happen, so the
+   kit does it once for everyone that links this file.
+
+   Motion is not removed, it is collapsed: near-zero durations keep transition/
+   animation END events firing, so state machines that advance on `transitionend`
+   still advance instead of deadlocking (the usual bug in a naive
+   `animation: none !important` reset).
+
+   This cannot reach a JS rAF loop. If your viz animates in JS, gate it yourself:
+     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   and jump to the end state instead of tweening to it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* The dashed-edge drift reads as decoration, not information — stop it dead
+     rather than freezing it mid-dash. */
+  .flow {
+    animation: none !important;
+  }
+}
+
+/* Auto-wrapping SVG label (see labelBox() in viz.js). Fills its <foreignObject>
+   and centers; overflow is clipped, never spilled. */
+.vsvg-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  font: 12px/1.25 var(--sans);
+  overflow: hidden;
+  padding: 2px 6px;
+}
+
+/* --- .elsewhere — third-party explainers -------------------------------------
+   A pointer to somebody ELSE explaining the same thing. Deliberately its own
+   look, because a page that cites standards needs three visually distinct
+   kinds of evidence and a reader must never mistake one for another:
+
+     normative   what makes the claim true      (RFC / NIST / regulator)
+     first-party what we read or decided        (source code, our own choice)
+     elsewhere   a second teacher               <- this
+
+   Uses --c5 (teal, one of the meaning-free categorical slots) so it reads as
+   "a different kind of thing" rather than as success or warning.
+
+   Convention that makes it worth having: the `.why` line says what the source
+   is actually good for, INCLUDING where it is thinner than its reputation. An
+   unread link presented as authoritative is the exact impression this component
+   exists to prevent. Pair it with a rot checker — external pages 404.  */
+.elsewhere {
+  border-left: 2px solid var(--c5);
+  padding: 8px 0 2px 12px;
+  margin-top: 12px;
+}
+.elsewhere > .lbl {
+  display: block;
+  font: 700 9px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c5);
+  margin-bottom: 5px;
+}
+.elsewhere a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c5);
+}
+.elsewhere a:hover { color: var(--c5) }
+.elsewhere .who { color: var(--faint); font-size: 0.85em; margin-left: 6px }
+.elsewhere .why {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+</style>
+<style>
+  html,body{ margin:0; background:var(--bg); }
+  .wrap{ max-width:1640px; margin:0 auto; padding:0 22px 90px; }
+
+  .viz-header{ padding:26px 0 6px; }
+  .viz-header h1{ margin:0 0 6px; font-size:26px; letter-spacing:-.02em; }
+  .viz-header .sub{ max-width:1000px; line-height:1.55; }
+
+  .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+            padding:12px 0 18px; border-bottom:1px solid var(--border); margin-bottom:18px; }
+  .btn{ background:var(--panel-2); border:1px solid var(--border); color:var(--text);
+        font:500 12px/1 var(--sans); padding:7px 11px; border-radius:6px; cursor:pointer; }
+  .btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn.on{ background:var(--accent); border-color:var(--accent); color:#08111f; }
+  .hint{ color:var(--muted); font-size:12px; }
+  kbd{ background:var(--panel-2); border:1px solid var(--border); border-bottom-width:2px;
+       border-radius:4px; padding:1px 5px; font:600 11px var(--mono); color:var(--text); }
+
+  h2.sect{ margin:38px 0 3px; font-size:17px; letter-spacing:-.015em; }
+  p.sect{ color:var(--muted); font-size:12.5px; line-height:1.6; margin:0 0 16px; max-width:1000px; }
+
+  .stage{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(380px,440px); gap:18px; align-items:start; }
+  @media (max-width:1580px){
+    .stage{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+    .detail{ grid-column:1/-1; position:static !important; }
+  }
+  @media (max-width:860px){ .stage{ grid-template-columns:1fr; } }
+
+  .lane-panel{ background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px 12px 8px; }
+  .lane-panel h3{ margin:0 0 2px; font-size:14px; letter-spacing:-.01em; display:flex; align-items:center; gap:8px; }
+  .lane-panel .tag{ font:600 9px/1 var(--mono); letter-spacing:.09em; padding:3px 6px; border-radius:4px; }
+  .tag.good{ background:color-mix(in srgb, var(--good) 18%, transparent); color:var(--good); border:1px solid color-mix(in srgb, var(--good) 40%, transparent); }
+  .tag.bad{ background:color-mix(in srgb, var(--danger) 18%, transparent); color:var(--danger); border:1px solid color-mix(in srgb, var(--danger) 40%, transparent); }
+  .lane-panel .blurb{ color:var(--muted); font-size:11.5px; line-height:1.5; margin:0 0 8px; min-height:34px; }
+  svg{ display:block; width:100%; height:auto; }
+
+  .lifeline{ stroke:var(--border); stroke-width:1; stroke-dasharray:3 4; }
+  .step{ cursor:pointer; }
+  .step .hit{ fill:transparent; }
+  .step .wire{ stroke-width:1.6; fill:none; transition:stroke-width .12s; }
+  .step:hover .wire{ stroke-width:3; }
+  .step.sel .wire{ stroke-width:3.2; }
+  .step .lbl{ font:500 10.5px/1.32 var(--sans); color:var(--muted); transition:color .12s;
+              display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+              overflow:hidden; text-align:center; }
+  .step:hover .lbl, .step.sel .lbl{ color:var(--text); }
+  /* .55 not .3 — this is a comparison viz, both lanes must stay readable at rest */
+  .step.dim{ opacity:.55; }
+  .step.sel .num circle{ stroke-width:2.4; }
+  .num text{ font:700 9px var(--mono); fill:var(--bg); }
+
+  .band{ fill:color-mix(in srgb, var(--danger) 7%, transparent); }
+  .band-same{ fill:color-mix(in srgb, var(--accent) 4%, transparent); }
+  .band-lbl{ font:700 9px var(--mono); letter-spacing:.08em; }
+
+  .lane-head{ font:600 10.5px/1.25 var(--sans); color:var(--text); }
+  .lane-head .h{ display:block; }
+  .lane-head .s{ display:block; font:400 8.5px/1.3 var(--mono); color:var(--muted);
+                 white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  /* ── provenance ─────────────────────────────────────────────────── */
+  .prov{ display:inline-flex; align-items:center; gap:4px; font:700 8.5px/1 var(--mono);
+         letter-spacing:.06em; padding:3px 6px; border-radius:3px; white-space:nowrap; }
+  .prov.doc{ background:color-mix(in srgb, var(--good) 16%, transparent); color:var(--good); }
+  .prov.src{ background:color-mix(in srgb, var(--c5) 20%, transparent); color:var(--c5); }
+  .prov.inf{ background:color-mix(in srgb, var(--warn) 16%, transparent); color:var(--warn); }
+  .prov.ill{ background:var(--panel-2); color:var(--muted); border:1px solid var(--border); }
+  .provbar{ padding:9px 14px; border-bottom:1px solid var(--border); background:var(--panel-2); }
+  .provbar .pnote{ margin-top:6px; font-size:11px; line-height:1.5; color:var(--muted); }
+  .provbar .pnote a{ color:var(--accent); }
+  .reflinks{ margin-top:8px; display:flex; flex-direction:column; gap:5px; }
+  .reflinks a{ display:flex; align-items:center; gap:6px; text-decoration:none;
+               font:500 10.5px/1.35 var(--sans); color:var(--accent);
+               background:var(--panel); border:1px solid var(--border);
+               border-radius:5px; padding:5px 7px; }
+  .reflinks a:hover{ border-color:var(--accent); }
+  .reflinks.nocite{ font:400 10.5px/1.45 var(--sans); color:var(--muted); font-style:italic; }
+
+  /* ── detail ─────────────────────────────────────────────────────── */
+  .detail{ position:sticky; top:14px; background:var(--panel); border:1px solid var(--border);
+           border-radius:10px; overflow:hidden; }
+  .detail .dh{ padding:12px 14px; border-bottom:1px solid var(--border); }
+  .detail .dh .eyebrow{ font:700 9px var(--mono); letter-spacing:.1em; color:var(--muted); }
+  .detail .dh h4{ margin:5px 0 0; font-size:14px; letter-spacing:-.01em; }
+  .detail .dh .when{ color:var(--muted); font-size:11px; margin-top:3px; }
+  pre.wirebox{ margin:0; padding:13px 14px; background:#0a0e14; overflow-x:auto;
+               font:500 10.9px/1.62 var(--mono); color:#c9d6e4; max-height:380px; overflow-y:auto;
+               border-bottom:1px solid var(--border); }
+  pre.wirebox .k{ color:var(--accent); }
+  pre.wirebox .c{ color:#5d6b7a; }
+  pre.wirebox .s{ color:var(--good); }
+  pre.wirebox .r{ color:var(--danger); }
+  pre.wirebox .w{ color:var(--warn); }
+  .note{ padding:12px 14px; font-size:12px; line-height:1.55; color:var(--muted);
+         border-bottom:1px solid var(--border); }
+  .note strong{ color:var(--text); font-weight:600; }
+  .blast{ padding:12px 14px; }
+  .blast .bt{ font:700 9px var(--mono); letter-spacing:.1em; color:var(--muted); margin-bottom:8px; }
+  .blast.none{ color:var(--muted); font-size:12px; }
+  .brow{ display:flex; gap:9px; font-size:11.5px; line-height:1.5; padding:5px 0;
+         border-top:1px solid var(--border); }
+  .brow:first-of-type{ border-top:0; }
+  .brow .bk{ color:var(--muted); flex:0 0 74px; }
+  .brow .bv{ color:var(--text); }
+  .sev{ display:inline-block; font:700 9px/1 var(--mono); letter-spacing:.07em;
+        padding:3px 6px; border-radius:4px; }
+  .sev.lo{ background:color-mix(in srgb, var(--good) 18%, transparent); color:var(--good); }
+  .sev.md{ background:color-mix(in srgb, var(--warn) 18%, transparent); color:var(--warn); }
+  .sev.hi{ background:color-mix(in srgb, var(--danger) 20%, transparent); color:var(--danger); }
+
+  /* ── lifecycle ──────────────────────────────────────────────────── */
+  .procs{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; }
+  @media (max-width:1100px){ .procs{ grid-template-columns:1fr; } }
+  .proc{ background:var(--panel); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .proc .ph{ padding:10px 12px; border-bottom:1px solid var(--border); background:var(--panel-2); }
+  .proc .ph code{ font:700 12px var(--mono); color:var(--text); }
+  .proc .ph .pmeta{ font-size:10.5px; color:var(--muted); margin-top:3px; line-height:1.45; }
+  .calls{ list-style:none; margin:0; padding:8px 0; }
+  .calls li{ display:grid; grid-template-columns:16px 1fr; gap:8px; padding:5px 12px;
+             font:500 10.6px/1.45 var(--mono); color:#c9d6e4; align-items:start; }
+  .calls li .d{ width:7px; height:7px; border-radius:50%; margin-top:5px; }
+  .calls li em{ display:block; font:400 10px/1.45 var(--sans); color:var(--muted); font-style:normal; margin-top:2px; }
+  .calls li.ann{ grid-template-columns:1fr; padding:6px 12px 6px 36px; font:400 10.5px/1.5 var(--sans); color:var(--muted); }
+  .calls li.ann strong{ color:var(--text); font-weight:600; }
+  .pfoot{ padding:9px 12px; border-top:1px solid var(--border); font:400 10.5px/1.5 var(--sans); color:var(--muted); }
+  .keylegend{ display:flex; gap:14px; flex-wrap:wrap; margin:0 0 14px; font-size:11px; color:var(--muted); }
+  .keylegend span{ display:inline-flex; align-items:center; gap:5px; }
+  .keylegend i{ width:8px; height:8px; border-radius:50%; display:inline-block; }
+
+  /* ── ttl chart ──────────────────────────────────────────────────── */
+  .two{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:18px; align-items:start; }
+  @media (max-width:1100px){ .two{ grid-template-columns:1fr; } }
+  .ttl-row{ display:grid; grid-template-columns:172px 1fr; gap:10px; align-items:center; margin-bottom:9px; }
+  .ttl-name{ font:500 11px var(--sans); color:var(--text); text-align:right; }
+  .ttl-name em{ display:block; font:400 9.5px var(--mono); color:var(--muted); font-style:normal; }
+  .ttl-track{ position:relative; height:22px; background:var(--panel-2); border-radius:4px; overflow:hidden; }
+  .ttl-fill{ position:absolute; top:0; bottom:0; border-radius:4px 0 0 4px; }
+  .ttl-band{ position:absolute; top:0; bottom:0; }
+  .ttl-val{ position:absolute; top:50%; transform:translateY(-50%);
+            font:700 10px var(--mono); white-space:nowrap; color:var(--muted); }
+  /* the track clips overflow, so a label past ~65% has to sit INSIDE the bar */
+  .ttl-val.inside{ color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.95); }
+  .ttl-tick{ position:absolute; top:0; bottom:0; width:1px; background:var(--border); opacity:.5; }
+  .ttl-axis{ position:relative; height:13px; margin:7px 0 0 182px; }
+  .ttl-axis span{ position:absolute; transform:translateX(-50%); white-space:nowrap;
+                  font:500 9px var(--mono); color:var(--muted); }
+
+  /* ── sources ────────────────────────────────────────────────────── */
+  .src{ border:1px solid var(--border); border-radius:8px; padding:9px 11px; margin-bottom:7px;
+        background:var(--panel-2); }
+  .src .sh{ display:flex; align-items:center; gap:8px; margin-bottom:3px; flex-wrap:wrap; }
+  .src a{ color:var(--accent); font:600 11.5px var(--sans); text-decoration:none; }
+  .src a:hover{ text-decoration:underline; }
+  .src p{ margin:0; font-size:11px; line-height:1.5; color:var(--muted); }
+  .src code{ font:600 10px var(--mono); color:var(--text); }
+  .unknown{ border-left:2px solid var(--danger); }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Federated vs client secret">
+<meta property="og:description" content="Wire-level walkthrough of GitHub Actions → Entra → Blob under OIDC federation vs a client secret, with per-claim provenance and the terraform command lifecycle.">
+<meta property="og:url" content="https://rascaltwo.github.io/explorables/azure-oidc-vs-client-secret/">
+<meta property="og:image" content="https://rascaltwo.github.io/explorables/azure-oidc-vs-client-secret/og.auto.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="viz-header">
+    <h1>Federated credentials vs client secrets — what's actually on the wire</h1>
+    <div class="sub">
+      A generic walkthrough of CI → identity provider → cloud storage, under OIDC federation and under a client secret.
+      Both paths end at the same object with the same authorization check; they diverge <em>only</em> in the shaded band up top —
+      how the job comes to hold something the token endpoint will accept.
+      <strong>Every claim carries a provenance chip</strong>, because a page that says "byte by byte" has no business guessing at bytes.
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn" id="play">▶ Play both</button>
+    <button class="btn" id="reset">Reset</button>
+    <span class="hint">Click any step · <kbd>←</kbd> <kbd>→</kbd> step · <kbd>↑</kbd> <kbd>↓</kbd> switch lane</span>
+    <span style="flex:1"></span>
+    <span class="prov doc">DOCUMENTED</span>
+    <span class="prov src">SOURCE-ONLY</span>
+    <span class="prov inf">INFERRED</span>
+    <span class="prov ill">ILLUSTRATIVE</span>
+  </div>
+
+  <div class="stage">
+    <div class="lane-panel" id="p-fed">
+      <h3>Federated (OIDC / workload identity) <span class="tag good">KEYLESS</span></h3>
+      <p class="blurb">No secret exists anywhere. The CI provider signs a fresh, single-purpose assertion per run; the token endpoint verifies it against a public key it fetched earlier.</p>
+      <svg id="svg-fed" viewBox="0 0 540 670" role="img" aria-label="Federated OIDC sequence"></svg>
+    </div>
+
+    <div class="lane-panel" id="p-sec">
+      <h3>Client ID + secret <span class="tag bad">BEARER</span></h3>
+      <p class="blurb">A long-lived password sits at rest in the CI secret store, gets injected into the job env, and is posted to the token endpoint. Possession is identity.</p>
+      <svg id="svg-sec" viewBox="0 0 540 670" role="img" aria-label="Client secret sequence"></svg>
+    </div>
+
+    <div class="detail" id="detail"></div>
+  </div>
+
+  <h2 class="sect">Who calls the token endpoint, and when?</h2>
+  <p class="sect">
+    Not <code>azure/login</code>, and not once per job. The <strong>backend is compiled into the terraform binary</strong> and resolves credentials in its own
+    <code>Configure()</code> before any provider process launches — so <em>terraform itself</em> does the OIDC fetch and the token exchange.
+    And because every <code>terraform</code> invocation is a separate OS process whose token cache is memory-only, <strong>each command re-authenticates from scratch</strong>.
+    Three commands means three GitHub JWTs and three token exchanges. Colour = who's being talked to.
+  </p>
+  <div class="keylegend">
+    <span><i style="background:var(--good)"></i> CI OIDC endpoint</span>
+    <span><i style="background:var(--c4)"></i> Entra token endpoint</span>
+    <span><i style="background:var(--accent)"></i> Blob data plane</span>
+    <span><i style="background:var(--muted)"></i> other providers — separate auth entirely</span>
+  </div>
+  <div class="procs" id="procs"></div>
+
+  <h2 class="sect">How long a stolen artifact stays useful</h2>
+  <div class="two">
+    <div class="panel">
+      <p class="sect" style="margin-bottom:14px">
+        Log scale, spanning five orders of magnitude — that spread is the entire argument.
+        Solid = the floor; hatched = the documented range or the uncertainty. The federated artifacts expire on their own;
+        the secret expires when a human remembers.
+      </p>
+      <div id="ttl"></div>
+      <div class="ttl-axis" id="ttlAxis"></div>
+    </div>
+    <div class="panel">
+      <h3 style="margin:0 0 3px;font-size:14px">Sources — and what nobody documents</h3>
+      <p class="sect" style="margin-bottom:14px">Everything above is traceable to one of these, or explicitly marked unknown.</p>
+      <div id="sources"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+// app.ts
+import { arrowMarkers, saveHash, loadHash } from "/_kit/viz.js";
+var SOURCES = {
+  disco: {
+    p: "doc",
+    n: "GitHub OIDC discovery document",
+    u: "https://token.actions.githubusercontent.com/.well-known/openid-configuration",
+    d: "Fetched live while building this page. Issuer, <code>jwks_uri</code>, RS256, claim names."
+  },
+  ghref: {
+    p: "doc",
+    n: "GitHub — OIDC reference",
+    u: "https://docs.github.com/en/actions/reference/security/oidc",
+    d: "The <code>ACTIONS_ID_TOKEN_REQUEST_*</code> vars, the curl form, the <code>audience</code> param, every <code>sub</code> format, the immutable format."
+  },
+  toolkit: {
+    p: "src",
+    n: "actions/toolkit — oidc-utils.ts",
+    u: "https://github.com/actions/toolkit/blob/main/packages/core/src/oidc-utils.ts",
+    d: "<code>getIDToken()</code> internals: <code>encodeURIComponent(audience)</code>, bearer handler, <code>setSecret()</code> masking."
+  },
+  mscert: {
+    p: "doc",
+    n: "Microsoft — certificate credentials / client assertions",
+    u: "https://learn.microsoft.com/en-us/entra/identity-platform/certificate-credentials",
+    d: "The <code>client_assertion_type</code> URN and the client-assertion parameter set."
+  },
+  mstok: {
+    p: "doc",
+    n: "Microsoft — configurable token lifetimes",
+    u: "https://learn.microsoft.com/en-us/entra/identity-platform/configurable-token-lifetimes",
+    d: "The 60–90 min randomised access-token lifetime; <code>AccessTokenLifetime</code> min 10 min / max 24 h; CAE 24–28 h."
+  },
+  mskey: {
+    p: "doc",
+    n: "Microsoft — prevent Shared Key authorization",
+    u: "https://learn.microsoft.com/en-us/azure/storage/common/shared-key-authorization-prevent",
+    d: "The <code>listKeys</code> quote; <code>allowSharedKeyAccess</code> unset-by-default; CA requires disabling shared key."
+  },
+  mslease: {
+    p: "doc",
+    n: "Microsoft — Lease Blob (REST)",
+    u: "https://learn.microsoft.com/en-us/rest/api/storageservices/lease-blob",
+    d: "<code>x-ms-lease-duration: -1</code> = never expires; only valid on acquire."
+  },
+  tfback: {
+    p: "doc",
+    n: "HashiCorp — azurerm backend",
+    u: "https://developer.hashicorp.com/terraform/language/backend/azurerm",
+    d: '<code>use_oidc</code>/<code>use_azuread_auth</code>, the <code>ARM_*</code> vars, "ID Token environment variables are automatically found", client-secret "retained for backwards compatibility only".'
+  },
+  tfcli: {
+    p: "doc",
+    n: "HashiCorp — terraform plan",
+    u: "https://developer.hashicorp.com/terraform/cli/commands/plan",
+    d: '<code>-lock</code> defaults true; plan files save sensitive data <em>"in cleartext"</em>.'
+  },
+  tfsrc: {
+    p: "src",
+    n: "hashicorp/terraform — azure remote-state backend",
+    u: "https://github.com/hashicorp/terraform/tree/main/internal/backend/remote-state/azure",
+    d: "Infinite lease (<code>LeaseDuration: -1</code>, no renewal path); <code>terraformlockid</code> metadata; init's List Blobs; init→<code>ListKeys</code> when <code>use_azuread_auth</code> is unset; <code>storage.azure.com/.default</code> scope; 20-min <code>tokenExpiryDelta</code>; memory-only token cache. <strong>None of this is documented</strong> — it can change without a changelog."
+  },
+  tfpf: {
+    p: "src",
+    n: "hashicorp/terraform — planfile writer",
+    u: "https://github.com/hashicorp/terraform/tree/main/internal/plans/planfile",
+    d: "Plan archives contain <code>tfstate</code> and <code>tfstate-prev</code> entries — the sensitivity is documented, the mechanism is source-only."
+  }
+};
+var REFS = {
+  fed: [["disco"], ["ghref", "toolkit"], ["ghref"], ["mscert", "tfsrc"], [], ["mstok"], ["tfback"], ["mskey"]],
+  sec: [[], ["mscert"], [], ["mstok"], ["tfback", "tfsrc"], ["mskey"]]
+};
+var W = 540;
+var NUM_X = 15;
+var LANE_X = [94, 221, 349, 476];
+var BOX_W = 112;
+var BOX_H = 46;
+var HEAD_Y = 8;
+var BAND1 = { y: 100, h: 200 };
+var BAND2 = { y: 304 };
+var Y = { p0: 150, a: 214, b: 278, present: 358, verify: 422, token: 486, blob: 550, rbac: 614 };
+var SVG_H = 670;
+var FED_LANES = [
+  { h: "CI Runner", s: "ephemeral VM" },
+  { h: "CI OIDC issuer", s: "token.actions.githubusercontent.com" },
+  { h: "Entra ID", s: "login.microsoftonline.com" },
+  { h: "Blob", s: "<acct>.blob.core.windows.net" }
+];
+var SEC_LANES = [
+  { h: "CI Runner", s: "ephemeral VM" },
+  { h: "CI secret store", s: "encrypted at rest" },
+  { h: "Entra ID", s: "login.microsoftonline.com" },
+  { h: "Blob", s: "<acct>.blob.core.windows.net" }
+];
+var FED = [
+  {
+    y: Y.p0,
+    from: 2,
+    to: 1,
+    color: "muted",
+    label: "GET /.well-known/jwks",
+    eyebrow: "PHASE 0 · OUT OF BAND",
+    title: "Entra caches the issuer's public keys",
+    when: "before your run · on Entra's schedule",
+    prov: "inf",
+    provNote: `The endpoints and their contents are <b>documented and live-fetchable</b> — I pulled this discovery doc during this session. But <b>the caching cadence is my inference</b>: Entra's JWKS refresh interval is not published anywhere. Standard OIDC relying-party behaviour is to cache and refetch on unknown <code>kid</code>; I can't prove Entra's specific timing.`,
+    wire: `<span class="k">GET</span> https://token.actions.githubusercontent.com/.well-known/openid-configuration
+<span class="c">→ 200  (fetched live while building this page)</span>
+{
+  "issuer": <span class="s">"https://token.actions.githubusercontent.com"</span>,
+  "jwks_uri": <span class="s">"https://token.actions.githubusercontent.com/.well-known/jwks"</span>,
+  "id_token_signing_alg_values_supported": [<span class="s">"RS256"</span>]
+}
+
+<span class="k">GET</span> https://token.actions.githubusercontent.com/.well-known/jwks
+<span class="c">→ 200</span>
+{ "keys": [ { "kty":"RSA", "kid":"…", "n":"…", "e":"AQAB" } ] }
+
+<span class="c"># no auth. no registration. an anonymous GET of a public file.</span>`,
+    note: `<strong>This is the entire trust relationship.</strong> Not a handshake — a cached HTTP GET. The issuer's logs show an anonymous fetch of a public JSON file and nothing else; it has never heard of your tenant and is never consulted during your run. The trust bottoms out at <strong>web PKI</strong>: a CA vouched for that hostname's TLS certificate, so Entra believes the keys belong to who it thinks.`,
+    blast: null
+  },
+  {
+    y: Y.a,
+    from: 0,
+    to: 1,
+    color: "good",
+    label: "GET id-token · aud=AzureADTokenExchange",
+    eyebrow: "STEP 1 · RUNNER → CI ISSUER",
+    title: "The job asks CI to vouch for it",
+    when: "never touches Azure",
+    prov: "doc",
+    provNote: `Env var names, the curl form and the <code>audience</code> query param are documented. The <code>encodeURIComponent</code> and <code>setSecret</code> behaviour is verified in <b>actions/toolkit source</b>. <b>The URL's shape is an undocumented internal</b> — treat it as opaque.`,
+    wire: `<span class="k">GET</span> $ACTIONS_ID_TOKEN_REQUEST_URL<span class="w">&amp;audience=api://AzureADTokenExchange</span>
+<span class="k">Authorization:</span> bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN
+
+<span class="c"># Both are injected by the runner, and ONLY if the job declares:</span>
+permissions:
+  id-token: <span class="s">write</span>
+<span class="c"># Without it neither var exists and getIDToken() throws.
+
+# _URL   → GitHub's Actions token service, scoped to THIS run + job.
+#          Shape is an undocumented internal. Treat as opaque.
+# _TOKEN → a bearer credential FOR GITHUB, not for Azure. It proves to
+#          GitHub "I am job 3 of run 991". This is GitHub authenticating
+#          its OWN runner. Azure is nowhere near this step.
+
+# Three distinct credentials, which people collapse into one:
+#   1. the runner credential  ($ACTIONS_ID_TOKEN_REQUEST_TOKEN)
+#   2. the signed assertion   (the JWT that comes back)
+#   3. the Azure access token (what Entra hands over later)</span>`,
+    note: `Drop the <code>audience</code> param and <code>aud</code> defaults to your org URL, so Entra rejects it. That's the most common "it worked in the tutorial" failure. The toolkit calls <code>setSecret()</code> on the returned JWT, so it's masked in logs. <strong>Nothing here contacts Azure.</strong>`,
+    blast: null
+  },
+  {
+    y: Y.b,
+    from: 1,
+    to: 0,
+    color: "good",
+    label: "200 { value: <JWT> }",
+    eyebrow: "STEP 2 · CI ISSUER → RUNNER",
+    title: "A signed statement of fact",
+    when: "lifetime undocumented",
+    prov: "inf",
+    provNote: `Claim <b>names</b> and the <code>sub</code> formats are documented; the <b>values below are illustrative</b>. <b>The token's lifetime is not documented anywhere</b> — GitHub publishes <code>exp</code> inside the token but states no duration. Any number you've heard (including mine, earlier) is folklore.`,
+    wire: `<span class="c">200 OK</span>
+{"value":"eyJhbGciOiJSUzI1NiIsImtpZCI6…"}
+
+<span class="c">── header ──</span>
+{ "alg":<span class="s">"RS256"</span>, "kid":"…", "typ":"JWT" }
+<span class="c">── payload (values illustrative; claim names documented) ──</span>
+{
+  "iss": <span class="s">"https://token.actions.githubusercontent.com"</span>,
+  "aud": <span class="s">"api://AzureADTokenExchange"</span>,
+  "sub": <span class="w">"repo:my-org/my-repo:environment:prod"</span>,
+  "repository": "my-org/my-repo",
+  "environment": "prod",
+  "job_workflow_ref": "my-org/my-repo/.github/workflows/deploy.yml@refs/heads/main",
+  "run_id": "…", "actor": "…", "jti": "…",
+  "iat": …, "nbf": …, <span class="r">"exp": …   ← duration UNDOCUMENTED</span>
+}
+
+<span class="c"># documented sub formats:
+#   repo:ORG/REPO:ref:refs/heads/BRANCH
+#   repo:ORG/REPO:environment:ENV
+#   repo:ORG/REPO:pull_request        ← loosest one there is
+#   repo:ORG@ORG-ID/REPO@REPO-ID:…    ← immutable format, new repos</span>`,
+    note: `The issuer is a <strong>notary</strong>. It stamps what is true about this run and walks away — it does not know or care that the token is bound for Azure. The same JWT could be handed to AWS, GCP, Vault, or dropped on the floor. <strong>Adding <code>environment:</code> to a job changes this <code>sub</code> string</strong>, which silently breaks a <code>ref:</code>-based federated credential.`,
+    blast: {
+      art: "CI OIDC JWT",
+      ttl: "short, but the duration is <strong>undocumented</strong>",
+      scope: "replayable only to Entra, only as this one app, only for the requested audience",
+      sev: "lo",
+      sevT: "LOW",
+      what: "An attacker must exfiltrate it <em>and</em> replay it before <code>exp</code>. It mints nothing else."
+    }
+  },
+  {
+    y: Y.present,
+    from: 0,
+    to: 2,
+    color: "good",
+    label: "POST /oauth2/v2.0/token  (assertion)",
+    eyebrow: "STEP 3 · RUNNER → ENTRA",
+    title: "Present the assertion",
+    when: "RFC 7523 client assertion",
+    prov: "doc",
+    provNote: `The <code>client_assertion_type</code> URN and the parameter set are documented by Microsoft. The <b>scope value is source-only</b> — see the lifecycle section below.`,
+    wire: `<span class="k">POST</span> https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+<span class="k">Content-Type:</span> application/x-www-form-urlencoded
+
+grant_type=<span class="s">client_credentials</span>
+&amp;client_id=<span class="s">{app-id}</span>
+&amp;scope=<span class="s">https%3A%2F%2Fstorage.azure.com%2F.default</span>
+&amp;client_assertion_type=<span class="s">urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer</span>
+&amp;client_assertion=<span class="w">eyJhbGciOiJSUzI1NiIs…</span>   <span class="c"># ← the CI JWT</span>
+
+<span class="c"># RFC 7523. This is the SAME client-assertion slot a certificate JWT
+# would occupy — the request shape is identical. The only difference:
+# this assertion was signed by someone else.</span>`,
+    note: `<code>client_id</code>, <code>tenant_id</code> and <code>subscription_id</code> are <strong>not secrets</strong> — they're identifiers. People stash them in CI secrets out of habit; harmless, but it isn't buying anything.`,
+    blast: null
+  },
+  {
+    y: Y.verify,
+    self: 2,
+    color: "c4",
+    label: "verify — offline",
+    eyebrow: "STEP 4 · INSIDE ENTRA",
+    title: "Verification, calling nobody",
+    when: "no packets to the issuer",
+    prov: "inf",
+    provNote: `<b>My reconstruction of the ordering, not a documented algorithm.</b> That the four fields must match is implied by how federated credentials are configured; the internal sequence is not published. Error codes are from recall — <b>verify before you trust them</b>.`,
+    wire: `<span class="c"># Entra, offline. It does NOT call the issuer here.
+# (Ordering below is reconstructed, not a documented algorithm.)</span>
+
+1. header.kid <span class="c">→</span> cached JWKS key <span class="c">→</span> verify RS256 signature   <span class="s">✓</span>
+2. client_id <span class="c">→</span> its registered federatedIdentityCredentials
+3. iss <span class="c">must equal the configured issuer</span>                       <span class="s">✓</span>
+   aud <span class="c">must equal the configured audience</span>                     <span class="s">✓</span>
+   sub <span class="c">must equal the configured subject</span>
+       <span class="r">↑ EXACT string equality. no wildcard. no prefix.</span>          <span class="s">✓</span>
+4. nbf ≤ now &lt; exp                                             <span class="s">✓</span>
+
+<span class="c"># A mismatch surfaces as an AADSTS7002xx-class error meaning
+# "no matching federated credential" — in practice, a wrong sub.
+# (Exact codes: recall, unverified.)</span>`,
+    note: `Two questions people conflate. <strong>Authenticating the issuer</strong> ("is this really GitHub?") is answered by the signature — automatic, nothing to configure. <strong>Authorizing the workload</strong> ("should <em>this run</em> get a token?") is answered <em>entirely</em> by the <code>sub</code> string you typed. The issuer will happily sign a truthful token for <em>any</em> repo on its platform, including one created five minutes ago to look like yours. The <code>sub</code> check is the only thing in the way.`,
+    blast: null
+  },
+  {
+    y: Y.token,
+    from: 2,
+    to: 0,
+    color: "good",
+    label: "200 { access_token }",
+    eyebrow: "STEP 5 · ENTRA → RUNNER",
+    title: "A real Azure token",
+    when: "60–90 min, randomised",
+    prov: "doc",
+    provNote: `Lifetime is documented and is <b>not a fixed hour</b>: <i>"an access token's default lifetime is assigned a random value ranging between 60-90 minutes (75 minutes on average)"</i>. Configurable via <code>AccessTokenLifetime</code> (min 10 min, max 24 h). CAE-aware sessions can extend to 24–28 h.`,
+    wire: `<span class="c">200 OK</span>
+{
+  "token_type": <span class="s">"Bearer"</span>,
+  "expires_in": <span class="w">…</span>,   <span class="c"># NOT a fixed 3600. Randomised 60–90 min.</span>
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiI…"
+}
+
+<span class="c"># Microsoft, verbatim:
+#   "When issued, an access token's default lifetime is assigned a
+#    random value ranging between 60-90 minutes (75 minutes on average)."
+#
+# Configurable via an AccessTokenLifetime policy:
+#   minimum 00:10:00   maximum 23:59:59
+# Continuous Access Evaluation can extend it to 24-28 hours.
+
+# From this line down, the two lanes are byte-identical.</span>`,
+    note: `The federation is <strong>over</strong>. Everything after this is indistinguishable from having used a client secret — same token shape, same authorization. The credential model only ever mattered at step 4. <strong>The randomised 60–90 window matters</strong>: anything that assumes a flat hour is wrong, and the SDK's refresh logic keys off it.`,
+    blast: {
+      art: "Azure access token",
+      ttl: "60–90 min, randomised (documented)",
+      scope: "whatever RBAC the service principal holds",
+      sev: "md",
+      sevT: "MEDIUM",
+      what: "Identical exposure in <em>both</em> lanes. This artifact is not where the two approaches differ."
+    }
+  },
+  {
+    y: Y.blob,
+    from: 0,
+    to: 3,
+    color: "accent",
+    label: "GET /{container}/{key}",
+    eyebrow: "STEP 6 · RUNNER → BLOB",
+    title: "Read the object",
+    when: "identical in both lanes",
+    prov: "doc",
+    provNote: `<code>use_azuread_auth</code> and the <code>ARM_*</code> variables are documented by HashiCorp. <b>Earlier this page carried an <code>x-ms-version</code> header I invented</b> — it's gone; I have no basis for a specific value.`,
+    wire: `<span class="k">GET</span> https://{account}.blob.core.windows.net/{container}/{key}
+<span class="k">Authorization:</span> Bearer eyJ0eXAiOiJKV1Qi…
+
+<span class="c"># Reached here with NO azure/login step — terraform's backend does
+# the OIDC fetch and exchange itself:</span>
+env:
+  ARM_USE_OIDC:    <span class="s">true</span>
+  ARM_USE_AZUREAD: <span class="s">true</span>   <span class="c"># ← talk to blob via Entra RBAC, not a key</span>
+
+<span class="c"># ARM_USE_AZUREAD is load-bearing in BOTH lanes. Without it the
+# backend falls back to shared-key auth, and every bit of RBAC you
+# configured becomes decorative.</span>`,
+    note: `The interesting failure isn't "used a client secret" — it's reaching for an <strong>account access key</strong> because it's the one that Just Works. A key is not a weaker service principal; it's <strong>not a service principal at all</strong>. It bypasses RBAC entirely and appears in logs as nobody.`,
+    blast: null
+  },
+  {
+    y: Y.rbac,
+    self: 3,
+    color: "accent",
+    label: "RBAC evaluation",
+    eyebrow: "STEP 7 · INSIDE STORAGE",
+    title: "The authorization check",
+    when: "identical in both lanes",
+    prov: "doc",
+    provNote: `The <code>listKeys</code> quote is verbatim from Microsoft's shared-key page. Container-level RBAC scoping is documented Azure behaviour.`,
+    wire: `<span class="c"># Storage evaluates the token's oid against role assignments.</span>
+
+oid   <span class="w">{sp-object-id}</span>
+scope <span class="c">…/blobServices/default/containers/</span><span class="s">{container}</span>
+role  <span class="s">Storage Blob Data Contributor</span>                     <span class="s">✓ ALLOW</span>
+
+<span class="c"># Azure RBAC granularity for blobs stops at the CONTAINER.
+# A token scoped to one container 403s on another.</span>
+
+<span class="c"># But an ACCOUNT KEY bypasses this check entirely, and Microsoft
+# is blunt about who can mint one — verbatim:</span>
+
+  <span class="r">"[Owner/Contributor/Storage Account Contributor] do not provide
+   access to data in a storage account via Microsoft Entra ID.
+   However, they include Microsoft.Storage/storageAccounts/
+   listkeys/action, which grants access to the account access keys.
+   With this permission, a user can use the account access keys to
+   access ALL DATA in a storage account."</span>
+
+<span class="c"># allowSharedKeyAccess is UNSET by default, which Azure treats as
+# allowed. So container-scoped RBAC is opt-in until you disable it.</span>`,
+    note: `The under-sold cost of the secret lane lands upstream, in the sign-in log. A federated sign-in is attributable to a specific <code>sub</code> — a repo, an environment, a run. A secret sign-in tells you only that <em>someone, somewhere</em> had the password. <strong>I have not verified the exact log field names</strong>, so I'm not quoting them; earlier drafts of this page invented those strings.`,
+    blast: null
+  }
+];
+var SEC = [
+  {
+    y: Y.p0,
+    from: 1,
+    to: 0,
+    color: "danger",
+    label: "secret injected into job env",
+    eyebrow: "STEP 1 · SECRET STORE → RUNNER",
+    title: "A password that already existed",
+    when: "and for the last N months",
+    prov: "doc",
+    provNote: `CI secret injection is documented, ordinary behaviour. The <b>"places it exists at rest" list is reasoning, not a citation</b> — but it follows from the artifact being a static string somebody had to create and paste.`,
+    wire: `<span class="c"># CI decrypts the secret and injects it into the job environment</span>
+env:
+  ARM_CLIENT_SECRET: <span class="r">\${{ secrets.ARM_CLIENT_SECRET }}</span>
+
+<span class="c"># Before this run ever started, this value existed at rest in at
+# least these places:
+#   · Entra (stored somehow — the mechanism is NOT documented)
+#   · the CI secret store
+#   · whoever generated it: clipboard, shell history, password
+#     manager, a browser tab, possibly a chat message
+#
+# The federated lane has NO equivalent of this step, because there
+# is no artifact to store.</span>`,
+    note: `This is the whole divergence, and it happens <strong>before the run begins</strong>. The federated lane's credential does not exist until the moment it's needed and stops existing minutes later. This one has been sitting somewhere, unchanged, since the day it was created.`,
+    blast: {
+      art: "client secret",
+      ttl: "until a human rotates it",
+      scope: "mints unlimited tokens as the app, <strong>from any machine on earth</strong>",
+      sev: "hi",
+      sevT: "CRITICAL",
+      what: "No replay window to beat. No binding to repo, branch, environment, workflow, or network. Possession <em>is</em> identity."
+    }
+  },
+  {
+    y: Y.present,
+    from: 0,
+    to: 2,
+    color: "danger",
+    label: "POST /oauth2/v2.0/token  (secret)",
+    eyebrow: "STEP 2 · RUNNER → ENTRA",
+    title: "Present the password",
+    when: "same endpoint, same grant",
+    prov: "doc",
+    provNote: `The client-credentials-with-secret request is documented by Microsoft.`,
+    wire: `<span class="k">POST</span> https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+<span class="k">Content-Type:</span> application/x-www-form-urlencoded
+
+grant_type=<span class="s">client_credentials</span>
+&amp;client_id=<span class="s">{app-id}</span>
+&amp;scope=<span class="s">https%3A%2F%2Fstorage.azure.com%2F.default</span>
+&amp;client_secret=<span class="r">{the secret}</span>   <span class="c"># ← the entire ballgame, one field</span>
+
+<span class="c"># Compare to the federated step 3: same endpoint, same grant type,
+# same scope. Entra treats client_secret and client_assertion as
+# interchangeable proofs in the same slot.</span>`,
+    note: `Everything from here is identical to the federated lane. That's not a rhetorical flourish — it's why swapping credential models doesn't touch your authorization model at all.`,
+    blast: null
+  },
+  {
+    y: Y.verify,
+    self: 2,
+    color: "danger",
+    label: "verify the secret",
+    eyebrow: "STEP 3 · INSIDE ENTRA",
+    title: "What Entra checks — and can't",
+    when: "",
+    prov: "inf",
+    provNote: `<b>Corrected.</b> An earlier draft asserted <code>hash(secret) == stored hash</code> — <b>I invented that</b>; Microsoft does not document how secrets are stored, and I shouldn't have implied I knew. What survives is the part that's actually defensible: the <b>list of things the request cannot convey</b>, which follows from the request's contents.`,
+    wire: `<span class="c"># Entra validates the presented secret against the app's registered
+# credentials and checks it hasn't expired.
+#
+# HOW it's stored/compared is NOT documented. Earlier versions of
+# this page claimed a hash comparison. That was invented. Removed.</span>
+
+<span class="c"># The defensible part — what is NOT checked, because there is
+# nothing in the request to check it against:</span>
+
+   <span class="r">·</span> which repo sent it            <span class="r">— unknowable</span>
+   <span class="r">·</span> which branch / environment    <span class="r">— unknowable</span>
+   <span class="r">·</span> which workflow file           <span class="r">— unknowable</span>
+   <span class="r">·</span> which machine, which network  <span class="r">— unknowable</span>
+   <span class="r">·</span> whether a CI run is even happening
+
+<span class="c"># Contrast the federated lane, where every one of those arrives as
+# a signed claim that Entra can and does match on.</span>`,
+    note: `<strong>This is the actual difference</strong>, and it's a difference in <em>how much the request can even tell Entra</em>. The federated assertion carries provenance. A secret carries none. Entra isn't being lazy — there is genuinely nothing else in the request to verify.`,
+    blast: null
+  },
+  {
+    y: Y.token,
+    from: 2,
+    to: 0,
+    color: "warn",
+    label: "200 { access_token }",
+    eyebrow: "STEP 4 · ENTRA → RUNNER",
+    title: "The identical token",
+    when: "60–90 min, randomised",
+    prov: "doc",
+    provNote: `Same documented lifetime as the federated lane — because it <i>is</i> the same thing.`,
+    wire: `<span class="c">200 OK</span>
+{
+  "token_type": <span class="s">"Bearer"</span>,
+  "expires_in": <span class="w">…</span>,   <span class="c"># randomised 60–90 min, same as federated</span>
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiI…"
+}
+
+<span class="c"># Byte-for-byte the same shape as the federated lane's token.
+# Same oid, same audience, same lifetime, same RBAC.
+#
+# Downstream, Azure cannot tell how this token was obtained.
+# The distinction survives ONLY in the sign-in log.</span>`,
+    note: `Worth sitting with: <strong>the authorization is identical</strong>. Swapping to a client secret does not weaken container-scoped RBAC one bit — as long as <code>use_azuread_auth</code> stays on. It weakens <em>authentication</em>, and it costs you <em>attribution</em>. That's a rotation-and-forensics liability, not a privilege escalation — which is why "just use a secret" isn't automatically catastrophic, and also why it's rarely worth it.`,
+    blast: {
+      art: "Azure access token",
+      ttl: "60–90 min, randomised",
+      scope: "whatever RBAC the SP holds",
+      sev: "md",
+      sevT: "MEDIUM",
+      what: "Same as the federated lane. Not where the two differ."
+    }
+  },
+  {
+    y: Y.blob,
+    from: 0,
+    to: 3,
+    color: "accent",
+    label: "GET /{container}/{key}",
+    eyebrow: "STEP 5 · RUNNER → BLOB",
+    title: "Read the object",
+    when: "identical in both lanes",
+    prov: "doc",
+    provNote: `Backend config and the "backwards compatibility only" characterisation are documented by HashiCorp. The <code>init</code>→<code>ListKeys</code> behaviour is <b>source-verified, undocumented</b>.`,
+    wire: `<span class="k">GET</span> https://{account}.blob.core.windows.net/{container}/{key}
+<span class="k">Authorization:</span> Bearer eyJ0eXAiOiJKV1Qi…
+
+<span class="c"># The strictest client-secret backend still keeps Entra RBAC:</span>
+terraform {
+  backend "azurerm" {
+    <span class="s">use_azuread_auth = true</span>      <span class="c"># ← DO NOT DROP THIS</span>
+    client_id        = <span class="s">"{app-id}"</span>
+    <span class="c"># secret via ARM_CLIENT_SECRET, never in HCL</span>
+  }
+}
+<span class="c"># HashiCorp calls this path "retained for backwards compatibility only".
+
+# The trap — NOT "the secret version", but much worse:</span>
+<span class="r">export ARM_ACCESS_KEY=…</span>   <span class="c"># shared key: root over EVERY container,
+                          # no RBAC evaluation, no identity in logs.
+
+# Source-verified, undocumented: with use_azuread_auth UNSET and no
+# key/SAS supplied, "terraform init" reaches for the ARM management
+# plane and calls ListKeys itself — i.e. the default path fetches an
+# account key on your behalf.</span>`,
+    note: `Both lanes converge here completely. If you take one thing from this page, take this: the credential model is a smaller lever than <code>use_azuread_auth</code>.`,
+    blast: {
+      art: "account access key (if used)",
+      ttl: "forever — until manually rotated",
+      scope: "<strong>every container in the account</strong>. RBAC not consulted.",
+      sev: "hi",
+      sevT: "CRITICAL",
+      what: "Collapses any per-container design in one env var."
+    }
+  },
+  {
+    y: Y.rbac,
+    self: 3,
+    color: "accent",
+    label: "RBAC evaluation",
+    eyebrow: "STEP 6 · INSIDE STORAGE",
+    title: "The authorization check",
+    when: "identical in both lanes",
+    prov: "doc",
+    provNote: `Same documented check as the federated lane. The sign-in-log <b>field names are deliberately not quoted</b> — earlier drafts invented them.`,
+    wire: `<span class="c"># Identical to the federated lane — same oid, same check.</span>
+
+oid   <span class="w">{sp-object-id}</span>
+scope <span class="c">…/containers/</span><span class="s">{container}</span>
+role  <span class="s">Storage Blob Data Contributor</span>                     <span class="s">✓ ALLOW</span>
+
+<span class="c"># The one forensic difference lands upstream, in Entra's sign-in
+# log: a federated sign-in is attributable to a specific subject
+# claim (a repo, an environment, a run). A secret sign-in is not.
+#
+# I have NOT verified the exact log field names or strings, so this
+# page no longer quotes them. An earlier draft did — those were
+# fabricated.</span>`,
+    note: `Not just "it could leak" — <strong>you lose attribution</strong>. In the federated lane every token ever minted traces to a run. In the secret lane every token for the credential's whole life looks identical, including an attacker's.`,
+    blast: null
+  }
+];
+var COL = {
+  good: "var(--good)",
+  danger: "var(--danger)",
+  warn: "var(--warn)",
+  accent: "var(--accent)",
+  muted: "var(--muted)",
+  c4: "var(--c4)"
+};
+var MK = {
+  good: "ah-good",
+  danger: "ah-danger",
+  warn: "ah-warn",
+  accent: "ah-accent",
+  muted: "ah",
+  c4: "ah-accent"
+};
+function laneHeads(lanes) {
+  return lanes.map((l, i) => {
+    const x = LANE_X[i] - BOX_W / 2;
+    return `<g>
+      <rect x="${x}" y="${HEAD_Y}" width="${BOX_W}" height="${BOX_H}" rx="6"
+            fill="var(--panel-2)" stroke="var(--border)"/>
+      <foreignObject x="${x + 7}" y="${HEAD_Y + 7}" width="${BOX_W - 14}" height="${BOX_H - 12}">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="lane-head">
+          <span class="h">${l.h}</span><span class="s">${l.s}</span>
+        </div>
+      </foreignObject>
+      <line class="lifeline" x1="${LANE_X[i]}" y1="${HEAD_Y + BOX_H}" x2="${LANE_X[i]}" y2="${SVG_H - 14}"/>
+    </g>`;
+  }).join("");
+}
+function stepMark(st, n, laneId) {
+  const c = COL[st.color], mk = MK[st.color];
+  let body, lx, lw;
+  if (st.self !== undefined) {
+    const x = LANE_X[st.self], w = 104, h = 26;
+    body = `<rect x="${x - w / 2}" y="${st.y - h / 2}" width="${w}" height="${h}" rx="5"
+                  fill="var(--panel-2)" stroke="${c}" class="wire"/>
+            <text x="${x}" y="${st.y + 4}" text-anchor="middle"
+                  font-family="var(--mono)" font-size="10" font-weight="700" fill="${c}">⟳ internal</text>`;
+    lx = x - w / 2 - 8;
+    lw = w + 16;
+  } else {
+    const x1 = LANE_X[st.from], x2 = LANE_X[st.to];
+    const dir = x2 > x1 ? 1 : -1;
+    body = `<path class="wire" d="M ${x1} ${st.y} L ${x2 - dir * 7} ${st.y}" stroke="${c}"
+                  ${st.color === "muted" ? 'stroke-dasharray="5 4"' : ""} marker-end="url(#${mk})"/>`;
+    lx = Math.min(x1, x2) + 4;
+    lw = Math.abs(x2 - x1) - 8;
+  }
+  return `<g class="step" data-lane="${laneId}" data-i="${n}"
+             data-viz-id="${laneId}-${n}" data-label="${st.label}">
+    <rect class="hit" x="0" y="${st.y - 34}" width="${W}" height="54"/>
+    <foreignObject x="${lx}" y="${st.y - 34}" width="${Math.max(lw, 96)}" height="30">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="lbl">${st.label}</div>
+    </foreignObject>
+    ${body}
+    <g class="num"><circle cx="${NUM_X}" cy="${st.y}" r="8" fill="${c}" stroke="var(--bg)"/>
+      <text x="${NUM_X}" y="${st.y + 3}" text-anchor="middle">${n + 1}</text></g>
+  </g>`;
+}
+function drawLane(svgEl, lanes, steps, laneId) {
+  svgEl.innerHTML = `
+    ${arrowMarkers()}
+    <rect class="band" x="30" y="${BAND1.y}" width="${W - 30}" height="${BAND1.h}" rx="6"/>
+    <rect class="band-same" x="30" y="${BAND2.y}" width="${W - 30}" height="${SVG_H - BAND2.y - 8}" rx="6"/>
+    <text class="band-lbl" x="38" y="${BAND1.y + 12}" fill="var(--danger)">THE ONLY DIFFERENCE</text>
+    <text class="band-lbl" x="38" y="${BAND2.y + 12}" fill="var(--accent)">IDENTICAL FROM HERE ↓</text>
+    ${laneHeads(lanes)}
+    ${steps.map((s, i) => stepMark(s, i, laneId)).join("")}`;
+}
+drawLane(document.querySelector("#svg-fed"), FED_LANES, FED, "fed");
+drawLane(document.querySelector("#svg-sec"), SEC_LANES, SEC, "sec");
+var STEPS = { fed: FED, sec: SEC };
+var PROV_LABEL = { doc: "DOCUMENTED", src: "SOURCE-ONLY", inf: "INFERRED", ill: "ILLUSTRATIVE" };
+var sel = Object.assign({ lane: "fed", i: 2 }, loadHash());
+if (!STEPS[sel.lane])
+  sel.lane = "fed";
+sel.i = Math.max(0, Math.min(STEPS[sel.lane].length - 1, Math.trunc(sel.i) || 0));
+function renderDetail() {
+  const st = STEPS[sel.lane][sel.i];
+  const b = st.blast;
+  const refs = REFS[sel.lane][sel.i] ?? [];
+  document.querySelector("#detail").innerHTML = `
+    <div class="dh">
+      <div class="eyebrow">${st.eyebrow}</div>
+      <h4>${st.title}</h4>
+      ${st.when ? `<div class="when">${st.when}</div>` : ""}
+    </div>
+    <div class="provbar">
+      <span class="prov ${st.prov}">${PROV_LABEL[st.prov]}</span>
+      <div class="pnote">${st.provNote}</div>
+      ${refs.length > 0 ? `<div class="reflinks">
+        ${refs.map((k) => {
+    const s = SOURCES[k];
+    return `<a href="${s.u}" target="_blank" rel="noopener"
+             title="${s.n}"><span class="prov ${s.p}">${PROV_LABEL[s.p]}</span>${s.n} ↗</a>`;
+  }).join("")}
+      </div>` : `<div class="reflinks nocite">Nothing to cite — see the note above for what the reasoning rests on.</div>`}
+    </div>
+    <pre class="wirebox">${st.wire}</pre>
+    <div class="note">${st.note}</div>
+    ${b ? `
+      <div class="blast">
+        <div class="bt">IF THIS ARTIFACT LEAKS HERE</div>
+        <div class="brow"><span class="bk">artifact</span><span class="bv"><code>${b.art}</code> <span class="sev ${b.sev}">${b.sevT}</span></span></div>
+        <div class="brow"><span class="bk">useful for</span><span class="bv">${b.ttl}</span></div>
+        <div class="brow"><span class="bk">gets you</span><span class="bv">${b.scope}</span></div>
+        <div class="brow"><span class="bk">so what</span><span class="bv">${b.what}</span></div>
+      </div>` : `
+      <div class="blast none">No credential material on the wire at this step.</div>`}`;
+  document.querySelectorAll(".step").forEach((g) => {
+    const on = g.dataset["lane"] === sel.lane && Number(g.dataset["i"]) === sel.i;
+    g.classList.toggle("sel", on);
+    g.classList.toggle("dim", !on);
+  });
+  saveHash(sel);
+}
+document.querySelectorAll(".step").forEach((g) => {
+  g.addEventListener("click", () => {
+    const lane = g.dataset["lane"];
+    if (lane === "fed" || lane === "sec")
+      sel.lane = lane;
+    sel.i = +g.dataset["i"];
+    renderDetail();
+  });
+});
+addEventListener("keydown", (e) => {
+  const n = STEPS[sel.lane].length;
+  if (e.key === "ArrowRight") {
+    sel.i = (sel.i + 1) % n;
+  } else if (e.key === "ArrowLeft") {
+    sel.i = (sel.i - 1 + n) % n;
+  } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+    sel.lane = sel.lane === "fed" ? "sec" : "fed";
+    sel.i = Math.min(sel.i, STEPS[sel.lane].length - 1);
+  } else
+    return;
+  e.preventDefault();
+  renderDetail();
+});
+document.querySelector("#reset").addEventListener("click", () => {
+  sel.lane = "fed";
+  sel.i = 0;
+  renderDetail();
+});
+var timer = null;
+document.querySelector("#play").addEventListener("click", (e) => {
+  if (!(e.target instanceof HTMLElement))
+    return;
+  const target = e.target;
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+    target.textContent = "▶ Play both";
+    target.classList.remove("on");
+    return;
+  }
+  target.textContent = "⏸ Pause";
+  target.classList.add("on");
+  sel.lane = "fed";
+  sel.i = 0;
+  renderDetail();
+  timer = setInterval(() => {
+    if (sel.i < STEPS[sel.lane].length - 1)
+      sel.i++;
+    else if (sel.lane === "fed") {
+      sel.lane = "sec";
+      sel.i = 0;
+    } else {
+      clearInterval(timer);
+      timer = null;
+      document.querySelector("#play").textContent = "▶ Play both";
+      document.querySelector("#play").classList.remove("on");
+    }
+    renderDetail();
+  }, 2600);
+});
+renderDetail();
+var D = { gh: "var(--good)", entra: "var(--c4)", blob: "var(--accent)", other: "var(--muted)" };
+var PROCS = [
+  {
+    cmd: "terraform init",
+    meta: "New OS process. Empty token cache.",
+    calls: [
+      { c: D.gh, t: "GET $ACTIONS_ID_TOKEN_REQUEST_URL", e: "fresh CI JWT #1" },
+      { c: D.entra, t: "POST /{tenant}/oauth2/v2.0/token", e: "scope=https://storage.azure.com/.default → access token" },
+      { c: D.blob, t: "GET /{container}?restype=container&comp=list", e: "List Blobs — yes, init hits the data plane" },
+      { c: D.blob, t: "GET /{container}/{key}", e: "Get Blob — read state" }
+    ],
+    ann: `<strong>init locks only conditionally</strong> — a lease is taken solely when the state blob doesn't exist yet and must be created. Existing state → no lock on init.`,
+    foot: `Process exits → the in-memory token is discarded. Nothing persists to disk.`
+  },
+  {
+    cmd: "terraform plan -out=tfplan",
+    meta: "New process. Nothing cached. Full re-auth.",
+    calls: [
+      { c: D.gh, t: "GET $ACTIONS_ID_TOKEN_REQUEST_URL", e: "fresh CI JWT #2 — the first one is long gone" },
+      { c: D.entra, t: "POST /{tenant}/oauth2/v2.0/token", e: "a second, independent exchange" },
+      { c: D.blob, t: "PUT /{container}/{key}?comp=lease", e: "x-ms-lease-action: acquire · x-ms-lease-duration: -1 (infinite)" },
+      { c: D.blob, t: "PUT /{container}/{key}?comp=metadata", e: "writes terraformlockid" },
+      { c: D.blob, t: "GET /{container}/{key}", e: "read state — plan does NOT write state" },
+      { c: D.blob, t: "PUT …?comp=lease (release)", e: "" },
+      { c: D.other, t: "provider auth — separate", e: "aws / keycloak / gitlab / … authenticate with their own creds, to their own APIs" }
+    ],
+    ann: `<strong>plan locks by default</strong> (<code>-lock</code> defaults true). And the resulting <code>tfplan</code> <strong>embeds full state snapshots</strong> — the archive contains <code>tfstate</code> and <code>tfstate-prev</code> entries. HashiCorp: <em>"any sort of sensitive data … will be saved in cleartext in the plan file."</em> Treat the plan artifact as state-equivalent for exfiltration purposes.`,
+    foot: `Process exits → token discarded again.`
+  },
+  {
+    cmd: "terraform apply tfplan",
+    meta: "New process. Nothing cached. Full re-auth.",
+    calls: [
+      { c: D.gh, t: "GET $ACTIONS_ID_TOKEN_REQUEST_URL", e: "fresh CI JWT #3" },
+      { c: D.entra, t: "POST /{tenant}/oauth2/v2.0/token", e: "a third, independent exchange" },
+      { c: D.blob, t: "PUT …?comp=lease", e: "acquire, duration -1" },
+      { c: D.blob, t: "GET /{container}/{key}", e: "read state" },
+      { c: D.blob, t: "PUT /{container}/{key}", e: "Put Block Blob — WRITE state" },
+      { c: D.blob, t: "PUT …?comp=lease (release)", e: "" }
+    ],
+    ann: `<strong>If the apply outlives the token</strong>, the SDK renews <em>20 minutes before</em> expiry — and to do so it fetches a <strong>brand-new CI JWT</strong> and re-exchanges it. So a long apply keeps calling the CI OIDC endpoint. Because the lease is infinite with no renewal path, the <em>lock</em> can never lapse mid-apply — a token failure breaks the write, leaving a stuck lease that needs <code>force-unlock</code>.`,
+    foot: `Whether $ACTIONS_ID_TOKEN_REQUEST_TOKEN stays valid late in a very long job is <strong>undocumented</strong>. Not guessing.`
+  }
+];
+document.querySelector("#procs").innerHTML = PROCS.map((p, i) => `
+  <div class="proc" data-viz-id="proc-${i}" data-label="${p.cmd}">
+    <div class="ph"><code>${p.cmd}</code><div class="pmeta">${p.meta}</div></div>
+    <ul class="calls">
+      ${p.calls.map((c) => `<li><span class="d" style="background:${c.c}"></span>
+        <span>${c.t}${c.e ? `<em>${c.e}</em>` : ""}</span></li>`).join("")}
+      <li class="ann">${p.ann}</li>
+    </ul>
+    <div class="pfoot">${p.foot}</div>
+  </div>`).join("");
+var MIN = 60;
+var HOUR = 3600;
+var DAY = 86400;
+var MO = 2592000;
+var YR = 31536000;
+var LO = Math.log(MIN);
+var HI = Math.log(8 * YR);
+var posOf = (s) => (Math.log(s) - LO) / (HI - LO) * 100;
+var TTL = [
+  {
+    n: "CI OIDC JWT",
+    e: "federated · per exchange",
+    lo: 300,
+    hi: 900,
+    c: "var(--good)",
+    t: "undocumented",
+    unknown: true
+  },
+  {
+    n: "Azure access token",
+    e: "both lanes",
+    lo: 60 * 60,
+    hi: 90 * 60,
+    c: "var(--warn)",
+    t: "60–90 min"
+  },
+  {
+    n: "Client secret",
+    e: "as configured",
+    lo: MO * 6,
+    hi: 2 * YR,
+    c: "var(--danger)",
+    t: "months → years"
+  },
+  {
+    n: "Account access key",
+    e: "the trap",
+    lo: 8 * YR,
+    hi: 8 * YR,
+    c: "var(--danger)",
+    t: "∞ until rotated",
+    inf: true
+  }
+];
+var TICKS = [
+  { s: MIN, l: "1 min" },
+  { s: HOUR, l: "1 hr" },
+  { s: DAY, l: "1 day" },
+  { s: MO, l: "1 mo" },
+  { s: 2 * YR, l: "2 yr" },
+  { s: 8 * YR, l: "∞" }
+];
+document.querySelector("#ttl").innerHTML = TTL.map((d) => {
+  const a = posOf(d.lo), b = Math.max(posOf(d.hi), a + 1.5);
+  const grid = TICKS.slice(1, -1).map((t) => `<div class="ttl-tick" style="left:${posOf(t.s)}%"></div>`).join("");
+  const hatch = d.inf ? `repeating-linear-gradient(45deg,var(--danger),var(--danger) 6px,#8b1f1a 6px,#8b1f1a 12px)` : `repeating-linear-gradient(45deg, ${d.c} 0 4px, transparent 4px 8px)`;
+  return `<div class="ttl-row" data-viz-id="ttl-${d.n}" data-label="${d.n} lifetime">
+    <div class="ttl-name">${d.n}<em>${d.e}</em></div>
+    <div class="ttl-track">
+      ${grid}
+      <div class="ttl-fill" style="left:0;width:${a}%;background:${d.c};${d.unknown ? "opacity:.35" : ""}"></div>
+      <div class="ttl-band" style="left:${a}%;width:${b - a}%;background:${hatch};opacity:.9"></div>
+      <div class="ttl-val ${b > 65 ? "inside" : ""}"
+           style="${b > 65 ? `right:calc(${100 - b}% + 8px)` : `left:calc(${b}% + 8px)`}">${d.t}${d.unknown ? " ?" : ""}</div>
+    </div>
+  </div>`;
+}).join("");
+document.querySelector("#ttlAxis").innerHTML = TICKS.map((t) => `<span style="left:${posOf(t.s)}%">${t.l}</span>`).join("");
+var UNKNOWN = [
+  "The CI OIDC JWT's lifetime. GitHub publishes <code>exp</code> in the token but states no duration. Every number in circulation is folklore.",
+  "How Entra stores/compares a client secret. An earlier draft of this page asserted a hash comparison — that was invented.",
+  `Entra's JWKS cache interval — the "Phase 0" cadence is inferred from standard OIDC behaviour, not published.`,
+  "Entra sign-in log field names for federated vs secret sign-ins. Earlier drafts quoted strings that do not exist.",
+  "Whether <code>$ACTIONS_ID_TOKEN_REQUEST_TOKEN</code> stays valid late in a very long job — matters for applies that outlive a token refresh.",
+  "The exact AADSTS error codes for a subject mismatch. Recall only."
+];
+document.querySelector("#sources").innerHTML = Object.values(SOURCES).map((s) => `<div class="src">
+    <div class="sh"><span class="prov ${s.p}">${PROV_LABEL[s.p]}</span>
+      <a href="${s.u}" target="_blank" rel="noopener">${s.n} ↗</a></div>
+    <p>${s.d}</p></div>`).join("") + `<div class="src unknown" style="margin-top:12px">
+       <div class="sh"><span class="prov ill">NOT KNOWN</span>
+       <span style="font:600 11.5px var(--sans);color:var(--text)">Things this page refuses to guess</span></div>
+       <p style="margin-top:6px">${UNKNOWN.map((u) => `• ${u}`).join("<br>")}</p>
+     </div>`;
+</script>
+<a id="__viz_dl" href="#" role="button" aria-label="Save a copy of this page"
+title="Save a copy" style="position:fixed;bottom:14px;right:14px;z-index:2147483646;
+width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+border-radius:8px;background:rgba(20,20,22,.55);color:#fff;opacity:.35;
+backdrop-filter:blur(4px);transition:opacity .15s;text-decoration:none"
+onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.35">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/>
+<line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+<script>(function(){
+  var a=document.getElementById("__viz_dl");
+  var name=(document.title||"visualization").toLowerCase()
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60)||"visualization";
+  var plain="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+  function save(text){
+    var url=URL.createObjectURL(new Blob([text],{type:"text/html"}));
+    var t=document.createElement("a"); t.href=url; t.download=name+".html";
+    document.body.appendChild(t); t.click(); t.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  a.addEventListener("click",function(e){
+    e.preventDefault();
+    fetch(location.href).then(function(r){return r.text();})
+      .then(function(t){ save(t.indexOf("staticrypt"+"Config")>0?plain:t); })
+      .catch(function(){ save(plain); });
+  });
+})();</script>
+</body>
+</html>
