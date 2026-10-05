@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PingOne Self-Service API Credential Flow</title>
+    <meta name="viz:uid" content="v-9e4961826702" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:title" content="PingOne Self-Service API Credential Flow" />
+    <meta
+      name="viz:description"
+      content="How an API consumer self-provisions API credentials, mints an access token, and calls a protected API — using Dynamic Client Registration against the PingOne Management API."
+    />
+    <meta name="viz:tag" content="PingOne" />
+    <meta name="viz:tag" content="API" />
+    <style>
+      :root {
+        --setup: #94a3b8;
+        --setup-bg: #1b2130;
+        --prov: #34d399;
+        --prov-bg: #112a22;
+        --mint: #60a5fa;
+        --mint-bg: #122036;
+        --call: #a78bfa;
+        --call-bg: #1d1a34;
+        --ink: #e6e9ef;
+        --muted: #8b93a7;
+        --line: #2a3142;
+        --bg: #0b0e14;
+        --surface: #131722;
+        --surface2: #1b2130;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.45;
+      }
+      header {
+        padding: 18px 28px 14px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 19px;
+      }
+      header p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .legend {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 3px;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        padding: 10px 28px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      button {
+        font: inherit;
+        font-size: 13px;
+        padding: 6px 13px;
+        border-radius: 7px;
+        border: 1px solid var(--line);
+        background: var(--surface2);
+        color: var(--ink);
+        cursor: pointer;
+        transition:
+          background 0.12s,
+          border-color 0.12s;
+      }
+      button:hover {
+        background: #252d3f;
+      }
+      button.primary {
+        background: var(--mint);
+        color: #07101f;
+        border-color: var(--mint);
+      }
+      button.primary:hover {
+        background: #82bdfb;
+      }
+      button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      .controls .steplabel {
+        font-size: 12px;
+        color: var(--muted);
+        margin-left: 4px;
+      }
+      .controls .spacer {
+        flex: 1;
+      }
+
+      .layout {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .diagram-wrap {
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+        padding: 20px 24px 48px;
+      }
+      svg {
+        display: block;
+      }
+
+      .panel {
+        width: 388px;
+        flex-shrink: 0;
+        align-self: stretch;
+        border-left: 1px solid var(--line);
+        background: var(--surface);
+        padding: 22px 24px;
+        position: sticky;
+        top: 49px;
+        max-height: calc(100vh - 49px);
+        overflow-y: auto;
+      }
+      .panel .tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 3px 9px;
+        border-radius: 20px;
+        color: #fff;
+      }
+      .panel h2 {
+        font-size: 16px;
+        margin: 12px 0 8px;
+      }
+      .panel .desc {
+        font-size: 13.5px;
+        color: #c7cde0;
+      }
+      .panel .ref {
+        margin-top: 14px;
+        font-size: 11.5px;
+        color: var(--muted);
+        border-top: 1px dashed var(--line);
+        padding-top: 10px;
+      }
+      .panel .ref code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        background: var(--surface2);
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-size: 11px;
+        color: #cdd4e4;
+      }
+      .panel pre {
+        margin: 10px 0 0;
+        padding: 11px 13px;
+        border-radius: 8px;
+        background: #0f172a;
+        color: #a7f3d0;
+        font-size: 11.5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        overflow-x: auto;
+        line-height: 1.5;
+      }
+      .panel .hint {
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      .panel ul {
+        padding-left: 18px;
+        margin: 8px 0;
+        font-size: 13px;
+        color: #c7cde0;
+      }
+      .panel li {
+        margin: 5px 0;
+      }
+
+      /* SVG interactive bits */
+      .stepg {
+        cursor: pointer;
+      }
+      .stepg .hit {
+        fill: transparent;
+      }
+      .stepg:hover .msglabel {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>PingOne &mdash; Self-Service API Credential Obtainment Flow</h1>
+      <p>
+        How an API consumer provisions API credentials, mints an access token, and calls a protected
+        API &mdash; using Dynamic Client Registration against the PingOne Management API.
+      </p>
+      <div class="legend">
+        <span class="chip"
+          ><span class="dot" style="background: var(--setup)"></span>One-time setup
+          (Terraform)</span
+        >
+        <span class="chip"
+          ><span class="dot" style="background: var(--prov)"></span>Phase 1 &mdash; Provision
+          credentials</span
+        >
+        <span class="chip"
+          ><span class="dot" style="background: var(--mint)"></span>Phase 2 &mdash; Mint access
+          token</span
+        >
+        <span class="chip"
+          ><span class="dot" style="background: var(--call)"></span>Phase 3 &mdash; Call the
+          API</span
+        >
+      </div>
+    </header>
+
+    <div class="controls">
+      <button id="btnPlay" class="primary">&#9654;&nbsp; Play walkthrough</button>
+      <button id="btnPrev">&#9664; Prev</button>
+      <button id="btnNext">Next &#9654;</button>
+      <button id="btnAll">&#9638; Show all (static)</button>
+      <span class="steplabel" id="stepLabel"
+        >Static view &mdash; all 15 steps visible. Click any step for detail.</span
+      >
+      <span class="spacer"></span>
+    </div>
+
+    <div class="layout">
+      <div class="diagram-wrap"><div id="diagram"></div></div>
+      <aside class="panel" id="panel"></aside>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

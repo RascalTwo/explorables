@@ -1,0 +1,2645 @@
+{
+ "docs": [
+  {
+   "stem": "providence-public-works",
+   "label": "providence public works",
+   "pages": 275,
+   "words": 111158,
+   "cites": 73,
+   "located": 60,
+   "exact": 56,
+   "ocr": 4,
+   "approx": 0,
+   "fields": 19,
+   "fieldTotal": 20,
+   "scannedPages": 25,
+   "usd": 14.039,
+   "usd2025": 42.116,
+   "source": "providenceri.gov",
+   "url": "https://www.providenceri.gov/wp-content/uploads/2026/02/PVD26-13-Public-Works-RFP-Sidewalk-Road-Bridge-and-Drainage-Construction-MT-52281.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/providence-public-works.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 1,
+    "img": {
+     "src": "assets/deadline/providence-public-works.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.05882,
+      0.33771,
+      0.37644,
+      0.01677
+     ]
+    ],
+    "quote": "**Date to be opened:** **Monday, March 9, 2026**",
+    "value": "Monday, March 9, 2026 at 2:15 P.M. (bids publicly opened at 2:15 P.M.)"
+   },
+   "citedPageCount": 35
+  },
+  {
+   "stem": "annarbor-water-treatment",
+   "label": "annarbor water treatment",
+   "pages": 209,
+   "words": 75161,
+   "cites": 34,
+   "located": 34,
+   "exact": 33,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 14,
+   "fieldTotal": 15,
+   "scannedPages": 10,
+   "usd": 10.408,
+   "usd2025": 31.225,
+   "source": "a2gov.org",
+   "url": "https://www.a2gov.org/media/gj1p5sab/rfp-26-24_document.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/annarbor-water-treatment.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 1,
+    "img": {
+     "src": "assets/deadline/annarbor-water-treatment.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.20353,
+      0.59544,
+      0.59299,
+      0.02013
+     ]
+    ],
+    "quote": "## Due Date: May 12, 2026 by 2:00 p.m. (local time)",
+    "value": "May 12, 2026 by 2:00 p.m. (local time)"
+   },
+   "citedPageCount": 16
+  },
+  {
+   "stem": "sf-oewd-236",
+   "label": "sf oewd 236",
+   "pages": 96,
+   "words": 29687,
+   "cites": 28,
+   "located": 27,
+   "exact": 26,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 14,
+   "fieldTotal": 15,
+   "scannedPages": 0,
+   "usd": 4.12,
+   "usd2025": 12.361,
+   "source": "media.api.sf.gov",
+   "url": "https://media.api.sf.gov/documents/OEWD_RFP_236_Spring_2026_6.10.26.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/sf-oewd-236.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 2,
+    "img": {
+     "src": "assets/deadline/sf-oewd-236.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.1271,
+      0.11639,
+      0.14753,
+      0.01515
+     ],
+     [
+      0.47263,
+      0.11639,
+      0.29548,
+      0.01515
+     ],
+     [
+      0.47263,
+      0.15336,
+      0.40937,
+      0.01515
+     ],
+     [
+      0.47263,
+      0.17199,
+      0.39789,
+      0.01515
+     ],
+     [
+      0.47263,
+      0.19048,
+      0.17576,
+      0.01515
+     ]
+    ],
+    "quote": "| Proposal Due Date | Tuesday, June 23, 2026, at 12:00 P.M.<br><br>**Proposal submissions will be accepted online only.** A link to the online application is published on [the procurement website](#). |",
+    "value": "Tuesday, June 23, 2026, at 12:00 P.M."
+   },
+   "citedPageCount": 13
+  },
+  {
+   "stem": "franklin-county-ohio",
+   "label": "franklin county ohio",
+   "pages": 93,
+   "words": 36122,
+   "cites": 32,
+   "located": 32,
+   "exact": 30,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 14,
+   "fieldTotal": 15,
+   "scannedPages": 2,
+   "usd": 4.977,
+   "usd2025": 14.931,
+   "source": "bids.franklincountyohio.gov",
+   "url": "https://bids.franklincountyohio.gov/public/bids/108B3177-0399-8ABB-F271E56F0A81EEAC.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/franklin-county-ohio.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 1,
+    "img": {
+     "src": "assets/deadline/franklin-county-ohio.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.22471,
+      0.37324,
+      0.55078,
+      0.02097
+     ]
+    ],
+    "quote": "DATE AND TIME OF RFP OPENING**:   JULY 8, 2021 AT 2:00 p.m.**",
+    "value": "July 8, 2021 at 2:00 p.m."
+   },
+   "citedPageCount": 16
+  },
+  {
+   "stem": "providence-stenographic",
+   "label": "providence stenographic",
+   "pages": 22,
+   "words": 6771,
+   "cites": 28,
+   "located": 28,
+   "exact": 28,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 14,
+   "fieldTotal": 15,
+   "scannedPages": 0,
+   "usd": 0.949,
+   "usd2025": 2.633,
+   "source": "providenceri.gov",
+   "url": "https://www.providenceri.gov/wp-content/uploads/2026/06/PVD26-66-Public-Property-RFP-Stenographic-Services-Two-Year-Contract-with-Two-One-Year-Options-MT53203.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/providence-stenographic.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 2,
+    "img": {
+     "src": "assets/deadline/providence-stenographic.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.05882,
+      0.12006,
+      0.88124,
+      0.02097
+     ],
+     [
+      0.05882,
+      0.14006,
+      0.39314,
+      0.02097
+     ]
+    ],
+    "quote": "Bids may be submitted up to **2:15 P.M.** on the above meeting date at the **<u>Department of the City Clerk. Room 311, City Hall. 25 Dorrance Street, Providence.</u>**",
+    "value": "Monday, June 15, 2026 by 2:15 P.M. (bids publicly opened at 2:15 P.M.)"
+   },
+   "citedPageCount": 10
+  },
+  {
+   "stem": "flagstaff-downtown",
+   "label": "flagstaff downtown",
+   "pages": 22,
+   "words": 6733,
+   "cites": 21,
+   "located": 21,
+   "exact": 20,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 12,
+   "fieldTotal": 15,
+   "scannedPages": 1,
+   "usd": 1.163,
+   "usd2025": 3.49,
+   "source": "ctycms.com",
+   "url": "https://ctycms.com/az-flagstaff/docs/2026-83-city-of-flagstaff-rfp-downtown-enhanced-services.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/flagstaff-downtown.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 1,
+    "img": {
+     "src": "assets/deadline/flagstaff-downtown.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.08824,
+      0.19171,
+      0.68506,
+      0.0162
+     ]
+    ],
+    "quote": "**CLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time.**",
+    "value": "Friday, October 31, 2025, at 3:00 PM Arizona Time"
+   },
+   "citedPageCount": 7
+  },
+  {
+   "stem": "mchenry-county-19-29",
+   "label": "mchenry county 19 29",
+   "pages": 21,
+   "words": 7949,
+   "cites": 30,
+   "located": 30,
+   "exact": 29,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 13,
+   "fieldTotal": 15,
+   "scannedPages": 0,
+   "usd": 1.086,
+   "usd2025": 3.258,
+   "source": "eac.gov",
+   "url": "https://www.eac.gov/sites/default/files/2025-04/VRS-EMS_McHenry_IL_2019_508.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/mchenry-county-19-29.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 1,
+    "img": {
+     "src": "assets/deadline/mchenry-county-19-29.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.07059,
+      0.64842,
+      0.48431,
+      0.01394
+     ]
+    ],
+    "quote": "**SUBMISSION DATE AND TIME: by 2:00 PM, (CST) August 23, 2019**",
+    "value": "August 23, 2019 by 2:00 PM (CST)"
+   },
+   "citedPageCount": 7
+  },
+  {
+   "stem": "addendum-vre-gpec",
+   "label": "addendum vre gpec",
+   "pages": 13,
+   "words": 3847,
+   "cites": 20,
+   "located": 20,
+   "exact": 20,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 11,
+   "fieldTotal": 15,
+   "scannedPages": 0,
+   "usd": 0.616,
+   "usd2025": 1.847,
+   "source": "vre.org",
+   "url": "https://www.vre.org/assets/1/6/026-003_GPEC_-_Addendum_No._1_Final.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/addendum-vre-gpec.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 3,
+    "img": {
+     "src": "assets/deadline/addendum-vre-gpec.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.16024,
+      0.36202,
+      0.32108,
+      0.01677
+     ],
+     [
+      0.51894,
+      0.36202,
+      0.28203,
+      0.01677
+     ]
+    ],
+    "quote": "| **Proposals Due (Closing Date and Time)** | ***February 25, 2026*** at 2:00 P.M. EST |",
+    "value": "February 25, 2026 at 2:00 P.M. EST"
+   },
+   "citedPageCount": 8
+  },
+  {
+   "stem": "addendum-westchicago-website",
+   "label": "addendum westchicago website",
+   "pages": 11,
+   "words": 2328,
+   "cites": 17,
+   "located": 17,
+   "exact": 17,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 8,
+   "fieldTotal": 15,
+   "scannedPages": 0,
+   "usd": 0.438,
+   "usd2025": 1.315,
+   "source": "westchicago.org",
+   "url": "https://westchicago.org/wp-content/uploads/2026/05/Addendum-No.-1_Website-Design-RFP_052926.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/addendum-westchicago-website.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 1,
+    "img": {
+     "src": "assets/deadline/addendum-westchicago-website.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.15592,
+      0.62698,
+      0.1602,
+      0.01689
+     ],
+     [
+      0.39851,
+      0.62698,
+      0.21673,
+      0.01689
+     ],
+     [
+      0.64134,
+      0.61819,
+      0.21673,
+      0.01689
+     ],
+     [
+      0.64134,
+      0.63562,
+      0.10469,
+      0.01689
+     ]
+    ],
+    "quote": "| Proposal Deadline | June 8, 2026 at 12:00pm | June 8, 2026 at 12:00pm (no change) |",
+    "value": "June 8, 2026 at 12:00pm"
+   },
+   "citedPageCount": 7
+  },
+  {
+   "stem": "addendum-dchousing",
+   "label": "addendum dchousing",
+   "pages": 2,
+   "words": 629,
+   "cites": 9,
+   "located": 9,
+   "exact": 9,
+   "ocr": 0,
+   "approx": 0,
+   "fields": 6,
+   "fieldTotal": 15,
+   "scannedPages": 0,
+   "usd": 0.143,
+   "usd2025": 0.429,
+   "source": "dchousing.org",
+   "url": "https://www.dchousing.org/api/files/solicitations/3273.pdf",
+   "aspect": 1.2941,
+   "cover": {
+    "src": "assets/cover/addendum-dchousing.jpg",
+    "w": 300,
+    "h": 389
+   },
+   "deadline": {
+    "page": 2,
+    "img": {
+     "src": "assets/deadline/addendum-dchousing.jpg",
+     "w": 700,
+     "h": 906
+    },
+    "rects": [
+     [
+      0.11749,
+      0.39593,
+      0.16547,
+      0.01258
+     ],
+     [
+      0.57364,
+      0.39593,
+      0.21025,
+      0.01258
+     ]
+    ],
+    "quote": "| **<span style=\"color:red\">Submission of Proposals:</span>** | **<span style=\"color:red\">Friday, June 12, 2026 12:00 PM</span>** |",
+    "value": "Friday, June 12, 2026 12:00 PM"
+   },
+   "citedPageCount": 2
+  }
+ ],
+ "hero": {
+  "stem": "flagstaff-downtown",
+  "pages": 22,
+  "words": 6733,
+  "img": {
+   "src": "assets/hero/flagstaff-downtown-p1.jpg",
+   "w": 2000,
+   "h": 2589
+  },
+  "aspect": 1.2941,
+  "marks": [
+   {
+    "field": "title",
+    "quote": "**SOLICITATION: Downtown Enhanced Services**",
+    "value": "Downtown Enhanced Services",
+    "rects": [
+     [
+      0.08824,
+      0.12938,
+      0.39848,
+      0.01553
+     ]
+    ]
+   },
+   {
+    "field": "issuer",
+    "quote": "**City of Flagstaff**\n**REQUEST FOR PROPOSALS**",
+    "value": "City of Flagstaff",
+    "rects": [
+     [
+      0.43196,
+      0.08226,
+      0.1359,
+      0.01553
+     ],
+     [
+      0.37608,
+      0.09817,
+      0.24767,
+      0.01553
+     ]
+    ]
+   },
+   {
+    "field": "issuerContact",
+    "quote": "**PROCUREMENT AGENT:** For this RFP, the Purchasing Director, Patrick Brown, will be servicing as the Procurement Agent.",
+    "value": "Patrick Brown, Purchasing Director (Procurement Agent)",
+    "rects": [
+     [
+      0.08824,
+      0.4011,
+      0.82278,
+      0.0162
+     ],
+     [
+      0.08824,
+      0.41777,
+      0.23475,
+      0.0162
+     ]
+    ]
+   },
+   {
+    "field": "issuerEmail",
+    "quote": "Email Address: [pbrown@flagstaffaz.gov](mailto:pbrown@flagstaffaz.gov).",
+    "value": "pbrown@flagstaffaz.gov",
+    "rects": [
+     [
+      0.33244,
+      0.41777,
+      0.34649,
+      0.0162
+     ]
+    ]
+   },
+   {
+    "field": "solicitationNumber",
+    "quote": "**SOLICITATION NO.: 2026-83**",
+    "value": "2026-83",
+    "rects": [
+     [
+      0.08824,
+      0.16044,
+      0.2407,
+      0.01553
+     ]
+    ]
+   },
+   {
+    "field": "intent",
+    "quote": "**CITY NEEDS:** The City of Flagstaff (\"City\") is seeking Proposals from qualified Contractors to establish a term contract for Enhanced Services in Historic Downtown Flagstaff, as outlined in the Scope of Work presented in this Request for Proposals (\"RFP\") document.",
+    "value": "The City of Flagstaff seeks proposals from qualified contractors to establish a term contract for Enhanced Services (sanitation, maintenance, beautification, snow/cinder removal, and programming) in Historic Downtown Flagstaff.",
+    "rects": [
+     [
+      0.08824,
+      0.28732,
+      0.82303,
+      0.0162
+     ],
+     [
+      0.08824,
+      0.30398,
+      0.82287,
+      0.0162
+     ],
+     [
+      0.08824,
+      0.32065,
+      0.53826,
+      0.0162
+     ]
+    ]
+   },
+   {
+    "field": "submissionDeadline",
+    "quote": "**CLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time.**",
+    "value": "Friday, October 31, 2025, at 3:00 PM Arizona Time",
+    "rects": [
+     [
+      0.08824,
+      0.19171,
+      0.68506,
+      0.0162
+     ]
+    ]
+   },
+   {
+    "field": "questionsDeadline",
+    "quote": "**QUESTIONS:** Any questions must be received by the Procurement Agent via email no later than Friday**, October 24, 2025, at 5:00 pm** Arizona time.",
+    "value": "Friday, October 24, 2025, at 5:00 pm Arizona time",
+    "rects": [
+     [
+      0.08824,
+      0.48307,
+      0.82304,
+      0.0162
+     ],
+     [
+      0.08824,
+      0.49974,
+      0.43117,
+      0.0162
+     ]
+    ]
+   },
+   {
+    "field": "eligibleApplicants",
+    "quote": "The City of Flagstaff (\"City\") is seeking Proposals from qualified Contractors to establish a term contract for Enhanced Services in Historic Downtown Flagstaff",
+    "value": "Qualified contractors legally qualified to contract with the City and holding any required active State of Arizona license(s); subcontracting is permitted.",
+    "rects": [
+     [
+      0.20551,
+      0.28732,
+      0.70575,
+      0.0162
+     ],
+     [
+      0.08824,
+      0.30398,
+      0.59079,
+      0.0162
+     ]
+    ]
+   },
+   {
+    "field": "submissionMethod",
+    "quote": "**WHERE TO SUBMIT PROPOSALS (\"PROPOSALS\"):** Proposals shall be submitted on the online bid platform with PlanetBids at the enclosed link prior to the Closing Date and Time.",
+    "value": "Electronic submission only, via the PlanetBids online bid platform (https://www.planetbids.com/portal/portal.cfm?CompanyID=27606) prior to the Closing Date and Time; no hard copies.",
+    "rects": [
+     [
+      0.08824,
+      0.22347,
+      0.82339,
+      0.01553
+     ],
+     [
+      0.08824,
+      0.23938,
+      0.06504,
+      0.01553
+     ],
+     [
+      0.17266,
+      0.23938,
+      0.03202,
+      0.01553
+     ],
+     [
+      0.2242,
+      0.23938,
+      0.08566,
+      0.01553
+     ],
+     [
+      0.32948,
+      0.23938,
+      0.01489,
+      0.01553
+     ],
+     [
+      0.36401,
+      0.23938,
+      0.02503,
+      0.01553
+     ],
+     [
+      0.40838,
+      0.23938,
+      0.07196,
+      0.01553
+     ],
+     [
+      0.49967,
+      0.23938,
+      0.02691,
+      0.01553
+     ],
+     [
+      0.5462,
+      0.23938,
+      0.07042,
+      0.01553
+     ],
+     [
+      0.63596,
+      0.23938,
+      0.10401,
+      0.01553
+     ],
+     [
+      0.7596,
+      0.23938,
+      0.03792,
+      0.01553
+     ],
+     [
+      0.81714,
+      0.23938,
+      0.02993,
+      0.01553
+     ],
+     [
+      0.86659,
+      0.23938,
+      0.04471,
+      0.01553
+     ]
+    ]
+   }
+  ],
+  "grid": {
+   "src": "assets/grid/flagstaff-downtown.jpg",
+   "cols": 8,
+   "rows": 3,
+   "cellW": 210,
+   "cellH": 272,
+   "pages": 22
+  },
+  "citedPages": {
+   "1": [
+    "title",
+    "issuer",
+    "issuerContact",
+    "issuerEmail",
+    "solicitationNumber",
+    "intent",
+    "submissionDeadline",
+    "questionsDeadline",
+    "eligibleApplicants",
+    "submissionMethod"
+   ],
+   "3": [
+    "scope"
+   ],
+   "4": [
+    "scope"
+   ],
+   "5": [
+    "scope"
+   ],
+   "7": [
+    "eligibleApplicants",
+    "evaluationCriteria"
+   ],
+   "8": [
+    "evaluationCriteria"
+   ],
+   "10": [
+    "submissionMethod"
+   ]
+  },
+  "citedPageRects": {
+   "1": [
+    [
+     0.08824,
+     0.12938,
+     0.39848,
+     0.01553
+    ],
+    [
+     0.43196,
+     0.08226,
+     0.1359,
+     0.01553
+    ],
+    [
+     0.37608,
+     0.09817,
+     0.24767,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.4011,
+     0.82278,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.41777,
+     0.23475,
+     0.0162
+    ],
+    [
+     0.33244,
+     0.41777,
+     0.34649,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.16044,
+     0.2407,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.28732,
+     0.82303,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.30398,
+     0.82287,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.32065,
+     0.53826,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.19171,
+     0.68506,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.48307,
+     0.82304,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.49974,
+     0.43117,
+     0.0162
+    ],
+    [
+     0.20551,
+     0.28732,
+     0.70575,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.30398,
+     0.59079,
+     0.0162
+    ],
+    [
+     0.08824,
+     0.22347,
+     0.82339,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.23938,
+     0.06504,
+     0.01553
+    ],
+    [
+     0.17266,
+     0.23938,
+     0.03202,
+     0.01553
+    ],
+    [
+     0.2242,
+     0.23938,
+     0.08566,
+     0.01553
+    ],
+    [
+     0.32948,
+     0.23938,
+     0.01489,
+     0.01553
+    ],
+    [
+     0.36401,
+     0.23938,
+     0.02503,
+     0.01553
+    ],
+    [
+     0.40838,
+     0.23938,
+     0.07196,
+     0.01553
+    ],
+    [
+     0.49967,
+     0.23938,
+     0.02691,
+     0.01553
+    ],
+    [
+     0.5462,
+     0.23938,
+     0.07042,
+     0.01553
+    ],
+    [
+     0.63596,
+     0.23938,
+     0.10401,
+     0.01553
+    ],
+    [
+     0.7596,
+     0.23938,
+     0.03792,
+     0.01553
+    ],
+    [
+     0.81714,
+     0.23938,
+     0.02993,
+     0.01553
+    ],
+    [
+     0.86659,
+     0.23938,
+     0.04471,
+     0.01553
+    ]
+   ],
+   "3": [
+    [
+     0.08824,
+     0.14682,
+     0.82301,
+     0.01401
+    ],
+    [
+     0.08824,
+     0.16137,
+     0.61306,
+     0.01401
+    ],
+    [
+     0.08824,
+     0.23197,
+     0.82284,
+     0.01401
+    ],
+    [
+     0.08824,
+     0.24667,
+     0.36906,
+     0.01401
+    ],
+    [
+     0.6349,
+     0.19046,
+     0.27674,
+     0.01401
+    ],
+    [
+     0.08824,
+     0.205,
+     0.82295,
+     0.01401
+    ]
+   ],
+   "4": [
+    [
+     0.14706,
+     0.6794,
+     0.76386,
+     0.01401
+    ],
+    [
+     0.17647,
+     0.69394,
+     0.41428,
+     0.01401
+    ]
+   ],
+   "5": [
+    [
+     0.27941,
+     0.13925,
+     0.00975,
+     0.01421
+    ],
+    [
+     0.30887,
+     0.13834,
+     0.6023,
+     0.01401
+    ],
+    [
+     0.30882,
+     0.15303,
+     0.45273,
+     0.01401
+    ]
+   ],
+   "7": [
+    [
+     0.08824,
+     0.58514,
+     0.46165,
+     0.01553
+    ],
+    [
+     0.11769,
+     0.66332,
+     0.79372,
+     0.01553
+    ],
+    [
+     0.11765,
+     0.67938,
+     0.33633,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.11332,
+     0.82303,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.12938,
+     0.8227,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.14529,
+     0.37725,
+     0.01553
+    ]
+   ],
+   "8": [
+    [
+     0.11765,
+     0.38544,
+     0.015,
+     0.01553
+    ],
+    [
+     0.16169,
+     0.38544,
+     0.40042,
+     0.01553
+    ],
+    [
+     0.79355,
+     0.38544,
+     0.03603,
+     0.01553
+    ],
+    [
+     0.11765,
+     0.40892,
+     0.015,
+     0.01553
+    ],
+    [
+     0.16169,
+     0.40892,
+     0.16197,
+     0.01553
+    ],
+    [
+     0.79384,
+     0.40892,
+     0.03603,
+     0.01553
+    ],
+    [
+     0.11765,
+     0.43256,
+     0.15716,
+     0.01553
+    ],
+    [
+     0.79396,
+     0.43256,
+     0.03592,
+     0.01553
+    ],
+    [
+     0.11765,
+     0.45605,
+     0.14976,
+     0.01553
+    ],
+    [
+     0.79405,
+     0.45605,
+     0.03592,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.12938,
+     0.82308,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.14529,
+     0.82301,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.16135,
+     0.24819,
+     0.01553
+    ]
+   ],
+   "10": [
+    [
+     0.08824,
+     0.16135,
+     0.82352,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.17726,
+     0.82369,
+     0.01553
+    ],
+    [
+     0.08824,
+     0.19317,
+     0.32252,
+     0.01553
+    ]
+   ]
+  },
+  "perPageWords": [
+   221,
+   84,
+   633,
+   668,
+   523,
+   625,
+   458,
+   386,
+   552,
+   399,
+   337,
+   161,
+   22,
+   146,
+   49,
+   194,
+   253,
+   209,
+   333,
+   341,
+   132,
+   7
+  ],
+  "fields": {
+   "title": "Downtown Enhanced Services",
+   "issuer": "City of Flagstaff",
+   "issuerContact": "Patrick Brown, Purchasing Director (Procurement Agent)",
+   "issuerEmail": "pbrown@flagstaffaz.gov",
+   "solicitationNumber": "2026-83",
+   "intent": "The City of Flagstaff seeks proposals from qualified contractors to establish a term contract for Enhanced Services (sanitation, maintenance, beautification, snow/cinder removal, and programming) in Historic Downtown Flagstaff.",
+   "scope": "Enhanced services within Downtown Flagstaff on City property, public rights-of-way and Heritage Square, including sanitation (graffiti removal, excrement removal, pressure washing/surface cleaning, parking kiosk exterior cleaning, weed removal, restroom cleaning and servicing, waste container servicing, painting red and yellow curbs), snow and cinder removal, post-special-event cleanup, and dedicated programs (Clean Team Ambassador Program, Paint Downtown Green Program, and enhanced event programming of at least three free public events per week on average). Contractor may provide the services directly or subcontract them under its management.",
+   "submissionDeadline": "Friday, October 31, 2025, at 3:00 PM Arizona Time",
+   "questionsDeadline": "Friday, October 24, 2025, at 5:00 pm Arizona time",
+   "contractTerm": null,
+   "estimatedValue": null,
+   "eligibleApplicants": "Qualified contractors legally qualified to contract with the City and holding any required active State of Arizona license(s); subcontracting is permitted.",
+   "submissionMethod": "Electronic submission only, via the PlanetBids online bid platform (https://www.planetbids.com/portal/portal.cfm?CompanyID=27606) prior to the Closing Date and Time; no hard copies.",
+   "evaluationCriteria": "Scored by an Evaluation Committee: Proposer Qualifications, Experience and Expertise 35%; Presented approach 30%; Proposed Fee 25%; Sustainability 10% (total 100%). Responsibility factors are also considered, and the Committee may short list proposers, hold discussions/presentations, and request \"Best and Final\" offers.",
+   "terminationConditions": null
+  }
+ },
+ "monster": {
+  "stem": "providence-public-works",
+  "pages": 275,
+  "words": 111158,
+  "usd": 14.039,
+  "grid": {
+   "src": "assets/grid/providence-public-works.jpg",
+   "cols": 28,
+   "rows": 10,
+   "cellW": 60,
+   "cellH": 78,
+   "pages": 275
+  },
+  "citedPages": {
+   "1": [
+    "title",
+    "issuer",
+    "issuerContact",
+    "issuerEmail",
+    "solicitationNumber",
+    "submissionDeadline",
+    "questionsDeadline"
+   ],
+   "2": [
+    "submissionDeadline",
+    "submissionMethod"
+   ],
+   "4": [
+    "eligibleApplicants",
+    "evaluationCriteria"
+   ],
+   "10": [
+    "eligibleApplicants"
+   ],
+   "14": [
+    "terminationConditions"
+   ],
+   "15": [
+    "terminationConditions"
+   ],
+   "16": [
+    "title"
+   ],
+   "24": [
+    "intent",
+    "scope",
+    "contractTerm",
+    "evaluationCriteria"
+   ],
+   "25": [
+    "eligibleApplicants"
+   ],
+   "26": [
+    "submissionMethod"
+   ],
+   "29": [
+    "evaluationCriteria"
+   ],
+   "40": [
+    "scope"
+   ],
+   "47": [
+    "terminationConditions"
+   ],
+   "50": [
+    "materialStandards"
+   ],
+   "59": [
+    "terminationConditions"
+   ],
+   "98": [
+    "materialStandards"
+   ],
+   "100": [
+    "dimensionalRequirements"
+   ],
+   "105": [
+    "materialStandards"
+   ],
+   "107": [
+    "dimensionalRequirements"
+   ],
+   "137": [
+    "contractTerm"
+   ],
+   "159": [
+    "materialStandards"
+   ],
+   "175": [
+    "dimensionalRequirements"
+   ],
+   "177": [
+    "specifiedProducts"
+   ],
+   "178": [
+    "specifiedProducts"
+   ],
+   "184": [
+    "materialStandards"
+   ],
+   "185": [
+    "specifiedProducts"
+   ],
+   "195": [
+    "dimensionalRequirements"
+   ],
+   "217": [
+    "specifiedProducts",
+    "dimensionalRequirements"
+   ],
+   "218": [
+    "specifiedProducts",
+    "dimensionalRequirements"
+   ],
+   "223": [
+    "standardDetails"
+   ],
+   "224": [
+    "standardDetails"
+   ],
+   "225": [
+    "castMarkings"
+   ],
+   "226": [
+    "castMarkings"
+   ],
+   "230": [
+    "castMarkings"
+   ],
+   "233": [
+    "specifiedProducts"
+   ]
+  },
+  "citedPageCount": 35,
+  "fields": {
+   "title": "Sidewalk, Road, Bridge, and Drainage Construction (Blanket Contract 2026)",
+   "issuer": "City of Providence, Rhode Island \u2014 Board of Contract and Supply; issuing department: Department of Public Works",
+   "issuerContact": "Bryant Anderson, Deputy Chief Engineer, Engineering Division, Department of Public Works (technical/specification questions); Grace Diaz, MBE/WBE Outreach Director (MBE/WBE forms); Purchasing Department (process questions)",
+   "issuerEmail": "banderson@providenceri.gov (specifications); purchasing@providenceri.gov (process); gdiaz@providenceri.gov (MBE/WBE forms)",
+   "solicitationNumber": "Procurement/MinuteTraq #: 52281",
+   "intent": "The City of Providence Department of Public Works seeks to qualify multiple contractors under a blanket contract to perform sidewalk, road, bridge, drainage and other similar construction within the public right-of-way or other City-owned areas as funding opportunities and needs arise, with work assigned by Task Order.",
+   "scope": "Work is divided into two categories: 1) Sidewalk, Road, and Drainage Construction \u2014 full frontage sidewalk repairs, spot sidewalk repairs, utility patch restorations (road and sidewalk), full depth road restoration including granular and rigid base, minor milling/paving, drainage work including catch basin/manhole repairs, installation of speed lumps/raised crosswalks; and 2) Bridge Construction \u2014 bridge construction, maintenance and repairs. Also includes restoration of roadway striping and traffic detection loops and all incidentals.",
+   "submissionDeadline": "Monday, March 9, 2026 at 2:15 P.M. (bids publicly opened at 2:15 P.M.)",
+   "questionsDeadline": "2:00 pm on Tuesday, February 24, 2026",
+   "contractTerm": "Runs through December 31, 2027, with three (3) one-year renewal options (1/1/2028\u201312/31/2028, 1/1/2029\u201312/31/2029, and 1/1/2030\u201312/31/2030), exercisable upon mutual agreement of the parties.",
+   "estimatedValue": null,
+   "eligibleApplicants": "Qualified and responsible contractors with at least 5 years construction experience within the last 7 years on Roadway and/or Bridge Improvement Projects; out-of-state corporations must be registered to transact business in Rhode Island. MBE/WBE participation goals (20% combined) apply to Task Orders, and MBE/WBE firms are actively sought.",
+   "submissionMethod": "Physical delivery of sealed bids to the Department of the City Clerk, City Hall Room 311, 25 Dorrance Street, Providence, RI 02903 \u2014 2 copies (one original and one paper copy) in sealed, labeled envelopes plus an electronic copy in .PDF format on a USB flash drive. No CDs or emailed PDFs accepted.",
+   "evaluationCriteria": "Award to the lowest qualified and responsible bidder(s) meeting RFP requirements; the City qualifies multiple responsive, qualified and experienced contractors. Bidders' qualifications (5 years' experience, equipment, personnel, financials, references) are investigated; a Pre-Bid Award Descope Meeting may be required. For projects with items on the Schedule of Unit Prices, DPW estimates project costs from submitted unit prices to determine the lowest bidder, but timeliness to schedule or complete the work is also a consideration, and the City reserves the right to award to any Contractor if in the City's best interest.",
+   "terminationConditions": "The City may terminate upon five (5) days' written notice if the contractor fails to observe any terms and conditions or if the City believes the contractor's ability to perform has been materially impaired (e.g., loss of insurance coverage, lapsing of surety bond, bankruptcy, appointment of a receiver); upon termination the contractor is entitled to just and equitable compensation for satisfactory work completed. Under the General Conditions, if the Contractor or a Subcontractor refuses or fails to prosecute the work with diligence to ensure completion within the specified time, or violates any other provision, the Owner may by written notice terminate the Contractor's right to proceed, take over and complete the work, and hold the Contractor and sureties liable for additional costs and liquidated damages. Failure to comply with insurance requirements is a material breach entitling the Owner to terminate or suspend immediately. Noncompliance with Section 3 / equal opportunity requirements may result in cancellation, termination or suspension.",
+   "specifiedProducts": "Named products (each \"or approved equal\"): Heavy Duty Round Frame and Cover \u2013 32\" \u2014 EJ Co. Product No. 00200694W03 (Cover) and 00200813 (Frame); Chute Frame and Cover \u2014 EJ Product No. 801144B01; Frame and Grate \u2014 EJ Product Nos. 5520002C01, 5520002C02, 5520001C01 (standard/high capacity, 3 or 4 flange); Heavy Duty Manhole Frame and Cover \u2013 24\" \u2014 EJ Product 240834B01; Sidewalk Manhole Frame and Cover \u2014 EJ Product 1040081A02; Rectangular Frame and Grate \u2014 EJ Product 45660040; Flexible Porous Pavement \u2014 KBI Flexi-Pave HD2000 by K.I. Industries, Inc.; Traffic Separator Curb with Flexpost \u2014 Tough Curb XLP and MP Flex Post by Impact Recovery Systems; Flexible Delineator Post \u2014 City Post model EAC Channelizer Post by Pexco, LLC \u2013 Davidson Traffic Control Products; sidewalk imprint cure spray \u2014 Meadows CS309 or equivalent; traffic separator curb anchors \u2014 FG 300 Anchor Bolt and Drill Bit.",
+   "materialStandards": "All work shall be in accordance with the RIDOT Standard Specifications for Road and Bridge Construction, August 2025, with all revisions, and State and Federal Special Provisions, plus City of Providence Technical Specifications and Standard Details (RIDOT Standard Details, February 24, 2025 for all others). Named standards include ASTM A48 (gray iron castings), ASTM A536 (ductile iron), ASTM No. 57 aggregate, ASTM D4280 (reflectors), AASHTO M45-92 (masonry mortar sand), AASHTO M170 Class IV (RCP), AASHTO T180 modified Proctor density (95% compaction), MUTCD (latest edition), NCHRP Report 350 / MASH 2009, ADA requirements, RIGL Title 37 Chapter 13 prevailing wage, Davis-Bacon, and RIDOT Standard Specification Sections 100, 106.5, 105.06, 201, 202, 206, 212, 301, 401, 403, 501, 601, 603, 702, 704, 905, 906, 913, 914, 932, 935, M.01\u2013M.04, M.09, M.18, L.01, L.02, L.06, T.11, T.18. Materials testing per the RIDOT Materials Testing and Certification Schedule and RIDOT Master Schedule for Sampling, Testing, and Certification of Materials, latest edition; Portland cement concrete Class XX(AE) 4,000 psi.",
+   "standardDetails": "Appendix D contains City of Providence Standard Details, indexed as: 6.1.1 P Sidewalk Manhole Frame and Cover; 6.1.2 P Chute Frame and Cover; 6.2.1 P Heavy Duty Manhole Frame and Cover - 24 Inch; 6.2.2 P Heavy Duty Manhole Frame and Cover - 32 Inch; 6.3.0 P Standard Capacity Grate; 6.3.3 P High Capacity Grate; 6.3.4 P High Capacity Grate and Three Flange Frame; 6.3.5 P High Capacity Grate and Four Flange Frame; 6.3.6 P Rectangular Frame and Grate; 7.3.0 P Granite Curb \u2013 Straight and Circular; 7.3.3 P Granite Wheelchair Ramp Transition Curb; 7.3.4 P Granite 2'-0\" Radius Curb Return; 7.3.5 P Granite Inlet Stone - 30\" Opening; 7.3.6 P Granite Inlet Stone \u2013 24\" Opening; 7.3.7 P Granite Apron Stone \u2013 24\" Opening; 7.3.8 P Granite Apron Stone \u2013 30\" Opening; 7.3.9 P Granite Ramp Stone; 7.6.0 P Curb Setting Detail; 43.1.0 P Cement Concrete Sidewalk; 43.1.1 P Sidewalk Removal Detail; 43.3.0 Wheelchair Ramp (RIDOT Standard); 43.3.1 Wheelchair Ramp for Limited Right-of-Way Areas; 43.3.2 Ramp-Landing for Narrow Sidewalk; 48.1.0 Detectable Warning Panel Placement; 43.5.0 P Cement Concrete Driveways; 43.6.0 P Compound Slope Sidewalk; 60.1.0 P Temporary Roadway Restoration; 60.2.1 P Permanent Roadway Restoration \u2013 Granular Base; 60.2.2 P Permanent Roadway Restoration \u2013 Concrete Base; 60.2.3 P Cobblestone Restoration \u2013 Granular Base; 60.4.0 P Inlet/Apron Stone Reveal; SL.1.0 P Speed Lumps.",
+   "dimensionalRequirements": "Examples include: granite curbing 7 in. width, minimum 3'-0\" lengths for straight/circular pieces, 6 inch curb reveal (min. 4 inches when matching existing); granite ramp stone 4'-0\" minimum length, 18\" height; 4 inch Portland cement concrete sidewalks and 8 inch concrete driveways/wheelchair ramps (4,000 psi), control joints every 5 feet, expansion joints every 20 feet; sidewalk minimum 5'-0\" width (ADA clear width 36 in. at pinch points, 48 in. continuous elsewhere); cross slope max 2% (1:50) and running slope max 8.33% (1:12); compound slope sidewalk requires 7 ft min. width, 5 ft min. accessible route, \u22652 ft compound section; travel lane minimum 11 feet wide; pedestrian way 5 feet unobstructed clear width; welded wire mesh 6\"x6\"-W4xW4 set 3\" below driveway surface; 8 inch minimum rigid concrete base with 5/8\" epoxy-coated #5 dowels 24\" long at 18\" on center; permanent restoration extends 1 ft beyond limits of excavation, trench width D+2'-0\"; temporary patch 3\" HMA; parking meters set with bottom ~37 inches and display ~54 inches (4.5 ft) above grade; flexible delineator posts 3 in. diameter, 36 in. high with two 3 in. retroreflective bands and 4\" deep anchor cup; traffic separator curb modular unit 40\"L x 8\"W x 2\"H with 36\"H x 3\" dia. flexpost; flexible porous pavement 2 in. finished thickness over 4 in. aggregate base; tree removals measured 24 inches above grade, stumps ground 18 inches below grade; loam borrow and pine bark mulch 4 inches deep; detectable warning panel 24\" depth matching ramp width; horizontal sawcut running slope not exceeding 1v:12h nor less than 1v:14h; sidewalk sawcut 6 inches (minimum) from face of adjacent buildings/walls/fences.",
+   "castMarkings": "Manhole/catch basin castings are specified only by manufacturer product number, but cast lettering appears on the detail sheets as follows \u2014 Sidewalk Manhole Frame and Cover (Std. 6.1.1 P): \"CITY OF PROVIDENCE\", \"MADE IN USA\", \"ASTM A48 CL35B\", \"MO/DA/YR X\", \"PROD. NO.\"; Chute Frame and Cover (Std. 6.1.2 P): \"CITY OF PROVIDENCE\", \"MADE IN USA\"; Heavy Duty Manhole Frame and Cover \u2013 24 Inch (Std. 6.2.1 P): \"CITY OF PROVIDENCE\", \"MADE IN USA\", \"NO DUMPING X\", \"PROD NO\", \"ASTM A48 CL35B\" with 1\" lettering; Heavy Duty Manhole Frame and Cover \u2013 32 Inch (Std. 6.2.2 P): \"CITY OF PROVIDENCE\", \"MADE IN USA\", \"ASTM A48 CL35B\", \"PROD. NO\", \"MO/DA/YR X\" with 2\" lettering; Standard Capacity Grate (Std. 6.3.0 P): \"DRAINS TO WATERWAYS\", \"DUMP NO WASTE!\", \"CITY OF PROVIDENCE\", \"MADE IN USA\", \"ASTM A536\", \"PROD. NO.\", \"MO/D/YR X\" in 3/8\" flat face gothic; High Capacity Grate (Std. 6.3.3 P): \"MADE IN USA\", \"CITY OF PROVIDENCE\", \"DRAINS TO WATERWAYS\", \"DUMP NO WASTE\", \"FLOW\", \"PROD. NO.\", \"MO/DY/YR X\", \"ASTM A536\", \"L24SG18DI\" with 3/8\" recessed lettering; High Capacity Grate and Three/Four Flange Frame (Std. 6.3.4 P / 6.3.5 P): \"CITY OF PROVIDENCE\", \"DRAINS TO WATERWAYS\", \"DUMP NO WASTE\", \"MADE IN USA\", \"FLOW\", \"ASTM A48 CL35B\", \"PROD. NO.\", \"MO/DY/YR X\" with 1/2\" recessed lettering; Rectangular Frame and Grate (Std. 6.3.6 P): \"DUMP NO WASTE!\", \"MADE IN USA\", \"DRAINS TO WATERWAYS\", \"MO/DA/YR\" with 1/2\" letters and a fish logo."
+  },
+  "perPageWords": [
+   266,
+   376,
+   221,
+   490,
+   491,
+   266,
+   459,
+   294,
+   391,
+   207,
+   322,
+   492,
+   188,
+   784,
+   516,
+   129,
+   7,
+   342,
+   385,
+   415,
+   397,
+   134,
+   188,
+   568,
+   355,
+   669,
+   519,
+   515,
+   657,
+   631,
+   667,
+   414,
+   271,
+   531,
+   448,
+   235,
+   49,
+   71,
+   51,
+   554,
+   611,
+   557,
+   685,
+   556,
+   544,
+   535,
+   744,
+   716,
+   705,
+   951,
+   635,
+   669,
+   672,
+   708,
+   604,
+   456,
+   440,
+   473,
+   515,
+   648,
+   675,
+   728,
+   673,
+   593,
+   515,
+   507,
+   485,
+   578,
+   565,
+   532,
+   662,
+   589,
+   503,
+   544,
+   565,
+   545,
+   566,
+   225,
+   301,
+   467,
+   555,
+   714,
+   598,
+   640,
+   507,
+   589,
+   576,
+   661,
+   547,
+   602,
+   644,
+   610,
+   564,
+   302,
+   339,
+   553,
+   508,
+   362,
+   505,
+   644,
+   523,
+   606,
+   542,
+   520,
+   523,
+   639,
+   498,
+   498,
+   166,
+   77,
+   46,
+   366,
+   52,
+   367,
+   243,
+   389,
+   240,
+   129,
+   122,
+   138,
+   417,
+   311,
+   312,
+   126,
+   136,
+   125,
+   137,
+   124,
+   129,
+   140,
+   120,
+   134,
+   121,
+   87,
+   59,
+   49,
+   407,
+   591,
+   614,
+   668,
+   608,
+   419,
+   582,
+   542,
+   417,
+   523,
+   653,
+   415,
+   222,
+   72,
+   291,
+   169,
+   318,
+   139,
+   48,
+   54,
+   168,
+   44,
+   223,
+   42,
+   389,
+   443,
+   477,
+   401,
+   460,
+   357,
+   143,
+   42,
+   188,
+   48,
+   366,
+   487,
+   384,
+   123,
+   339,
+   75,
+   330,
+   377,
+   553,
+   182,
+   404,
+   160,
+   385,
+   426,
+   442,
+   477,
+   375,
+   473,
+   423,
+   438,
+   484,
+   356,
+   166,
+   43,
+   327,
+   507,
+   440,
+   332,
+   341,
+   312,
+   316,
+   199,
+   394,
+   515,
+   318,
+   44,
+   233,
+   102,
+   308,
+   83,
+   105,
+   43,
+   274,
+   93,
+   370,
+   115,
+   276,
+   426,
+   430,
+   99,
+   48,
+   49,
+   263,
+   174,
+   283,
+   196,
+   197,
+   214,
+   287,
+   343,
+   307,
+   7937,
+   219,
+   194,
+   291,
+   196,
+   395,
+   385,
+   534,
+   561,
+   335,
+   225,
+   207,
+   193,
+   151,
+   640,
+   458,
+   509,
+   366,
+   500,
+   386,
+   339,
+   325,
+   454,
+   296,
+   279,
+   56,
+   54,
+   287,
+   141,
+   51,
+   699,
+   669,
+   653,
+   673,
+   646,
+   652,
+   684,
+   739,
+   626,
+   188,
+   52,
+   189,
+   169,
+   309
+  ]
+ },
+ "corpus": {
+  "docs": 10,
+  "pages": 764,
+  "words": 280385,
+  "usd": 37.94,
+  "usd2025": 113.61,
+  "fields": 125,
+  "fieldTotal": 155,
+  "citations": {
+   "cites": 292,
+   "located": 278,
+   "exact": 268,
+   "ocr": 4,
+   "approx": 0,
+   "notFound": 14,
+   "partial": 6,
+   "claims": {
+    "filled": 120,
+    "cited": 120
+   },
+   "standard": {
+    "cites": 252,
+    "located": 251,
+    "notFound": 1
+   },
+   "visual": {
+    "cites": 40,
+    "located": 27,
+    "notFound": 13
+   }
+  }
+ },
+ "scanned": {
+  "stem": "flagstaff-downtown-RASTERIZED",
+  "pages": 22,
+  "scanned_pages": 22,
+  "fields": 12,
+  "field_total": 15,
+  "cites": 17,
+  "located": 17,
+  "exact": 15,
+  "ocr": 17,
+  "approx": 0,
+  "usd": 1.486,
+  "usd_2025": 4.457
+ },
+ "reading": {
+  "wpm": 238,
+  "lo": 175,
+  "hi": 300,
+  "cite": "Brysbaert 2019, Journal of Memory & Language 109:104047",
+  "citeUrl": "https://doi.org/10.1016/j.jml.2019.104047",
+  "note": "adult silent reading, non-fiction; 190 studies, 18,573 participants"
+ },
+ "throughput": {
+  "runs": [
+   {
+    "stem": "providence-public-works",
+    "pages": 275,
+    "seconds": 393.8,
+    "perMin": 41.9
+   },
+   {
+    "stem": "annarbor-water-treatment",
+    "pages": 209,
+    "seconds": 278.3,
+    "perMin": 45.1
+   },
+   {
+    "stem": "sf-oewd-236",
+    "pages": 96,
+    "seconds": 98.7,
+    "perMin": 58.4
+   },
+   {
+    "stem": "franklin-county-ohio",
+    "pages": 93,
+    "seconds": 135.1,
+    "perMin": 41.3
+   },
+   {
+    "stem": "providence-stenographic",
+    "pages": 22,
+    "seconds": 26.3,
+    "perMin": 50.1
+   },
+   {
+    "stem": "mchenry-county-19-29",
+    "pages": 21,
+    "seconds": 24.8,
+    "perMin": 50.8
+   }
+  ],
+  "pagesPerMin": 44.9,
+  "basis": "716 pages across 6 clean parallel bursts"
+ },
+ "trace": {
+  "field": "submissionDeadline",
+  "page": 1,
+  "textLayer": " \n1 \n \nCity of Flagstaff \nREQUEST FOR PROPOSALS \nSOLICITATION: Downtown Enhanced Services \nSOLICITATION NO.: 2026-83 \nCLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time. \nWHERE TO SUBMIT PROPOSALS (\u201cPROPOSALS\u201d): Proposals shall be submitted on the online bid \nplatform \nwith \nPlanetBids \nat \nthe \nenclosed \nlink \nprior to \nthe Closing \nDate \nand \nTime. \nhttps://www.planetbids.com/portal/portal.cfm?CompanyID=27606 \nCITY NEEDS: The City of Flagstaff (\u201cCity\u201d) is seeking Proposals from qualified Contractors to establish \na term contract for Enhanced Services in Historic Downtown Flagstaff, as outlined in the Scope of \nWork presented in this Request for Proposals (\u201cRFP\u201d) document.  \nINFORMATION:  The Solicitation, all related materials, and any addenda may be downloaded from \nthe Planetbids Website, https://www.planetbids.com/portal/portal.cfm?CompanyID=27606.   \nPROCUREMENT AGENT: For this RFP, the Purchasing Director, Patrick Brown, will be servicing \nas the Procurement Agent. Email Address: pbrown@flagstaffaz.gov. If the Purchasing Director \ncannot be immediately reached, you may contact the receptionist for the City Management Services \nPurchasing Division at (928) 213-2206. \nQUESTIONS: Any questions must be received by the Procurement Agent via email no later than \nFriday, October 24, 2025, at 5:00 pm Arizona time.  \n",
+  "textLayerChars": 1359,
+  "markdown": "**City of Flagstaff**\n**REQUEST FOR PROPOSALS**\n\n**SOLICITATION: Downtown Enhanced Services**\n\n**SOLICITATION NO.: 2026-83**\n\n**CLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time.**\n\n**WHERE TO SUBMIT PROPOSALS (\"PROPOSALS\"):** Proposals shall be submitted on the online bid platform with PlanetBids at the enclosed link prior to the Closing Date and Time. [https://www.planetbids.com/portal/portal.cfm?CompanyID=27606](https://www.planetbids.com/portal/portal.cfm?CompanyID=27606)\n\n**CITY NEEDS:** The City of Flagstaff (\"City\") is seeking Proposals from qualified Contractors to establish a term contract for Enhanced Services in Historic Downtown Flagstaff, as outlined in the Scope of Work presented in this Request for Proposals (\"RFP\") document.\n\n**INFORMATION:** The Solicitation, all related materials, and any addenda may be downloaded from the Planetbids Website, [https://www.planetbids.com/portal/portal.cfm?CompanyID=27606](https://www.planetbids.com/portal/portal.cfm?CompanyID=27606).\n\n**PROCUREMENT AGENT:** For this RFP, the Purchasing Director, Patrick Brown, will be servicing as the Procurement Agent. Email Address: [pbrown@flagstaffaz.gov](mailto:pbrown@flagstaffaz.gov). If the Purchasing Director cannot be immediately reached, you may contact the receptionist for the City Management Services Purchasing Division at (928) 213-2206.\n\n**QUESTIONS:** Any questions must be received by the Procurement Agent via email no later than Friday**, October 24, 2025, at 5:00 pm** Arizona time.\n\n1",
+  "markdownChars": 1532,
+  "docChars": 46915,
+  "pages": 22,
+  "question": "The deadline for submitting a proposal, including time and timezone if stated.",
+  "rule": [
+   "Do not guess. A confidently wrong value is worse than null.",
+   "Copy them character for character: no paraphrasing, no summarising, no fixing typos, no normalising whitespace or punctuation."
+  ],
+  "value": "Friday, October 31, 2025, at 3:00 PM Arizona Time",
+  "quote": "**CLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time.**",
+  "answers": [
+   {
+    "field": "title",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "issuer",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "issuerContact",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "issuerEmail",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "solicitationNumber",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "intent",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "scope",
+    "quotes": 5,
+    "found": true
+   },
+   {
+    "field": "submissionDeadline",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "questionsDeadline",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "contractTerm",
+    "quotes": 0,
+    "found": false
+   },
+   {
+    "field": "estimatedValue",
+    "quotes": 0,
+    "found": false
+   },
+   {
+    "field": "eligibleApplicants",
+    "quotes": 3,
+    "found": true
+   },
+   {
+    "field": "submissionMethod",
+    "quotes": 2,
+    "found": true
+   },
+   {
+    "field": "evaluationCriteria",
+    "quotes": 3,
+    "found": true
+   },
+   {
+    "field": "terminationConditions",
+    "quotes": 0,
+    "found": false
+   }
+  ],
+  "rects": [
+   [
+    0.08824,
+    0.19171,
+    0.68506,
+    0.0162
+   ]
+  ],
+  "words": [
+   {
+    "w": "CLOSING",
+    "x": 54,
+    "y": 152
+   },
+   {
+    "w": "DATE",
+    "x": 107,
+    "y": 152
+   },
+   {
+    "w": "AND",
+    "x": 140,
+    "y": 152
+   },
+   {
+    "w": "TIME:",
+    "x": 167,
+    "y": 152
+   },
+   {
+    "w": "Friday,",
+    "x": 200,
+    "y": 152
+   },
+   {
+    "w": "October",
+    "x": 239,
+    "y": 152
+   },
+   {
+    "w": "31,",
+    "x": 287,
+    "y": 152
+   },
+   {
+    "w": "2025,",
+    "x": 306,
+    "y": 152
+   },
+   {
+    "w": "at",
+    "x": 338,
+    "y": 152
+   },
+   {
+    "w": "3:00",
+    "x": 351,
+    "y": 152
+   },
+   {
+    "w": "PM",
+    "x": 377,
+    "y": 152
+   },
+   {
+    "w": "Arizona",
+    "x": 398,
+    "y": 152
+   },
+   {
+    "w": "Time.",
+    "x": 443,
+    "y": 152
+   }
+  ],
+  "exact": true,
+  "ocr": false
+ },
+ "traceScan": {
+  "field": "submissionDeadline",
+  "page": 1,
+  "textLayer": "",
+  "textLayerChars": 0,
+  "markdown": "**City of Flagstaff**\n**REQUEST FOR PROPOSALS**\n\n**SOLICITATION: Downtown Enhanced Services**\n\n**SOLICITATION NO.: 2026-83**\n\n**CLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time.**\n\n**WHERE TO SUBMIT PROPOSALS (\"PROPOSALS\"):** Proposals shall be submitted on the online bid platform with PlanetBids at the enclosed link prior to the Closing Date and Time. [https://www.planetbids.com/portal/portal.cfm?CompanyID=27606](https://www.planetbids.com/portal/portal.cfm?CompanyID=27606)\n\n**CITY NEEDS:** The City of Flagstaff (\"City\") is seeking Proposals from qualified Contractors to establish a term contract for Enhanced Services in Historic Downtown Flagstaff, as outlined in the Scope of Work presented in this Request for Proposals (\"RFP\") document.\n\n**INFORMATION:** The Solicitation, all related materials, and any addenda may be downloaded from the Planetbids Website, [https://www.planetbids.com/portal/portal.cfm?CompanyID=27606](https://www.planetbids.com/portal/portal.cfm?CompanyID=27606).\n\n**PROCUREMENT AGENT:** For this RFP, the Purchasing Director, Patrick Brown, will be servicing as the Procurement Agent. Email Address: [pbrown@flagstaffaz.gov](mailto:pbrown@flagstaffaz.gov). If the Purchasing Director cannot be immediately reached, you may contact the receptionist for the City Management Services Purchasing Division at (928) 213-2206.\n\n**QUESTIONS:** Any questions must be received by the Procurement Agent via email no later than Friday**, October 24, 2025, at 5:00 pm** Arizona time.\n\n1",
+  "markdownChars": 1532,
+  "docChars": 78233,
+  "pages": 22,
+  "question": "The deadline for submitting a proposal, including time and timezone if stated.",
+  "rule": [
+   "Do not guess. A confidently wrong value is worse than null.",
+   "Copy them character for character: no paraphrasing, no summarising, no fixing typos, no normalising whitespace or punctuation."
+  ],
+  "value": "Friday, October 31, 2025, at 3:00 PM Arizona Time",
+  "quote": "**CLOSING DATE AND TIME: Friday, October 31, 2025, at 3:00 PM Arizona Time.**",
+  "answers": [
+   {
+    "field": "title",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "issuer",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "issuerContact",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "issuerEmail",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "solicitationNumber",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "intent",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "scope",
+    "quotes": 3,
+    "found": true
+   },
+   {
+    "field": "submissionDeadline",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "questionsDeadline",
+    "quotes": 1,
+    "found": true
+   },
+   {
+    "field": "contractTerm",
+    "quotes": 0,
+    "found": false
+   },
+   {
+    "field": "estimatedValue",
+    "quotes": 0,
+    "found": false
+   },
+   {
+    "field": "eligibleApplicants",
+    "quotes": 2,
+    "found": true
+   },
+   {
+    "field": "submissionMethod",
+    "quotes": 2,
+    "found": true
+   },
+   {
+    "field": "evaluationCriteria",
+    "quotes": 2,
+    "found": true
+   },
+   {
+    "field": "terminationConditions",
+    "quotes": 0,
+    "found": false
+   }
+  ],
+  "rects": [
+   [
+    0.08902,
+    0.19424,
+    0.68314,
+    0.01364
+   ]
+  ],
+  "words": [
+   {
+    "w": "CLOSING",
+    "x": 54,
+    "y": 154
+   },
+   {
+    "w": "DATE",
+    "x": 108,
+    "y": 154
+   },
+   {
+    "w": "AND",
+    "x": 140,
+    "y": 154
+   },
+   {
+    "w": "TIME:",
+    "x": 167,
+    "y": 154
+   },
+   {
+    "w": "Friday,",
+    "x": 201,
+    "y": 154
+   },
+   {
+    "w": "October",
+    "x": 240,
+    "y": 154
+   },
+   {
+    "w": "31,",
+    "x": 287,
+    "y": 154
+   },
+   {
+    "w": "2025,",
+    "x": 306,
+    "y": 154
+   },
+   {
+    "w": "at",
+    "x": 338,
+    "y": 154
+   },
+   {
+    "w": "3:00",
+    "x": 352,
+    "y": 154
+   },
+   {
+    "w": "PM",
+    "x": 378,
+    "y": 154
+   },
+   {
+    "w": "Arizona",
+    "x": 398,
+    "y": 154
+   },
+   {
+    "w": "Time.",
+    "x": 443,
+    "y": 154
+   }
+  ],
+  "exact": true,
+  "ocr": true
+ },
+ "traceModel": {
+  "rects": [
+   [
+    0.088,
+    0.194,
+    0.687,
+    0.021
+   ]
+  ]
+ },
+ "crops": [
+  {
+   "stem": "martin-seed-ss427-4-corn",
+   "img": {
+    "src": "assets/crop/martin-seed-ss427-4-corn-p1.jpg",
+    "w": 1500,
+    "h": 1942
+   },
+   "url": "",
+   "subject": "SS-427-4 TRE (Trecepta\u00ae RIB COMPLETE)",
+   "docType": "Seed corn hybrid product/seed guide sheet (two-page product spec sheet)",
+   "attributes": 12,
+   "measurements": 18,
+   "graphical": 17,
+   "nulls": 0,
+   "attrRows": [
+    [
+     "EAR TYPE",
+     "Flex"
+    ],
+    [
+     "KERNEL ROWS",
+     "16-18"
+    ],
+    [
+     "FLOWERING FOR RM",
+     "Medium Early"
+    ],
+    [
+     "RM ZONE FIT",
+     "In Zone, South of Zone"
+    ],
+    [
+     "POPULATION RANGE",
+     "Medium to Medium High"
+    ],
+    [
+     "FUNGICIDE RESPONSE",
+     "High"
+    ],
+    [
+     "FEATURES AND BENEFITS",
+     "When big yields are needed, call in the big gun \u2014 SS-427-4 is a mighty beast with an appetite for yield. A bigger and more robust type of product that works over a wide range of soils, plus has strong stress tolerance for the long hot days of summer. Expect a big flexy ear with extremely deep kernels of somewhat rough textured grain. Late season standability is very good under good growing conditions."
+    ],
+    [
+     "Trecepta\u00ae RIB COMPLETE",
+     "Trecepta\u00ae RIB COMPLETE\u00ae \u2014 includes Roundup Ready\u00ae 2 Technology (glyphosate tolerance); insect control technology provided by Vip3A under license from Syngenta Crop Protection AG; sold as RIB Complete\u00ae corn blend product (no structured refuge required except in the Cotton-Growing Area where corn earworm is a significant pest)"
+    ],
+    [
+     "Seedsmen SS Select Series",
+     "Seedsmen SS Select Series \u2014 High Performance Corn Hybrids"
+    ],
+    [
+     "Growing Season",
+     "2025-2026 Growing Season"
+    ],
+    [
+     "Martin Seed contact information",
+     "Martin Seed \u2014 World class genetics. Local roots. Corn hybrids, soybeans/wheat: 10280 West SR 28, West Lebanon, IN 47991, Matt Willard: 217-649-6348. Alfalfa/pasture/hay, cover crop/native seed, wildlife food/turf: 10045 West 2nd Street, Williamsport, IN 47993, Ron Haston: 765-986-2030. Seedsmanship by Seedsmen since 1935."
+    ],
+    [
+     "Stewardship / IRM / legal notices",
+     "Bayer is a member of Excellence Through Stewardship\u00ae (ETS); products commercialized per ETS Product Launch Stewardship Guidance and Bayer's Policy for Commercialization of Biotechnology-Derived Plant Products in Commodity Crops; export only to countries with applicable regulatory approvals; growers should confirm buying position with grain handler. ALWAYS READ AND FOLLOW PESTICIDE LABEL DIRECTIONS. B.t. products may not yet be registered in all states. IMPORTANT IRM INFORMATION: RIB Complete\u00ae corn blend products do not require a structured refuge except in the Cotton-Growing Area where corn earworm is a significant pest; non-RIB Complete products require a structured refuge \u2014 see the IRM/Grower Guide; always read and follow IRM requirements. Roundup Ready\u00ae 2 Technology contains genes conferring glyphosate tolerance; non-tolerant plants may be damaged or killed. RIB Complete\u00ae, Roundup Ready\u00ae and Trecepta\u00ae are registered trademarks of Bayer Group; Agrisure Viptera\u00ae is a registered trademark of a Syngenta group company; Respect the Refuge and Corn Design\u00ae is a registered trademark of National Corn Growers Association. Stewardship notice: before opening a bag of seed, read, understand and accept the stewardship requirements, including refuge requirements, set forth in the Technology/Stewardship Agreement. Contact your Martin Seed dealer or refer to the Bayer Technology Use Guide for recommended weed control programs. \u00a9 2025 Martin Seed. All rights reserved."
+    ]
+   ],
+   "measRows": [
+    [
+     "RELATIVE MATURITY",
+     "112"
+    ],
+    [
+     "Stalk Strength",
+     "6"
+    ],
+    [
+     "Root Strength",
+     "7"
+    ],
+    [
+     "Kernel Depth Potential",
+     "8"
+    ],
+    [
+     "Test Weight",
+     "6"
+    ],
+    [
+     "Early Vigor",
+     "7"
+    ],
+    [
+     "Drought Tolerance",
+     "8"
+    ],
+    [
+     "Greensnap",
+     "5"
+    ],
+    [
+     "Intactness",
+     "7"
+    ],
+    [
+     "Husk Cover",
+     "6"
+    ],
+    [
+     "Drydown",
+     "8"
+    ],
+    [
+     "GLS",
+     "8"
+    ],
+    [
+     "NCLB",
+     "8"
+    ],
+    [
+     "Physoderma",
+     "4"
+    ],
+    [
+     "Southern Rust",
+     "6"
+    ],
+    [
+     "Tar Spot",
+     "6"
+    ],
+    [
+     "Goss'",
+     "6"
+    ],
+    [
+     "Stalk Health",
+     "5"
+    ]
+   ],
+   "scaleNote": "Printed legend states \"1=Poor, 9=Excellent\", but the drawn bar-chart axis runs from 2 to 10 \u2014 the two disagree, so bar-derived values may be offset by one relative to the stated 1-9 legend. Ratings are graphical (bar lengths) with no printed digits; values reported are approximate read-offs. RELATIVE MATURITY (112) is on a separate days-to-maturity scale and not part of this scale."
+  },
+  {
+   "stem": "armor-1575-corn",
+   "img": {
+    "src": "assets/crop/armor-1575-corn-p1.jpg",
+    "w": 1500,
+    "h": 1942
+   },
+   "url": "https://www.armorseed.com/getContentAsset/9f8746e1-7657-467d-98a1-5075b366e5d1/a3fb1720-5373-4b5c-9377-cbf067c64cea/Armor-Seed-Corn-1575.pdf?language=en",
+   "subject": "ARMOR SEED 1575 (VT Double PRO\u00ae RIB Complete\u00ae) corn hybrid",
+   "docType": "Seed product spec sheet (corn hybrid product page) with regulatory/stewardship legal notices",
+   "attributes": 31,
+   "measurements": 7,
+   "graphical": 5,
+   "nulls": 5,
+   "attrRows": [
+    [
+     "Relative Maturity",
+     "115"
+    ],
+    [
+     "Trait package",
+     "VT Double PRO\u00ae RIB Complete\u00ae"
+    ],
+    [
+     "Product bullet features",
+     "Consistent ear with good kernel depth; Attractive plant with good disease tolerance; Broadly adapted, versatile hybrid that can handle a wide range of environments"
+    ],
+    [
+     "PLANT HEIGHT",
+     "Tall"
+    ],
+    [
+     "EAR HEIGHT",
+     "Medium-High"
+    ],
+    [
+     "Maturity",
+     "115"
+    ],
+    [
+     "Early Growth",
+     "Excellent"
+    ],
+    [
+     "Stress Tolerance",
+     "Very Good"
+    ],
+    [
+     "Stalk Strength",
+     "Excellent"
+    ],
+    [
+     "Root Strength",
+     "Excellent"
+    ],
+    [
+     "Staygreen",
+     "Excellent"
+    ],
+    [
+     "Drydown",
+     "Very Good"
+    ],
+    [
+     "Canopy",
+     "N/A"
+    ],
+    [
+     "Ear Type",
+     "Semi-Flex"
+    ],
+    [
+     "Husk Cover",
+     "N/A"
+    ],
+    [
+     "Test Weight",
+     "Excellent"
+    ],
+    [
+     "Green Snap",
+     "N/A"
+    ],
+    [
+     "Fall Intactness",
+     "Very Good"
+    ],
+    [
+     "Corn After Corn",
+     "N/A"
+    ],
+    [
+     "Herbicide Tolerance",
+     "Acceptable"
+    ],
+    [
+     "Ear Mold",
+     "N/A"
+    ],
+    [
+     "Southern Rust",
+     "Average"
+    ],
+    [
+     "Common Rust",
+     "N/A"
+    ],
+    [
+     "Grey Leaf Spot",
+     "Good"
+    ],
+    [
+     "Southern Leaf Blight",
+     "Very Good"
+    ],
+    [
+     "Northern Leaf Blight",
+     "Very Good"
+    ],
+    [
+     "Goss' Wilt",
+     "N/A"
+    ],
+    [
+     "Trait abbreviation legend",
+     "SmartStax RIB=SmartStax\u00ae RIB Complete\u00ae Corn Blend. SmartStax\u00ae Corn. DroughtGuard. Double Pro RIB = DroughtGard\u00ae Hybrids with VT Double PRO\u00ae RIB Complete\u00ae Corn Blend. DroughtGard Pro = DroughtGard\u00ae Hybrids with VT Double PRO\u00ae Corn. Double Pro RIB = VT Double PRO\u00ae RIB Complete\u00ae Corn Blend. Double Pro = VT Double PRO\u00ae Corn. Roundup Ready Corn 2 = Roundup Ready\u00ae Corn 2. Trecepta RIB = Trecepta\u00ae RIB Complete\u00ae Corn Blend. Trecepta = Trecepta\u00ae Corn Blend. Viptera = Agrisure Viptera\u00ae Corn Hybrids."
+    ],
+    [
+     "Ratings disclaimer",
+     "Rating are general. Soil and environment may adversely affect performance."
+    ],
+    [
+     "Stewardship / IRM legal notices",
+     "ALWAYS READ AND FOLLOW PESTICIDE LABEL DIRECTIONS. Bayer is a member of Excellence Through Stewardship\u00ae (ETS); products commercialized per ETS Product Launch Stewardship Guidance; export/import approval and grain-handler buying position notices. B.t. products may not yet be registered in all states; refuge seed may not always contain the DroughtGard\u00ae trait. IMPORTANT IRM INFORMATION: RIB Complete\u00ae corn blend products do not require a structured refuge except in the Cotton-Growing Area where corn earworm is a significant pest; non-RIB products require structured refuge \u2014 see IRM/Grower Guide. Roundup Ready\u00ae/Roundup Ready\u00ae 2 glyphosate tolerance statements; Vip3A licensed from Syngenta Crop Protection AG; Herculex\u00ae, Agrisure Viptera\u00ae, Respect the Refuge\u00ae trademark notices; Bayer Group trademarks (Acceleron\u00ae, DroughtGard\u00ae, RIB Complete\u00ae, Roundup Ready\u00ae, SmartStax\u00ae, Trecepta\u00ae, VT Double PRO\u00ae, VT4PRO\u2122). Insect Resistance Management notice: read, understand and accept stewardship requirements including refuge requirements before opening a bag of seed. PowerCore\u00ae Enlist\u00ae, Enlist\u00ae Corn - REFUGE and Enlist E3\u00ae patent/limited license terms (www.traitstewardship.com), Corteva Agriscience Technology Use Agreement and Product Use Guides including Herbicide Resistance Management. Corteva Agriscience ETS membership and www.biotradestatus.com reference. Enlist Duo\u00ae and Enlist One\u00ae with Colex-D\u00ae are the only 2,4-D herbicides authorized with Enlist\u00ae crops; not registered in AK, CA, CT, HI, ID, MA, ME, MT, NH, NV, OR, RI, UT, VT, WA and WY. POWERCORE\u00ae multi-event technology developed by Corteva Agriscience LLC and Monsanto; LibertyLink\u00ae and Water Droplet Design registered trademarks of BASF; PowerCore\u00ae and Roundup Ready\u00ae registered trademarks of Bayer Group."
+    ],
+    [
+     "Brand / copyright line",
+     "ARMOR SEED \u2014 Start Strong. Plant Armor.\u00ae | PROUD MEMBER OF U.S. AGRICULTURE | \u00ae 2026 ARMOR SEED. A WINFIELD UNITED COMPANY"
+    ]
+   ],
+   "measRows": [
+    [
+     "GDUs to 50% Pollination",
+     "1370"
+    ],
+    [
+     "GDUs to Black Layer",
+     "2830"
+    ],
+    [
+     "Resistance: Stalk Strength",
+     null
+    ],
+    [
+     "Resistance: Root Strength",
+     null
+    ],
+    [
+     "Resistance: Staygreen",
+     null
+    ],
+    [
+     "Resistance: Drydown",
+     null
+    ],
+    [
+     "Resistance: Test Weight",
+     null
+    ]
+   ],
+   "scaleNote": "No numeric scale is printed. The Resistance bar chart's drawn axis is labeled only \"Average\" (left) to \"Excellent\" (right) with no numeric ticks, so bar lengths can only be read graphically (full bar = Excellent, ~three-quarters = Very Good). The tables use a verbal scale (N/A, Average, Acceptable, Good, Very Good, Excellent), which does not fully agree with the chart's two-endpoint axis: the axis omits the intermediate labels (Good, Very Good) used in the tables and cannot represent categories below \"Average\". No numeric best/worst values are recoverable."
+  },
+  {
+   "stem": "dekalb-2021-corn-agronomic-ratings-p13",
+   "img": {
+    "src": "assets/crop/dekalb-2021-corn-agronomic-ratings-p13-p1.jpg",
+    "w": 1500,
+    "h": 970
+   },
+   "url": "https://devolderfarms.com/wp-content/uploads/2020/11/2021-DEKALB-Seed-Guide-ECAN.pdf",
+   "subject": "2021 DEKALB Corn Hybrids",
+   "docType": "Seed corn hybrid product guide page with agronomic ratings table (2021 DEKALB Corn Hybrids)",
+   "attributes": 11,
+   "measurements": 15,
+   "graphical": 0,
+   "nulls": 15,
+   "attrRows": [
+    [
+     "HYBRID*",
+     "DKC39-97RIB; DKC41-99RIB; DKC41-95; DKC42-60RIB; DKC42-05RIB; DKC42-04RIB; DKC43-47RIB; DKC44-80RIB (the RIB designation refers to a RIB Complete\u00ae product)"
+    ],
+    [
+     "MANAGEMENT: VALUE-ADDED TRAIT",
+     "DKC39-97RIB: SS; DKC41-99RIB: VT2P; DKC41-95: RR2; DKC42-60RIB: SS; DKC42-05RIB: VT2P; DKC42-04RIB: SS; DKC43-47RIB: SS; DKC44-80RIB: VT2P"
+    ],
+    [
+     "Trait/brand marks",
+     "DKC39-97RIB: SmartStax RIB Complete, Silage Ready; DKC41-99RIB: VT Double PRO RIB Complete, Silage Ready, Proline; DKC41-95: Roundup Ready Corn 2, Proline; DKC42-60RIB: SmartStax RIB Complete; DKC42-05RIB: VT Double PRO RIB Complete, Silage Ready; DKC42-04RIB: SmartStax RIB Complete, Silage Ready; DKC43-47RIB: SmartStax RIB Complete, Proline; DKC44-80RIB: VT Double PRO RIB Complete, Silage Ready"
+    ],
+    [
+     "FLOWERING TIMING FOR MATURITY",
+     "DKC39-97RIB: Early; DKC41-99RIB: Avg; DKC41-95: Avg; DKC42-60RIB: Avg; DKC42-05RIB: Avg; DKC42-04RIB: Avg; DKC43-47RIB: Late; DKC44-80RIB: Early"
+    ],
+    [
+     "PLANTING: TARGET POPULATION \u00b2",
+     "DKC39-97RIB: 34-36; DKC41-99RIB: 36-38; DKC41-95: 36-38; DKC42-60RIB: 36-38; DKC42-05RIB: 32-34; DKC42-04RIB: 32-34; DKC43-47RIB: 36-38; DKC44-80RIB: 32-34"
+    ],
+    [
+     "PLANT HEIGHT",
+     "DKC39-97RIB: M; DKC41-99RIB: M-T; DKC41-95: M-T; DKC42-60RIB: M; DKC42-05RIB: T; DKC42-04RIB: T; DKC43-47RIB: M-T; DKC44-80RIB: T"
+    ],
+    [
+     "HERBICIDE & DISEASE TOLERANCE: HERBICIDE SAFETY \u00b3",
+     "DKC39-97RIB: \u2714; DKC41-99RIB: \u2714; DKC41-95: \u2714; DKC42-60RIB: \u2714; DKC42-05RIB: \u2714; DKC42-04RIB: \u2714; DKC43-47RIB: GR; DKC44-80RIB: \u2714"
+    ],
+    [
+     "GIBBERELLA EAR ROT",
+     "DKC39-97RIB: AA; DKC41-99RIB: BA; DKC41-95: BA; DKC42-60RIB: A; DKC42-05RIB: AA; DKC42-04RIB: AA; DKC43-47RIB: BA; DKC44-80RIB: AA"
+    ],
+    [
+     "SILAGE READY",
+     "Silage Ready: DKC39-97RIB, DKC41-99RIB, DKC42-05RIB, DKC42-04RIB, DKC44-80RIB; not designated: DKC41-95, DKC42-60RIB, DKC43-47RIB"
+    ],
+    [
+     "Hybrid description bullets",
+     "DKC39-97RIB: Excellent early season growth and vigour for early planting; excellent drydown and solid agronomics; excellent stalks and roots, girthy cob and very good late season plant health; medium plant type, great dual-purpose hybrid; performs well across all soil types and yield environments tested; plant at higher populations to maximize yields. DKC41-99RIB: Performs well across all soil types, rotations and yield environments tested; strong silage potential; plant at medium-to-high plant populations; medium-to-tall plant type; an application of Proline fungicide at silking is recommended if conditions are conducive to DON/gibberella ear rot development. DKC41-95: Performs well across all soil types, rotations and yield environments tested; plant at medium-to-high plant populations; excellent stalk strength and seedling vigour; an application of Proline fungicide at silking is recommended if conditions are conducive to DON/gibberella ear rot development. DKC42-60RIB: Very good emergence and seedling growth; solid agronomics with very good test weight; excellent stalk strength; very good stress tolerance; performs best on medium-to-highly productive ground. DKC42-05RIB: Excellent seedling vigour; excellent drought tolerance and good overall stress tolerance; a tall plant with great ear flex; excellent drydown. DKC42-04RIB: Excellent seedling vigour; excellent drought tolerance and good overall stress tolerance; a tall plant with great ear flex; excellent drydown; an ideal choice for corn on corn areas. DKC43-47RIB: Versatile hybrid with top end yield potential; excellent stalks and roots with very good drydown; excellent drought and stress tolerance; plant at medium-high to high populations to maximize yield potential; keep in proper maturity zone for best results; excellent choice for corn on corn rotations because of disease package; an application of Proline fungicide at silking is recommended if conditions are conducive to DON/gibberella ear rot development. DKC44-80RIB: Strong performance across all yield zones tested; great ear flex to compensate in lower plant populations; excellent emergence and seedling vigour; plant at medium populations for best results; performs best on clay and loam soil types; excellent drydown."
+    ],
+    [
+     "Data source note",
+     "Data compiled from Bayer conducted field trials."
+    ]
+   ],
+   "measRows": [
+    [
+     "RELATIVE MATURITY \u00b9",
+     null
+    ],
+    [
+     "CHU",
+     null
+    ],
+    [
+     "EMERGENCE",
+     null
+    ],
+    [
+     "GROWTH: SEEDLING VIGOUR",
+     null
+    ],
+    [
+     "ROOT STRENGTH",
+     null
+    ],
+    [
+     "STALK STRENGTH",
+     null
+    ],
+    [
+     "DROUGHT TOLERANCE",
+     null
+    ],
+    [
+     "HARVEST: STAYGREEN",
+     null
+    ],
+    [
+     "DRYDOWN",
+     null
+    ],
+    [
+     "TEST WEIGHT",
+     null
+    ],
+    [
+     "NORTHERN CORN LEAF BLIGHT",
+     null
+    ],
+    [
+     "GRAY LEAF SPOT",
+     null
+    ],
+    [
+     "EYE SPOT",
+     null
+    ],
+    [
+     "COMMON RUST",
+     null
+    ],
+    [
+     "ANTHRACNOSE STALK ROT",
+     null
+    ]
+   ],
+   "scaleNote": "Printed \"Rating Scale\" legend: 1-2 = Excellent, 3-4 = Very Good, 5-6 = Good to Average, 7-8 = Fair to Poor, 9 = Poor, and \"-\" = Not Available; lower is better. Values are printed as digits (no drawn axis/bars). Separate non-numeric scales apply to Plant Height (S/M/T, incl. M-T), Gibberella Ear Rot (AA/A/BA) and Herbicide Safety (\u2714/GR/IS); Relative Maturity, CHU and Target Population are absolute values, not on the 1-9 scale. Per-hybrid numeric ratings are reported in the attributes-style table rather than as single measurements because the page covers eight hybrids: EMERGENCE 2/2/2/3/3/3/3/2; SEEDLING VIGOUR 2/2/2/3/2/2/1/2; ROOT STRENGTH 2/3/3/2/3/3/1/3; STALK STRENGTH 2/2/2/2/4/4/1/5; DROUGHT TOLERANCE 2/3/3/3/2/2/2/3; STAYGREEN 3/3/3/2/3/3/3/3; DRYDOWN 2/3/3/3/2/2/3/2; TEST WEIGHT 3/4/4/3/3/3/4/3; NCLB 4/3/3/2/4/4/5/5; GRAY LEAF SPOT -/4/-/6/5/5/3/5; EYE SPOT 4/3/3/3/2/2/3/-; COMMON RUST 3/4/4/3/3/3/2/3; ANTHRACNOSE STALK ROT 5/5/5/5/5/5/5/2 (order: DKC39-97RIB, DKC41-99RIB, DKC41-95, DKC42-60RIB, DKC42-05RIB, DKC42-04RIB, DKC43-47RIB, DKC44-80RIB). Relative maturity 89/91/91/92/92/92/93/94 days; CHU 2700/2775/2775/2775/2800/2800/2825/2850."
+  },
+  {
+   "stem": "martin-seed-m355xf-soybean",
+   "img": {
+    "src": "assets/crop/martin-seed-m355xf-soybean-p1.jpg",
+    "w": 1500,
+    "h": 1942
+   },
+   "url": "https://www.martinseed.com/Product_profiles/M355-XF-Soybean_2025-26_Product_Profile.pdf",
+   "subject": "M355-XF",
+   "docType": "Soybean seed variety product spec sheet / sales flyer (with Bayer trait stewardship and \"bin run\" legal inserts)",
+   "attributes": 23,
+   "measurements": 1,
+   "graphical": 0,
+   "nulls": 0,
+   "attrRows": [
+    [
+     "Growing Season",
+     "2025-2026"
+    ],
+    [
+     "TRAIT PACKAGE",
+     "XF"
+    ],
+    [
+     "HILUM",
+     "Imp Black"
+    ],
+    [
+     "FLOWER",
+     "Purple"
+    ],
+    [
+     "PUBECENCE",
+     "Gray"
+    ],
+    [
+     "POD WALL",
+     "Brown"
+    ],
+    [
+     "STANDABILITY",
+     "Good"
+    ],
+    [
+     "EMERGENCE",
+     "Very Good"
+    ],
+    [
+     "PLANT HEIGHT",
+     "Medium Tall"
+    ],
+    [
+     "STRESS TOLERANCE",
+     "Very Good"
+    ],
+    [
+     "SDS",
+     "Very Good"
+    ],
+    [
+     "SCN",
+     "R3, MR14"
+    ],
+    [
+     "SCN SOURCE",
+     "PI 88.788"
+    ],
+    [
+     "PPR GENE",
+     "Rps 1C"
+    ],
+    [
+     "PPR TOLERANCE",
+     "Good"
+    ],
+    [
+     "BSR",
+     "NA"
+    ],
+    [
+     "FROGEYE",
+     "Average"
+    ],
+    [
+     "WHITE MOLD",
+     "Average"
+    ],
+    [
+     "FEATURES",
+     "Superior yield performance in the XF platform. Attractive product that stands well. Can be sensitive to PPO herbicides."
+    ],
+    [
+     "Seed company / contact information",
+     "Martin Seed \u2014 \"World class genetics. Local roots.\" / \"Seedsmanship by Seedsmen since 1935\". CORN HYBRIDS, SOYBEANS / WHEAT: 10280 West SR 28, West Lebanon, IN 47991 \u2014 Matt Willard: 217-649-6348. ALFALFA / PASTURE / HAY, COVER CROP / NATIVE SEED, WILDLIFE FOOD / TURF: 10045 West 2nd Street, Williamsport, IN 47993 \u2014 Ron Haston: 765-986-2030. \u00a9 2025 Martin Seed. All rights reserved."
+    ],
+    [
+     "Trademark and stewardship legal text",
+     "Contact your Martin Seed dealer or refer to the Bayer Technology Use Guide for recommended weed control programs. Roundup Ready 2 Xtend\u00ae, Roundup Ready 2 Yield\u00ae, Roundup Ready\u00ae and XtendFlex\u00ae are trademarks of Bayer Group. No dicamba may be used in-crop with seed with Roundup Ready\u00ae Xtend Technology unless and until approved or specifically permitted; no dicamba formulations are currently registered for such use in the 2024 season (see https://www.roundupreadyxtend.com/pages/xtendimax-updates.aspx). Bayer is a member of Excellence Through Stewardship\u00ae (ETS); products commercialized per ETS Product Launch Stewardship Guidance and Bayer's Policy for Commercialization of Biotechnology-Derived Plant Products in Commodity Crops; export/import restrictions apply and growers should confirm buying position with their grain handler. ALWAYS READ AND FOLLOW PESTICIDE LABEL DIRECTIONS; NOT ALL formulations of dicamba, glyphosate or glufosinate are approved for in-crop use with XtendFlex\u00ae Technology \u2014 only use formulations specifically labeled and approved in the state of application; contact U.S. EPA and state pesticide regulatory agency. XtendFlex\u00ae Technology confers tolerance to glyphosate, glufosinate and dicamba, each of which will kill non-tolerant crops. LibertyLink logo\u00ae and LibertyLink\u00ae are trademarks of BASF Corporation; Water Droplet Design\u00ae is a trademark of BASF. Seed containing the XtendFlex\u00ae traits can only be used to plant a single commercial crop; it is unlawful to save and replant XtendFlex\u00ae soybeans (see Technology Stewardship Agreement and Bayer Technology Use Guide: tug.bayer.com; patents at cs.bayerpatents.bayer.com). Technical support line 1-888-283-6847. \u00a92022 Bayer Group. All rights reserved. Rev 01/2022. Bayer is also a member of the Seed Innovation and Protection Alliance (SIPA\u2122, www.seedipalliance.com)."
+    ],
+    [
+     "Think Before You Bin Run considerations",
+     "Verification Required \u2014 the last patent on the original Roundup Ready\u00ae soybean trait expired a few years ago and U.S. farmers may legally plant saved seed from some Roundup Ready\u00ae varieties, but check with your seed supplier whether a specific variety is covered by other intellectual property rights and the seed-saving policy. Higher Seeding Rate \u2014 a higher seeding rate may be required for bin-run Roundup Ready\u00ae soybeans compared to new branded seed. Yield Loss \u2014 Roundup Ready 2 Yield\u00ae, Roundup Ready 2 Xtend\u00ae and XtendFlex\u00ae varieties typically have higher yield opportunity than Roundup Ready\u00ae varieties. Cleanout Loss \u2014 loss of seed and/or shrink occurs during seed cleaning and handling of bin-run seed. Seed Treatment Costs \u2014 treating seed adds the cost of the treatment and its application. Lost Income \u2014 every bushel of saved seed planted is a bushel not sold as commodity grain. Increased Seed Management \u2014 saving bin-run seed requires managing harvest operations and grain storage so seed isn't co-mingled with seed covered by intellectual property rights. Contacts for seed IP questions or anonymous saved seed tips: call 1-866-99-BAYER; write Trait Stewardship, 622 Emerson Road, Suite 150, Creve Coeur, MO 63141; or submit a request at cropscience.bayer.us/contact."
+    ],
+    [
+     "High Value of New Branded Seed",
+     "Latest Technology \u2014 high-yielding soybean technologies; better variety options; leading seed treatment options. Customer Service \u2014 dealer agronomic support before and after the sale; replant policy support; convenient packaging and delivery. Reliable Germination and Quality \u2014 rigorously tested and meets U.S. Federal Seed Act requirements; free of seed-borne diseases; properly stored and conditioned."
+    ]
+   ],
+   "measRows": [
+    [
+     "MATURITY",
+     "3.6"
+    ]
+   ],
+   "scaleNote": "No shared numeric rating scale is used or printed. Agronomic characteristics are given as qualitative words (Very Good / Good / Average); the only printed numbers are the relative maturity value (3.6) and SCN race codes (R3, MR14). No legend or bar/dot rating graphics are present."
+  }
+ ]
+}

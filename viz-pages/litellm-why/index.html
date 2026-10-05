@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viz:tag" content="LiteLLM" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Why LiteLLM?</title>
+    <meta name="viz:uid" content="v-8d370183dc7f" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:title" content="Why LiteLLM?" />
+    <meta
+      name="viz:description"
+      content="What an AI gateway solves, what you get, and how to get access — the front door to the LiteLLM viz family."
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      body {
+        padding-bottom: 64px;
+      }
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      section {
+        margin: 40px 0;
+      }
+      h2 {
+        font-size: 17px;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        margin: 0 0 4px;
+      }
+      .lead {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0 0 18px;
+        max-width: 70ch;
+      }
+
+      /* before / after */
+      .ba {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 760px) {
+        .ba {
+          grid-template-columns: 1fr;
+        }
+      }
+      .ba .card {
+        padding: 14px 14px 10px;
+      }
+      .ba h3 {
+        margin: 0 0 2px;
+        font-size: 13.5px;
+      }
+      .ba .tag {
+        font: 600 11px/1 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .ba .tag.bad {
+        color: var(--danger);
+      }
+      .ba .tag.good {
+        color: var(--good);
+      }
+      .ba svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 6px 0;
+      }
+      .ba ul {
+        margin: 4px 0 0;
+        padding-left: 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .ba li {
+        margin: 2px 0;
+      }
+      .vsvg-label {
+        font: 600 11px/1.15 var(--sans);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        text-align: center;
+        padding: 0 4px;
+      }
+
+      /* capability grid */
+      .caps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 760px) {
+        .caps {
+          grid-template-columns: 1fr;
+        }
+      }
+      .cap {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 13px 14px;
+      }
+      .cap b {
+        font-size: 13px;
+      }
+      .cap p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      /* link cards (the hub) */
+      .links {
+        display: grid;
+        gap: 12px;
+      }
+      .fork {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      @media (max-width: 760px) {
+        .fork {
+          grid-template-columns: 1fr;
+        }
+      }
+      a.lk {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+        transition: 0.15s;
+      }
+      a.lk:hover {
+        border-color: var(--accent);
+        background: #11203a;
+        transform: translateY(-1px);
+      }
+      a.lk .badge {
+        font: 600 10.5px/1 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 3px 7px;
+        border-radius: 999px;
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+      .badge.pref {
+        color: var(--good);
+        border: 1px solid color-mix(in srgb, var(--good) 45%, transparent);
+      }
+      .badge.fb {
+        color: var(--warn);
+        border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent);
+      }
+      .badge.ent {
+        color: var(--c4);
+        border: 1px solid color-mix(in srgb, var(--c4) 45%, transparent);
+      }
+      a.lk h3 {
+        margin: 0 0 5px;
+        font-size: 14.5px;
+      }
+      a.lk p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+      a.lk .go {
+        color: var(--accent);
+        font-size: 12.5px;
+        font-weight: 600;
+        margin-top: 9px;
+        display: inline-block;
+      }
+      a.lk .go::after {
+        content: " →";
+      }
+      a.lk[role="button"] {
+        cursor: pointer;
+      }
+
+      /* OAuth modal */
+      .modal-back {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.62);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 100;
+      }
+      .modal-back[hidden] {
+        display: none;
+      }
+      .modal {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow: auto;
+        padding: 24px 26px;
+        position: relative;
+      }
+      .modal h2 {
+        margin: 0 0 4px;
+        font-size: 18px;
+      }
+      .modal-x {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 26px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .modal-x:hover {
+        color: var(--text);
+      }
+      .mh {
+        font: 600 11.5px/1 var(--mono);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 22px 0 10px;
+      }
+      .setup {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      @media (max-width: 640px) {
+        .setup {
+          grid-template-columns: 1fr;
+        }
+      }
+      .setup .s {
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 11px 12px;
+      }
+      .setup .n {
+        font: 600 11px/1 var(--mono);
+        color: var(--accent);
+      }
+      .setup b {
+        display: block;
+        margin: 5px 0 3px;
+        font-size: 12.5px;
+      }
+      .setup p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 11.5px;
+        line-height: 1.42;
+      }
+      #svg-oauth {
+        width: 100%;
+        height: auto;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .seq-lbl {
+        font: 500 10px/1 var(--sans);
+        fill: var(--text);
+      }
+      .modal .foot {
+        color: var(--muted);
+        font-size: 11.5px;
+        margin-top: 12px;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="viz-header" style="padding-left: 0; padding-right: 0">
+        <h1>Why LiteLLM?</h1>
+        <div class="sub">
+          One front door for every model — what it solves, what you get, and how to get access.
+        </div>
+      </div>
+
+      <!-- THE PROBLEM / SOLUTION -->
+      <section>
+        <h2>What it solves</h2>
+        <p class="lead">
+          Without a gateway, every app wires straight to every model provider. That mesh is where
+          the pain lives: keys copied into each app, no shared budget or audit, and swapping a model
+          means editing every caller. LiteLLM collapses the mesh into one OpenAI-compatible front
+          door.
+        </p>
+        <div class="ba">
+          <div class="card">
+            <span class="tag bad">Without a gateway</span>
+            <h3>N apps × M providers</h3>
+            <svg
+              id="svg-before"
+              viewBox="0 0 460 300"
+              aria-label="Tangled mesh of apps wired to every provider"
+            ></svg>
+            <ul>
+              <li>Keys live in every app — no central rotation or revocation</li>
+              <li>No shared view of spend, limits, or who called what</li>
+              <li>Swap a model → touch every caller</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="tag good">With LiteLLM</span>
+            <h3>One gateway, one endpoint</h3>
+            <svg
+              id="svg-after"
+              viewBox="0 0 460 300"
+              aria-label="Apps routed through one LiteLLM gateway to providers"
+            ></svg>
+            <ul>
+              <li>One place for keys, budgets, routing, and logging</li>
+              <li>Apps speak one OpenAI-compatible <code>/v1</code> API</li>
+              <li>Swap or fail over models centrally — apps don't change</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAPABILITIES -->
+      <section>
+        <h2>What you get</h2>
+        <p class="lead">
+          The capabilities the gateway adds on top of raw model access. The full PoC proves each of
+          these end-to-end — see the deep dive below.
+        </p>
+        <div class="caps" id="caps"></div>
+      </section>
+
+      <!-- HOW TO GET ACCESS -->
+      <section>
+        <h2>How do you get access?</h2>
+        <p class="lead">
+          Two paths, depending on whether your app can authenticate with the identity provider.
+        </p>
+        <div class="fork">
+          <a class="lk" role="button" tabindex="0" id="oauth-open">
+            <span class="badge pref">Preferred</span>
+            <h3>Bring your own OAuth</h3>
+            <p>
+              If your app already authenticates with the IdP, LiteLLM acts as an OAuth2
+              <em>resource server</em>: present your JWT, it maps to your <code>client_id</code> and
+              enforces your limits. No key to mint, store, or rotate.
+            </p>
+            <span class="go">See how it works</span>
+          </a>
+          <a class="lk" href="../litellm-key-vendor-compare/">
+            <span class="badge fb">If you can't</span>
+            <h3>Get vended a virtual key</h3>
+            <p>
+              Can't do OAuth? A self-service key-vendor mints, scopes, and rotates a virtual key for
+              you — declaratively, via Ansible, Terraform, or an always-on Kubernetes operator.
+            </p>
+            <span class="go">Compare the key-vendor engines</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- OSS vs ENTERPRISE -->
+      <section>
+        <h2>Open source or Enterprise?</h2>
+        <p class="lead">
+          LiteLLM is MIT-licensed and free for almost everything here. A few features sit behind an
+          Enterprise license — and most have an OSS workaround.
+        </p>
+        <div class="links">
+          <a class="lk" href="../litellm-enterprise-features/">
+            <span class="badge ent">OSS vs Enterprise</span>
+            <h3>What's free, what's paid, and how to avoid paying</h3>
+            <p>
+              A source-verified, domain-by-domain matrix: OSS / MIT vs what Enterprise adds vs the
+              OSS way to get it anyway — with a verdict on how much the free ceiling actually hurts.
+            </p>
+            <span class="go">Open the licensing matrix</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- OAuth modal -->
+    <div class="modal-back" id="oauth-modal" hidden>
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="How bring-your-own-OAuth works"
+      >
+        <button class="modal-x" id="oauth-close" aria-label="Close">&times;</button>
+        <h2>Bring your own OAuth</h2>
+        <p class="lead">
+          LiteLLM acts as an OAuth2 <em>resource server</em>. Your existing identity-provider token
+          is the credential — there's no API key to mint, store, or rotate.
+        </p>
+
+        <div class="mh">What you do (one-time setup)</div>
+        <div class="setup">
+          <div class="s">
+            <span class="n">01</span><b>Register your app</b>
+            <p>
+              Create a client in the IdP and get its credentials (<code>client_id</code> + secret).
+            </p>
+          </div>
+          <div class="s">
+            <span class="n">02</span><b>Gateway trusts your IdP</b>
+            <p>
+              Platform team points LiteLLM at the IdP's JWKS and maps a token claim → your identity.
+              Done once.
+            </p>
+          </div>
+          <div class="s">
+            <span class="n">03</span><b>Call with a token</b>
+            <p>Your app fetches a token and sends it as a Bearer header. No key to manage.</p>
+          </div>
+        </div>
+
+        <div class="mh">How a call works</div>
+        <svg
+          id="svg-oauth"
+          viewBox="0 0 720 360"
+          aria-label="OAuth2 resource-server sequence diagram"
+        ></svg>
+        <p class="foot">
+          The gateway caches the IdP's public keys (JWKS) to verify tokens locally — no IdP
+          round-trip per request. Tokens are short-lived, so access falls away automatically on
+          expiry.
+        </p>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

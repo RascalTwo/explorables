@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The journey of a change · Terraform monorepo</title>
+    <meta name="viz:uid" content="v-7b7651c226b3" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:title" content="The journey of a change · Terraform monorepo" />
+    <meta
+      name="viz:description"
+      content="One reusable module, four isolated environments, a gated road to prod: an interactive walkthrough of a change moving through the pipeline — edit → MR → plan ×4 → merge → sequential apply → prod gate → CAB. Plus a hard look at the state file: what it is, where it lives, who can really read it, and how you'd move or seal it."
+    />
+    <meta name="viz:tag" content="Terraform" />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+      .viz-header {
+        padding: 16px 24px 10px;
+        border-bottom: 1px solid var(--border);
+      }
+      .viz-header h1 {
+        font-size: 19px;
+      }
+      .viz-header .sub {
+        font-size: 12.5px;
+      }
+
+      /* progress rail */
+      .rail {
+        display: flex;
+        gap: 6px;
+        padding: 10px 24px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(var(--panel), transparent);
+      }
+      .chip {
+        font-size: 11.5px;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        padding: 4px 9px;
+        border-radius: 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.15s;
+      }
+      .chip:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+      .chip .n {
+        font-variant-numeric: tabular-nums;
+        opacity: 0.6;
+      }
+      .chip.active {
+        color: #0d1117;
+        background: var(--accent);
+        border-color: var(--accent);
+        font-weight: 600;
+      }
+      .chip.active .n {
+        opacity: 0.8;
+      }
+      .chip.done {
+        color: var(--text);
+      }
+
+      main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 0;
+        min-height: 0;
+      }
+      /* `safe center` keeps a too-tall scene from clipping at the top edge when it overflows */
+      #stage {
+        padding: 18px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: safe center;
+        min-width: 0;
+        overflow-y: auto;
+      }
+      .scene {
+        width: 100%;
+        height: auto;
+        max-height: 64vh;
+        display: block;
+      }
+      aside {
+        border-left: 1px solid var(--border);
+        padding: 22px 22px 16px;
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+      }
+      aside .tag {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      aside h2 {
+        font-size: 17px;
+        margin: 6px 0 12px;
+        letter-spacing: -0.01em;
+      }
+      aside .body {
+        font-size: 13px;
+        color: var(--text);
+      }
+      aside .body p {
+        margin: 0 0 11px;
+      }
+      aside .body .real {
+        margin-top: 14px;
+        padding: 11px 12px;
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 6px;
+        background: var(--panel-2);
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      aside .body .real b {
+        color: var(--text);
+      }
+      code,
+      .mono {
+        font-family: var(--mono);
+        font-size: 0.92em;
+      }
+      aside .body code {
+        background: var(--panel-2);
+        padding: 0.5px 4px;
+        border-radius: 4px;
+        color: #9fd1ff;
+      }
+
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 24px;
+        border-top: 1px solid var(--border);
+        background: var(--panel);
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+      }
+      button.nav-btn {
+        font: inherit;
+        font-size: 13px;
+        color: var(--text);
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        padding: 7px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+      button.nav-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      button.nav-btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      .counter {
+        font-size: 12px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* reveal */
+      .rv {
+        opacity: 0;
+        animation: rvin 0.5s ease forwards;
+        animation-delay: var(--d, 0s);
+      }
+      @keyframes rvin {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      svg .rv {
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      /* svg text helpers */
+      .t {
+        font-family: var(--sans);
+        fill: var(--text);
+      }
+      .tm {
+        font-family: var(--mono);
+        fill: var(--muted);
+      }
+      .lbl {
+        font-family: var(--sans);
+        fill: var(--muted);
+        font-size: 12px;
+      }
+      .ttl {
+        font-family: var(--sans);
+        fill: var(--text);
+        font-weight: 600;
+      }
+
+      /* html card scenes */
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .card2 {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+      }
+      .card2 h3 {
+        margin: 0 0 4px;
+        font-size: 14px;
+      }
+      .card2 .who {
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+      .diff {
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.6;
+        background: #0a0e14;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+        overflow: auto;
+      }
+      .diff .path {
+        color: var(--muted);
+        display: block;
+        margin-bottom: 6px;
+        font-size: 11px;
+      }
+      .diff .add {
+        color: #3fb950;
+      }
+      .diff .add::before {
+        content: "+ ";
+      }
+      .diff .del {
+        color: #f85149;
+      }
+      .diff .del::before {
+        content: "- ";
+      }
+      .diff .ctx {
+        color: var(--muted);
+      }
+      .diff .ctx::before {
+        content: "  ";
+      }
+      .blast {
+        margin-top: 12px;
+        font-size: 12px;
+        padding: 7px 10px;
+        border-radius: 6px;
+      }
+      .blast.all {
+        background: rgba(248, 81, 73, 0.1);
+        border: 1px solid rgba(248, 81, 73, 0.35);
+        color: #ffb3ae;
+      }
+      .blast.one {
+        background: rgba(88, 166, 255, 0.1);
+        border: 1px solid rgba(88, 166, 255, 0.35);
+        color: #a9d1ff;
+      }
+
+      .epi {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .epi .card2 {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 18px;
+        height: 130px;
+        padding: 6px 4px 0;
+      }
+      .bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+        justify-content: flex-end;
+      }
+      .bar .b {
+        width: 38px;
+        border-radius: 5px 5px 0 0;
+      }
+      .bar .v {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text);
+      }
+      .bar .e {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .bar .tier {
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .bar .tier.prem {
+        color: #ffd9a8;
+        border-color: #d29922;
+        background: rgba(210, 153, 34, 0.12);
+      }
+      .slist {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 12.5px;
+      }
+      .slist li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .slist li:last-child {
+        border: 0;
+      }
+      .slist .k {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: #9fd1ff;
+      }
+      .pill {
+        margin-left: auto;
+        font-size: 10.5px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        white-space: nowrap;
+      }
+      .pill.in {
+        background: rgba(210, 153, 34, 0.14);
+        color: #ffd9a8;
+        border: 1px solid rgba(210, 153, 34, 0.4);
+      }
+      .pill.out {
+        background: rgba(63, 185, 80, 0.12);
+        color: #9be7a8;
+        border: 1px solid rgba(63, 185, 80, 0.4);
+      }
+      .note {
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+
+      .legend {
+        padding-top: 10px;
+      }
+
+      /* left-aligned mono specimen inside an SVG labelBox */
+      .spec {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        line-height: 1.6;
+        text-align: left !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        overflow: hidden;
+      }
+      .spec .kk {
+        color: #9fd1ff;
+      }
+      .spec .vv {
+        color: #9be7a8;
+      }
+      .spec .hot {
+        color: #ffb3ae;
+        background: rgba(248, 81, 73, 0.16);
+        border-radius: 3px;
+        padding: 0 3px;
+      }
+      .spec .cmt {
+        color: var(--muted);
+      }
+
+      /* control-portability matrix */
+      .mtx {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      .mtx th {
+        text-align: left;
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 600;
+        padding: 0 10px 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .mtx th:first-child {
+        width: 190px;
+      }
+      .mtx td {
+        padding: 5px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+        color: var(--muted);
+        line-height: 1.35;
+        font-size: 11.5px;
+      }
+      .mtx td:first-child {
+        color: var(--text);
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .mtx tr.punch td {
+        background: rgba(248, 81, 73, 0.07);
+        border-bottom-color: rgba(248, 81, 73, 0.3);
+      }
+      .mtx tr.punch td:first-child {
+        color: #ffb3ae;
+      }
+      .mtx .mono {
+        color: #9fd1ff;
+      }
+      .chipx {
+        display: inline-block;
+        font-size: 9.5px;
+        padding: 1px 6px;
+        border-radius: 9px;
+        margin-bottom: 2px;
+        border: 1px solid;
+        letter-spacing: 0.03em;
+      }
+      .chipx.auto {
+        color: #9be7a8;
+        border-color: rgba(63, 185, 80, 0.45);
+        background: rgba(63, 185, 80, 0.1);
+      }
+      .chipx.cfg {
+        color: #ffd9a8;
+        border-color: rgba(210, 153, 34, 0.45);
+        background: rgba(210, 153, 34, 0.12);
+      }
+      .chipx.build {
+        color: #e0b8ff;
+        border-color: rgba(188, 140, 255, 0.45);
+        background: rgba(188, 140, 255, 0.12);
+      }
+      .chipx.win {
+        color: #a9d1ff;
+        border-color: rgba(88, 166, 255, 0.5);
+        background: rgba(88, 166, 255, 0.12);
+      }
+      .chipx.same {
+        color: #ffb3ae;
+        border-color: rgba(248, 81, 73, 0.45);
+        background: rgba(248, 81, 73, 0.1);
+      }
+      .verdict {
+        margin-top: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 11.5px;
+        line-height: 1.45;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--warn);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="viz-header">
+      <h1>The journey of a change</h1>
+      <p class="sub">
+        One reusable module · four isolated environments · a gated road to prod —
+        <span class="mono">terraform monorepo</span>
+      </p>
+    </header>
+
+    <nav class="rail" id="rail"></nav>
+
+    <main>
+      <section id="stage"></section>
+      <aside>
+        <div class="tag" id="nTag"></div>
+        <h2 id="nTitle"></h2>
+        <div class="body" id="nBody"></div>
+        <div style="flex: 1"></div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="counter" id="counter"></div>
+      <div class="nav">
+        <button class="nav-btn" id="prev">← Prev</button>
+        <button class="nav-btn" id="next">Next →</button>
+      </div>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

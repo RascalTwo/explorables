@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Federated credentials vs client secrets — what's actually on the wire</title>
+    <meta name="viz:uid" content="v-649e38bb4c66" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:title" content="Federated vs client secret" />
+    <meta
+      name="viz:description"
+      content="Wire-level walkthrough of GitHub Actions → Entra → Blob under OIDC federation vs a client secret, with per-claim provenance and the terraform command lifecycle."
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+      }
+      .wrap {
+        max-width: 1640px;
+        margin: 0 auto;
+        padding: 0 22px 90px;
+      }
+
+      .viz-header {
+        padding: 26px 0 6px;
+      }
+      .viz-header h1 {
+        margin: 0 0 6px;
+        font-size: 26px;
+        letter-spacing: -0.02em;
+      }
+      .viz-header .sub {
+        max-width: 1000px;
+        line-height: 1.55;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 12px 0 18px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 18px;
+      }
+      .btn {
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font: 500 12px/1 var(--sans);
+        padding: 7px 11px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .btn.on {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #08111f;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      kbd {
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-bottom-width: 2px;
+        border-radius: 4px;
+        padding: 1px 5px;
+        font: 600 11px var(--mono);
+        color: var(--text);
+      }
+
+      h2.sect {
+        margin: 38px 0 3px;
+        font-size: 17px;
+        letter-spacing: -0.015em;
+      }
+      p.sect {
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.6;
+        margin: 0 0 16px;
+        max-width: 1000px;
+      }
+
+      .stage {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(380px, 440px);
+        gap: 18px;
+        align-items: start;
+      }
+      @media (max-width: 1580px) {
+        .stage {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+        .detail {
+          grid-column: 1/-1;
+          position: static !important;
+        }
+      }
+      @media (max-width: 860px) {
+        .stage {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .lane-panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 12px 8px;
+      }
+      .lane-panel h3 {
+        margin: 0 0 2px;
+        font-size: 14px;
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .lane-panel .tag {
+        font: 600 9px/1 var(--mono);
+        letter-spacing: 0.09em;
+        padding: 3px 6px;
+        border-radius: 4px;
+      }
+      .tag.good {
+        background: color-mix(in srgb, var(--good) 18%, transparent);
+        color: var(--good);
+        border: 1px solid color-mix(in srgb, var(--good) 40%, transparent);
+      }
+      .tag.bad {
+        background: color-mix(in srgb, var(--danger) 18%, transparent);
+        color: var(--danger);
+        border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+      }
+      .lane-panel .blurb {
+        color: var(--muted);
+        font-size: 11.5px;
+        line-height: 1.5;
+        margin: 0 0 8px;
+        min-height: 34px;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .lifeline {
+        stroke: var(--border);
+        stroke-width: 1;
+        stroke-dasharray: 3 4;
+      }
+      .step {
+        cursor: pointer;
+      }
+      .step .hit {
+        fill: transparent;
+      }
+      .step .wire {
+        stroke-width: 1.6;
+        fill: none;
+        transition: stroke-width 0.12s;
+      }
+      .step:hover .wire {
+        stroke-width: 3;
+      }
+      .step.sel .wire {
+        stroke-width: 3.2;
+      }
+      .step .lbl {
+        font: 500 10.5px/1.32 var(--sans);
+        color: var(--muted);
+        transition: color 0.12s;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-align: center;
+      }
+      .step:hover .lbl,
+      .step.sel .lbl {
+        color: var(--text);
+      }
+      /* .55 not .3 — this is a comparison viz, both lanes must stay readable at rest */
+      .step.dim {
+        opacity: 0.55;
+      }
+      .step.sel .num circle {
+        stroke-width: 2.4;
+      }
+      .num text {
+        font: 700 9px var(--mono);
+        fill: var(--bg);
+      }
+
+      .band {
+        fill: color-mix(in srgb, var(--danger) 7%, transparent);
+      }
+      .band-same {
+        fill: color-mix(in srgb, var(--accent) 4%, transparent);
+      }
+      .band-lbl {
+        font: 700 9px var(--mono);
+        letter-spacing: 0.08em;
+      }
+
+      .lane-head {
+        font: 600 10.5px/1.25 var(--sans);
+        color: var(--text);
+      }
+      .lane-head .h {
+        display: block;
+      }
+      .lane-head .s {
+        display: block;
+        font: 400 8.5px/1.3 var(--mono);
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* ── provenance ─────────────────────────────────────────────────── */
+      .prov {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font: 700 8.5px/1 var(--mono);
+        letter-spacing: 0.06em;
+        padding: 3px 6px;
+        border-radius: 3px;
+        white-space: nowrap;
+      }
+      .prov.doc {
+        background: color-mix(in srgb, var(--good) 16%, transparent);
+        color: var(--good);
+      }
+      .prov.src {
+        background: color-mix(in srgb, var(--c5) 20%, transparent);
+        color: var(--c5);
+      }
+      .prov.inf {
+        background: color-mix(in srgb, var(--warn) 16%, transparent);
+        color: var(--warn);
+      }
+      .prov.ill {
+        background: var(--panel-2);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .provbar {
+        padding: 9px 14px;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel-2);
+      }
+      .provbar .pnote {
+        margin-top: 6px;
+        font-size: 11px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .provbar .pnote a {
+        color: var(--accent);
+      }
+      .reflinks {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .reflinks a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        font: 500 10.5px/1.35 var(--sans);
+        color: var(--accent);
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 5px 7px;
+      }
+      .reflinks a:hover {
+        border-color: var(--accent);
+      }
+      .reflinks.nocite {
+        font: 400 10.5px/1.45 var(--sans);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      /* ── detail ─────────────────────────────────────────────────────── */
+      .detail {
+        position: sticky;
+        top: 14px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .detail .dh {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      .detail .dh .eyebrow {
+        font: 700 9px var(--mono);
+        letter-spacing: 0.1em;
+        color: var(--muted);
+      }
+      .detail .dh h4 {
+        margin: 5px 0 0;
+        font-size: 14px;
+        letter-spacing: -0.01em;
+      }
+      .detail .dh .when {
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 3px;
+      }
+      pre.wirebox {
+        margin: 0;
+        padding: 13px 14px;
+        background: #0a0e14;
+        overflow-x: auto;
+        font: 500 10.9px/1.62 var(--mono);
+        color: #c9d6e4;
+        max-height: 380px;
+        overflow-y: auto;
+        border-bottom: 1px solid var(--border);
+      }
+      pre.wirebox .k {
+        color: var(--accent);
+      }
+      pre.wirebox .c {
+        color: #5d6b7a;
+      }
+      pre.wirebox .s {
+        color: var(--good);
+      }
+      pre.wirebox .r {
+        color: var(--danger);
+      }
+      pre.wirebox .w {
+        color: var(--warn);
+      }
+      .note {
+        padding: 12px 14px;
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+      }
+      .note strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .blast {
+        padding: 12px 14px;
+      }
+      .blast .bt {
+        font: 700 9px var(--mono);
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .blast.none {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .brow {
+        display: flex;
+        gap: 9px;
+        font-size: 11.5px;
+        line-height: 1.5;
+        padding: 5px 0;
+        border-top: 1px solid var(--border);
+      }
+      .brow:first-of-type {
+        border-top: 0;
+      }
+      .brow .bk {
+        color: var(--muted);
+        flex: 0 0 74px;
+      }
+      .brow .bv {
+        color: var(--text);
+      }
+      .sev {
+        display: inline-block;
+        font: 700 9px/1 var(--mono);
+        letter-spacing: 0.07em;
+        padding: 3px 6px;
+        border-radius: 4px;
+      }
+      .sev.lo {
+        background: color-mix(in srgb, var(--good) 18%, transparent);
+        color: var(--good);
+      }
+      .sev.md {
+        background: color-mix(in srgb, var(--warn) 18%, transparent);
+        color: var(--warn);
+      }
+      .sev.hi {
+        background: color-mix(in srgb, var(--danger) 20%, transparent);
+        color: var(--danger);
+      }
+
+      /* ── lifecycle ──────────────────────────────────────────────────── */
+      .procs {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      @media (max-width: 1100px) {
+        .procs {
+          grid-template-columns: 1fr;
+        }
+      }
+      .proc {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .proc .ph {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel-2);
+      }
+      .proc .ph code {
+        font: 700 12px var(--mono);
+        color: var(--text);
+      }
+      .proc .ph .pmeta {
+        font-size: 10.5px;
+        color: var(--muted);
+        margin-top: 3px;
+        line-height: 1.45;
+      }
+      .calls {
+        list-style: none;
+        margin: 0;
+        padding: 8px 0;
+      }
+      .calls li {
+        display: grid;
+        grid-template-columns: 16px 1fr;
+        gap: 8px;
+        padding: 5px 12px;
+        font: 500 10.6px/1.45 var(--mono);
+        color: #c9d6e4;
+        align-items: start;
+      }
+      .calls li .d {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        margin-top: 5px;
+      }
+      .calls li em {
+        display: block;
+        font: 400 10px/1.45 var(--sans);
+        color: var(--muted);
+        font-style: normal;
+        margin-top: 2px;
+      }
+      .calls li.ann {
+        grid-template-columns: 1fr;
+        padding: 6px 12px 6px 36px;
+        font: 400 10.5px/1.5 var(--sans);
+        color: var(--muted);
+      }
+      .calls li.ann strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .pfoot {
+        padding: 9px 12px;
+        border-top: 1px solid var(--border);
+        font: 400 10.5px/1.5 var(--sans);
+        color: var(--muted);
+      }
+      .keylegend {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin: 0 0 14px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .keylegend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .keylegend i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      /* ── ttl chart ──────────────────────────────────────────────────── */
+      .two {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+      @media (max-width: 1100px) {
+        .two {
+          grid-template-columns: 1fr;
+        }
+      }
+      .ttl-row {
+        display: grid;
+        grid-template-columns: 172px 1fr;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 9px;
+      }
+      .ttl-name {
+        font: 500 11px var(--sans);
+        color: var(--text);
+        text-align: right;
+      }
+      .ttl-name em {
+        display: block;
+        font: 400 9.5px var(--mono);
+        color: var(--muted);
+        font-style: normal;
+      }
+      .ttl-track {
+        position: relative;
+        height: 22px;
+        background: var(--panel-2);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .ttl-fill {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-radius: 4px 0 0 4px;
+      }
+      .ttl-band {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+      .ttl-val {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font: 700 10px var(--mono);
+        white-space: nowrap;
+        color: var(--muted);
+      }
+      /* the track clips overflow, so a label past ~65% has to sit INSIDE the bar */
+      .ttl-val.inside {
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+      }
+      .ttl-tick {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--border);
+        opacity: 0.5;
+      }
+      .ttl-axis {
+        position: relative;
+        height: 13px;
+        margin: 7px 0 0 182px;
+      }
+      .ttl-axis span {
+        position: absolute;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        font: 500 9px var(--mono);
+        color: var(--muted);
+      }
+
+      /* ── sources ────────────────────────────────────────────────────── */
+      .src {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 11px;
+        margin-bottom: 7px;
+        background: var(--panel-2);
+      }
+      .src .sh {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 3px;
+        flex-wrap: wrap;
+      }
+      .src a {
+        color: var(--accent);
+        font: 600 11.5px var(--sans);
+        text-decoration: none;
+      }
+      .src a:hover {
+        text-decoration: underline;
+      }
+      .src p {
+        margin: 0;
+        font-size: 11px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .src code {
+        font: 600 10px var(--mono);
+        color: var(--text);
+      }
+      .unknown {
+        border-left: 2px solid var(--danger);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="viz-header">
+        <h1>Federated credentials vs client secrets — what's actually on the wire</h1>
+        <div class="sub">
+          A generic walkthrough of CI → identity provider → cloud storage, under OIDC federation and
+          under a client secret. Both paths end at the same object with the same authorization
+          check; they diverge <em>only</em> in the shaded band up top — how the job comes to hold
+          something the token endpoint will accept.
+          <strong>Every claim carries a provenance chip</strong>, because a page that says "byte by
+          byte" has no business guessing at bytes.
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button class="btn" id="play">▶ Play both</button>
+        <button class="btn" id="reset">Reset</button>
+        <span class="hint"
+          >Click any step · <kbd>←</kbd> <kbd>→</kbd> step · <kbd>↑</kbd> <kbd>↓</kbd> switch
+          lane</span
+        >
+        <span style="flex: 1"></span>
+        <span class="prov doc">DOCUMENTED</span>
+        <span class="prov src">SOURCE-ONLY</span>
+        <span class="prov inf">INFERRED</span>
+        <span class="prov ill">ILLUSTRATIVE</span>
+      </div>
+
+      <div class="stage">
+        <div class="lane-panel" id="p-fed">
+          <h3>Federated (OIDC / workload identity) <span class="tag good">KEYLESS</span></h3>
+          <p class="blurb">
+            No secret exists anywhere. The CI provider signs a fresh, single-purpose assertion per
+            run; the token endpoint verifies it against a public key it fetched earlier.
+          </p>
+          <svg
+            id="svg-fed"
+            viewBox="0 0 540 670"
+            role="img"
+            aria-label="Federated OIDC sequence"
+          ></svg>
+        </div>
+
+        <div class="lane-panel" id="p-sec">
+          <h3>Client ID + secret <span class="tag bad">BEARER</span></h3>
+          <p class="blurb">
+            A long-lived password sits at rest in the CI secret store, gets injected into the job
+            env, and is posted to the token endpoint. Possession is identity.
+          </p>
+          <svg
+            id="svg-sec"
+            viewBox="0 0 540 670"
+            role="img"
+            aria-label="Client secret sequence"
+          ></svg>
+        </div>
+
+        <div class="detail" id="detail"></div>
+      </div>
+
+      <h2 class="sect">Who calls the token endpoint, and when?</h2>
+      <p class="sect">
+        Not <code>azure/login</code>, and not once per job. The
+        <strong>backend is compiled into the terraform binary</strong> and resolves credentials in
+        its own <code>Configure()</code> before any provider process launches — so
+        <em>terraform itself</em> does the OIDC fetch and the token exchange. And because every
+        <code>terraform</code> invocation is a separate OS process whose token cache is memory-only,
+        <strong>each command re-authenticates from scratch</strong>. Three commands means three
+        GitHub JWTs and three token exchanges. Colour = who's being talked to.
+      </p>
+      <div class="keylegend">
+        <span><i style="background: var(--good)"></i> CI OIDC endpoint</span>
+        <span><i style="background: var(--c4)"></i> Entra token endpoint</span>
+        <span><i style="background: var(--accent)"></i> Blob data plane</span>
+        <span
+          ><i style="background: var(--muted)"></i> other providers — separate auth entirely</span
+        >
+      </div>
+      <div class="procs" id="procs"></div>
+
+      <h2 class="sect">How long a stolen artifact stays useful</h2>
+      <div class="two">
+        <div class="panel">
+          <p class="sect" style="margin-bottom: 14px">
+            Log scale, spanning five orders of magnitude — that spread is the entire argument. Solid
+            = the floor; hatched = the documented range or the uncertainty. The federated artifacts
+            expire on their own; the secret expires when a human remembers.
+          </p>
+          <div id="ttl"></div>
+          <div class="ttl-axis" id="ttlAxis"></div>
+        </div>
+        <div class="panel">
+          <h3 style="margin: 0 0 3px; font-size: 14px">Sources — and what nobody documents</h3>
+          <p class="sect" style="margin-bottom: 14px">
+            Everything above is traceable to one of these, or explicitly marked unknown.
+          </p>
+          <div id="sources"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

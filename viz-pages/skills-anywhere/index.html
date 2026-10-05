@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>You have a skill. Use it in any AI.</title>
+    <meta name="viz:uid" content="v-7e0a3186d505" />
+    <meta name="viz:posture" content="local" />
+    <meta name="viz:listed" content="unlisted" />
+    <meta name="viz:title" content="You have a skill. Use it in any AI." />
+    <meta
+      name="viz:description"
+      content="A vendor-neutral guide to Agent Skills (SKILL.md folders) across Claude, ChatGPT, Codex, Gemini, Antigravity, Copilot and Cursor. Pick a role — using a skill, or making one — and your AI, and get exactly the steps that apply."
+    />
+    <meta
+      name="viz:tags"
+      content="ai-agents,skills,claude-code,codex,copilot,cursor,gemini,chatgpt,beginners"
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      :root {
+        --tone: var(--accent);
+      }
+      body {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 28px 28px 80px;
+      }
+      code {
+        font: 0.92em var(--mono);
+        color: var(--text);
+        background: var(--panel-2);
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+
+      /* ---- header + role switch ---- */
+      .eyebrow {
+        font: 600 10.5px/1 var(--mono);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--faint);
+      }
+      h1 {
+        font-size: 34px;
+        letter-spacing: -0.025em;
+        margin: 10px 0 8px;
+        line-height: 1.12;
+      }
+      .lede {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 74ch;
+        margin: 0 0 22px;
+      }
+      .lede b {
+        color: var(--text);
+      }
+
+      .rolebar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        backdrop-filter: blur(6px);
+        padding: 10px 0;
+        margin: 0 0 8px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .rolebar .q {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .roles {
+        display: inline-flex;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        overflow: hidden;
+      }
+      .roles button {
+        font: inherit;
+        font-size: 13.5px;
+        padding: 8px 16px;
+        background: none;
+        border: 0;
+        color: var(--muted);
+        cursor: pointer;
+        border-right: 1px solid var(--border);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .roles button:last-child {
+        border-right: 0;
+      }
+      .roles button:hover {
+        color: var(--text);
+        background: var(--panel);
+      }
+      .roles button.on {
+        background: color-mix(in srgb, var(--role) 16%, transparent);
+        color: var(--text);
+        box-shadow: inset 0 -2px 0 var(--role);
+      }
+      .roles .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--role);
+      }
+      [data-role="use"] {
+        --role: var(--c5);
+      }
+      [data-role="make"] {
+        --role: var(--c4);
+      }
+      [data-role="both"] {
+        --role: var(--accent);
+      }
+      .rolebar .hint {
+        font-size: 12px;
+        color: var(--faint);
+        margin-left: auto;
+      }
+
+      /* role-scoped visibility */
+      body.r-use .only-make {
+        display: none !important;
+      }
+      body.r-make .only-use {
+        display: none !important;
+      }
+
+      section {
+        padding: 34px 0 6px;
+      }
+      .sec-head {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+      .sec-n {
+        flex: 0 0 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font: 700 14px var(--mono);
+        color: var(--bg);
+        background: var(--tone);
+      }
+      .sec-head h2 {
+        margin: 2px 0 4px;
+        font-size: 22px;
+        letter-spacing: -0.015em;
+      }
+      .sec-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13.5px;
+        max-width: 80ch;
+        line-height: 1.55;
+      }
+      .sec-head p b {
+        color: var(--text);
+      }
+
+      /* ---- the map (matrix) ---- */
+      .map {
+        display: grid;
+        gap: 0;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--panel);
+      }
+      .mrow {
+        display: grid;
+        grid-template-columns: var(--cols);
+        align-items: center;
+        min-height: 46px;
+        border-top: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.12s;
+      }
+      .mrow:hover {
+        background: var(--panel-2);
+      }
+      .mrow.sel {
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+        box-shadow: inset 3px 0 0 var(--accent);
+      }
+      .mrow.dim {
+        opacity: 0.35;
+      }
+      .mhead {
+        cursor: default;
+        min-height: 0;
+        padding: 12px 0 10px;
+        border-top: 0;
+        align-items: end;
+        background: var(--bg);
+      }
+      .mhead:hover {
+        background: var(--bg);
+      }
+      .mfam {
+        cursor: default;
+        min-height: 0;
+        padding: 9px 16px 7px;
+        background: color-mix(in srgb, var(--bg) 55%, var(--panel));
+        font: 600 10.5px/1.3 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--faint);
+        display: block;
+      }
+      .mfam:hover {
+        background: color-mix(in srgb, var(--bg) 55%, var(--panel));
+      }
+      .mfam span {
+        text-transform: none;
+        letter-spacing: 0;
+        font-family: var(--sans);
+        font-weight: 400;
+        margin-left: 10px;
+        color: var(--muted);
+      }
+      .mc {
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12.5px;
+        min-width: 0;
+      }
+      .mc.name {
+        justify-content: flex-start;
+        padding-left: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+      }
+      .mc.name b {
+        font-size: 14px;
+      }
+      .mc.name i {
+        font-style: normal;
+        font-size: 11px;
+        line-height: 1.3;
+        color: var(--faint);
+      }
+      .mc.name {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+      .mh {
+        font: 600 10.5px/1.25 var(--mono);
+        color: var(--muted);
+        text-align: center;
+        padding: 0 6px;
+        overflow-wrap: anywhere;
+        min-width: 0;
+      }
+      .mh i {
+        display: block;
+        font: 400 10px/1.3 var(--sans);
+        color: var(--faint);
+        margin-top: 3px;
+      }
+      .mh.grp {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-bottom: 4px;
+      }
+      .route-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+      }
+      .route-dot.on {
+        background: var(--rc);
+        border-color: var(--rc);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--rc) 22%, transparent);
+      }
+      .route-own {
+        font: 11px var(--mono);
+        color: var(--c7);
+        color: color-mix(in srgb, var(--c4) 85%, var(--text));
+      }
+      .pill {
+        font-size: 11.5px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        white-space: nowrap;
+        color: var(--pc);
+        background: color-mix(in srgb, var(--pc) 14%, transparent);
+        border: 1px solid color-mix(in srgb, var(--pc) 35%, transparent);
+      }
+      .pill.disputed::after {
+        content: " ?";
+        font-weight: 700;
+      }
+      .sigil {
+        font: 600 13px var(--mono);
+        color: var(--text);
+      }
+      .strict {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-right: 10px;
+      }
+      .strict .bar {
+        height: 10px;
+        border-radius: 3px;
+        background: var(--c4);
+      }
+      .strict b {
+        font: 600 11px var(--mono);
+        color: var(--muted);
+      }
+      .map-foot {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin: 12px 2px 0;
+        font-size: 12px;
+        color: var(--faint);
+      }
+      .map-foot b {
+        color: var(--muted);
+      }
+      .callout {
+        margin: 16px 0 0;
+        padding: 12px 16px;
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--good);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--good) 6%, var(--panel));
+        font-size: 13.5px;
+        line-height: 1.6;
+      }
+      .callout b {
+        color: var(--text);
+      }
+      .callout.make {
+        border-left-color: var(--c4);
+        background: color-mix(in srgb, var(--c4) 6%, var(--panel));
+      }
+
+      /* ---- install tabs (the self-portrait's pattern) ---- */
+      .inst-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0 0 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .inst-tab {
+        flex: 1 1 0;
+        min-width: 104px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        text-align: left;
+        font: inherit;
+        transition:
+          background 0.15s,
+          border-color 0.15s,
+          color 0.15s;
+      }
+      .inst-tab:hover {
+        border-color: var(--accent);
+        color: var(--text);
+      }
+      .inst-tab.on {
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+        border-color: var(--accent);
+        color: var(--text);
+      }
+      .inst-tab b {
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .inst-tab i {
+        font-style: normal;
+        font-size: 0.72rem;
+        opacity: 0.75;
+      }
+      .inst-tab .fam {
+        font: 600 9px/1 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.6;
+        margin-bottom: 2px;
+      }
+
+      .facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 16px;
+      }
+      .fact {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--panel);
+        min-width: 150px;
+      }
+      .fact label {
+        font: 600 9.5px/1 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--faint);
+      }
+      .fact span {
+        font-size: 13px;
+      }
+      .fact small {
+        font-size: 11px;
+        color: var(--faint);
+        max-width: 34ch;
+        line-height: 1.4;
+      }
+
+      .halves {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      body.r-use .halves,
+      body.r-make .halves {
+        grid-template-columns: 1fr;
+      }
+      @media (max-width: 900px) {
+        .halves {
+          grid-template-columns: 1fr;
+        }
+      }
+      .half {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px 18px;
+        background: var(--panel);
+        border-top: 3px solid var(--role);
+      }
+      .half h3 {
+        margin: 0 0 4px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .half h3 .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--role);
+      }
+      .half .lead {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.55;
+      }
+      .half .lead b {
+        color: var(--text);
+      }
+      ol.steps {
+        list-style: none;
+        counter-reset: s;
+        padding: 0;
+        margin: 0 0 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      ol.steps li {
+        counter-increment: s;
+        position: relative;
+        padding-left: 34px;
+        font-size: 13.5px;
+        line-height: 1.55;
+      }
+      ol.steps li::before {
+        content: counter(s);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font: 700 11px var(--mono);
+        background: color-mix(in srgb, var(--role) 22%, transparent);
+        color: var(--role);
+      }
+      ul.plain {
+        padding-left: 18px;
+        margin: 10px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      ul.plain li {
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+      ul.plain li b {
+        color: var(--text);
+      }
+      .sub-h {
+        font: 600 10px/1 var(--mono);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--faint);
+        margin: 16px 0 6px;
+      }
+      .note {
+        font-size: 12.5px;
+        color: var(--muted);
+        line-height: 1.55;
+        margin: 8px 0 0;
+      }
+      .bites {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .bite {
+        font-size: 12.5px;
+        line-height: 1.45;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--c4) 8%, transparent);
+        border-left: 2px solid var(--c4);
+        cursor: pointer;
+      }
+      .bite:hover {
+        background: color-mix(in srgb, var(--c4) 16%, transparent);
+      }
+
+      .cmd {
+        position: relative;
+        margin-top: 10px;
+      }
+      .cmd label {
+        display: block;
+        font: 600 11px var(--mono);
+        color: var(--muted);
+        margin-bottom: 5px;
+      }
+      .cmd label span {
+        font-weight: 400;
+        color: var(--faint);
+      }
+      .cmd pre {
+        margin: 0;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 10px 70px 10px 12px;
+        overflow-x: auto;
+      }
+      .cmd code {
+        background: none;
+        padding: 0;
+        color: var(--accent);
+        font-size: 12.5px;
+      }
+      .copy {
+        position: absolute;
+        right: 7px;
+        bottom: 7px;
+        font: 600 10.5px var(--mono);
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 5px;
+        padding: 3px 8px;
+        cursor: pointer;
+      }
+      .copy.ok {
+        color: var(--good);
+        border-color: var(--good);
+      }
+      .srcs {
+        margin: 14px 0 0;
+        font-size: 11.5px;
+        color: var(--faint);
+      }
+      .srcs a {
+        color: var(--muted);
+      }
+
+      /* ---- anatomy ---- */
+      .anat {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .anat {
+          grid-template-columns: 1fr;
+        }
+      }
+      .filebox {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .filebar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel);
+        font: 12px var(--mono);
+        color: var(--muted);
+      }
+      .filebar .sp {
+        flex: 1;
+      }
+      .toggle {
+        display: inline-flex;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        overflow: hidden;
+      }
+      .toggle button {
+        font: 600 11px var(--mono);
+        padding: 5px 10px;
+        background: none;
+        border: 0;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .toggle button.on {
+        background: var(--panel-2);
+        color: var(--text);
+      }
+      .toggle button.on.bad {
+        color: var(--danger);
+      }
+      .toggle button.on.good {
+        color: var(--good);
+      }
+      .lines {
+        padding: 8px 0;
+        font: 12.5px/1.65 var(--mono);
+      }
+      .ln {
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        padding: 0 12px 0 0;
+        border-left: 3px solid transparent;
+        cursor: default;
+      }
+      .ln .no {
+        color: var(--faint);
+        text-align: right;
+        padding-right: 12px;
+        user-select: none;
+        opacity: 0.6;
+      }
+      .ln .tx {
+        white-space: pre-wrap;
+        word-break: break-word;
+        color: var(--muted);
+      }
+      .ln.k-ok,
+      .ln.k-break,
+      .ln.k-host,
+      .ln.k-fixed {
+        cursor: pointer;
+      }
+      .ln.k-ok .tx {
+        color: var(--text);
+      }
+      .ln.k-ok:hover,
+      .ln.k-ok.sel {
+        border-left-color: var(--good);
+        background: color-mix(in srgb, var(--good) 8%, transparent);
+      }
+      .ln.k-break .tx {
+        color: color-mix(in srgb, var(--danger) 80%, var(--text));
+        text-decoration: underline wavy color-mix(in srgb, var(--danger) 60%, transparent);
+        text-underline-offset: 4px;
+      }
+      .ln.k-break {
+        border-left-color: color-mix(in srgb, var(--danger) 50%, transparent);
+      }
+      .ln.k-break:hover,
+      .ln.k-break.sel {
+        background: color-mix(in srgb, var(--danger) 10%, transparent);
+        border-left-color: var(--danger);
+      }
+      .ln.k-fixed .tx {
+        color: var(--good);
+      }
+      .ln.k-fixed {
+        border-left-color: color-mix(in srgb, var(--good) 50%, transparent);
+      }
+      .ln.k-fixed:hover,
+      .ln.k-fixed.sel {
+        background: color-mix(in srgb, var(--good) 10%, transparent);
+        border-left-color: var(--good);
+      }
+      .ln.k-host .tx {
+        color: color-mix(in srgb, var(--c4) 80%, var(--text));
+      }
+      .ln.k-host:hover,
+      .ln.k-host.sel {
+        border-left-color: var(--c4);
+        background: color-mix(in srgb, var(--c4) 10%, transparent);
+      }
+      .ln.gone {
+        display: none;
+      }
+      .ln.k-frame .tx {
+        color: var(--faint);
+      }
+      .side {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .explain {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        background: var(--panel);
+        min-height: 128px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .explain .k {
+        font: 600 10px/1 var(--mono);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .explain .k.ok {
+        color: var(--good);
+      }
+      .explain .k.break {
+        color: var(--danger);
+      }
+      .explain .k.host {
+        color: var(--c4);
+      }
+      .explain .k.fixed {
+        color: var(--good);
+      }
+      .explain .fixto {
+        display: block;
+        margin-top: 8px;
+        font: 12px var(--mono);
+        color: var(--good);
+      }
+      .score {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--panel);
+      }
+      .score .big {
+        font: 700 26px var(--mono);
+      }
+      .score .lbl {
+        font-size: 12.5px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .pips {
+        display: flex;
+        gap: 3px;
+        margin-top: 4px;
+      }
+      .pip {
+        width: 14px;
+        height: 8px;
+        border-radius: 2px;
+        background: var(--good);
+        transition: background 0.25s;
+      }
+      .pip.x {
+        background: var(--danger);
+      }
+      .tree {
+        font: 12.5px/1.8 var(--mono);
+        padding: 8px 0;
+      }
+      .tree .ln {
+        grid-template-columns: 12px 1fr;
+      }
+
+      /* ---- checklist grid ---- */
+      .cl {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--panel);
+        margin-top: 18px;
+      }
+      .clrow {
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr) repeat(8, 36px) 12px;
+        align-items: center;
+        border-top: 1px solid var(--border);
+        padding: 9px 0;
+      }
+      .clrow.hd {
+        border-top: 0;
+        padding: 10px 0 8px;
+        background: var(--bg);
+        align-items: end;
+      }
+      .clrow .ck {
+        align-self: start;
+        margin-top: 3px;
+        justify-self: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        border: 2px solid var(--border);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        color: var(--bg);
+      }
+      .clrow.done .ck {
+        background: var(--good);
+        border-color: var(--good);
+      }
+      .clrow.done .t {
+        opacity: 0.55;
+      }
+      .clrow .t {
+        font-size: 13px;
+        line-height: 1.5;
+        padding-right: 12px;
+      }
+      .clrow .t small {
+        display: block;
+        color: var(--faint);
+        font-size: 12px;
+        margin-top: 2px;
+      }
+      .clrow.flash {
+        background: color-mix(in srgb, var(--c4) 12%, transparent);
+      }
+      .cell {
+        justify-self: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 5px;
+        background: var(--panel-2);
+      }
+      .cell.hit {
+        background: color-mix(in srgb, var(--c4) 70%, transparent);
+      }
+      .clrow.done .cell.hit {
+        background: color-mix(in srgb, var(--good) 55%, transparent);
+      }
+      .colh {
+        justify-self: center;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font: 600 10.5px var(--mono);
+        color: var(--muted);
+        height: 92px;
+        text-align: left;
+        cursor: pointer;
+      }
+      .colh:hover {
+        color: var(--text);
+      }
+      .cl-foot {
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr) repeat(8, 36px) 12px;
+        align-items: center;
+        padding: 10px 0;
+        border-top: 1px solid var(--border);
+        background: var(--bg);
+      }
+      .cl-foot .t {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .cl-foot .n {
+        justify-self: center;
+        font: 700 12px var(--mono);
+      }
+
+      .x-link {
+        color: var(--accent);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .asof {
+        margin-top: 40px;
+        font-size: 12px;
+        color: var(--faint);
+        border-top: 1px solid var(--border);
+        padding-top: 14px;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body class="r-both">
+    <div class="eyebrow">Agent Skills · a field guide · checked <span id="asof"></span></div>
+    <h1>You have a skill. Here’s how to use it in any AI.</h1>
+    <p class="lede">
+      A <b>skill</b> is a folder with a <code>SKILL.md</code> file in it: instructions, plus
+      optional scripts and reference files, that teach an AI how to do one job. Since early 2026
+      nearly every major AI reads the same format — but each one wants the folder in a
+      <b>different place</b>, and a few are <b>strict about what’s inside</b>. This page covers both
+      sides.
+    </p>
+
+    <div class="rolebar">
+      <span class="q">I’m here to…</span>
+      <div class="roles" role="tablist" id="roles">
+        <button data-role="use" data-viz-id="role-use" data-label="role: use a skill">
+          <span class="dot"></span>use a skill
+        </button>
+        <button data-role="make" data-viz-id="role-make" data-label="role: make a skill">
+          <span class="dot"></span>make a skill work everywhere
+        </button>
+        <button data-role="both" data-viz-id="role-both" data-label="role: both">
+          <span class="dot"></span>see both
+        </button>
+      </div>
+      <span class="hint" id="rolehint"></span>
+    </div>
+
+    <section id="s-map">
+      <div class="sec-head">
+        <div class="sec-n">1</div>
+        <div>
+          <h2>The map: eight AIs, four ways in</h2>
+          <p>
+            Each row is an AI, grouped into <b>coding agents</b> and <b>chat apps</b>. A filled dot
+            means that route works.
+            <span class="only-make"
+              >The purple bar counts how many of the portability rules in section 3 actually bite on
+              that AI.</span
+            >
+            <b>Click a row</b> to open its guide below.
+          </p>
+        </div>
+      </div>
+      <div class="map" id="map"></div>
+      <div class="map-foot" id="mapfoot"></div>
+      <div class="callout only-use" id="shared-callout"></div>
+      <div class="callout make only-make" id="strict-callout"></div>
+    </section>
+
+    <section id="s-tabs">
+      <div class="sec-head">
+        <div class="sec-n">2</div>
+        <div>
+          <h2>Your AI, step by step</h2>
+          <p>
+            <span class="only-use">What to do with the folder you have.</span
+            ><span class="only-make"> What your skill has to get right to load there.</span>
+          </p>
+        </div>
+      </div>
+      <div id="tabs"></div>
+    </section>
+
+    <section id="s-port" class="only-make">
+      <div class="sec-head">
+        <div class="sec-n">3</div>
+        <div>
+          <h2>Making one skill that works everywhere</h2>
+          <p>
+            A typical skill written in Claude Code, with its problems underlined.
+            <b>Click any line</b> to see what it does on other AIs, then press
+            <b>make it portable</b> to see the fixed version. Below it: the full checklist, and
+            which AIs each rule protects you on.
+          </p>
+        </div>
+      </div>
+      <div class="anat" id="anat"></div>
+      <div class="cl" id="checklist"></div>
+    </section>
+
+    <section id="s-other-use" class="only-use">
+      <div class="sec-head">
+        <div class="sec-n">3</div>
+        <div>
+          <h2>Installing for several AIs at once</h2>
+          <p>If you use more than one of these, you don’t need eight copies.</p>
+        </div>
+      </div>
+      <div id="multi"></div>
+    </section>
+
+    <div class="asof" id="asof-foot"></div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

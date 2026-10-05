@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Props · State · Context — the basketball cut</title>
+    <meta name="viz:uid" content="v-d6f65a43c293" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:tag" content="React" />
+    <meta name="viz:title" content="Props · State · Context (basketball)" />
+    <meta
+      name="viz:description"
+      content="Where React data lives and who can see it, explained for basketball nerds."
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      body {
+        max-width: 1520px;
+        margin: 0 auto;
+        padding: 12px 14px 20px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        gap: 22px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---- narrative ---- */
+      .narr .tag {
+        display: inline-block;
+        font: 600 11px/1 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 8px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+      }
+      .narr[data-c="props"] .tag {
+        color: var(--accent);
+        border-color: #2b4f7e;
+      }
+      .narr[data-c="state"] .tag {
+        color: var(--good);
+        border-color: #245c32;
+      }
+      .narr[data-c="context"] .tag {
+        color: var(--c4);
+        border-color: #4a3a6b;
+      }
+      .narr h2 {
+        margin: 0.1em 0 0.5em;
+        font-size: 21px;
+      }
+      .narr p {
+        color: var(--text);
+        line-height: 1.6;
+        margin: 0 0 14px;
+      }
+      .narr b.hl {
+        color: var(--text);
+      }
+      .narr[data-c="props"] b.hl {
+        color: var(--accent);
+      }
+      .narr[data-c="state"] b.hl {
+        color: var(--good);
+      }
+      .narr[data-c="context"] b.hl {
+        color: var(--c4);
+      }
+      pre.code {
+        background: #0a0e14;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        overflow-x: auto;
+        font: 13px/1.55 var(--mono);
+        color: #c9d4e3;
+        margin: 0 0 16px;
+        white-space: pre;
+        tab-size: 2;
+      }
+      pre.code .k {
+        color: #ff7b72;
+      } /* keyword */
+      pre.code .f {
+        color: #d2a8ff;
+      } /* function/component */
+      pre.code .s {
+        color: #a5d6ff;
+      } /* string/value */
+      pre.code .c {
+        color: #6e7781;
+        font-style: italic;
+      } /* comment */
+
+      /* ---- nav ---- */
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 4px;
+      }
+      .nav button {
+        font: 600 13px var(--sans);
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        background: var(--panel-2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .nav button:hover:not(:disabled) {
+        border-color: var(--accent);
+      }
+      .nav button:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+      .dots {
+        display: flex;
+        gap: 7px;
+        margin-left: auto;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--border);
+        cursor: pointer;
+        border: none;
+        padding: 0;
+      }
+      .dot.on {
+        background: var(--accent);
+      }
+
+      /* ---- stage ---- */
+      .stage svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+
+      .box {
+        fill: var(--panel-2);
+        stroke: var(--border);
+        stroke-width: 1.5;
+        transition: 0.35s;
+        cursor: help;
+      }
+
+      .tip {
+        position: fixed;
+        z-index: 50;
+        max-width: 248px;
+        pointer-events: none;
+        display: none;
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 11px;
+        box-shadow: 0 8px 24px #000a;
+        font: 13px/1.45 var(--sans);
+        color: var(--text);
+      }
+      .tip b {
+        display: block;
+        margin-bottom: 3px;
+        font: 600 12px var(--mono);
+        color: var(--accent);
+      }
+      .node .vsvg-label {
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        pointer-events: none;
+      }
+      .node .vsvg-label .nm {
+        font: 600 14px var(--mono);
+      }
+      .node .vsvg-label .sb {
+        font: 11px var(--sans);
+        color: var(--muted);
+        margin-top: 3px;
+      }
+      .node.dim {
+        opacity: 0.28;
+      }
+      .node.on .box {
+        stroke-width: 2.5;
+      }
+      .n-props .box {
+        stroke: var(--accent);
+      }
+      .n-state .box {
+        stroke: var(--good);
+      }
+      .n-context .box {
+        stroke: var(--c4);
+      }
+      .node.pulse .box {
+        animation: pulse 0.55s ease;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          stroke-width: 2.5;
+        }
+        50% {
+          stroke-width: 7;
+          filter: drop-shadow(0 0 6px var(--good));
+        }
+      }
+
+      .edge {
+        stroke: var(--border);
+        stroke-width: 2;
+        fill: none;
+        transition: 0.35s;
+      }
+      .edge.hot {
+        stroke: var(--accent);
+        stroke-width: 3;
+      }
+
+      .ball {
+        fill: #e8a13c;
+        stroke: #7a4d12;
+        stroke-width: 1.5;
+      }
+      .fxtag {
+        font: 600 12px var(--mono);
+      }
+      .fxtag rect {
+        stroke-width: 1.5;
+        rx: 6;
+      }
+
+      .beam {
+        stroke: var(--c4);
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 6 6;
+        opacity: 0;
+        animation: beam 0.9s ease forwards;
+      }
+      @keyframes beam {
+        from {
+          opacity: 0;
+          stroke-dashoffset: 60;
+        }
+        to {
+          opacity: 0.85;
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .relay {
+        fill: var(--warn);
+      }
+      .ctxtok {
+        fill: var(--c4);
+      }
+
+      .cap {
+        color: var(--muted);
+        font: 13px var(--sans);
+        margin: 12px 2px 0;
+      }
+      .cap b {
+        color: var(--text);
+      }
+
+      /* ---- legend ---- */
+      .legend {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+        padding: 12px 14px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .legend .li {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .legend .sw {
+        width: 11px;
+        height: 11px;
+        border-radius: 3px;
+        transform: translateY(1px);
+      }
+      .legend .li b {
+        font-family: var(--mono);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viz-header">
+      <h1>Props · State · Context</h1>
+      <div class="sub">
+        One question — <em>where does this data live, and who can see it?</em> — explained for
+        basketball nerds.
+      </div>
+    </div>
+
+    <div class="layout">
+      <!-- NARRATIVE -->
+      <div class="panel narr" id="narr" data-c="setup">
+        <span class="tag" id="t-tag">The roster</span>
+        <h2 id="t-title"></h2>
+        <div id="t-body"></div>
+        <pre class="code" id="t-code"></pre>
+        <div class="nav">
+          <button id="prev">‹ Back</button>
+          <button id="next">Next ›</button>
+          <div class="dots" id="dots"></div>
+        </div>
+      </div>
+
+      <!-- STAGE -->
+      <div class="stage">
+        <svg id="court" viewBox="0 0 860 500" aria-label="component tree"></svg>
+        <div class="cap" id="cap"></div>
+        <div class="legend">
+          <div class="li">
+            <span class="sw" style="background: var(--accent)"></span><b>props</b> = the pass (down
+            only)
+          </div>
+          <div class="li">
+            <span class="sw" style="background: var(--good)"></span><b>state</b> = your own dribble
+          </div>
+          <div class="li">
+            <span class="sw" style="background: var(--c4)"></span><b>context</b> = the jumbotron
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tip" id="tip"></div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

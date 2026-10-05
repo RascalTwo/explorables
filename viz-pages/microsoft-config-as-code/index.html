@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Managing Microsoft as Code</title>
+    <meta name="viz:uid" content="v-9b90319ee455" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:title" content="Managing Microsoft as Code — pick your weapon" />
+    <meta
+      name="viz:description"
+      content="ClickOps vs Bicep vs Terraform vs idempotent PowerShell for provisioning the Microsoft cloud — plus where Ansible actually fits (Day-2 config, a different game)."
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+      }
+      .viz-header {
+        padding: 28px 24px 8px;
+      }
+      .viz-header h1 {
+        font-size: 26px;
+      }
+      .viz-header .sub {
+        font-size: 13.5px;
+        max-width: 780px;
+        line-height: 1.6;
+      }
+      section {
+        padding: 20px 24px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 10px;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 17px;
+        margin: 0 0 4px;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+      }
+      .lead {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0 0 16px;
+        max-width: 860px;
+        line-height: 1.6;
+      }
+
+      /* ---- Coverage matrix ---- */
+      .matrix {
+        display: grid;
+        grid-template-columns: 210px repeat(3, 1fr) 22px 1fr;
+        gap: 6px;
+        align-items: stretch;
+      }
+      .mx-spacer {
+        border: 0;
+        background: none;
+      }
+      .mx-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 4px 2px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .mx-group .tag {
+        font-family: var(--mono);
+        font-size: 10px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        letter-spacing: 0.04em;
+      }
+      .mx-group.g1 .tag {
+        color: var(--good);
+        border-color: color-mix(in srgb, var(--good) 45%, var(--border));
+      }
+      .mx-group.g2 .tag {
+        color: var(--c4);
+        border-color: color-mix(in srgb, var(--c4) 45%, var(--border));
+      }
+      .mx-colhead {
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+      }
+      .mx-colhead.day2 {
+        border-color: color-mix(in srgb, var(--c4) 40%, var(--border));
+      }
+      .mx-colhead .t {
+        font-weight: 650;
+        font-size: 13px;
+      }
+      .mx-colhead .d {
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 3px;
+        line-height: 1.4;
+      }
+      .mx-colhead .ex {
+        color: var(--muted);
+        font-size: 10.5px;
+        margin-top: 4px;
+        font-family: var(--mono);
+        opacity: 0.8;
+      }
+      .mx-rowhead {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+      }
+      .mx-rowhead .t {
+        font-weight: 650;
+        font-size: 13.5px;
+      }
+      .mx-rowhead .k {
+        color: var(--muted);
+        font-size: 10.5px;
+        margin-top: 3px;
+      }
+      .mx-rowhead.loser .t {
+        color: var(--muted);
+        text-decoration: line-through;
+        text-decoration-color: var(--danger);
+      }
+      .mx-rowhead.diff {
+        border-color: color-mix(in srgb, var(--c4) 40%, var(--border));
+      }
+      .mx-rowhead.diff .t::after {
+        content: " ≠";
+        color: var(--c4);
+      }
+      .cell {
+        border-radius: 8px;
+        padding: 12px 12px;
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-height: 74px;
+        transition:
+          transform 0.12s ease,
+          box-shadow 0.12s ease;
+      }
+      .cell.day2 {
+        position: relative;
+      }
+      .cell:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+      .cell .lvl {
+        font-weight: 650;
+        font-size: 12.5px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .cell .note {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .cell .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex: none;
+      }
+
+      .lvl-full {
+        background: color-mix(in srgb, var(--good) 16%, var(--panel));
+        border-color: color-mix(in srgb, var(--good) 45%, var(--border));
+      }
+      .lvl-full .dot,
+      .sw-full {
+        background: var(--good);
+      }
+      .lvl-partial {
+        background: color-mix(in srgb, var(--c5) 15%, var(--panel));
+        border-color: color-mix(in srgb, var(--c5) 45%, var(--border));
+      }
+      .lvl-partial .dot,
+      .sw-partial {
+        background: var(--c5);
+      }
+      .lvl-scripted {
+        background: color-mix(in srgb, var(--warn) 15%, var(--panel));
+        border-color: color-mix(in srgb, var(--warn) 45%, var(--border));
+      }
+      .lvl-scripted .dot,
+      .sw-scripted {
+        background: var(--warn);
+      }
+      .lvl-manual {
+        background: color-mix(in srgb, var(--muted) 10%, var(--panel));
+        border-color: var(--border);
+      }
+      .lvl-manual .dot,
+      .sw-manual {
+        background: var(--muted);
+      }
+      .lvl-none {
+        background: repeating-linear-gradient(
+          45deg,
+          var(--bg),
+          var(--bg) 6px,
+          var(--panel) 6px,
+          var(--panel) 12px
+        );
+        border-color: var(--border);
+      }
+      .lvl-none .lvl {
+        color: var(--danger);
+      }
+      .lvl-none .dot,
+      .sw-none {
+        background: var(--danger);
+      }
+      /* the one green cell nobody else has — give it a quiet glow */
+      .cell.day2.lvl-full {
+        box-shadow:
+          0 0 0 1px color-mix(in srgb, var(--good) 40%, transparent),
+          0 0 22px color-mix(in srgb, var(--good) 22%, transparent);
+      }
+
+      .legend {
+        margin-top: 16px;
+      }
+      .legend .swatch {
+        border-radius: 50%;
+      }
+      .reach-note {
+        margin-top: 14px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+        max-width: 900px;
+      }
+      .reach-note b {
+        color: var(--text);
+      }
+
+      /* ---- Decision flow ---- */
+      .flowgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 14px;
+      }
+      .flowcard {
+        position: relative;
+        padding: 16px;
+        padding-left: 18px;
+      }
+      .flowcard::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12px;
+        bottom: 12px;
+        width: 4px;
+        border-radius: 4px;
+        background: var(--accent);
+      }
+      .flowcard.f-azure::before {
+        background: var(--good);
+      }
+      .flowcard.f-entra::before {
+        background: var(--c5);
+      }
+      .flowcard.f-m365::before {
+        background: var(--warn);
+      }
+      .flowcard.f-guest::before {
+        background: var(--c4);
+      }
+      .flowcard.f-explore::before {
+        background: var(--muted);
+      }
+      .flowcard .q {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .flowcard .w {
+        font-size: 14px;
+        font-weight: 650;
+        margin: 5px 0 8px;
+      }
+      .flowcard .a {
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+      .flowcard .a b {
+        color: var(--text);
+      }
+      .flowcard .a .arw {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      /* ---- Tool cards ---- */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        gap: 16px;
+      }
+      .tool {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+      .tool.loser {
+        opacity: 0.82;
+      }
+      .tool.diff {
+        border-color: color-mix(in srgb, var(--c4) 40%, var(--border));
+      }
+      .tool .top {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+      .tool .rank {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .tool h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 680;
+        letter-spacing: -0.01em;
+      }
+      .tool.loser h3 {
+        text-decoration: line-through;
+        text-decoration-color: var(--danger);
+        color: var(--muted);
+      }
+      .tool .tag {
+        margin-left: auto;
+        font-size: 10.5px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .tool .verdict {
+        font-size: 12.5px;
+        line-height: 1.55;
+        color: var(--text);
+      }
+      .tool .verdict .em {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .tool.diff .verdict .em {
+        color: var(--c4);
+      }
+      .specs {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4px 12px;
+        font-size: 11.5px;
+      }
+      .specs dt {
+        color: var(--muted);
+      }
+      .specs dd {
+        margin: 0;
+        color: var(--text);
+      }
+      .pc {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        font-size: 11.5px;
+      }
+      .pc ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .pc .pros li::before {
+        content: "+ ";
+        color: var(--good);
+        font-weight: 700;
+      }
+      .pc .cons li::before {
+        content: "\2212 ";
+        color: var(--danger);
+        font-weight: 700;
+      }
+      .pc li {
+        line-height: 1.4;
+        color: var(--muted);
+      }
+      .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 3px 10px;
+        border-bottom-left-radius: 8px;
+      }
+      .badge.winner {
+        background: var(--good);
+        color: #04140a;
+      }
+      .badge.loser {
+        background: var(--danger);
+        color: #1a0505;
+      }
+      .badge.diff {
+        background: var(--c4);
+        color: #14061f;
+      }
+
+      .kicker {
+        margin-top: 8px;
+        padding: 16px 20px;
+        border-left: 3px solid var(--warn);
+        background: color-mix(in srgb, var(--warn) 7%, var(--panel));
+        border-radius: 0 10px 10px 0;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .kicker b {
+        color: var(--text);
+      }
+      .kicker + .kicker {
+        border-left-color: var(--c4);
+        background: color-mix(in srgb, var(--c4) 7%, var(--panel));
+      }
+      .kicker.field {
+        border-left-color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 8%, var(--panel));
+      }
+      .kicker .src {
+        display: block;
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--muted);
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viz-header">
+      <h1>Managing Microsoft as Code — pick your weapon</h1>
+      <div class="sub">
+        You want to stop clicking around the portal and manage your Microsoft cloud
+        <em>as code</em>. Here are your real options — and the punchline: no single
+        <em>declarative</em> tool reaches the whole surface (only imperative PowerShell does, by
+        hand-rolling the idempotency the others give free), so you pick by
+        <b>what you're trying to touch</b>, not by taste. (And one of them, Ansible, isn't even in
+        the same race.)
+      </div>
+    </div>
+
+    <section>
+      <p class="eyebrow">The map</p>
+      <h2>How far each tool reaches — across two different jobs</h2>
+      <p class="lead">
+        Two things get called "infrastructure as code," and they're different jobs.
+        <b style="color: var(--good)">Day 1 — provision</b> the cloud surface (the three left
+        columns; harder to reach as you go right).
+        <b style="color: var(--c4)">Day 2 — configure</b> what runs <em>inside</em> the machines
+        (the far-right column). Bicep is a fortress on Azure. Terraform wades into identity. Only
+        idempotent PowerShell reaches DLP/Purview. And
+        <b style="color: var(--c4)">Ansible owns a column the others can't touch at all</b> — but
+        it's a column that's empty if you run no VMs.
+      </p>
+      <div class="matrix" id="matrix"></div>
+      <div class="legend" id="legend"></div>
+      <div class="reach-note">
+        <b>Reading it:</b> the three Day-1 columns are one axis — the Microsoft cloud surface,
+        getting harder to reach left→right, until only hand-written PowerShell gets there. The Day-2
+        column is a <b>different axis entirely</b>: configuring the guest OS + apps inside VMs.
+        That's Ansible's home turf and the one bright-green cell no provisioning tool owns — and it
+        goes dark for everyone (Ansible included) the moment you're all-PaaS / serverless.
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">The routing rule</p>
+      <h2>"What am I trying to manage?" → the tool</h2>
+      <p class="lead">
+        Skip the religious war. The surface you're touching picks the tool for you.
+      </p>
+      <div class="flowgrid" id="flow"></div>
+    </section>
+
+    <section>
+      <p class="eyebrow">The contenders</p>
+      <h2>Pros, cons & the verdict</h2>
+      <p class="lead">
+        01–03 are the real fight over provisioning the Microsoft cloud, ranked by how much of the
+        "as code" dream they deliver. ClickOps is on the board to be the loser. Ansible sits apart
+        (<span style="color: var(--c4)">≠</span>) — it's not competing, it's playing a different
+        game.
+      </p>
+      <div class="cards" id="cards"></div>
+      <div class="kicker">
+        <b>The provisioning mental model:</b> declarative IaC (Bicep / Terraform) owns the ARM
+        control plane — the <em>resources</em>. Everything else — identity in Entra, data-plane
+        config in Purview / Exchange / Teams — is the escape hatch's job:
+        <b>idempotent PowerShell over Microsoft's admin modules</b>, each just a glorified
+        authenticated API call. Real shops run <em>both</em> side by side.
+      </div>
+      <div class="kicker">
+        <b>Where Ansible fits:</b> it's not a rival to any of those — it owns <b>Day 2</b>,
+        configuring the guest OS + apps <em>inside</em> your VMs (its real rivals are Puppet / Chef
+        / PowerShell DSC). It <em>can</em> provision Azure via the Microsoft-maintained
+        <code>azure.azcollection</code>, but that's redundant vs Terraform/Bicep. Its one
+        uncontested value is the in-VM layer —
+        <b
+          >essential if you run VM fleets, zero value if you're all Container Apps / Functions +
+          M365.</b
+        >
+      </div>
+      <div class="kicker field">
+        <b>Field note — capable ≠ approved.</b> The winning tool isn't always the most capable one,
+        it's the most capable <em>approved</em> one. In a real M365 Copilot rollout in a regulated
+        environment, Terraform (the best declarative option) was <b>org-banned</b> — and since
+        PowerShell already covers 100%, the shipped answer was <b>PowerShell-only</b>, hand-rolled
+        idempotency and all. Two caveats ride along: the Bicep/Terraform gaps are
+        <b>maturity, not architecture</b> — all three call the same Graph APIs, and the declarative
+        ceiling is already rising (a preview <code>msgraph</code> Terraform provider can now do
+        group licensing). The only <em>truly</em> un-automatable residue is small and portal-only:
+        Cloud Policy Service, some Copilot admin toggles.
+        <span class="src"
+          >Corroborated against a real-world 4-variant Copilot IaC build (bicep-max / terraform-max
+          / cascade-max / powershell-only).</span
+        >
+      </div>
+    </section>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
