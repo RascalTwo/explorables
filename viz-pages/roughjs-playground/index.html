@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viz:tag" content="rough.js" />
+    <meta name="viz:tag" content="hand-drawn" />
+    <meta name="viz:tag" content="sketchy" />
+    <meta name="viz:tag" content="dataviz" />
+    <meta name="viz:tag" content="editor" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Rough.js playground — every option, every primitive, and what a wobbly pen can say
+    </title>
+    <meta name="viz:uid" content="v-337350aeab39" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta
+      name="viz:tests"
+      content="smoke: a visual demo of a third-party library — any wrong output is visible on screen, nothing is computed for the reader to rely on"
+    />
+    <meta
+      name="viz:title"
+      content="Rough.js playground — every option, every primitive, and what a wobbly pen can say"
+    />
+    <meta
+      name="viz:description"
+      content="A hand-drawn test bench for Rough.js 4.6.6: live options lab on canvas + SVG, all primitives, fill styles, option ladders, a sketchy diagram, ops anatomy — plus twelve interactive scenes, including a trust dashboard and a diagram editor."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap"
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      /* Re-theme the kit to "Excalidraw paper" — tokens only. */
+      :root {
+        --bg: #faf8f2;
+        --panel: #fffefb;
+        --panel-2: #f1ede2;
+        --border: #d6cfbd;
+        --text: #1e1e1e;
+        --muted: #6b665a;
+        --accent: #6965db;
+        --good: #2f9e44;
+        --warn: #f08c00;
+        --danger: #e03131;
+        --c1: #1971c2;
+        --c2: #2f9e44;
+        --c3: #f08c00;
+        --c4: #6965db;
+        --c5: #0c8599;
+        --c6: #e03131;
+        --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+      }
+      body {
+        background: var(--bg);
+        background-image: radial-gradient(#d9d3c3 1px, transparent 1px);
+        background-size: 22px 22px;
+        color: var(--text);
+        margin: 0;
+      }
+      main,
+      .viz-header {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .viz-header h1 {
+        font-family: var(--hand);
+        font-size: 52px;
+        margin: 18px 0 0;
+      }
+      .viz-header .sub {
+        max-width: 900px;
+        font-size: 15px;
+      }
+      nav.top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+        align-items: center;
+        padding: 8px 20px;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+      }
+      nav.top a {
+        font-family: var(--hand);
+        font-size: 21px;
+        text-decoration: none;
+      }
+      nav.top .grow {
+        flex: 1;
+      }
+      nav.top button,
+      .btn {
+        font: inherit;
+        font-size: 13px;
+        background: var(--panel);
+        border: 1.5px solid var(--text);
+        border-radius: 6px 10px 7px 9px;
+        padding: 3px 10px;
+        cursor: pointer;
+        color: var(--text);
+      }
+      nav.top button:hover,
+      .btn:hover {
+        background: var(--panel-2);
+      }
+      nav.top button[aria-pressed="true"] {
+        background: var(--accent);
+        color: #fff;
+      }
+      nav.top button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      nav.top .seedread {
+        font-family: var(--mono);
+        min-width: 7ch;
+        display: inline-block;
+        text-align: center;
+      }
+      section {
+        margin: 34px 0 10px;
+        scroll-margin-top: 58px;
+      }
+      h2 {
+        font-family: var(--hand);
+        font-size: 38px;
+        margin: 0 0 2px;
+      }
+      h2 small {
+        font-size: 22px;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      p.lede {
+        margin: 0 0 12px;
+        color: var(--muted);
+        max-width: 900px;
+      }
+      code {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        background: var(--panel-2);
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+
+      /* Lab */
+      .lab {
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .lab {
+          grid-template-columns: 1fr;
+        }
+      }
+      #lab-controls {
+        max-height: 780px;
+        overflow: auto;
+        padding: 8px 10px;
+      }
+      #lab-controls details {
+        border-bottom: 1px dashed var(--border);
+        padding: 4px 0;
+      }
+      #lab-controls summary {
+        font-family: var(--hand);
+        font-size: 22px;
+        cursor: pointer;
+      }
+      .ctl {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0 8px;
+        margin: 6px 0 8px;
+        font-size: 13px;
+      }
+      .ctl label {
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+      .ctl output {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+        min-width: 5ch;
+        text-align: right;
+      }
+      .ctl input[type="range"] {
+        grid-column: 1 / -1;
+        width: 100%;
+        accent-color: var(--accent);
+      }
+      .ctl .hint {
+        grid-column: 1 / -1;
+        color: var(--muted);
+        font-size: 11.5px;
+        line-height: 1.3;
+      }
+      .ctl select {
+        grid-column: 1 / -1;
+        font: inherit;
+        padding: 2px 4px;
+      }
+      .ctl.row {
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+      }
+      .stagegrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      @media (max-width: 1100px) {
+        .stagegrid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .stage h3 {
+        font-family: var(--hand);
+        font-size: 22px;
+        margin: 0 0 4px;
+      }
+      .stage canvas,
+      .stage svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .toolbar select {
+        font: inherit;
+        padding: 3px 6px;
+      }
+      pre.out {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        white-space: pre-wrap;
+        word-break: break-all;
+        background: var(--panel-2);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin: 4px 0 10px;
+        max-height: 190px;
+        overflow: auto;
+      }
+      .panel h3 {
+        font-family: var(--hand);
+        font-size: 22px;
+        margin: 4px 0 0;
+      }
+
+      /* Galleries */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 12px;
+      }
+      .cardfig {
+        margin: 0;
+        padding: 8px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .cardfig:hover {
+        border-color: var(--accent);
+      }
+      .cardfig svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .cardfig figcaption {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .cardfig figcaption b {
+        font-family: var(--hand);
+        font-size: 20px;
+        color: var(--text);
+      }
+      .ladder {
+        margin: 0 0 16px;
+        padding: 8px 10px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .ladder h3 {
+        font-size: 13px;
+        margin: 0;
+        font-family: var(--mono);
+      }
+      .ladder h3 span {
+        font-family: var(--sans);
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .ladder .cells {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 4px 0;
+      }
+      .cell {
+        flex: 0 0 auto;
+        text-align: center;
+        font-size: 11.5px;
+      }
+      .cell svg {
+        display: block;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+      }
+      .cell .lab1 {
+        font-family: var(--mono);
+        color: var(--text);
+      }
+      .cell .bytes {
+        color: var(--muted);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+      /* Plus Ultra scenes */
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .chip {
+        font-family: var(--hand);
+        font-size: 22px;
+        background: var(--panel);
+        border: 2px solid var(--text);
+        border-radius: 12px 8px 14px 8px;
+        padding: 2px 14px;
+        cursor: pointer;
+        color: var(--text);
+      }
+      .chip[aria-pressed="true"] {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .sceneSvg {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        touch-action: none;
+        user-select: none;
+      }
+      .scene .toolbar label {
+        font-size: 13px;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .scene .toolbar output {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--accent);
+      }
+      .readout {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      .hoverable {
+        cursor: pointer;
+      }
+      .hoverable:hover path,
+      .linked path {
+        stroke-width: 4.5px;
+      }
+      #scene-info h3 {
+        font-family: var(--hand);
+        font-size: 28px;
+        margin: 0 0 4px;
+      }
+      #scene-info p {
+        margin: 6px 0;
+        font-size: 13.5px;
+      }
+
+      /* Diagram + anatomy */
+      #diagram-svg,
+      #anat-svg {
+        width: 100%;
+        height: auto;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        display: block;
+      }
+      #diagram-svg [data-viz-id] {
+        cursor: pointer;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 14px;
+        align-items: start;
+      }
+      @media (max-width: 1000px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+      #nodeinfo h3 {
+        font-family: var(--hand);
+        font-size: 26px;
+        margin: 0 0 4px;
+      }
+      #nodeinfo p {
+        margin: 4px 0;
+        font-size: 13.5px;
+      }
+      table.sets {
+        border-collapse: collapse;
+        font-size: 12.5px;
+        width: 100%;
+      }
+      table.sets td,
+      table.sets th {
+        border-bottom: 1px solid var(--border);
+        padding: 4px 6px;
+        text-align: left;
+      }
+      .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+      .legendrow {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        font-size: 12.5px;
+        margin: 6px 0 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viz-header">
+      <h1>Rough.js playground</h1>
+      <div class="sub">
+        A hand-drawn test bench for <b>Rough.js 4.6.6</b>. Everything on this page is drawn by the
+        library — no CSS tricks, no filters.
+        <b>Slider &amp; select controls change real Rough.js options</b> and redraw instantly; the
+        <i>Boil</i> buttons up top nudge every live sketch's random seed (that's the "jittery
+        Excalidraw" effect). Same seed ⇒ same wobble, always.
+      </div>
+    </div>
+
+    <nav class="top" aria-label="Sections and boil controls">
+      <a href="#lab">Lab</a><a href="#gallery">Primitives</a><a href="#fills">Fills</a
+      ><a href="#ladders">Option ladders</a><a href="#diagram">Diagram</a
+      ><a href="#anatomy">Anatomy</a><a href="#ultra">Plus Ultra</a>
+      <span class="grow"></span>
+      <span title="Adds this offset to every live sketch's seed">boil offset</span>
+      <button id="boil-prev" title="Step back (←)">◀</button>
+      <span class="seedread" id="boil-read">+0</span>
+      <button id="boil-next" title="Step forward (→)">▶</button>
+      <button id="boil-play" aria-pressed="false" title="Auto-advance ~7 fps">✍ boil</button>
+    </nav>
+
+    <main>
+      <section id="lab" data-viz-id="lab" data-label="Options lab">
+        <h2>1 · Options lab <small>— every option, both renderers</small></h2>
+        <p class="lede">
+          One <code>Drawable</code> is generated once with <code>rough.generator()</code>, then
+          handed to <b>both</b> <code>rough.canvas()</code> and <code>rough.svg()</code> — the two
+          renders should be identical. Options set to their Rough.js defaults are omitted from the
+          generated code below. <code>-1</code> means "auto" for the options that support it.
+        </p>
+        <div class="toolbar">
+          <label
+            >shape
+            <select id="shape"></select
+          ></label>
+          <button class="btn" id="reset">reset options</button>
+          <button class="btn" id="reroll" title="Pick a new random seed">🎲 new seed</button>
+        </div>
+        <div class="lab">
+          <div class="panel" id="lab-controls" aria-label="Options"></div>
+          <div>
+            <div class="stagegrid">
+              <div class="stage" data-viz-id="lab-canvas" data-label="Canvas renderer">
+                <h3>rough.canvas(<span style="color: var(--muted)">&lt;canvas&gt;</span>)</h3>
+                <canvas id="cv"></canvas>
+              </div>
+              <div class="stage" data-viz-id="lab-svg" data-label="SVG renderer">
+                <h3>rough.svg(<span style="color: var(--muted)">&lt;svg&gt;</span>)</h3>
+                <svg id="sv" viewBox="0 0 420 300"></svg>
+              </div>
+            </div>
+            <div class="panel" style="margin-top: 12px">
+              <h3>
+                Generated code <button class="btn" id="copy" style="font-size: 12px">copy</button>
+              </h3>
+              <pre class="out" id="code"></pre>
+              <h3>
+                Drawable.sets
+                <span style="font-size: 15px; color: var(--muted)">(the recorded pen strokes)</span>
+              </h3>
+              <pre class="out" id="ops"></pre>
+              <h3>generator.toPaths(drawable)</h3>
+              <pre class="out" id="paths"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" data-viz-id="gallery" data-label="Primitive gallery">
+        <h2>2 · Every primitive <small>— click a card to re-roll its seed</small></h2>
+        <p class="lede">
+          All nine drawing calls (plus the two arc modes and the <code>Point[][]</code> form of
+          <code>curve</code>). Each card shows the call signature it exercises.
+        </p>
+        <div class="grid" id="prims"></div>
+      </section>
+
+      <section id="fills" data-viz-id="fills" data-label="Fill styles">
+        <h2>3 · Fill styles <small>— all seven, then their knobs</small></h2>
+        <p class="lede">
+          Fill is drawn as extra strokes, not a bitmap. Below each cell is the size of the resulting
+          SVG path data in characters — a rough cost of that look. Click a row to redraw it: seeded
+          cells hold still.
+        </p>
+        <div id="fills-rows"></div>
+      </section>
+
+      <section id="ladders" data-viz-id="ladders" data-label="Option ladders">
+        <h2>4 · Option ladders <small>— one option, swept</small></h2>
+        <p class="lede">
+          Every cell uses <code>seed: 7</code> so the only thing that changes across a row is the
+          option in its label. The <code>seed</code> row at the bottom proves it: equal seeds ⇒
+          identical drawings; <code>seed: 0</code> re-rolls each time you click.
+        </p>
+        <div id="ladder-rows"></div>
+      </section>
+
+      <section id="diagram" data-viz-id="diagram" data-label="Sketch diagram">
+        <h2>5 · A diagram, Excalidraw-style <small>— boxes, arrows, arrowheads, notes</small></h2>
+        <p class="lede">
+          Rough.js draws shapes only — no arrowheads, no text. Arrowheads here are two extra
+          <code>linearPath</code> strokes; labels are ordinary SVG text in a handwriting font. Click
+          any box for what it does.
+        </p>
+        <div class="toolbar">
+          <label
+            >global roughness
+            <input type="range" id="d-rough" min="0" max="4" step="0.1" value="1.4" />
+            <output id="d-rough-out">1.4</output></label
+          >
+        </div>
+        <div class="split">
+          <svg
+            id="diagram-svg"
+            viewBox="0 0 1100 470"
+            role="img"
+            aria-label="Rough.js pipeline: Options to Generator to Drawable to Canvas, SVG or path strings"
+          ></svg>
+          <div class="panel" id="nodeinfo"></div>
+        </div>
+      </section>
+
+      <section id="anatomy" data-viz-id="anatomy" data-label="Ops anatomy">
+        <h2>6 · Anatomy of a Drawable <small>— the raw ops behind the wobble</small></h2>
+        <p class="lede">
+          Drop one level down: <code>drawable.sets</code> is a list of <code>OpSet</code>s, each a
+          list of <code>move</code> / <code>lineTo</code> / <code>bcurveTo</code> ops. Below, every
+          op's coordinates are plotted on top of the rendered shape.
+        </p>
+        <div class="toolbar">
+          <label
+            >shape
+            <select id="a-shape"></select
+          ></label>
+          <label
+            >fillStyle
+            <select id="a-fill"></select
+          ></label>
+          <label
+            >roughness <input type="range" id="a-rough" min="0" max="5" step="0.1" value="1.5" />
+            <output id="a-rough-out">1.5</output></label
+          >
+        </div>
+        <div class="split">
+          <svg
+            id="anat-svg"
+            viewBox="0 0 560 340"
+            role="img"
+            aria-label="A Rough.js drawing with its raw operation points overlaid"
+          ></svg>
+          <div class="panel">
+            <div class="legendrow">
+              <span
+                ><i class="dot" style="background: var(--text); border-radius: 2px"></i>move</span
+              >
+              <span><i class="dot" style="background: var(--text)"></i>lineTo / bcurveTo end</span>
+              <span
+                ><i class="dot" style="background: transparent; border: 1.5px solid var(--text)"></i
+                >bezier control point</span
+              >
+            </div>
+            <table class="sets" id="sets"></table>
+            <h3>generator.opsToPath(set)</h3>
+            <pre class="out" id="a-path"></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="ultra" data-viz-id="ultra" data-label="Plus Ultra scenes">
+        <h2>
+          7 · Plus Ultra <small>— what can a wobbly pen <i>say</i>?</small>
+        </h2>
+        <p class="lede">
+          Not options this time — ideas (including a real architecture diagram of the conversation
+          that built this page, and two working tools: a trust dashboard and a diagram editor). Each
+          scene uses the hand-drawn look to carry a meaning that a crisp chart can't: uncertainty,
+          draft-ness, emphasis, light, sequence, choice. Every one is interactive; pick a scene,
+          then poke it. The boil controls up top re-seed whichever scene is showing.
+        </p>
+        <div class="chips" id="scene-tabs" role="tablist"></div>
+        <div class="split">
+          <div id="scene-stage"></div>
+          <div class="panel" id="scene-info"></div>
+        </div>
+      </section>
+    </main>
+    <div style="height: 60px"></div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

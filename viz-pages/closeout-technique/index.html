@@ -1,0 +1,1607 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viz:uid" content="v-b1bb5c1340ac" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:tag" content="Basketball" />
+    <meta name="viz:title" content="The Closeout" />
+    <meta
+      name="viz:description"
+      content="Learn to close out on a shooter: sprint the gap, chop your feet, hold an arm's-length cushion, and angle your closeout to force a side. Seven interactive views — a 3D body-mechanics orbit and a reactive sandbox that grades your possession and punishes every mistake."
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://esm.sh/three@0.160.0",
+          "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <style>
+      body {
+        margin: 0;
+      }
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin: 18px 0 22px;
+        border-bottom: 1px solid var(--line, #2c3647);
+      }
+      .tabs button {
+        font: inherit;
+        cursor: pointer;
+        background: transparent;
+        color: var(--ink-dim, #9fb0c3);
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 10px 12px 12px;
+        margin-bottom: -1px;
+        font-size: 13.5px;
+      }
+      .tabs button:hover {
+        color: var(--ink, #e7ecf3);
+      }
+      .tabs button.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+        font-weight: 600;
+      }
+      .tab {
+        display: none;
+      }
+      .tab.active {
+        display: block;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: minmax(340px, 540px) 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      @media (max-width: 860px) {
+        .two {
+          grid-template-columns: 1fr;
+        }
+      }
+      svg.court {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 14px;
+        touch-action: none;
+        background: #15110a;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+      .controls button {
+        font: inherit;
+        cursor: pointer;
+        background: var(--panel-2, #1b2230);
+        color: var(--ink, #e7ecf3);
+        border: 1px solid var(--line, #2c3647);
+        border-radius: 9px;
+        padding: 8px 14px;
+      }
+      .controls button:hover {
+        border-color: var(--accent);
+      }
+      .controls button.primary {
+        background: var(--accent);
+        color: #06121f;
+        border-color: var(--accent);
+        font-weight: 600;
+      }
+      input[type="range"] {
+        flex: 1;
+        min-width: 110px;
+        accent-color: var(--accent);
+      }
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .step {
+        padding: 13px 15px;
+        border: 1px solid var(--line, #2c3647);
+        border-radius: 12px;
+        background: var(--panel, #141a24);
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+      }
+      .step:hover {
+        border-color: var(--accent);
+      }
+      .step.active {
+        border-color: var(--accent);
+        background: #16202e;
+        box-shadow: 0 0 0 1px var(--accent) inset;
+      }
+      .step h3 {
+        margin: 0 0 4px;
+        font-size: 14.5px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .step .num {
+        display: inline-grid;
+        place-items: center;
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #06121f;
+        font-size: 12px;
+        font-weight: 700;
+        flex: none;
+      }
+      .step p {
+        margin: 0;
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--ink-dim, #9fb0c3);
+      }
+      .legend {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 11px;
+        font-size: 12.5px;
+        color: var(--ink-dim, #9fb0c3);
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .prose {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: var(--ink-dim, #9fb0c3);
+      }
+      .prose b {
+        color: var(--ink, #e7ecf3);
+      }
+      .prose h3 {
+        color: var(--ink, #e7ecf3);
+        margin: 16px 0 6px;
+        font-size: 15px;
+      }
+      .verdict {
+        margin-top: 14px;
+        padding: 13px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--line, #2c3647);
+        background: var(--panel, #141a24);
+      }
+      .verdict .big {
+        font-size: 19px;
+        font-weight: 700;
+      }
+      .verdict.open {
+        border-color: #e2493f;
+        box-shadow: 0 0 0 1px #e2493f inset;
+      }
+      .verdict.open .big {
+        color: #e2493f;
+      }
+      .verdict.bad {
+        border-color: #e2493f;
+        box-shadow: 0 0 0 1px #e2493f inset;
+      }
+      .verdict.bad .big {
+        color: #e2493f;
+      }
+      .verdict.ok {
+        border-color: #e2b23f;
+        box-shadow: 0 0 0 1px #e2b23f inset;
+      }
+      .verdict.ok .big {
+        color: #e2b23f;
+      }
+      .verdict.good {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent) inset;
+      }
+      .verdict.good .big {
+        color: var(--accent);
+      }
+      .hint {
+        font-size: 13px;
+        color: var(--ink-dim, #9fb0c3);
+        margin-top: 12px;
+      }
+      .tldr {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: var(--ink-dim, #9fb0c3);
+      }
+      .tldr b {
+        color: var(--ink, #e7ecf3);
+      }
+      .meter {
+        margin-top: 12px;
+      }
+      .meter .lab {
+        font-size: 12px;
+        color: var(--ink-dim, #9fb0c3);
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .meter .track {
+        height: 10px;
+        border-radius: 6px;
+        background: var(--panel-2, #1b2230);
+        border: 1px solid var(--line, #2c3647);
+        overflow: hidden;
+      }
+      .meter .fill {
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        transition:
+          width 0.08s linear,
+          background 0.2s;
+      }
+      .cues {
+        list-style: none;
+        padding: 0;
+        margin: 14px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .cues li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        font-size: 13px;
+        color: var(--ink-dim, #9fb0c3);
+        opacity: 0.4;
+        transition: opacity 0.3s;
+      }
+      .cues li.on {
+        opacity: 1;
+      }
+      .cues .tick {
+        flex: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1.5px solid var(--line, #2c3647);
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        color: transparent;
+      }
+      .cues li.on .tick {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #06121f;
+      }
+      .cues b {
+        color: var(--ink, #e7ecf3);
+      }
+      /* segmented control + sandbox */
+      .ctlrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .ctlrow > .lbl {
+        font-size: 12.5px;
+        color: var(--ink-dim, #9fb0c3);
+        width: 78px;
+        flex: none;
+      }
+      .seg {
+        display: inline-flex;
+        border: 1px solid var(--line, #2c3647);
+        border-radius: 9px;
+        overflow: hidden;
+      }
+      .seg button {
+        font: inherit;
+        font-size: 12.5px;
+        cursor: pointer;
+        background: var(--panel-2, #1b2230);
+        color: var(--ink-dim, #9fb0c3);
+        border: none;
+        border-right: 1px solid var(--line, #2c3647);
+        padding: 7px 12px;
+      }
+      .seg button:last-child {
+        border-right: none;
+      }
+      .seg button.active {
+        background: var(--accent);
+        color: #06121f;
+        font-weight: 600;
+      }
+      .scorecard {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .sc {
+        padding: 9px 8px;
+        border-radius: 10px;
+        border: 1px solid var(--line, #2c3647);
+        background: var(--panel, #141a24);
+        text-align: center;
+      }
+      .sc .k {
+        font-size: 11px;
+        color: var(--ink-dim, #9fb0c3);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .sc .v {
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 3px;
+        color: var(--ink-dim, #9fb0c3);
+      }
+      .sc.pass {
+        border-color: var(--accent);
+      }
+      .sc.pass .v {
+        color: var(--accent);
+      }
+      .sc.fail {
+        border-color: #e2493f;
+      }
+      .sc.fail .v {
+        color: #e2493f;
+      }
+      .grade {
+        display: inline-grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        font-size: 28px;
+        font-weight: 800;
+        border: 2px solid var(--line, #2c3647);
+        color: var(--ink-dim, #9fb0c3);
+      }
+      .d3-canvas {
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #0c0a06;
+      }
+      /* data-grounding band strip (Cushion tab) */
+      .numbers {
+        margin-top: 16px;
+      }
+      .numbers .nlabel {
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-dim, #9fb0c3);
+        margin-bottom: 7px;
+      }
+      .bands {
+        position: relative;
+        display: flex;
+        gap: 3px;
+        margin-top: 26px;
+      }
+      .band {
+        border-radius: 8px;
+        padding: 8px 6px 7px;
+        text-align: center;
+        background: var(--panel-2, #1b2230);
+        border: 1px solid var(--line, #2c3647);
+      }
+      .band.good {
+        border-color: #36c98f;
+        background: #122a20;
+      }
+      .band .bpct {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--ink, #e7ecf3);
+      }
+      .band.good .bpct {
+        color: #36c98f;
+      }
+      .band .bname {
+        font-size: 10.5px;
+        color: var(--ink-dim, #9fb0c3);
+        margin-top: 2px;
+        line-height: 1.3;
+      }
+      .ftmarker {
+        position: absolute;
+        top: -9px;
+        width: 0;
+        height: 0;
+        margin-left: -6px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid var(--accent);
+        transition: left 0.08s linear;
+      }
+      .ftmarker::after {
+        content: attr(data-ft);
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .neffect {
+        font-size: 12.5px;
+        line-height: 1.55;
+        color: var(--ink-dim, #9fb0c3);
+        margin: 12px 0 0;
+      }
+      .neffect b {
+        color: var(--ink, #e7ecf3);
+      }
+      .ncite {
+        font-size: 11px;
+        line-height: 1.5;
+        color: #6b7688;
+        margin: 8px 0 0;
+      }
+      .ncite a {
+        color: #6b7688;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="viz-header" style="padding: 0">
+        <h1 style="margin: 0">The Closeout</h1>
+        <div class="sub">
+          A shooter caught the ball and you're a step late. Sprint out, chop your feet, hold a
+          cushion, force a side — then try it yourself and get graded. Seven ways to see it.
+        </div>
+      </div>
+
+      <nav class="tabs" id="tabs">
+        <button data-tab="move" class="active">1 · The Closeout</button>
+        <button data-tab="cushion">2 · The Cushion</button>
+        <button data-tab="side">3 · Force a Side</button>
+        <button data-tab="feet">4 · The Footwork</button>
+        <button data-tab="d3">5 · 3D View</button>
+        <button data-tab="sandbox">6 · You Try It</button>
+        <button data-tab="drill">7 · Live Drill</button>
+        <button data-tab="read">8 · Read the Man</button>
+        <button data-tab="team">9 · In a Defense</button>
+        <button data-tab="sources">10 · Sources</button>
+      </nav>
+
+      <!-- ============ TAB 1: THE CLOSEOUT ============ -->
+      <section id="tab-move" class="tab active">
+        <div class="two">
+          <div>
+            <svg
+              class="court move-court"
+              viewBox="0 0 500 490"
+              aria-label="Top-down closeout animation"
+            >
+              <g class="courtbg"></g>
+              <path
+                class="trail"
+                fill="none"
+                stroke="var(--accent)"
+                stroke-width="2.5"
+                stroke-dasharray="5 5"
+                opacity="0.45"
+              />
+              <g class="prints"></g>
+              <g class="off" data-viz-id="shooter" data-label="Shooter">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <line
+                class="hand"
+                stroke="var(--accent)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <g class="def" data-viz-id="defender" data-label="You (defender)">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+            </svg>
+            <div class="controls">
+              <button class="play primary">▶ Play</button>
+              <button class="restart">↺ Restart</button>
+              <input class="scrub" type="range" min="0" max="1000" value="0" />
+            </div>
+            <div class="meter">
+              <div class="lab"><span>Your speed</span><span class="spd-word">—</span></div>
+              <div class="track"><div class="spd-fill fill"></div></div>
+            </div>
+            <div class="legend">
+              <span><i class="dot" style="background: var(--accent)"></i> You (defender)</span>
+              <span><i class="dot" style="background: #36c98f"></i> Shooter</span>
+              <span><i class="dot" style="background: #ff9b3c"></i> Ball</span>
+            </div>
+          </div>
+          <div>
+            <p class="tldr">
+              <b>The job:</b> the ball just got swung to a shooter and you're helping one pass away.
+              Cover ground <i>fast</i>, then arrive <i>under control</i> — close enough to contest,
+              balanced enough to stop a drive. Hit ▶ and watch your speed meter drop as you chop
+              your feet.
+            </p>
+            <div class="steps move-steps" style="margin-top: 14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 2: THE CUSHION ============ -->
+      <section id="tab-cushion" class="tab">
+        <div class="two">
+          <div>
+            <svg
+              class="court cush-court"
+              viewBox="0 0 500 490"
+              aria-label="Cushion distance simulator"
+            >
+              <g class="courtbg"></g>
+              <circle
+                class="ideal"
+                fill="none"
+                stroke="#36c98f"
+                stroke-width="1.6"
+                stroke-dasharray="5 4"
+                opacity="0.7"
+              />
+              <path
+                class="drive"
+                fill="none"
+                stroke="#e2493f"
+                stroke-width="2.5"
+                stroke-dasharray="4 4"
+                opacity="0"
+              />
+              <g class="off" data-viz-id="cush-shooter" data-label="Shooter">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <line
+                class="hand"
+                stroke="var(--accent)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <g class="def" data-viz-id="cush-defender" data-label="You (defender)">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+              <text
+                class="stamp"
+                x="250"
+                y="330"
+                text-anchor="middle"
+                font-size="24"
+                font-weight="800"
+                opacity="0"
+              ></text>
+            </svg>
+            <div class="controls">
+              <span style="font-size: 13px; color: var(--ink-dim, #9fb0c3)">Crowd&nbsp;him</span>
+              <input class="cushrange" type="range" min="0" max="100" value="30" />
+              <span style="font-size: 13px; color: var(--ink-dim, #9fb0c3)">Give&nbsp;space</span>
+              <button class="cushrun primary">▶ Run it</button>
+            </div>
+            <div class="legend">
+              <span
+                >Slide the dial to set your <b style="color: var(--accent)">cushion</b>, then run
+                it.</span
+              >
+              <span style="color: #36c98f">◌ arm's length</span>
+            </div>
+          </div>
+          <div>
+            <div class="verdict cush-verdict">
+              <div class="big">—</div>
+              <p
+                class="cush-text"
+                style="
+                  margin: 6px 0 0;
+                  font-size: 13px;
+                  color: var(--ink-dim, #9fb0c3);
+                  line-height: 1.5;
+                "
+              ></p>
+            </div>
+            <div class="numbers">
+              <div class="nlabel">By the numbers — NBA player-tracking, 3-pt%</div>
+              <div class="bands">
+                <div class="band" style="flex: 2">
+                  <div class="bpct">~29%</div>
+                  <div class="bname">Very tight<br />0–2 ft</div>
+                </div>
+                <div class="band good" style="flex: 2">
+                  <div class="bpct">~29%</div>
+                  <div class="bname">Tight · arm's length<br />2–4 ft</div>
+                </div>
+                <div class="band" style="flex: 2">
+                  <div class="bpct">~34%</div>
+                  <div class="bname">Open<br />4–6 ft</div>
+                </div>
+                <div class="band" style="flex: 3">
+                  <div class="bpct">~38%</div>
+                  <div class="bname">Wide open<br />6+ ft</div>
+                </div>
+                <div class="ftmarker" data-ft="" style="left: 30%"></div>
+              </div>
+              <p class="neffect">
+                Closing a <b>wide-open</b> three (~38%) down to an
+                <b>arm's-length contest</b> (~29%) is a <b>~10-point</b> swing league-wide — up to
+                <b>~17</b> for a shooter like Korver (55%→38%). That gap <i>is</i> the closeout.
+              </p>
+              <p class="ncite">
+                Bands are official NBA tracking (Very&nbsp;Tight/Tight/Open/Wide&nbsp;Open); 3P% ≈
+                2020–22 league via tracking-based analyses. The blow-by / drive outcomes elsewhere
+                in this viz are <b>coaching heuristics</b> — no public tracking stat measures them.
+              </p>
+            </div>
+            <div class="prose">
+              <h3>Why an arm's length?</h3>
+              <p>
+                Stick your arm out and your fingertips should just graze his jersey. That single
+                step of space is the whole game:
+              </p>
+              <p>
+                <b>Too tight</b> and you've got nowhere to go — one shot-fake or jab and he's
+                driving past, or you foul him. <b>Too soft</b> and you're waving at a wide-open
+                shooter from a mile away. The sweet spot is one step:
+                <b>close enough to bother the shot, far enough to slide with a drive.</b>
+              </p>
+              <p>
+                Chopping your feet on the way in (Tab&nbsp;1) is <i>how</i> you hold that cushion —
+                it kills your momentum so you stop at a step instead of flying into him.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 3: FORCE A SIDE ============ -->
+      <section id="tab-side" class="tab">
+        <div class="two">
+          <div>
+            <svg class="court side-court" viewBox="0 0 500 490" aria-label="Force-a-side simulator">
+              <g class="courtbg"></g>
+              <path class="wall" fill="#e2493f" fill-opacity="0.12" stroke="none" />
+              <path
+                class="lane"
+                fill="none"
+                stroke="#e2b23f"
+                stroke-width="3"
+                stroke-dasharray="6 5"
+                opacity="0"
+                marker-end="url(#side-ar)"
+              />
+              <path class="sdrive" fill="none" stroke="#e2493f" stroke-width="2.5" opacity="0" />
+              <defs>
+                <marker
+                  id="side-ar"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M0,0 L10,5 L0,10 z" fill="#e2b23f" />
+                </marker>
+              </defs>
+              <g class="help" opacity="0.85">
+                <circle r="12" fill="#7a6bd6" stroke="#241a3a" stroke-width="2" />
+                <text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">
+                  H
+                </text>
+              </g>
+              <g class="off">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <line class="hhi" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" />
+              <line class="hlo" stroke="#5fd0ff" stroke-width="3" stroke-linecap="round" />
+              <g class="def">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+              <text
+                class="sstamp"
+                x="250"
+                y="335"
+                text-anchor="middle"
+                font-size="22"
+                font-weight="800"
+                opacity="0"
+              ></text>
+            </svg>
+            <div class="ctlrow">
+              <span class="lbl">Force him</span>
+              <div class="seg side-seg">
+                <button data-f="baseline" class="active">Baseline</button>
+                <button data-f="straight">Straight up</button>
+                <button data-f="middle">Middle</button>
+              </div>
+              <button class="side-run primary">▶ Drive it</button>
+            </div>
+            <div class="legend">
+              <span style="color: var(--accent)">▮ high hand (shot)</span>
+              <span style="color: #5fd0ff">▮ low hand (ball)</span>
+              <span style="color: #e2493f">▨ taken away</span>
+              <span><i class="dot" style="background: #7a6bd6"></i> help</span>
+            </div>
+          </div>
+          <div>
+            <div class="verdict side-verdict">
+              <div class="big">—</div>
+              <p
+                class="side-text"
+                style="
+                  margin: 6px 0 0;
+                  font-size: 13px;
+                  color: var(--ink-dim, #9fb0c3);
+                  line-height: 1.5;
+                "
+              ></p>
+            </div>
+            <div class="prose">
+              <h3>Distance isn't enough — angle matters</h3>
+              <p>
+                A perfect cushion still gets beaten if you close out <i>square</i> to a live driver:
+                he just picks a side. Good closeouts arrive <b>on an angle</b>, shading one shoulder
+                to <b>take a direction away</b>.
+              </p>
+              <p>
+                <b>High-low hands:</b> your <b style="color: var(--accent)">top hand</b> is up in
+                the shot; your <b style="color: #5fd0ff">low hand</b> walls off the drive you're
+                taking away. Here you funnel him <b>baseline</b>, into the short corner where
+                <b style="color: #7a6bd6">help</b> is waiting — not <b>middle</b>, into the open
+                lane.
+              </p>
+              <p>
+                Try all three and drive it: forcing middle feeds the layup; square is a coin flip;
+                forcing baseline is contained.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 4: THE FOOTWORK ============ -->
+      <section id="tab-feet" class="tab">
+        <div class="two">
+          <div>
+            <svg class="court feet-court" viewBox="0 0 300 430" aria-label="Chop-step rhythm">
+              <rect
+                x="6"
+                y="6"
+                width="288"
+                height="418"
+                fill="#241a0e"
+                stroke="#6b5836"
+                stroke-width="2"
+              />
+              <g class="off" transform="translate(150 70)">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle r="5.5" cy="-15" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <text x="150" y="102" text-anchor="middle" font-size="11" fill="#7d8aa0">
+                ↑ the shooter
+              </text>
+              <g class="feet-prints"></g>
+            </svg>
+          </div>
+          <div>
+            <div class="ctlrow" style="margin-top: 0">
+              <span class="lbl">Technique</span>
+              <div class="seg feet-seg">
+                <button data-m="chop" class="active">Chop-step</button>
+                <button data-m="sprint">Sprint-stop (1-2)</button>
+              </div>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 12px; margin: 14px 0 2px">
+              <div
+                class="feet-phase"
+                style="font-size: 24px; font-weight: 800; color: var(--accent); line-height: 1"
+              >
+                Ready
+              </div>
+              <button class="feet-run primary" style="margin-left: auto">▶ Run it</button>
+            </div>
+            <div class="meter" style="margin-top: 14px">
+              <div class="lab"><span>Balance / control</span><span class="tr-bal-v">—</span></div>
+              <div class="track"><div class="tr-bal fill" style="background: #36c98f"></div></div>
+            </div>
+            <div class="meter" style="margin-top: 8px">
+              <div class="lab">
+                <span>Closing speed (how fast you get there)</span><span class="tr-spd-v">—</span>
+              </div>
+              <div class="track"><div class="tr-spd fill" style="background: #e2b23f"></div></div>
+            </div>
+            <div class="verdict feet-when good" style="margin-top: 12px">
+              <div class="big" style="font-size: 14px">Best vs —</div>
+              <p
+                class="feet-when-t"
+                style="
+                  margin: 5px 0 0;
+                  font-size: 12.5px;
+                  color: var(--ink-dim, #9fb0c3);
+                  line-height: 1.5;
+                "
+              ></p>
+            </div>
+            <ul class="cues feet-cues"></ul>
+            <div class="prose">
+              <h3>Chop or sprint-stop? It's a real debate</h3>
+              <p>
+                The classic teaching is <b>chop your feet</b> — break the sprint into short steps to
+                arrive low and balanced. But plenty of coaches now argue the chop is over-taught and
+                <i>slow</i>: it bleeds so much speed you arrive a beat late and give up the contest.
+                Their answer is the <b>sprint-stop</b> — a hard sprint into a quick
+                <b>1-2 plant</b> — which gets you there faster to bother the shot, trading a little
+                balance for a lot of closing speed.
+              </p>
+              <p>
+                Neither is universally right. <b>Read the matchup:</b> sprint-stop a
+                <b>shooter</b> to contest the shot in time; chop-step a live <b>driver</b> so you
+                can still slide when he attacks. Toggle the two and watch the tradeoff.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 5: 3D VIEW ============ -->
+      <section id="tab-d3" class="tab">
+        <div class="two">
+          <div>
+            <div class="d3-canvas"></div>
+            <div class="controls">
+              <button class="d3play primary">▶ Play</button>
+              <input class="d3scrub" type="range" min="0" max="1000" value="0" />
+              <label
+                style="
+                  font-size: 12.5px;
+                  color: var(--ink-dim, #9fb0c3);
+                  display: inline-flex;
+                  gap: 5px;
+                  align-items: center;
+                "
+                ><input class="d3rot" type="checkbox" checked /> spin</label
+              >
+              <button class="d3side">Side view</button>
+            </div>
+            <div class="legend">
+              <span
+                >🖱 drag to orbit · scroll to zoom · <b>Side view</b> snaps to a coach's-eye
+                angle</span
+              >
+            </div>
+          </div>
+          <div>
+            <div class="verdict good" style="margin-top: 0">
+              <div class="big" style="font-size: 16px" id="d3phaseTitle">The sprint</div>
+              <p
+                class="d3phase"
+                style="
+                  margin-top: 6px;
+                  font-size: 13px;
+                  color: var(--ink-dim, #9fb0c3);
+                  line-height: 1.5;
+                "
+              >
+                Press ▶ and orbit around the closeout.
+              </p>
+            </div>
+            <div class="prose">
+              <h3>What the top-down can't show</h3>
+              <p>
+                From above you see the path and the cushion. From the side you see the <b>body</b>:
+                on the sprint you're tall and fast; as you chop, your <b>hips drop</b> and your
+                <b>chest stays up</b> — that low, wide base is what lets you change direction.
+              </p>
+              <p>
+                At the cushion you land in a <b>staggered stance</b> with your
+                <b>top hand high</b> in the shot and your <b>low hand out</b> to wall the drive.
+                Tall and reaching = beaten. Low and balanced = a real contest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 6: YOU TRY IT (SANDBOX) ============ -->
+      <section id="tab-sandbox" class="tab">
+        <div class="two">
+          <div>
+            <svg
+              class="court sb-court"
+              viewBox="0 0 500 490"
+              aria-label="Reactive closeout sandbox"
+            >
+              <g class="courtbg"></g>
+              <circle
+                class="ideal"
+                fill="none"
+                stroke="#36c98f"
+                stroke-width="1.4"
+                stroke-dasharray="5 4"
+                opacity="0.55"
+              />
+              <path class="sbdrive" fill="none" stroke="#e2493f" stroke-width="2.5" opacity="0" />
+              <g class="help" opacity="0">
+                <circle r="12" fill="#7a6bd6" stroke="#241a3a" stroke-width="2" />
+                <text y="4" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">
+                  H
+                </text>
+              </g>
+              <g class="off">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <line
+                class="hhi"
+                stroke="var(--accent)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <line
+                class="hlo"
+                stroke="#5fd0ff"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <g class="def">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+              <text
+                class="sbstamp"
+                x="250"
+                y="335"
+                text-anchor="middle"
+                font-size="22"
+                font-weight="800"
+                opacity="0"
+              ></text>
+            </svg>
+            <div class="ctlrow">
+              <span class="lbl">Cushion</span>
+              <span style="font-size: 12px; color: var(--ink-dim, #9fb0c3)">crowd</span>
+              <input class="sb-cush" type="range" min="0" max="100" value="30" />
+              <span style="font-size: 12px; color: var(--ink-dim, #9fb0c3)">soft</span>
+            </div>
+            <div class="ctlrow">
+              <span class="lbl">Approach</span>
+              <span style="font-size: 12px; color: var(--ink-dim, #9fb0c3)">flew in</span>
+              <input class="sb-ctrl" type="range" min="0" max="100" value="75" />
+              <span style="font-size: 12px; color: var(--ink-dim, #9fb0c3)">chopped</span>
+            </div>
+            <div class="ctlrow">
+              <span class="lbl">Force</span>
+              <div class="seg sb-force">
+                <button data-f="baseline" class="active">Baseline</button>
+                <button data-f="straight">Straight</button>
+                <button data-f="middle">Middle</button>
+              </div>
+            </div>
+            <div class="ctlrow">
+              <span class="lbl">Leave on</span>
+              <div class="seg sb-timing">
+                <button data-t="early" class="active">The pass</button>
+                <button data-t="late">The catch</button>
+              </div>
+              <button class="sb-run primary" style="margin-left: auto">▶ Run possession</button>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; gap: 14px; align-items: center">
+              <div class="grade" id="sbGrade">—</div>
+              <div class="verdict sb-verdict" style="margin: 0; flex: 1">
+                <div class="big" style="font-size: 17px">Set it up, then run it</div>
+                <p
+                  class="sb-text"
+                  style="
+                    margin: 5px 0 0;
+                    font-size: 13px;
+                    color: var(--ink-dim, #9fb0c3);
+                    line-height: 1.5;
+                  "
+                >
+                  You control the closeout. The shooter reacts to your mistakes — get all four right
+                  for an A.
+                </p>
+              </div>
+            </div>
+            <div class="scorecard">
+              <div class="sc" data-k="distance">
+                <div class="k">Distance</div>
+                <div class="v">—</div>
+              </div>
+              <div class="sc" data-k="balance">
+                <div class="k">Balance</div>
+                <div class="v">—</div>
+              </div>
+              <div class="sc" data-k="angle">
+                <div class="k">Angle</div>
+                <div class="v">—</div>
+              </div>
+              <div class="sc" data-k="timing">
+                <div class="k">Timing</div>
+                <div class="v">—</div>
+              </div>
+            </div>
+            <div class="prose">
+              <h3>All four, every time</h3>
+              <p>
+                A great closeout is <b>distance</b> (an arm's length), <b>balance</b> (chopped down,
+                not flying), <b>angle</b> (force baseline, take the middle away), and
+                <b>timing</b> (leave on the flight of the pass, not after the catch). Miss any one
+                and a real shooter makes you pay — an open look, a blow-by, or a straight-line
+                drive.
+              </p>
+              <p class="hint">
+                Tip: crowd him and he rips past; jog and he shoots; force him middle and he's at the
+                rim; leave late and you never arrive. Only the full recipe holds up.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 7: LIVE DRILL (REAL-TIME) ============ -->
+      <section id="tab-drill" class="tab">
+        <div class="two">
+          <div>
+            <svg
+              class="court drill-court"
+              viewBox="0 0 500 490"
+              aria-label="Real-time closeout drill"
+              style="cursor: none"
+            >
+              <g class="courtbg"></g>
+              <circle
+                class="dideal"
+                fill="none"
+                stroke="#36c98f"
+                stroke-width="1.4"
+                stroke-dasharray="5 4"
+                opacity="0.5"
+              />
+              <circle
+                class="dgather"
+                fill="none"
+                stroke="#e2b23f"
+                stroke-width="2"
+                stroke-dasharray="5 4"
+                opacity="0"
+              />
+              <path class="ddrive" fill="none" stroke="#e2493f" stroke-width="2.5" opacity="0" />
+              <g class="off">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle class="ball" r="5.5" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <line
+                class="dhand"
+                stroke="var(--accent)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <g class="def">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+              <circle
+                class="dcursor"
+                r="6"
+                fill="none"
+                stroke="#e7ecf3"
+                stroke-width="1.5"
+                opacity="0.45"
+              />
+              <text
+                class="dstamp"
+                x="250"
+                y="335"
+                text-anchor="middle"
+                font-size="26"
+                font-weight="800"
+                opacity="0"
+              ></text>
+            </svg>
+            <div class="controls">
+              <button class="d-start primary">▶ Start / new rep</button>
+              <div
+                style="
+                  display: flex;
+                  gap: 16px;
+                  margin-left: auto;
+                  font-size: 13.5px;
+                  color: var(--ink-dim, #9fb0c3);
+                "
+              >
+                <span>Stops <b class="d-stops" style="color: var(--accent)">0</b></span>
+                <span>Buckets <b class="d-buckets" style="color: #e2493f">0</b></span>
+                <span>Streak <b class="d-streak" style="color: #36c98f">0</b></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              class="verdict d-msg"
+              style="color: var(--ink, #e7ecf3); font-size: 14px; line-height: 1.5"
+            >
+              Press <b>Start</b>, then steer your defender with the cursor.
+            </div>
+            <div class="prose">
+              <h3>This one you actually play</h3>
+              <p>
+                Your defender <b>chases your cursor with real momentum</b> — the white ring is where
+                you're pointing, the <b style="color: var(--accent)">D</b> is where your body
+                actually is. Yank the cursor at the shooter and you'll <i>overshoot</i>, exactly
+                like flying in without chopping.
+              </p>
+              <p>
+                The shooter reads you every frame: too far and he <b>rises up</b>; too tight or
+                off-balance and he <b>drives past</b>; arrive at an arm's length under control and
+                hold it — <b>contested, stop.</b> If he drives, keep your cursor
+                <i>between him and the rim</i> to wall it off.
+              </p>
+              <p class="hint">
+                Sprint out, then <b>ease the cursor to a stop</b> at the green ring — that's the
+                chop. Chain stops to build a streak.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 8: READ THE MAN ============ -->
+      <section id="tab-read" class="tab">
+        <div class="two">
+          <div>
+            <svg
+              class="court read-court"
+              viewBox="0 0 500 490"
+              aria-label="Closeout adjusted to the offensive player"
+            >
+              <g class="courtbg"></g>
+              <circle
+                class="rideal"
+                fill="none"
+                stroke="#36c98f"
+                stroke-width="1.5"
+                stroke-dasharray="5 4"
+                opacity="0.6"
+              />
+              <line
+                class="rcush"
+                stroke="#9fb0c3"
+                stroke-width="1.5"
+                stroke-dasharray="4 4"
+                opacity="0.55"
+              />
+              <text class="rcush-lab" font-size="12" fill="#9fb0c3" text-anchor="middle"></text>
+              <g class="off">
+                <circle r="14" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06231a">
+                  O
+                </text>
+                <circle r="5.5" cx="-13" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              </g>
+              <line
+                class="rhi"
+                stroke="var(--accent)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <g class="def">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="13" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+            </svg>
+            <div class="ctlrow">
+              <span class="lbl">He's a…</span>
+              <div class="seg read-seg">
+                <button data-t="shooter" class="active">Shooter</button>
+                <button data-t="pump">Pump-faker</button>
+                <button data-t="driver">Driver</button>
+                <button data-t="none">Non-shooter</button>
+              </div>
+            </div>
+            <div class="legend">
+              <span
+                >The green ring is how close you should get.
+                <b style="color: var(--accent)">▮</b> high hand.</span
+              >
+            </div>
+          </div>
+          <div>
+            <div class="verdict read-verdict">
+              <div class="big">—</div>
+              <p
+                class="read-rule"
+                style="
+                  margin: 6px 0 0;
+                  font-size: 13px;
+                  color: var(--ink-dim, #9fb0c3);
+                  line-height: 1.5;
+                "
+              ></p>
+            </div>
+            <div
+              class="verdict read-mistake"
+              style="border-color: #e2493f; box-shadow: 0 0 0 1px #e2493f inset"
+            >
+              <div class="big" style="font-size: 14px; color: #e2493f">The mistake</div>
+              <p
+                class="read-mistake-t"
+                style="
+                  margin: 5px 0 0;
+                  font-size: 12.5px;
+                  color: var(--ink-dim, #9fb0c3);
+                  line-height: 1.5;
+                "
+              ></p>
+            </div>
+            <div class="prose">
+              <h3>The best closeout depends on the man</h3>
+              <p>
+                Distance, speed, and whether you even throw a high hand all change with
+                <i>who has the ball</i>. The rule of thumb coaches use:
+                <b>sprint ~90% and break down late on a shooter</b> (get there, contest);
+                <b>sprint only halfway and break down early on a driver</b> (sit on the drive, give
+                the jumper).
+              </p>
+              <p>
+                The two special cases: a <b>pump-faker</b> — contest with a high hand but
+                <b>never leave your feet</b>; and a <b>non-shooter</b> — don't close out at all,
+                stay in the gap and dare him to shoot.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 9: IN A DEFENSE ============ -->
+      <section id="tab-team" class="tab">
+        <div class="two">
+          <div>
+            <svg
+              class="court team-court"
+              viewBox="0 0 500 490"
+              aria-label="Closeout within a team rotation"
+            >
+              <g class="courtbg"></g>
+              <path
+                class="pass"
+                fill="none"
+                stroke="#ff9b3c"
+                stroke-width="2"
+                stroke-dasharray="7 5"
+                opacity="0"
+              />
+              <path
+                class="dtrail"
+                fill="none"
+                stroke="var(--accent)"
+                stroke-width="2"
+                stroke-dasharray="5 5"
+                opacity="0.4"
+              />
+              <path
+                class="htrail"
+                fill="none"
+                stroke="#7a6bd6"
+                stroke-width="2"
+                stroke-dasharray="5 5"
+                opacity="0.35"
+              />
+              <g class="o1">
+                <circle r="13" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">
+                  1
+                </text>
+              </g>
+              <g class="o2">
+                <circle r="13" fill="#36c98f" stroke="#073d2a" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="#06231a">
+                  2
+                </text>
+              </g>
+              <circle class="tball" r="6" fill="#ff9b3c" stroke="#7a3c00" stroke-width="1.5" />
+              <g class="help">
+                <circle r="12" fill="#7a6bd6" stroke="#241a3a" stroke-width="2" />
+                <text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">
+                  H
+                </text>
+              </g>
+              <line
+                class="hand"
+                stroke="var(--accent)"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0"
+              />
+              <g class="def">
+                <circle r="13" fill="var(--accent)" stroke="#06121f" stroke-width="2" />
+                <text y="4.5" text-anchor="middle" font-size="12" font-weight="700" fill="#06121f">
+                  D
+                </text>
+              </g>
+            </svg>
+            <div class="controls">
+              <button class="team-play primary">▶ Run the rotation</button>
+              <input class="team-scrub" type="range" min="0" max="1000" value="0" />
+            </div>
+            <div class="legend">
+              <span><i class="dot" style="background: var(--accent)"></i> You</span>
+              <span><i class="dot" style="background: #7a6bd6"></i> Help (low man)</span>
+              <span><i class="dot" style="background: #36c98f"></i> Offense</span>
+              <span><i class="dot" style="background: #ff9b3c"></i> Ball</span>
+            </div>
+          </div>
+          <div>
+            <p class="tldr">
+              <b>Closeouts don't happen in a vacuum.</b> You're late because you were doing your job
+              — helping. And you can close out <i>hard</i> because there's help behind you. Press
+              play.
+            </p>
+            <div class="steps team-steps" style="margin-top: 14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAB 10: SOURCES ============ -->
+      <section id="tab-sources" class="tab">
+        <div style="max-width: 820px">
+          <p class="tldr" style="margin-bottom: 6px">
+            Where the claims come from. Evidence tier: primary (official tracking / source data) ·
+            🟡 secondary (analysis or coaching site citing data or established fundamentals).
+          </p>
+
+          <div class="prose">
+            <h3>Shooting % and the value of a contest</h3>
+            <ul style="margin: 0; padding-left: 18px; line-height: 1.7">
+              <li>
+                Defender-distance brackets —
+                <b>Very Tight 0–2 ft · Tight 2–4 ft · Open 4–6 ft · Wide Open 6+ ft</b> — are
+                official NBA player-tracking categories.
+                <a
+                  href="https://www.nba.com/stats/players/shots-closest-defender"
+                  target="_blank"
+                  rel="noopener"
+                  >NBA.com/stats — Closest Defender</a
+                >
+              </li>
+              <li>
+                3P% by band (~<b>38%</b> wide open, ~<b>34%</b> open, ~<b>29%</b> contested;
+                ~2020–22 league). 🟡
+                <a
+                  href="https://www.thestrick.land/strick/a-study-on-3-point-shooting-should-we-change-how-we-contextualize-3-point-defense-in-nba-advanced-stats-analytics"
+                  target="_blank"
+                  rel="noopener"
+                  >thestrick.land</a
+                >
+                · 🟡
+                <a
+                  href="https://jeremylu43.github.io/nba_contested_shooting/"
+                  target="_blank"
+                  rel="noopener"
+                  >Jeremy Lu (2020-21)</a
+                >
+                · 🟡
+                <a
+                  href="https://bestballstats.com/2022/09/18/true-shooting-ability-separating-shooting-talent-from-shot-circumstances/"
+                  target="_blank"
+                  rel="noopener"
+                  >Best Ball Stats</a
+                >
+              </li>
+              <li>
+                Contest effect size — ~<b>10-point</b> league swing wide-open→contested; up to ~<b
+                  >17</b
+                >
+                for a shooter (Korver 55%→38%). 🟡
+                <a
+                  href="https://bestballstats.com/2022/09/18/true-shooting-ability-separating-shooting-talent-from-shot-circumstances/"
+                  target="_blank"
+                  rel="noopener"
+                  >Best Ball Stats</a
+                >
+              </li>
+              <li>
+                Caveat: for <i>pull-up</i> jumpers, defender distance moves efficiency only ~2 pts —
+                the big contest effect is on catch-and-shoot. 🟡
+                <a
+                  href="https://fansided.com/2018/02/16/nylon-calculus-diminishing-returns-step-back-jumper/"
+                  target="_blank"
+                  rel="noopener"
+                  >Nylon Calculus</a
+                >
+              </li>
+            </ul>
+
+            <h3>Closeout fundamentals &amp; distance</h3>
+            <ul style="margin: 0; padding-left: 18px; line-height: 1.7">
+              <li>
+                Close out to an <b>arm's length</b> — "reach out and you should just graze the
+                jersey." 🟡
+                <a
+                  href="https://www.coachesclipboard.net/DefenseCloseOutDrill.html"
+                  target="_blank"
+                  rel="noopener"
+                  >Coach's Clipboard</a
+                >
+                · 🟡
+                <a
+                  href="https://www.hooperuniversity.com/breakdowns/the-right-way-to-closeout-and-contest"
+                  target="_blank"
+                  rel="noopener"
+                  >Hooper University</a
+                >
+                · 🟡
+                <a
+                  href="https://www.breakthroughbasketball.com/defense/keys-close-outs.html"
+                  target="_blank"
+                  rel="noopener"
+                  >Breakthrough Basketball</a
+                >
+              </li>
+              <li>
+                Sprint, then <b>chop the feet / high hands / under control</b>; delaying lets the
+                shooter use your momentum to drive past. 🟡
+                <a
+                  href="https://www.breakthroughbasketball.com/defense/keys-close-outs.html"
+                  target="_blank"
+                  rel="noopener"
+                  >Breakthrough Basketball</a
+                >
+              </li>
+              <li>
+                Leaving your feet / jumping leads to <b>fouls and blow-bys</b>. 🟡
+                <a
+                  href="https://www.basketballforcoaches.com/dribble-drive-offense/"
+                  target="_blank"
+                  rel="noopener"
+                  >Basketball For Coaches</a
+                >
+              </li>
+              <li>
+                Read the man —
+                <b
+                  >sprint ~90% + break down late vs a shooter; sprint halfway + break down early vs
+                  a driver.</b
+                >
+                🟡
+                <a
+                  href="https://pgcbasketball.com/blog/smarter-closeouts-defend-shooters-drivers-complete-players/"
+                  target="_blank"
+                  rel="noopener"
+                  >PGC Basketball</a
+                >
+              </li>
+            </ul>
+
+            <h3>The chop vs. sprint-stop debate</h3>
+            <ul style="margin: 0; padding-left: 18px; line-height: 1.7">
+              <li>
+                The classic chop-step vs. the modern sprint-stop (1-2) — the argument that the
+                choice depends on your defensive priority, driven by how much proximity swings
+                shooting %. 🟡
+                <a
+                  href="https://lockdowndefense.substack.com/p/to-chop-or-not-to-chop"
+                  target="_blank"
+                  rel="noopener"
+                  >Lockdown Defense — "To Chop or Not to Chop"</a
+                >
+              </li>
+            </ul>
+
+            <h3 style="color: #e2b23f">What's measured vs. what's coaching judgment</h3>
+            <p>
+              Being straight about it: the <b>defender-distance bands and their FG%</b> are real
+              tracking data. But several numbers in the interactive sims are
+              <b>coaching heuristics, not measured</b>:
+            </p>
+            <ul style="margin: 0; padding-left: 18px; line-height: 1.7">
+              <li>
+                The exact pixel thresholds in the Cushion / Sandbox / Live Drill (where "tight,"
+                "good," "soft" fall) are tuned for teaching, not calibrated to data.
+              </li>
+              <li>
+                <b>Blow-by / drive rates off a closeout</b> — there is no public tracking stat for
+                these; the outcomes are modeled from coaching consensus.
+              </li>
+              <li>
+                A numeric <b>feet</b> value for "arm's length" (~2–3 ft) is reasoned from human arm
+                reach; sources only ever say "arm's length."
+              </li>
+            </ul>
+            <p class="hint" style="margin-top: 14px">
+              Research compiled July 2026. Bands and effect direction are stable season-to-season;
+              per-band percentages are rounded from the seasons noted above.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

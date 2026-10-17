@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What you pay for AI coding — and what it gets you</title>
+    <meta name="viz:uid" content="v-3de5745f615f" />
+    <meta name="viz:posture" content="local" />
+    <meta name="viz:listed" content="unlisted" />
+    <meta name="viz:title" content="What you pay for AI coding — and what it gets you" />
+    <meta
+      name="viz:description"
+      content="Start owning nothing. Add subscriptions and watch the tools light up. Every plan is placed by what it costs and how far you'd trust it — and the Personal/At-work switch shows how much the field narrows once someone else's security team gets a vote."
+    />
+    <meta
+      name="viz:tags"
+      content="ai-agents,pricing,beginners,claude-code,copilot,cursor,entitlements"
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      body {
+        padding: 20px 24px 70px;
+      }
+      .wrap {
+        max-width: 1900px;
+        margin: 0 auto;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* ── control bar ─────────────────────────────────────────────── */
+      .bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 26px;
+        align-items: center;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 13px 18px;
+        margin: 16px 0 6px;
+      }
+      .bar .grp {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .bar .lbl {
+        font: 600 10.5px var(--sans);
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--faint);
+      }
+
+      /* segmented Personal / At work */
+      .seg {
+        display: flex;
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 3px;
+      }
+      .seg button {
+        font: 600 12.5px var(--sans);
+        color: var(--muted);
+        background: none;
+        border: 0;
+        padding: 6px 15px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: 0.16s;
+      }
+      .seg button:hover {
+        color: var(--text);
+      }
+      .seg button[aria-pressed="true"] {
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      /* budget slider — a real input, styled through kit tokens */
+      input[type="range"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 210px;
+        height: 4px;
+        background: var(--border);
+        border-radius: 999px;
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--accent);
+        cursor: pointer;
+        border: 2px solid var(--bg);
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--accent);
+        cursor: pointer;
+        border: 2px solid var(--bg);
+      }
+      .budgetval {
+        font: 600 13px var(--mono);
+        color: var(--accent);
+        min-width: 74px;
+      }
+
+      .presets {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .presets button {
+        font: 12px var(--sans);
+        color: var(--muted);
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: 0.16s;
+        white-space: nowrap;
+      }
+      .presets button:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+
+      /* receipt */
+      .receipt {
+        margin-left: auto;
+        display: flex;
+        gap: 22px;
+        align-items: baseline;
+      }
+      .receipt b {
+        font: 600 25px/1 var(--sans);
+        color: var(--text);
+      }
+      .receipt .u {
+        color: var(--faint);
+        font-size: 11.5px;
+      }
+      .receipt .spend b {
+        color: var(--warn);
+      }
+      .receipt .got b {
+        color: var(--good);
+      }
+      .clearbtn {
+        font: 11.5px var(--sans);
+        color: var(--faint);
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: 0.16s;
+      }
+      .clearbtn:hover {
+        color: var(--danger);
+        border-color: var(--danger);
+      }
+
+      /* ── band rails (shared y-axis) ──────────────────────────────── */
+      .bandname {
+        fill: var(--text);
+        font: 600 12.5px var(--sans);
+      }
+      .bandsub {
+        fill: var(--faint);
+        font: 10.5px var(--sans);
+      }
+      .bandnum {
+        fill: var(--faint);
+        font: 600 10px var(--mono);
+        letter-spacing: 0.06em;
+      }
+      .axlab {
+        fill: var(--faint);
+        font: 10.5px var(--mono);
+      }
+      .axtitle {
+        fill: var(--muted);
+        font: 600 11px var(--sans);
+        letter-spacing: 0.08em;
+      }
+      .gridline {
+        stroke: var(--border);
+        stroke-width: 1;
+      }
+
+      /* ── plan dots (section 1) ───────────────────────────────────── */
+      .plan {
+        cursor: pointer;
+      }
+      .plan circle {
+        transition:
+          r 0.16s,
+          opacity 0.16s,
+          stroke-width 0.16s;
+      }
+      .plan text {
+        font: 10.5px var(--sans);
+        pointer-events: none;
+      }
+      .plan.owned circle {
+        stroke: var(--text);
+        stroke-width: 2.2;
+      }
+
+      /* ── surface boxes (section 2) ───────────────────────────────── */
+      .colhead {
+        fill: var(--muted);
+        font: 600 11.5px var(--sans);
+        letter-spacing: 0.05em;
+      }
+      .colsub {
+        fill: var(--faint);
+        font: 10px var(--sans);
+      }
+      .node rect {
+        cursor: pointer;
+        transition:
+          fill 0.18s,
+          stroke 0.18s,
+          opacity 0.18s;
+      }
+      .nodelabel {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+        padding: 5px 8px;
+        gap: 1px;
+        pointer-events: none;
+      }
+      .n-title {
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.2;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .n-how {
+        font: 9.5px/1.2 var(--mono);
+        color: var(--faint);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+      .locked .n-title {
+        color: var(--faint);
+        font-weight: 500;
+      }
+      .locked .n-how {
+        opacity: 0.4;
+      }
+
+      .sechead {
+        margin: 30px 0 2px;
+        font-size: 17px;
+      }
+      .secsub {
+        color: var(--muted);
+        font-size: 12.5px;
+        margin-bottom: 10px;
+        max-width: 900px;
+        line-height: 1.55;
+      }
+      .legend {
+        margin: 10px 0 2px;
+      }
+      .foot {
+        color: var(--faint);
+        font-size: 12px;
+        margin-top: 18px;
+        line-height: 1.65;
+        max-width: 1100px;
+      }
+
+      .stale {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 10px;
+      }
+      .stale .card {
+        padding: 12px 14px;
+      }
+      .stale h4 {
+        margin: 0 0 4px;
+        font-size: 13px;
+        color: var(--warn);
+      }
+      .stale p {
+        margin: 0;
+        font-size: 12.5px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* ── detail drawer ───────────────────────────────────────────── */
+      .detail {
+        margin-top: 18px;
+      }
+      .detail h3 {
+        margin: 0 0 3px;
+        font-size: 16px;
+      }
+      .dr-sub {
+        color: var(--muted);
+        font-size: 12px;
+        margin-bottom: 11px;
+      }
+      .dr-grid {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 7px 16px;
+        font-size: 13px;
+      }
+      .dr-grid dt {
+        color: var(--faint);
+      }
+      .dr-grid dd {
+        margin: 0;
+      }
+      .req {
+        display: flex;
+        gap: 8px;
+        align-items: baseline;
+        margin: 3px 0;
+        font-size: 12.5px;
+      }
+      .req .mk {
+        font: 12px var(--mono);
+        width: 14px;
+        flex: none;
+      }
+      .ok {
+        color: var(--good);
+      }
+      .no {
+        color: var(--faint);
+      }
+      code {
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1px 5px;
+        font: 12px var(--mono);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="viz-header">
+        <h1>What you pay for AI coding — and what it actually gets you</h1>
+        <div class="sub">
+          You start owning <b>nothing</b>. Click any plan below to “buy” it and watch the tools
+          light up underneath.
+          <b>Left–right is price, height is how far you'd trust the vendor</b> — the top band clears
+          a corporate security review today, the bottom is what you run on your own machine.
+          Flipping to <b>At work</b> doesn't thin the field as much as you'd expect; what it takes
+          away is specific, and worth seeing.
+        </div>
+      </div>
+
+      <div class="bar">
+        <div class="grp">
+          <span class="lbl">I'm doing this</span>
+          <div class="seg" id="mode">
+            <button data-mode="personal" aria-pressed="true">for myself</button>
+            <button data-mode="work" aria-pressed="false">at work</button>
+          </div>
+        </div>
+        <div class="grp">
+          <span class="lbl">Budget</span>
+          <input type="range" id="budget" min="0" max="220" step="5" value="220" />
+          <span class="budgetval" id="budgetval">any</span>
+        </div>
+        <div class="grp">
+          <span class="lbl">Start me off</span>
+          <div class="presets" id="presets"></div>
+        </div>
+        <div class="receipt">
+          <span class="spend"><b id="r-spend">$0</b> <span class="u">/month</span></span>
+          <span class="got"
+            ><b id="r-got">0</b>
+            <span class="u">of <span id="r-all">0</span> tools unlocked</span></span
+          >
+          <button class="clearbtn" id="clear">reset</button>
+        </div>
+      </div>
+
+      <h2 class="sechead">1 · What you can pay for</h2>
+      <div class="secsub" id="s1sub"></div>
+      <div class="legend" id="legend-pay"></div>
+      <svg
+        id="market"
+        role="img"
+        aria-label="Every AI coding plan placed by monthly price and how far you would trust the vendor."
+      ></svg>
+
+      <h2 class="sechead">2 · What that gets you</h2>
+      <div class="secsub" id="s2sub"></div>
+      <svg
+        id="grid"
+        role="img"
+        aria-label="Every AI coding tool, grouped by trust band and by where it runs, lit up by the plans you own."
+      ></svg>
+
+      <div class="panel detail" id="drawer"></div>
+
+      <h2 class="sechead">3 · What the guides still get wrong</h2>
+      <div class="secsub">
+        This field moves faster than the blog posts about it. Everything below changed recently
+        enough that advice you find by searching is likely to be describing a world that ended.
+      </div>
+      <div class="stale" id="stale"></div>
+
+      <div class="foot" id="foot"></div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
