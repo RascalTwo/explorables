@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Why Infrastructure as Code?</title>
+    <meta name="viz:uid" content="v-5a9208907e64" />
+    <meta name="viz:posture" content="public" />
+    <meta name="viz:listed" content="listed" />
+    <meta name="viz:title" content="Why Infrastructure as Code?" />
+    <meta
+      name="viz:description"
+      content="A plain-English, no-jargon tour of Infrastructure as Code and where Terraform fits — framed like moving money: nothing happens without a procedure, a second set of eyes, and a record that survives the next exam."
+    />
+    <link rel="stylesheet" href="/_kit/viz-kit.css" />
+    <style>
+      :root {
+        --maxw: 1180px;
+      }
+      body {
+        margin: 0;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px 26px 80px;
+      }
+
+      /* ---- header ---- */
+      .top {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .top h1 {
+        font-size: 30px;
+        margin: 0 0 4px;
+        letter-spacing: -0.02em;
+      }
+      .top h1 .tf {
+        color: var(--c4);
+      }
+      .top .sub {
+        color: var(--muted);
+        font-size: 14.5px;
+        max-width: 640px;
+        line-height: 1.5;
+      }
+      .audience {
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 5px 12px;
+        white-space: nowrap;
+      }
+
+      /* ---- stepper ---- */
+      .stepper {
+        display: flex;
+        gap: 6px;
+        margin: 22px 0 18px;
+        flex-wrap: wrap;
+      }
+      .step {
+        flex: 1 1 0;
+        min-width: 120px;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 10px;
+        padding: 9px 11px;
+        transition: 0.18s;
+        position: relative;
+        overflow: hidden;
+      }
+      .step:hover {
+        border-color: #45506b;
+      }
+      .step .n {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .step .t {
+        font-size: 12.5px;
+        margin-top: 2px;
+        line-height: 1.25;
+        color: var(--text);
+      }
+      .step.active {
+        border-color: var(--accent);
+        background: #11203a;
+      }
+      .step.active .n {
+        color: var(--accent);
+      }
+      .step.done .n::after {
+        content: " ✓";
+        color: var(--good);
+      }
+      .step .bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 0;
+        background: var(--accent);
+        transition: width 0.3s;
+      }
+      .step.active .bar {
+        width: 100%;
+      }
+
+      /* ---- stage ---- */
+      .stage {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .stage {
+          grid-template-columns: 1fr;
+        }
+      }
+      .canvas {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 430px;
+      }
+      .canvas svg {
+        width: 100%;
+        height: auto;
+        max-height: 520px;
+        display: block;
+      }
+      .narr {
+        display: flex;
+        flex-direction: column;
+      }
+      .kicker {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .narr h2 {
+        font-size: 22px;
+        margin: 6px 0 12px;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+      }
+      .narr p {
+        margin: 0 0 13px;
+        line-height: 1.62;
+        font-size: 15px;
+        color: #cdd6e0;
+      }
+      .narr p b {
+        color: var(--text);
+      }
+      .narr ul {
+        margin: 0 0 13px;
+        padding-left: 18px;
+      }
+      .narr li {
+        line-height: 1.55;
+        font-size: 14.5px;
+        margin-bottom: 6px;
+        color: #cdd6e0;
+      }
+
+      .analogy {
+        margin-top: auto;
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--c3);
+        background: linear-gradient(180deg, #1c1a12, #161b22);
+        border-radius: 10px;
+        padding: 13px 15px;
+      }
+      .analogy .lab {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c3);
+        font-family: var(--mono);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .analogy p {
+        margin: 7px 0 0;
+        font-size: 14px;
+        line-height: 1.55;
+        color: #e4d9bf;
+      }
+      .analogy p b {
+        color: #fff3d6;
+      }
+      .analogy.risk {
+        border-left-color: var(--danger);
+        background: linear-gradient(180deg, #1f1413, #161b22);
+      }
+      .analogy.risk .lab {
+        color: var(--danger);
+      }
+      .analogy.risk p {
+        color: #f1d3cf;
+      }
+      .analogy.risk p b {
+        color: #ffdcd6;
+      }
+
+      /* ---- footer nav ---- */
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .nav .count {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      button.bn {
+        font: inherit;
+        font-size: 14px;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        color: var(--text);
+        border-radius: 9px;
+        padding: 9px 18px;
+        transition: 0.15s;
+      }
+      button.bn:hover:not(:disabled) {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      button.bn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      button.bn.primary {
+        background: var(--accent);
+        color: #04101f;
+        border-color: var(--accent);
+        font-weight: 600;
+      }
+      button.bn.primary:hover {
+        filter: brightness(1.1);
+        color: #04101f;
+      }
+      .hint {
+        text-align: center;
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-top: 10px;
+        font-family: var(--mono);
+      }
+
+      /* svg helpers */
+      .lbl {
+        font: 600 13px var(--sans);
+        fill: var(--text);
+      }
+      .lbl-sm {
+        font: 500 11px var(--sans);
+        fill: var(--muted);
+      }
+      .lbl-mono {
+        font: 11px var(--mono);
+        fill: var(--muted);
+      }
+      .fade-in {
+        animation: fin 0.45s both;
+      }
+      @keyframes fin {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .pulse {
+        animation: pl 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+      @keyframes pl {
+        0%,
+        100% {
+          opacity: 0.55;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      .dash {
+        stroke-dasharray: 6 6;
+        animation: dashmove 1s linear infinite;
+      }
+      @keyframes dashmove {
+        to {
+          stroke-dashoffset: -12;
+        }
+      }
+
+      /* interactive reconcile buttons */
+      .tf-controls {
+        display: flex;
+        gap: 9px;
+        justify-content: center;
+        margin-top: 6px;
+        flex-wrap: wrap;
+      }
+      .tf-controls button {
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 7px 14px;
+        transition: 0.15s;
+      }
+      .tf-controls button:hover:not(:disabled) {
+        border-color: var(--c4);
+        color: #c9a3ff;
+      }
+      .tf-controls button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .tf-controls button.go {
+        background: var(--c4);
+        border-color: var(--c4);
+        color: #150a24;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1>Why Infrastructure as Code? <span class="tf">…and where Terraform fits.</span></h1>
+          <div class="sub">
+            A plain-English tour — no jargon required. Think of it the way you'd think about moving
+            money: nothing happens without a procedure, a second set of eyes, and a record that
+            survives the next exam.
+          </div>
+        </div>
+      </div>
+
+      <div class="stepper" id="stepper"></div>
+
+      <div class="stage">
+        <div class="canvas">
+          <svg id="art" viewBox="0 0 560 460" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="narr" id="narr"></div>
+      </div>
+
+      <div class="nav">
+        <button class="bn" id="back">← Back</button>
+        <div class="count" id="count"></div>
+        <button class="bn primary" id="next">Next →</button>
+      </div>
+      <div class="hint">← / → arrow keys to move · click a step above to jump</div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

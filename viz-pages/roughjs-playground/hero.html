@@ -1,0 +1,128 @@
+<div class="og-card" id="hero">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap"
+  />
+  <style>
+    #hero {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 0;
+      background: #faf8f2;
+      background-image: radial-gradient(#d9d3c3 1.4px, transparent 1.4px);
+      background-size: 26px 26px;
+      color: #1e1e1e;
+      font-family: "Caveat", "Segoe Print", cursive;
+    }
+    #hero .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    #hero .left {
+      position: absolute;
+      left: 64px;
+      top: 46px;
+      width: 560px;
+    }
+    #hero .eyebrow {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 15px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #6965db;
+      font-weight: 700;
+    }
+    #hero h1 {
+      margin: 12px 0 0;
+      font-size: 92px;
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    #hero h1 .say {
+      color: #6965db;
+      position: relative;
+    }
+    #hero .sub {
+      margin-top: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.4;
+      color: #55503f;
+      max-width: 540px;
+    }
+    #hero .sub b {
+      color: #1e1e1e;
+    }
+    #hero .chips {
+      position: absolute;
+      left: 64px;
+      bottom: 34px;
+      width: 580px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 8px;
+    }
+    #hero .chip {
+      font-size: 21px;
+      font-weight: 700;
+      border: 2px solid #1e1e1e;
+      border-radius: 12px 8px 14px 8px;
+      padding: 0 10px 1px;
+      background: #fffefb;
+      line-height: 1.25;
+    }
+    #hero .chip.hot {
+      background: #6965db;
+      color: #fff;
+      border-color: #6965db;
+    }
+    #hero svg.art {
+      position: absolute;
+      right: 28px;
+      top: 34px;
+      width: 540px;
+      height: 562px;
+    }
+    #hero .tag {
+      position: absolute;
+      right: 44px;
+      bottom: 26px;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b665a;
+    }
+  </style>
+  <div class="left">
+    <div class="eyebrow">Rough.js playground · §7 · Plus Ultra</div>
+    <h1>What can a wobbly<br />pen <span class="say">say?</span></h1>
+    <div class="sub">
+      Twelve interactive scenes where the <b>hand-drawn look carries meaning</b> — uncertainty,
+      emphasis, light, sequence, choice. With an <b>architecture data flow</b>, a
+      <b>trust dashboard</b> and a working <b>diagram editor</b>.
+    </div>
+  </div>
+  <div class="chips">
+    <span class="chip">📊 Data</span><span class="chip hot">❓ Uncertainty</span
+    ><span class="chip">🖍 Annotate</span><span class="chip">🌗 Shading</span
+    ><span class="chip">📱 Fidelity</span><span class="chip">🕸 Mind map</span>
+    <span class="chip">🏠 Floor plan</span><span class="chip">✍ Write-on</span
+    ><span class="chip">🔀 Flowchart</span><span class="chip hot">🏗 Architecture</span
+    ><span class="chip hot">📈 Trust</span><span class="chip hot">🖊 Editor</span>
+  </div>
+  <svg
+    class="art"
+    id="art"
+    viewBox="0 0 540 562"
+    role="img"
+    aria-label="A hand-drawn collage: a forecast line that gets shakier, a shaded cube with a sun, a circled word and a phone wireframe"
+  ></svg>
+  <div class="tag">rascaltwo.github.io/explorables</div>
+  <script type="module" src="./hero.1.js"></script>
+</div>
