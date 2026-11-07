@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        --bg: #0b0d12;
+        --bg-2: #11141c;
+        --fg: #e6e8ee;
+        --fg-dim: #9aa1b1;
+        --fg-faint: #5b6378;
+        --brand: #52a98c;
+        --in: #5fc2a2;
+        --out: #e6a55c;
+        --react: #4bb3c6;
+        --angular: #d9705f;
+        --line: #232838;
+        --code-bg: #0a0c11;
+        --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: #05060a;
+      }
+
+      .og-card {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        position: relative;
+        background:
+          radial-gradient(1150px 620px at 6% -12%, rgba(95, 194, 162, 0.1), transparent 58%),
+          radial-gradient(950px 560px at 108% 8%, rgba(230, 165, 92, 0.07), transparent 60%),
+          var(--bg);
+        font-family: var(--sans);
+        color: var(--fg);
+        display: flex;
+        align-items: stretch;
+      }
+      .frame {
+        position: absolute;
+        inset: 22px;
+        border: 1px solid rgba(35, 40, 56, 0.7);
+        border-radius: 18px;
+        pointer-events: none;
+      }
+      .og-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 20%),
+          radial-gradient(1400px 800px at 50% 130%, rgba(0, 0, 0, 0.5), transparent 60%);
+        pointer-events: none;
+      }
+
+      .left {
+        width: 640px;
+        padding: 64px 16px 64px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: var(--mono);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: var(--brand);
+        background: rgba(82, 169, 140, 0.1);
+        border: 1px solid rgba(82, 169, 140, 0.22);
+        padding: 7px 14px;
+        border-radius: 999px;
+        width: fit-content;
+        margin-bottom: 32px;
+        text-transform: uppercase;
+      }
+      .eyebrow .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--brand);
+        box-shadow: 0 0 10px var(--brand);
+      }
+
+      .title {
+        font-size: 80px;
+        line-height: 0.94;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        white-space: nowrap;
+      }
+      .title .hl {
+        color: var(--in);
+      }
+
+      .essence {
+        margin-top: 28px;
+        font-size: 29px;
+        line-height: 1.28;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        max-width: 510px;
+      }
+      .essence .hl {
+        color: var(--in);
+      }
+      .essence .hl2 {
+        color: var(--out);
+      }
+
+      .sub {
+        margin-top: 16px;
+        font-size: 17px;
+        line-height: 1.5;
+        color: var(--fg-dim);
+        max-width: 490px;
+      }
+      .sub code {
+        font-family: var(--mono);
+        font-size: 0.9em;
+        color: var(--fg);
+        background: var(--code-bg);
+        padding: 1px 6px;
+        border-radius: 4px;
+        border: 1px solid var(--line);
+      }
+
+      .chips {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        font-family: var(--mono);
+        font-size: 13.5px;
+        color: var(--fg-dim);
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        padding: 8px 13px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .chip .tk {
+        width: 6px;
+        height: 6px;
+        border-radius: 2px;
+        background: var(--brand);
+        box-shadow: 0 0 6px rgba(82, 169, 140, 0.5);
+      }
+
+      .right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 60px 56px 4px;
+        position: relative;
+        z-index: 2;
+      }
+      .panel {
+        width: 424px;
+        background: linear-gradient(180deg, rgba(22, 26, 37, 0.92), rgba(17, 20, 28, 0.92));
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px 20px 16px;
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+      .panel-cap {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .panel-cap .t {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--fg-dim);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .panel-cap .s {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--fg-faint);
+      }
+
+      svg.graph {
+        width: 100%;
+        display: block;
+      }
+
+      .foot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 10px;
+      }
+      .stat .n {
+        font-family: var(--mono);
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 1;
+      }
+      .stat.a .n {
+        color: var(--in);
+      }
+      .stat.b .n {
+        color: var(--out);
+      }
+      .stat .l {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--fg-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 5px;
+      }
+      .stat .d {
+        font-size: 12px;
+        color: var(--fg-dim);
+        margin-top: 3px;
+        line-height: 1.35;
+        max-width: 172px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="og-card">
+      <div class="frame"></div>
+
+      <div class="left">
+        <div class="eyebrow">
+          <span class="dot"></span>Web Components &middot; framework-agnostic
+        </div>
+
+        <div class="title">One bundle.<br /><span class="hl">Two frameworks.</span></div>
+
+        <div class="essence">
+          The whole boundary is <span class="hl">three knots</span> wide &mdash; and
+          <span class="hl2">zero</span> of them are React.
+        </div>
+
+        <div class="sub">
+          The React chat widget, wrapped as <code>&lt;ecommerce-chatbot&gt;</code> and dropped
+          unchanged into a React <i>and</i> an Angular storefront. Same tag, each host&rsquo;s own
+          router.
+        </div>
+
+        <div class="chips">
+          <span class="chip"><span class="tk"></span>r2wc wrapper</span>
+          <span class="chip"><span class="tk"></span>open shadow DOM</span>
+          <span class="chip"><span class="tk"></span>Vite lib build</span>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="panel">
+          <div class="panel-cap">
+            <span class="t">The boundary</span>
+            <span class="s">1 source &rarr; 2 hosts</span>
+          </div>
+
+          <svg class="graph" viewBox="0 0 384 332" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .lab {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 12px;
+                  fill: #e6e8ee;
+                  dominant-baseline: middle;
+                }
+                .sublab {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 9.5px;
+                  fill: #5b6378;
+                  dominant-baseline: middle;
+                }
+                .knot {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 11px;
+                  font-weight: 700;
+                  dominant-baseline: middle;
+                }
+                .dirlab {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 8.5px;
+                  fill: #5b6378;
+                  dominant-baseline: middle;
+                }
+                .rail {
+                  stroke: #232838;
+                  stroke-width: 2;
+                }
+              </style>
+              <marker
+                id="ain"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0,1 L9,5 L0,9 z" fill="#5fc2a2" />
+              </marker>
+              <marker
+                id="aout"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0,1 L9,5 L0,9 z" fill="#e6a55c" />
+              </marker>
+              <marker
+                id="adim"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
+                <path d="M0,1 L9,5 L0,9 z" fill="#5b6378" />
+              </marker>
+            </defs>
+
+            <!-- ===== the one bundle ===== -->
+            <rect
+              x="62"
+              y="0"
+              width="260"
+              height="52"
+              rx="11"
+              fill="#1b2b26"
+              stroke="#52a98c"
+              stroke-width="1.5"
+            />
+            <rect x="76" y="16" width="20" height="20" rx="5" fill="#52a98c" />
+            <text class="lab" x="106" y="20">&lt;ecommerce-chatbot&gt;</text>
+            <text class="sublab" x="106" y="36">309 KB &middot; self-registering ESM</text>
+
+            <!-- ===== the contract: 3 knots ===== -->
+            <line class="rail" x1="192" y1="52" x2="192" y2="70" marker-end="url(#adim)" />
+
+            <rect
+              x="20"
+              y="76"
+              width="344"
+              height="118"
+              rx="11"
+              fill="#0a0c11"
+              stroke="#2f6a58"
+              stroke-width="1.3"
+              stroke-dasharray="5 4"
+            />
+            <text class="sublab" x="34" y="90" fill="#52a98c">
+              THE CONTRACT &mdash; everything that crosses
+            </text>
+
+            <!-- knot 1 -->
+            <text class="knot" x="34" y="113" fill="#5fc2a2">pageContext</text>
+            <text class="dirlab" x="144" y="113">property</text>
+            <line
+              x1="204"
+              y1="113"
+              x2="348"
+              y2="113"
+              stroke="#5fc2a2"
+              stroke-width="2"
+              marker-end="url(#ain)"
+            />
+            <text class="dirlab" x="214" y="103" fill="#5fc2a2">host &rarr; bot</text>
+
+            <!-- knot 2 -->
+            <text class="knot" x="34" y="145" fill="#5fc2a2">api-base</text>
+            <text class="dirlab" x="144" y="145">attribute</text>
+            <line
+              x1="204"
+              y1="145"
+              x2="348"
+              y2="145"
+              stroke="#5fc2a2"
+              stroke-width="2"
+              marker-end="url(#ain)"
+            />
+            <text class="dirlab" x="214" y="135" fill="#5fc2a2">host &rarr; bot</text>
+
+            <!-- knot 3 -->
+            <text class="knot" x="34" y="177" fill="#e6a55c">citation-click</text>
+            <text class="dirlab" x="144" y="177">event</text>
+            <line
+              x1="348"
+              y1="177"
+              x2="204"
+              y2="177"
+              stroke="#e6a55c"
+              stroke-width="2"
+              marker-end="url(#aout)"
+            />
+            <text class="dirlab" x="214" y="167" fill="#e6a55c">bot &rarr; host</text>
+
+            <!-- fan out to the two hosts -->
+            <path class="rail" d="M192,194 C192,214 100,208 100,232" marker-end="url(#adim)" />
+            <path class="rail" d="M192,194 C192,214 284,208 284,232" marker-end="url(#adim)" />
+
+            <!-- ===== two hosts, identical ===== -->
+            <rect x="20" y="238" width="160" height="76" rx="10" fill="#11141c" stroke="#232838" />
+            <rect x="34" y="252" width="18" height="18" rx="5" fill="#2c7d8c" />
+            <text class="lab" x="60" y="261" font-size="11.5">React 19</text>
+            <text class="sublab" x="34" y="285">React Router &middot; :5175</text>
+            <text class="sublab" x="34" y="301" fill="#52a98c">same tag, 0 rewrites</text>
+
+            <rect x="204" y="238" width="160" height="76" rx="10" fill="#11141c" stroke="#232838" />
+            <rect x="218" y="252" width="18" height="18" rx="5" fill="#b3473a" />
+            <text class="lab" x="244" y="261" font-size="11.5">Angular 22</text>
+            <text class="sublab" x="218" y="285">Angular Router &middot; :5176</text>
+            <text class="sublab" x="218" y="301" fill="#52a98c">same tag, 0 rewrites</text>
+          </svg>
+
+          <div class="foot">
+            <div class="stat a">
+              <div class="n">3</div>
+              <div class="l">knots</div>
+              <div class="d">nothing else crosses the shadow boundary</div>
+            </div>
+            <div class="stat b">
+              <div class="n">0</div>
+              <div class="l">rewrites</div>
+              <div class="d">no per-framework copy to keep in sync</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

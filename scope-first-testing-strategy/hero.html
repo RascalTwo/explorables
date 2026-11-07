@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        --bg: #0b0d12;
+        --bg-2: #11141c;
+        --fg: #e6e8ee;
+        --fg-dim: #9aa1b1;
+        --fg-faint: #5b6378;
+        --cy: #4cc9f0;
+        --red: #ef476f;
+        --grn: #06d6a0;
+        --amb: #ffd166;
+        --vio: #b692f6;
+        --line: #232838;
+        --code-bg: #0a0c11;
+        --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: #05060a;
+      }
+
+      .og-card {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        position: relative;
+        background:
+          radial-gradient(1150px 620px at 6% -12%, rgba(239, 71, 111, 0.1), transparent 58%),
+          radial-gradient(950px 560px at 108% 8%, rgba(6, 214, 160, 0.08), transparent 60%),
+          var(--bg);
+        font-family: var(--sans);
+        color: var(--fg);
+        display: flex;
+        align-items: stretch;
+      }
+      .frame {
+        position: absolute;
+        inset: 22px;
+        border: 1px solid rgba(35, 40, 56, 0.7);
+        border-radius: 18px;
+        pointer-events: none;
+      }
+      .og-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 20%),
+          radial-gradient(1400px 800px at 50% 130%, rgba(0, 0, 0, 0.5), transparent 60%);
+        pointer-events: none;
+      }
+
+      .left {
+        width: 626px;
+        padding: 64px 18px 64px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: var(--mono);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: var(--cy);
+        background: rgba(76, 201, 240, 0.1);
+        border: 1px solid rgba(76, 201, 240, 0.22);
+        padding: 7px 14px;
+        border-radius: 999px;
+        width: fit-content;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+      }
+      .eyebrow .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--cy);
+        box-shadow: 0 0 10px var(--cy);
+      }
+
+      .title {
+        font-size: 76px;
+        line-height: 0.92;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        white-space: nowrap;
+      }
+      .title .hl {
+        color: var(--red);
+      }
+
+      .essence {
+        margin-top: 30px;
+        font-size: 29px;
+        line-height: 1.28;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        max-width: 505px;
+      }
+      .essence .hl {
+        color: var(--cy);
+      }
+      .essence .hl2 {
+        color: var(--grn);
+      }
+
+      .sub {
+        margin-top: 16px;
+        font-size: 17px;
+        line-height: 1.5;
+        color: var(--fg-dim);
+        max-width: 490px;
+      }
+      .sub .hl {
+        color: var(--cy);
+        font-weight: 600;
+      }
+      .sub code {
+        font-family: var(--mono);
+        font-size: 0.88em;
+        color: var(--fg);
+        background: var(--code-bg);
+        padding: 1px 6px;
+        border-radius: 4px;
+        border: 1px solid var(--line);
+      }
+
+      .chips {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        font-family: var(--mono);
+        font-size: 13.5px;
+        color: var(--fg-dim);
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        padding: 8px 13px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .chip .tk {
+        width: 6px;
+        height: 6px;
+        border-radius: 2px;
+        background: var(--cy);
+        box-shadow: 0 0 6px rgba(76, 201, 240, 0.5);
+      }
+
+      .right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 64px 60px 8px;
+        position: relative;
+        z-index: 2;
+      }
+      .panel {
+        width: 412px;
+        background: linear-gradient(180deg, rgba(22, 26, 37, 0.92), rgba(17, 20, 28, 0.92));
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+      .panel-cap {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .panel-cap .t {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--fg-dim);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .panel-cap .s {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--fg-faint);
+      }
+
+      svg.graph {
+        width: 100%;
+        display: block;
+      }
+
+      .foot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+      }
+      .stat .n {
+        font-family: var(--mono);
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 1;
+        color: var(--grn);
+      }
+      .stat .l {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--fg-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="og-card">
+      <div class="frame"></div>
+
+      <div class="left">
+        <div class="eyebrow"><span class="dot"></span>Testing &middot; scope-first strategy</div>
+
+        <div class="title">Bad tests<br /><span class="hl">drive out good.</span></div>
+
+        <div class="essence">
+          So don&rsquo;t ask for discipline. Make the honest test the
+          <span class="hl2">easy</span> one.
+        </div>
+
+        <div class="sub">
+          Three tiers split by <span class="hl">scope</span>, not fidelity &mdash; and the lazy move
+          is unrepresentable or CI-blocked: a bare <code>cy.intercept</code> without
+          <code>@justification</code> fails lint.
+        </div>
+
+        <div class="chips">
+          <span class="chip"><span class="tk"></span>Cypress E2E</span>
+          <span class="chip"><span class="tk"></span>Storybook play()</span>
+          <span class="chip"><span class="tk"></span>Vitest + RTL</span>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="panel">
+          <div class="panel-cap">
+            <span class="t">Same behavior, two scopes</span>
+            <span class="s">wall clock</span>
+          </div>
+
+          <svg class="graph" viewBox="0 0 368 246" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .hd {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 12px;
+                  font-weight: 700;
+                  dominant-baseline: middle;
+                }
+                .sl {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 10px;
+                  fill: #5b6378;
+                  dominant-baseline: middle;
+                }
+                .val {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 21px;
+                  font-weight: 800;
+                  dominant-baseline: middle;
+                }
+                .oom {
+                  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+                  font-size: 10.5px;
+                  font-weight: 700;
+                  fill: #ef476f;
+                  dominant-baseline: middle;
+                }
+              </style>
+              <linearGradient id="gbad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ef476f" />
+                <stop offset="1" stop-color="#7a2238" />
+              </linearGradient>
+              <linearGradient id="ggood" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#06d6a0" />
+                <stop offset="1" stop-color="#0a9c76" />
+              </linearGradient>
+            </defs>
+
+            <!-- ===== ROW 1: the lazy path ===== -->
+            <g>
+              <circle cx="6" cy="10" r="4" fill="#ef476f" />
+              <text class="hd" x="18" y="10" fill="#ef476f">Fully-mocked Cypress</text>
+              <text class="sl" x="18" y="28">
+                cy.intercept auth + all backend &middot; the &ldquo;easy&rdquo; style
+              </text>
+
+              <!-- full-length bar = 214s -->
+              <rect x="0" y="44" width="300" height="34" rx="7" fill="url(#gbad)" />
+              <text class="val" x="312" y="61" fill="#ef476f">214s</text>
+
+              <!-- OOM crash badge sitting on the bar -->
+              <g transform="translate(142,61)">
+                <rect
+                  x="-80"
+                  y="-12"
+                  width="160"
+                  height="24"
+                  rx="6"
+                  fill="#11030a"
+                  stroke="#ef476f"
+                  stroke-width="1.5"
+                />
+                <text class="oom" x="0" y="1" text-anchor="middle">
+                  &#9888; OOM &mdash; never went green
+                </text>
+              </g>
+            </g>
+
+            <!-- ===== ROW 2: the honest path at the right scope ===== -->
+            <g transform="translate(0,110)">
+              <circle cx="6" cy="10" r="4" fill="#06d6a0" />
+              <text class="hd" x="18" y="10" fill="#06d6a0">Storybook play()</text>
+              <text class="sl" x="18" y="28">component scope &middot; in-browser Vitest + MSW</text>
+
+              <!-- 7.95s, drawn true to scale against 214s -->
+              <rect x="0" y="44" width="11" height="34" rx="4" fill="url(#ggood)" />
+              <text class="val" x="24" y="61" fill="#06d6a0">7.95s</text>
+              <text class="sl" x="98" y="62">&larr; same 300px scale</text>
+            </g>
+
+            <!-- baseline rule under both bars -->
+            <line x1="0" y1="204" x2="368" y2="204" stroke="#232838" />
+            <text class="sl" x="0" y="220">0s</text>
+            <text class="sl" x="300" y="220" text-anchor="middle">214s</text>
+          </svg>
+
+          <div class="foot">
+            <div class="stat">
+              <div class="n">27&times;</div>
+              <div class="l">faster whole-run</div>
+            </div>
+            <div class="stat">
+              <div class="n">219<span style="font-size: 0.5em; color: #5b6378"> ms</span></div>
+              <div class="l">per test &mdash; ~1000&times;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
